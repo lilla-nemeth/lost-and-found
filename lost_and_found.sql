@@ -32,5 +32,5 @@ CREATE TABLE pets (
     uniquefeature VARCHAR(255),
     postdescription VARCHAR(255),
     since TIMESTAMP NOT NULL DEFAULT NOW(),
-    until TIMESTAMP NOT NULL DEFAULT NOW()
+    until TIMESTAMP
 );

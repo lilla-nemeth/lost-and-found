@@ -23,7 +23,7 @@ const pool = new Pool({
     password: 'postgres',
     port: 5432,
     database: 'lostandfound'
-})
+});
 
 // from pets table get all pets by userId
 app.get('/pets', authMw, (request, response) => {
@@ -32,21 +32,20 @@ app.get('/pets', authMw, (request, response) => {
     pool.query('SELECT * FROM pets WHERE userId=$1', [userId])
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch all pets'}));
-})
+});
 
 // from pets table get one pet by id
-app.get('/pets/:id', (request, response) => {
+app.get('/pets/:id', authMw, (request, response) => {
     let id = request.params.id;
 
     pool.query('SELECT * FROM pets WHERE id=$1', [id])
-    .then((res) => response.status(200).json({msg: 'Pet successfully fetched'}))
+    .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch pet by id'}));
-})
+});
 
 // Add new pet:
-app.post('/pets', (request, response) => {
-    // let userId = request.userId
-    let userId = 3;
+app.post('/pets', authMw, (request, response) => {
+    let userId = request.userId;
     let addstatus = request.body.addstatus;
     let region = request.body.region;
     let municipality = request.body.municipality;
@@ -62,13 +61,45 @@ app.post('/pets', (request, response) => {
     let uniquefeature = request.body.uniquefeature;
     let postdescription = request.body.postdescription;
 
-
     pool.query('INSERT INTO pets(userId, addstatus, region, municipality, zip, district, street, species, size, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *', [userId, addstatus, region, municipality, zip, district, street, species, size, breed, sex, color, age, uniquefeature, postdescription])
-    .then((res) => console.log('Pet successfully inserted'))
-    .catch((err) => console.log('Failed to add new pet'));
+    .then((res) => response.status(200).json(res.rows))
+    .catch((err) => response.status(400).json({msg: 'Failed to add new pet'}));
+});
+
+// update pet datas by id:
+app.put('/pets/:id', authMw, (request, response) => {
+    let id = request.params.id;
+    let addstatus = request.body.addstatus;
+    let region = request.body.region;
+    let municipality = request.body.municipality;
+    let zip = request.body.zip;
+    let district = request.body.district;
+    let street = request.body.street;
+    let size = request.body.size;
+    let breed = request.body.breed;
+    let sex = request.body.sex;
+    let color = request.body.color;
+    let age = request.body.age;
+    let uniquefeature = request.body.uniquefeature;
+    let postdescription = request.body.postdescription;
+
+    pool.query('UPDATE pets SET addstatus=$1, region=$2, municipality=$3, zip=$4, district=$5, street=$6, size=$7, breed=$8, sex=$9, color=$10, age=$11, uniquefeature=$12, postdescription=$13 WHERE id=$14', [addstatus, region, municipality, zip, district, street, size, breed, sex, color, age, uniquefeature, postdescription, id])
+    .then((res) => response.status(200).json({msg: 'Post is successfully updated'}))
+    .catch((err) => response.status(400).json({msg: 'Failed to update the post'}))
+});
+
+// delete user by id, if it doesn't linked to have any pet
+
+// delete pet by id
+app.delete('/pets/:id', authMw, (request, response) => {
+    let id = request.params.id
+
+    pool.query('DELETE FROM pets WHERE id=$1', [id])
+    .then((res) => response.status(200).json({msg: 'Pet is successfully deleted'}))
+    .catch((err) => response.status(400).json({msg: 'Failed to delete the pet'}))
 })
 
-app.post('/register', (request, response) => {
+app.post('/register', /*place for password and email checker middlewares*/ (request, response) => {
     let username = request.body.username;
     let email = request.body.email;
     let pw = request.body.pw;
@@ -80,9 +111,9 @@ app.post('/register', (request, response) => {
     pool.query('INSERT INTO users(username, email, pw, phone) VALUES ($1, $2, $3, $4) RETURNING *', [username, email, encryptedPw, phone])
     .then((res) => response.status(200).json({msg: 'User succesfully created'}))
     .catch((err) => response.status(400).json({msg: 'Failed to create user'}))
-})
+});
 
-app.post('/login', (request, response) => {
+app.post('/login', /*place for password and email checker middlewares*/ (request, response) => {
     let email = request.body.email;
     // POST login kérésben megadtuk a jelszót, ami nem hashelt:
     let pw = request.body.pw;
@@ -111,7 +142,7 @@ app.post('/login', (request, response) => {
         });
     })
     .catch((err) => response.status(400).json({msg: 'User not found'}))
-})
+});
 
 
 app.listen(port, () => console.log("Server is running on 3003"));
