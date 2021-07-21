@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 // const path = require("path");
 // require('dotenv').config();
-const { authMw } = require('./middlewares.js');
+const { authMw, isEmailValid } = require('./middlewares.js');
 
 // amikor a backend és a frontend különböző portokon fut, akkor cors elhárítja a hibát, engedélyezi a kül portok közötti kommunikációt
 app.use(cors());
@@ -156,7 +156,7 @@ app.post('/register', /*place for password and email checker middlewares*/ (requ
     .catch((err) => response.status(400).json({msg: 'Failed to create user'}))
 });
 
-app.post('/login', /*place for password and email checker middlewares*/ (request, response) => {
+app.post('/login', [isEmailValid /*place for password checker middleware*/]  , (request, response) => {
     let email = request.body.email;
     // POST login kérésben megadtuk a jelszót, ami nem hashelt:
     let pw = request.body.pw;

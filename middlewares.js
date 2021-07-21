@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 
 // add middlewares:
-// email checker
+
 // pw islongenough
 // phone number format
 
@@ -31,6 +31,45 @@ function authMw (request, response, next) {
     }
 }
 
+function isEmailValid (request, response, next) {
+    let email = request.body.email;
+
+    const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    
+    const at = '@';
+    const dot = '.';
+
+    if (!email) {
+        response.status(400).json({msg: "Email field is empty"});
+    }
+
+    if (!email.includes(at) || !email.includes(dot)) {
+        response.status(400).json({msg: 'Your email format is not valid'});
+    }
+
+    let validByRegexp = emailRegexp.test(email);
+    if (!validByRegexp) {
+        response.status(400).json({msg: 'Email includes invalid characters'});
+    }
+
+    if (email.length > 254) {
+        response.status(400).json({msg: 'Email length exceeds the maximum'});
+    }
+
+    let emailParts = email.split("@");
+    if (emailParts[0].length > 64) {
+        response.status(400).json({msg: 'Email username is too long'})
+    }
+
+    let domainParts = emailParts[1].split('.');
+    if (domainParts.some(function(part) {return part.length > 63;})) {
+        response.status(400).json({msg: 'Email domain name is too long'});
+    }
+
+    next();
+}
+
 module.exports = {
-    authMw
+    authMw,
+    isEmailValid
 }
