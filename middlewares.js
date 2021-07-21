@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 // add middlewares:
 // email checker
 // pw islongenough
+// phone number format
 
 
 function authMw (request, response, next) {

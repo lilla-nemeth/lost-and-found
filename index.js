@@ -95,6 +95,21 @@ app.put('/editpet/:id', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to update your post'}));
 });
 
+// user dashboard - edit user's datas
+app.put('/editprofile', authMw, (request, response) => {
+    let id = request.userId;
+    let username = request.body.username;
+    let email = request.body.email;
+    let pw = request.body.pw;
+    let phone = request.body.phone;
+    let encryptedPw = bcrypt.hashSync(pw, 10);
+ 
+    pool.query('UPDATE users SET username=$1, email=$2, pw=$3, phone=$4 WHERE id=$5', [username, email, encryptedPw, phone, id])
+    .then((res) => response.status(200).json({msg: 'Profile is succesfully updated'}))
+    .catch((err) => response.status(400).json({msg: 'Failed to update your profile'}))
+});
+
+
 // user dashboard - delete one pet by id
 app.delete('/deletepet/:id', authMw, (request, response) => {
     let id = request.params.id
