@@ -1,13 +1,19 @@
 const jwt = require('jsonwebtoken');
 
+
+// add middlewares:
+// email checker
+// pw islongenough
+
+
 function authMw (request, response, next) {
     // token a kérés headers részében található
     let token = request.headers['x-auth-token'];
     
-
+    
     // jsonwebtoken addig nem engedi tovább, amíg nem sikerült beazonosítani a felszhasználót 
     // a dekódolt token tartalmazza a felhasználó id-t + a megadott 
-
+    
     // decodedToken az egy objektum, amiben van az id meg iat (issued at, létrehozás dátuma):
     if (token) {
         jwt.verify(token, 'r4uqSKqC6L', (err, decodedToken) => {
