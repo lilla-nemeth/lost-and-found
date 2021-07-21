@@ -3,8 +3,7 @@ const app = express();
 const cors = require('cors');
 const { Pool } = require('pg');
 const bcrypt = require('bcryptjs'); 
-const { JsonWebTokenError } = require('jsonwebtoken');
-const { request, response } = require('express');
+const jwt = require('jsonwebtoken');
 // const path = require("path");
 // require('dotenv').config();
 const { authMw } = require('./middlewares.js');
@@ -43,8 +42,16 @@ app.get('/pets/:id', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch pet by id'}));
 });
 
-// Add new pet:
-app.post('/pets', authMw, (request, response) => {
+app.get('/username', authMw, (request, response) => {
+    let id = request.userId;
+
+    pool.query('SELECT * FROM users WHERE id=$1', [id])
+    .then((res) => response.status(200).json(res.rows[0].username))
+    .catch((err) => response.status(400).json({msg: 'Failed to fetch user'}));
+})
+
+// user dashboard - post/report a pet (but it could be in the front page also)
+app.post('/addpet', authMw, (request, response) => {
     let userId = request.userId;
     let addstatus = request.body.addstatus;
     let region = request.body.region;
@@ -66,8 +73,8 @@ app.post('/pets', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to add new pet'}));
 });
 
-// update pet datas by id:
-app.put('/pets/:id', authMw, (request, response) => {
+// user dashboard - update one pet's datas (by id):
+app.put('/editpet/:id', authMw, (request, response) => {
     let id = request.params.id;
     let addstatus = request.body.addstatus;
     let region = request.body.region;
@@ -85,19 +92,40 @@ app.put('/pets/:id', authMw, (request, response) => {
 
     pool.query('UPDATE pets SET addstatus=$1, region=$2, municipality=$3, zip=$4, district=$5, street=$6, size=$7, breed=$8, sex=$9, color=$10, age=$11, uniquefeature=$12, postdescription=$13 WHERE id=$14', [addstatus, region, municipality, zip, district, street, size, breed, sex, color, age, uniquefeature, postdescription, id])
     .then((res) => response.status(200).json({msg: 'Post is successfully updated'}))
-    .catch((err) => response.status(400).json({msg: 'Failed to update the post'}))
+    .catch((err) => response.status(400).json({msg: 'Failed to update your post'}));
 });
 
-// delete user by id, if it doesn't linked to have any pet
-
-// delete pet by id
-app.delete('/pets/:id', authMw, (request, response) => {
+// user dashboard - delete one pet by id
+app.delete('/deletepet/:id', authMw, (request, response) => {
     let id = request.params.id
 
     pool.query('DELETE FROM pets WHERE id=$1', [id])
     .then((res) => response.status(200).json({msg: 'Pet is successfully deleted'}))
-    .catch((err) => response.status(400).json({msg: 'Failed to delete the pet'}))
-})
+    .catch((err) => response.status(400).json({msg: 'Failed to delete the pet'}));
+});
+
+// user dashboard - delete all pets
+app.delete('/deleteallpets', authMw, (request, response) => {
+    let userId = request.userId;
+
+    pool.query('DELETE FROM pets WHERE userId=1', [userId])
+    .then((res) => response.status(200).json({msg: 'All pets are successfully deleted'}))
+    .catch((err) => response.status(400).json({msg: 'Failed to delete all pets'}));
+});
+
+// user dashboard - delete all pets and after the user account (secondary key -> primary key)
+// ! remove the token on the frontend side! (sign out)
+app.delete('/deleteuser', authMw, (request, response) => {
+    let userId = request.userId;
+
+    pool.query('DELETE FROM pets WHERE userId=$1', [userId])
+    .then((res) => {
+        pool.query('DELETE FROM users WHERE id=$1', [userId])
+        .then((res) => response.status(200).json({msg: 'Your account and your posts are successfully deleted'}))
+        .catch((err) => response.status(400).json({msg: 'Failed to delete your account'}));
+    })
+    .catch((err) => response.status(400).json({msg: 'Failed to delete your posts'}));
+});
 
 app.post('/register', /*place for password and email checker middlewares*/ (request, response) => {
     let username = request.body.username;
@@ -143,6 +171,5 @@ app.post('/login', /*place for password and email checker middlewares*/ (request
     })
     .catch((err) => response.status(400).json({msg: 'User not found'}))
 });
-
 
 app.listen(port, () => console.log("Server is running on 3003"));
