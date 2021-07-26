@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 
 
 // add middlewares:
-
-// pw islongenough
+// username validation
+// pw validation (like islongenough)
 // phone number format
 
 
@@ -34,33 +34,27 @@ function authMw (request, response, next) {
 function isEmailValid (request, response, next) {
     let email = request.body.email;
 
-    const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-    
-    const at = '@';
-    const dot = '.';
+    const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
     if (!email) {
         response.status(400).json({msg: "Email field is empty"});
     }
 
-    if (!email.includes(at) || !email.includes(dot)) {
-        response.status(400).json({msg: 'Your email format is not valid'});
+    let validByEmailRegex = emailRegex.test(email);
+    if (!validByEmailRegex) {
+        response.status(400).json({msg: 'Email format is not valid'});
     }
-
-    let validByRegexp = emailRegexp.test(email);
-    if (!validByRegexp) {
-        response.status(400).json({msg: 'Email includes invalid characters'});
-    }
-
+    
     if (email.length > 254) {
         response.status(400).json({msg: 'Email length exceeds the maximum'});
     }
 
     let emailParts = email.split("@");
+    
     if (emailParts[0].length > 64) {
-        response.status(400).json({msg: 'Email username is too long'})
+        response.status(400).json({msg: 'Email username is too long'});
     }
-
+    
     let domainParts = emailParts[1].split('.');
     if (domainParts.some(function(part) {return part.length > 63;})) {
         response.status(400).json({msg: 'Email domain name is too long'});
@@ -69,7 +63,48 @@ function isEmailValid (request, response, next) {
     next();
 }
 
+function isPasswordValid (request, response, next) {
+    let password = request.body.pw;
+
+    //pwRegex: Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character:
+    const pwUppercase = /^(?=.*[A-Z])/; 
+    const pwLowercase = /^(?=.*[a-z])/; 
+    const pwDigit =  /^(?=.*\d)/; 
+    const pwSpecialCharacter = /^(?=.*[!#$@^%&?*+,-./:;<=>_`{|}~])/;
+
+    if (!password) {
+        response.status(400).json({msg: 'Password field is empty'});
+    }
+
+    if (password.length < 8) {
+        response.status(400).json({msg: 'Password must contain at least 8 characters'});
+    }
+
+    let isContainUppercase = pwUppercase.test(password);
+    if (!isContainUppercase) {                         
+        response.status(400).json({msg: 'Password must contain at least one uppercase letter'});              
+    }
+
+    let isContainLowercase = pwLowercase.test(password);
+    if (!isContainLowercase) {                         
+        response.status(400).json({msg: 'Password must contain at least one lowercase letter'});              
+    }
+
+    let isContainDigit = pwDigit.test(password);
+    if (!isContainDigit) {
+        response.status(400).json({msg: 'Password must contain at least one number'})
+    }
+
+    let isContainSpecialCharacter = pwSpecialCharacter.test(password);
+    if (!isContainSpecialCharacter) {
+        response.status(400).json({msg: 'Password must contain at least one special character'})
+    }
+
+    next();
+}
+
 module.exports = {
     authMw,
-    isEmailValid
+    isEmailValid,
+    isPasswordValid
 }
