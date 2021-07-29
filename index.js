@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 // const path = require("path");
 // require('dotenv').config();
-const { authMw, isEmailValid, isPasswordValid } = require('./middlewares.js');
+const { authMw, isEmailValid, isUsernameValid, isPasswordValid } = require('./middlewares.js');
 
 // amikor a backend és a frontend különböző portokon fut, akkor cors elhárítja a hibát, engedélyezi a kül portok közötti kommunikációt
 app.use(cors());
@@ -96,15 +96,13 @@ app.put('/editpet/:id', authMw, (request, response) => {
 });
 
 // user dashboard - edit user's datas
-app.put('/editprofile', [isPasswordValid, authMw, isEmailValid], (request, response) => {
+app.put('/editprofile', [isPasswordValid, isUsernameValid, authMw, isEmailValid], (request, response) => {
     let id = request.userId;
     let username = request.body.username;
     let email = request.body.email;
     let pw = request.body.pw;
     let phone = request.body.phone;
     let encryptedPw = bcrypt.hashSync(pw, 10);
-
-    console.log(pw);
  
     pool.query('UPDATE users SET username=$1, email=$2, pw=$3, phone=$4 WHERE id=$5', [username, email, encryptedPw, phone, id])
     .then((res) => response.status(200).json({msg: 'Profile is succesfully updated'}))
@@ -144,7 +142,7 @@ app.delete('/deleteuser', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to delete your posts'}));
 });
 
-app.post('/register', [isEmailValid, isPasswordValid], (request, response) => {
+app.post('/register', [isEmailValid, isUsernameValid, isPasswordValid], (request, response) => {
     let username = request.body.username;
     let email = request.body.email;
     let pw = request.body.pw;
@@ -158,7 +156,7 @@ app.post('/register', [isEmailValid, isPasswordValid], (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to create user'}))
 });
 
-app.post('/login', isEmailValid, (request, response) => {
+app.post('/login', [isEmailValid], (request, response) => {
     let email = request.body.email;
     // POST login kérésben megadtuk a jelszót, ami nem hashelt:
     let pw = request.body.pw;

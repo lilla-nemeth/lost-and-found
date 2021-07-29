@@ -1,16 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-
-// add middlewares:
-// username validation
-// pw validation (like islongenough)
-// phone number format
-
-
 function authMw (request, response, next) {
     // token a kérés headers részében található
     let token = request.headers['x-auth-token'];
-    
     
     // jsonwebtoken addig nem engedi tovább, amíg nem sikerült beazonosítani a felszhasználót 
     // a dekódolt token tartalmazza a felhasználó id-t + a megadott 
@@ -31,13 +23,49 @@ function authMw (request, response, next) {
     }
 }
 
+function isUsernameValid (request, response, next) {
+    let username = request.body.username;
+
+    // allowed characters: alphanumeric characters, dots and underscores 
+    const usernameRegex = /^[a-zA-Z][A-Za-z0-9_\.]*$/;
+    const usernameFirstCharacter = /^[a-zA-Z]/;
+
+    if (!username) {
+        response.status(400).json({msg: 'Username field is required'})
+    }
+
+    // if (username.length < 2 && username.length > 30) {
+    //     response.status(400).json({msg: 'Username length must be between 2 and 30 characters'})
+    // }
+
+    if (username.length < 2) {
+        response.status(400).json({msg: 'Username must contain at least 2 characters'});
+    }
+
+    if (username.length > 30) {
+        response.status(400).json({msg: 'Username must be less than 30 characters'});
+    }
+    
+    let isFirstCharacterValid = usernameFirstCharacter.test(username);
+    if (!isFirstCharacterValid) {
+        response.status(400).json({msg: 'Username must start with a letter'})
+    }
+
+    let validByUsernameRegex = usernameRegex.test(username);
+    if (!validByUsernameRegex) {
+        response.status(400).json({msg: 'Username contains invalid character'})
+    }
+
+    next();
+}
+
 function isEmailValid (request, response, next) {
     let email = request.body.email;
 
     const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
     if (!email) {
-        response.status(400).json({msg: "Email field is empty"});
+        response.status(400).json({msg: 'Email field is required'});
     }
 
     let validByEmailRegex = emailRegex.test(email);
@@ -70,10 +98,10 @@ function isPasswordValid (request, response, next) {
     const pwUppercase = /^(?=.*[A-Z])/; 
     const pwLowercase = /^(?=.*[a-z])/; 
     const pwDigit =  /^(?=.*\d)/; 
-    const pwSpecialCharacter = /^(?=.*[!#$@^%&?*+,-./:;<=>_`{|}~])/;
+    const pwSpecialCharacters = /^(?=.*[!#$@^%&?*+,-./:;<=>_`{|}~])/;
 
     if (!password) {
-        response.status(400).json({msg: 'Password field is empty'});
+        response.status(400).json({msg: 'Password field is required'});
     }
 
     if (password.length < 8) {
@@ -95,7 +123,7 @@ function isPasswordValid (request, response, next) {
         response.status(400).json({msg: 'Password must contain at least one number'})
     }
 
-    let isContainSpecialCharacter = pwSpecialCharacter.test(password);
+    let isContainSpecialCharacter = pwSpecialCharacters.test(password);
     if (!isContainSpecialCharacter) {
         response.status(400).json({msg: 'Password must contain at least one special character'})
     }
@@ -105,6 +133,7 @@ function isPasswordValid (request, response, next) {
 
 module.exports = {
     authMw,
+    isUsernameValid,
     isEmailValid,
     isPasswordValid
 }
