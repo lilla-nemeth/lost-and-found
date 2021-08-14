@@ -8,6 +8,9 @@ const jwt = require('jsonwebtoken');
 // require('dotenv').config();
 const { authMw, isEmailValid, isUsernameValid, isPasswordValid } = require('./middlewares.js');
 
+
+// app.use - these middlewares will be called for every call to the application:
+
 // amikor a backend és a frontend különböző portokon fut, akkor cors elhárítja a hibát, engedélyezi a kül portok közötti kommunikációt
 app.use(cors());
 // express.json (post kérésekben a body-t ki tudjuk nyerni - régi verzióban külön kellet body parser-t installálni, ezt kiküszöböli)
@@ -16,15 +19,21 @@ app.use(express.json());
 const port = process.env.PORT || 3003;
 
 // adatbázis konfigurálása kell a kérések előtt
+// asztalinál a jelszó postgres:
 const pool = new Pool({
     host: 'localhost',
     user: 'postgres',
-    password: 'postgres',
+    // password: 'postgres',
+    password: 'masterpassword',
     port: 5432,
     database: 'lostandfound'
 });
 
 // from pets table get all pets by userId
+// mettől meddig fetchelje (pl. egy oldalra csak 20-at fetcheljen be egyszerre)
+// sql pagination
+// nem csak id lesz, hanem még lesz egy FROM meg egy TO
+// /:from/:to
 app.get('/pets', authMw, (request, response) => {
     let userId = request.userId;
 
