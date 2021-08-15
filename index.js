@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 // const path = require("path");
 // require('dotenv').config();
-const { authMw, isEmailValid, isUsernameValid, isPasswordValid } = require('./middlewares.js');
+const { authMw, isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid } = require('./middlewares.js');
 
 
 // app.use - these middlewares will be called for every call to the application:
@@ -105,7 +105,8 @@ app.put('/editpet/:id', authMw, (request, response) => {
 });
 
 // user dashboard - edit user's datas
-app.put('/editprofile', [isPasswordValid, isUsernameValid, authMw, isEmailValid], (request, response) => {
+// don't forget to add isPhoneValid middleware if works well!
+app.put('/editprofile', [isPasswordValid, isPhoneValid, isUsernameValid, authMw, isEmailValid], (request, response) => {
     let id = request.userId;
     let username = request.body.username;
     let email = request.body.email;
@@ -151,7 +152,7 @@ app.delete('/deleteuser', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to delete your posts'}));
 });
 
-app.post('/register', [isEmailValid, isUsernameValid, isPasswordValid], (request, response) => {
+app.post('/register', [isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid], (request, response) => {
     let username = request.body.username;
     let email = request.body.email;
     let pw = request.body.pw;

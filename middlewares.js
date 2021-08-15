@@ -91,6 +91,25 @@ function isEmailValid (request, response, next) {
     next();
 }
 
+function isPhoneValid (request, response, next) {
+    let phone = request.body.phone;
+
+    if (!phone) {
+        response.status(400).json({msg: 'Phone number is required'})
+    }
+
+    if (phone.length < 3) {
+        response.status(400).json({msg: 'Phone number is too short'})
+    }
+
+    if (phone.length > 10) {
+        response.status(400).json({msg: 'Phone number is too long'})
+    }
+
+    next();
+
+}
+
 function isPasswordValid (request, response, next) {
     let password = request.body.pw;
 
@@ -135,5 +154,6 @@ module.exports = {
     authMw,
     isUsernameValid,
     isEmailValid,
+    isPhoneValid,
     isPasswordValid
 }
