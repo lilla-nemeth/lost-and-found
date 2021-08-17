@@ -1,6 +1,6 @@
 import './App.css';
 import AuthContextProvider from './contexts/AuthContext';
-import PetLostAndFound from './PetLostAndFound';
+import PetLostAndFound from './components/PetLostAndFound';
 
 
 function App() {

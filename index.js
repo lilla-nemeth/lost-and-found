@@ -30,10 +30,7 @@ const pool = new Pool({
 });
 
 // from pets table get all pets by userId
-// mettől meddig fetchelje (pl. egy oldalra csak 20-at fetcheljen be egyszerre)
-// sql pagination
-// nem csak id lesz, hanem még lesz egy FROM meg egy TO
-// /:from/:to
+// ha a felhasználó a saját általa hozzáadott állatokat akarja megnézni
 app.get('/pets', authMw, (request, response) => {
     let userId = request.userId;
 
@@ -41,6 +38,29 @@ app.get('/pets', authMw, (request, response) => {
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch all pets'}));
 });
+ 
+
+// Pagination:
+app.get('/pets/:fetch/:skip', (request, response) => {
+    // limit = fetch
+    // offset = skip
+    let limit = request.params.fetch;
+    let offset = request.params.skip;
+    // console.log(fetch, skip)
+
+    pool.query('SELECT * FROM pets LIMIT $1 OFFSET $2', [limit, offset])
+    .then((res) => response.status(200).json(res.rows))
+    .catch((err) => response.status(400).json({msg: 'Failed to fetch pets'}));
+});
+
+// get the total amount of pets as a number
+app.get('/pets/total', (request, response) => {
+
+    pool.query('SELECT COUNT(*) FROM pets')
+    .then((res) => response.status(200).json(res.rows[0].count))
+    .catch((err) => response.status(400).json({msg: 'Failed to fetch the total amount of pets'}));
+})
+
 
 // from pets table get one pet by id
 app.get('/pets/:id', authMw, (request, response) => {
