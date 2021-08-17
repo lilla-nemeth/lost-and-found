@@ -1,11 +1,13 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
 export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
-    // token, setToken
-    // user, setUser
-    // errorMsg, setErrorMsg
+    const [token, setToken] = useState(null);
+
+    // check if user and errorMsg are necessary!
+    // const [user, setUser] = useState('');
+    // const [errorMsg, setErrorMsg] = useState('');
 
 
     // useEffect
