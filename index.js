@@ -53,7 +53,21 @@ app.get('/pets/:fetch/:skip', (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch pets'}));
 });
 
-// get the total amount of pets as a number
+// get the timestamp (since) in the required format
+app.get('/pets/since', (request, response) => {
+
+    // get the year from timestamp:
+    // pool.query('SELECT EXTRACT(YEAR FROM since) FROM pets')
+
+    // they work well:
+    // pool.query("SELECT to_char(since, 'DD-MM-YYYY') FROM pets")
+    // pool.query("SELECT to_char(since, 'DD/MM/YYYY') FROM pets")
+    pool.query("SELECT to_char(since, 'DD.MM.YYYY') FROM pets")
+    .then((res) => console.log(res.rows))
+    .catch((err) => console.log(err));
+})
+
+// get the total amount of pets
 app.get('/pets/total', (request, response) => {
 
     pool.query('SELECT COUNT(*) FROM pets')
