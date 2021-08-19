@@ -21,7 +21,7 @@ const styles = {
 
     petPicture: {
         width: '300px',  
-        // height: '250px',
+        // height: '300px',
         border: '2px solid black',
         cursor: 'pointer', 
         position: 'relative',

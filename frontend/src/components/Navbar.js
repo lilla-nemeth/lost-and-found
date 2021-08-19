@@ -1,36 +1,47 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ReactComponent as PetPawLogo } from '../assets/icons/dogpaw.svg';
 
 const styles = {
+    navbarContainer: {
+        background: '#B0F0EB', 
+        height: '100px'
+    },
     navbar: {
         listStyleType: 'none',
-        margin: 0,
-        padding: '22px 0',
-        background: '#333',
+        // padding: '20px 0',
+        background: '#226660',
         overflow: 'hidden',
-        display: 'flex',
-        justifyContent: 'flex-end',
+        boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)',
+        position: 'fixed',
+        width: '100%',
+        zIndex: 5,
+        display: 'flex'
     },
     navbarElement: {
         textAlign: 'center',
         padding: '14px 18px',
         margin: '4px',
         textDecoration: 'none',
-        border: '1px solid white',
         color: 'white',
         font: '300 15px/1.2 "Poppins", sans-serif',
+        display: 'flex',
     },
+    pawIcon: {
+        // width: '20px',
+        height: '20px',
+    }
 }
 
 const Navbar = () => {
 
     return (  
-        <div>
+        <div style={styles.navbarContainer}>
             <ul style={styles.navbar}>
-                <li><Link style={styles.navbarElement} className='navLink' to='/'>Logo</Link></li>
-                <li><Link style={styles.navbarElement} className='navLink' to='/'>Lost & Found</Link></li>
-                <li><Link style={styles.navbarElement} className='navLink' to='/reportpet'>Report Pet</Link></li>
-                <li><Link style={styles.navbarElement} className='navLink' to='/login'>Login</Link></li>
+                    <li><Link style={styles.navbarElement} to='/'><PetPawLogo style={styles.pawIcon}/></Link></li>
+                    <li><Link style={styles.navbarElement} className='navLink' to='/'>Lost & Found</Link></li>
+                    <li><Link style={styles.navbarElement} className='navLink' to='/reportpet'>Report Pet</Link></li>
+                    <li><Link style={styles.navbarElement} className='navLink' to='/login'>Login</Link></li>
             </ul>
         </div>
     );

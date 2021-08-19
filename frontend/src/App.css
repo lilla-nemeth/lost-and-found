@@ -46,5 +46,6 @@ table {
 }
 
 .navLink:hover {
-	background-color: #111;
+	background-color: #47a39c;
+	/* border: 1px solid white; */
 }
