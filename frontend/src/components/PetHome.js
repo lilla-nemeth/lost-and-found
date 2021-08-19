@@ -11,7 +11,7 @@ const styles = {
     }
 }
 
-const PetLostAndFound = () => {
+const PetHome = () => {
     return (  
         <main style={styles.main}>
             <section>
@@ -23,4 +23,4 @@ const PetLostAndFound = () => {
     );
 }
  
-export default PetLostAndFound;
+export default PetHome;

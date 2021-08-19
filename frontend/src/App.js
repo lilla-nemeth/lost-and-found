@@ -1,17 +1,70 @@
 import './App.css';
 import AuthContextProvider from './contexts/AuthContext';
-import PetLostAndFound from './components/PetLostAndFound';
+import PetHome from './components/PetHome';
+import Navbar from './components/Navbar';
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
 
 function App() {
-  return (
-    <AuthContextProvider>
 
-      {/*  PetLostAndFound - default home page */}
-      <PetLostAndFound />
+  // if token exists -> AuthContextProvider
+  // if doesn't exist -> without it 
 
-    </AuthContextProvider>
-  );
-}
+  //     <AuthContextProvider>
+  //       {/* USER CONTENTS */}
+  //     </AuthContextProvider>
+
+
+  // * = default 
+
+  // if (!token) {
+
+    return (
+      <>
+        <BrowserRouter>
+
+            <Navbar />
+
+          <Switch>
+            <Route path='*'>
+              <PetHome />
+            </Route>
+            <Route path='/'>
+              <PetHome />
+            </Route>
+
+
+            <Route path='/register'>
+              {/* Register Component */}
+            </Route>
+            <Route path='/login'>
+              {/* Login Component */}
+            </Route>
+
+          </Switch>
+
+        </BrowserRouter>
+      </>
+      );
+  } 
+
+
+  // return (
+    //   <>
+    //   <BrowserRouter>
+    //     {/* Navbar Component */}
+    //     <Switch>
+    //       <Route exact path='/'>
+    //         {/* PetHome */}
+    //       </Route>
+    //       <Route path='*'>
+    //         {/* PetHome */}
+    //       </Route>
+    //     </Switch>
+    //   </BrowserRouter>
+    // </>
+    // );
+
+// }
 
 export default App;
