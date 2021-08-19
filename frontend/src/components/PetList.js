@@ -75,12 +75,11 @@ const styles = {
     },
 
     petProfileButton: {
+        margin: '10px 0',
         font: '400 15px/1.2 "Poppins", sans-serif',
         cursor: 'pointer',
         width: '100%',
-        padding: '15px',
-        // width: 'fit-content',
-
+        padding: '15px'
     },
 
     pagination: {
@@ -159,12 +158,29 @@ const PetList = () => {
         return numberArr;
     } 
 
+    // convertDate helper function:
     function convertDate(timestamp) {
         let dateBySugar = Sugar.Date.create(timestamp)
         let formattedDateBySugar = Sugar.Date.format(dateBySugar, '{dd}/{MM}/{yyyy}');
+        
         return formattedDateBySugar;
     }
 
+    // petStatus helper function:
+    function petStatus(status) {
+        if (status === 'found') {
+            return 'Found'
+        } else if (status === 'lost') {
+            return 'Lost';
+        } else {
+            return 'Reunited';
+        }
+    }
+
+    // lost -> since (in progress cases)
+    // found -> since (in progress cases)
+    // reunited -> until (ready to close cases)
+    
     return (  
         <>
         {pets.map(pet => {
@@ -184,12 +200,18 @@ const PetList = () => {
                                 <div style={styles.petSpecies}>
                                     {pet.species}
                                 </div>
-                                {/* to create unique id - uuid? */}
                                 <div style={styles.petId}>
+                                    {/* {uuidv4()} */}
                                     #{pet.id}
                                 </div>
                                 <div style={styles.petDate}>
-                                    {convertDate(pet.since)}
+                                     {
+                                        pet.addstatus === 'lost' || pet.addstatus === 'found' 
+                                        ? 
+                                        petStatus(pet.addstatus) + ': ' + convertDate(pet.since) 
+                                        : 
+                                        petStatus(pet.addstatus) + ': ' + convertDate(pet.until)
+                                     }
                                 </div>
                                 <div style={styles.petPlace}>
                                     <div>
