@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PetSortingButtons = () => {
+const PetProfile = () => {
 
 
     return (  
@@ -9,4 +9,4 @@ const PetSortingButtons = () => {
     );
 }
  
-export default PetSortingButtons;
+export default PetProfile;

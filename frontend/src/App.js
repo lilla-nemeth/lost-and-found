@@ -7,7 +7,7 @@ function App() {
   return (
     <AuthContextProvider>
 
-      {/*  PetLostAndFound will be the default home page */}
+      {/*  PetLostAndFound - default home page */}
       <PetLostAndFound />
 
     </AuthContextProvider>
