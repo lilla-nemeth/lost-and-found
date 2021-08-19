@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+import Sugar from 'sugar';
 
 const styles = {
-
     petCard: {
         background: 'rgba(255,255,255,0.7)', 
         marginBottom: '25px', 
@@ -103,19 +104,18 @@ const styles = {
 }
 
 const PetList = () => {
-// PetSortingButtons lost and found buttons:
-// if Lost is checked, then show the since info: pets > pet.since
-// if Found is checked, then show the until info: pets > pet.until
 
-// install sugar npm! (date)
+    // PetSortingButtons lost and found buttons:
+    // if Lost is checked, then show the since info: pets > pet.since
+    // if Found is checked, then show the until info: pets > pet.until
 
-const [pets, setPets] = useState([]);
-// we get string and we need to convert it to number before saving into the state:
-const [total, setTotal] = useState(0);
-// the default skip: 
-const [offset, setOffset] = useState(0);
+    const [pets, setPets] = useState([]);
+    // we get string and we need to convert it to number before saving into the state:
+    const [total, setTotal] = useState(0);
+    // the default skip: 
+    const [offset, setOffset] = useState(0);
 
-let limit = 6;
+    let limit = 6;
 
     useEffect(() => {
         let options = {
@@ -159,6 +159,12 @@ let limit = 6;
         return numberArr;
     } 
 
+    function convertDate(timestamp) {
+        let dateBySugar = Sugar.Date.create(timestamp)
+        let formattedDateBySugar = Sugar.Date.format(dateBySugar, '{dd}/{MM}/{yyyy}');
+        return formattedDateBySugar;
+    }
+
     return (  
         <>
         {pets.map(pet => {
@@ -175,12 +181,20 @@ let limit = 6;
                                 <div style={styles.petStatus}>
                                     {pet.addstatus}
                                 </div>
-                                <div style={styles.petSpecies}>{pet.species}</div>
+                                <div style={styles.petSpecies}>
+                                    {pet.species}
+                                </div>
                                 {/* to create unique id - uuid? */}
-                                <div style={styles.petId}>#{pet.id}</div>
-                                <div style={styles.petDate}>{pet.since}</div>
+                                <div style={styles.petId}>
+                                    #{pet.id}
+                                </div>
+                                <div style={styles.petDate}>
+                                    {convertDate(pet.since)}
+                                </div>
                                 <div style={styles.petPlace}>
-                                    <div>{pet.municipality} ({pet.region})</div>
+                                    <div>
+                                        {pet.municipality} ({pet.region})
+                                    </div>
                                 </div>
                                 <button style={styles.petProfileButton}>View Pet</button>
                             </div>
@@ -192,6 +206,7 @@ let limit = 6;
             <div style={styles.pagination}>{numberIncreases().map(page => {
                     return (
                         <div 
+                            key={uuidv4()}
                             onClick={() => setOffset(page * limit)} 
                             style={styles.paginationNumbers}
                         >

@@ -41,31 +41,29 @@ app.get('/pets', authMw, (request, response) => {
  
 
 // Pagination:
+// app.get('/pets/:fetch/:skip', (request, response) => {
+//     // limit = fetch
+//     // offset = skip
+//     let limit = request.params.fetch;
+//     let offset = request.params.skip;
+
+
+//     pool.query('SELECT * FROM pets LIMIT $1 OFFSET $2', [limit, offset])
+//     .then((res) => response.status(200).json(res.rows))
+//     .catch((err) => response.status(400).json({msg: 'Failed to fetch pets'}));
+// });
+
 app.get('/pets/:fetch/:skip', (request, response) => {
     // limit = fetch
     // offset = skip
     let limit = request.params.fetch;
     let offset = request.params.skip;
-    // console.log(fetch, skip)
 
+    // pool.query('SELECT to_char(since, "DD/MM/YYYY") AS since FROM pets LIMIT $1 OFFSET $2', [limit, offset])
     pool.query('SELECT * FROM pets LIMIT $1 OFFSET $2', [limit, offset])
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch pets'}));
 });
-
-// get the timestamp (since) in the required format
-app.get('/pets/since', (request, response) => {
-
-    // get the year from timestamp:
-    // pool.query('SELECT EXTRACT(YEAR FROM since) FROM pets')
-
-    // they work well:
-    // pool.query("SELECT to_char(since, 'DD-MM-YYYY') FROM pets")
-    // pool.query("SELECT to_char(since, 'DD/MM/YYYY') FROM pets")
-    pool.query("SELECT to_char(since, 'DD.MM.YYYY') FROM pets")
-    .then((res) => console.log(res.rows))
-    .catch((err) => console.log(err));
-})
 
 // get the total amount of pets
 app.get('/pets/total', (request, response) => {
@@ -74,7 +72,6 @@ app.get('/pets/total', (request, response) => {
     .then((res) => response.status(200).json(res.rows[0].count))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch the total amount of pets'}));
 })
-
 
 // from pets table get one pet by id
 app.get('/pets/:id', authMw, (request, response) => {
