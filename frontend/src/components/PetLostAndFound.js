@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PetList from './PetList';
 import PetSearchBox from './PetSearchBox';
 import PetSortingButtons from './PetSortingButtons';
