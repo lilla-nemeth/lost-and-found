@@ -4,13 +4,14 @@ const styles = {
     smallBoxes: {
         display: 'flex',
         justifyContent: 'space-between',
-        width: '840px',
+        width: '830px',
     },
     genderBox: {
         background: 'rgba(255,255,255,0.7)', 
-        marginBottom: '25px', 
+        marginBottom: '13px', 
         padding: '25px', 
         // maxWidth: 'fit-content',
+        height: 'fit-content',
         maxWidth: '50%',
         borderRadius: '25px', 
         // width: '740px',
@@ -18,8 +19,9 @@ const styles = {
     }, 
     ageBox: {
         background: 'rgba(255,255,255,0.7)', 
-        marginBottom: '25px', 
+        marginBottom: '50px', 
         padding: '25px', 
+        // padding: '10px', 
         // maxWidth: 'fit-content',
         maxWidth: '100%',
         borderRadius: '25px', 

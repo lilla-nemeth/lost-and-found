@@ -2,6 +2,8 @@ import './App.css';
 import AuthContextProvider from './contexts/AuthContext';
 import PetHome from './components/PetHome';
 import Navbar from './components/Navbar';
+import Login from './components/Login';
+import Register from './components/Register';
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
 
@@ -23,22 +25,23 @@ function App() {
       <>
         <BrowserRouter>
 
-            <Navbar />
 
-          <Switch>
+             <Navbar />
+       {/*   <Switch>
             <Route path='*'>
               <PetHome />
             </Route>
             <Route path='/'>
               <PetHome />
-            </Route>
+            </Route> */}
 
+          <Switch>
 
             <Route path='/register'>
-              {/* Register Component */}
+              <Register />
             </Route>
             <Route path='/login'>
-              {/* Login Component */}
+              <Login />
             </Route>
 
           </Switch>
