@@ -1,7 +1,7 @@
 import React from 'react';
 import PetList from './PetList';
-import PetSearchBox from './PetSearchBox';
-import PetSortingButtons from './PetSortingButtons';
+import PetSearch from './PetSearch';
+import PetAdvancedSearch from './PetAdvancedSearch';
 
 const styles = {
     main: {
@@ -21,8 +21,8 @@ const PetHome = () => {
     return (  
         <main style={styles.main}>
             <section style={styles.section}>
-                <PetSearchBox />
-                <PetSortingButtons />
+                <PetSearch />
+                <PetAdvancedSearch />
                 <PetList />
             </section>
         </main>

@@ -125,3 +125,92 @@ input[type=radio]:checked ~ label{
 }
 
 
+/* Checkbox */
+.checkboxContainer {
+  display: block;
+  position: relative;
+  padding-left: 50px;
+  margin-bottom: 25px;
+  cursor: pointer;
+  user-select: none;
+  align-items: center;
+}
+
+.checkboxContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 30px;
+  background: lightpink;
+}
+
+.checkboxContainer:hover input ~ .checkmark {
+  background: darkorchid;
+}
+
+.checkboxContainer input:checked ~ .checkmark {
+  background: violet;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkboxContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkboxContainer .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 11px;
+  height: 16px;
+  border: solid var(--clr-white);
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+ul li input[type=checkbox]{
+  position: absolute;
+  visibility: hidden;
+}
+
+
+/* LOGIN, REGISTRATION */
+.formButton {
+  padding: 16px;
+  margin-top: 16px;
+  width: 100%;
+  cursor: pointer;
+  border-color: transparent;
+  text-transform: uppercase;
+  background: rgb(34, 102, 96);
+  color: #fff;
+}
+
+.formButton:hover {
+  background: rgb(71, 163, 156);
+}
+
+.formLink {
+  text-decoration: none;
+  color: rgb(71, 163, 156);
+}
+
+.formLink:hover {
+  color: rgb(34, 102, 96);
+}

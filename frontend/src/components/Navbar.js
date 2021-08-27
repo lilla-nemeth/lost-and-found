@@ -9,7 +9,6 @@ const styles = {
     },
     navbar: {
         listStyleType: 'none',
-        // padding: '20px 0',
         background: '#226660',
         overflow: 'hidden',
         boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)',
