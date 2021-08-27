@@ -4,13 +4,23 @@ import { v4 as uuidv4 } from 'uuid';
 import Sugar from 'sugar';
 
 const styles = {
+    petCardContainer: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
     petCard: {
         background: 'rgba(255,255,255,0.7)', 
         marginBottom: '25px', 
         padding: '50px', 
         maxWidth: 'fit-content',
+        // maxWidth: '50%',
         borderRadius: '25px', 
-        boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)'
+        boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)',
+
+
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     petCardInner: {
@@ -185,40 +195,42 @@ const PetList = () => {
         <>
         {pets.map(pet => {
             return (
-                <div style={styles.petCard} key={pet.id}>
-                    <div style={styles.petCardInner}>
-                        <div 
-                            style={styles.petPicture}
-                        >
-                                Place of Picture
-                        </div>
-                        <div style={styles.petTextBox}>
-                            <div style={styles.petHeadline}>
-                                <div style={styles.petStatus}>
-                                    {pet.addstatus}
-                                </div>
-                                <div style={styles.petSpecies}>
-                                    {pet.species}
-                                </div>
-                                <div style={styles.petId}>
-                                    {/* {uuidv4()} */}
-                                    #{pet.id}
-                                </div>
-                                <div style={styles.petDate}>
-                                     {
-                                        pet.addstatus === 'lost' || pet.addstatus === 'found' 
-                                        ? 
-                                        petStatus(pet.addstatus) + ': ' + convertDate(pet.since) 
-                                        : 
-                                        petStatus(pet.addstatus) + ': ' + convertDate(pet.until)
-                                     }
-                                </div>
-                                <div style={styles.petPlace}>
-                                    <div>
-                                        {pet.municipality} ({pet.region})
+                <div style={styles.petCardContainer}>
+                    <div style={styles.petCard} key={pet.id}>
+                        <div style={styles.petCardInner}>
+                            <div 
+                                style={styles.petPicture}
+                            >
+                                    Place of Picture
+                            </div>
+                            <div style={styles.petTextBox}>
+                                <div style={styles.petHeadline}>
+                                    <div style={styles.petStatus}>
+                                        {pet.addstatus}
                                     </div>
+                                    <div style={styles.petSpecies}>
+                                        {pet.species}
+                                    </div>
+                                    <div style={styles.petId}>
+                                        {/* {uuidv4()} */}
+                                        #{pet.id}
+                                    </div>
+                                    <div style={styles.petDate}>
+                                        {
+                                            pet.addstatus === 'lost' || pet.addstatus === 'found' 
+                                            ? 
+                                            petStatus(pet.addstatus) + ': ' + convertDate(pet.since) 
+                                            : 
+                                            petStatus(pet.addstatus) + ': ' + convertDate(pet.until)
+                                        }
+                                    </div>
+                                    <div style={styles.petPlace}>
+                                        <div>
+                                            {pet.municipality} ({pet.region})
+                                        </div>
+                                    </div>
+                                    <button style={styles.petProfileButton}>View Pet</button>
                                 </div>
-                                <button style={styles.petProfileButton}>View Pet</button>
                             </div>
                         </div>
                     </div>

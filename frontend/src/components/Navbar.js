@@ -15,7 +15,7 @@ const styles = {
         boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)',
         position: 'fixed',
         width: '100%',
-        zIndex: 5,
+        zIndex: 100,
         display: 'flex'
     },
     navbarElement: {

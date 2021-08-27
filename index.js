@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const { Pool } = require('pg');
+const { Pool, Connection } = require('pg');
 const bcrypt = require('bcryptjs'); 
 const jwt = require('jsonwebtoken');
 // const path = require("path");
@@ -39,30 +39,103 @@ app.get('/pets', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch all pets'}));
 });
  
-
 // Pagination:
-// app.get('/pets/:fetch/:skip', (request, response) => {
-//     // limit = fetch
-//     // offset = skip
-//     let limit = request.params.fetch;
-//     let offset = request.params.skip;
-
-
-//     pool.query('SELECT * FROM pets LIMIT $1 OFFSET $2', [limit, offset])
-//     .then((res) => response.status(200).json(res.rows))
-//     .catch((err) => response.status(400).json({msg: 'Failed to fetch pets'}));
-// });
-
 app.get('/pets/:fetch/:skip', (request, response) => {
     // limit = fetch
     // offset = skip
     let limit = request.params.fetch;
     let offset = request.params.skip;
 
-    // pool.query('SELECT to_char(since, "DD/MM/YYYY") AS since FROM pets LIMIT $1 OFFSET $2', [limit, offset])
     pool.query('SELECT * FROM pets LIMIT $1 OFFSET $2', [limit, offset])
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch pets'}));
+});
+
+// Search:
+
+// addstatus
+// region
+// municipality
+// zip
+// district
+// street
+// species
+// size
+// breed
+// sex
+// color
+// age
+// uniquefeature
+// postdescription
+
+
+// TEST
+// app.get('/search', (request, response) => {
+
+//     // let addstatus = request.body.addstatus;
+//     // let region = request.body.region;
+//     // let municipality = request.body.municipality;
+//     // let zip = request.body.zip;
+//     // let district = request.body.district;
+//     // let street = request.body.street;
+//     let species = request.body.species;
+//     // let size = request.body.size;
+//     // let breed = request.body.breed;
+//     // let sex = request.body.sex;
+//     // let color = request.body.color;
+//     // let age = request.body.age;
+//     // let uniquefeature = request.body.uniquefeature;
+//     // let postdescription = request.body.postdescription;
+
+//     pool.query("SELECT to_tsvector('english', 'a fat  cat sat on a mat - it ate a fat rats')")
+//     .then((res) => console.log(res))
+//     .catch((err) => console.log(err));
+// });
+
+// DETAILED SEARCH
+app.get('/search?', (request, response) => {
+    // példák
+    // postmanbe?? https://www.example.dev/?city=Rome&price=200
+    // const myNaiveUrl = `https://www.example.dev/?city=${city}&price=${price}`;
+    
+    console.log(request.query)
+
+    // let query = request.params.query
+    let selectAll = 'SELECT * FROM pets';
+    // create a new array with the already added array elements
+
+    // add the other columns of pets!
+    const existingParams = ['addstatus', 'size','sex'].filter(field => request.query[field]);
+    console.log(existingParams)
+ 
+
+    // console.log(existingParams)
+    // if the new existingParams array is not empty then
+    // we add the WHERE word to the existingParams - which is necessary to the query and 
+    // existingParams + WHERE + loop the existingParams and create a new array
+    // with the params + ? + AND word  
+    if (existingParams.length) {
+        selectAll += ' WHERE ';
+        selectAll += existingParams.map(field => `${field} = '${request.query[field]}'`).join(' AND ');      
+    }
+
+
+    
+    console.log(selectAll)
+    // connection.query(
+    //     selectAll,
+    //     existingParams.maps(field => req.query[field]
+    // )
+
+    // console.log(existingParams.maps(field => request.query[field]));
+
+    // pool.query(selectAll + existingParams.maps(field => req.query[field]))
+    pool.query(selectAll)
+    // .then((res) => response.status(200).json(res.rows))
+    .then((res) => response.status(200).json(res.rows))
+    .catch((err) => console.log(err));
+    // .catch((err) => response.status(400).json({msg: 'Failed to find anything'}));
+    
 });
 
 // get the total amount of pets
