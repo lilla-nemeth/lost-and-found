@@ -33,6 +33,8 @@ const styles = {
 }
 
 const Navbar = () => {
+    
+    let DEBUG = true;
 
     return (  
         <div style={styles.navbarContainer}>

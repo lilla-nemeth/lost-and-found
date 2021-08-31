@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 
+let DEBUG = true;
+
 function authMw (request, response, next) {
     // token a kérés headers részében található
     let token = request.headers['x-auth-token'];

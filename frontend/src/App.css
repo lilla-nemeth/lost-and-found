@@ -200,10 +200,24 @@ ul li input[type=checkbox]{
   text-transform: uppercase;
   background: rgb(34, 102, 96);
   color: #fff;
+  border-radius: 0.25rem;
 }
 
 .formButton:hover {
   background: rgb(71, 163, 156);
+}
+
+.formInput {
+  padding: 16px;
+  width: 300px;
+  background: rgb(183, 223, 219);
+  border: none;
+  font: 300 15px/1.2 "Poppins", sans-serif;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.formInput:hover {
+  background: rgb(191, 230, 226);
 }
 
 .formLink {

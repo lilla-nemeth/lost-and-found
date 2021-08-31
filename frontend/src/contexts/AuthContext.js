@@ -2,8 +2,10 @@ import React, { createContext, useState } from 'react';
 
 export const AuthContext = createContext();
 
-const AuthContextProvider = (props) => {
+export default function AuthContextProvider(props) {
     const [token, setToken] = useState(null);
+
+    let DEBUG = true;
 
     // check if user and errorMsg are necessary!
     // const [user, setUser] = useState('');
@@ -20,5 +22,3 @@ const AuthContextProvider = (props) => {
         </AuthContext.Provider>
     );
 }
- 
-export default AuthContextProvider;

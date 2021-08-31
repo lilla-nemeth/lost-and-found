@@ -2,6 +2,7 @@ import React from 'react';
 
 const PetProfile = () => {
 
+    let DEBUG = true;
 
     return (  
         <>
