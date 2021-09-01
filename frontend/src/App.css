@@ -109,6 +109,7 @@ table {
 
 
 
+
 /* CHANGE THE UL LI TO CLASSES!!!!!!!! */
 ul li{
   position: relative;
@@ -233,7 +234,7 @@ input[type=checkbox]:checked ~ label{
 }
 
 .formButton {
-  margin-top: 16px;
+  margin-top: 40px;
   width: 100%;
   border-radius: 0.25rem;
 }
@@ -247,27 +248,45 @@ input[type=checkbox]:checked ~ label{
   background: rgb(71, 163, 156);
 }
 
-.formInput,
-.searchInput {
+.formLabel {  
   padding: 16px;
-  width: 300px;
-  background: rgb(183, 223, 219);
-  border: none;
-  font: 300 15px/1.2 "Poppins", sans-serif;
+  width: fit-content;
+  fill: #226660;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid rgb(34, 102, 96);
+  /* background: #47a39c;
+  border-radius: 0.25rem 0 0 0.25rem; */
 }
 
-.formInput {
+.formInput,
+.searchInput {
+  /* padding: 16px; */
+  padding: 16px 8px;
+  width: 300px;
+  border-bottom: 2px solid rgb(34, 102, 96);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: none;
+  font: 300 15px/1.2 "Poppins", sans-serif;
+  /* background: rgb(183, 223, 219); */
+  /* border: none; */
+}
+
+/* .formInput {
   border-radius: 0 0.25rem 0.25rem 0;
 }
 
 .searchInput {
   border-radius: 0.25rem 0 0 0.25rem;
-}
+} */
 
-.formInput:hover,
+/* .formInput:hover,
 .searchInput:hover {
   background: rgb(191, 230, 226);
-}
+} */
 
 .formInput:focus,
 .searchInput:focus {

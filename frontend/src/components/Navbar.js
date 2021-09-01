@@ -33,6 +33,7 @@ const Navbar = () => {
                     <li><Link className='navLink' to='/'>Lost & Found</Link></li>
                     <li><Link className='navLink' to='/reportpet'>Report Pet</Link></li>
                     <li><Link className='navLink' to='/login'>Login</Link></li>
+                    <li><Link className='navLink' to='/register'>Register</Link></li>
             </ul>
         </div>
     );

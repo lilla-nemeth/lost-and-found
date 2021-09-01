@@ -29,14 +29,10 @@ export default function ApiContextProvider(props) {
 
         axios(options)
         .then(
-            res => {
-                if (success) success(res.data.msg, successTimeout())
-            }
+            res => {if (success) success(res.data.msg, successTimeout())}
         )
         .catch(
-            err => {               
-                    if (error) error(err.response.data.msg, errorTimeout())                
-            }
+            err => {if (error) error(err.response.data.msg, errorTimeout())}
         )
     }
 

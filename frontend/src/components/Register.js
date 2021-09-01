@@ -11,21 +11,24 @@ const styles = {
     main: {
         fontFamily: '"Poppins", sans-serif',
         background: '#B0F0EB',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        display: 'flex',
+        justifyContent: 'flex-end',
     },
     section: {
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
+        width: 'fit-content',
+        height: '100vh',
+        margin: '25px 100px',
     },
     formBox: {
         background: 'rgba(255,255,255,0.7)', 
-        marginBottom: '13px',
         padding: '50px', 
         height: 'fit-content',
         borderRadius: '25px', 
-        boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)'
+        boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)',
     }, 
     emailBox: {
         display: 'flex',
@@ -37,15 +40,6 @@ const styles = {
     passwordBox: {
         paddingTop: '20px',
         display: 'flex',
-    },
-    formLabel: {
-        padding: '16px',
-        background: '#47a39c',
-        width: 'fit-content',
-        fill: '#226660',
-        borderRadius: '0.25rem 0 0 0.25rem',
-        // fill: '#fff',
-        // fill: '#B0F0EB',
     },
     signUpText: {
         paddingTop: '20px',
@@ -60,6 +54,11 @@ const styles = {
         paddingTop: '20px',
         textAlign: 'center',
         color: 'green'
+    },
+    backButton: {
+        height: 'fit-content',
+        padding: '30px',
+        cursor: 'pointer',
     },
 }
 
@@ -97,12 +96,17 @@ const Register = () => {
     createHistory().replace('/register');
 
     return (
-        <main style={styles.main}>    
+        <main style={styles.main}>  
+            <Link to='/'>
+                <button style={styles.backButton}>
+                    Back to the Lost & Found Page
+                </button>
+            </Link>  
             <section style={styles.section}>
                 <div style={styles.formBox}>
                     <form onSubmit={handleSubmit}>
                         <div style={styles.emailBox}>
-                            <label style={styles.formLabel} for='email'>
+                            <label className='formLabel'  for='email'>
                                 <EmailIcon />
                             </label>
                             <input 
@@ -116,7 +120,7 @@ const Register = () => {
                             />
                         </div>
                         <div style={styles.usernameBox}>
-                            <label style={styles.formLabel} for='email'>
+                            <label className='formLabel'  for='email'>
                                 <UsernameIcon />
                             </label>
                             <input 
@@ -130,7 +134,7 @@ const Register = () => {
                             />
                         </div>
                         <div style={styles.usernameBox}>
-                            <label style={styles.formLabel} for='email'>
+                            <label className='formLabel'  for='email'>
                                 <PhoneIcon />
                             </label>
                             <input 
@@ -144,7 +148,7 @@ const Register = () => {
                             />
                         </div>
                         <div style={styles.passwordBox}>
-                            <label style={styles.formLabel} for='password'>
+                            <label className='formLabel'  for='password'>
                                 <PasswordIcon />
                             </label>
                             <input 
