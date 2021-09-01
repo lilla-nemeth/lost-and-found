@@ -19,7 +19,6 @@ const styles = {
     formBox: {
         background: 'rgba(255,255,255,0.7)', 
         marginBottom: '13px', 
-        // padding: '25px', 
         padding: '50px', 
         height: 'fit-content',
         borderRadius: '25px', 
@@ -38,8 +37,6 @@ const styles = {
         width: 'fit-content',
         fill: '#226660',
         borderRadius: '0.25rem 0 0 0.25rem',
-        // fill: '#fff',
-        // fill: '#B0F0EB',
     },
     signUpText: {
         paddingTop: '20px',
