@@ -296,6 +296,7 @@ input[type=checkbox]:checked ~ label{
 .formLink {
   text-decoration: none;
   color: rgb(71, 163, 156);
+  padding-left: 5px;
 }
 
 .formLink:hover {

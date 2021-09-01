@@ -7,7 +7,8 @@ import Logo from './Logo';
 
 const styles = {
     formBox: {
-        background: 'rgba(255,255,255,0.9)', 
+        // background: 'rgba(255,255,255,0.9)', 
+        background: 'rgba(255,255,255)', 
         padding: '50px', 
         height: 'fit-content',
         borderRadius: '25px', 
@@ -21,11 +22,13 @@ const styles = {
         display: 'flex',
     },
     signUpText: {
-        paddingTop: '40px',
-        textAlign: 'center',
+        paddingBottom: '40px',
+        font: '400 15px / 1.2 Poppins, sans-serif',
+        display: 'flex',
+        // textAlign: 'center',
     },
     container: {
-        textAlign: 'center',
+        // textAlign: 'center',
         position: 'absolute',
         top: '50%',
         left: '50%',
@@ -34,11 +37,17 @@ const styles = {
         display: 'flex',
         justifyContent: 'space-around',
         width: '100%',
+        alignItems: 'center'
     },
     logoContainer: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+    },
+    h2: {
+        font: '500 30px/1.2 "Poppins", sans-serif',
+        paddingBottom: '30px',
+        color: '#226660',
     }
 }
 
@@ -56,6 +65,11 @@ const Login = () => {
                     <Logo />
                 </div>
                 <div style={styles.formBox}>
+                        <h2 style={styles.h2}>Login</h2>
+                        <div style={styles.signUpText}>
+                            <p style={{paddingBottom: '10px'}}>Don't have an account?</p>
+                            <Link className='formLink' to='/register'>Sign Up Now</Link>
+                        </div>
                         <form method='POST' 
                             //   onSubmit={handleSubmit}
                         >
@@ -91,10 +105,6 @@ const Login = () => {
                                 <button className='formButton'>Login</button>
                             </div>
                         </form>
-                        <div style={styles.signUpText}>
-                            <p style={{paddingBottom: '20px'}}>Don't have an account?</p>
-                            <Link className='formLink' to='/register'>Sign Up Now</Link>
-                        </div>
                     </div>
             </div>      
         </div>

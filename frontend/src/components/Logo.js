@@ -5,29 +5,37 @@ import { ReactComponent as NavBackArrow } from '../assets/icons/navbackarrow.svg
 
 const styles = {
     logoBox: {
-        padding: '30px',
-        border: '5px solid white',
+        padding: '25px',
+        border: '4px solid white',
         borderRadius: '100%',
+        width: '30px',
+        height: '30px',
+        margin: 'auto',
     },
     logo: {
-        fill: 'white'
+        fill: 'white',
     },
-    // navBack: {
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     justifyContent: 'center',
-    // },
-    navBackButton: {
+    navBackText: {
         height: 'fit-content',
         paddingTop: '20px',
         paddingBottom: '20px',
         cursor: 'pointer',
-        background: 'none',
-        border: 'none',
         color: 'white',
         font: '300 15px/1.2 "Poppins", sans-serif',
         textTransform: 'uppercase',
+        display: 'flex',
+        alignItems: 'center',
     },
+    navBackArrow: {
+        fill: 'white',
+        transform: 'scaleX(-1)',
+        width: '18px',
+        height: '18px',
+        paddingLeft: '10px',
+    },
+    navBackLink: {
+        textDecoration: 'none',
+    }
 }
 
 const Logo = () => {
@@ -36,14 +44,19 @@ const Logo = () => {
 
     return (  
         <div>
+            <div>
                 <Link style={styles.logo} to='/'>
-            <div style={styles.logoBox} >
-                    <PetPawLogo />
-            </div>
+                    <div style={styles.logoBox} >
+                        <PetPawLogo />
+                    </div>
                 </Link>
+            </div>
             <div style={styles.navBack}>
-                <Link to='/'>
-                    <NavBackArrow /><button style={styles.navBackButton}>Back to Search</button>
+                <Link style={styles.navBackLink} to='/'>
+                    <div style={styles.navBackText}>
+                        <NavBackArrow style={styles.navBackArrow}/>
+                        Back to Search
+                    </div>
                 </Link>
             </div>
         </div>
