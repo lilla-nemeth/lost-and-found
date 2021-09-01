@@ -26,9 +26,9 @@ function App() {
       <>
         <BrowserRouter>
       <ApiContextProvider>
-          <Navbar />
             <Switch>
               <Route exact path='/'>
+                <Navbar />
                 <PetHome />
               </Route>
               <Route path='/register'>

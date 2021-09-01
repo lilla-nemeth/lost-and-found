@@ -17,17 +17,7 @@ const styles = {
         zIndex: 100,
         display: 'flex'
     },
-    navbarElement: {
-        textAlign: 'center',
-        padding: '14px 18px',
-        margin: '4px',
-        textDecoration: 'none',
-        color: 'white',
-        font: '300 15px/1.2 "Poppins", sans-serif',
-        display: 'flex',
-    },
     pawIcon: {
-        // width: '20px',
         height: '20px',
     }
 }
@@ -39,10 +29,11 @@ const Navbar = () => {
     return (  
         <div style={styles.navbarContainer}>
             <ul style={styles.navbar}>
-                    <li><Link style={styles.navbarElement} to='/'><PetPawLogo style={styles.pawIcon}/></Link></li>
-                    <li><Link style={styles.navbarElement} className='navLink' to='/'>Lost & Found</Link></li>
-                    <li><Link style={styles.navbarElement} className='navLink' to='/reportpet'>Report Pet</Link></li>
-                    <li><Link style={styles.navbarElement} className='navLink' to='/login'>Login</Link></li>
+                    <li><Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link></li>
+                    <li><Link className='navLink' to='/'>Lost & Found</Link></li>
+                    <li><Link className='navLink' to='/reportpet'>Report Pet</Link></li>
+                    <li><Link className='navLink' to='/login'>Login</Link></li>
+                    <li><Link className='navLink' to='/register'>Register</Link></li>
             </ul>
         </div>
     );
