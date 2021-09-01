@@ -124,6 +124,8 @@ const PetList = () => {
     // the default skip: 
     const [offset, setOffset] = useState(0);
 
+    let DEBUG = true;
+
     let limit = 6;
 
     useEffect(() => {

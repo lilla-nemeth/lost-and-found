@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const { Pool, Connection } = require('pg');
+const { Pool } = require('pg');
 const bcrypt = require('bcryptjs'); 
 const jwt = require('jsonwebtoken');
 // const path = require("path");
 // require('dotenv').config();
 const { authMw, isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid } = require('./middlewares.js');
 
+let DEBUG = true;
 
 // app.use - these middlewares will be called for every call to the application:
 
@@ -261,7 +262,6 @@ app.post('/register', [isEmailValid, isPhoneValid, isUsernameValid, isPasswordVa
     let email = request.body.email;
     let pw = request.body.pw;
     let phone = request.body.phone;
-    // bcrypt könyvtár hasheli a jelszót (pl. pw: makea... -> pw: $2a$10$vg/...):
     let encryptedPw = bcrypt.hashSync(pw, 10);
 
     // tehát csak az encryptedPw kerül elmentésre (hashelt jelszó):

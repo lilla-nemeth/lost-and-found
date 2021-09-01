@@ -48,7 +48,8 @@ const styles = {
 
 
 const PetSortingButtons = () => {
-
+    
+    let DEBUG = true;
 
     return (  
         <div> 

@@ -58,6 +58,8 @@ const styles = {
 const PetSearchBox = () => {
     const [input, setInput] = useState('');
 
+    let DEBUG = true;
+
     function handleChange(event) {
         setInput(event.target.value);
     }
