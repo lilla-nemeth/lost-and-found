@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import BackgroundImages from './BackgroundImages';
 import { Link } from 'react-router-dom';
 import { ReactComponent as EmailIcon } from '../assets/icons/email.svg';
 import { ReactComponent as PasswordIcon } from '../assets/icons/password.svg';
-import BackgroundImages from './BackgroundImages';
 import Logo from './Logo';
 
 const Login = () => {
@@ -14,8 +14,6 @@ const Login = () => {
     return (  
         <main>
             <BackgroundImages />
-            {/* <BackgroundImage2 /> */}
-            {/* <TestBg /> */}
             <section className='container'>
                 <div className='logoContainer'>
                     <Logo />
