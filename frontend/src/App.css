@@ -221,7 +221,53 @@ input[type=checkbox]:checked ~ label{
 }
 
 
-/* LOGIN, REGISTRATION */
+/* LOGIN, REGISTRATION WITH LOGO */
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formBox {
+  background: rgba(255,255,255); 
+  padding: 50px; 
+  height: fit-content;
+  border-radius: 25px; 
+  box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
+}
+
+.formHeadline {
+  font: 500 30px/1.2 "Poppins", sans-serif;
+  padding-bottom: 30px;
+  color: #226660;
+}
+
+.signUpText {
+  padding-bottom: 40px;
+  font: 400 15px / 1.2 Poppins, sans-serif;
+  display: flex;
+}
+
+.emailBox {
+  display: flex;
+}
+
+.passwordBox {
+  padding-top: 20px;
+  display: flex;
+}
 
 .formButton,
 .searchButton {
