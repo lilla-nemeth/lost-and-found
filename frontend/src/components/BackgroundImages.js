@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../App.css';
 import img01 from '../assets/images/01backgroundImg.jpg';
 import img02 from '../assets/images/02backgroundImg.jpg';
 import img03 from '../assets/images/03backgroundImg.jpg';
@@ -25,65 +26,81 @@ const styles = {
 // FIX IT: useEffect -> array dependency as:
 // load all images before rendering the whole page!
 
-// FIX IT: fadeInOut() and changeIndex() functions require different intervals
 
 const BackgroundImage = () => {
-  const [index, setIndex] = useState(0);
-  const [images, setImages] = useState([img01, img02, img03, img04, img05, img06, img07]);
-  const [fadeEffect, setFadeEffect] = useState({
-    // fade: 'fade-in'
-    fade: 'fade-out',
+  const [fadeEffect1, setFadeEffect1] = useState({
+    fade: 'fade-in1'
+  });
+  const [fadeEffect2, setFadeEffect2] = useState({
+    fade: 'fade-in2'
   });
 
-  // 3 array elements for test:
-  // const [images, setImages] = useState([img01, img02, img03]);
-  
+  // const [images, setImages] = useState([img01, img02, img03, img04, img05, img06, img07]);
+  const [images1, setImages1] = useState([img01, img02, img02, img03, img03, img04, img04, img05, img05, img06, img06, img07, img07, img01]);
+  const [images2, setImages2] = useState([img01, img01, img02, img02, img03, img03, img04, img04, img05, img05, img06, img06, img07, img07, img01]);
+  const [indexImages, setIndexImages] = useState(0);
+ 
   let DEBUG = true;
 
-
+  // 7000
   useEffect(() => {
-    const interval = setInterval(() => {
-      fadeInOut();
-      changeIndex();
-      }, 10000);
-      if (interval) {
-        return () => clearInterval(interval);
+    const imagesInterval = setInterval(() => {
+      changeImagesIndex(images2);
+      changeImagesIndex(images1);
+      fadeInOut2();
+      fadeInOut1();
+      }, 1000);
+      if (imagesInterval) {
+        return () => clearInterval(imagesInterval);
     }
-  }, [fadeEffect]);
+  }, [images1, images2, fadeEffect1, fadeEffect2]);
 
 
-  function changeIndex() {
-    const numberOfImages = images.length;
-      if (index === numberOfImages - 1) {
-        setIndex(0);
+  function changeImagesIndex(arr) {
+    const numberOfImages = arr.length;
+      if (indexImages === numberOfImages - 1) {
+        return setIndexImages(0);
       } else {
-        return setIndex(index + 1)
+        return setIndexImages(indexImages + 1);
       }
   }
 
-  function fadeInOut() {
-    if (fadeEffect.fade === 'fade-out') {
-        setFadeEffect({
-            fade: 'fade-in'
+  function fadeInOut1() {
+    if (fadeEffect1.fade === 'fade-in1') {
+        setFadeEffect1({
+            fade: 'fade-out1'
         })
     } else {
-        setFadeEffect({
-            fade: 'fade-out'
+        setFadeEffect1({
+            fade: 'fade-in1'
         })
     }
   }
 
+  function fadeInOut2() {
+    if (fadeEffect2.fade === 'fade-out2') {
+        setFadeEffect2({
+            fade: 'fade-in2'
+        })
+    } else {
+        setFadeEffect2({
+            fade: 'fade-out2'
+        })
+    }
+  }
 
-  const urlString = `url('${images[index]}')`;
-  if (DEBUG) console.log(`url('${images[index]}')`);
+  const urlImages1 = `url('${images1[indexImages]}')`;
+  const urlImages2 = `url('${images2[indexImages]}')`;
+  if (DEBUG) console.log(`url('${images1[indexImages]}')`);
+  if (DEBUG) console.log(`url('${images2[indexImages]}')`);
 
   return (
     <>
       <div className='backgroundFilter'>
-          <div className={fadeEffect.fade}>
-            <div className='backgroundImage' style={{backgroundImage: urlString}}>
-            </div>
-          </div>
+              <div className={fadeEffect2.fade} style={{backgroundImage: urlImages2}}>
+                <div className={fadeEffect1.fade} style={{backgroundImage: urlImages1}}>
+                </div>
+              </div>
       </div>
     </>
   )
