@@ -1,44 +1,47 @@
-import AuthContextProvider from './contexts/AuthContext';
+import AuthContextProvider, { AuthContext } from './contexts/AuthContext';
 import ApiContextProvider from './contexts/ApiContext';
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
 import PetHome from './components/PetHome';
+import PetReport from './components/PetReport';
 import './App.css';
+import { useContext } from 'react';
 
 
 function App() {
-
-  // if token exists -> AuthContextProvider
-  // if doesn't exist -> without it 
-
-  //     <AuthContextProvider>
-  //       {/* USER CONTENTS */}
-  //     </AuthContextProvider>
+  // const {token, setToken, handleLogOut} = useContext(AuthContext);
 
 
   // * = default 
 
-  // if (!token) {
 
     return (
       <>
         <BrowserRouter>
-          <ApiContextProvider>
-              <Switch>
-                <Route exact path='/'>
-                  <Navbar />
-                  <PetHome />
-                </Route>
-                <Route path='/register'>
-                  <Register />
-                </Route>
-                <Route path='/login'>
-                  <Login />
-                </Route>
-              </Switch>
-            </ApiContextProvider>
+          <AuthContextProvider>
+
+            <ApiContextProvider>
+                <Switch>
+                  <Route exact path='/'>
+                    <Navbar />
+                    <PetHome />
+                  </Route>
+                  <Route path='/reportpet'>
+                    <Navbar />
+                    <PetReport />
+                  </Route>
+                  <Route path='/register'>
+                    <Register />
+                  </Route>
+                  <Route path='/login'>
+                    <Login/>
+                  </Route>
+                </Switch>
+              </ApiContextProvider>
+
+            </AuthContextProvider>
           </BrowserRouter>
       </>
       );
