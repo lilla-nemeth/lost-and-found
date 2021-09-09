@@ -311,17 +311,31 @@ input[type=checkbox]:checked ~ label{
   color: #226660;
 }
 
+.loginText,
 .signUpText {
-  padding-bottom: 40px;
+  /* padding-bottom: 40px; */
   font: 400 15px / 1.2 Poppins, sans-serif;
   display: flex;
 }
 
-.emailBox {
-  display: flex;
+.message {
+  height: 30px;
+  padding-top: 10px;
+  font: 400 15px / 1.2 Poppins, sans-serif;
 }
 
-.passwordBox {
+.errorMessage {
+  color: red;
+}
+
+.successMessage {
+  color: green;
+}
+
+.emailBox,
+.usernameBox,
+.passwordBox,
+.phoneBox {
   padding-top: 20px;
   display: flex;
 }

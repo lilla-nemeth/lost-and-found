@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 export const AuthContext = createContext();
 
@@ -12,12 +12,27 @@ export default function AuthContextProvider(props) {
     // const [errorMsg, setErrorMsg] = useState('');
 
 
-    // useEffect
-    // logout
+    useEffect(() => {
+        let tokenFromLocalStorage = localStorage.getItem('token');
 
+        if (tokenFromLocalStorage) {
+            setToken(tokenFromLocalStorage);
+        }
+
+    })
+    
+    function handleLogOut() {
+        localStorage.removeItem('token');
+        setToken(null);
+    }
+
+    if (!token) {
+        <AuthContext.Provider value={setToken}>
+            { props.children }
+        </AuthContext.Provider>
+    }
     return (
-        // remember to add value to AuthContext.Provider! (contents what I want to give to the children as props)
-        <AuthContext.Provider>
+        <AuthContext.Provider value={token, handleLogOut}>
             { props.children }
         </AuthContext.Provider>
     );

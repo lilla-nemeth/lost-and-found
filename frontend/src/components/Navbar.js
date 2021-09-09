@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as PetPawLogo } from '../assets/icons/dogpaw.svg';
+import { AuthContext } from '../contexts/AuthContext';
 
 const styles = {
     navbarContainer: {
@@ -23,7 +24,8 @@ const styles = {
 }
 
 const Navbar = () => {
-    
+    const { handleLogOut } = useContext(AuthContext);
+
     let DEBUG = true;
 
     return (  
@@ -34,6 +36,7 @@ const Navbar = () => {
                     <li><Link className='navLink' to='/reportpet'>Report Pet</Link></li>
                     <li><Link className='navLink' to='/login'>Login</Link></li>
                     <li><Link className='navLink' to='/register'>Register</Link></li>
+                    <li><button className='navLink' onClick={() => handleLogOut()}>Log Out</button></li>
             </ul>
         </div>
     );

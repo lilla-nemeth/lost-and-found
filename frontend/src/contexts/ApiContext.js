@@ -1,5 +1,6 @@
+import React, { createContext, useContext } from 'react';
+import { AuthContext } from './AuthContext';
 import axios from 'axios';
-import React, { createContext, useState } from 'react';
 
 export const ApiContext = createContext();
 
@@ -7,6 +8,7 @@ export default function ApiContextProvider(props) {
     
     let DEBUG = true;
 
+    const { token } = useContext(AuthContext);
 
     // named input when we have many arguments
     // cannot mess up the order (in object {})
@@ -36,8 +38,39 @@ export default function ApiContextProvider(props) {
         )
     }
 
+    // token from AuthContext ?
+    // FIX IT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:
+    function loginUser({email, pw}) {
+
+        // CHECK IT LATER: are mode and headers necessary?!
+        let options = {
+            method: 'post',
+            url: 'http://localhost:3003/login',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': token,
+            },
+            data: {
+                email,
+                pw
+            },
+        };
+        
+        axios(options)
+        .then(
+            res => {console.log(res)}
+        )
+        .catch(
+            err => {console.log(err)}
+        )
+    }
+
+    // function reportPet() {
+    // }
+
     return (
-        <ApiContext.Provider value={{registerUser}}>
+        <ApiContext.Provider value={{registerUser, loginUser}}>
             { props.children }
         </ApiContext.Provider>
     )

@@ -7,24 +7,6 @@ import img04 from '../assets/images/04backgroundImg.jpg';
 import img05 from '../assets/images/05backgroundImg.jpg';
 import img06 from '../assets/images/06backgroundImg.jpg';
 import img07 from '../assets/images/07backgroundImg.jpg';
-import BackgroundFade from './BackgroundFade';
-
-const styles = {
-    // backgroundContainer: {
-    //     backgroundPosition: 'center',
-    //     backgroundRepeat: 'no-repeat',
-    //     backgroundSize: 'cover',
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     justifyContent: 'center',
-    //     position: 'relative',
-    //     height: '100vh',
-    //     overflow: 'hidden',
-    // },
-}   
-
-// FIX IT: useEffect -> array dependency as:
-// load all images before rendering the whole page!
 
 
 const BackgroundImage = () => {
@@ -35,12 +17,11 @@ const BackgroundImage = () => {
     fade: 'fade-in2'
   });
 
-  // const [images, setImages] = useState([img01, img02, img03, img04, img05, img06, img07]);
   const [images1, setImages1] = useState([img01, img02, img02, img03, img03, img04, img04, img05, img05, img06, img06, img07, img07, img01]);
   const [images2, setImages2] = useState([img01, img01, img02, img02, img03, img03, img04, img04, img05, img05, img06, img06, img07, img07, img01]);
   const [indexImages, setIndexImages] = useState(0);
  
-  let DEBUG = true;
+  let DEBUG = false;
 
   // 7000
   useEffect(() => {
@@ -49,7 +30,7 @@ const BackgroundImage = () => {
       changeImagesIndex(images1);
       fadeInOut2();
       fadeInOut1();
-      }, 1000);
+      }, 7000);
       if (imagesInterval) {
         return () => clearInterval(imagesInterval);
     }
@@ -88,6 +69,10 @@ const BackgroundImage = () => {
         })
     }
   }
+
+  // GIVE LOGIC: IF THE USER CLICKS TO THE LOGIN LINK ->
+  // SHOW DIFFERENT PICTURE THAN IN REGISTER PAGE
+  // TRUE FOR ALL LINKS: NAVBAR (2 LINKS), LOGIN TO REGISTER, REGISTER TO LOGIN)
 
   const urlImages1 = `url('${images1[indexImages]}')`;
   const urlImages2 = `url('${images2[indexImages]}')`;
