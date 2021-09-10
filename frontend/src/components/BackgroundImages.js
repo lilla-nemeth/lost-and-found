@@ -82,10 +82,10 @@ const BackgroundImage = () => {
   return (
     <>
       <div className='backgroundFilter'>
-              <div className={fadeEffect2.fade} style={{backgroundImage: urlImages2}}>
-                <div className={fadeEffect1.fade} style={{backgroundImage: urlImages1}}>
-                </div>
-              </div>
+          <div className={fadeEffect2.fade} style={{backgroundImage: urlImages2}}>
+            <div className={fadeEffect1.fade} style={{backgroundImage: urlImages1}}>
+            </div>
+          </div>
       </div>
     </>
   )

@@ -26,9 +26,6 @@ const styles = {
     genderCategory: {
         paddingBottom: '15px',
     },
-    radioList: {
-        display: 'flex',
-    }
 }
 
 // Buttons:
@@ -52,7 +49,7 @@ const PetSortingButtons = () => {
             {/* GENDER */}
                 <div style={styles.genderBox}>
                     <h2 style={styles.genderCategory}>Gender</h2>
-                    <ul style={styles.radioList}>
+                    <ul className='radioList'>
                         <li style={styles.radioListElements}>
                             <input type='radio' id='male' name='gender' />
                             <label for='male'>Male</label>
@@ -73,7 +70,7 @@ const PetSortingButtons = () => {
                 {/* SIZE */}
                 <div style={styles.genderBox}>
                     <h2 style={styles.genderCategory}>Size</h2>
-                    <ul style={styles.radioList}>
+                    <ul className='radioList'>
                         <li style={styles.radioListElements}>
                             <input type='radio' id='small' name='size' />
                             <label for='small'>Small</label>
@@ -95,7 +92,7 @@ const PetSortingButtons = () => {
             {/* AGE */}
             <div style={styles.ageBox}>
                 <h2 style={styles.genderCategory}>Age</h2>
-                <ul style={styles.radioList}>
+                <ul className='radioList'>
                     <li style={styles.radioListElements}>
                         <input type='radio' id='juvenile' name='age' />
                         <label for='juvenile'>Juvenile</label>
@@ -129,7 +126,7 @@ const PetSortingButtons = () => {
             {/* EDIT TO CHECKBOX FORMAT!!!!!!!!!!!!!!!!!!!!!!!! */}
             {/* <div style={styles.genderBox}>
                 <h2 style={styles.genderCategory}>Status</h2>
-                <ul style={styles.radioList}>
+                <ul className='radioList'>
                     <li style={styles.radioListElements}>
                         <input type='checkbox' checked id='lost' name='gender' />
                         <label for='lost'>Lost</label>
