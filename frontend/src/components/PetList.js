@@ -28,22 +28,6 @@ const styles = {
         height: '400px',
         justifyContent: 'space-between'
     },
-
-    petPicture: {
-        width: '300px',  
-        // height: '300px',
-        border: '2px solid black',
-        cursor: 'pointer', 
-        position: 'relative',
-
-        // delete later, or add to img tag:
-        background: '#999', 
-        objectFit: 'cover',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        display: 'block',
-    },
-
     petTextBox: {
         border: '2px solid black',
         padding: '50px',
@@ -201,7 +185,7 @@ const PetList = () => {
                     <div style={styles.petCard} key={pet.id}>
                         <div style={styles.petCardInner}>
                             <div 
-                                style={styles.petPicture}
+                                className='petPicture'
                             >
                                     Place of Picture
                             </div>

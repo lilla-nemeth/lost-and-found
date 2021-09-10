@@ -21,9 +21,6 @@ const styles = {
     },
     speciesCategory: {
         paddingBottom: '15px',
-    },
-    radioList: {
-        display: 'flex',
     }
 }
 
@@ -57,8 +54,8 @@ const PetSearchBox = () => {
                     <div style={{padding: '25px 0'}}>
                         {/* SPECIES */}
                         <h2 style={styles.speciesCategory}>Species</h2>
-                        <ul style={styles.radioList}>
-                            <li style={styles.radioListElements}>
+                        <ul className='radioList'>
+                            <li>
                                 <input type='radio' id='dog' name='species' />
                                 <label for='dog'>Dog</label>
                                 <div class="radioCheck"><div class="radioCheckInside"></div></div>
@@ -78,7 +75,7 @@ const PetSearchBox = () => {
                     <div style={{padding: '25px 0'}}>
                         {/* STATUS */}
                         <h2 style={styles.speciesCategory}>Status</h2>
-                        <ul style={styles.radioList}>
+                        <ul className='radioList'>
                             <li style={styles.radioListElements}>
                                 <input type='checkbox' id='lost' name='status' />
                                 <label for='lost' className='checkboxContainer'>

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import DragnDropZone from './DragnDropZone';
+import DropZoneTest from './DropZoneTest';
 
 const styles = {
     main: {
@@ -7,6 +9,9 @@ const styles = {
         overflow: 'hidden',
         height: '100vh',
     },
+    speciesCategory: {
+        paddingBottom: '15px',
+    }
 } 
 
 // const regionOptions = {
@@ -66,9 +71,30 @@ const PetReport = () => {
                     <form method='POST' 
                         //   onSubmit={handleSubmit}
                     >
-                        <div className='usernameBox'>
+                           <DragnDropZone />
+                           {/* <DropZoneTest /> */}
+                        <h2 style={styles.speciesCategory}>Species</h2>
+                        <ul className='radioList'>
+                            <li>
+                                <input type='radio' id='dog' name='species' />
+                                <label for='dog'>Dog</label>
+                                <div class="radioCheck"><div class="radioCheckInside"></div></div>
+                            </li>
+                            <li>
+                                <input type='radio' id='cat' name='species' />
+                                <label for='cat'>Cat</label>
+                                <div class="radioCheck"><div class="radioCheckInside"></div></div>
+                            </li>
+                            <li>
+                                <input type='radio' id='other' name='species' />
+                                <label for='other'>Other</label>
+                                <div class="radioCheck"><div class="radioCheckInside"></div></div>
+                            </li>
+                        </ul>
+
+                        {/* <div className='usernameBox'>
                             <label className='formLabel' for='email'>
-                                {/* <EmailIcon /> */}
+                                <EmailIcon />
                             </label>
                             <input 
                                 className='formInput' 
@@ -77,9 +103,9 @@ const PetReport = () => {
                                 name='email' 
                                 placeholder='email' 
                                 required 
-                                // onChange={event => setEmail(event.target.value)}
+                                onChange={event => setEmail(event.target.value)}
                             />
-                        </div>
+                        </div> */}
 
                         <div>
                             <button className='formButton'>Report</button>

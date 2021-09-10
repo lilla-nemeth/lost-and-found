@@ -11,6 +11,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.6.0",
+    "react-dropzone": "^11.3.4",
     "react-router-dom": "^5.2.0",
     "sugar": "^2.0.6",
     "uuid": "^8.3.2"
