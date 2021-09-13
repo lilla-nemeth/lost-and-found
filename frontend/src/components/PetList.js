@@ -9,7 +9,7 @@ const styles = {
         flexDirection: 'row'
     },
     petCard: {
-        background: 'rgba(255,255,255,0.7)', 
+        background: 'rgba(255,255,255)', 
         marginBottom: '25px', 
         padding: '50px', 
         maxWidth: 'fit-content',
@@ -78,18 +78,18 @@ const styles = {
 
     pagination: {
         display: 'flex',
-        border: '2px solid black',
+        // border: '2px solid black',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: '40px'
     },
 
     paginationNumbers: {
-        padding: '15px', 
+        padding: '20px', 
         background: 'rgba(255,255,255,0.7)',
-        margin: '0 5px',
+        margin: '0 7px',
         textAlign: 'center', 
-        width: '20px', 
-        height: '20px', 
+        width: '15px', 
         cursor: 'pointer',
         borderRadius: '30px',
     },

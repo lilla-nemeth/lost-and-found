@@ -36,6 +36,13 @@ const styles = {
         paddingTop: '20px',
         textAlign: 'center',
     },
+    acceptedPasswordText: {
+        paddingTop: '20px',
+        width: '350px',
+        font: '400 14px / 1.2 Poppins, sans-serif',
+        color: '#acacac',
+        fontStyle: 'italic',
+    },
     backButton: {
         height: 'fit-content',
         padding: '30px',
@@ -96,7 +103,7 @@ const Register = () => {
                     <form method='POST' 
                           onSubmit={handleSubmit}
                     >
-                        <div className='usernameBox'>
+                        <div className='inputBox'>
                             <label className='formLabel' for='email'>
                                 <EmailIcon />
                             </label>
@@ -110,7 +117,7 @@ const Register = () => {
                                 onChange={event => setEmail(event.target.value)}
                             />
                         </div>
-                        <div className='usernameBox'>
+                        <div className='inputBox'>
                             <label className='formLabel' for='username'>
                                 <UsernameIcon />
                             </label>
@@ -124,7 +131,7 @@ const Register = () => {
                                 onChange={event => setUsername(event.target.value)}
                             />
                         </div>
-                        <div className='phoneBox'>
+                        <div className='inputBox'>
                            <label className='formLabel' for='phone'>
                                <PhoneIcon />
                             </label>
@@ -138,7 +145,13 @@ const Register = () => {
                                 onChange={event => setPhone(event.target.value)}
                             />
                         </div>
-                        <div className='passwordBox'>
+                        <div style={styles.acceptedPasswordText}>
+                            At least 8 characters, 
+                            must contain one upper-case letter, 
+                            one lower-case letter, 
+                            one digit and one special character
+                        </div>
+                        <div className='inputBox'>
                             <label className='formLabel' for='password'>
                                 <PasswordIcon />
                             </label>

@@ -3,7 +3,7 @@ import { ReactComponent as SearchIcon } from '../assets/icons/search.svg'
 
 const styles = {
     searchBox: {
-        background: 'rgba(255,255,255,0.7)', 
+        background: 'rgba(255,255,255)', 
         marginBottom: '25px', 
         padding: '50px', 
         maxWidth: 'fit-content',
@@ -47,9 +47,17 @@ const PetSearchBox = () => {
             <div style={styles.searchBox}>
                 <form style={styles.searchForm} onSubmit={handleSubmit}>
                     <h2 style={styles.speciesCategory}>Location</h2>
-                    <div style={{display: 'flex'}}>
-                        <input className='searchInput' type='search' placeholder='City, Region or Zip' value={input} onChange={handleChange} />
-                        <button className='searchButton'><SearchIcon style={{fill: 'white', height: '20px'}}/></button>
+                    <div className='searchBox'>
+                        <input  className='searchInput'
+                                id='search' 
+                                type='search' 
+                                placeholder='City, Region or Zip' 
+                                value={input} 
+                                onChange={handleChange} 
+                        />
+                        <button className='searchButton'>
+                            <SearchIcon/>
+                        </button>
                     </div>
                     <div style={{padding: '25px 0'}}>
                         {/* SPECIES */}
@@ -66,17 +74,17 @@ const PetSearchBox = () => {
                                 <div class="radioCheck"><div class="radioCheckInside"></div></div>
                             </li>
                             <li>
-                                <input type='radio' id='other' name='species' />
-                                <label for='other'>Other</label>
+                                <input type='radio' id='otherSpecies' name='species' />
+                                <label for='otherSpecies'>Other</label>
                                 <div class="radioCheck"><div class="radioCheckInside"></div></div>
                             </li>
                         </ul>
                     </div> 
                     <div style={{padding: '25px 0'}}>
                         {/* STATUS */}
-                        <h2 style={styles.speciesCategory}>Status</h2>
+                        <h2 style={styles.speciesCategory}>Color</h2>
                         <ul className='radioList'>
-                            <li style={styles.radioListElements}>
+                            <li>
                                 <input type='checkbox' id='lost' name='status' />
                                 <label for='lost' className='checkboxContainer'>
                                     Lost

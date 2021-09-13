@@ -46,7 +46,6 @@ table {
 }
 
 
-
 /* NAVBAR */
 .navLogo {
   text-align: center;
@@ -70,7 +69,6 @@ table {
   border: 2px solid rgb(183, 223, 219);
   border-radius: 100%;
   transition: border 0.2s linear;
-  /* transition: border 160ms ease-in-out; */
 }
 
 .navLogoInner:after {
@@ -79,7 +77,6 @@ table {
   border-bottom: solid 2px rgb(183, 223, 219); 
   transform: scaleX(0);  
   transition: transform 0.2s linear;
-  /* transition: transform 160ms ease-in-out; */
 }
 
 .navLink {
@@ -98,7 +95,6 @@ table {
   border-bottom: solid 2px rgb(183, 223, 219); 
   transform: scaleX(0);  
   transition: transform 180ms ease-in-out;
-  /* transition: transform 0.1s linear; */
 }
 
 .navLink:hover:after {
@@ -108,14 +104,13 @@ table {
 
 /* Report - Picture */
 .petPicture {
-  width: 300px;  
-  height: 300px;
-  /* border: 2px solid black; */
+  width: 350px;  
+  /* height: 350px; */
   cursor: pointer; 
   position: relative;
 
   /* delete later, or add to img tag: */
-  background: rgb(221 226 225); 
+  /* background: rgb(236 236 236); */
   object-fit: cover;
   margin-left: auto;
   margin-right: auto;
@@ -318,6 +313,7 @@ input[type=checkbox]:checked ~ label{
   background: rgba(255,255,255); 
   padding: 50px; 
   height: fit-content;
+  min-width: 350px;
   border-radius: 25px; 
   box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
 }
@@ -330,7 +326,6 @@ input[type=checkbox]:checked ~ label{
 
 .loginText,
 .signUpText {
-  /* padding-bottom: 40px; */
   font: 400 15px / 1.2 Poppins, sans-serif;
   display: flex;
 }
@@ -349,78 +344,94 @@ input[type=checkbox]:checked ~ label{
   color: green;
 }
 
-.emailBox,
-.usernameBox,
-.passwordBox,
-.phoneBox {
-  padding-top: 20px;
+.inputBox,
+.searchBox {
+  padding-top: 10px;
   display: flex;
 }
 
-.formButton,
-.searchButton {
-  padding: 16px;
+#region,
+#search {
+  text-transform: capitalize;
+}
+
+.showInputs {
+  /* display: block; */
+	transition: height 300ms ease-in-out, opacity 700ms ease-in-out;
+}
+
+.hideInputs {
+  /* display: none; */
+	height: 0;
+	opacity: 0;
+}
+
+.optionalButton {
+  display: flex;
+  justify-content: space-between;
+  background: rgb(255, 227, 227);
+}
+
+.optionalButton,
+.formButton {
   cursor: pointer;
   border-color: transparent;
   text-transform: uppercase;
+  width: 100%;
+  margin-top: 40px;
+
+}
+
+.formButton {
+  padding: 16px;
+  border-radius: 0.25rem;
   background: rgb(34, 102, 96);
   color: #fff;
 }
 
-.formButton {
-  margin-top: 40px;
-  width: 100%;
-  border-radius: 0.25rem;
-}
-
-.searchButton {
-  border-radius: 0 0.25rem 0.25rem 0;
-}
-
-.formButton:hover,
-.searchButton:hover {
+.formButton:hover {
   background: rgb(71, 163, 156);
 }
 
-.formLabel {  
-  padding: 16px;
-  width: fit-content;
+.formLabel {
   fill: #226660;
-  border-top: none;
-  border-left: none;
-  border-right: none;
+}
+
+.arrowDown {
+  padding: 16px;
+  fill: #226660;
+  transform: scaleY(-1);
+}
+
+.searchButton,
+.formLabel {  
+  padding: 18px;
+  width: fit-content;
   border-bottom: 2px solid rgb(34, 102, 96);
-  /* background: #47a39c;
-  border-radius: 0.25rem 0 0 0.25rem; */
+}
+
+.searchButton {
+  cursor: pointer;
+  background: none;
+  fill: rgb(172, 172, 172);
+}
+
+.searchButton:hover {
+  fill: rgb(34, 102, 96); 
+  transition: fill 0.2s linear;
 }
 
 .formInput,
 .searchInput {
-  /* padding: 16px; */
-  padding: 16px 8px;
-  width: 300px;
+  padding: 16px 0;
+  width: 100%;
   border-bottom: 2px solid rgb(34, 102, 96);
   border-top: none;
   border-left: none;
   border-right: none;
   background: none;
   font: 300 15px/1.2 "Poppins", sans-serif;
-  /* background: rgb(183, 223, 219); */
-  /* border: none; */
 }
-
-/* .formInput {
-  border-radius: 0 0.25rem 0.25rem 0;
-}
-
-.searchInput {
-  border-radius: 0.25rem 0 0 0.25rem;
-} */
-
-/* .formInput:hover,
-.searchInput:hover {
-  background: rgb(191, 230, 226);
-} */
 
 .formInput:focus,
 .searchInput:focus {

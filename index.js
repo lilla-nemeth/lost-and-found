@@ -22,12 +22,12 @@ const port = process.env.PORT || 3003;
 // adatbázis konfigurálása kell a kérések előtt
 // asztalinál a jelszó postgres:
 const pool = new Pool({
-    host: 'localhost',
-    user: 'postgres',
-    // password: 'postgres',
-    password: 'masterpassword',
-    port: 5432,
-    database: 'lostandfound'
+    host:        'localhost',
+    user:        'postgres',
+    // password:    'postgres',
+    password:    'masterpassword',
+    port:        5432,
+    database:    'lostandfound'
 });
 
 // from pets table get all pets by userId
