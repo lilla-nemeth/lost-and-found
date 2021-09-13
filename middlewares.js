@@ -146,7 +146,7 @@ function isPasswordValid (request, response, next) {
 
     let isContainSpecialCharacter = pwSpecialCharacters.test(password);
     if (!isContainSpecialCharacter) {
-        response.status(400).json({msg: 'Password must contain at least one special character'})
+        response.status(400).json({msg: 'Password must contain at least one special character: /^(?=.*[!#$@^%&?*+,-./:;<=>_`{|}~])/'})
     }
 
     next();

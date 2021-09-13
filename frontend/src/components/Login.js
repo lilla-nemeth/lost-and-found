@@ -50,7 +50,7 @@ const Login = () => {
                         <form method='POST' 
                               onSubmit={handleSubmit}
                         >
-                            <div className='emailBox'>
+                            <div className='inputBox'>
                                 <label className='formLabel' for='email'>
                                     <EmailIcon />
                                 </label>
@@ -64,7 +64,7 @@ const Login = () => {
                                     onChange={event => setEmail(event.target.value)}
                                 />
                             </div>
-                            <div className='passwordBox' >
+                            <div className='inputBox' >
                                 <label className='formLabel' for='password'>
                                     <PasswordIcon />
                                 </label>

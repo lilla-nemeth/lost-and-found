@@ -9,6 +9,11 @@ import img06 from '../assets/images/06backgroundImg.jpg';
 import img07 from '../assets/images/07backgroundImg.jpg';
 
 
+// Need a function to decide: 
+// if the component is Login, starts the picture from e.g. the 4th element OR
+// use a different hooks with arrays, like 
+// instead images1, images2 -> loginImages1, loginImages2, registerImages1, registerImages2 
+
 const BackgroundImage = () => {
   const [fadeEffect1, setFadeEffect1] = useState({
     fade: 'fade-in1'

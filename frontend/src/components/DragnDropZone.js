@@ -3,35 +3,15 @@ import { useDropzone } from 'react-dropzone';
 
 
 const styles = {
-    inputImage: {
-        // textAlign: 'center',
-        // lineHeight: '300px',
-    },
-    // if I want to see it when the picture dropped to the container
-    // inputText: {
-    //     position: 'absolute', 
-    //     top: '0', 
-    //     textAlign: 'center', 
-    //     right: '0', 
-    //     left: '0',
-    // },
     previewContainer: {
         display: 'flex',
-        // flexDirection: 'column',
         justifyContent: 'center',
         position: 'relative',
         height: '300px',
         width: '300px',
         overflow: 'hidden', 
         position: 'absolute', 
-        // bottom: '0',
-        // top: '0',
     },
-    previewImage: {
-        // minWidth: '100%',
-        // opacity: '70%'
-
-    }
 }
 
 const DragnDropZone = () => {
@@ -48,6 +28,7 @@ const DragnDropZone = () => {
     // These are the hooks that Dropzone uses
     const {getRootProps, getInputProps} = useDropzone({
         accept: 'image/*',
+        multiple: 'false',
         onDrop: acceptedFiles => {
             setFiles(
                 acceptedFiles.map(file => Object.assign(file, {
@@ -64,17 +45,24 @@ const DragnDropZone = () => {
                 <img src={file.preview} style={styles.previewImage} alt='preview' />
             </div>
         </div>
-    ))
+    ));
+
+
+    // WHAT I NEED FOR IMAGE UPLOADING:
+    // Frontend, Features: 
+    // upload bar with percent; Delete button; ImageUploader component 
+    // Backend: 
+    // multer npm middleware; put the middleware to petreport request; test with Postman; Cloudinary;   
 
     return (  
-        <div>
+        <div style={{padding: '45px 0px'}}>
             <div className='petPicture'>
-                <div style={styles.inputImage} {...getRootProps()}>
+                <div style={{border: '3px dashed rgb(34 102 96)', background: 'rgb(243 243 243)'}} {...getRootProps()}>
                     {/* <div style={{overflow: 'hidden', position: 'absolute', bottom: '0'}}> */}
                         {images}
                     {/* </div> */}
                         <input {...getInputProps()} type='file'/>
-                        <p style={{lineHeight: '300px',textAlign: 'center'}}>
+                        <p style={{lineHeight: '350px',textAlign: 'center'}}>
                             Drop files here
                         </p>
                 </div>

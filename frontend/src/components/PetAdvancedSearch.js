@@ -6,8 +6,8 @@ const styles = {
         justifyContent: 'space-between',
         width: '830px',
     },
-    genderBox: {
-        background: 'rgba(255,255,255,0.7)', 
+    sexBox: {
+        background: 'rgba(255,255,255)', 
         marginBottom: '13px', 
         padding: '25px', 
         height: 'fit-content',
@@ -16,14 +16,14 @@ const styles = {
         boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)'
     }, 
     ageBox: {
-        background: 'rgba(255,255,255,0.7)', 
+        background: 'rgba(255,255,255)', 
         marginBottom: '50px', 
         padding: '25px', 
         maxWidth: '100%',
         borderRadius: '25px', 
         boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)'
     }, 
-    genderCategory: {
+    sexCategory: {
         paddingBottom: '15px',
     },
 }
@@ -33,7 +33,7 @@ const styles = {
 // - place (zip, municipality, region) - all
 // - lost/found/reunited
 
-// - gender
+// - sex
 // - size: small/medium/large
 // - age: puppy/kitten /adult/old/unknown
 // - age: juvenile/adolescent/adult/senior/unknown
@@ -46,30 +46,30 @@ const PetSortingButtons = () => {
     return (  
         <div> 
             <div style={styles.smallBoxes}>     
-            {/* GENDER */}
-                <div style={styles.genderBox}>
-                    <h2 style={styles.genderCategory}>Gender</h2>
+            {/* sex */}
+                <div style={styles.sexBox}>
+                    <h2 style={styles.sexCategory}>sex</h2>
                     <ul className='radioList'>
                         <li style={styles.radioListElements}>
-                            <input type='radio' id='male' name='gender' />
+                            <input type='radio' id='male' name='sex' />
                             <label for='male'>Male</label>
                             <div class="radioCheck"><div class="radioCheckInside"></div></div>
                         </li>
                         <li>
-                            <input type='radio' id='female' name='gender' />
+                            <input type='radio' id='female' name='sex' />
                             <label for='female'>Female</label>
                             <div class="radioCheck"><div class="radioCheckInside"></div></div>
                         </li>
                         <li>
-                            <input type='radio' id='genderunknown' name='gender' />
-                            <label for='genderunknown'>Unknown</label>
+                            <input type='radio' id='unknownsex' name='sex' />
+                            <label for='unknownsex'>Unknown</label>
                             <div class="radioCheck"><div class="radioCheckInside"></div></div>
                         </li>
                     </ul>
                 </div>
                 {/* SIZE */}
-                <div style={styles.genderBox}>
-                    <h2 style={styles.genderCategory}>Size</h2>
+                <div style={styles.sexBox}>
+                    <h2 style={styles.sexCategory}>Size</h2>
                     <ul className='radioList'>
                         <li style={styles.radioListElements}>
                             <input type='radio' id='small' name='size' />
@@ -91,7 +91,7 @@ const PetSortingButtons = () => {
             </div>
             {/* AGE */}
             <div style={styles.ageBox}>
-                <h2 style={styles.genderCategory}>Age</h2>
+                <h2 style={styles.sexCategory}>Age</h2>
                 <ul className='radioList'>
                     <li style={styles.radioListElements}>
                         <input type='radio' id='juvenile' name='age' />
@@ -114,8 +114,8 @@ const PetSortingButtons = () => {
                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
                     </li>
                     <li>
-                        <input type='radio' id='ageunknown' name='age' />
-                        <label for='ageunknown'>Unknown</label>
+                        <input type='radio' id='unknownAge' name='age' />
+                        <label for='unknownAge'>Unknown</label>
                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
                     </li>
                 </ul>
@@ -124,21 +124,21 @@ const PetSortingButtons = () => {
 
 
             {/* EDIT TO CHECKBOX FORMAT!!!!!!!!!!!!!!!!!!!!!!!! */}
-            {/* <div style={styles.genderBox}>
-                <h2 style={styles.genderCategory}>Status</h2>
+            {/* <div style={styles.sexBox}>
+                <h2 style={styles.sexCategory}>Status</h2>
                 <ul className='radioList'>
                     <li style={styles.radioListElements}>
-                        <input type='checkbox' checked id='lost' name='gender' />
+                        <input type='checkbox' checked id='lost' name='sex' />
                         <label for='lost'>Lost</label>
                         <div class="check"><div class="inside1"></div></div>
                     </li>
                     <li>
-                        <input type='checkbox' id='found' name='gender' />
+                        <input type='checkbox' id='found' name='sex' />
                         <label for='found'>Female</label>
                         <div class="check"><div class="inside1"></div></div>
                     </li>
                     <li>
-                        <input type='checkbox' id='reunited' name='gender' />
+                        <input type='checkbox' id='reunited' name='sex' />
                         <label for='reunited'>Reunited</label>
                         <div class="check"><div class="inside1"></div></div>
                     </li>
