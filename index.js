@@ -99,7 +99,7 @@ app.get('/search?', (request, response) => {
     // postmanbe?? https://www.example.dev/?city=Rome&price=200
     // const myNaiveUrl = `https://www.example.dev/?city=${city}&price=${price}`;
     
-    console.log(request.query)
+    // console.log(request.query)
 
     // let query = request.params.query
     let selectAll = 'SELECT * FROM pets';
@@ -107,7 +107,7 @@ app.get('/search?', (request, response) => {
 
     // add the other columns of pets!
     const existingParams = ['addstatus', 'size','sex'].filter(field => request.query[field]);
-    console.log(existingParams)
+    // console.log(existingParams)
  
 
     // console.log(existingParams)
@@ -122,7 +122,7 @@ app.get('/search?', (request, response) => {
 
 
     
-    console.log(selectAll)
+    // console.log(selectAll)
     // connection.query(
     //     selectAll,
     //     existingParams.maps(field => req.query[field]
@@ -134,7 +134,7 @@ app.get('/search?', (request, response) => {
     pool.query(selectAll)
     // .then((res) => response.status(200).json(res.rows))
     .then((res) => response.status(200).json(res.rows))
-    .catch((err) => console.log(err));
+    .catch((err) => response.status(400).json({msg: 'Pet not found'}));
     // .catch((err) => response.status(400).json({msg: 'Failed to find anything'}));
     
 });
@@ -164,7 +164,7 @@ app.get('/username', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch user'}));
 })
 
-// user dashboard - post/report a pet (but it could be in the front page also)
+// user dashboard - post/report a pet
 app.post('/addpet', authMw, (request, response) => {
     let userId = request.userId;
     let addstatus = request.body.addstatus;

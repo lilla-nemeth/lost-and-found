@@ -12,7 +12,7 @@ const styles = {
         background: 'rgba(255,255,255)', 
         marginBottom: '25px', 
         padding: '50px', 
-        maxWidth: 'fit-content',
+        // maxWidth: 'fit-content',
         // maxWidth: '50%',
         borderRadius: '25px', 
         boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)',
@@ -25,12 +25,14 @@ const styles = {
 
     petCardInner: {
         display: 'flex',
-        height: '400px',
+        // height: '400px',
+        // height: '300px',
         justifyContent: 'space-between'
     },
     petTextBox: {
         border: '2px solid black',
-        padding: '50px',
+        // padding: '50px',
+        padding: '30px',
     },
 
     // petHeadline: {
@@ -185,7 +187,7 @@ const PetList = () => {
                     <div style={styles.petCard} key={pet.id}>
                         <div style={styles.petCardInner}>
                             <div 
-                                className='petPicture'
+                                className='petListPicture'
                             >
                                     Place of Picture
                             </div>
@@ -215,7 +217,7 @@ const PetList = () => {
                                             {pet.municipality} ({pet.region})
                                         </div>
                                     </div>
-                                    <button style={styles.petProfileButton}>View Pet</button>
+                                    <button className='formButton'>View Pet</button>
                                 </div>
                             </div>
                         </div>

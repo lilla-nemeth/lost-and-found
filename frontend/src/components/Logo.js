@@ -55,7 +55,7 @@ const Logo = () => {
                 <Link style={styles.navBackLink} to='/'>
                     <div style={styles.navBackText}>
                         <NavBackArrow style={styles.navBackArrow}/>
-                        Back to Search
+                        Back to the Search
                     </div>
                 </Link>
             </div>

@@ -1,34 +1,50 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import BackgroundImages from './BackgroundImages';
-import createHistory from 'history/createBrowserHistory';
-import { ReactComponent as EmailIcon } from '../assets/icons/email.svg';
-import { ReactComponent as PasswordIcon } from '../assets/icons/password.svg';
+import { AuthContext } from '../contexts/AuthContext';
 import { ApiContext } from '../contexts/ApiContext';
+import createHistory from 'history/createBrowserHistory';
 import Logo from './Logo';
+import BackgroundImages from './BackgroundImages';
+import { ReactComponent as EmailIcon } from '../assets/icons/email.svg';
+import ShowHidePassword from './PasswordShowHide';
+import PasswordShowHide from './PasswordShowHide';
 
 const Login = () => {
     const [email, setEmail] = useState('');
-    const [pw, setPw] = useState('');
+    const [pwValues, setPwValues] = useState({
+        pw: '',
+        showPassword: false,
+    });
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
-    const { loginUser } = useContext(ApiContext);
-
     let DEBUG = true;
+
+    // const { token, setToken, handleLogOut } = useContext(AuthContext);
+    const { loginUser, token, setToken } = useContext(ApiContext);
+
+
+    // if (DEBUG) console.log(token, setToken)
     
     function handleSubmit(event) {
         event.preventDefault();
 
-        // console.log(loginUser({email, pw}));
-        // loginUser();
-        if (DEBUG) console.log(loginUser({email: '!emailaddress', pw: '!passwordText'}))
+        loginUser({
+            email,
+            pw: pwValues.pw,
+            error: err => setErrorMsg(err),
+            errorTimeout: () => (setTimeout(() => {
+                setErrorMsg('');
+            }, 5000))
+        });
+        
+        // if (DEBUG) console.log(loginUser(email, pw));
     }
 
     createHistory().replace('/login');
 
 
-    // DON'T FORGET TO PUT HERE THE SUCCESS/ERROR MESSAGES PART
+    if (DEBUG) console.log('PASSWORDVALUES', pwValues.pw);
 
     return (  
         <main>
@@ -56,7 +72,7 @@ const Login = () => {
                                 </label>
                                 <input 
                                     className='formInput' 
-                                    autocomplete='email' 
+                                    autoComplete='email' 
                                     type='email' 
                                     name='email' 
                                     placeholder='email' 
@@ -64,20 +80,7 @@ const Login = () => {
                                     onChange={event => setEmail(event.target.value)}
                                 />
                             </div>
-                            <div className='inputBox' >
-                                <label className='formLabel' for='password'>
-                                    <PasswordIcon />
-                                </label>
-                                <input 
-                                    className='formInput'
-                                    autocomplete='password' 
-                                    type='password' 
-                                    name='password' 
-                                    placeholder='password' 
-                                    required 
-                                    onChange={event => setPw(event.target.value)}
-                                />
-                            </div>
+                            <PasswordShowHide pwValues={pwValues} setPwValues={setPwValues} />
                             <div>
                                 <button className='formButton'>Login</button>
                             </div>

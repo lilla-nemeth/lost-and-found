@@ -8,11 +8,14 @@ export default function ApiContextProvider(props) {
     
     let DEBUG = true;
 
-    const { token } = useContext(AuthContext);
+    const { token, setToken, handleLogOut } = useContext(AuthContext);
+    
+    // if (DEBUG) console.log(token);
+
 
     // named input when we have many arguments
     // cannot mess up the order (in object {})
-    function registerUser({email, username, phone, pw, success, error, successTimeout, errorTimeout}) {
+    function registerUser({email, username, phone, pw, success, successTimeout, error, errorTimeout}) {
         
         let options = {
             method: 'post',
@@ -38,18 +41,15 @@ export default function ApiContextProvider(props) {
         )
     }
 
-    // token from AuthContext ?
-    // FIX IT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:
-    function loginUser({email, pw}) {
+    // FIX IT!!!!!!!!!!!:
+    function loginUser({email, pw, error, errorTimeout}) {
 
-        // CHECK IT LATER: are mode and headers necessary?!
         let options = {
             method: 'post',
             url: 'http://localhost:3003/login',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-                'x-auth-token': token,
             },
             data: {
                 email,
@@ -57,20 +57,35 @@ export default function ApiContextProvider(props) {
             },
         };
         
+        // if (DEBUG) console.log(token);
+        // res.data - token?
         axios(options)
         .then(
-            res => {console.log(res)}
+            // res => {if (success) success(res.data.msg, successTimeout())}
+            res => {        
+
+                // setItem - token works!
+                let tokenRes = res.data;
+
+                localStorage.setItem('token', tokenRes);
+                setToken(tokenRes);
+
+                if (DEBUG) console.log('APICONTEXT TOKEN RESPONSE', token);
+                // if (DEBUG) console.log(tokenRes);
+            }
         )
         .catch(
-            err => {console.log(err)}
+            // err => {if (error) error(err.response.data.msg, errorTimeout())}
+            err => {console.log(error('APICONTEXT-ERROR RESPONSE', err.response.data.msg, errorTimeout()))}
         )
     }
 
     // function reportPet() {
+        // addpet post 
     // }
 
     return (
-        <ApiContext.Provider value={{registerUser, loginUser}}>
+        <ApiContext.Provider value={{registerUser, loginUser, token, setToken, handleLogOut}}>
             { props.children }
         </ApiContext.Provider>
     )
