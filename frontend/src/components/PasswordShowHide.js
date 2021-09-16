@@ -14,8 +14,10 @@ const PasswordShowHide = (props) => {
 
     let DEBUG = true;
 
-    if (DEBUG) console.log('!!!pwValues', pwValues, '!!!setPwValues', setPwValues);
+    // if (DEBUG) console.log('!!!pwValues', pwValues, '!!!setPwValues', setPwValues);
 
+    
+    // TO FIX: CURSOR SHOULD BE AT THE END OF THE PASSWORD TEXT AFTER CLICK 
     function handleClickShowPw(event) {
         event.preventDefault();
         setPwValues({...pwValues, showPassword: !pwValues.showPassword,});
@@ -29,7 +31,6 @@ const PasswordShowHide = (props) => {
     const handleChangePw = (prop) => (event) => {
         setPwValues({...pwValues, [prop]: event.target.value });
     }
-    
 
 
     return (  

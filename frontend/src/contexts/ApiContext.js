@@ -10,7 +10,7 @@ export default function ApiContextProvider(props) {
 
     const { token, setToken, handleLogOut } = useContext(AuthContext);
     
-    // if (DEBUG) console.log(token);
+    if (DEBUG) console.log('!TOKEN', token, '!SETTOKEN', setToken, "logout", handleLogOut);
 
 
     // named input when we have many arguments
@@ -42,7 +42,7 @@ export default function ApiContextProvider(props) {
     }
 
     // FIX IT!!!!!!!!!!!:
-    function loginUser({email, pw, error, errorTimeout}) {
+    function loginUser({email, pw, errorCallback, errorTimeout}) {
 
         let options = {
             method: 'post',
@@ -70,13 +70,14 @@ export default function ApiContextProvider(props) {
                 localStorage.setItem('token', tokenRes);
                 setToken(tokenRes);
 
-                if (DEBUG) console.log('APICONTEXT TOKEN RESPONSE', token);
+                if (DEBUG) console.log('APICONTEXT TOKEN RESPONSE', tokenRes);
                 // if (DEBUG) console.log(tokenRes);
             }
         )
         .catch(
-            // err => {if (error) error(err.response.data.msg, errorTimeout())}
-            err => {console.log(error('APICONTEXT-ERROR RESPONSE', err.response.data.msg, errorTimeout()))}
+            // err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
+            // err => {console.log(error('APICONTEXT-ERROR RESPONSE', err.response.data.msg, errorTimeout()))}
+            err => console.log(err)
         )
     }
 
@@ -85,7 +86,7 @@ export default function ApiContextProvider(props) {
     // }
 
     return (
-        <ApiContext.Provider value={{registerUser, loginUser, token, setToken, handleLogOut}}>
+        <ApiContext.Provider value={{registerUser, loginUser}}>
             { props.children }
         </ApiContext.Provider>
     )
