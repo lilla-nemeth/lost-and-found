@@ -24,8 +24,9 @@ const styles = {
 }
 
 const Navbar = () => {
-    const { handleLogOut } = useContext(AuthContext);
+    const { token, handleLogOut } = useContext(AuthContext);
 
+    console.log('navbar props',handleLogOut)
     let DEBUG = true;
 
     return (  
@@ -34,9 +35,14 @@ const Navbar = () => {
                     <li><Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link></li>
                     <li><Link className='navLink' to='/'>Lost & Found</Link></li>
                     <li><Link className='navLink' to='/reportpet'>Report Pet</Link></li>
-                    <li><Link className='navLink' to='/login'>Login</Link></li>
-                    <li><Link className='navLink' to='/register'>Register</Link></li>
-                    <li><button className='navLink' onClick={() => handleLogOut()}>Log Out</button></li>
+                    { !token ?               
+                    <>
+                        <li><Link className='navLink' to='/login'>Login</Link></li>
+                        <li><Link className='navLink' to='/register'>Register</Link></li>
+                    </>
+                    : <li><button className='navLink' onClick={() => handleLogOut()}>Log Out</button></li>
+                }
+                    
             </ul>
         </div>
     );

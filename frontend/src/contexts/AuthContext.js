@@ -8,12 +8,16 @@ export default function AuthContextProvider(props) {
 
     let DEBUG = true;
 
+    // console.log('from authcontext', token)
     useEffect(() => {
-        // we don't get our token....why?
-       let getToken = localStorage.getItem(token);
-       if (getToken) {
-           setToken(getToken);
+
+       let tokenFromLocalStorage = localStorage.getItem('token');
+       console.log('AUTH, USEEFFECT',tokenFromLocalStorage);
+
+       if (tokenFromLocalStorage) {
+           setToken(tokenFromLocalStorage);
        }
+
     });
     
     if (DEBUG) console.log(token);
@@ -44,7 +48,7 @@ export default function AuthContextProvider(props) {
     // }
     return (
         // <AuthContext.Provider value={token, setToken, handleLogOut}>
-        <AuthContext.Provider value={token, setToken, handleLogOut}>
+        <AuthContext.Provider value={{token, setToken, handleLogOut}}>
             { props.children }
         </AuthContext.Provider>
     );

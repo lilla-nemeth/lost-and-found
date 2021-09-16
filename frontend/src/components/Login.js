@@ -21,7 +21,7 @@ const Login = () => {
     let DEBUG = true;
 
     // const { token, setToken, handleLogOut } = useContext(AuthContext);
-    const { loginUser, token, setToken } = useContext(ApiContext);
+    const { loginUser } = useContext(ApiContext);
 
 
     // if (DEBUG) console.log(token, setToken)
@@ -32,7 +32,7 @@ const Login = () => {
         loginUser({
             email,
             pw: pwValues.pw,
-            error: err => setErrorMsg(err),
+            errorCallback: err => setErrorMsg(err),
             errorTimeout: () => (setTimeout(() => {
                 setErrorMsg('');
             }, 5000))
@@ -44,7 +44,7 @@ const Login = () => {
     createHistory().replace('/login');
 
 
-    if (DEBUG) console.log('PASSWORDVALUES', pwValues.pw);
+    // if (DEBUG) console.log('PASSWORDVALUES', pwValues.pw);
 
     return (  
         <main>

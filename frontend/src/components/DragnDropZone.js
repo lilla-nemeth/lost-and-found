@@ -18,6 +18,8 @@ const DragnDropZone = () => {
     // empty arr, we map it (below)
     const [files, setFiles] = useState([]);
 
+    console.log(files)
+
     let DEBUG = true;
 
     // Object.assign() - usually merges multiple object elements, or can clone also
@@ -47,6 +49,7 @@ const DragnDropZone = () => {
         </div>
     ));
 
+    
 
     // WHAT I NEED FOR IMAGE UPLOADING:
     // Frontend, Features: 
@@ -67,6 +70,8 @@ const DragnDropZone = () => {
                         </p>
                 </div>
             </div>
+            {/* Instead of button it could be an X */}
+            {files.length > 0 && <button onClick={() => setFiles([])}>Delete</button>}
         </div>
     );
 }
