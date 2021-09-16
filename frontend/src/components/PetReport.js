@@ -86,23 +86,19 @@ const PetReport = () => {
             <section style={styles.section}>
             <div className='formBox'>
                     <h2 className='formHeadline'>Report Pet</h2>
-                    <div className='message'>
-                      <p className='errorMessage'>{errorMsg}</p>
-                      <p className='successMessage'>{successMsg}</p>
-                    </div>
                     <form method='POST' 
                         //   onSubmit={handleSubmit}
                     >
                         <div className='filterBox'>
                             <h2 style={styles.categoryHeadline}>Status</h2>
                             <ul className='radioList'>
-                                <li>
-                                    <input type='radio' id='lost' name='species' />
+                                <li className='radioButtonOption'>
+                                    <input type='radio' id='lost' name='status' />
                                     <label for='lost'>Lost</label>
                                     <div class="radioCheck"><div class="radioCheckInside"></div></div>
                                 </li>
-                                <li>
-                                    <input type='radio' id='found' name='species' />
+                                <li className='radioButtonOption'>
+                                    <input type='radio' id='found' name='status' />
                                     <label for='found'>Found</label>
                                     <div class="radioCheck"><div class="radioCheckInside"></div></div>
                                 </li>
@@ -113,17 +109,17 @@ const PetReport = () => {
                         <div className='filterBox'> 
                             <h2 style={styles.categoryHeadline}>Species</h2>
                             <ul className='radioList'>
-                                <li>
+                                <li className='radioButtonOption'>
                                     <input type='radio' id='dog' name='species' />
                                     <label for='dog'>Dog</label>
                                     <div class="radioCheck"><div class="radioCheckInside"></div></div>
                                 </li>
-                                <li>
+                                <li className='radioButtonOption'>
                                     <input type='radio' id='cat' name='species' />
                                     <label for='cat'>Cat</label>
                                     <div class="radioCheck"><div class="radioCheckInside"></div></div>
                                 </li>
-                                <li>
+                                <li className='radioButtonOption'>
                                     <input type='radio' id='otherSpecies' name='species' />
                                     <label for='otherSpecies'>Other</label>
                                     <div class="radioCheck"><div class="radioCheckInside"></div></div>
@@ -140,7 +136,7 @@ const PetReport = () => {
                                 <input 
                                     className='formInput' 
                                     id='region'
-                                    autocomplete='region' 
+                                    autoComplete='region' 
                                     type='text' 
                                     name='region' 
                                     placeholder='region' 
@@ -156,7 +152,7 @@ const PetReport = () => {
                                     style={{resize: 'none'}}
                                     className='formInput' 
                                     id='description'
-                                    autocomplete='region' 
+                                    autoComplete='region' 
                                     type='text' 
                                     name='region' 
                                     placeholder='Description' 
@@ -168,13 +164,12 @@ const PetReport = () => {
                                 </textarea>
                             </div>
                         </div>
-
                         <button className='optionalButton' onClick={() => showOptionalInputs()}>
-                            <div>
+                            {/* <div> */}
                                 Optional Data
-                            </div>
+                            {/* </div> */}
                             <div className='arrowDown'>
-                                <ArrowDown />
+                                <ArrowDown style={{height: '16px'}}/>
                             </div>
                         </button>
                         <div className={optionalInputs.display}>
@@ -184,7 +179,7 @@ const PetReport = () => {
                                     <input 
                                         className='formInput' 
                                         id='breed'
-                                        autocomplete='breed' 
+                                        autoComplete='breed' 
                                         type='text' 
                                         name='breed' 
                                         placeholder='breed'
@@ -195,17 +190,17 @@ const PetReport = () => {
                             <div className='filterBox'> 
                                 <h2 style={styles.categoryHeadline}>Size</h2>
                                 <ul className='radioList'>
-                                    <li>
+                                    <li className='radioButtonOption'>
                                         <input type='radio' id='small' name='size' />
                                         <label for='small'>Small</label>
                                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
                                     </li>
-                                    <li>
+                                    <li className='radioButtonOption'>
                                         <input type='radio' id='medium' name='size' />
                                         <label for='medium'>Medium</label>
                                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
                                     </li>
-                                    <li>
+                                    <li className='radioButtonOption'>
                                         <input type='radio' id='large' name='size' />
                                         <label for='large'>Large</label>
                                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
@@ -215,17 +210,17 @@ const PetReport = () => {
                             <div className='filterBox'> 
                                 <h2 style={styles.categoryHeadline}>Sex</h2>
                                 <ul className='radioList'>
-                                    <li>
+                                    <li className='radioButtonOption'>
                                         <input type='radio' id='male' name='sex'/>
                                         <label for='male'>Male</label>
                                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
                                     </li>
-                                    <li>
+                                    <li className='radioButtonOption'>
                                         <input type='radio' id='female' name='sex' />
                                         <label for='female'>Female</label>
                                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
                                     </li>
-                                    <li>
+                                    <li className='radioButtonOption'>
                                         <input type='radio' id='unknown' name='sex' />
                                         <label for='unknown'>Unknown</label>
                                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
@@ -235,14 +230,14 @@ const PetReport = () => {
                             <div className='filterBox'>
                                 <h2 style={styles.categoryHeadline}>Color</h2>
                                 <ul className='radioList'>
-                                    <li>
+                                    <li className='checkboxOption'>
                                         <input type='checkbox' id='black' name='color' />
                                         <label for='black' className='checkboxContainer'>
                                             Black
                                         </label>
                                         <div class="checkboxCheck"><div class="checkboxCheckInside"></div></div>
                                     </li>
-                                    <li>
+                                    <li className='checkboxOption'>
                                         <input type='checkbox' id='brown' name='color' />
                                         <label for='brown' className='checkboxContainer'>
                                             Brown
@@ -252,7 +247,7 @@ const PetReport = () => {
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li className='checkboxOption'>
                                         <input type='checkbox' id='cream' name='color' />
                                         <label for='cream' className='checkboxContainer'>
                                             Cream
@@ -262,7 +257,7 @@ const PetReport = () => {
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li className='checkboxOption'>
                                         <input type='checkbox' id='grey' name='color' />
                                         <label for='grey' className='checkboxContainer'>
                                             Grey
@@ -272,7 +267,7 @@ const PetReport = () => {
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li className='checkboxOption'>
                                         <input type='checkbox' id='red' name='color' />
                                         <label for='red' className='checkboxContainer'>
                                             Red
@@ -282,7 +277,7 @@ const PetReport = () => {
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li className='checkboxOption'>
                                         <input type='checkbox' id='white' name='color' />
                                         <label for='white' className='checkboxContainer'>
                                             White
@@ -292,7 +287,7 @@ const PetReport = () => {
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li className='checkboxOption'>
                                         <input type='checkbox' id='otherColor' name='color' />
                                         <label for='otherColor' className='checkboxContainer'>
                                             Other
@@ -307,27 +302,27 @@ const PetReport = () => {
                             <div className='filterBox'>
                                 <h2 style={styles.categoryHeadline}>Age</h2>
                                 <ul className='radioList'>
-                                    <li>
+                                    <li className='radioButtonOption'>
                                         <input type='radio' id='juvenile' name='age' />
                                         <label for='juvenile'>Juvenile</label>
                                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
                                     </li>
-                                    <li>
+                                    <li className='radioButtonOption'>
                                         <input type='radio' id='adolescent' name='age' />
                                         <label for='adolescent'>Adolescent</label>
                                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
                                     </li>
-                                    <li>
+                                    <li className='radioButtonOption'>
                                         <input type='radio' id='adult' name='age' />
                                         <label for='adult'>Adult</label>
                                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
                                     </li>
-                                    <li>
+                                    <li className='radioButtonOption'>
                                         <input type='radio' id='senior' name='age' />
                                         <label for='senior'>Senior</label>
                                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
                                     </li>
-                                    <li>
+                                    <li className='radioButtonOption'>
                                         <input type='radio' id='unknownAge' name='age' />
                                         <label for='unknownAge'>Unknown</label>
                                         <div class="radioCheck"><div class="radioCheckInside"></div></div>
@@ -340,7 +335,7 @@ const PetReport = () => {
                                     <input 
                                         className='formInput' 
                                         id='uniqueFeature'
-                                        autocomplete='unique feature' 
+                                        autoComplete='unique feature' 
                                         type='text' 
                                         name='uniqueFeature' 
                                         placeholder='unique feature'
@@ -348,9 +343,10 @@ const PetReport = () => {
                                     />
                                 </div>
                             </div>
-
-                        {/* color */}
-                        {/* uniquefeature */}
+                        </div>
+                        <div className='message'>
+                            <p className='errorMessage'>{errorMsg}</p>
+                            <p className='successMessage'>{successMsg}</p>
                         </div>
                         <div>
                             <button className='formButton'>Report</button>

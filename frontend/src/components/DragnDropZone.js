@@ -55,7 +55,7 @@ const DragnDropZone = () => {
     // multer npm middleware; put the middleware to petreport request; test with Postman; Cloudinary;   
 
     return (  
-        <div style={{padding: '45px 0px'}}>
+        <div style={{padding: '45px 0 0 0'}}>
             <div className='petPicture'>
                 <div style={{border: '3px dashed rgb(34 102 96)', background: 'rgb(243 243 243)'}} {...getRootProps()}>
                     {/* <div style={{overflow: 'hidden', position: 'absolute', bottom: '0'}}> */}

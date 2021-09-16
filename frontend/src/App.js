@@ -11,10 +11,12 @@ import { useContext } from 'react';
 
 
 function App() {
-  // const {token, setToken, handleLogOut} = useContext(AuthContext);
 
 
   // * = default 
+
+
+  
 
 
     return (
@@ -36,7 +38,7 @@ function App() {
                     <Register />
                   </Route>
                   <Route path='/login'>
-                    <Login/>
+                    <Login />
                   </Route>
                 </Switch>
               </ApiContextProvider>

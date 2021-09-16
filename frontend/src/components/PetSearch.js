@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg'
 
 const styles = {
-    searchBox: {
-        background: 'rgba(255,255,255)', 
-        marginBottom: '25px', 
-        padding: '50px', 
-        maxWidth: 'fit-content',
-        borderRadius: '25px', 
-        boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)',
-    },
+    // searchBox: {
+    //     background: 'rgba(255,255,255)', 
+    //     marginBottom: '25px', 
+    //     padding: '50px', 
+    //     maxWidth: 'fit-content',
+    //     borderRadius: '25px', 
+    //     boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)',
+    // },
     searchForm: {
         display: 'flex',
         justifyContent: 'center',
@@ -44,7 +44,7 @@ const PetSearchBox = () => {
 
     return (  
         <div>
-            <div style={styles.searchBox}>
+            <div className='formBox'>
                 <form style={styles.searchForm} onSubmit={handleSubmit}>
                     <h2 style={styles.speciesCategory}>Location</h2>
                     <div className='searchBox'>
@@ -82,16 +82,16 @@ const PetSearchBox = () => {
                     </div> 
                     <div style={{padding: '25px 0'}}>
                         {/* STATUS */}
-                        <h2 style={styles.speciesCategory}>Color</h2>
+                        <h2 style={styles.speciesCategory}>Status</h2>
                         <ul className='radioList'>
-                            <li>
+                            <li className='checkboxOption'>
                                 <input type='checkbox' id='lost' name='status' />
                                 <label for='lost' className='checkboxContainer'>
                                     Lost
                                 </label>
                                 <div class="checkboxCheck"><div class="checkboxCheckInside"></div></div>
                             </li>
-                            <li>
+                            <li className='checkboxOption'>
                                 <input type='checkbox' id='found' name='status' />
                                 <label for='found' className='checkboxContainer'>
                                     Found
@@ -101,7 +101,7 @@ const PetSearchBox = () => {
                                     </div>
                                 </div>
                             </li>
-                            <li>
+                            <li className='checkboxOption'>
                                 <input type='checkbox' id='reunited' name='status' />
                                 <label for='reunited' className='checkboxContainer'>
                                     Reunited

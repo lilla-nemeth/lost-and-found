@@ -8,6 +8,9 @@ import { ReactComponent as EmailIcon } from '../assets/icons/email.svg';
 import { ReactComponent as UsernameIcon } from '../assets/icons/username.svg';
 import { ReactComponent as PasswordIcon } from '../assets/icons/password.svg';
 import { ReactComponent as PhoneIcon } from '../assets/icons/phone.svg';
+import { ReactComponent as HidePasswordIcon } from '../assets/icons/hidepassword.svg';
+import { ReactComponent as ShowPasswordIcon } from '../assets/icons/showpassword.svg';
+import PasswordShowHide from './PasswordShowHide';
 
 const styles = {
     main: {
@@ -38,7 +41,7 @@ const styles = {
     },
     acceptedPasswordText: {
         paddingTop: '20px',
-        width: '350px',
+        // width: '350px',
         font: '400 14px / 1.2 Poppins, sans-serif',
         color: '#acacac',
         fontStyle: 'italic',
@@ -52,7 +55,10 @@ const styles = {
 
 const Register = () => {
     const [email, setEmail] = useState('');
-    const [pw, setPw] = useState('');
+    const [pwValues, setPwValues] = useState({
+        pw: '',
+        showPassword: false,
+    });
     const [username, setUsername] = useState('');
     const [phone, setPhone] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
@@ -69,7 +75,7 @@ const Register = () => {
             email,
             username,
             phone,
-            pw,
+            pw: pwValues.pw,
             success: res => setSuccessMsg(res),
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');
@@ -109,7 +115,7 @@ const Register = () => {
                             </label>
                             <input 
                                 className='formInput' 
-                                autocomplete='email' 
+                                autoComplete='email' 
                                 type='email' 
                                 name='email' 
                                 placeholder='email' 
@@ -123,7 +129,7 @@ const Register = () => {
                             </label>
                             <input 
                                 className='formInput'
-                                autocomplete='username' 
+                                autoComplete='username' 
                                 type='text' 
                                 name='username' 
                                 placeholder='username' 
@@ -137,8 +143,8 @@ const Register = () => {
                             </label>
                            <input 
                                 className='formInput'
-                                autocomplete='phone' 
-                                type='number' 
+                                autoComplete='phone' 
+                                type='tel' 
                                 name='phone' 
                                 placeholder='phone' 
                                 required 
@@ -151,20 +157,7 @@ const Register = () => {
                             one lower-case letter, 
                             one digit and one special character
                         </div>
-                        <div className='inputBox'>
-                            <label className='formLabel' for='password'>
-                                <PasswordIcon />
-                            </label>
-                            <input 
-                                className='formInput'
-                                autocomplete='password' 
-                                type='password' 
-                                name='password' 
-                                placeholder='password' 
-                                required 
-                                onChange={event => setPw(event.target.value)}
-                            />
-                        </div>
+                        <PasswordShowHide pwValues={pwValues} setPwValues={setPwValues} />
                         <div>
                             <button className='formButton'>Register</button>
                         </div>
