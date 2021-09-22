@@ -26,9 +26,10 @@ const styles = {
 const Navbar = () => {
     const { token, handleLogOut } = useContext(AuthContext);
 
-    console.log('navbar props',handleLogOut)
     let DEBUG = true;
-
+    
+    // if (DEBUG) console.log('navbar props',handleLogOut)
+    
     return (  
         <div style={styles.navbarContainer}>
             <ul style={styles.navbar}>
@@ -40,7 +41,7 @@ const Navbar = () => {
                         <li><Link className='navLink' to='/login'>Login</Link></li>
                         <li><Link className='navLink' to='/register'>Register</Link></li>
                     </>
-                    : <li><button className='navLink' onClick={() => handleLogOut()}>Log Out</button></li>
+                    : <li><button className='logOutButton' onClick={() => handleLogOut()}>Log Out</button></li>
                 }
                     
             </ul>

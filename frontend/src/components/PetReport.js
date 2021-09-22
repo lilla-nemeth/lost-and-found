@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import DragnDropZone from './DragnDropZone';
 import { ReactComponent as ArrowDown} from '../assets/icons/togglearrow.svg'
+import LocationSearch from './LocationSearch';
+import MapboxMap from './MapboxMap';
 // import DropZoneTest from './DropZoneTest';
 
 
@@ -130,7 +132,8 @@ const PetReport = () => {
                         if I'll use Mapbox API and convert the input into a search bar */}
                         {/* combine these parameters into 1 searchbar OR 
                         separate them to several input fields: municipality, zip, district, street */}
-                        <div className='filterBox'> 
+                       
+                        {/* <div className='filterBox'> 
                             <h2 style={styles.categoryHeadline}>Region</h2>
                             <div className='inputBox'>
                                 <input 
@@ -144,7 +147,12 @@ const PetReport = () => {
                                     onChange={event => setRegion(event.target.value)}
                                 />
                             </div>
-                        </div>
+                        </div> */}
+
+                        {/* <LocationSearch /> */}
+                        <MapboxMap />
+
+                        
                         <div className='filterBox'> 
                             <h2 style={styles.categoryHeadline}>Description</h2>
                             <div className='inputBox'>

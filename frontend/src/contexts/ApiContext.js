@@ -9,10 +9,25 @@ export default function ApiContextProvider(props) {
     let DEBUG = true;
 
     const { token, setToken, handleLogOut } = useContext(AuthContext);
+
+    // if (DEBUG) console.log('mapbox token',process.env.REACT_APP_MAPBOX_API_KEY);
+
+
+    // query must contain search text or set of coordinates: 
     
-    if (DEBUG) console.log('!TOKEN', token, '!SETTOKEN', setToken, "logout", handleLogOut);
+    // function searchWord(query) {    
+    //     const mapboxURL1 = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
+    //     return mapboxURL1 + query + '.json?types=address&access_token=' + 
+    //     process.env.REACT_APP_MAPBOX_API_KEY;
+    // } 
+
+    // if (DEBUG) console.log(searchWord('###QUERYTESTTEXT###'));
 
 
+    
+    // if (DEBUG) console.log('!TOKEN', token, '!SETTOKEN', setToken, "logout", handleLogOut);
+    
+    
     // named input when we have many arguments
     // cannot mess up the order (in object {})
     function registerUser({email, username, phone, pw, success, successTimeout, error, errorTimeout}) {

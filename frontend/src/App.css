@@ -82,10 +82,10 @@ table {
 .navLink {
   text-align: center;
   padding: 22.5px;
-  margin: auto;
+  /* margin: auto; */
   text-decoration: none;
   color: rgb(183, 223, 219);
-  font: 300 15px/1.2 "Poppins", sans-serif;
+  font: 300 15px/1.2 'Poppins', sans-serif;
   display: inline-block; 
 }
 
@@ -101,6 +101,23 @@ table {
   transform: scaleX(1);
 }
 
+.logOutButton {
+  text-align: center;
+  padding: 22.5px;
+
+  text-decoration: none;
+  font: 400 15px/1.2 'Poppins', sans-serif;
+  display: inline-block; 
+  cursor: pointer;
+  color: rgb(34, 102, 96);
+  border: none;
+  background: rgb(71, 163, 156);
+}
+
+.logOutButton:hover {
+  background: rgb(183, 223, 219);
+  transition: background 0.2s linear;
+}
 
 /* Report - Picture */
 
@@ -123,6 +140,10 @@ table {
   margin-left: auto;
   margin-right: auto;
   background: rgb(236 236 236);
+}
+
+.filterBox {
+  padding: 0 0 45px;
 }
 
 /* CHANGE THE UL LI TO CLASSES!!!!!!!! */
@@ -164,7 +185,7 @@ ul li label{
 }
 
 ul li:hover label{
-	color: #47a39c;
+	color: rgb(71, 163, 156);
 }
 
 ul li .radioCheck{
@@ -312,7 +333,7 @@ input[type=checkbox]:checked ~ label{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -336,7 +357,7 @@ input[type=checkbox]:checked ~ label{
 }
 
 .formHeadline {
-  font: 500 30px/1.2 "Poppins", sans-serif;
+  font: 500 30px/1.2 'Poppins', sans-serif;
   padding-bottom: 30px;
   color: #226660;
 }
@@ -475,7 +496,7 @@ input[type=checkbox]:checked ~ label{
   border-left: none;
   border-right: none;
   background: none;
-  font: 300 15px/1.2 "Poppins", sans-serif;
+  font: 300 15px/1.2 'Poppins', sans-serif;
 }
 
 .formInput:focus,
@@ -491,4 +512,62 @@ input[type=checkbox]:checked ~ label{
 
 .formLink:hover {
   color: rgb(34, 102, 96);
+}
+
+/* PET REPORT - MAP */
+
+.map-container {
+  height: 450px;
+}
+
+.mapboxgl-ctrl-geocoder {
+  display: flex;
+  width: 400px !important;
+  /* justify-content: space-between; */
+}
+
+.mapboxgl-ctrl-geocoder {
+  width: 120% !important;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+  padding: unset !important;
+  height: auto !important;
+  width: unset !important;
+  border-bottom: 2px solid rgb(34, 102, 96);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: none;
+  font: 300 15px/1.2 'Poppins', sans-serif !important;
+  text-transform: capitalize;
+}
+
+
+.mapboxgl-ctrl-geocoder--icon,
+.mapboxgl-ctrl-geocoder--icon-search {
+  margin: 12px;
+  width: 30px !important;
+  height: 30px !important;
+  /* margin: 0; */
+  padding: 0;
+
+  position: unset !important;
+
+  cursor: pointer;
+  background: none;
+  fill: rgb(172, 172, 172) !important;
+
+  /* padding: 18px; */
+  /* width: fit-content; */
+  /* border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid rgb(34, 102, 96); */
+}
+
+.mapboxgl-ctrl-geocoder--icon:hover,
+.mapboxgl-ctrl-geocoder--icon-search:hover {
+  fill: rgb(34, 102, 96); 
+  transition: fill 0.2s linear;
 }
