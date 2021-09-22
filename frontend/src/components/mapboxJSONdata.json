@@ -1,0 +1,30 @@
+{
+    "id":"region.9556502359088160",
+    "type": "Feature",
+    "place_type":["region"],
+    "relevance":1,
+    "properties":{
+        "wikidata":"Q5704",
+        "short_code":"FI-14"
+    },
+    "text_fi-FI":"Pohjois-Pohjanmaan maakunta",
+    "language_fi-FI":"fi",
+    "place_name_fi-FI":"Pohjois-Pohjanmaan maakunta, Suomi",
+    "text":"Pohjois-Pohjanmaan maakunta",
+    "language":"fi",
+    "place_name":"Pohjois-Pohjanmaan maakunta, Suomi",
+    "bbox":[23.4471334154388,63.4290320015667,30.1407878201837,66.4859919986692],
+    "center":[26,65],
+    "geometry":{"type":"Point","coordinates":[26,65]},
+    "context":[
+        {
+            "id":"country.12473357386425650",
+            "wikidata":"Q33",
+            "short_code":"fi",
+            "text_fi-FI":"Suomi",
+            "language_fi-FI":"fi",
+            "text":"Suomi",
+            "language":"fi"
+        }
+    ]
+}

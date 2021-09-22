@@ -1,22 +1,19 @@
-// import AuthContextProvider, { AuthContext } from './contexts/AuthContext';
-import ApiContextProvider from './contexts/ApiContext';
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { useContext } from 'react';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { AuthContext } from './contexts/AuthContext';
+import './App.css';
 import Navbar from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
 import PetHome from './components/PetHome';
 import PetReport from './components/PetReport';
-import './App.css';
-import { useContext } from 'react';
-import { AuthContext } from './contexts/AuthContext';
-
 
 function App() {
 
 const { token, setToken, handleLogOut } = useContext(AuthContext);
   // * = default 
 
-  console.log('APP componens', token);
+  console.log('APP component', token);
 
   if (!token) {
     return (

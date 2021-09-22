@@ -4,8 +4,10 @@ const cors = require('cors');
 const { Pool } = require('pg');
 const bcrypt = require('bcryptjs'); 
 const jwt = require('jsonwebtoken');
-// const path = require("path");
-// require('dotenv').config();
+require('dotenv').config();
+const path = require('path');
+
+
 const { authMw, isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid } = require('./middlewares.js');
 
 let DEBUG = true;
@@ -19,16 +21,16 @@ app.use(express.json());
 
 const port = process.env.PORT || 3003;
 
-// adatbázis konfigurálása kell a kérések előtt
 // asztalinál a jelszó postgres:
-const pool = new Pool({
-    host:        'localhost',
-    user:        'postgres',
-    // password:    'postgres',
-    password:    'masterpassword',
-    port:        5432,
-    database:    'lostandfound'
-});
+const devSettings = {
+    host: process.env.PG_HOST,
+    user: process.env.PG_USER,
+    password: process.env.PG_PASSWORD,
+    port: process.env.PG_PORT,
+    database: process.env.PG_DATABASE
+}
+
+const pool = new Pool(devSettings);
 
 // from pets table get all pets by userId
 // ha a felhasználó a saját általa hozzáadott állatokat akarja megnézni

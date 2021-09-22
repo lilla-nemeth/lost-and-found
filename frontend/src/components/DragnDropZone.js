@@ -70,7 +70,7 @@ const DragnDropZone = () => {
                         </p>
                 </div>
             </div>
-            {/* Instead of button it could be an X */}
+            {/* Instead of button it could be an X (top right corner)*/}
             {files.length > 0 && <button onClick={() => setFiles([])}>Delete</button>}
         </div>
     );
