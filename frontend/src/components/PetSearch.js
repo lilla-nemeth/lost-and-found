@@ -43,7 +43,7 @@ const PetSearchBox = () => {
     // zip
 
     return (  
-        <div>
+        <div className='searchContainer'>
             <div className='formBox'>
                 <form style={styles.searchForm} onSubmit={handleSubmit}>
                     <h2 style={styles.speciesCategory}>Location</h2>

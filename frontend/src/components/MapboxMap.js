@@ -52,6 +52,7 @@ const MapboxMap = () => {
 
     });
 
+    // Additional search settings: ZONE/DISTANCE, e.g: 5-10-25-50-75-100 km
     return (
         <>
             {/* <div style={{padding: '0 0 45px'}}>

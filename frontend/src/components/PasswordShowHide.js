@@ -12,16 +12,14 @@ const PasswordShowHide = (props) => {
     }, 
         setPwValues } = props;
 
+
+
     let DEBUG = true;
-
-    // if (DEBUG) console.log('!!!pwValues', pwValues, '!!!setPwValues', setPwValues);
-
     
     // TO FIX: CURSOR SHOULD BE AT THE END OF THE PASSWORD TEXT AFTER CLICK 
     function handleClickShowPw(event) {
         event.preventDefault();
-        setPwValues({...pwValues, showPassword: !pwValues.showPassword,});
-
+        setPwValues({...pwValues, showPassword: !pwValues.showPassword});
     }
 
     function handleMouseDownPw(event) {
@@ -32,6 +30,11 @@ const PasswordShowHide = (props) => {
         setPwValues({...pwValues, [prop]: event.target.value });
     }
 
+    function onKeyPress(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); 
+        }
+    }
 
     return (  
         <div className='inputBox' >
@@ -47,11 +50,12 @@ const PasswordShowHide = (props) => {
                 value={pwValues.pw}
                 required 
                 onChange={handleChangePw('pw')}
+                onKeyPress={onKeyPress}
             />
                 <button
-                className='showHidePassword'
-                  onClick={handleClickShowPw}
-                  onMouseDown={handleMouseDownPw}
+                    className='showHidePassword'
+                    onClick={handleClickShowPw}
+                    onMouseDown={handleMouseDownPw}
                 >
                   {pwValues.showPassword ? <ShowPasswordIcon /> : <HidePasswordIcon />}
                 </button>

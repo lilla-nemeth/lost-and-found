@@ -1,36 +1,22 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import axios from 'axios';
 
 export const ApiContext = createContext();
 
 export default function ApiContextProvider(props) {
+
+    const { token, setToken } = useContext(AuthContext);
+    const [user, setUser] = useState('');
     
     let DEBUG = true;
 
-    const { token, setToken, handleLogOut } = useContext(AuthContext);
-
-    // if (DEBUG) console.log('mapbox token',process.env.REACT_APP_MAPBOX_API_KEY);
-
-
-    // query must contain search text or set of coordinates: 
-    
-    // function searchWord(query) {    
-    //     const mapboxURL1 = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
-    //     return mapboxURL1 + query + '.json?types=address&access_token=' + 
-    //     process.env.REACT_APP_MAPBOX_API_KEY;
-    // } 
-
-    // if (DEBUG) console.log(searchWord('###QUERYTESTTEXT###'));
-
-
-    
     // if (DEBUG) console.log('!TOKEN', token, '!SETTOKEN', setToken, "logout", handleLogOut);
     
     
     // named input when we have many arguments
     // cannot mess up the order (in object {})
-    function registerUser({email, username, phone, pw, success, successTimeout, error, errorTimeout}) {
+    function registerUser({email, username, phone, pw, successCallback, successTimeout, errorCallback, errorTimeout}) {
         
         let options = {
             method: 'post',
@@ -49,14 +35,14 @@ export default function ApiContextProvider(props) {
 
         axios(options)
         .then(
-            res => {if (success) success(res.data.msg, successTimeout())}
+            res => {if (successCallback) successCallback(res.data.msg, successTimeout())}
         )
         .catch(
-            err => {if (error) error(err.response.data.msg, errorTimeout())}
+            err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
         )
     }
 
-    // FIX IT!!!!!!!!!!!:
+
     function loginUser({email, pw, errorCallback, errorTimeout}) {
 
         let options = {
@@ -76,24 +62,41 @@ export default function ApiContextProvider(props) {
         // res.data - token?
         axios(options)
         .then(
-            // res => {if (success) success(res.data.msg, successTimeout())}
             res => {        
-
-                // setItem - token works!
                 let tokenRes = res.data;
 
                 localStorage.setItem('token', tokenRes);
                 setToken(tokenRes);
 
-                if (DEBUG) console.log('APICONTEXT TOKEN RESPONSE', tokenRes);
-                // if (DEBUG) console.log(tokenRes);
+                // if (DEBUG) console.log('APICONTEXT TOKEN RESPONSE', tokenRes);
             }
         )
         .catch(
-            // err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
+            err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
             // err => {console.log(error('APICONTEXT-ERROR RESPONSE', err.response.data.msg, errorTimeout()))}
-            err => console.log(err)
+            // err => console.log(err)
         )
+    }
+
+    function getUsername({errorCallback, errorTimeout}) {
+
+        let options = {
+            method: 'get',
+            url: 'http://localhost:3003/username',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': token
+            }
+        };
+        axios(options)
+        .then(
+            res => setUser(res.data)
+        )
+        .catch(
+            err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
+        )
+
     }
 
     // function reportPet() {
@@ -101,7 +104,7 @@ export default function ApiContextProvider(props) {
     // }
 
     return (
-        <ApiContext.Provider value={{registerUser, loginUser}}>
+        <ApiContext.Provider value={{registerUser, loginUser, getUsername, user}}>
             { props.children }
         </ApiContext.Provider>
     )

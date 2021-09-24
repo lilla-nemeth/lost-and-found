@@ -76,11 +76,11 @@ const Register = () => {
             username,
             phone,
             pw: pwValues.pw,
-            success: res => setSuccessMsg(res),
+            successCallback: res => setSuccessMsg(res),
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');
             }, 5000)),
-            error: err => setErrorMsg(err),
+            errorCallback: err => setErrorMsg(err),
             errorTimeout: () => (setTimeout(() => {
                 setErrorMsg('');
             }, 5000))
