@@ -359,6 +359,7 @@ const PetReport = () => {
                         <div>
                             <button className='formButton'>Report</button>
                         </div>
+                        {/* <RadioButton/> */}
                     </form>
                 </div>
             </section>
@@ -367,4 +368,14 @@ const PetReport = () => {
 }
  
 export default PetReport;
+
+// function RadioButton() {
+//     return (
+//         <li className='radioButtonOption'>
+//         <input type='radio' id='adult' name='age' />
+//         <label for='adult'>Adult</label>
+//         <div class="radioCheck"><div class="radioCheckInside"></div></div>
+//     </li>
+//     )
+// }
 
