@@ -3,6 +3,8 @@ import DragnDropZone from './DragnDropZone';
 import { ReactComponent as ArrowDown} from '../assets/icons/togglearrow.svg'
 import LocationSearch from './LocationSearch';
 import MapboxMap from './MapboxMap';
+import RadioButton from './generic/RadioButton';
+import Checkbox from './generic/Checkbox';
 // import DropZoneTest from './DropZoneTest';
 
 
@@ -63,6 +65,14 @@ const PetReport = () => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
+    // for checkbox:
+    const [isChecked, setIsChecked] = useState(false);
+    // radio useState input will be the response data (from ApiContext) - 
+    // -> remove the hard coded 'lost' string, change to pet array with objects
+    const [radio, setRadio] = useState('lost');
+    const [isRequired, setIsRequired] = useState(false);
+
+
     const [optionalInputs, setOptionalInputs] = useState({
         display: 'hideInputs',
     });
@@ -83,27 +93,45 @@ const PetReport = () => {
         }
     }
 
+    // place for the function where I call the report api fron ApiContext
+
+    {/* map() the pet data from ApiContext for RadioButton & checkbox data */}
+    {/* isChecked={true} - isChecked value will be a hooks with boolean value */}
+    {/* 1. test with hard coded data - strings */}
+    {/* change the hard coded: radio === lost    to object (from ApiContext) */}
+
     return (  
         <main style={styles.main}>
             <section style={styles.section}>
             <div className='formBox'>
                     <h2 className='formHeadline'>Report Pet</h2>
-                    <form method='POST' 
-                        //   onSubmit={handleSubmit}
+                    <form 
+                        method='POST' 
+                        // onSubmit={handleSubmit}
                     >
                         <div className='filterBox'>
                             <h2 style={styles.categoryHeadline}>Status</h2>
                             <ul className='radioList'>
-                                <li className='radioButtonOption'>
-                                    <input type='radio' id='lost' name='status' />
-                                    <label for='lost'>Lost</label>
-                                    <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                </li>
-                                <li className='radioButtonOption'>
-                                    <input type='radio' id='found' name='status' />
-                                    <label for='found'>Found</label>
-                                    <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                </li>
+                                <RadioButton 
+                                    id={'lost'} 
+                                    name={'status'} 
+                                    value={'lost'} 
+                                    checked={radio === 'lost'} 
+                                    onChange={event => {setRadio(event.target.value)}} 
+                                    labelFor={'lost'} 
+                                    labelName={'Lost'}
+                                    required={!isRequired}  
+                                />
+                                <RadioButton 
+                                    id={'found'} 
+                                    name={'status'} 
+                                    value={'found'} 
+                                    checked={radio === 'found'} 
+                                    onChange={event => {setRadio(event.target.value)}} 
+                                    labelFor={'found'} 
+                                    labelName={'Found'}
+                                    required={!isRequired}  
+                                />
                             </ul>
                         </div>
                            <DragnDropZone />
@@ -111,21 +139,36 @@ const PetReport = () => {
                         <div className='filterBox'> 
                             <h2 style={styles.categoryHeadline}>Species</h2>
                             <ul className='radioList'>
-                                <li className='radioButtonOption'>
-                                    <input type='radio' id='dog' name='species' />
-                                    <label for='dog'>Dog</label>
-                                    <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                </li>
-                                <li className='radioButtonOption'>
-                                    <input type='radio' id='cat' name='species' />
-                                    <label for='cat'>Cat</label>
-                                    <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                </li>
-                                <li className='radioButtonOption'>
-                                    <input type='radio' id='otherSpecies' name='species' />
-                                    <label for='otherSpecies'>Other</label>
-                                    <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                </li>
+                                <RadioButton 
+                                    id={'dog'} 
+                                    name={'species'} 
+                                    value={'dog'} 
+                                    checked={radio === 'dog'} 
+                                    onChange={event => {setRadio(event.target.value)}} 
+                                    labelFor={'dog'} 
+                                    labelName={'Dog'} 
+                                    required={!isRequired}
+                                />
+                                <RadioButton 
+                                    id={'cat'} 
+                                    name={'species'} 
+                                    value={'cat'} 
+                                    checked={radio === 'cat'} 
+                                    onChange={event => {setRadio(event.target.value)}} 
+                                    labelFor={'cat'} 
+                                    labelName={'Cat'} 
+                                    required={!isRequired}
+                                />
+                                <RadioButton 
+                                    id={'otherSpecies'} 
+                                    name={'species'} 
+                                    value={'otherSpecies'} 
+                                    checked={radio === 'otherSpecies'} 
+                                    onChange={event => {setRadio(event.target.value)}} 
+                                    labelFor={'otherSpecies'} 
+                                    labelName={'Other'}
+                                    required={!isRequired} 
+                                />
                             </ul>
                         </div>  
                         {/* change later the 'Region' headline to 'Location' 
@@ -148,14 +191,12 @@ const PetReport = () => {
                                 />
                             </div>
                         </div> */}
-
                         {/* <LocationSearch /> */}
                         <MapboxMap />
-
-                        
                         <div className='filterBox'> 
                             <h2 style={styles.categoryHeadline}>Description</h2>
                             <div className='inputBox'>
+                                {/* NOTE: put textarea tag into a Textarea component - reusability */}
                                 <textarea
                                     style={{resize: 'none'}}
                                     className='formInput' 
@@ -173,9 +214,7 @@ const PetReport = () => {
                             </div>
                         </div>
                         <button className='optionalButton' onClick={() => showOptionalInputs()}>
-                            {/* <div> */}
                                 Optional Data
-                            {/* </div> */}
                             <div className='arrowDown'>
                                 <ArrowDown style={{height: '16px'}}/>
                             </div>
@@ -198,143 +237,196 @@ const PetReport = () => {
                             <div className='filterBox'> 
                                 <h2 style={styles.categoryHeadline}>Size</h2>
                                 <ul className='radioList'>
-                                    <li className='radioButtonOption'>
-                                        <input type='radio' id='small' name='size' />
-                                        <label for='small'>Small</label>
-                                        <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                    </li>
-                                    <li className='radioButtonOption'>
-                                        <input type='radio' id='medium' name='size' />
-                                        <label for='medium'>Medium</label>
-                                        <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                    </li>
-                                    <li className='radioButtonOption'>
-                                        <input type='radio' id='large' name='size' />
-                                        <label for='large'>Large</label>
-                                        <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                    </li>
+                                    <RadioButton 
+                                        id={'small'} 
+                                        name={'size'} 
+                                        value={'small'} 
+                                        checked={radio === 'small'} 
+                                        onChange={event => {setRadio(event.target.value)}} 
+                                        labelFor={'small'} 
+                                        labelName={'Small'}
+                                        required={isRequired} 
+                                    />
+                                    <RadioButton 
+                                        id={'medium'} 
+                                        name={'size'} 
+                                        value={'medium'} 
+                                        checked={radio === 'medium'} 
+                                        onChange={event => {setRadio(event.target.value)}} 
+                                        labelFor={'medium'} 
+                                        labelName={'medium'}
+                                        required={isRequired} 
+                                    />
+                                    <RadioButton 
+                                        id={'large'} 
+                                        name={'size'} 
+                                        value={'large'} 
+                                        checked={radio === 'large'} 
+                                        onChange={event => {setRadio(event.target.value)}} 
+                                        labelFor={'large'} 
+                                        labelName={'large'} 
+                                        required={isRequired} 
+                                    />
                                 </ul>
                             </div> 
                             <div className='filterBox'> 
                                 <h2 style={styles.categoryHeadline}>Sex</h2>
                                 <ul className='radioList'>
-                                    <li className='radioButtonOption'>
-                                        <input type='radio' id='male' name='sex'/>
-                                        <label for='male'>Male</label>
-                                        <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                    </li>
-                                    <li className='radioButtonOption'>
-                                        <input type='radio' id='female' name='sex' />
-                                        <label for='female'>Female</label>
-                                        <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                    </li>
-                                    <li className='radioButtonOption'>
-                                        <input type='radio' id='unknown' name='sex' />
-                                        <label for='unknown'>Unknown</label>
-                                        <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                    </li>
+                                    <RadioButton 
+                                        id={'male'} 
+                                        name={'sex'} 
+                                        value={'male'} 
+                                        checked={radio === 'male'} 
+                                        onChange={event => {setRadio(event.target.value)}} 
+                                        labelFor={'male'} 
+                                        labelName={'Male'}
+                                        required={isRequired} 
+                                    />
+                                    <RadioButton 
+                                        id={'female'} 
+                                        name={'sex'} 
+                                        value={'female'} 
+                                        checked={radio === 'female'} 
+                                        onChange={event => {setRadio(event.target.value)}} 
+                                        labelFor={'female'} 
+                                        labelName={'Female'}
+                                        required={isRequired}
+                                    />
+                                    <RadioButton 
+                                        id={'unknownSex'} 
+                                        name={'sex'} 
+                                        value={'unknownSex'} 
+                                        checked={radio === 'unknownSex'} 
+                                        onChange={event => {setRadio(event.target.value)}} 
+                                        labelFor={'unknownSex'} 
+                                        labelName={'Unknown'}
+                                        required={isRequired} 
+                                    />
                                 </ul>
                             </div> 
                             <div className='filterBox'>
                                 <h2 style={styles.categoryHeadline}>Color</h2>
                                 <ul className='radioList'>
-                                    <li className='checkboxOption'>
-                                        <input type='checkbox' id='black' name='color' />
-                                        <label for='black' className='checkboxContainer'>
-                                            Black
-                                        </label>
-                                        <div class="checkboxCheck"><div class="checkboxCheckInside"></div></div>
-                                    </li>
-                                    <li className='checkboxOption'>
-                                        <input type='checkbox' id='brown' name='color' />
-                                        <label for='brown' className='checkboxContainer'>
-                                            Brown
-                                        </label>
-                                        <div class="checkboxCheck">
-                                            <div class="checkboxCheckInside">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li className='checkboxOption'>
-                                        <input type='checkbox' id='cream' name='color' />
-                                        <label for='cream' className='checkboxContainer'>
-                                            Cream
-                                        </label>
-                                        <div class="checkboxCheck">
-                                            <div class="checkboxCheckInside">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li className='checkboxOption'>
-                                        <input type='checkbox' id='grey' name='color' />
-                                        <label for='grey' className='checkboxContainer'>
-                                            Grey
-                                        </label>
-                                        <div class="checkboxCheck">
-                                            <div class="checkboxCheckInside">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li className='checkboxOption'>
-                                        <input type='checkbox' id='red' name='color' />
-                                        <label for='red' className='checkboxContainer'>
-                                            Red
-                                        </label>
-                                        <div class="checkboxCheck">
-                                            <div class="checkboxCheckInside">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li className='checkboxOption'>
-                                        <input type='checkbox' id='white' name='color' />
-                                        <label for='white' className='checkboxContainer'>
-                                            White
-                                        </label>
-                                        <div class="checkboxCheck">
-                                            <div class="checkboxCheckInside">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li className='checkboxOption'>
-                                        <input type='checkbox' id='otherColor' name='color' />
-                                        <label for='otherColor' className='checkboxContainer'>
-                                            Other
-                                        </label>
-                                        <div class="checkboxCheck">
-                                            <div class="checkboxCheckInside">
-                                            </div>
-                                        </div>
-                                    </li>
+                                    {/* FIX THE CHECKBOX */}
+                                    <Checkbox
+                                        id={'black'} 
+                                        name={'color'} 
+                                        value={'black'} 
+                                        checked={isChecked} 
+                                        onChange={event => {setIsChecked(event.target.checked)}} 
+                                        labelFor={'black'} 
+                                        labelName={'Black'}
+                                        // something required...?
+                                    />
+                                    <Checkbox
+                                        id={'brown'} 
+                                        name={'color'} 
+                                        value={'brown'} 
+                                        checked={isChecked} 
+                                        onChange={event => {setIsChecked(event.target.checked)}} 
+                                        labelFor={'brown'} 
+                                        labelName={'Brown'}  
+                                    />
+                                    <Checkbox
+                                        id={'cream'} 
+                                        name={'color'} 
+                                        value={'cream'} 
+                                        checked={isChecked} 
+                                        onChange={event => {setIsChecked(event.target.checked)}} 
+                                        labelFor={'cream'} 
+                                        labelName={'Cream'}  
+                                    />
+                                    <Checkbox
+                                        id={'grey'} 
+                                        name={'color'} 
+                                        value={'grey'} 
+                                        checked={isChecked} 
+                                        onChange={event => {setIsChecked(event.target.checked)}} 
+                                        labelFor={'grey'} 
+                                        labelName={'Grey'}  
+                                    />
+                                    <Checkbox
+                                        id={'red'} 
+                                        name={'color'} 
+                                        value={'red'} 
+                                        checked={isChecked} 
+                                        onChange={event => {setIsChecked(event.target.checked)}} 
+                                        labelFor={'red'} 
+                                        labelName={'Red'}  
+                                    />
+                                    <Checkbox
+                                        id={'white'} 
+                                        name={'color'} 
+                                        value={'white'} 
+                                        checked={isChecked} 
+                                        onChange={event => {setIsChecked(event.target.checked)}} 
+                                        labelFor={'white'} 
+                                        labelName={'White'}  
+                                    />
+                                    <Checkbox
+                                        id={'otherColor'} 
+                                        name={'color'} 
+                                        value={'otherColor'} 
+                                        checked={isChecked} 
+                                        onChange={event => {setIsChecked(event.target.checked)}} 
+                                        labelFor={'otherColor'} 
+                                        labelName={'Other'}  
+                                    />
                                 </ul>
                             </div>
                             <div className='filterBox'>
                                 <h2 style={styles.categoryHeadline}>Age</h2>
                                 <ul className='radioList'>
-                                    <li className='radioButtonOption'>
-                                        <input type='radio' id='juvenile' name='age' />
-                                        <label for='juvenile'>Juvenile</label>
-                                        <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                    </li>
-                                    <li className='radioButtonOption'>
-                                        <input type='radio' id='adolescent' name='age' />
-                                        <label for='adolescent'>Adolescent</label>
-                                        <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                    </li>
-                                    <li className='radioButtonOption'>
-                                        <input type='radio' id='adult' name='age' />
-                                        <label for='adult'>Adult</label>
-                                        <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                    </li>
-                                    <li className='radioButtonOption'>
-                                        <input type='radio' id='senior' name='age' />
-                                        <label for='senior'>Senior</label>
-                                        <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                    </li>
-                                    <li className='radioButtonOption'>
-                                        <input type='radio' id='unknownAge' name='age' />
-                                        <label for='unknownAge'>Unknown</label>
-                                        <div class="radioCheck"><div class="radioCheckInside"></div></div>
-                                    </li>
+                                    <RadioButton 
+                                        id={'juvenile'} 
+                                        name={'age'} 
+                                        value={'juvenile'} 
+                                        checked={radio === 'juvenile'} 
+                                        onChange={event => {setRadio(event.target.value)}} 
+                                        labelFor={'juvenile'} 
+                                        labelName={'Juvenile'}
+                                        required={isRequired} 
+                                    />
+                                    <RadioButton 
+                                        id={'adolescent'} 
+                                        name={'age'} 
+                                        value={'adolescent'} 
+                                        checked={radio === 'adolescent'} 
+                                        onChange={event => {setRadio(event.target.value)}} 
+                                        labelFor={'adolescent'} 
+                                        labelName={'Adolescent'}
+                                        required={isRequired} 
+                                    />
+                                    <RadioButton 
+                                        id={'adult'} 
+                                        name={'age'} 
+                                        value={'adult'} 
+                                        checked={radio === 'adult'} 
+                                        onChange={event => {setRadio(event.target.value)}} 
+                                        labelFor={'adult'} 
+                                        labelName={'Adult'}
+                                        required={isRequired} 
+                                    />
+                                    <RadioButton 
+                                        id={'senior'} 
+                                        name={'age'} 
+                                        value={'senior'} 
+                                        checked={radio === 'senior'} 
+                                        onChange={event => {setRadio(event.target.value)}} 
+                                        labelFor={'senior'} 
+                                        labelName={'Senior'}
+                                        required={isRequired} 
+                                    />
+                                    <RadioButton 
+                                        id={'unknownAge'} 
+                                        name={'age'} 
+                                        value={'unknownAge'} 
+                                        checked={radio === 'unknownAge'} 
+                                        onChange={event => {setRadio(event.target.value)}} 
+                                        labelFor={'unknownAge'} 
+                                        labelName={'Unknown'}
+                                        required={isRequired} 
+                                    />
                                 </ul>
                             </div>
                             <div className='filterBox'> 
@@ -359,7 +451,6 @@ const PetReport = () => {
                         <div>
                             <button className='formButton'>Report</button>
                         </div>
-                        {/* <RadioButton/> */}
                     </form>
                 </div>
             </section>
@@ -368,14 +459,4 @@ const PetReport = () => {
 }
  
 export default PetReport;
-
-// function RadioButton() {
-//     return (
-//         <li className='radioButtonOption'>
-//         <input type='radio' id='adult' name='age' />
-//         <label for='adult'>Adult</label>
-//         <div class="radioCheck"><div class="radioCheckInside"></div></div>
-//     </li>
-//     )
-// }
 

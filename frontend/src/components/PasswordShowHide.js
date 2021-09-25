@@ -5,8 +5,8 @@ import { ReactComponent as HidePasswordIcon } from '../assets/icons/hidepassword
 import { ReactComponent as ShowPasswordIcon } from '../assets/icons/showpassword.svg';
 
 const PasswordShowHide = (props) => {
-    const {password, setPassword} = props
-    const [showPassword, setShowPassword] = useState(false)
+    const { password, setPassword } = props;
+    const [showPassword, setShowPassword] = useState(false);
 
     let DEBUG = true;
     
@@ -28,7 +28,7 @@ const PasswordShowHide = (props) => {
                 placeholder='password' 
                 value={password}
                 required 
-                onChange={(e)=> setPassword(e.target.value)}
+                onChange={event => setPassword(event.target.value)}
             />
                 <div
                     className='showHidePassword'

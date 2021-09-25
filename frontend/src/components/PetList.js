@@ -19,6 +19,8 @@ const PetList = () => {
 
     let limit = 6;
 
+    // NOTE: put the API part into ApiContext!
+     
     useEffect(() => {
         let options = {
             method: 'get',
