@@ -4,9 +4,8 @@ import { ApiContext } from '../contexts/ApiContext';
 import createHistory from 'history/createBrowserHistory';
 import Logo from './Logo';
 import BackgroundImages from './BackgroundImages';
-import { ReactComponent as EmailIcon } from '../assets/icons/email.svg';
-import ShowHidePassword from './PasswordShowHide';
 import PasswordShowHide from './PasswordShowHide';
+import { ReactComponent as EmailIcon } from '../assets/icons/email.svg';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -25,17 +24,19 @@ const Login = () => {
 
     // if (DEBUG) console.log(token, setToken)
     
-    function handleSubmit(event) {
-        event.preventDefault();
 
-        loginUser({
-            email,
-            pw: pwValues.pw,
-            errorCallback: err => setErrorMsg(err),
-            errorTimeout: () => (setTimeout(() => {
-                setErrorMsg('');
-            }, 5000))
-        });
+
+    function handleSubmit(event) {
+            event.preventDefault();
+    
+            loginUser({
+                email,
+                pw: pwValues.pw,
+                errorCallback: err => setErrorMsg(err),
+                errorTimeout: () => (setTimeout(() => {
+                    setErrorMsg('');
+                }, 5000))
+            });
         
         // if (DEBUG) console.log(loginUser(email, pw));
     }
@@ -62,7 +63,7 @@ const Login = () => {
                             <p className='errorMessage'>{errorMsg}</p>
                             <p className='successMessage'>{successMsg}</p>
                         </div>
-                        <form method='POST' 
+                        <form method='POST'
                               onSubmit={handleSubmit}
                         >
                             <div className='inputBox'>
@@ -81,7 +82,7 @@ const Login = () => {
                             </div>
                             <PasswordShowHide pwValues={pwValues} setPwValues={setPwValues} />
                             <div>
-                                <button className='formButton'>Login</button>
+                                <button type='submit' className='formButton'>Login</button>
                             </div>
                         </form>
                     </div>

@@ -3,101 +3,6 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import Sugar from 'sugar';
 
-const styles = {
-    petCardContainer: {
-        display: 'flex',
-        flexDirection: 'row'
-    },
-    petCard: {
-        background: 'rgba(255,255,255)', 
-        marginBottom: '25px', 
-        padding: '50px', 
-        // maxWidth: 'fit-content',
-        // maxWidth: '50%',
-        borderRadius: '25px', 
-        boxShadow: '7px 12px 24px -8px rgba(0,0,0,0.40)',
-
-
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    petCardInner: {
-        display: 'flex',
-        // height: '400px',
-        // height: '300px',
-        justifyContent: 'space-between'
-    },
-    petTextBox: {
-        border: '2px solid black',
-        // padding: '50px',
-        padding: '30px',
-    },
-
-    // petHeadline: {
-
-    // },
-
-    petStatus: {
-        font: '500 15px/1.2',
-        textTransform: 'uppercase',
-        border: '1px solid black',
-        padding: '10px',
-        width: 'fit-content',
-        // different color for 'lost' and 'found'
-    },
-
-    petSpecies: {
-        font: '700 32px/1.2 "Poppins", sans-serif',
-        fontSize: '35px',
-        margin: '40px 0 30px 0'
-    },
-
-    petId: {
-        margin: '10px 0',
-        font: '300 15px/1.2 "Poppins", sans-serif',
-    },
-
-    petDate: {
-        margin: '10px 0',
-        font: '300 15px/1.2 "Poppins", sans-serif',
-    },
-
-    petPlace: {
-        flexDirection: 'row',
-        margin: '10px 0',
-        font: '300 15px/1.2 "Poppins", sans-serif',
-    },
-
-    petProfileButton: {
-        margin: '10px 0',
-        font: '400 15px/1.2 "Poppins", sans-serif',
-        cursor: 'pointer',
-        width: '100%',
-        padding: '15px'
-    },
-
-    pagination: {
-        display: 'flex',
-        // border: '2px solid black',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '40px'
-    },
-
-    paginationNumbers: {
-        padding: '20px', 
-        background: 'rgba(255,255,255,0.7)',
-        margin: '0 7px',
-        textAlign: 'center', 
-        width: '15px', 
-        cursor: 'pointer',
-        borderRadius: '30px',
-    },
-
-}
-
 const PetList = () => {
 
     // PetSortingButtons lost and found buttons:
@@ -183,27 +88,25 @@ const PetList = () => {
         <>
         {pets.map(pet => {
             return (
-                <div style={styles.petCardContainer}>
-                    <div style={styles.petCard} key={pet.id}>
-                        <div style={styles.petCardInner}>
-                            <div 
-                                className='petListPicture'
-                            >
-                                    Place of Picture
+                <div>
+                    <div className='petCard' key={pet.id}>
+                        <div className='petCardInner'>
+                            <div className='petListPicture'>
+                                Place of Picture
                             </div>
-                            <div style={styles.petTextBox}>
-                                <div style={styles.petHeadline}>
-                                    <div style={styles.petStatus}>
+                            <div className='petTextBox'>
+                                <div className='petHeadline'>
+                                    <div className='petStatus'>
                                         {pet.addstatus}
                                     </div>
-                                    <div style={styles.petSpecies}>
+                                    <div className='petSpecies'>
                                         {pet.species}
                                     </div>
-                                    <div style={styles.petId}>
+                                    <div className='petId'>
                                         {/* {uuidv4()} */}
                                         #{pet.id}
                                     </div>
-                                    <div style={styles.petDate}>
+                                    <div className='petDate'>
                                         {
                                             pet.addstatus === 'lost' || pet.addstatus === 'found' 
                                             ? 
@@ -212,7 +115,7 @@ const PetList = () => {
                                             petStatus(pet.addstatus) + ': ' + convertDate(pet.until)
                                         }
                                     </div>
-                                    <div style={styles.petPlace}>
+                                    <div className='petPlace'>
                                         <div>
                                             {pet.municipality} ({pet.region})
                                         </div>
@@ -225,12 +128,12 @@ const PetList = () => {
                 </div>
             )
         })}
-            <div style={styles.pagination}>{numberIncreases().map(page => {
+            <div className='pagination'>{numberIncreases().map(page => {
                     return (
                         <div 
                             key={uuidv4()}
                             onClick={() => setOffset(page * limit)} 
-                            style={styles.paginationNumbers}
+                            className='paginationNumbers'
                         >
                             {page + 1}
                         </div>

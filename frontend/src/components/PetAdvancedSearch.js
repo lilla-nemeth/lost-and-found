@@ -1,10 +1,14 @@
 import React from 'react';
 
+// Fix the the advanced search style - be similar like in PetReport
 const styles = {
     smallBoxes: {
-        display: 'flex',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         width: '830px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
     },
     sexBox: {
         background: 'rgba(255,255,255)', 

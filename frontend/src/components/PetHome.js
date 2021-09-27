@@ -9,12 +9,12 @@ const styles = {
         background: '#B0F0EB',
         overflow: 'hidden'
     },
-    section: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-    }
+    // section: {
+    //     display: 'flex',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     flexDirection: 'column',
+    // }
 }
 
 const PetHome = () => {

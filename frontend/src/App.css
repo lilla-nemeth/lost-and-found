@@ -79,6 +79,18 @@ table {
   transition: transform 0.2s linear;
 }
 
+
+.username {
+  text-align: center;
+  padding: 22.5px;
+  /* margin: auto; */
+  text-decoration: none;
+  /* color: rgb(183, 223, 219); */
+  color: #fff;
+  font: 400 15px/1.2 'Poppins', sans-serif;
+  display: inline-block; 
+}
+
 .navLink {
   text-align: center;
   padding: 22.5px;
@@ -119,34 +131,119 @@ table {
   transition: background 0.2s linear;
 }
 
-/* Report - Picture */
+/* Lost & Found - PetSearch */
+.searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 
+/* Lost & Found - PetList */
+.petCard {
+  background: rgba(255,255,255); 
+  margin-bottom: 25px; 
+  padding: 50px;
+  border-radius: 25px; 
+  box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
+  display: flex;
+}
+
+.petCardInner {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+}
+
+.petTextBox {
+  border: 2px solid black;
+  padding: 30px;
+  flex: 50%;
+  width: 100%
+}
+
+.petListPicture {
+  width: 350px;  
+  object-fit: cover;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgb(236 236 236);
+  flex: 50%;
+  width: 100%
+}
+
+/* note: set the colors for lost and found - 1-1 color/status */
+.petStatus {
+  font: 500 15px/1.2;
+  text-transform: uppercase;
+  border: 1px solid black;
+  padding: 10px;
+  width: fit-content;
+}
+
+.petSpecies {
+  font: 700 32px/1.2 "Poppins", sans-serif;
+  font-size: 35px;
+  margin: 40px 0 30px 0;
+}
+
+.petId {
+  margin: 10px 0;
+  font: 300 15px/1.2 "Poppins", sans-serif;
+}
+
+.petDate {
+  margin: 10px 0;
+  font: 300 15px/1.2 "Poppins", sans-serif;
+}
+
+.petPlace {
+  flex-direction: row;
+  margin: 10px 0;
+  font: 300 15px/1.2 "Poppins", sans-serif;
+}
+
+.petProfileButton {
+  margin: 10px 0;
+  font: 400 15px/1.2 "Poppins", sans-serif;
+  cursor: pointer;
+  width: 100%;
+  padding: 15px;
+}
+
+/* Pagination buttons */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.paginationNumbers {
+  padding: 20px; 
+  background: rgba(255,255,255,0.7);
+  margin: 0 7px;
+  text-align: center;
+  width: 15px; 
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+/* Report - Picture */
 .petPicture {
-  /* width: 350px;   */
-  /* height: 350px; */
   cursor: pointer; 
   position: relative;
   object-fit: cover;
   margin-left: auto;
   margin-right: auto;
   display: block;
-
-}
-
-.petListPicture {
-  width: 350px;  
-  /* height: 350px; */
-  object-fit: cover;
-  margin-left: auto;
-  margin-right: auto;
-  background: rgb(236 236 236);
 }
 
 .filterBox {
   padding: 0 0 45px;
 }
 
-/* CHANGE THE UL LI TO CLASSES!!!!!!!! */
+/* CHANGE THE UL LI TO CLASSES!*/
 .radioList {
   display: flex;
   flex-flow: row wrap;
@@ -350,7 +447,6 @@ input[type=checkbox]:checked ~ label{
   background: rgba(255,255,255); 
   padding: 50px; 
   height: fit-content;
-  /* min-width: 350px; */
   width: 450px;
   border-radius: 25px; 
   box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
@@ -409,23 +505,13 @@ input[type=checkbox]:checked ~ label{
   justify-content: space-between;
   align-items: center;
   justify-content: center;
-  /* background: #fff; */
-
-  /* background: rgb(176,240,235); */
   background: rgb(255,255,255);
-
-  /* box-shadow: inset 0px 40px 24px -25px rgb(0 0 0 / 30%);  */
   box-shadow: 0px 12px 12px -12px rgb(0 0 0 / 50%);
 }
-
-/* .optionalButton:after {
-  box-shadow: 0;
-} */
 
 .optionalButton,
 .formButton {
   cursor: pointer;
-  /* border-color: transparent; */
   border: none;
   text-transform: uppercase;
   width: 100%;
@@ -461,7 +547,6 @@ input[type=checkbox]:checked ~ label{
 
 .arrowDown {
   padding: 16px;
-  /* fill: #226660; */
   transform: scaleY(-1);
 }
 
@@ -515,7 +600,6 @@ input[type=checkbox]:checked ~ label{
 }
 
 /* PET REPORT - MAP */
-
 .map-container {
   height: 450px;
 }
