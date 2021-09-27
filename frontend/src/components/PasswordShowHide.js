@@ -5,29 +5,14 @@ import { ReactComponent as HidePasswordIcon } from '../assets/icons/hidepassword
 import { ReactComponent as ShowPasswordIcon } from '../assets/icons/showpassword.svg';
 
 const PasswordShowHide = (props) => {
-
-    const { pwValues = {        
-        pw: '',
-        showPassword: false,
-    }, 
-        setPwValues } = props;
-
-
+    const {password, setPassword} = props
+    const [showPassword, setShowPassword] = useState(false)
 
     let DEBUG = true;
     
     // TO FIX: CURSOR SHOULD BE AT THE END OF THE PASSWORD TEXT AFTER CLICK 
-    function handleClickShowPw(event) {
-        event.preventDefault();
-        setPwValues({...pwValues, showPassword: !pwValues.showPassword});
-    }
-
-    function handleMouseDownPw(event) {
-        event.preventDefault();
-    }
-
-    const handleChangePw = (prop) => (event) => {
-        setPwValues({...pwValues, [prop]: event.target.value });
+    function handleClickShowPw() {
+        setShowPassword(!showPassword);
     }
 
     return (  
@@ -38,19 +23,18 @@ const PasswordShowHide = (props) => {
             <input 
                 className='formInput'
                 autoComplete='password' 
-                type={pwValues.showPassword ? 'text' : 'password'}
+                type={showPassword ? 'text' : 'password'}
                 name='password' 
                 placeholder='password' 
-                value={pwValues.pw}
+                value={password}
                 required 
-                onChange={handleChangePw('pw')}
+                onChange={(e)=> setPassword(e.target.value)}
             />
                 <div
                     className='showHidePassword'
                     onClick={handleClickShowPw}
-                    // onMouseDown={handleMouseDownPw}
                 >
-                  {pwValues.showPassword ? <ShowPasswordIcon /> : <HidePasswordIcon />}
+                  {showPassword ? <ShowPasswordIcon /> : <HidePasswordIcon />}
                 </div>
         </div>
     );

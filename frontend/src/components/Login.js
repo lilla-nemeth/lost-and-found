@@ -9,10 +9,7 @@ import { ReactComponent as EmailIcon } from '../assets/icons/email.svg';
 
 const Login = () => {
     const [email, setEmail] = useState('');
-    const [pwValues, setPwValues] = useState({
-        pw: '',
-        showPassword: false,
-    });
+    const [password, setPassword] = useState("");
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
@@ -31,7 +28,7 @@ const Login = () => {
     
             loginUser({
                 email,
-                pw: pwValues.pw,
+                pw: password,
                 errorCallback: err => setErrorMsg(err),
                 errorTimeout: () => (setTimeout(() => {
                     setErrorMsg('');
@@ -80,7 +77,7 @@ const Login = () => {
                                     onChange={event => setEmail(event.target.value)}
                                 />
                             </div>
-                            <PasswordShowHide pwValues={pwValues} setPwValues={setPwValues} />
+                            <PasswordShowHide password={password} setPassword={setPassword} />
                             <div>
                                 <button type='submit' className='formButton'>Login</button>
                             </div>

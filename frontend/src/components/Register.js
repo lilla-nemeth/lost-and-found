@@ -55,10 +55,7 @@ const styles = {
 
 const Register = () => {
     const [email, setEmail] = useState('');
-    const [pwValues, setPwValues] = useState({
-        pw: '',
-        showPassword: false,
-    });
+    const [password, setPassword] = useState("");
     const [username, setUsername] = useState('');
     const [phone, setPhone] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
@@ -75,7 +72,7 @@ const Register = () => {
             email,
             username,
             phone,
-            pw: pwValues.pw,
+            pw:password,
             successCallback: res => setSuccessMsg(res),
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');
@@ -157,7 +154,7 @@ const Register = () => {
                             one lower-case letter, 
                             one digit and one special character
                         </div>
-                        <PasswordShowHide pwValues={pwValues} setPwValues={setPwValues} />
+                        <PasswordShowHide password={password} setPassword={setPassword} />
                         <div>
                             <button className='formButton'>Register</button>
                         </div>
