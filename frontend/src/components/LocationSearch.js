@@ -2,13 +2,6 @@ import React, { useState, useContext } from 'react';
 import { ApiContext } from '../contexts/ApiContext';
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
 
-
-const styles = {
-    categoryHeadline: {
-        padding: '45px 0px 15px',
-    }
-}
-
 const LocationSearch = () => {
     const [search, setSearch] = useState('');
 
@@ -24,7 +17,7 @@ const LocationSearch = () => {
 
     return (  
         <>
-          <h2 style={styles.categoryHeadline}>Location</h2>
+          <h2 className='categoryHeadline'>Location</h2>
             <div className='searchBox'>
                 <input  className='searchInput'
                         id='search' 
