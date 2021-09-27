@@ -6,10 +6,7 @@ import BackgroundImages from './BackgroundImages';
 import Logo from './Logo';
 import { ReactComponent as EmailIcon } from '../assets/icons/email.svg';
 import { ReactComponent as UsernameIcon } from '../assets/icons/username.svg';
-import { ReactComponent as PasswordIcon } from '../assets/icons/password.svg';
 import { ReactComponent as PhoneIcon } from '../assets/icons/phone.svg';
-import { ReactComponent as HidePasswordIcon } from '../assets/icons/hidepassword.svg';
-import { ReactComponent as ShowPasswordIcon } from '../assets/icons/showpassword.svg';
 import PasswordShowHide from './PasswordShowHide';
 
 const styles = {
@@ -41,7 +38,6 @@ const styles = {
     },
     acceptedPasswordText: {
         paddingTop: '20px',
-        // width: '350px',
         font: '400 14px / 1.2 Poppins, sans-serif',
         color: '#acacac',
         fontStyle: 'italic',
@@ -55,7 +51,7 @@ const styles = {
 
 const Register = () => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [phone, setPhone] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
@@ -116,6 +112,7 @@ const Register = () => {
                                 type='email' 
                                 name='email' 
                                 placeholder='email' 
+                                value={email}
                                 required 
                                 onChange={event => setEmail(event.target.value)}
                             />
@@ -129,7 +126,8 @@ const Register = () => {
                                 autoComplete='username' 
                                 type='text' 
                                 name='username' 
-                                placeholder='username' 
+                                placeholder='username'
+                                value={username}
                                 required 
                                 onChange={event => setUsername(event.target.value)}
                             />
@@ -143,7 +141,8 @@ const Register = () => {
                                 autoComplete='phone' 
                                 type='tel' 
                                 name='phone' 
-                                placeholder='phone' 
+                                placeholder='phone'
+                                value={phone}
                                 required 
                                 onChange={event => setPhone(event.target.value)}
                             />

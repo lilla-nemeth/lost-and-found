@@ -18,10 +18,7 @@ const Login = () => {
     // const { token, setToken, handleLogOut } = useContext(AuthContext);
     const { loginUser } = useContext(ApiContext);
 
-
     // if (DEBUG) console.log(token, setToken)
-    
-
 
     function handleSubmit(event) {
             event.preventDefault();
@@ -72,7 +69,8 @@ const Login = () => {
                                     autoComplete='email' 
                                     type='email' 
                                     name='email' 
-                                    placeholder='email' 
+                                    placeholder='email'
+                                    value={email}
                                     required 
                                     onChange={event => setEmail(event.target.value)}
                                 />
