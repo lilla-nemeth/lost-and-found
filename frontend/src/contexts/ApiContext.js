@@ -55,7 +55,7 @@ export default function ApiContextProvider(props) {
             data: {
                 email,
                 pw
-            },
+            }
         };
         
         // if (DEBUG) console.log(token);
@@ -94,16 +94,65 @@ export default function ApiContextProvider(props) {
         )
         .catch(
             err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
-        )
-
+        );
     }
 
-    // function reportPet() {
-        // addpet post 
-    // }
+    // {successCallback, successTimeout, errorCallback, errorTimeout}
+    function reportPet({
+        addstatus, 
+        region, 
+        municipality, 
+        zip, 
+        district, 
+        street, 
+        species, 
+        size, 
+        breed, 
+        sex, 
+        color, 
+        age, 
+        uniquefeature, 
+        postdescription,
+        // errorCallback, 
+        // errorTimeout
+    }) {
+        let options = {
+            method: 'post',
+            url: 'http://localhost:3003/reportpet',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': token
+            },
+            data: {
+                addstatus,
+                region,
+                municipality,
+                zip,
+                district,
+                street,
+                species,
+                size,
+                breed,
+                sex,
+                color,
+                age,
+                uniquefeature,
+                postdescription
+            }
+        };
+        axios(options)
+        .then(
+            res => console.log(res.rows)
+        )
+        .catch(
+            // err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
+            err => console.log(err.response.data.msg)
+        );
+    }
 
     return (
-        <ApiContext.Provider value={{registerUser, loginUser, getUsername, user}}>
+        <ApiContext.Provider value={{registerUser, loginUser, getUsername, user, reportPet}}>
             { props.children }
         </ApiContext.Provider>
     )

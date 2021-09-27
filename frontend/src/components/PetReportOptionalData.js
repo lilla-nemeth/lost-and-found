@@ -1,17 +1,69 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RadioButton from './generic/RadioButton';
 import Checkbox from './generic/Checkbox';
 
-const PetReportOptionalData = (props) => {
-    const [uniquefeature, setUniquefeature] = useState('');
-    const [breed, setBreed] = useState('');
+// Radiobuttons and checkboxes: Check the value attributes! change them if necessary: {''} -> {}
 
-    const { radio, setRadio, isRequired, isChecked, setIsChecked, optionalInputs } = props;
+const PetReportOptionalData = (props) => {
+    const { 
+        size,
+        setSize,
+        breed,
+        setBreed,
+        sex,
+        setSex,
+        color,
+        setColor,
+        age,
+        setAge,
+        uniquefeature,
+        setUniquefeature,
+
+        isRequired, 
+        isChecked, 
+        setIsChecked, 
+        optionalInputs 
+    } = props;
 
     let DEBUG = true;
 
     return (  
             <div className={optionalInputs.display}>
+                <div className='filterBox'> 
+                    <h2 className='categoryHeadline'>Size</h2>
+                    <ul className='radioList'>
+                        <RadioButton 
+                            id={'small'} 
+                            name={'size'} 
+                            value={'small'} 
+                            checked={size === 'small'} 
+                            onChange={event => {setSize(event.target.value)}} 
+                            labelFor={'small'} 
+                            labelName={'Small'}
+                            required={isRequired} 
+                        />
+                        <RadioButton 
+                            id={'medium'} 
+                            name={'size'} 
+                            value={'medium'} 
+                            checked={size === 'medium'} 
+                            onChange={event => {setSize(event.target.value)}} 
+                            labelFor={'medium'} 
+                            labelName={'Medium'}
+                            required={isRequired} 
+                        />
+                        <RadioButton 
+                            id={'large'} 
+                            name={'size'} 
+                            value={'large'} 
+                            checked={size === 'large'} 
+                            onChange={event => {setSize(event.target.value)}} 
+                            labelFor={'large'} 
+                            labelName={'Large'} 
+                            required={isRequired} 
+                        />
+                    </ul>
+                </div> 
                 <div className='filterBox'> 
                     <h2 className='categoryHeadline'>Breed</h2>
                     <div className='inputBox'>
@@ -21,46 +73,12 @@ const PetReportOptionalData = (props) => {
                             autoComplete='breed' 
                             type='text' 
                             name='breed' 
+                            value={breed}
                             placeholder='breed'
                             onChange={event => setBreed(event.target.value)}
                         />
                     </div>
                 </div>
-                <div className='filterBox'> 
-                    <h2 className='categoryHeadline'>Size</h2>
-                    <ul className='radioList'>
-                        <RadioButton 
-                            id={'small'} 
-                            name={'size'} 
-                            value={'small'} 
-                            checked={radio === 'small'} 
-                            onChange={event => {setRadio(event.target.value)}} 
-                            labelFor={'small'} 
-                            labelName={'Small'}
-                            required={isRequired} 
-                        />
-                        <RadioButton 
-                            id={'medium'} 
-                            name={'size'} 
-                            value={'medium'} 
-                            checked={radio === 'medium'} 
-                            onChange={event => {setRadio(event.target.value)}} 
-                            labelFor={'medium'} 
-                            labelName={'Medium'}
-                            required={isRequired} 
-                        />
-                        <RadioButton 
-                            id={'large'} 
-                            name={'size'} 
-                            value={'large'} 
-                            checked={radio === 'large'} 
-                            onChange={event => {setRadio(event.target.value)}} 
-                            labelFor={'large'} 
-                            labelName={'Large'} 
-                            required={isRequired} 
-                        />
-                    </ul>
-                </div> 
                 <div className='filterBox'> 
                     <h2 className='categoryHeadline'>Sex</h2>
                     <ul className='radioList'>
@@ -68,8 +86,8 @@ const PetReportOptionalData = (props) => {
                             id={'male'} 
                             name={'sex'} 
                             value={'male'} 
-                            checked={radio === 'male'} 
-                            onChange={event => {setRadio(event.target.value)}} 
+                            checked={sex === 'male'} 
+                            onChange={event => {setSex(event.target.value)}} 
                             labelFor={'male'} 
                             labelName={'Male'}
                             required={isRequired} 
@@ -78,8 +96,8 @@ const PetReportOptionalData = (props) => {
                             id={'female'} 
                             name={'sex'} 
                             value={'female'} 
-                            checked={radio === 'female'} 
-                            onChange={event => {setRadio(event.target.value)}} 
+                            checked={sex === 'female'} 
+                            onChange={event => {setSex(event.target.value)}} 
                             labelFor={'female'} 
                             labelName={'Female'}
                             required={isRequired}
@@ -88,8 +106,8 @@ const PetReportOptionalData = (props) => {
                             id={'unknownSex'} 
                             name={'sex'} 
                             value={'unknownSex'} 
-                            checked={radio === 'unknownSex'} 
-                            onChange={event => {setRadio(event.target.value)}} 
+                            checked={sex === 'unknownSex'} 
+                            onChange={event => {setSex(event.target.value)}} 
                             labelFor={'unknownSex'} 
                             labelName={'Unknown'}
                             required={isRequired} 
@@ -160,7 +178,7 @@ const PetReportOptionalData = (props) => {
                             name={'color'} 
                             value={'otherColor'} 
                             checked={isChecked} 
-                            onChange={event => {setIsChecked(event.target.checked)}} 
+                            onChange={event => {setIsChecked(event.target.checked)}}  
                             labelFor={'otherColor'} 
                             labelName={'Other'}  
                         />
@@ -173,8 +191,8 @@ const PetReportOptionalData = (props) => {
                             id={'juvenile'} 
                             name={'age'} 
                             value={'juvenile'} 
-                            checked={radio === 'juvenile'} 
-                            onChange={event => {setRadio(event.target.value)}} 
+                            checked={age === 'juvenile'} 
+                            onChange={event => {setAge(event.target.value)}} 
                             labelFor={'juvenile'} 
                             labelName={'Juvenile'}
                             required={isRequired} 
@@ -183,8 +201,8 @@ const PetReportOptionalData = (props) => {
                             id={'adolescent'} 
                             name={'age'} 
                             value={'adolescent'} 
-                            checked={radio === 'adolescent'} 
-                            onChange={event => {setRadio(event.target.value)}} 
+                            checked={age === 'adolescent'} 
+                            onChange={event => {setAge(event.target.value)}} 
                             labelFor={'adolescent'} 
                             labelName={'Adolescent'}
                             required={isRequired} 
@@ -193,8 +211,8 @@ const PetReportOptionalData = (props) => {
                             id={'adult'} 
                             name={'age'} 
                             value={'adult'} 
-                            checked={radio === 'adult'} 
-                            onChange={event => {setRadio(event.target.value)}} 
+                            checked={age === 'adult'} 
+                            onChange={event => {setAge(event.target.value)}} 
                             labelFor={'adult'} 
                             labelName={'Adult'}
                             required={isRequired} 
@@ -203,8 +221,8 @@ const PetReportOptionalData = (props) => {
                             id={'senior'} 
                             name={'age'} 
                             value={'senior'} 
-                            checked={radio === 'senior'} 
-                            onChange={event => {setRadio(event.target.value)}} 
+                            checked={age === 'senior'} 
+                            onChange={event => {setAge(event.target.value)}} 
                             labelFor={'senior'} 
                             labelName={'Senior'}
                             required={isRequired} 
@@ -213,8 +231,8 @@ const PetReportOptionalData = (props) => {
                             id={'unknownAge'} 
                             name={'age'} 
                             value={'unknownAge'} 
-                            checked={radio === 'unknownAge'} 
-                            onChange={event => {setRadio(event.target.value)}} 
+                            checked={age === 'unknownAge'} 
+                            onChange={event => {setAge(event.target.value)}} 
                             labelFor={'unknownAge'} 
                             labelName={'Unknown'}
                             required={isRequired} 
@@ -230,6 +248,7 @@ const PetReportOptionalData = (props) => {
                             autoComplete='unique feature' 
                             type='text' 
                             name='uniqueFeature' 
+                            value={uniquefeature}
                             placeholder='unique feature'
                             onChange={event => setUniquefeature(event.target.value)}
                         />

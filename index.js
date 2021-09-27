@@ -167,7 +167,7 @@ app.get('/username', authMw, (request, response) => {
 })
 
 // user dashboard - post/report a pet
-app.post('/addpet', authMw, (request, response) => {
+app.post('/reportpet', authMw, (request, response) => {
     let userId = request.userId;
     let addstatus = request.body.addstatus;
     let region = request.body.region;

@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import DragnDropZone from './DragnDropZone';
 import { ReactComponent as ArrowDown} from '../assets/icons/togglearrow.svg'
 import LocationSearch from './LocationSearch';
 import MapboxMap from './MapboxMap';
 import RadioButton from './generic/RadioButton';
-import Checkbox from './generic/Checkbox';
 import PetReportOptionalData from './PetReportOptionalData';
 import Loader from './Loader';
+import { ApiContext } from '../contexts/ApiContext';
+import createHistory from 'history/createBrowserHistory';
 // import DropZoneTest from './DropZoneTest';
 
 
@@ -39,50 +40,90 @@ const styles = {
 // }
 
 // statusOptions -> reunited option comes later with post editing:
-const statusOptions = ['lost', 'found']
-const speciesOptions = ['dog', 'cat', 'other']
-const sizeOptions = ['small', 'medium', 'large'];
-const sexOptions = ['male', 'female', 'unknown'];
-const colorOptions = ['black', 'brown', 'grey', 'white'];
-const ageOptions = ['juvenile', 'adolescent', 'adult', 'senior', 'unknown'];
+
+// const statusOptions = ['lost', 'found']
+// const speciesOptions = ['dog', 'cat', 'other']
+// const sizeOptions = ['small', 'medium', 'large'];
+// const sexOptions = ['male', 'female', 'unknown'];
+// const colorOptions = ['black', 'brown', 'grey', 'white'];
+// const ageOptions = ['juvenile', 'adolescent', 'adult', 'senior', 'unknown'];
 
 
 const PetReport = () => {
-    const [status, setStatus] = useState(statusOptions);
-    const [region, setRegion] = useState('');
+    const [status, setStatus] = useState('');
+
+    // Write temporary inputs for region, municipality, zip, district, street:
+    const [region, setRegion] = useState(''); 
     const [municipality, setMunicipality] = useState('');
     const [zip, setZip] = useState('');
     const [district, setDistrict] = useState('');
     const [street, setStreet] = useState('');
-    const [species, setSpecies] = useState(speciesOptions);
-    const [size, setSize] = useState(sizeOptions);
 
-    const [sex, setSex] = useState(sexOptions);
-    const [color, setColor] = useState(colorOptions);
-    const [age, setAge] = useState(ageOptions);
-
+    const [species, setSpecies] = useState('');
     const [description, setDescription] = useState('');
+
+    // Show/hide additional data:
+    const [optionalInputs, setOptionalInputs] = useState({
+        display: 'hideInputs',
+    });
+
+    // Optional Data:
+    const [size, setSize] = useState('');
+    const [breed, setBreed] = useState('');
+    const [sex, setSex] = useState('');
+    const [color, setColor] = useState('');
+    const [age, setAge] = useState('');
+    const [uniquefeature, setUniquefeature] = useState('');
+
+
+
+    // success/error messages
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
     // for checkbox:
     const [isChecked, setIsChecked] = useState(false);
+
     // radio useState input will be the response data (from ApiContext) - 
     // -> remove the hard coded 'lost' string, change to pet array with objects
     const [radio, setRadio] = useState('lost');
     const [isRequired, setIsRequired] = useState(false);
     
     // API res: setLoader(true)
-    const [loader, setLoader] = useState(false);
+    const [loader, setLoader] = useState(true);
 
 
-    const [optionalInputs, setOptionalInputs] = useState({
-        display: 'hideInputs',
-    });
+
+    const { reportPet } = useContext(ApiContext);
 
     let DEBUG = true;
 
-    // const { reportPet } = useContext(ApiContext);
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        reportPet({
+            addstatus: status,
+            region,
+            municipality,
+            zip,
+            district,
+            street,
+            species,
+            size,
+            breed,
+            sex,
+            color,
+            age,
+            uniquefeature,
+            postdescription: description,
+            // errorCallback: err => setErrorMsg(err),
+            // errorTimeout: () => (setTimeout(() => {
+            //     setErrorMsg('');
+            // }, 5000))
+        })
+    }
+
+    createHistory().replace('/register');
 
     function showOptionalInputs() {
         if (optionalInputs.display === 'hideInputs') {
@@ -103,8 +144,9 @@ const PetReport = () => {
     {/* 1. test with hard coded data - strings */}
     {/* change the hard coded: radio === lost    to object (from ApiContext) */}
 
-
-    if (loader) {
+    // change to: if (loader)
+    // possible places for Loader component: PetHome, Login, Register 
+    if (!loader) {
         return (
             <Loader />
         )
@@ -117,8 +159,12 @@ const PetReport = () => {
                     <h2 className='formHeadline'>Report Pet</h2>
                     <form 
                         method='POST' 
-                        // onSubmit={handleSubmit}
+                        onSubmit={handleSubmit}
                     >
+                        <div className='message'>
+                            <p className='errorMessage'>{errorMsg}</p>
+                            <p className='successMessage'>{successMsg}</p>
+                        </div>
                         <div className='filterBox'>
                             <h2 className='categoryHeadline'>Status</h2>
                             <ul className='radioList'>
@@ -126,8 +172,8 @@ const PetReport = () => {
                                     id={'lost'} 
                                     name={'status'} 
                                     value={'lost'} 
-                                    checked={radio === 'lost'} 
-                                    onChange={event => {setRadio(event.target.value)}} 
+                                    checked={status === 'lost'} 
+                                    onChange={event => {setStatus(event.target.value)}} 
                                     labelFor={'lost'} 
                                     labelName={'Lost'}
                                     required={!isRequired}  
@@ -136,8 +182,8 @@ const PetReport = () => {
                                     id={'found'} 
                                     name={'status'} 
                                     value={'found'} 
-                                    checked={radio === 'found'} 
-                                    onChange={event => {setRadio(event.target.value)}} 
+                                    checked={status === 'found'} 
+                                    onChange={event => {setStatus(event.target.value)}} 
                                     labelFor={'found'} 
                                     labelName={'Found'}
                                     required={!isRequired}  
@@ -153,8 +199,8 @@ const PetReport = () => {
                                     id={'dog'} 
                                     name={'species'} 
                                     value={'dog'} 
-                                    checked={radio === 'dog'} 
-                                    onChange={event => {setRadio(event.target.value)}} 
+                                    checked={species === 'dog'} 
+                                    onChange={event => {setSpecies(event.target.value)}} 
                                     labelFor={'dog'} 
                                     labelName={'Dog'} 
                                     required={!isRequired}
@@ -163,8 +209,8 @@ const PetReport = () => {
                                     id={'cat'} 
                                     name={'species'} 
                                     value={'cat'} 
-                                    checked={radio === 'cat'} 
-                                    onChange={event => {setRadio(event.target.value)}} 
+                                    checked={species === 'cat'} 
+                                    onChange={event => {setSpecies(event.target.value)}} 
                                     labelFor={'cat'} 
                                     labelName={'Cat'} 
                                     required={!isRequired}
@@ -173,8 +219,8 @@ const PetReport = () => {
                                     id={'otherSpecies'} 
                                     name={'species'} 
                                     value={'otherSpecies'} 
-                                    checked={radio === 'otherSpecies'} 
-                                    onChange={event => {setRadio(event.target.value)}} 
+                                    checked={species === 'otherSpecies'} 
+                                    onChange={event => {setSpecies(event.target.value)}} 
                                     labelFor={'otherSpecies'} 
                                     labelName={'Other'}
                                     required={!isRequired} 
@@ -232,11 +278,24 @@ const PetReport = () => {
                                 <ArrowDown style={{height: '16px'}}/>
                             </div>
                         </button>
-                        <PetReportOptionalData radio={radio} setRadio={setRadio} isRequired={isRequired} isChecked={isChecked} setIsChecked={setIsChecked} optionalInputs={optionalInputs} />
-                        <div className='message'>
-                            <p className='errorMessage'>{errorMsg}</p>
-                            <p className='successMessage'>{successMsg}</p>
-                        </div>
+                        <PetReportOptionalData 
+                            size={size} 
+                            setSize={setSize} 
+                            breed={breed} 
+                            setBreed={setBreed} 
+                            sex={sex} 
+                            setSex={setSex} 
+                            color={color} 
+                            setColor={setColor} 
+                            age={age} 
+                            setAge={setAge} 
+                            uniquefeature={uniquefeature} 
+                            setUniquefeature={setUniquefeature} 
+                            isRequired={isRequired} 
+                            isChecked={isChecked} 
+                            setIsChecked={setIsChecked} 
+                            optionalInputs={optionalInputs} 
+                        />
                         <div>
                             <button className='formButton'>Report</button>
                         </div>
