@@ -30,12 +30,6 @@ const PasswordShowHide = (props) => {
         setPwValues({...pwValues, [prop]: event.target.value });
     }
 
-    function onKeyPress(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); 
-        }
-    }
-
     return (  
         <div className='inputBox' >
             <label className='formLabel' for='password'>
@@ -50,15 +44,14 @@ const PasswordShowHide = (props) => {
                 value={pwValues.pw}
                 required 
                 onChange={handleChangePw('pw')}
-                onKeyPress={onKeyPress}
             />
-                <button
+                <div
                     className='showHidePassword'
                     onClick={handleClickShowPw}
-                    onMouseDown={handleMouseDownPw}
+                    // onMouseDown={handleMouseDownPw}
                 >
                   {pwValues.showPassword ? <ShowPasswordIcon /> : <HidePasswordIcon />}
-                </button>
+                </div>
         </div>
     );
 }
