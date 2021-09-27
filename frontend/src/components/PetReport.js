@@ -6,6 +6,7 @@ import MapboxMap from './MapboxMap';
 import RadioButton from './generic/RadioButton';
 import Checkbox from './generic/Checkbox';
 import PetReportOptionalData from './PetReportOptionalData';
+import Loader from './Loader';
 // import DropZoneTest from './DropZoneTest';
 
 
@@ -70,6 +71,9 @@ const PetReport = () => {
     // -> remove the hard coded 'lost' string, change to pet array with objects
     const [radio, setRadio] = useState('lost');
     const [isRequired, setIsRequired] = useState(false);
+    
+    // API res: setLoader(true)
+    const [loader, setLoader] = useState(false);
 
 
     const [optionalInputs, setOptionalInputs] = useState({
@@ -98,6 +102,13 @@ const PetReport = () => {
     {/* isChecked={true} - isChecked value will be a hooks with boolean value */}
     {/* 1. test with hard coded data - strings */}
     {/* change the hard coded: radio === lost    to object (from ApiContext) */}
+
+
+    if (loader) {
+        return (
+            <Loader />
+        )
+    }
 
     return (  
         <main style={styles.main}>

@@ -59,7 +59,6 @@ export default function ApiContextProvider(props) {
         };
         
         // if (DEBUG) console.log(token);
-        // res.data - token?
         axios(options)
         .then(
             res => {        

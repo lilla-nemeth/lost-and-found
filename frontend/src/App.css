@@ -597,6 +597,84 @@ input[type=checkbox]:checked ~ label{
 }
 
 
+/* Paw Loader */
+#loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background: rgb(176, 240, 235);
+}
+
+#loader {
+  height: 95px;
+  width: 95px;
+}
+
+.paw {
+  animation-name: load;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  transition: load 3s linear;
+}
+
+#firstDigitalPad {
+  animation-delay: 0.1s;
+}
+
+#secondDigitalPad {
+  animation-delay: 0.2s;
+}
+
+#thirdDigitalPad {
+  animation-delay: 0.3s;
+
+}
+
+#forthDigitalPad {
+  animation-delay: 0.4s;
+
+}
+
+@keyframes load {
+    0% {
+      visibility: visible;
+      opacity: 0
+    }
+    25% {
+      visibility: visible;
+      opacity: 1
+    }
+    75% {
+      visibility: hidden;
+      opacity: 1
+    }
+    100% {
+      visibility: hidden;
+      opacity: 0
+    }
+}
+
+@keyframes load {
+  0% {
+    visibility: visible;
+    opacity: 0
+  }
+  25% {
+    visibility: visible;
+    opacity: 1
+  }
+  75% {
+    visibility: hidden;
+    opacity: 1
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0
+  }
+}
+
+
 /* PET REPORT */
 .categoryHeadline {
   padding: 45px 0px 15px;

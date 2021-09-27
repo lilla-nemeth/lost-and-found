@@ -8,19 +8,13 @@ const styles = {
         fontFamily: '"Poppins", sans-serif',
         background: '#B0F0EB',
         overflow: 'hidden'
-    },
-    // section: {
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     flexDirection: 'column',
-    // }
+    }
 }
 
 const PetHome = () => {
     return (  
         <main style={styles.main}>
-            <section style={styles.section}>
+            <section>
                 <PetSearch />
                 <PetAdvancedSearch />
                 <PetList />

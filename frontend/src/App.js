@@ -10,7 +10,7 @@ import PetReport from './components/PetReport';
 
 function App() {
 
-const { token, setToken, handleLogOut } = useContext(AuthContext);
+const { token } = useContext(AuthContext);
   // * = default 
 
   console.log('APP component', token);
