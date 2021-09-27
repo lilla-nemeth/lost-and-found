@@ -79,13 +79,10 @@ table {
   transition: transform 0.2s linear;
 }
 
-
 .username {
   text-align: center;
   padding: 22.5px;
-  /* margin: auto; */
   text-decoration: none;
-  /* color: rgb(183, 223, 219); */
   color: #fff;
   font: 400 15px/1.2 'Poppins', sans-serif;
   display: inline-block; 
@@ -598,6 +595,14 @@ input[type=checkbox]:checked ~ label{
 .formLink:hover {
   color: rgb(34, 102, 96);
 }
+
+
+/* PET REPORT */
+.categoryHeadline {
+  padding: 45px 0px 15px;
+}
+
+
 
 /* PET REPORT - MAP */
 .map-container {

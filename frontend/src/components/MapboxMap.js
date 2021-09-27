@@ -49,7 +49,6 @@ const MapboxMap = () => {
 
         currentMap.addControl(geocoder);
         if (DEBUG) console.log(geocoder);
-
     });
 
     // Additional search settings: ZONE/DISTANCE, e.g: 5-10-25-50-75-100 km
