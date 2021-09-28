@@ -18,7 +18,6 @@ const PetReportOptionalData = (props) => {
         setAge,
         uniquefeature,
         setUniquefeature,
-
         isRequired, 
         isChecked, 
         setIsChecked, 
@@ -70,7 +69,6 @@ const PetReportOptionalData = (props) => {
                         <input 
                             className='formInput' 
                             id='breed'
-                            autoComplete='breed' 
                             type='text' 
                             name='breed' 
                             value={breed}
@@ -239,21 +237,15 @@ const PetReportOptionalData = (props) => {
                         />
                     </ul>
                 </div>
-                <div className='filterBox'> 
-                    <h2 className='categoryHeadline'>Unique feature</h2>
-                    <div className='inputBox'>
-                        <input 
-                            className='formInput' 
-                            id='uniqueFeature'
-                            autoComplete='unique feature' 
-                            type='text' 
-                            name='uniqueFeature' 
-                            value={uniquefeature}
-                            placeholder='unique feature'
-                            onChange={event => setUniquefeature(event.target.value)}
-                        />
-                    </div>
-                </div>
+                <TextInput 
+                    headlineName={'Unique feature'}
+                    id={'uniquefeature'}
+                    name={'uniquefeature'}
+                    value={uniquefeature}
+                    placeholder={'unique feature'}
+                    onChange={event => setUniquefeature(event.target.value)}
+                    // required={!isRequired}
+                />
             </div>
     );
 }

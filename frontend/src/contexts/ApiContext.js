@@ -113,8 +113,9 @@ export default function ApiContextProvider(props) {
         age, 
         uniquefeature, 
         postdescription,
-        // errorCallback, 
-        // errorTimeout
+        successReportCallback,
+        // successMsgCallback,
+        errorCallback, 
     }) {
         let options = {
             method: 'post',
@@ -143,16 +144,19 @@ export default function ApiContextProvider(props) {
         };
         axios(options)
         .then(
-            res => console.log(res.rows)
+            res => {successReportCallback(res.rows); console.log(res.rows)}
         )
+        // .then(
+        //     res => {successMsgCallback(res.data.msg); console.log(res.data.msg)}
+        // )
         .catch(
-            // err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
-            err => console.log(err.response.data.msg)
+            err => errorCallback(err.response.data.msg)
         );
     }
 
+
     return (
-        <ApiContext.Provider value={{registerUser, loginUser, getUsername, user, reportPet}}>
+        <ApiContext.Provider value={{registerUser, loginUser, getUsername, user, reportPet, token}}>
             { props.children }
         </ApiContext.Provider>
     )

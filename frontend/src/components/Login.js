@@ -15,7 +15,6 @@ const Login = () => {
 
     let DEBUG = true;
 
-    // const { token, setToken, handleLogOut } = useContext(AuthContext);
     const { loginUser } = useContext(ApiContext);
 
     // if (DEBUG) console.log(token, setToken)
@@ -31,8 +30,6 @@ const Login = () => {
                     setErrorMsg('');
                 }, 5000))
             });
-        
-        // if (DEBUG) console.log(loginUser(email, pw));
     }
 
     createHistory().replace('/login');
@@ -66,7 +63,6 @@ const Login = () => {
                                 </label>
                                 <input 
                                     className='formInput' 
-                                    autoComplete='email' 
                                     type='email' 
                                     name='email' 
                                     placeholder='email'

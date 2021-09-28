@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as PetPawLogo } from '../assets/icons/dogpaw.svg';
 import { AuthContext } from '../contexts/AuthContext';
@@ -27,19 +27,22 @@ const styles = {
 const Navbar = () => {
     const [errorMsg, setErrorMsg] = useState('');
 
-    const { token, handleLogOut } = useContext(AuthContext);
-    const { getUsername, user } = useContext(ApiContext);
+    const { handleLogOut } = useContext(AuthContext);
+    const { token, getUsername, user } = useContext(ApiContext);
 
 
     let DEBUG = true;
     
-    getUsername({
-        errorCallback: err => setErrorMsg(err),
-        errorTimeout: () => (setTimeout(() => {
-           setErrorMsg('');
-        }, 5000))
-    })
+    useEffect(() => {
 
+            getUsername({
+                errorCallback: err => setErrorMsg(err),
+                errorTimeout: () => (setTimeout(() => {
+                   setErrorMsg('');
+                }, 5000))
+            })
+            
+    },[token]);
 
     
     return (  

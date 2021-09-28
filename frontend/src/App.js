@@ -10,25 +10,26 @@ import PetReport from './components/PetReport';
 
 function App() {
 
-const { token } = useContext(AuthContext);
-  // * = default 
+  const { token } = useContext(AuthContext);
 
-  console.log('APP component', token);
+  let DEBUG = false;
+
+  if (DEBUG) console.log('APP component', token);
 
   if (!token) {
     return (
       <>
       <BrowserRouter>
         <Switch>
-          <Route exact path='/'>
-            <Navbar />
-            <PetHome />
+          <Route path='/login'>
+            <Login />
           </Route>
           <Route path='/register'>
             <Register />
           </Route>
-          <Route path='/login'>
-            <Login />
+          <Route exact path='/'>
+            <Navbar />
+            <PetHome />
           </Route>
           <Route path='*'>
             <Navbar />
@@ -44,13 +45,13 @@ const { token } = useContext(AuthContext);
       <>
         <BrowserRouter>
           <Switch>
-            <Route exact path='/'>
-                <Navbar />
-                <PetHome />
-            </Route>
             <Route path='/reportpet'>
-                <Navbar />
-                <PetReport />
+              <Navbar />
+              <PetReport />
+            </Route>
+            <Route exact path='/'>
+              <Navbar />
+              <PetHome />
             </Route>
             <Route path='*'>
               <Navbar />

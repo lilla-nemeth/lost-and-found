@@ -18,7 +18,7 @@ const DragnDropZone = () => {
     // empty arr, we map it (below)
     const [files, setFiles] = useState([]);
 
-    console.log(files)
+    // console.log(files)
 
     let DEBUG = true;
 

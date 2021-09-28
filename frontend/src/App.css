@@ -148,7 +148,7 @@ table {
 
 .petCardInner {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   /* justify-content: space-between; */
 }
 
@@ -492,7 +492,6 @@ input[type=checkbox]:checked ~ label{
 }
 
 .hideInputs {
-  /* display: none; */
 	height: 0;
 	opacity: 0;
 }
@@ -513,7 +512,7 @@ input[type=checkbox]:checked ~ label{
   text-transform: uppercase;
   width: 100%;
   margin-top: 40px;
-
+  z-index: 1;
 }
 
 .formButton {
@@ -521,6 +520,7 @@ input[type=checkbox]:checked ~ label{
   border-radius: 0.25rem;
   background: rgb(34, 102, 96);
   color: #fff;
+  /* z-index: 2; */
 }
 
 .formButton:hover {

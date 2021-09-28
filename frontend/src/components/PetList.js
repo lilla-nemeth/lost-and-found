@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import Sugar from 'sugar';
+import Loader from './Loader';
+import createHistory from 'history/createBrowserHistory';
 
 const PetList = () => {
 
@@ -14,6 +16,9 @@ const PetList = () => {
     const [total, setTotal] = useState(0);
     // the default skip: 
     const [offset, setOffset] = useState(0);
+
+    // API res: setLoader(true)
+    const [loader, setLoader] = useState(true);
 
     let DEBUG = true;
 
@@ -41,7 +46,10 @@ const PetList = () => {
             }
         }
         axios(options)
-        .then((res) => setPets(res.data))
+        .then((res) => {
+            setLoader(false);
+            setPets(res.data);
+        })
         // .then((res) => console.log(res.data))
         .then(() => {
             axios(optionsTotal) 
@@ -85,7 +93,15 @@ const PetList = () => {
     // lost -> since (in progress cases)
     // found -> since (in progress cases)
     // reunited -> until (ready to close cases)
-    
+
+    createHistory().replace('/');
+
+    if (loader) {
+        return (
+            <Loader />
+        );
+    }
+
     return (  
         <>
         {pets.map(pet => {
