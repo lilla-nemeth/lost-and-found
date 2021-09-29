@@ -102,50 +102,46 @@ const PetList = () => {
         );
     }
 
+    {/* <button className='formButton'>View Pet</button> */}
+
     return (  
-        <>
+        <div className='petContainer'>
+            <h1 className='lostAndFoundHeadline'>Lost and Found Pets</h1>
         {pets.map(pet => {
             return (
-                <div>
                     <div className='petCard' key={pet.id}>
                         <div className='petCardInner'>
                             <div className='petListPicture'>
                                 Place of Picture
                             </div>
                             <div className='petTextBox'>
-                                <div className='petHeadline'>
-                                    <div className='petStatus'>
-                                        {pet.addstatus}
-                                    </div>
-                                    <div className='petSpecies'>
-                                        {pet.species}
-                                    </div>
-                                    <div className='petId'>
-                                        {/* {uuidv4()} */}
-                                        #{pet.id}
-                                    </div>
-                                    <div className='petDate'>
-                                        {
-                                            pet.addstatus === 'lost' || pet.addstatus === 'found' 
-                                            ? 
-                                            petStatus(pet.addstatus) + ': ' + convertDate(pet.since) 
-                                            : 
-                                            petStatus(pet.addstatus) + ': ' + convertDate(pet.until)
-                                        }
-                                    </div>
-                                    <div className='petPlace'>
-                                        <div>
-                                            {pet.municipality} ({pet.region})
-                                        </div>
-                                    </div>
-                                    <button className='formButton'>View Pet</button>
+                                <div className='petStatus'>
+                                    {pet.addstatus}
+                                </div>
+                                <div className='petSpecies'>
+                                    {pet.species}
+                                </div>
+                                <div className='petId'>
+                                    #{pet.id}
+                                </div>
+                                <div className='petDate'>
+                                    {
+                                        pet.addstatus === 'lost' || pet.addstatus === 'found' 
+                                        ? 
+                                        petStatus(pet.addstatus) + ': ' + convertDate(pet.since) 
+                                        : 
+                                        petStatus(pet.addstatus) + ': ' + convertDate(pet.until)
+                                    }
+                                </div>
+                                <div className='petPlace'>
+                                    {pet.municipality} ({pet.region})
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
             )
-        })}
+        })} 
+
             <div className='pagination'>{numberIncreases().map(page => {
                     return (
                         <div 
@@ -157,8 +153,8 @@ const PetList = () => {
                         </div>
                     )
                 })}
-            </div>
-        </>
+            </div> 
+        </div>
     );
 }
  

@@ -137,36 +137,57 @@ table {
 }
 
 /* Lost & Found - PetList */
+.lostAndFoundHeadline {
+  font: 700 38px/1.2 "Poppins", sans-serif;
+  display: flex;
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.petContainer {
+	display: flex;
+	flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
 .petCard {
+	width: 20%;
   background: rgba(255,255,255); 
-  margin-bottom: 25px; 
+  margin-bottom: 60px;
+  margin-right: 30px;
+  margin-left: 30px;
   padding: 50px;
   border-radius: 25px; 
   box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
-  display: flex;
+} 
+
+.petCard:nth-child(even) {
+  background: rgba(255,255,255); 
+}
+
+.petCard:nth-child(odd) {
+  background: rgba(255,255,255); 
 }
 
 .petCardInner {
-  display: flex;
-  /* flex-wrap: wrap; */
-  /* justify-content: space-between; */
+ display: flex;
 }
 
 .petTextBox {
-  border: 2px solid black;
-  padding: 30px;
   flex: 50%;
-  width: 100%
+  padding: 40px;
+  background: #ebebeb; 
 }
 
 .petListPicture {
-  width: 350px;  
-  object-fit: cover;
-  margin-left: auto;
-  margin-right: auto;
-  background: rgb(236 236 236);
   flex: 50%;
-  width: 100%
+  padding: 40px;
+  background: #aaaaaa;
 }
 
 /* note: set the colors for lost and found - 1-1 color/status */
@@ -214,6 +235,7 @@ table {
   align-items: center;
   justify-content: center;
   padding: 40px;
+  width: 100%;
 }
 
 .paginationNumbers {
@@ -244,7 +266,7 @@ table {
 .radioList {
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start; 
+  justify-content: space-between;
 }
 
 .checkboxOption,
@@ -254,7 +276,6 @@ table {
 
 ul li{
   position: relative;
-  padding: 0 25px 0 0;
   display: flex;
 }
 
