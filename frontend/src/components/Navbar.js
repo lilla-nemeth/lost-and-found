@@ -7,7 +7,7 @@ import { ApiContext } from '../contexts/ApiContext';
 const styles = {
     navbarContainer: {
         background: '#B0F0EB', 
-        height: '100px'
+        height: '100px',
     },
     navbar: {
         listStyleType: 'none',
@@ -17,7 +17,12 @@ const styles = {
         position: 'fixed',
         width: '100%',
         zIndex: 100,
-        display: 'flex'
+        display: 'flex',
+        // alignItems: 'center',
+        // justifyContent: 'center',
+
+
+        justifyContent: 'space-between',
     },
     pawIcon: {
         height: '20px',
@@ -51,18 +56,22 @@ const Navbar = () => {
                     { !token ?               
                     <>
                         <li><Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link></li>
-                        <li><Link className='navLink' to='/'>Lost & Found</Link></li>
-                        <li><Link className='navLink' to='/reportpet' disabled>Report Pet</Link></li>
-                        <li><Link className='navLink' to='/login'>Login</Link></li>
-                        <li><Link className='navLink' to='/register'>Register</Link></li>
+                            <li><Link className='navLink' to='/'>Lost & Found</Link></li>
+                            <li><Link className='navLink' to='/reportpet' disabled>Report Pet</Link></li>
+                            <li><Link className='navLink' to='/login'>Login</Link></li>
+                            <li><Link className='navLink' to='/register'>Register</Link></li>
                     </>
                     : 
                     <>
-                        <li><Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link></li>
-                        <li className='username'>Hi {user}!</li>
-                        <li><Link className='navLink' to='/'>Lost & Found</Link></li>
-                        <li><Link className='navLink' to='/reportpet'>Report Pet</Link></li>
-                        <li><button className='logOutButton' onClick={() => handleLogOut()}>Log Out</button></li>
+                        <ul style={{display: 'flex', alignContent: 'flex-start'}}>
+                            <li><Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link></li>
+                            <li className='username'>Hi {user}!</li>
+                        </ul>
+                        <ul style={{display: 'flex', textAlign: 'right'}}>
+                            <li><Link className='navLink' to='/'>Lost & Found</Link></li>
+                            <li><Link className='navLink' to='/reportpet'>Report Pet</Link></li>
+                            <li><button className='logOutButton' onClick={() => handleLogOut()}>Log Out</button></li>
+                        </ul>
                     </>
                 }     
             </ul>

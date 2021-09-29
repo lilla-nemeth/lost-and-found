@@ -1,6 +1,7 @@
 import React from 'react';
 import RadioButton from './generic/RadioButton';
 import Checkbox from './generic/Checkbox';
+import TextInput from './generic/TextInput';
 
 // Radiobuttons and checkboxes: Check the value attributes! change them if necessary: {''} -> {}
 
