@@ -15,13 +15,13 @@ const RadioButton = (props) => {
                     value={value} 
                     checked={checked} 
                     onChange={onChange}
-                    required={required}
+                    // required={required}
                 />
                 <label for={labelFor}>
                     {labelName}
                 </label>
-                <div class="radioCheck">
-                    <div class="radioCheckInside">
+                <div className="radioCheck">
+                    <div className="radioCheckInside">
                     </div>
                 </div>
             </li>

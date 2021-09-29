@@ -22,7 +22,6 @@ const PasswordShowHide = (props) => {
             </label>
             <input 
                 className='formInput'
-                autoComplete='password' 
                 type={showPassword ? 'text' : 'password'}
                 name='password' 
                 placeholder='password' 

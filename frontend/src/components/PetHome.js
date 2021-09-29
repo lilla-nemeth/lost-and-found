@@ -3,6 +3,7 @@ import PetList from './PetList';
 import PetSearch from './PetSearch';
 import PetAdvancedSearch from './PetAdvancedSearch';
 
+
 const styles = {
     main: {
         fontFamily: '"Poppins", sans-serif',
@@ -15,8 +16,9 @@ const PetHome = () => {
     return (  
         <main style={styles.main}>
             <section>
-                <PetSearch />
-                <PetAdvancedSearch />
+                {/* FIX PETSEARCH AND PETADVANCEDSEARCH COMPONENTS */}
+                {/* <PetSearch />
+                <PetAdvancedSearch /> */}
                 <PetList />
             </section>
         </main>

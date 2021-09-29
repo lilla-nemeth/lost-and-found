@@ -108,7 +108,6 @@ const Register = () => {
                             </label>
                             <input 
                                 className='formInput' 
-                                autoComplete='email' 
                                 type='email' 
                                 name='email' 
                                 placeholder='email' 
@@ -123,7 +122,6 @@ const Register = () => {
                             </label>
                             <input 
                                 className='formInput'
-                                autoComplete='username' 
                                 type='text' 
                                 name='username' 
                                 placeholder='username'
@@ -138,7 +136,6 @@ const Register = () => {
                             </label>
                            <input 
                                 className='formInput'
-                                autoComplete='phone' 
                                 type='tel' 
                                 name='phone' 
                                 placeholder='phone'
