@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RadioButton from './generic/RadioButton';
 import Checkbox from './generic/Checkbox';
 import TextInput from './generic/TextInput';
@@ -13,19 +13,29 @@ const PetReportOptionalData = (props) => {
         setBreed,
         sex,
         setSex,
-        color,
-        setColor,
+        colors,
+        setColors,
         age,
         setAge,
         uniquefeature,
         setUniquefeature,
-        isRequired, 
-        isChecked, 
-        setIsChecked, 
+        isRequired,  
         optionalInputs 
     } = props;
 
     let DEBUG = true;
+
+
+    const [checkboxValues, setCheckboxValues] = useState();
+
+    function changeCheckboxValue(array, setArray, value) {
+        if (array.includes(value)) {
+            return setArray(array.filter(e => e != value))
+        } else {
+            return setArray([...array, value])
+        }
+    }
+
 
     return (  
             <div className={optionalInputs.display}>
@@ -116,13 +126,12 @@ const PetReportOptionalData = (props) => {
                 <div className='filterBox'>
                     <h2 className='categoryHeadline'>Color</h2>
                     <ul className='radioList'>
-                        {/* FIX THE CHECKBOX */}
                         <Checkbox
                             id={'black'} 
                             name={'color'} 
                             value={'black'} 
-                            checked={isChecked} 
-                            onChange={event => {setIsChecked(event.target.checked)}} 
+                            checked={colors.includes('black')} 
+                            onChange={() => changeCheckboxValue(colors, setColors, 'black')}
                             labelFor={'black'} 
                             labelName={'Black'}
                             // something required...?
@@ -131,8 +140,8 @@ const PetReportOptionalData = (props) => {
                             id={'brown'} 
                             name={'color'} 
                             value={'brown'} 
-                            checked={isChecked} 
-                            onChange={event => {setIsChecked(event.target.checked)}} 
+                            checked={colors.includes('brown')} 
+                            onChange={() => changeCheckboxValue(colors, setColors, 'brown')}
                             labelFor={'brown'} 
                             labelName={'Brown'}  
                         />
@@ -140,8 +149,8 @@ const PetReportOptionalData = (props) => {
                             id={'cream'} 
                             name={'color'} 
                             value={'cream'} 
-                            checked={isChecked} 
-                            onChange={event => {setIsChecked(event.target.checked)}} 
+                            checked={colors.includes('cream')} 
+                            onChange={() => changeCheckboxValue(colors, setColors, 'cream')} 
                             labelFor={'cream'} 
                             labelName={'Cream'}  
                         />
@@ -149,8 +158,8 @@ const PetReportOptionalData = (props) => {
                             id={'grey'} 
                             name={'color'} 
                             value={'grey'} 
-                            checked={isChecked} 
-                            onChange={event => {setIsChecked(event.target.checked)}} 
+                            checked={colors.includes('grey')} 
+                            onChange={() => changeCheckboxValue(colors, setColors, 'grey')} 
                             labelFor={'grey'} 
                             labelName={'Grey'}  
                         />
@@ -158,8 +167,8 @@ const PetReportOptionalData = (props) => {
                             id={'red'} 
                             name={'color'} 
                             value={'red'} 
-                            checked={isChecked} 
-                            onChange={event => {setIsChecked(event.target.checked)}} 
+                            checked={colors.includes('red')} 
+                            onChange={() => changeCheckboxValue(colors, setColors, 'red')} 
                             labelFor={'red'} 
                             labelName={'Red'}  
                         />
@@ -167,8 +176,8 @@ const PetReportOptionalData = (props) => {
                             id={'white'} 
                             name={'color'} 
                             value={'white'} 
-                            checked={isChecked} 
-                            onChange={event => {setIsChecked(event.target.checked)}} 
+                            checked={colors.includes('white')} 
+                            onChange={() => changeCheckboxValue(colors, setColors, 'white')} 
                             labelFor={'white'} 
                             labelName={'White'}  
                         />
@@ -176,11 +185,11 @@ const PetReportOptionalData = (props) => {
                             id={'otherColor'} 
                             name={'color'} 
                             value={'otherColor'} 
-                            checked={isChecked} 
-                            onChange={event => {setIsChecked(event.target.checked)}}  
+                            checked={colors.includes('otherColor')} 
+                            onChange={() => changeCheckboxValue(colors, setColors, 'otherColor')}  
                             labelFor={'otherColor'} 
                             labelName={'Other'}  
-                        />
+                        /> 
                     </ul>
                 </div>
                 <div className='filterBox'>
@@ -238,15 +247,18 @@ const PetReportOptionalData = (props) => {
                         />
                     </ul>
                 </div>
-                <TextInput 
-                    headlineName={'Unique feature'}
-                    id={'uniquefeature'}
-                    name={'uniquefeature'}
-                    value={uniquefeature}
-                    placeholder={'unique feature'}
-                    onChange={event => setUniquefeature(event.target.value)}
-                    // required={!isRequired}
-                />
+                <div className='filterBox'> 
+                <h2 className='categoryHeadline'>Unique feature</h2>
+                    <TextInput 
+                        headlineName={'Unique feature'}
+                        id={'uniquefeature'}
+                        name={'uniquefeature'}
+                        value={uniquefeature}
+                        placeholder={'unique feature'}
+                        onChange={event => setUniquefeature(event.target.value)}
+                        // required={!isRequired}
+                    />
+                </div>
             </div>
     );
 }

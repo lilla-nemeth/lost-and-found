@@ -116,7 +116,7 @@ const PetList = () => {
                             </div>
                             <div className='petTextBox'>
                                 <div className='petStatus'>
-                                    {pet.addstatus}
+                                    {pet.petstatus}
                                 </div>
                                 <div className='petSpecies'>
                                     {pet.species}
@@ -126,15 +126,15 @@ const PetList = () => {
                                 </div>
                                 <div className='petDate'>
                                     {
-                                        pet.addstatus === 'lost' || pet.addstatus === 'found' 
+                                        pet.petstatus === 'lost' || pet.petstatus === 'found' 
                                         ? 
-                                        petStatus(pet.addstatus) + ': ' + convertDate(pet.since) 
+                                        petStatus(pet.petstatus) + ': ' + convertDate(pet.since) 
                                         : 
-                                        petStatus(pet.addstatus) + ': ' + convertDate(pet.until)
+                                        petStatus(pet.petstatus) + ': ' + convertDate(pet.until)
                                     }
                                 </div>
                                 <div className='petPlace'>
-                                    {pet.municipality} ({pet.region})
+                                    {pet.petlocation}
                                 </div>
                             </div>
                         </div>

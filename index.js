@@ -56,12 +56,8 @@ app.get('/pets/:fetch/:skip', (request, response) => {
 
 // Search:
 
-// addstatus
-// region
-// municipality
-// zip
-// district
-// street
+// petstatus
+// petlocation
 // species
 // size
 // breed
@@ -75,20 +71,17 @@ app.get('/pets/:fetch/:skip', (request, response) => {
 // TEST
 // app.get('/search', (request, response) => {
 
-//     // let addstatus = request.body.addstatus;
-//     // let region = request.body.region;
-//     // let municipality = request.body.municipality;
-//     // let zip = request.body.zip;
-//     // let district = request.body.district;
-//     // let street = request.body.street;
-//     let species = request.body.species;
-//     // let size = request.body.size;
-//     // let breed = request.body.breed;
-//     // let sex = request.body.sex;
-//     // let color = request.body.color;
-//     // let age = request.body.age;
-//     // let uniquefeature = request.body.uniquefeature;
-//     // let postdescription = request.body.postdescription;
+    // let petstatus = request.body.petstatus;
+    // let petlocation = request.body.petlocation;
+
+    // let species = request.body.species;
+    // let size = request.body.size;
+    // let breed = request.body.breed;
+    // let sex = request.body.sex;
+    // let color = request.body.color;
+    // let age = request.body.age;
+    // let uniquefeature = request.body.uniquefeature;
+    // let postdescription = request.body.postdescription;
 
 //     pool.query("SELECT to_tsvector('english', 'a fat  cat sat on a mat - it ate a fat rats')")
 //     .then((res) => console.log(res))
@@ -169,12 +162,8 @@ app.get('/username', authMw, (request, response) => {
 // user dashboard - post/report a pet
 app.post('/reportpet', authMw, (request, response) => {
     let userId = request.userId;
-    let addstatus = request.body.addstatus;
-    let region = request.body.region;
-    let municipality = request.body.municipality;
-    let zip = request.body.zip;
-    let district = request.body.district;
-    let street = request.body.street;
+    let petstatus = request.body.petstatus;
+    let petlocation = request.body.petlocation;
     let species = request.body.species;
     let size = request.body.size;
     let breed = request.body.breed;
@@ -184,20 +173,18 @@ app.post('/reportpet', authMw, (request, response) => {
     let uniquefeature = request.body.uniquefeature;
     let postdescription = request.body.postdescription;
 
-    pool.query('INSERT INTO pets(userId, addstatus, region, municipality, zip, district, street, species, size, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *', [userId, addstatus, region, municipality, zip, district, street, species, size, breed, sex, color, age, uniquefeature, postdescription])
+    pool.query('INSERT INTO pets(userId, petstatus, petlocation, species, size, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *', [userId, petstatus, petlocation, species, size, breed, sex, color, age, uniquefeature, postdescription])
     .then((res) => response.status(200).json(res.rows))
+    // .then((res) => console.log(res))
     .catch((err) => response.status(400).json({msg: 'Failed to add new pet'}));
+    // .catch((err) => console.log(err));
 });
 
 // user dashboard - update one pet's datas (by id):
 app.put('/editpet/:id', authMw, (request, response) => {
     let id = request.params.id;
-    let addstatus = request.body.addstatus;
-    let region = request.body.region;
-    let municipality = request.body.municipality;
-    let zip = request.body.zip;
-    let district = request.body.district;
-    let street = request.body.street;
+    let petstatus = request.body.petstatus;
+    let petlocation = request.body.petlocation;
     let size = request.body.size;
     let breed = request.body.breed;
     let sex = request.body.sex;
@@ -206,7 +193,7 @@ app.put('/editpet/:id', authMw, (request, response) => {
     let uniquefeature = request.body.uniquefeature;
     let postdescription = request.body.postdescription;
 
-    pool.query('UPDATE pets SET addstatus=$1, region=$2, municipality=$3, zip=$4, district=$5, street=$6, size=$7, breed=$8, sex=$9, color=$10, age=$11, uniquefeature=$12, postdescription=$13 WHERE id=$14', [addstatus, region, municipality, zip, district, street, size, breed, sex, color, age, uniquefeature, postdescription, id])
+    pool.query('UPDATE pets SET petstatus=$1, petlocation=$2, size=$3, breed=$4, sex=$5, color=$6, age=$7, uniquefeature=$8, postdescription=$9 WHERE id=$10', [petstatus, petlocation, size, breed, sex, color, age, uniquefeature, postdescription, id])
     .then((res) => response.status(200).json({msg: 'Post is successfully updated'}))
     .catch((err) => response.status(400).json({msg: 'Failed to update your post'}));
 });

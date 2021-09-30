@@ -17,12 +17,8 @@ CREATE TABLE users (
 CREATE TABLE pets (
     id SERIAL PRIMARY KEY,
     userId INT NOT NULL REFERENCES users,
-    addstatus VARCHAR(50),
-    region VARCHAR(50),
-    municipality VARCHAR(50),
-    zip INT,
-    district VARCHAR(50),
-    street VARCHAR(50),
+    petstatus VARCHAR(50),
+    petlocation VARCHAR(50),
     species VARCHAR(50),
     size VARCHAR(50),
     breed VARCHAR(255),
@@ -34,3 +30,9 @@ CREATE TABLE pets (
     since TIMESTAMP NOT NULL DEFAULT NOW(),
     until TIMESTAMP
 );
+
+    -- region VARCHAR(50),
+    -- municipality VARCHAR(50),
+    -- zip INT,
+    -- district VARCHAR(50),
+    -- street VARCHAR(50),

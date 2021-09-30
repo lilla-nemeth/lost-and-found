@@ -32,12 +32,6 @@ const styles = {
     },
 }
 
-// Buttons:
-// - species: all/dog/cat/other
-// - place (zip, municipality, region) - all
-// - lost/found/reunited
-
-// - sex
 // - size: small/medium/large
 // - age: puppy/kitten /adult/old/unknown
 // - age: juvenile/adolescent/adult/senior/unknown
@@ -49,8 +43,7 @@ const PetSortingButtons = () => {
 
     return (  
         <div> 
-            <div style={styles.smallBoxes}>     
-            {/* sex */}
+            <div style={styles.smallBoxes}>
                 <div style={styles.sexBox}>
                     <h2 style={styles.sexCategory}>sex</h2>
                     <ul className='radioList'>

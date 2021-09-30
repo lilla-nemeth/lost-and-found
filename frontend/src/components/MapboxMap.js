@@ -44,7 +44,6 @@ const MapboxMap = () => {
             mapboxgl: mapboxgl,
             // marker: false, // Do not use the default marker style
             placeholder: 'Search City',
-            // types:'region,region,locality,place',
         });
 
         currentMap.addControl(geocoder);
