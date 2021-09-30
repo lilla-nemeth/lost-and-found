@@ -99,12 +99,9 @@ export default function ApiContextProvider(props) {
 
     // {successCallback, successTimeout, errorCallback, errorTimeout}
     function reportPet({
-        addstatus, 
-        region, 
-        municipality, 
-        zip, 
-        district, 
-        street, 
+        petstatus,
+        // TODO: enable when mapbox is implemented:
+        petlocation,
         species, 
         size, 
         breed, 
@@ -113,8 +110,8 @@ export default function ApiContextProvider(props) {
         age, 
         uniquefeature, 
         postdescription,
-        successReportCallback,
-        // successMsgCallback,
+        // successReportCallback,
+        successMsgCallback,
         errorCallback, 
     }) {
         let options = {
@@ -126,12 +123,8 @@ export default function ApiContextProvider(props) {
                 'x-auth-token': token
             },
             data: {
-                addstatus,
-                region,
-                municipality,
-                zip,
-                district,
-                street,
+                petstatus,
+                petlocation,
                 species,
                 size,
                 breed,
@@ -143,12 +136,12 @@ export default function ApiContextProvider(props) {
             }
         };
         axios(options)
-        .then(
-            res => {successReportCallback(res.rows); console.log(res.rows)}
-        )
         // .then(
-        //     res => {successMsgCallback(res.data.msg); console.log(res.data.msg)}
+        //     res => {successReportCallback(res.rows); console.log(res.rows)}
         // )
+        .then(
+            res => {successMsgCallback(res.data.msg); console.log(res.data.msg)}
+        )
         .catch(
             err => errorCallback(err.response.data.msg)
         );

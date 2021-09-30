@@ -6,8 +6,6 @@ const TextInput = (props) => {
     let DEBUG = true;
 
     return (  
-        <div className='filterBox'> 
-            <h2 className='categoryHeadline'>{headlineName}</h2>
             <div className='inputBox'>
                 <input 
                     className='formInput' 
@@ -20,7 +18,6 @@ const TextInput = (props) => {
                     // required={required}
                 />
             </div>
-        </div>
     );
 }
  

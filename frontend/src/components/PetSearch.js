@@ -37,11 +37,6 @@ const PetSearchBox = () => {
         event.preventDefault();
     }
 
-    // Get location data (search box) from the following columns:
-    // region
-    // municipality
-    // zip
-
     return (  
         <div className='searchContainer'>
             <div className='formBox'>

@@ -8,7 +8,7 @@ const PetLandingPage = () => {
     return (
         <>
             <div className='landingPageHeadline'>
-                 <h1>Find Your Lost Pet</h1>
+                 <h1>Find Your<br />Lost Pet</h1>
             </div>
             <div>
                <video className='landingPageVideo' autoPlay loop muted>

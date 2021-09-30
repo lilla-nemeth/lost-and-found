@@ -11,7 +11,6 @@ import TextInput from './generic/TextInput';
 import TextArea from './generic/TextArea';
 // import DropZoneTest from './DropZoneTest';
 
-
 const styles = {
     main: {
         fontFamily: '"Poppins", sans-serif',
@@ -23,43 +22,15 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
+        padding: '90px'
     },
 
-} 
-
-// const regionOptions = {
-//     01: 'Lapland',
-//     02: 'North Ostrobothnia',
-//     03: 'Kainuu',
-//     04: 'North Karelia',
-//     05: 'Northern Savonia',
-//     06: 'Southern Savonia',
-//     07: 'South Karelia',
-//     08: 'Central Finland',
-//     // ... maybe this offer way too many options :/ - 
-//     // only municipalities of North Ostrobothnia?
-// }
+}
 
 // statusOptions -> reunited option comes later with post editing:
 
-// const statusOptions = ['lost', 'found']
-// const speciesOptions = ['dog', 'cat', 'other']
-// const sizeOptions = ['small', 'medium', 'large'];
-// const sexOptions = ['male', 'female', 'unknown'];
-// const colorOptions = ['black', 'brown', 'grey', 'white'];
-// const ageOptions = ['juvenile', 'adolescent', 'adult', 'senior', 'unknown'];
-
-
 const PetReport = () => {
-    const [pet, setPet] = useState([]);
     const [status, setStatus] = useState('');
-    // const [region, setRegion] = useState(''); 
-    // const [municipality, setMunicipality] = useState('');
-    // const [zip, setZip] = useState('');
-    // const [district, setDistrict] = useState('');
-    // const [street, setStreet] = useState('');
-    
-    // 1 input for all location data:
     const [location, setLocation] = useState('');
     const [species, setSpecies] = useState('');
     const [description, setDescription] = useState('');
@@ -73,64 +44,63 @@ const PetReport = () => {
     const [size, setSize] = useState('');
     const [breed, setBreed] = useState('');
     const [sex, setSex] = useState('');
-    const [color, setColor] = useState('');
+    const [colors, setColors] = useState([]);
     const [age, setAge] = useState('');
     const [uniquefeature, setUniquefeature] = useState('');
-
 
     // success/error messages
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
-
-    // for checkbox:
-    const [isChecked, setIsChecked] = useState(false);
-
-    // radio useState input will be the response data (from ApiContext) - 
-    // -> remove the hard coded 'lost' string, change to pet array with objects
-
     const [isRequired, setIsRequired] = useState(false);
 
     const { reportPet } = useContext(ApiContext);
 
     let DEBUG = true;
 
-
+    if (DEBUG) console.log(colors);
 
     function handleSubmit(event) {
         event.preventDefault();
 
         reportPet({
-            addstatus: status,
-            region: location,
-            municipality: location,
-            zip: location,
-            district: location,
-            street: location,
+            petstatus: status,
+            petlocation: location,
             species,
             size,
             breed,
             sex,
-            color,
+            color: colors,
             age,
             uniquefeature,
             postdescription: description,
-            successReportCallback: res => {
-                {setPet(res); console.log(res)}
+            successMsgCallback: res => {
+                setSuccessMsg(res);
+                console.log(res)
+                setSize('');
+                setStatus('');
+                setSpecies('');
+                setBreed('');
+                setSex('');
+                setColors('');
+                setAge('');
+                setUniquefeature('');
+                setSuccessMsg('');
+                setErrorMsg('');
+                setLocation('');
+                setDescription('');
+                //TODO hook for removing image
             },
-            // successMsgCallback: res => {
-            //     setSuccessMsg(res)
-            // },
             errorCallback: err => console.log(err),
             // errorTimeout: () => (setTimeout(() => {
                 //     setErrorMsg('');
                 // }, 5000))
             
             })
-            if (DEBUG) console.log('PET ARR', pet);
+
         }
 
-
     createHistory().replace('/reportpet');
+
 
     function showOptionalInputs() {
         if (optionalInputs.display === 'hideInputs') {
@@ -143,13 +113,6 @@ const PetReport = () => {
             })
         }
     }
-
-    // place for the function where I call the report api fron ApiContext
-
-    {/* map() the pet data from ApiContext for RadioButton & checkbox data */}
-    {/* isChecked={true} - isChecked value will be a hooks with boolean value */}
-    {/* 1. test with hard coded data - strings */}
-    {/* change the hard coded: radio === lost    to object (from ApiContext) */}
 
     return (  
         <main style={styles.main}>
@@ -172,7 +135,7 @@ const PetReport = () => {
                                     name={'status'} 
                                     value={'lost'} 
                                     checked={status === 'lost'} 
-                                    onChange={event => {setStatus(event.target.value)}} 
+                                    onChange={event => setStatus(event.target.value)} 
                                     labelFor={'lost'} 
                                     labelName={'Lost'}
                                     // required={!isRequired}  
@@ -182,7 +145,7 @@ const PetReport = () => {
                                     name={'status'} 
                                     value={'found'} 
                                     checked={status === 'found'} 
-                                    onChange={event => {setStatus(event.target.value)}} 
+                                    onChange={event => setStatus(event.target.value)} 
                                     labelFor={'found'} 
                                     labelName={'Found'}
                                     // required={!isRequired}  
@@ -199,7 +162,7 @@ const PetReport = () => {
                                     name={'species'} 
                                     value={'dog'} 
                                     checked={species === 'dog'} 
-                                    onChange={event => {setSpecies(event.target.value)}} 
+                                    onChange={event => setSpecies(event.target.value)} 
                                     labelFor={'dog'} 
                                     labelName={'Dog'} 
                                     // required={!isRequired}
@@ -209,40 +172,41 @@ const PetReport = () => {
                                     name={'species'} 
                                     value={'cat'} 
                                     checked={species === 'cat'} 
-                                    onChange={event => {setSpecies(event.target.value)}} 
+                                    onChange={event => setSpecies(event.target.value)} 
                                     labelFor={'cat'} 
                                     labelName={'Cat'} 
                                     // required={!isRequired}
                                 />
-                                <RadioButton 
-                                    id={'otherSpecies'} 
-                                    name={'species'} 
-                                    value={'otherSpecies'} 
-                                    checked={species === 'otherSpecies'} 
-                                    onChange={event => {setSpecies(event.target.value)}} 
-                                    labelFor={'otherSpecies'} 
-                                    labelName={'Other'}
-                                    // required={!isRequired} 
+                                <TextInput 
+                                    id={'otherSpecies'}
+                                    name={'species'}
+                                    value={species === 'dog' || species === 'cat' ? '' : species}
+                                    placeholder={'Other'}
+                                    onChange={event => setSpecies(event.target.value)}
+                                    // required={!isRequired}
                                 />
                             </ul>
                         </div>  
-                        {/* change later the 'Region' headline to 'Location' 
-                        if I'll use Mapbox API and convert the input into a search bar */}
+
+                        {/* if I'll use Mapbox API and convert the input into a search bar */}
                         {/* combine these parameters into 1 searchbar OR 
                         separate them to several input fields: municipality, zip, district, street */}
-                        <TextInput 
-                            headlineName={'Location'}
-                            id={'location'}
-                            name={'location'}
-                            value={location}
-                            placeholder={'Location'}
-                            onChange={event => setLocation(event.target.value)}
-                            // required={!isRequired}
-                        />
+                        
+                        <div className='filterBox'> 
+                            <h2 className='categoryHeadline'>Location</h2>
+                            <TextInput 
+                                id={'location'}
+                                name={'location'}
+                                value={location}
+                                placeholder={'Location'}
+                                onChange={event => setLocation(event.target.value)}
+                                // required={!isRequired}
+                            />
+                        </div>
                         
                         {/* <LocationSearch /> */}
 
-{/* FIX THAT: remove the map refreshing whenever input event is active */}
+                        {/* FIX THAT: remove the map refreshing whenever input event is active */}
                         {/* <MapboxMap /> */}
 
                         <TextArea 
@@ -256,12 +220,12 @@ const PetReport = () => {
                             onChange={event => setDescription(event.target.value)} 
                             // required={!isRequired}
                         />
-                        <button className='optionalButton' onClick={() => showOptionalInputs()}>
+                        <div className='optionalButton' onClick={() => showOptionalInputs()}>
                                 Optional Data
                             <div className='arrowDown'>
                                 <ArrowDown style={{height: '16px'}}/>
                             </div>
-                        </button>
+                        </div>
                         <PetReportOptionalData 
                             size={size} 
                             setSize={setSize} 
@@ -269,15 +233,13 @@ const PetReport = () => {
                             setBreed={setBreed} 
                             sex={sex} 
                             setSex={setSex} 
-                            color={color} 
-                            setColor={setColor} 
+                            colors={colors} 
+                            setColors={setColors} 
                             age={age} 
                             setAge={setAge} 
                             uniquefeature={uniquefeature} 
                             setUniquefeature={setUniquefeature} 
                             // isRequired={isRequired} 
-                            isChecked={isChecked} 
-                            setIsChecked={setIsChecked} 
                             optionalInputs={optionalInputs} 
                             style={{zIndex: 1}}
                         />
