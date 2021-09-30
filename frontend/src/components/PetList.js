@@ -94,7 +94,7 @@ const PetList = () => {
     // found -> since (in progress cases)
     // reunited -> until (ready to close cases)
 
-    createHistory().replace('/');
+    createHistory().replace('/lostandfound');
 
     if (loader) {
         return (

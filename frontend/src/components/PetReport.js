@@ -61,7 +61,6 @@ const PetReport = () => {
     
     // 1 input for all location data:
     const [location, setLocation] = useState('');
-
     const [species, setSpecies] = useState('');
     const [description, setDescription] = useState('');
 
@@ -116,7 +115,7 @@ const PetReport = () => {
             uniquefeature,
             postdescription: description,
             successReportCallback: res => {
-                setPet(res)
+                {setPet(res); console.log(res)}
             },
             // successMsgCallback: res => {
             //     setSuccessMsg(res)
@@ -250,7 +249,7 @@ const PetReport = () => {
                             headlineName={'Description'}
                             id={'description'} 
                             name={description} 
-                            value={'description'} 
+                            value={description} 
                             placeholder={'Description'} 
                             rows={'6'}
                             cols={'10'}

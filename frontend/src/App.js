@@ -7,6 +7,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import PetHome from './components/PetHome';
 import PetReport from './components/PetReport';
+import PetLandingPage from './components/PetLandingPage';
 
 function App() {
 
@@ -27,13 +28,17 @@ function App() {
           <Route path='/register'>
             <Register />
           </Route>
-          <Route exact path='/'>
+          <Route exact path='/lostandfound'>
             <Navbar />
             <PetHome />
           </Route>
+          <Route exact path='/'>
+            <Navbar />
+            <PetLandingPage />
+          </Route>
           <Route path='*'>
             <Navbar />
-            <PetHome />
+            <PetLandingPage />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -49,9 +54,13 @@ function App() {
               <Navbar />
               <PetReport />
             </Route>
-            <Route exact path='/'>
+            <Route path='/lostandfound'>
               <Navbar />
               <PetHome />
+            </Route>
+            <Route exact path='/'>
+              <Navbar />
+              <PetLandingPage />
             </Route>
             <Route path='*'>
               <Navbar />

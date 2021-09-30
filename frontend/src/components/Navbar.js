@@ -5,10 +5,6 @@ import { AuthContext } from '../contexts/AuthContext';
 import { ApiContext } from '../contexts/ApiContext';
 
 const styles = {
-    navbarContainer: {
-        background: '#B0F0EB', 
-        height: '100px',
-    },
     navbar: {
         listStyleType: 'none',
         background: '#226660',
@@ -18,10 +14,6 @@ const styles = {
         width: '100%',
         zIndex: 100,
         display: 'flex',
-        // alignItems: 'center',
-        // justifyContent: 'center',
-
-
         justifyContent: 'space-between',
     },
     pawIcon: {
@@ -31,7 +23,6 @@ const styles = {
 
 const Navbar = () => {
     const [errorMsg, setErrorMsg] = useState('');
-
     const { handleLogOut } = useContext(AuthContext);
     const { token, getUsername, user } = useContext(ApiContext);
 
@@ -39,14 +30,12 @@ const Navbar = () => {
     let DEBUG = true;
     
     useEffect(() => {
-
             getUsername({
                 errorCallback: err => setErrorMsg(err),
                 errorTimeout: () => (setTimeout(() => {
                    setErrorMsg('');
                 }, 5000))
             })
-            
     },[token]);
 
     
@@ -56,10 +45,12 @@ const Navbar = () => {
                     { !token ?               
                     <>
                         <li><Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link></li>
-                            <li><Link className='navLink' to='/'>Lost & Found</Link></li>
+                        <ul style={{display: 'flex', textAlign: 'right'}}> 
+                            <li><Link className='navLink' to='/lostandfound'>Lost & Found</Link></li>
                             <li><Link className='navLink' to='/reportpet' disabled>Report Pet</Link></li>
                             <li><Link className='navLink' to='/login'>Login</Link></li>
                             <li><Link className='navLink' to='/register'>Register</Link></li>
+                        </ul>
                     </>
                     : 
                     <>
@@ -68,7 +59,7 @@ const Navbar = () => {
                             <li className='username'>Hi {user}!</li>
                         </ul>
                         <ul style={{display: 'flex', textAlign: 'right'}}>
-                            <li><Link className='navLink' to='/'>Lost & Found</Link></li>
+                            <li><Link className='navLink' to='/lostandfound'>Lost & Found</Link></li>
                             <li><Link className='navLink' to='/reportpet'>Report Pet</Link></li>
                             <li><button className='logOutButton' onClick={() => handleLogOut()}>Log Out</button></li>
                         </ul>
