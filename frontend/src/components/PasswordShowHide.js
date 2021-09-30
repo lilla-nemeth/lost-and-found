@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { ReactComponent as PasswordIcon } from '../assets/icons/password.svg';
 import { ReactComponent as HidePasswordIcon } from '../assets/icons/hidepassword.svg';

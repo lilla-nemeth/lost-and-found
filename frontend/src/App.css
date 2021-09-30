@@ -136,9 +136,33 @@ table {
   flex-direction: column;
 }
 
+/* Landing Page */
+.landingPageHeadline {
+  font: 700 50px/1.2 'Poppins', sans-serif;
+  color: #fff;
+  z-index: 1;
+  width: 40%; 
+  display: flex;
+  justify-content: center;
+  /* align-self: center; */
+  align-items: center;
+  height: 800px;
+}
+
+.landingPageVideo {
+  position: absolute; 
+  width: 100%; 
+  left: 50%; 
+  top: 50%; 
+  height: 100%; 
+  object-fit: cover; 
+  transform: translate(-50%, -50%); 
+  z-index: -1;
+}
+
 /* Lost & Found - PetList */
 .lostAndFoundHeadline {
-  font: 700 38px/1.2 "Poppins", sans-serif;
+  font: 700 38px/1.2 'Poppins', sans-serif;
   display: flex;
   width: 100%;
   padding-top: 50px;
@@ -200,30 +224,30 @@ table {
 }
 
 .petSpecies {
-  font: 700 32px/1.2 "Poppins", sans-serif;
+  font: 700 32px/1.2 'Poppins', sans-serif;
   font-size: 35px;
   margin: 40px 0 30px 0;
 }
 
 .petId {
   margin: 10px 0;
-  font: 300 15px/1.2 "Poppins", sans-serif;
+  font: 300 15px/1.2 'Poppins', sans-serif;
 }
 
 .petDate {
   margin: 10px 0;
-  font: 300 15px/1.2 "Poppins", sans-serif;
+  font: 300 15px/1.2 'Poppins', sans-serif;
 }
 
 .petPlace {
   flex-direction: row;
   margin: 10px 0;
-  font: 300 15px/1.2 "Poppins", sans-serif;
+  font: 300 15px/1.2 'Poppins', sans-serif;
 }
 
 .petProfileButton {
   margin: 10px 0;
-  font: 400 15px/1.2 "Poppins", sans-serif;
+  font: 400 15px/1.2 'Poppins', sans-serif;
   cursor: pointer;
   width: 100%;
   padding: 15px;
@@ -700,7 +724,6 @@ input[type=checkbox]:checked ~ label{
 .categoryHeadline {
   padding: 45px 0px 15px;
 }
-
 
 
 /* PET REPORT - MAP */
