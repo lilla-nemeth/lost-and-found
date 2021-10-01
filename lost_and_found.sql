@@ -14,6 +14,8 @@ CREATE TABLE users (
     modified TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
+
+-- add place for object
 CREATE TABLE pets (
     id SERIAL PRIMARY KEY,
     userId INT NOT NULL REFERENCES users,

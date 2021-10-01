@@ -8,7 +8,7 @@ require('dotenv').config();
 const path = require('path');
 
 
-const { authMw, isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid } = require('./middlewares.js');
+const { authMw, isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid, upload } = require('./middlewares.js');
 
 let DEBUG = true;
 
@@ -175,8 +175,10 @@ app.post('/reportpet', authMw, (request, response) => {
 
     pool.query('INSERT INTO pets(userId, petstatus, petlocation, species, size, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *', [userId, petstatus, petlocation, species, size, breed, sex, color, age, uniquefeature, postdescription])
     .then((res) => response.status(200).json(res.rows))
+    .then((res) => response.status(200).json({msg: 'Pet successfully added'}))
+
     // .then((res) => console.log(res))
-    .catch((err) => response.status(400).json({msg: 'Failed to add new pet'}));
+    .catch((err) => response.status(400).json({msg: 'Failed to add new pet'}))
     // .catch((err) => console.log(err));
 });
 
@@ -288,6 +290,43 @@ app.post('/login', [isEmailValid], (request, response) => {
         });
     })
     .catch((err) => response.status(400).json({msg: 'User not found'}))
+});
+
+
+// Multer file uploading: 1 image; multiple images
+app.post('/single', [authMw, upload.single('image')], (request, response) => {
+    // let userId = request.userId;
+    let image = request.file;
+    // let fieldname = request.file.fieldname;
+    // let originalname = request.file.originalname;
+    // let encoding = request.file.encoding;
+    // let mimetype = request.file.mimetype;
+    // let destination = request.file.destination;
+    // let filename = request.file.filename;
+    // let path = request.file.path;
+    // let size = request.file.size;
+
+    console.log('image', image);
+    console.log('response', request.file);
+    // response.status(200).json({msg: 'File is successfully uploaded'})
+    response.status(200).json('File is successfully uploaded')
+
+    // pool.query('INSERT INTO pets(userId, fieldname, originalname, encoding, mimetype, destination, filename, path, size) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *', [userId, fieldname, originalname, encoding, mimetype, destination, filename, path, size])
+    // pool.query('INSERT INTO pets(userId, image) VALUES ($1, $2) RETURNING *', [userId, image])
+    
+    // response.status(200).send({msg: 'Single file upload success'}))
+    // response.status(200).json('/single api')
+    
+    // .then((res) => response.status(200).json({msg: 'Single file upload success'}))
+    // .catch((err) => response.status(400).json({msg: 'Failed to upload image'}))
+});
+
+app.post('/multiple', [authMw, upload.array('images', 3)], (request, response) => {
+    let userId = request.userId;
+    let images = request.body.files
+
+    console.log(images);
+    response.status(200).send('Multiple file upload success')
 });
 
 app.listen(port, () => console.log("Server is running on 3003"));

@@ -8,6 +8,7 @@ import Login from './components/Login';
 import PetHome from './components/PetHome';
 import PetReport from './components/PetReport';
 import PetLandingPage from './components/PetLandingPage';
+import FileUploadTest from './components/FileUploadTest';
 
 function App() {
 
@@ -50,6 +51,13 @@ function App() {
       <>
         <BrowserRouter>
           <Switch>
+          <Route path='/single'>
+              <Navbar />
+              <FileUploadTest />
+            </Route>
+
+
+
             <Route path='/reportpet'>
               <Navbar />
               <PetReport />

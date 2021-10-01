@@ -9,6 +9,7 @@ import { ApiContext } from '../contexts/ApiContext';
 import createHistory from 'history/createBrowserHistory';
 import TextInput from './generic/TextInput';
 import TextArea from './generic/TextArea';
+import FileUploadTest from './FileUploadTest';
 // import DropZoneTest from './DropZoneTest';
 
 const styles = {
@@ -40,6 +41,7 @@ const PetReport = () => {
         display: 'hideInputs',
     });
 
+
     // Optional Data:
     const [size, setSize] = useState('');
     const [breed, setBreed] = useState('');
@@ -57,8 +59,6 @@ const PetReport = () => {
 
     let DEBUG = true;
 
-    if (DEBUG) console.log(colors);
-
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -73,31 +73,30 @@ const PetReport = () => {
             age,
             uniquefeature,
             postdescription: description,
-            successMsgCallback: res => {
-                setSuccessMsg(res);
-                console.log(res)
-                setSize('');
-                setStatus('');
-                setSpecies('');
-                setBreed('');
-                setSex('');
-                setColors('');
-                setAge('');
-                setUniquefeature('');
-                setSuccessMsg('');
-                setErrorMsg('');
-                setLocation('');
-                setDescription('');
+            successCallback: res => {
+                setSuccessMsg(res)
+                setSize('')
+                setStatus('')
+                setSpecies('')
+                setBreed('')
+                setSex('')
+                setColors('')
+                setAge('')
+                setUniquefeature('')
+                setErrorMsg('')
+                setLocation('')
+                setDescription('')
                 //TODO hook for removing image
             },
-            errorCallback: err => console.log(err),
-            // errorTimeout: () => (setTimeout(() => {
-                //     setErrorMsg('');
-                // }, 5000))
-            
-            })
-
-        }
+            // successTimeout: () => (setTimeout(() => {
+            //     setSuccessMsg('');
+            // }, 5000)),
+            errorCallback: err => setErrorMsg(err),
+            errorTimeout: () => (setTimeout(() => {
+                setErrorMsg('');
+            }, 5000))
+        });
+    }
 
     createHistory().replace('/reportpet');
 
@@ -114,6 +113,138 @@ const PetReport = () => {
         }
     }
 
+    {/* <LocationSearch /> */}
+
+    {/* FIX THAT: remove the map refreshing whenever input event is active */}
+    {/* <MapboxMap /> */}
+    
+    {/* if I'll use Mapbox API and convert the input into a search bar */}
+    {/* combine these parameters into 1 searchbar OR 
+    separate them to several input fields: municipality, zip, district, street */}
+
+
+
+    if (optionalInputs.display === 'hideInputs') {
+        return (  
+            <main style={styles.main}>
+                <section style={styles.section}>
+                <div className='formBox'>
+                        <h2 className='formHeadline'>Report Pet</h2>
+                        <form 
+                            method='POST' 
+                            onSubmit={handleSubmit}
+                        >
+                            <div className='filterBox'>
+                                <h2 className='categoryHeadline'>Status</h2>
+                                <ul className='radioList'>
+                                    <RadioButton 
+                                        id={'lost'} 
+                                        name={'status'} 
+                                        value={'lost'} 
+                                        checked={status === 'lost'} 
+                                        onChange={event => setStatus(event.target.value)} 
+                                        labelFor={'lost'} 
+                                        labelName={'Lost'}
+                                    />
+                                    <RadioButton 
+                                        id={'found'} 
+                                        name={'status'} 
+                                        value={'found'} 
+                                        checked={status === 'found'} 
+                                        onChange={event => setStatus(event.target.value)} 
+                                        labelFor={'found'} 
+                                        labelName={'Found'}  
+                                    />
+                                </ul>
+                            </div>
+                               <DragnDropZone />
+                               {/* <FileUploadTest /> */}
+                            <div className='filterBox'> 
+                                <h2 className='categoryHeadline'>Species</h2>
+                                <ul className='radioList'>
+                                    <RadioButton 
+                                        id={'dog'} 
+                                        name={'species'} 
+                                        value={'dog'} 
+                                        checked={species === 'dog'} 
+                                        onChange={event => setSpecies(event.target.value)} 
+                                        labelFor={'dog'} 
+                                        labelName={'Dog'} 
+                                    />
+                                    <RadioButton 
+                                        id={'cat'} 
+                                        name={'species'} 
+                                        value={'cat'} 
+                                        checked={species === 'cat'} 
+                                        onChange={event => setSpecies(event.target.value)} 
+                                        labelFor={'cat'} 
+                                        labelName={'Cat'} 
+                                    />
+                                    <TextInput 
+                                        id={'otherSpecies'}
+                                        name={'species'}
+                                        value={species === 'dog' || species === 'cat' ? '' : species}
+                                        placeholder={'Other'}
+                                        onChange={event => setSpecies(event.target.value)}
+                                    />
+                                </ul>
+                            </div>                   
+                            <div className='filterBox'> 
+                                <h2 className='categoryHeadline'>Location</h2>
+                                <TextInput 
+                                    id={'location'}
+                                    name={'location'}
+                                    value={location}
+                                    placeholder={'Location'}
+                                    onChange={event => setLocation(event.target.value)}
+                                />
+                            </div>
+                            <TextArea 
+                                headlineName={'Description'}
+                                id={'description'} 
+                                name={description} 
+                                value={description} 
+                                placeholder={'Description'} 
+                                rows={'6'}
+                                cols={'10'}
+                                onChange={event => setDescription(event.target.value)} 
+                            />
+                            <div className='message'>
+                                <p className='errorMessage'>{errorMsg}</p>
+                                <p className='successMessage'>{successMsg}</p>
+                            </div>
+                            <div className='optionalButton' onClick={() => showOptionalInputs()}>
+                                    Optional Data
+                                <div className='arrowDown'>
+                                    <ArrowDown style={{height: '16px'}}/>
+                                </div>
+                            </div>
+                            <PetReportOptionalData 
+                                size={size} 
+                                setSize={setSize} 
+                                breed={breed} 
+                                setBreed={setBreed} 
+                                sex={sex} 
+                                setSex={setSex} 
+                                colors={colors} 
+                                setColors={setColors} 
+                                age={age} 
+                                setAge={setAge} 
+                                uniquefeature={uniquefeature} 
+                                setUniquefeature={setUniquefeature} 
+                                optionalInputs={optionalInputs} 
+                                style={{zIndex: 1}}
+                            />
+                            <div>
+                                <button className='formButton'>Report</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </main>
+        );
+    } 
+
     return (  
         <main style={styles.main}>
             <section style={styles.section}>
@@ -123,10 +254,6 @@ const PetReport = () => {
                         method='POST' 
                         onSubmit={handleSubmit}
                     >
-                        <div className='message'>
-                            <p className='errorMessage'>{errorMsg}</p>
-                            <p className='successMessage'>{successMsg}</p>
-                        </div>
                         <div className='filterBox'>
                             <h2 className='categoryHeadline'>Status</h2>
                             <ul className='radioList'>
@@ -138,7 +265,6 @@ const PetReport = () => {
                                     onChange={event => setStatus(event.target.value)} 
                                     labelFor={'lost'} 
                                     labelName={'Lost'}
-                                    // required={!isRequired}  
                                 />
                                 <RadioButton 
                                     id={'found'} 
@@ -147,13 +273,11 @@ const PetReport = () => {
                                     checked={status === 'found'} 
                                     onChange={event => setStatus(event.target.value)} 
                                     labelFor={'found'} 
-                                    labelName={'Found'}
-                                    // required={!isRequired}  
+                                    labelName={'Found'}  
                                 />
                             </ul>
                         </div>
                            <DragnDropZone />
-                           {/* <DropZoneTest /> */}
                         <div className='filterBox'> 
                             <h2 className='categoryHeadline'>Species</h2>
                             <ul className='radioList'>
@@ -165,7 +289,6 @@ const PetReport = () => {
                                     onChange={event => setSpecies(event.target.value)} 
                                     labelFor={'dog'} 
                                     labelName={'Dog'} 
-                                    // required={!isRequired}
                                 />
                                 <RadioButton 
                                     id={'cat'} 
@@ -175,7 +298,6 @@ const PetReport = () => {
                                     onChange={event => setSpecies(event.target.value)} 
                                     labelFor={'cat'} 
                                     labelName={'Cat'} 
-                                    // required={!isRequired}
                                 />
                                 <TextInput 
                                     id={'otherSpecies'}
@@ -183,15 +305,9 @@ const PetReport = () => {
                                     value={species === 'dog' || species === 'cat' ? '' : species}
                                     placeholder={'Other'}
                                     onChange={event => setSpecies(event.target.value)}
-                                    // required={!isRequired}
                                 />
                             </ul>
-                        </div>  
-
-                        {/* if I'll use Mapbox API and convert the input into a search bar */}
-                        {/* combine these parameters into 1 searchbar OR 
-                        separate them to several input fields: municipality, zip, district, street */}
-                        
+                        </div>                   
                         <div className='filterBox'> 
                             <h2 className='categoryHeadline'>Location</h2>
                             <TextInput 
@@ -200,15 +316,8 @@ const PetReport = () => {
                                 value={location}
                                 placeholder={'Location'}
                                 onChange={event => setLocation(event.target.value)}
-                                // required={!isRequired}
                             />
                         </div>
-                        
-                        {/* <LocationSearch /> */}
-
-                        {/* FIX THAT: remove the map refreshing whenever input event is active */}
-                        {/* <MapboxMap /> */}
-
                         <TextArea 
                             headlineName={'Description'}
                             id={'description'} 
@@ -218,7 +327,6 @@ const PetReport = () => {
                             rows={'6'}
                             cols={'10'}
                             onChange={event => setDescription(event.target.value)} 
-                            // required={!isRequired}
                         />
                         <div className='optionalButton' onClick={() => showOptionalInputs()}>
                                 Optional Data
@@ -239,10 +347,13 @@ const PetReport = () => {
                             setAge={setAge} 
                             uniquefeature={uniquefeature} 
                             setUniquefeature={setUniquefeature} 
-                            // isRequired={isRequired} 
                             optionalInputs={optionalInputs} 
                             style={{zIndex: 1}}
                         />
+                        <div className='message'>
+                            <p className='errorMessage'>{errorMsg}</p>
+                            <p className='successMessage'>{successMsg}</p>
+                        </div>
                         <div>
                             <button className='formButton'>Report</button>
                         </div>
@@ -251,6 +362,8 @@ const PetReport = () => {
             </section>
         </main>
     );
+
+    
 }
  
 export default PetReport;

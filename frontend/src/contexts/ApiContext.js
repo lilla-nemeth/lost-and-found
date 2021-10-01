@@ -8,6 +8,7 @@ export default function ApiContextProvider(props) {
 
     const { token, setToken } = useContext(AuthContext);
     const [user, setUser] = useState('');
+    const [fileData, setFileData] = useState('');
     
     let DEBUG = true;
 
@@ -66,14 +67,16 @@ export default function ApiContextProvider(props) {
 
                 localStorage.setItem('token', tokenRes);
                 setToken(tokenRes);
-
-                // if (DEBUG) console.log('APICONTEXT TOKEN RESPONSE', tokenRes);
             }
         )
         .catch(
-            err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
-            // err => {console.log(error('APICONTEXT-ERROR RESPONSE', err.response.data.msg, errorTimeout()))}
-            // err => console.log(err)
+            err => {if (            
+                err && 
+                err.response && 
+                err.response.data && 
+                err.response.data.msg && 
+                errorCallback
+                ) errorCallback(err.response.data.msg, errorTimeout())}
         )
     }
 
@@ -93,14 +96,20 @@ export default function ApiContextProvider(props) {
             res => setUser(res.data)
         )
         .catch(
-            err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
+            err => {if (
+            err && 
+            err.response && 
+            err.response.data && 
+            err.response.data.msg && 
+            errorCallback
+            ) errorCallback(err.response.data.msg, errorTimeout())}
         );
     }
 
     // {successCallback, successTimeout, errorCallback, errorTimeout}
     function reportPet({
+        // TODO: other location data enable when mapbox is implemented
         petstatus,
-        // TODO: enable when mapbox is implemented:
         petlocation,
         species, 
         size, 
@@ -110,9 +119,10 @@ export default function ApiContextProvider(props) {
         age, 
         uniquefeature, 
         postdescription,
-        // successReportCallback,
-        successMsgCallback,
-        errorCallback, 
+        successCallback,
+        successTimeout,
+        errorCallback,
+        errorTimeout
     }) {
         let options = {
             method: 'post',
@@ -136,20 +146,40 @@ export default function ApiContextProvider(props) {
             }
         };
         axios(options)
-        // .then(
-        //     res => {successReportCallback(res.rows); console.log(res.rows)}
-        // )
         .then(
-            res => {successMsgCallback(res.data.msg); console.log(res.data.msg)}
+           res => {if (successCallback) successCallback(res.data.msg, successTimeout())}
         )
         .catch(
-            err => errorCallback(err.response.data.msg)
+            err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
         );
     }
 
+    // TODO: change the url later:
+    
+    function storeSingleImage() {
+        // const imgData = new FormData();
+
+        // imgData.append('image', fileData)
+
+        // let options = {
+        //     method: 'post',
+        //     url: 'http://localhost:3003/single',
+        //     mode: 'cors',
+        //     headers: {
+        //         // 'Content-Type': 'multipart/form-data',
+        //         'x-auth-token': token
+        //     },
+        //     data: {
+        //         imgData
+        //     }
+        // };
+        // axios(options)
+        // .then(res => console.log('File sent successfully'))
+        // .catch(err => console.log(err.message));
+    }
 
     return (
-        <ApiContext.Provider value={{registerUser, loginUser, getUsername, user, reportPet, token}}>
+        <ApiContext.Provider value={{registerUser, loginUser, getUsername, user, reportPet, token, storeSingleImage, setFileData}}>
             { props.children }
         </ApiContext.Provider>
     )
