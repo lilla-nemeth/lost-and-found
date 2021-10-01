@@ -8,6 +8,7 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 
 
+
 ReactDOM.render(
   <React.StrictMode>
     <AuthContextProvider>

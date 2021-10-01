@@ -61,10 +61,8 @@ const DragnDropZone = () => {
         <div style={{padding: '45px 0 0 0'}}>
             <div className='petPicture'>
                 <div style={{border: '3px dashed rgb(34 102 96)', background: 'rgb(243 243 243)'}} {...getRootProps()}>
-                    {/* <div style={{overflow: 'hidden', position: 'absolute', bottom: '0'}}> */}
                         {images}
-                    {/* </div> */}
-                        <input {...getInputProps()} type='file'/>
+                        <input {...getInputProps()} type='file' name='image'/>
                         <p style={{lineHeight: '350px',textAlign: 'center'}}>
                             Drop files here
                         </p>

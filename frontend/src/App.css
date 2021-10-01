@@ -45,7 +45,6 @@ table {
 	border-spacing: 0;
 }
 
-
 /* NAVBAR */
 .navLogo {
   text-align: center;
@@ -91,7 +90,6 @@ table {
 .navLink {
   text-align: center;
   padding: 22.5px;
-  /* margin: auto; */
   text-decoration: none;
   color: rgb(183, 223, 219);
   font: 300 15px/1.2 'Poppins', sans-serif;
@@ -137,16 +135,20 @@ table {
 }
 
 /* Landing Page */
-.landingPageHeadline {
-  font: 700 50px/1.2 'Poppins', sans-serif;
-  color: #fff;
-  z-index: 1;
-  width: 40%; 
+.landingPageBox {
+  z-index: 2;
+  width: 40%;
   display: flex;
   justify-content: center;
-  /* align-self: center; */
   align-items: center;
-  height: 400px;
+}
+
+.landingPageHeadline {
+  font: 700 62px/1.2 'Poppins', sans-serif;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 10%;
 }
 
 .landingPageVideo {
@@ -170,7 +172,6 @@ table {
   justify-content: center;
   align-items: center;
 }
-
 
 .petContainer {
 	display: flex;
@@ -196,10 +197,6 @@ table {
 
 .petCard:nth-child(odd) {
   background: rgba(255,255,255); 
-}
-
-.petCardInner {
- /* display: flex; */
 }
 
 .petTextBox {

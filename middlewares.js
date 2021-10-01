@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
 
 let DEBUG = true;
 
 function authMw (request, response, next) {
-    // token a kérés headers részében található
+    // token is the headers part of the request:
     let token = request.headers['x-auth-token'];
     
     // jsonwebtoken addig nem engedi tovább, amíg nem sikerült beazonosítani a felszhasználót 
@@ -152,10 +153,26 @@ function isPasswordValid (request, response, next) {
     next();
 }
 
+    // Multer file storage:
+    const fileStorageEngine = multer.diskStorage({
+        destination: (request, file, callback) => {
+            callback(null, './images')
+        },
+        filename: (request, file, callback) => {
+            callback(null, Date.now() + '--' + file.originalname)
+        }
+    });
+    
+    // Multer object:
+    const upload = multer({ storage: fileStorageEngine });
+
+
+
 module.exports = {
     authMw,
     isUsernameValid,
     isEmailValid,
     isPhoneValid,
-    isPasswordValid
+    isPasswordValid,
+    upload
 }
