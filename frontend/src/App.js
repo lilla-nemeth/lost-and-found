@@ -8,7 +8,7 @@ import Login from './components/Login';
 import PetHome from './components/PetHome';
 import PetReport from './components/PetReport';
 import PetLandingPage from './components/PetLandingPage';
-import FileUploadTest from './components/FileUploadTest';
+import ImageUpload from './components/ImageUpload';
 
 function App() {
 
@@ -53,11 +53,8 @@ function App() {
           <Switch>
           <Route path='/single'>
               <Navbar />
-              <FileUploadTest />
+              <ImageUpload />
             </Route>
-
-
-
             <Route path='/reportpet'>
               <Navbar />
               <PetReport />

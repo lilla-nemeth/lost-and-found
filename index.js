@@ -321,12 +321,12 @@ app.post('/single', [authMw, upload.single('image')], (request, response) => {
     // .catch((err) => response.status(400).json({msg: 'Failed to upload image'}))
 });
 
-app.post('/multiple', [authMw, upload.array('images', 3)], (request, response) => {
-    let userId = request.userId;
-    let images = request.body.files
+app.post('/multiple', [authMw, upload.array('images', 6)], (request, response) => {
+    // let userId = request.userId;
+    let images = request.files
 
-    console.log(images);
-    response.status(200).send('Multiple file upload success')
+    console.log("multiple image upload", images);
+    response.status(200).json('Multiple file upload success')
 });
 
 app.listen(port, () => console.log("Server is running on 3003"));

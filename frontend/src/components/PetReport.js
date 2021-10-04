@@ -9,7 +9,7 @@ import { ApiContext } from '../contexts/ApiContext';
 import createHistory from 'history/createBrowserHistory';
 import TextInput from './generic/TextInput';
 import TextArea from './generic/TextArea';
-import FileUploadTest from './FileUploadTest';
+import ImageUpload from './ImageUpload';
 // import DropZoneTest from './DropZoneTest';
 
 const styles = {
@@ -32,6 +32,7 @@ const styles = {
 
 const PetReport = () => {
     const [status, setStatus] = useState('');
+    const [files, setFiles] = useState([]);
     const [location, setLocation] = useState('');
     const [species, setSpecies] = useState('');
     const [description, setDescription] = useState('');
@@ -40,7 +41,6 @@ const PetReport = () => {
     const [optionalInputs, setOptionalInputs] = useState({
         display: 'hideInputs',
     });
-
 
     // Optional Data:
     const [size, setSize] = useState('');
@@ -55,47 +55,88 @@ const PetReport = () => {
     const [errorMsg, setErrorMsg] = useState('');
     const [isRequired, setIsRequired] = useState(false);
 
-    const { reportPet } = useContext(ApiContext);
+    const { reportPet, storeSingleImage, storeMultipleImages } = useContext(ApiContext);
 
     let DEBUG = true;
 
     function handleSubmit(event) {
         event.preventDefault();
+        console.log(files)
+        //if the user uploaded an image, we save the img first, then send the report pet query
+        // storeMultipleImages(files, ()=> {
+        storeSingleImage(files, ()=> {
+            reportPet({
+                petstatus: status,
+                petlocation: location,
+                species,
+                size,
+                breed,
+                sex,
+                color: colors,
+                age,
+                uniquefeature,
+                postdescription: description,
+                successCallback: res => {
+                    setSuccessMsg(res)
+                    setSize('')
+                    setStatus('')
+                    setSpecies('')
+                    setBreed('')
+                    setSex('')
+                    setColors('')
+                    setAge('')
+                    setUniquefeature('')
+                    setErrorMsg('')
+                    setLocation('')
+                    setDescription('')
+                    //TODO hook for removing image
+                },
+                // successTimeout: () => (setTimeout(() => {
+                //     setSuccessMsg('');
+                // }, 5000)),
+                errorCallback: err => setErrorMsg(err),
+                errorTimeout: () => (setTimeout(() => {
+                    setErrorMsg('');
+                }, 5000))
+            })
+        },
+        (err)=> console.log(err)
+        )
 
-        reportPet({
-            petstatus: status,
-            petlocation: location,
-            species,
-            size,
-            breed,
-            sex,
-            color: colors,
-            age,
-            uniquefeature,
-            postdescription: description,
-            successCallback: res => {
-                setSuccessMsg(res)
-                setSize('')
-                setStatus('')
-                setSpecies('')
-                setBreed('')
-                setSex('')
-                setColors('')
-                setAge('')
-                setUniquefeature('')
-                setErrorMsg('')
-                setLocation('')
-                setDescription('')
-                //TODO hook for removing image
-            },
-            // successTimeout: () => (setTimeout(() => {
-            //     setSuccessMsg('');
-            // }, 5000)),
-            errorCallback: err => setErrorMsg(err),
-            errorTimeout: () => (setTimeout(() => {
-                setErrorMsg('');
-            }, 5000))
-        });
+        // reportPet({
+        //     petstatus: status,
+        //     petlocation: location,
+        //     species,
+        //     size,
+        //     breed,
+        //     sex,
+        //     color: colors,
+        //     age,
+        //     uniquefeature,
+        //     postdescription: description,
+        //     successCallback: res => {
+        //         setSuccessMsg(res)
+        //         setSize('')
+        //         setStatus('')
+        //         setSpecies('')
+        //         setBreed('')
+        //         setSex('')
+        //         setColors('')
+        //         setAge('')
+        //         setUniquefeature('')
+        //         setErrorMsg('')
+        //         setLocation('')
+        //         setDescription('')
+        //         //TODO hook for removing image
+        //     },
+        //     // successTimeout: () => (setTimeout(() => {
+        //     //     setSuccessMsg('');
+        //     // }, 5000)),
+        //     errorCallback: err => setErrorMsg(err),
+        //     errorTimeout: () => (setTimeout(() => {
+        //         setErrorMsg('');
+        //     }, 5000))
+        // });
     }
 
     createHistory().replace('/reportpet');
@@ -133,6 +174,7 @@ const PetReport = () => {
                         <form 
                             method='POST' 
                             onSubmit={handleSubmit}
+                            enctype='multipart/form-data' 
                         >
                             <div className='filterBox'>
                                 <h2 className='categoryHeadline'>Status</h2>
@@ -157,8 +199,8 @@ const PetReport = () => {
                                     />
                                 </ul>
                             </div>
-                               <DragnDropZone />
-                               {/* <FileUploadTest /> */}
+                               {/* <DragnDropZone files={files} setFiles={setFiles}/> */}
+                               <ImageUpload files={files} setFiles={setFiles} />
                             <div className='filterBox'> 
                                 <h2 className='categoryHeadline'>Species</h2>
                                 <ul className='radioList'>
@@ -253,6 +295,7 @@ const PetReport = () => {
                     <form 
                         method='POST' 
                         onSubmit={handleSubmit}
+                        enctype='multipart/form-data' 
                     >
                         <div className='filterBox'>
                             <h2 className='categoryHeadline'>Status</h2>
@@ -277,7 +320,8 @@ const PetReport = () => {
                                 />
                             </ul>
                         </div>
-                           <DragnDropZone />
+                           {/* <DragnDropZone files={files} setFiles={setFiles} /> */}
+                           <ImageUpload files={files} setFiles={setFiles} />
                         <div className='filterBox'> 
                             <h2 className='categoryHeadline'>Species</h2>
                             <ul className='radioList'>

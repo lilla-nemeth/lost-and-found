@@ -7,9 +7,9 @@ export const ApiContext = createContext();
 export default function ApiContextProvider(props) {
 
     const { token, setToken } = useContext(AuthContext);
+    // TODO: put hooks back to components!!!!!!!!
     const [user, setUser] = useState('');
-    const [fileData, setFileData] = useState('');
-    
+
     let DEBUG = true;
 
     // if (DEBUG) console.log('!TOKEN', token, '!SETTOKEN', setToken, "logout", handleLogOut);
@@ -147,39 +147,93 @@ export default function ApiContextProvider(props) {
         };
         axios(options)
         .then(
-           res => {if (successCallback) successCallback(res.data.msg, successTimeout())}
+            res => {
+                console.log(res)
+               if (successCallback) successCallback(res.data.msg, successTimeout())
+        }
         )
         .catch(
-            err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
+            err => {if (errorCallback) errorCallback(
+                err &&
+                err.response &&
+                err.response.data &&
+                err.response.data.msg, 
+                errorTimeout())
+            }
         );
     }
 
     // TODO: change the url later:
     
-    function storeSingleImage() {
-        // const imgData = new FormData();
 
-        // imgData.append('image', fileData)
+    // callback inputs...
+    function storeSingleImage(fileArr, callback, errorCallback) {
 
-        // let options = {
-        //     method: 'post',
-        //     url: 'http://localhost:3003/single',
-        //     mode: 'cors',
+        const formData = new FormData();
+        if (DEBUG) console.log('file data', fileArr)
+
+        formData.append('image', fileArr);
+
+        if (DEBUG) console.log("form data from axios", formData)
+        let options = {
+            method: 'post',
+            url: 'http://localhost:3003/single',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'x-auth-token': token
+            },
+            data: formData
+            
+        };
+        axios(options)
+        .then(res => console.log('res', res))
+        .catch(err => console.log('err', err.message));
+
+        // This version also works:
+        // axios.post('http://localhost:3003/single', formData, {
         //     headers: {
-        //         // 'Content-Type': 'multipart/form-data',
-        //         'x-auth-token': token
-        //     },
-        //     data: {
-        //         imgData
+        //       'Content-Type': 'multipart/form-data',
+        //       'x-auth-token': token
         //     }
-        // };
-        // axios(options)
-        // .then(res => console.log('File sent successfully'))
-        // .catch(err => console.log(err.message));
+        // })
+    }
+
+    function storeMultipleImages(fileArr, callback, errorCallback) {
+        var DEBUG = true
+        const formData = new FormData();
+        if (DEBUG) console.log('file data', fileArr)
+
+        // fileArr.forEach((file) => {
+        //     formData.append("image", file);
+        // })
+        for(let i = 0; i < fileArr.length; i++) {
+            formData.append(`image${i}`, fileArr[i]);
+        }
+        if (DEBUG) console.log("form data from axios", formData)
+        let options = {
+            method: 'post',
+            url: 'http://localhost:3003/multiple',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'x-auth-token': token
+            },
+            data: formData
+            
+        };
+        axios(options)
+        .then(res => {
+            console.log('res', res)
+            if(callback) {
+                callback(res)
+            }
+        })
+        .catch(err => console.log('err', err.message));
     }
 
     return (
-        <ApiContext.Provider value={{registerUser, loginUser, getUsername, user, reportPet, token, storeSingleImage, setFileData}}>
+        <ApiContext.Provider value={{registerUser, loginUser, getUsername, user, reportPet, token, storeSingleImage, storeMultipleImages}}>
             { props.children }
         </ApiContext.Provider>
     )
