@@ -3,31 +3,53 @@ import { useDropzone } from 'react-dropzone';
 
 
 const styles = {
-    previewContainer: {
+    dropZone: {
+        border: '3px dashed rgb(34 102 96)', 
+        background: 'rgb(243 243 243)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+        height: '450px',
+        overflow: 'hidden',
+    },
+    dropText: {
+        width: '100%',
         display: 'flex',
         justifyContent: 'center',
-        position: 'relative',
-        height: '300px',
-        width: '300px',
-        overflow: 'hidden', 
-        position: 'absolute', 
+        alignItems: 'center',
+        font: '700 32px/1.2 "Poppins", sans-serif',
+        position: 'absolute',
+        top: '50%',
+        zIndex: '1',
     },
+    previewContainer: {
+        position: 'relative',
+        height: '450px',
+        overflow: 'hidden',
+        width: '100%',
+    },
+    previewImage: {
+        position: 'absolute',
+        top: '50%',    
+        left: '50%',
+        right: '50%',
+        margin: 'auto',
+        transform: 'translate( -50%, -50%)',
+        objectFit: 'cover',
+        minHeight: '100%',
+        minWidth: '100%',
+        maxHeight: '150%',
+        maxWidth: '150%',
+        zIndex: '2',
+    }
 }
 
-const DragnDropZone = () => {
-    // empty arr, we map it (below)
-    const [files, setFiles] = useState([]);
+const DragnDropZone = (props) => {
 
-    // console.log(files)
-
+    const { files, setFiles } = props;
+    
     let DEBUG = true;
-
-    // Object.assign() - usually merges multiple object elements, or can clone also
     
-    
-    // The Dropzone: 
-    // accepted file formats like: jpg, png...
-    // These are the hooks that Dropzone uses
     const {getRootProps, getInputProps} = useDropzone({
         accept: 'image/*',
         multiple: 'false',
@@ -40,8 +62,12 @@ const DragnDropZone = () => {
         }
     });
 
+    // console.log('files', files.length)
+    // files is an object:
+    // console.log('typeof files',typeof files) 
+
     // Place of Preview Image
-    const images = files.map(file => (
+    const images = files && files.map(file => (
         <div key={file.name}>
             <div style={styles.previewContainer}>
                 <img src={file.preview} style={styles.previewImage} alt='preview' />
@@ -49,27 +75,20 @@ const DragnDropZone = () => {
         </div>
     ));
 
-    
-
-    // WHAT I NEED FOR IMAGE UPLOADING:
-    // Frontend, Features: 
-    // upload bar with percent; Delete button; ImageUploader component 
-    // Backend: 
-    // multer npm middleware; put the middleware to petreport request; test with Postman; Cloudinary;   
+    // OTHER TASKS FOR IMAGE UPLOADING:
+    // Features (later): - upload bar with percent
+    // Backend: multer npm middleware --> put it into the petreport request; test with Postman; store the pics in Cloudinary;   
 
     return (  
-        <div style={{padding: '45px 0 0 0'}}>
+        <div>
             <div className='petPicture'>
-                <div style={{border: '3px dashed rgb(34 102 96)', background: 'rgb(243 243 243)'}} {...getRootProps()}>
+                <div style={styles.dropZone} {...getRootProps()}>
+                        {files.length > 0 && <button className='deleteButton' onClick={() => setFiles([])}>X</button>}
                         {images}
                         <input {...getInputProps()} type='file' name='image'/>
-                        <p style={{lineHeight: '350px',textAlign: 'center'}}>
-                            Drop files here
-                        </p>
+                        <p style={styles.dropText}>Drop files here</p>
                 </div>
             </div>
-            {/* Instead of button it could be an X (top right corner)*/}
-            {files.length > 0 && <button onClick={() => setFiles([])}>Delete</button>}
         </div>
     );
 }

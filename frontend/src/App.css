@@ -563,10 +563,32 @@ input[type=checkbox]:checked ~ label{
   border-radius: 0.25rem;
   background: rgb(34, 102, 96);
   color: #fff;
+  cursor: pointer;
+  border: none;
   /* z-index: 2; */
 }
 
 .formButton:hover {
+  background: rgb(71, 163, 156);
+}
+
+.deleteButton {
+  border-radius: 0.25rem;
+  background: rgb(34, 102, 96);
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+  z-index: 4;
+  font: 400 15px/1.2 'Poppins', sans-serif;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.deleteButton:hover {
   background: rgb(71, 163, 156);
 }
 
