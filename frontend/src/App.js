@@ -3,15 +3,14 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
 import './App.css';
 import Navbar from './components/Navbar';
-import Register from './components/login_register/Register';
-import Login from './components/login_register/Login';
+import Register from './components/login-register/Register';
+import Login from './components/login-register/Login';
 import PetHome from './components/lost_and_found/PetHome';
 import PetReport from './components/report_pet/PetReport';
 import PetLandingPage from './components/landing_page/PetLandingPage';
 import ImageUpload from './components/report_pet/ImageUpload';
 
 function App() {
-
   const { token } = useContext(AuthContext);
 
   let DEBUG = false;

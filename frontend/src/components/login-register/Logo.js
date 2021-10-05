@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ReactComponent as PetPawLogo } from '../assets/icons/dogpaw.svg';
-import { ReactComponent as NavBackArrow } from '../assets/icons/navbackarrow.svg';
+import { ReactComponent as PetPawLogo } from '../../assets/icons/dogpaw.svg';
+import { ReactComponent as NavBackArrow } from '../../assets/icons/navbackarrow.svg';
 
 const styles = {
     logoBox: {

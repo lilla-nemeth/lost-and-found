@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { ReactComponent as ArrowDown} from '../assets/icons/togglearrow.svg'
-import { ApiContext } from '../contexts/ApiContext';
+import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg'
+import { ApiContext } from '../../contexts/ApiContext';
 import createHistory from 'history/createBrowserHistory';
 import PetReportOptionalData from './PetReportOptionalData';
 
 // generic components:
-import RadioButton from './generic/RadioButton';
-import TextInput from './generic/TextInput';
-import TextArea from './generic/TextArea';
+import RadioButton from '../generic/RadioButton';
+import TextInput from '../generic/TextInput';
+import TextArea from '../generic/TextArea';
 
 import ImageUpload from './ImageUpload';
 import DragnDropZone from './DragnDropZone';

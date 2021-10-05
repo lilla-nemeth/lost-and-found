@@ -1,5 +1,5 @@
 import React from 'react';
-import Video from '../assets/video/dogvideo.mp4';
+import Video from '../../assets/video/dogvideo.mp4';
 
 const PetLandingPage = () => {
 

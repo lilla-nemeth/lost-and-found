@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { ReactComponent as PasswordIcon } from '../assets/icons/password.svg';
-import { ReactComponent as HidePasswordIcon } from '../assets/icons/hidepassword.svg';
-import { ReactComponent as ShowPasswordIcon } from '../assets/icons/showpassword.svg';
+import { ReactComponent as PasswordIcon } from '../../assets/icons/password.svg';
+import { ReactComponent as HidePasswordIcon } from '../../assets/icons/hidepassword.svg';
+import { ReactComponent as ShowPasswordIcon } from '../../assets/icons/showpassword.svg';
 
 const PasswordShowHide = (props) => {
     const { password, setPassword } = props;

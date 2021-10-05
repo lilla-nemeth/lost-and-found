@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import '../App.css';
-import img01 from '../assets/images/01backgroundImg.jpg';
-import img02 from '../assets/images/02backgroundImg.jpg';
-import img03 from '../assets/images/03backgroundImg.jpg';
-import img04 from '../assets/images/04backgroundImg.jpg';
-import img05 from '../assets/images/05backgroundImg.jpg';
-import img06 from '../assets/images/06backgroundImg.jpg';
-import img07 from '../assets/images/07backgroundImg.jpg';
+import '../../App.css';
+import img01 from '../../assets/images/01backgroundImg.jpg';
+import img02 from '../../assets/images/02backgroundImg.jpg';
+import img03 from '../../assets/images/03backgroundImg.jpg';
+import img04 from '../../assets/images/04backgroundImg.jpg';
+import img05 from '../../assets/images/05backgroundImg.jpg';
+import img06 from '../../assets/images/06backgroundImg.jpg';
+import img07 from '../../assets/images/07backgroundImg.jpg';
 
 // Need a function to decide: 
 // if the component is Login, starts the picture from e.g. the 4th element OR

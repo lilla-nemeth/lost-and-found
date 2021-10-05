@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { ApiContext } from '../contexts/ApiContext';
+import { ApiContext } from '../../contexts/ApiContext';
 
 const styles = {
     inputImage: {
