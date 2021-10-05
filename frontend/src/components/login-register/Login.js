@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ApiContext } from '../contexts/ApiContext';
+import { ApiContext } from '../../contexts/ApiContext';
 import createHistory from 'history/createBrowserHistory';
 import Logo from './Logo';
 import BackgroundImages from './BackgroundImages';
 import PasswordShowHide from './PasswordShowHide';
-import { ReactComponent as EmailIcon } from '../assets/icons/email.svg';
+import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
 
 const Login = () => {
     const [email, setEmail] = useState('');

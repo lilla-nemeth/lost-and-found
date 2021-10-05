@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import Sugar from 'sugar';
-import Loader from './Loader';
+import Loader from '../generic/Loader';
 import createHistory from 'history/createBrowserHistory';
 
 const PetList = () => {

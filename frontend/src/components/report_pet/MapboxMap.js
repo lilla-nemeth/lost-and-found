@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
+import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 

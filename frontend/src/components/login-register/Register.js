@@ -4,10 +4,10 @@ import { ApiContext } from '../../contexts/ApiContext';
 import createHistory from 'history/createBrowserHistory';
 import BackgroundImages from './BackgroundImages';
 import Logo from './Logo';
-import { ReactComponent as EmailIcon } from '../assets/icons/email.svg';
-import { ReactComponent as UsernameIcon } from '../assets/icons/username.svg';
-import { ReactComponent as PhoneIcon } from '../assets/icons/phone.svg';
 import PasswordShowHide from './PasswordShowHide';
+import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
+import { ReactComponent as UsernameIcon } from '../../assets/icons/username.svg';
+import { ReactComponent as PhoneIcon } from '../../assets/icons/phone.svg';
 
 const styles = {
     main: {

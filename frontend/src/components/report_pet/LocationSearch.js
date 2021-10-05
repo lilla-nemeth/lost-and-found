@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { ApiContext } from '../contexts/ApiContext';
-import { ReactComponent as SearchIcon } from '../assets/icons/search.svg';
+import { ApiContext } from '../../contexts/ApiContext';
+import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 
 const LocationSearch = () => {
     const [search, setSearch] = useState('');
