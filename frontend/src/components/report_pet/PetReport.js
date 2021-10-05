@@ -1,15 +1,18 @@
 import React, { useContext, useState } from 'react';
-import DragnDropZone from './DragnDropZone';
 import { ReactComponent as ArrowDown} from '../assets/icons/togglearrow.svg'
-import LocationSearch from './LocationSearch';
-import MapboxMap from './MapboxMap';
-import RadioButton from './generic/RadioButton';
-import PetReportOptionalData from './PetReportOptionalData';
 import { ApiContext } from '../contexts/ApiContext';
 import createHistory from 'history/createBrowserHistory';
+import PetReportOptionalData from './PetReportOptionalData';
+
+// generic components:
+import RadioButton from './generic/RadioButton';
 import TextInput from './generic/TextInput';
 import TextArea from './generic/TextArea';
+
 import ImageUpload from './ImageUpload';
+import DragnDropZone from './DragnDropZone';
+import LocationSearch from './LocationSearch';
+import MapboxMap from './MapboxMap';
 // import DropZoneTest from './DropZoneTest';
 
 const styles = {
@@ -25,7 +28,6 @@ const styles = {
         flexDirection: 'column',
         padding: '90px'
     },
-
 }
 
 // statusOptions -> reunited option comes later with post editing:
@@ -63,8 +65,8 @@ const PetReport = () => {
         event.preventDefault();
         console.log(files)
         //if the user uploaded an image, we save the img first, then send the report pet query
-        // storeMultipleImages(files, ()=> {
-        storeSingleImage(files, ()=> {
+        // storeSingleImage(files, ()=> {
+            storeMultipleImages(files, ()=> {
             reportPet({
                 petstatus: status,
                 petlocation: location,

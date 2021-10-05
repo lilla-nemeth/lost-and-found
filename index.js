@@ -8,7 +8,7 @@ require('dotenv').config();
 const path = require('path');
 
 
-const { authMw, isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid, upload } = require('./middlewares.js');
+const { authMw, isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid, uploadSingle, uploadMultiple } = require('./middlewares.js');
 
 let DEBUG = true;
 
@@ -294,22 +294,13 @@ app.post('/login', [isEmailValid], (request, response) => {
 
 
 // Multer file uploading: 1 image; multiple images
-app.post('/single', [authMw, upload.single('image')], (request, response) => {
-    // let userId = request.userId;
+app.post('/single', [authMw, uploadSingle], (request, response) => {
     let image = request.file;
-    // let fieldname = request.file.fieldname;
-    // let originalname = request.file.originalname;
-    // let encoding = request.file.encoding;
-    // let mimetype = request.file.mimetype;
-    // let destination = request.file.destination;
-    // let filename = request.file.filename;
-    // let path = request.file.path;
-    // let size = request.file.size;
 
     console.log('image', image);
     console.log('response', request.file);
-    // response.status(200).json({msg: 'File is successfully uploaded'})
-    response.status(200).json('File is successfully uploaded')
+
+    response.status(200).json({msg: 'File is successfully uploaded'})
 
     // pool.query('INSERT INTO pets(userId, fieldname, originalname, encoding, mimetype, destination, filename, path, size) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *', [userId, fieldname, originalname, encoding, mimetype, destination, filename, path, size])
     // pool.query('INSERT INTO pets(userId, image) VALUES ($1, $2) RETURNING *', [userId, image])
@@ -321,12 +312,27 @@ app.post('/single', [authMw, upload.single('image')], (request, response) => {
     // .catch((err) => response.status(400).json({msg: 'Failed to upload image'}))
 });
 
-app.post('/multiple', [authMw, upload.array('images', 6)], (request, response) => {
-    // let userId = request.userId;
+app.post('/multiple', authMw, (request, response) => {
     let images = request.files
+    
+    uploadMultiple(request, response, (error) => {
+        if (error) {
+            response.render('index', {
+                msg: error
+            });
+        } else {
+            console.log(images);
+            response.send('test')
+        }
+    });
 
-    console.log("multiple image upload", images);
-    response.status(200).json('Multiple file upload success')
+
+    
+    // let images = request.files
+
+    // console.log("multiple image upload", images);
+    // response.status(200).json({msg: 'Multiple file upload success'})
 });
+
 
 app.listen(port, () => console.log("Server is running on 3003"));

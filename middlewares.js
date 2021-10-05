@@ -153,19 +153,36 @@ function isPasswordValid (request, response, next) {
     next();
 }
 
-    // Multer file storage:
-    const fileStorageEngine = multer.diskStorage({
-        destination: (request, file, callback) => {
-            callback(null, './images')
-        },
-        filename: (request, file, callback) => {
-            callback(null, Date.now() + '--' + file.originalname)
-        }
-    });
-    
-    // Multer object:
-    const upload = multer({ storage: fileStorageEngine });
+    // Multer file storage - V1:
+    // const fileStorageEngine = multer.diskStorage({
+    //     destination: (request, file, callback) => {
+    //         callback(null, './images')
+    //     },
+    //     filename: (request, file, callback) => {
+    //         callback(null, Date.now() + '--' + file.originalname)
+    //     }
+    // });
 
+    // Multer file storage - V2:
+    const fileStorageEngine = multer.diskStorage({
+        destination: './images',
+        filename: function(request, file, callback) {
+            callback(null, file.fieldname + '--' + Date.now() + 
+            path.extname(file.originalname));
+        }
+    })
+
+    // Multer object
+    const uploadSingle = multer({ 
+        storage: fileStorageEngine,
+        limits:{fileSize: 1000000}
+     }).single('image');
+
+     // Multer object - multiple with array
+     const uploadMultiple = multer({ 
+        storage: fileStorageEngine,
+        limits:{fileSize: 1000000}
+     }).array('images', 6);
 
 
 module.exports = {
@@ -174,5 +191,6 @@ module.exports = {
     isEmailValid,
     isPhoneValid,
     isPasswordValid,
-    upload
+    uploadSingle,
+    uploadMultiple
 }
