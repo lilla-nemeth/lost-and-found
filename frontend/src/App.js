@@ -1,14 +1,14 @@
 import { useContext } from 'react';
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
 import './App.css';
 import Navbar from './components/Navbar';
-import Register from './components/Register';
-import Login from './components/Login';
-import PetHome from './components/PetHome';
-import PetReport from './components/PetReport';
-import PetLandingPage from './components/PetLandingPage';
-import ImageUpload from './components/ImageUpload';
+import Register from './components/login_register/Register';
+import Login from './components/login_register/Login';
+import PetHome from './components/lost_and_found/PetHome';
+import PetReport from './components/report_pet/PetReport';
+import PetLandingPage from './components/landing_page/PetLandingPage';
+import ImageUpload from './components/report_pet/ImageUpload';
 
 function App() {
 

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ApiContext } from '../contexts/ApiContext';
+import { ApiContext } from '../../contexts/ApiContext';
 import createHistory from 'history/createBrowserHistory';
 import BackgroundImages from './BackgroundImages';
 import Logo from './Logo';
