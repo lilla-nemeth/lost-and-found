@@ -8,7 +8,6 @@ import Login from './components/login-register/Login';
 import PetHome from './components/lost_and_found/PetHome';
 import PetReport from './components/report_pet/PetReport';
 import PetLandingPage from './components/landing_page/PetLandingPage';
-import ImageUpload from './components/report_pet/ImageUpload';
 
 function App() {
   const { token } = useContext(AuthContext);
@@ -50,10 +49,6 @@ function App() {
       <>
         <BrowserRouter>
           <Switch>
-          <Route path='/single'>
-              <Navbar />
-              <ImageUpload />
-            </Route>
             <Route path='/reportpet'>
               <Navbar />
               <PetReport />
@@ -73,7 +68,7 @@ function App() {
           </Switch>
         </BrowserRouter>
       </>
-      );
+    );
   }
 
 export default App;

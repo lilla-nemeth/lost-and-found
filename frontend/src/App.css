@@ -280,6 +280,72 @@ table {
   display: block;
 }
 
+.imageUploadContainer {
+  border: 3px dashed rgb(34 102 96); 
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 450px;
+  overflow: hidden;
+  background: rgba(183, 223, 219, 0.2);
+}
+
+
+/* TEST */
+.inputFile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputFile,
+.inputLabel {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 700 28px/1.2 "Poppins", sans-serif;
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* .inputfile:focus,
+.inputLabel:focus,
+.inputfile:hover,
+.inputLabel:hover {
+  background: #fff;
+} */
+
+.previewContainer {
+  position: relative;
+  height: 450px;
+  overflow: hidden;
+  width: 100%;
+  /* z-index: 3; */
+}
+
+.previewImage {
+  position: absolute;
+  top: 50%;    
+  left: 50%;
+  right: 50%;
+  margin: auto;
+  transform: translate( -50%, -50%);
+  object-fit: cover;
+  min-height: 100%;
+  min-width: 100%;
+  max-height: 150%;
+  max-width: 150%;
+  /* z-index: 3; */
+
+}
+
+
 .filterBox {
   padding: 0 0 45px;
 }
@@ -586,9 +652,27 @@ input[type=checkbox]:checked ~ label{
   position: absolute;
   top: 0;
   right: 0;
+  fill: #fff;
 }
 
-.deleteButton:hover {
+.changePictureButton {
+  border-radius: 0.25rem;
+  background: rgb(34, 102, 96);
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+  z-index: 4;
+  font: 400 15px/1.2 'Poppins', sans-serif;
+
+  position: absolute;
+  top: 0;
+  right: 70px;
+}
+
+.deleteButton:hover,
+.changePictureButton:hover {
   background: rgb(71, 163, 156);
 }
 

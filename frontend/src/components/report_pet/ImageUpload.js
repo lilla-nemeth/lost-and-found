@@ -1,66 +1,51 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { ApiContext } from '../../contexts/ApiContext';
-
-const styles = {
-    inputImage: {
-        // textAlign: 'center',
-        // lineHeight: '300px',
-    },
-    // if I want to see it when the picture dropped to the container
-    // inputText: {
-    //     position: 'absolute', 
-    //     top: '0', 
-    //     textAlign: 'center', 
-    //     right: '0', 
-    //     left: '0',
-    // },
-    previewContainer: {
-        display: 'flex',
-        // flexDirection: 'column',
-        justifyContent: 'center',
-        position: 'relative',
-        height: '300px',
-        width: '300px',
-        overflow: 'hidden', 
-        position: 'absolute', 
-        // bottom: '0',
-        // top: '0',
-    },
-    previewImage: {
-        // minWidth: '100%',
-        // opacity: '70%'
-
-    }
-}
+import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
 const ImageUpload = (props) => {
-    const { files, setFiles } = props;
+    const { files, setFiles, preview, setPreview } = props;
+
     const { storeSingleImage, storeMultipleImages } = useContext(ApiContext);
 
     let DEBUG = true;
 
     function fileChangeHandler(event) {
-        setFiles(event.target.files[0]);
+        setFiles((event.target.files[0]));
+        setPreview(URL.createObjectURL(event.target.files[0]));
     }
 
     function handleSubmit(event) {
         event.preventDefault(); 
 
-        // storeSingleImage(files, (res) => console.log(res));
-        storeMultipleImages(files, (res) => console.log(res));
+        storeSingleImage(files, (res) => console.log(res));
+        // storeMultipleImages(files, (res) => console.log(res));
 
     }
 
     if (DEBUG) console.log('files from ImageUpload', files);
+    if (DEBUG) console.log('files.length from ImageUpload', files.length);
 
     return (  
         <>
-            <form enctype='multipart/form-data' onSubmit={handleSubmit} style={{padding: '200px'}}>
-                <input name='image' type='file'enctype='multipart/form-data' onChange={fileChangeHandler}/>
-                {/* <button className='formButton' type='submit'>Submit file to Backend</button> */}
+            <form enctype='multipart/form-data' onSubmit={handleSubmit} className='imageUploadContainer'>
+                {!preview ? 
+                    <>
+                        <input type="file" name="image" id="file" enctype='multipart/form-data' className="inputFile" onChange={fileChangeHandler} />
+                        <label for="file" className='inputLabel'>Choose a file</label>
+                    </> 
+                    :
+                    <>
+                        <button className='deleteButton' onClick={() => setFiles([])}><DeleteIcon /></button>
+                        <div className='previewContainer'>
+                            <img src={preview} className='previewImage'/>
+                        </div> 
+                    </>
+                }
             </form>
         </>
     );
+
+
 }
  
 export default ImageUpload;

@@ -294,7 +294,7 @@ app.post('/login', [isEmailValid], (request, response) => {
 
 
 // Multer file uploading: 1 image; multiple images
-app.post('/single', [authMw, uploadSingle], (request, response) => {
+app.post('/single', [authMw, uploadSingle.single('image')], (request, response) => {
     let image = request.file;
 
     console.log('image', image);
@@ -302,37 +302,38 @@ app.post('/single', [authMw, uploadSingle], (request, response) => {
 
     response.status(200).json({msg: 'File is successfully uploaded'})
 
-    // pool.query('INSERT INTO pets(userId, fieldname, originalname, encoding, mimetype, destination, filename, path, size) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *', [userId, fieldname, originalname, encoding, mimetype, destination, filename, path, size])
-    // pool.query('INSERT INTO pets(userId, image) VALUES ($1, $2) RETURNING *', [userId, image])
-    
-    // response.status(200).send({msg: 'Single file upload success'}))
-    // response.status(200).json('/single api')
-    
     // .then((res) => response.status(200).json({msg: 'Single file upload success'}))
     // .catch((err) => response.status(400).json({msg: 'Failed to upload image'}))
 });
 
-app.post('/multiple', authMw, (request, response) => {
-    let images = request.files
-    
-    uploadMultiple(request, response, (error) => {
-        if (error) {
-            response.render('index', {
-                msg: error
-            });
-        } else {
-            console.log(images);
-            response.send('test')
-        }
-    });
-
-
-    
+app.post('/multiple', [authMw, uploadMultiple.single('image')], (request, response) => {
     // let images = request.files
 
     // console.log("multiple image upload", images);
     // response.status(200).json({msg: 'Multiple file upload success'})
 });
+
+// app.post('/multiple', authMw, (request, response) => {
+//     let images = request.files
+    
+//     uploadMultiple(request, response, (error) => {
+//         if (error) {
+//             response.render('index', {
+//                 msg: error
+//             });
+//         } else {
+//             console.log(images);
+//             response.send('test')
+//         }
+//     });
+
+
+    
+//     // let images = request.files
+
+//     // console.log("multiple image upload", images);
+//     // response.status(200).json({msg: 'Multiple file upload success'})
+// });
 
 
 app.listen(port, () => console.log("Server is running on 3003"));

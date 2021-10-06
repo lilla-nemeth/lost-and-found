@@ -35,6 +35,7 @@ const styles = {
 const PetReport = () => {
     const [status, setStatus] = useState('');
     const [files, setFiles] = useState([]);
+    const [preview, setPreview] = useState(null);
     const [location, setLocation] = useState('');
     const [species, setSpecies] = useState('');
     const [description, setDescription] = useState('');
@@ -63,10 +64,11 @@ const PetReport = () => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(files)
+
+        if (DEBUG) console.log(files);
         //if the user uploaded an image, we save the img first, then send the report pet query
-        // storeSingleImage(files, ()=> {
-            storeMultipleImages(files, ()=> {
+        // storeMultipleImages(files, ()=> {
+        storeSingleImage(files, ()=> {
             reportPet({
                 petstatus: status,
                 petlocation: location,
@@ -91,6 +93,7 @@ const PetReport = () => {
                     setErrorMsg('')
                     setLocation('')
                     setDescription('')
+                    setPreview(null)
                     //TODO hook for removing image
                 },
                 // successTimeout: () => (setTimeout(() => {
@@ -167,7 +170,7 @@ const PetReport = () => {
 
 
 
-    if (optionalInputs.display === 'hideInputs') {
+
         return (  
             <main style={styles.main}>
                 <section style={styles.section}>
@@ -202,7 +205,7 @@ const PetReport = () => {
                                 </ul>
                             </div>
                                {/* <DragnDropZone files={files} setFiles={setFiles}/> */}
-                               <ImageUpload files={files} setFiles={setFiles} />
+                               <ImageUpload files={files} setFiles={setFiles} preview={preview} setPreview={setPreview} />
                             <div className='filterBox'> 
                                 <h2 className='categoryHeadline'>Species</h2>
                                 <ul className='radioList'>
@@ -287,129 +290,6 @@ const PetReport = () => {
                 </section>
             </main>
         );
-    } 
-
-    return (  
-        <main style={styles.main}>
-            <section style={styles.section}>
-            <div className='formBox'>
-                    <h2 className='formHeadline'>Report Pet</h2>
-                    <form 
-                        method='POST' 
-                        onSubmit={handleSubmit}
-                        enctype='multipart/form-data' 
-                    >
-                        <div className='filterBox'>
-                            <h2 className='categoryHeadline'>Status</h2>
-                            <ul className='radioList'>
-                                <RadioButton 
-                                    id={'lost'} 
-                                    name={'status'} 
-                                    value={'lost'} 
-                                    checked={status === 'lost'} 
-                                    onChange={event => setStatus(event.target.value)} 
-                                    labelFor={'lost'} 
-                                    labelName={'Lost'}
-                                />
-                                <RadioButton 
-                                    id={'found'} 
-                                    name={'status'} 
-                                    value={'found'} 
-                                    checked={status === 'found'} 
-                                    onChange={event => setStatus(event.target.value)} 
-                                    labelFor={'found'} 
-                                    labelName={'Found'}  
-                                />
-                            </ul>
-                        </div>
-                           {/* <DragnDropZone files={files} setFiles={setFiles} /> */}
-                           <ImageUpload files={files} setFiles={setFiles} />
-                        <div className='filterBox'> 
-                            <h2 className='categoryHeadline'>Species</h2>
-                            <ul className='radioList'>
-                                <RadioButton 
-                                    id={'dog'} 
-                                    name={'species'} 
-                                    value={'dog'} 
-                                    checked={species === 'dog'} 
-                                    onChange={event => setSpecies(event.target.value)} 
-                                    labelFor={'dog'} 
-                                    labelName={'Dog'} 
-                                />
-                                <RadioButton 
-                                    id={'cat'} 
-                                    name={'species'} 
-                                    value={'cat'} 
-                                    checked={species === 'cat'} 
-                                    onChange={event => setSpecies(event.target.value)} 
-                                    labelFor={'cat'} 
-                                    labelName={'Cat'} 
-                                />
-                                <TextInput 
-                                    id={'otherSpecies'}
-                                    name={'species'}
-                                    value={species === 'dog' || species === 'cat' ? '' : species}
-                                    placeholder={'Other'}
-                                    onChange={event => setSpecies(event.target.value)}
-                                />
-                            </ul>
-                        </div>                   
-                        <div className='filterBox'> 
-                            <h2 className='categoryHeadline'>Location</h2>
-                            <TextInput 
-                                id={'location'}
-                                name={'location'}
-                                value={location}
-                                placeholder={'Location'}
-                                onChange={event => setLocation(event.target.value)}
-                            />
-                        </div>
-                        <TextArea 
-                            headlineName={'Description'}
-                            id={'description'} 
-                            name={description} 
-                            value={description} 
-                            placeholder={'Description'} 
-                            rows={'6'}
-                            cols={'10'}
-                            onChange={event => setDescription(event.target.value)} 
-                        />
-                        <div className='optionalButton' onClick={() => showOptionalInputs()}>
-                                Optional Data
-                            <div className='arrowDown'>
-                                <ArrowDown style={{height: '16px'}}/>
-                            </div>
-                        </div>
-                        <PetReportOptionalData 
-                            size={size} 
-                            setSize={setSize} 
-                            breed={breed} 
-                            setBreed={setBreed} 
-                            sex={sex} 
-                            setSex={setSex} 
-                            colors={colors} 
-                            setColors={setColors} 
-                            age={age} 
-                            setAge={setAge} 
-                            uniquefeature={uniquefeature} 
-                            setUniquefeature={setUniquefeature} 
-                            optionalInputs={optionalInputs} 
-                            style={{zIndex: 1}}
-                        />
-                        <div className='message'>
-                            <p className='errorMessage'>{errorMsg}</p>
-                            <p className='successMessage'>{successMsg}</p>
-                        </div>
-                        <div>
-                            <button className='formButton'>Report</button>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </main>
-    );
-
-    
 }
  
 export default PetReport;
