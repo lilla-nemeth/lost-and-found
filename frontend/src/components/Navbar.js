@@ -59,9 +59,6 @@ const Navbar = () => {
                             <li className='username'>Hi {user}!</li>
                         </ul>
                         <ul style={{display: 'flex', textAlign: 'right'}}>
-                            <li><Link className='navLink' to='/single'>Single Picture Uploading</Link></li>
-
-
                             <li><Link className='navLink' to='/lostandfound'>Lost & Found</Link></li>
                             <li><Link className='navLink' to='/reportpet'>Report Pet</Link></li>
                             <li><button className='logOutButton' onClick={() => handleLogOut()}>Log Out</button></li>
