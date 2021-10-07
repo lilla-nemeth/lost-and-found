@@ -100,7 +100,6 @@ export default function ApiContextProvider(props) {
     function reportPet({
         // TODO: other location data enable when mapbox is implemented
         token,
-        // id,
         petstatus,
         petlocation,
         species, 
@@ -125,7 +124,6 @@ export default function ApiContextProvider(props) {
                 'x-auth-token': token
             },
             data: {
-                // id,
                 petstatus,
                 petlocation,
                 species,
@@ -156,7 +154,7 @@ export default function ApiContextProvider(props) {
         );
     }
     
-    function storeSingleImage({petId, token, fileArr, callback, errorCallback}) {
+    function storeImage({petId, token, fileArr, callback, errorCallback}) {
 
         const formData = new FormData();
         if (DEBUG) console.log('file data', fileArr)
@@ -173,18 +171,14 @@ export default function ApiContextProvider(props) {
                 'x-auth-token': token
             },
             data: formData
-            
         };
+        
         axios(options)
-        .then(res => {console.log('storeSingleImage res from ApiContext', res)
-            // if(callback) {
-            //     callback(res)
-            // }
-        })
+        .then(res => console.log('storeSingleImage res from ApiContext', res))
         .catch(err => console.log('storeSingleImage err from ApiContext', err));
     }
 
-    function storeMultipleImages({token, fileArr, callback, errorCallback}) {
+    function storeImages({token, fileArr, successCallback, errorCallback}) {
         const formData = new FormData();
         if (DEBUG) console.log('file data', fileArr)
 
@@ -209,8 +203,8 @@ export default function ApiContextProvider(props) {
         axios(options)
         .then(res => {
             console.log('res', res)
-            if(callback) {
-                callback(res)
+            if(successCallback) {
+                successCallback(res)
             }
         })
         .catch(err => console.log('err', err.message));
@@ -253,7 +247,7 @@ export default function ApiContextProvider(props) {
     }
 
     return (
-        <ApiContext.Provider value={{registerUser, loginUser, getUsername, reportPet, storeSingleImage, storeMultipleImages, pagination, getAllPets}}>
+        <ApiContext.Provider value={{registerUser, loginUser, getUsername, reportPet, storeImage, storeImages, pagination, getAllPets}}>
             { props.children }
         </ApiContext.Provider>
     )

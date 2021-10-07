@@ -549,6 +549,20 @@ input[type=checkbox]:checked ~ label{
   justify-content: center;
 }
 
+.formMain {
+  font-family: "Poppins", sans-serif;
+  background: #B0F0EB;
+  overflow: hidden;
+}
+
+.formSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 90px;
+}
+
 .formBox {
   background: rgba(255,255,255); 
   padding: 50px; 
@@ -601,8 +615,10 @@ input[type=checkbox]:checked ~ label{
 }
 
 .hideInputs {
-	height: 0;
+	height: 0px;
 	opacity: 0;
+  z-index: -1000;
+  width: 0px;
 }
 
 .optionalButton {

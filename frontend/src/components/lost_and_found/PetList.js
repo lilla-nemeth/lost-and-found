@@ -17,7 +17,6 @@ const PetList = () => {
     // the default skip: 
     const [offset, setOffset] = useState(0);
 
-    // API res: setLoader(true)
     const [loader, setLoader] = useState(true);
 
     // success/error messages
@@ -30,9 +29,7 @@ const PetList = () => {
 
     let limit = 6;
 
-
     useEffect(() => {
-
         pagination({
             limit,
             offset,
@@ -46,38 +43,8 @@ const PetList = () => {
                     }
                 })
             },
-            errorCallback: err => console.log(err)
+            errorCallback: err => setSuccessMsg(err.data.msg)
         })
-
-
-        // let options = {
-        //     method: 'get',
-        //     url: `http://localhost:3003/pets/${limit}/${offset}`,
-        //     mode: 'cors',        
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // };
-        // let optionsTotal = {
-        //     method: 'get',
-        //     url: 'http://localhost:3003/pets/total',
-        //     mode: 'cors',        
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // }
-
-        // axios(options)
-        // .then((res) => {
-        //     setLoader(false);
-        //     setPets(res.data);
-        // })
-
-        // .then(() => {
-        //     axios(optionsTotal) 
-        //     .then((res) => setTotal(Number(res.data)))
-        // })
-        // .catch((err) => console.log(err));
     },[offset]);
 
     let numberOfPages = total / limit;  
