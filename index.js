@@ -128,12 +128,16 @@ app.post('/reportpet', authMw, (request, response) => {
     let postdescription = request.body.postdescription;
 
     pool.query('INSERT INTO pets(userId, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *', [userId, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription])
-    .then((res) => response.status(200).json(res.rows))
-    .then((res) => response.status(200).json({msg: 'Pet successfully added'}))
-
-    // .then((res) => console.log(res))
+    .then(
+        (res) => {
+            response.status(200).json({msg: 'Pet successfully added'})
+            response.status(200).json(res.rows)
+            // petId:
+            console.log(res.rows[0].id)
+        }
+    )
     .catch((err) => response.status(400).json({msg: 'Failed to add new pet'}))
-    // .catch((err) => console.log(err));
+
 });
 
 

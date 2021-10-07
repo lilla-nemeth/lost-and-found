@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { ApiContext } from '../../contexts/ApiContext';
 import createHistory from 'history/createBrowserHistory';
+import Loader from '../generic/Loader';
 import PetReportOptionalData from './PetReportOptionalData';
 import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg'
 
@@ -16,24 +17,12 @@ import LocationSearch from './LocationSearch';
 import MapboxMap from './MapboxMap';
 // import DropZoneTest from './DropZoneTest';
 
-const styles = {
-    main: {
-        fontFamily: '"Poppins", sans-serif',
-        background: '#B0F0EB',
-        overflow: 'hidden',
-    },
-    section: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        padding: '90px'
-    },
-}
 
 // statusOptions -> reunited option comes later with post editing:
 
 const PetReport = () => {
+    const [petId, setPetId] = useState(null);
+
     const [status, setStatus] = useState('');
     const [files, setFiles] = useState([]);
     const [preview, setPreview] = useState(null);
@@ -60,7 +49,7 @@ const PetReport = () => {
     // const [isRequired, setIsRequired] = useState(false);
 
     const { token } = useContext(AuthContext);
-    const { reportPet, storeSingleImage, storeMultipleImages } = useContext(ApiContext);
+    const { reportPet, storeImage, storeImages } = useContext(ApiContext);
 
     let DEBUG = true;
 
@@ -76,90 +65,11 @@ const PetReport = () => {
 
 
         if (files.length > 0) {
-            storeSingleImage(files, (res) => console.log(res));
+            storeImage(files, (res) => console.log(res));
         }
-
-        // storeMultipleImages(files, ()=> {
-        // storeSingleImage(files, ()=> {
-        //     reportPet({
-        //         token,
-        //         petstatus: status,
-        //         petlocation: location,
-        //         species,
-        //         petsize,
-        //         breed,
-        //         sex,
-        //         color: colors,
-        //         age,
-        //         uniquefeature,
-        //         postdescription: description,
-        //         successCallback: res => {
-        //             setSuccessMsg(res)
-        //             setPetSize('')
-        //             setStatus('')
-        //             setSpecies('')
-        //             setBreed('')
-        //             setSex('')
-        //             setColors('')
-        //             setAge('')
-        //             setUniquefeature('')
-        //             setErrorMsg('')
-        //             setLocation('')
-        //             setDescription('')
-        //             setPreview(null)
-        //             //TODO hook for removing image
-        //         },
-        //         // successTimeout: () => (setTimeout(() => {
-        //         //     setSuccessMsg('');
-        //         // }, 5000)),
-        //         errorCallback: err => setErrorMsg(err),
-        //         errorTimeout: () => (setTimeout(() => {
-        //             setErrorMsg('');
-        //         }, 5000))
-        //     })
-        // },
-        // (err)=> console.log(err)
-        // )
-
-        // reportPet({
-        //     token,
-        //     petstatus: status,
-        //     petlocation: location,
-        //     species,
-        //     petsize,
-        //     breed,
-        //     sex,
-        //     color: colors,
-        //     age,
-        //     uniquefeature,
-        //     postdescription: description,
-        //     successCallback: res => {
-        //         setSuccessMsg(res)
-        //         setPetSize('')
-        //         setStatus('')
-        //         setSpecies('')
-        //         setBreed('')
-        //         setSex('')
-        //         setColors('')
-        //         setAge('')
-        //         setUniquefeature('')
-        //         setErrorMsg('')
-        //         setLocation('')
-        //         setDescription('')
-        //         //TODO hook for removing image
-        //     },
-        //     // successTimeout: () => (setTimeout(() => {
-        //     //     setSuccessMsg('');
-        //     // }, 5000)),
-        //     errorCallback: err => setErrorMsg(err),
-        //     errorTimeout: () => (setTimeout(() => {
-        //         setErrorMsg('');
-        //     }, 5000))
-        // });
 
         reportPet({
             token,
-            // id,
             petstatus: status,
             petlocation: location,
             species,
@@ -171,8 +81,8 @@ const PetReport = () => {
             uniquefeature,
             postdescription: description,
             successCallback: res => {
-                console.log("does it run?")
                 setSuccessMsg(res)
+                setPetId(res.rows[0].id)
                 setPetSize('')
                 setStatus('')
                 setSpecies('')
@@ -184,11 +94,13 @@ const PetReport = () => {
                 setErrorMsg('')
                 setLocation('')
                 setDescription('')
-                //TODO hook for removing image
+                setPreview('')
+
+                // place here the storeImage function from below
             },
-            // successTimeout: () => (setTimeout(() => {
-            //     setSuccessMsg('');
-            // }, 5000)),
+            successTimeout: () => (setTimeout(() => {
+                setSuccessMsg('');
+            }, 5000)),
             errorCallback: err => setErrorMsg(err),
             errorTimeout: () => (setTimeout(() => {
                 setErrorMsg('');
@@ -196,6 +108,22 @@ const PetReport = () => {
         });
 
 
+        // Put this function into the successCallback of reportPet function:
+        storeImage({
+            petId,
+            token,
+            files,
+            successCallback: res => {
+                console.log(res)
+            },
+            successTimeout: () => (setTimeout(() => {
+                setSuccessMsg('');
+            }, 5000)),
+            errorCallback: err => setErrorMsg(err),
+            errorTimeout: () => (setTimeout(() => {
+                setErrorMsg('');
+            }, 5000))
+        });
     }
 
     createHistory().replace('/reportpet');
@@ -213,19 +141,28 @@ const PetReport = () => {
         }
     }
 
-    {/* <LocationSearch /> */}
-
-    {/* FIX THAT: remove the map refreshing whenever input event is active */}
+    {/* remove the map refreshing whenever input event is active */}
     {/* <MapboxMap /> */}
     
     {/* if I'll use Mapbox API and convert the input into a search bar */}
     {/* combine these parameters into 1 searchbar OR 
     separate them to several input fields: municipality, zip, district, street */}
 
+ 
+    const errorSuccessMessage = (
+        <div className='message'>
+            <p className='errorMessage'>{errorMsg}</p>
+            <p className='successMessage'>{successMsg}</p>
+        </div>
+    )
+    
+    
+            
+    
 
         return (  
-            <main style={styles.main}>
-                <section style={styles.section}>
+            <main className='formMain'>
+                <section className='formSection'>
                 <div className='formBox'>
                         <h2 className='formHeadline'>Report Pet</h2>
                         <form 
@@ -308,10 +245,7 @@ const PetReport = () => {
                                 cols={'10'}
                                 onChange={event => setDescription(event.target.value)} 
                             />
-                            <div className='message'>
-                                <p className='errorMessage'>{errorMsg}</p>
-                                <p className='successMessage'>{successMsg}</p>
-                            </div>
+                            { optionalInputs.display === 'hideInputs' ? errorSuccessMessage : '' }
                             <div className='optionalButton' onClick={() => showOptionalInputs()}>
                                     Optional Data
                                 <div className='arrowDown'>
@@ -334,6 +268,7 @@ const PetReport = () => {
                                 optionalInputs={optionalInputs} 
                                 style={{zIndex: 1}}
                             />
+                            { optionalInputs.display === 'showInputs' ? errorSuccessMessage : '' }
                             <div>
                                 <button className='formButton'>Report</button>
                             </div>
