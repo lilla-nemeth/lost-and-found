@@ -1,20 +1,12 @@
-import React, { createContext, useContext, useState } from 'react';
-import { AuthContext } from './AuthContext';
+import React, { createContext } from 'react';
 import axios from 'axios';
 
 export const ApiContext = createContext();
 
 export default function ApiContextProvider(props) {
 
-    const { token, setToken } = useContext(AuthContext);
-    // TODO: put hooks back to components!!!!!!!!
-    const [user, setUser] = useState('');
-
     let DEBUG = true;
 
-    // if (DEBUG) console.log('!TOKEN', token, '!SETTOKEN', setToken, "logout", handleLogOut);
-    
-    
     // named input when we have many arguments
     // cannot mess up the order (in object {})
     function registerUser({email, username, phone, pw, successCallback, successTimeout, errorCallback, errorTimeout}) {
@@ -43,8 +35,7 @@ export default function ApiContextProvider(props) {
         )
     }
 
-
-    function loginUser({email, pw, errorCallback, errorTimeout}) {
+    function loginUser({setToken, email, pw, errorCallback, errorTimeout}) {
 
         let options = {
             method: 'post',
@@ -80,7 +71,7 @@ export default function ApiContextProvider(props) {
         )
     }
 
-    function getUsername({errorCallback, errorTimeout}) {
+    function getUsername({token, setUser, errorCallback, errorTimeout}) {
 
         let options = {
             method: 'get',
@@ -106,13 +97,14 @@ export default function ApiContextProvider(props) {
         );
     }
 
-    // {successCallback, successTimeout, errorCallback, errorTimeout}
     function reportPet({
         // TODO: other location data enable when mapbox is implemented
+        token,
+        // id,
         petstatus,
         petlocation,
         species, 
-        size, 
+        petsize, 
         breed, 
         sex, 
         color, 
@@ -133,10 +125,11 @@ export default function ApiContextProvider(props) {
                 'x-auth-token': token
             },
             data: {
+                // id,
                 petstatus,
                 petlocation,
                 species,
-                size,
+                petsize,
                 breed,
                 sex,
                 color,
@@ -148,7 +141,7 @@ export default function ApiContextProvider(props) {
         axios(options)
         .then(
             res => {
-                console.log(res)
+                if (DEBUG) console.log(res)
                if (successCallback) successCallback(res.data.msg, successTimeout())
         }
         )
@@ -162,22 +155,18 @@ export default function ApiContextProvider(props) {
             }
         );
     }
-
-    // TODO: change the url later:
     
-
-    // callback inputs...
-    function storeSingleImage(fileArr, callback, errorCallback) {
+    function storeSingleImage({petId, token, fileArr, callback, errorCallback}) {
 
         const formData = new FormData();
         if (DEBUG) console.log('file data', fileArr)
 
         formData.append('image', fileArr);
 
-        if (DEBUG) console.log("form data from axios", formData)
+        if (DEBUG) console.log("form data from axios 1", formData)
         let options = {
             method: 'post',
-            url: 'http://localhost:3003/single',
+            url: `http://localhost:3003/single/${petId}`,
             mode: 'cors',
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -187,20 +176,15 @@ export default function ApiContextProvider(props) {
             
         };
         axios(options)
-        .then(res => console.log('res', res))
-        .catch(err => console.log('err', err.message));
-
-        // This version also works:
-        // axios.post('http://localhost:3003/single', formData, {
-        //     headers: {
-        //       'Content-Type': 'multipart/form-data',
-        //       'x-auth-token': token
-        //     }
-        // })
+        .then(res => {console.log('storeSingleImage res from ApiContext', res)
+            // if(callback) {
+            //     callback(res)
+            // }
+        })
+        .catch(err => console.log('storeSingleImage err from ApiContext', err));
     }
 
-    function storeMultipleImages(fileArr, callback, errorCallback) {
-        var DEBUG = true
+    function storeMultipleImages({token, fileArr, callback, errorCallback}) {
         const formData = new FormData();
         if (DEBUG) console.log('file data', fileArr)
 
@@ -232,8 +216,44 @@ export default function ApiContextProvider(props) {
         .catch(err => console.log('err', err.message));
     }
 
+    function pagination({limit, offset, successCallback, errorCallback}) {
+        let options = {
+            method: 'get',
+            url: `http://localhost:3003/pets/${limit}/${offset}`,
+            mode: 'cors',        
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        axios(options)
+        .then((res) => {
+            if (successCallback) successCallback(res)
+        })
+        .catch((err) => {
+            if (errorCallback) errorCallback(err)
+        })
+    }
+    
+    function getAllPets({successCallback, errorCallback}) {
+        let options = {
+            method: 'get',
+            url: 'http://localhost:3003/pets/total',
+            mode: 'cors',        
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        axios(options)
+        .then((res) => {
+            if (successCallback) successCallback(res)
+        })
+        .catch((err) => {
+            if (errorCallback) errorCallback(err)
+        })
+    }
+
     return (
-        <ApiContext.Provider value={{registerUser, loginUser, getUsername, user, reportPet, token, storeSingleImage, storeMultipleImages}}>
+        <ApiContext.Provider value={{registerUser, loginUser, getUsername, reportPet, storeSingleImage, storeMultipleImages, pagination, getAllPets}}>
             { props.children }
         </ApiContext.Provider>
     )

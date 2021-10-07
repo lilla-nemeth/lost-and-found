@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState, useContext } from 'react';
+import { ApiContext } from '../../contexts/ApiContext';
+import createHistory from 'history/createBrowserHistory';
+import Loader from '../generic/Loader';
 import { v4 as uuidv4 } from 'uuid';
 import Sugar from 'sugar';
-import Loader from '../generic/Loader';
-import createHistory from 'history/createBrowserHistory';
 
 const PetList = () => {
 
@@ -20,43 +20,64 @@ const PetList = () => {
     // API res: setLoader(true)
     const [loader, setLoader] = useState(true);
 
+    // success/error messages
+    const [successMsg, setSuccessMsg] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
+
+    const { pagination, getAllPets } = useContext(ApiContext);
+
     let DEBUG = true;
 
     let limit = 6;
 
-    // NOTE: put the API part into ApiContext!
-     
+
     useEffect(() => {
-        let options = {
-            method: 'get',
-            // to the frontend find the localhost necessary to add proxy in package.json (frontend folder)
-            url: `http://localhost:3003/pets/${limit}/${offset}`,
-            mode: 'cors',        
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-        let optionsTotal = {
-            method: 'get',
-            // to the frontend find the localhost necessary to add proxy in package.json (frontend folder)
-            url: 'http://localhost:3003/pets/total',
-            mode: 'cors',        
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-        axios(options)
-        .then((res) => {
-            setLoader(false);
-            setPets(res.data);
+
+        pagination({
+            limit,
+            offset,
+            successCallback: res => {
+                setLoader(false);
+                setPets(res.data);
+                getAllPets({
+                    successCallback: res => {
+                        setSuccessMsg(res.data.msg);
+                        setTotal(Number(res.data));
+                    }
+                })
+            },
+            errorCallback: err => console.log(err)
         })
-        // .then((res) => console.log(res.data))
-        .then(() => {
-            axios(optionsTotal) 
-            .then((res) => setTotal(Number(res.data)))
-            // .then((res) => console.log(res.data))
-        })
-        .catch((err) => console.log(err));
+
+
+        // let options = {
+        //     method: 'get',
+        //     url: `http://localhost:3003/pets/${limit}/${offset}`,
+        //     mode: 'cors',        
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // };
+        // let optionsTotal = {
+        //     method: 'get',
+        //     url: 'http://localhost:3003/pets/total',
+        //     mode: 'cors',        
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // }
+
+        // axios(options)
+        // .then((res) => {
+        //     setLoader(false);
+        //     setPets(res.data);
+        // })
+
+        // .then(() => {
+        //     axios(optionsTotal) 
+        //     .then((res) => setTotal(Number(res.data)))
+        // })
+        // .catch((err) => console.log(err));
     },[offset]);
 
     let numberOfPages = total / limit;  

@@ -7,8 +7,8 @@ import TextInput from '../generic/TextInput';
 
 const PetReportOptionalData = (props) => {
     const { 
-        size,
-        setSize,
+        petsize,
+        setPetSize,
         breed,
         setBreed,
         sex,
@@ -44,30 +44,30 @@ const PetReportOptionalData = (props) => {
                     <ul className='radioList'>
                         <RadioButton 
                             id={'small'} 
-                            name={'size'} 
+                            name={'petsize'} 
                             value={'small'} 
-                            checked={size === 'small'} 
-                            onChange={event => {setSize(event.target.value)}} 
+                            checked={petsize === 'small'} 
+                            onChange={event => {setPetSize(event.target.value)}} 
                             labelFor={'small'} 
                             labelName={'Small'}
                             required={isRequired} 
                         />
                         <RadioButton 
                             id={'medium'} 
-                            name={'size'} 
+                            name={'petsize'} 
                             value={'medium'} 
-                            checked={size === 'medium'} 
-                            onChange={event => {setSize(event.target.value)}} 
+                            checked={petsize === 'medium'} 
+                            onChange={event => {setPetSize(event.target.value)}} 
                             labelFor={'medium'} 
                             labelName={'Medium'}
                             required={isRequired} 
                         />
                         <RadioButton 
                             id={'large'} 
-                            name={'size'} 
+                            name={'petsize'} 
                             value={'large'} 
-                            checked={size === 'large'} 
-                            onChange={event => {setSize(event.target.value)}} 
+                            checked={petsize === 'large'} 
+                            onChange={event => {setPetSize(event.target.value)}} 
                             labelFor={'large'} 
                             labelName={'Large'} 
                             required={isRequired} 

@@ -1,3 +1,4 @@
+const { request } = require('express');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 
@@ -172,18 +173,23 @@ function isPasswordValid (request, response, next) {
     //     }
     // })
 
-    // Multer object
-    const uploadSingle = multer({ 
-        storage: fileStorageEngine,
-        limits:{fileSize: 1000000}
-     });
+    const fileFilter = (request, file, callback) => {
+        // reject a file
+        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+            callback(new Error('message'), true);      
+        } else {
+            callback(null, false);
+        }
+    };
 
-     // Multer object - multiple with array
-     const uploadMultiple = multer({ 
+    // Multer object - single
+    const upload = multer({ 
         storage: fileStorageEngine,
-        limits:{fileSize: 1000000}
-     });
-
+        limits: {
+            fileSize: 1024 * 1024 * 5
+        },
+        // fileFilter: fileFilter
+    });
 
 module.exports = {
     authMw,
@@ -191,6 +197,5 @@ module.exports = {
     isEmailValid,
     isPhoneValid,
     isPasswordValid,
-    uploadSingle,
-    uploadMultiple
+    upload
 }

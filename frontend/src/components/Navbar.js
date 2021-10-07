@@ -22,15 +22,18 @@ const styles = {
 }
 
 const Navbar = () => {
+    const [user, setUser] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
-    const { handleLogOut } = useContext(AuthContext);
-    const { token, getUsername, user } = useContext(ApiContext);
+    const { token, handleLogOut } = useContext(AuthContext);
+    const { getUsername } = useContext(ApiContext);
 
 
     let DEBUG = true;
     
     useEffect(() => {
             getUsername({
+                token,
+                setUser,
                 errorCallback: err => setErrorMsg(err),
                 errorTimeout: () => (setTimeout(() => {
                    setErrorMsg('');
