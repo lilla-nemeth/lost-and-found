@@ -22,7 +22,7 @@ CREATE TABLE pets (
     petstatus VARCHAR(50),
     petlocation VARCHAR(50),
     species VARCHAR(50),
-    size VARCHAR(50),
+    petsize VARCHAR(50),
     breed VARCHAR(255),
     sex VARCHAR(50),
     color VARCHAR(255),
@@ -38,3 +38,18 @@ CREATE TABLE pets (
     -- zip INT,
     -- district VARCHAR(50),
     -- street VARCHAR(50),
+
+
+CREATE TABLE images (
+    id SERIAL NOT NULL PRIMARY KEY,
+    petId INT NOT NULL REFERENCES pets,
+    filename TEXT UNIQUE NOT NULL,
+    filepath TEXT NOT NULL,
+    mimetype TEXT NOT NULL,
+    size BIGINT NOT NULL
+);
+
+
+
+
+    -- petId INT NOT NULL REFERENCES pets,

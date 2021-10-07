@@ -14,20 +14,25 @@ const ImageUpload = (props) => {
         setPreview(URL.createObjectURL(event.target.files[0]));
     }
 
-    function handleSubmit(event) {
-        event.preventDefault(); 
+    // function handleSubmit(event) {
+    //     event.preventDefault(); 
 
-        storeSingleImage(files, (res) => console.log(res));
+    //     if (files.length > 0) {
+    //         storeSingleImage(files, (res) => console.log(res));
+    //     }
         // storeMultipleImages(files, (res) => console.log(res));
 
-    }
+    // }
 
     if (DEBUG) console.log('files from ImageUpload', files);
     if (DEBUG) console.log('files.length from ImageUpload', files.length);
 
+    {/* <form enctype='multipart/form-data' onSubmit={handleSubmit} className='imageUploadContainer'> */}
+    {/* </form> */}
+
     return (  
         <>
-            <form enctype='multipart/form-data' onSubmit={handleSubmit} className='imageUploadContainer'>
+            <div className='imageUploadContainer'>
                 {!preview ? 
                     <>
                         <input type="file" name="image" id="file" enctype='multipart/form-data' className="inputFile" onChange={fileChangeHandler} />
@@ -41,10 +46,10 @@ const ImageUpload = (props) => {
                         </div> 
                     </>
                 }
-            </form>
+            </div>
+
         </>
     );
-
 
 }
  

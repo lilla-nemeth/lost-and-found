@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg'
+import { AuthContext } from '../../contexts/AuthContext';
 import { ApiContext } from '../../contexts/ApiContext';
 import createHistory from 'history/createBrowserHistory';
 import PetReportOptionalData from './PetReportOptionalData';
+import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg'
 
 // generic components:
 import RadioButton from '../generic/RadioButton';
@@ -46,7 +47,7 @@ const PetReport = () => {
     });
 
     // Optional Data:
-    const [size, setSize] = useState('');
+    const [petsize, setPetSize] = useState('');
     const [breed, setBreed] = useState('');
     const [sex, setSex] = useState('');
     const [colors, setColors] = useState([]);
@@ -56,8 +57,9 @@ const PetReport = () => {
     // success/error messages
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
-    const [isRequired, setIsRequired] = useState(false);
+    // const [isRequired, setIsRequired] = useState(false);
 
+    const { token } = useContext(AuthContext);
     const { reportPet, storeSingleImage, storeMultipleImages } = useContext(ApiContext);
 
     let DEBUG = true;
@@ -65,54 +67,66 @@ const PetReport = () => {
     function handleSubmit(event) {
         event.preventDefault();
 
-        if (DEBUG) console.log(files);
+        if (DEBUG) console.log('files from PetReport', files);
         //if the user uploaded an image, we save the img first, then send the report pet query
+        
+
+        // TODO: FIX: response status don't update to empty values
+        // TODO: FIX: reportPet API request works, but now with storeSingleImage
+
+
+        if (files.length > 0) {
+            storeSingleImage(files, (res) => console.log(res));
+        }
+
         // storeMultipleImages(files, ()=> {
-        storeSingleImage(files, ()=> {
-            reportPet({
-                petstatus: status,
-                petlocation: location,
-                species,
-                size,
-                breed,
-                sex,
-                color: colors,
-                age,
-                uniquefeature,
-                postdescription: description,
-                successCallback: res => {
-                    setSuccessMsg(res)
-                    setSize('')
-                    setStatus('')
-                    setSpecies('')
-                    setBreed('')
-                    setSex('')
-                    setColors('')
-                    setAge('')
-                    setUniquefeature('')
-                    setErrorMsg('')
-                    setLocation('')
-                    setDescription('')
-                    setPreview(null)
-                    //TODO hook for removing image
-                },
-                // successTimeout: () => (setTimeout(() => {
-                //     setSuccessMsg('');
-                // }, 5000)),
-                errorCallback: err => setErrorMsg(err),
-                errorTimeout: () => (setTimeout(() => {
-                    setErrorMsg('');
-                }, 5000))
-            })
-        },
-        (err)=> console.log(err)
-        )
+        // storeSingleImage(files, ()=> {
+        //     reportPet({
+        //         token,
+        //         petstatus: status,
+        //         petlocation: location,
+        //         species,
+        //         petsize,
+        //         breed,
+        //         sex,
+        //         color: colors,
+        //         age,
+        //         uniquefeature,
+        //         postdescription: description,
+        //         successCallback: res => {
+        //             setSuccessMsg(res)
+        //             setPetSize('')
+        //             setStatus('')
+        //             setSpecies('')
+        //             setBreed('')
+        //             setSex('')
+        //             setColors('')
+        //             setAge('')
+        //             setUniquefeature('')
+        //             setErrorMsg('')
+        //             setLocation('')
+        //             setDescription('')
+        //             setPreview(null)
+        //             //TODO hook for removing image
+        //         },
+        //         // successTimeout: () => (setTimeout(() => {
+        //         //     setSuccessMsg('');
+        //         // }, 5000)),
+        //         errorCallback: err => setErrorMsg(err),
+        //         errorTimeout: () => (setTimeout(() => {
+        //             setErrorMsg('');
+        //         }, 5000))
+        //     })
+        // },
+        // (err)=> console.log(err)
+        // )
 
         // reportPet({
+        //     token,
         //     petstatus: status,
         //     petlocation: location,
         //     species,
-        //     size,
+        //     petsize,
         //     breed,
         //     sex,
         //     color: colors,
@@ -121,7 +135,7 @@ const PetReport = () => {
         //     postdescription: description,
         //     successCallback: res => {
         //         setSuccessMsg(res)
-        //         setSize('')
+        //         setPetSize('')
         //         setStatus('')
         //         setSpecies('')
         //         setBreed('')
@@ -142,6 +156,46 @@ const PetReport = () => {
         //         setErrorMsg('');
         //     }, 5000))
         // });
+
+        reportPet({
+            token,
+            // id,
+            petstatus: status,
+            petlocation: location,
+            species,
+            petsize,
+            breed,
+            sex,
+            color: colors,
+            age,
+            uniquefeature,
+            postdescription: description,
+            successCallback: res => {
+                console.log("does it run?")
+                setSuccessMsg(res)
+                setPetSize('')
+                setStatus('')
+                setSpecies('')
+                setBreed('')
+                setSex('')
+                setColors('')
+                setAge('')
+                setUniquefeature('')
+                setErrorMsg('')
+                setLocation('')
+                setDescription('')
+                //TODO hook for removing image
+            },
+            // successTimeout: () => (setTimeout(() => {
+            //     setSuccessMsg('');
+            // }, 5000)),
+            errorCallback: err => setErrorMsg(err),
+            errorTimeout: () => (setTimeout(() => {
+                setErrorMsg('');
+            }, 5000))
+        });
+
+
     }
 
     createHistory().replace('/reportpet');
@@ -169,8 +223,6 @@ const PetReport = () => {
     separate them to several input fields: municipality, zip, district, street */}
 
 
-
-
         return (  
             <main style={styles.main}>
                 <section style={styles.section}>
@@ -179,7 +231,7 @@ const PetReport = () => {
                         <form 
                             method='POST' 
                             onSubmit={handleSubmit}
-                            enctype='multipart/form-data' 
+                            // enctype='multipart/form-data' 
                         >
                             <div className='filterBox'>
                                 <h2 className='categoryHeadline'>Status</h2>
@@ -267,8 +319,8 @@ const PetReport = () => {
                                 </div>
                             </div>
                             <PetReportOptionalData 
-                                size={size} 
-                                setSize={setSize} 
+                                petsize={petsize} 
+                                setPetSize={setPetSize} 
                                 breed={breed} 
                                 setBreed={setBreed} 
                                 sex={sex} 

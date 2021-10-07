@@ -6,6 +6,7 @@ import Logo from './Logo';
 import BackgroundImages from './BackgroundImages';
 import PasswordShowHide from './PasswordShowHide';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ const Login = () => {
 
     let DEBUG = true;
 
+    const { setToken } = useContext(AuthContext);
     const { loginUser } = useContext(ApiContext);
 
     // if (DEBUG) console.log(token, setToken)
@@ -23,6 +25,7 @@ const Login = () => {
             event.preventDefault();
     
             loginUser({
+                setToken,
                 email,
                 pw: password,
                 errorCallback: err => setErrorMsg(err),
