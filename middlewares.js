@@ -183,13 +183,15 @@ function isPasswordValid (request, response, next) {
     };
 
     // Multer object - single
-    const upload = multer({ 
-        storage: fileStorageEngine,
-        limits: {
-            fileSize: 1024 * 1024 * 5
-        },
-        // fileFilter: fileFilter
-    });
+    // const upload = multer({ 
+    //     storage: fileStorageEngine,
+    //     limits: {
+    //         fileSize: 1024 * 1024 * 5
+    //     },
+    //     // fileFilter: fileFilter
+    // });
+
+    const upload = multer();
 
 module.exports = {
     authMw,

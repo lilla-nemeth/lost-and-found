@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { ApiContext } from '../../contexts/ApiContext';
 import createHistory from 'history/createBrowserHistory';
-import Loader from '../generic/Loader';
 import PetReportOptionalData from './PetReportOptionalData';
 import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg'
 
@@ -18,14 +17,12 @@ import MapboxMap from './MapboxMap';
 // import DropZoneTest from './DropZoneTest';
 
 
-// statusOptions -> reunited option comes later with post editing:
+// petstatusOptions -> reunited option comes later with post editing:
 
 const PetReport = () => {
-    const [petId, setPetId] = useState(null);
-
+    const [preview, setPreview] = useState(null);
     const [status, setStatus] = useState('');
     const [files, setFiles] = useState([]);
-    const [preview, setPreview] = useState(null);
     const [location, setLocation] = useState('');
     const [species, setSpecies] = useState('');
     const [description, setDescription] = useState('');
@@ -36,7 +33,7 @@ const PetReport = () => {
     });
 
     // Optional Data:
-    const [petsize, setPetSize] = useState('');
+    const [size, setSize] = useState('');
     const [breed, setBreed] = useState('');
     const [sex, setSex] = useState('');
     const [colors, setColors] = useState([]);
@@ -49,31 +46,22 @@ const PetReport = () => {
     // const [isRequired, setIsRequired] = useState(false);
 
     const { token } = useContext(AuthContext);
-    const { reportPet, storeImage, storeImages } = useContext(ApiContext);
+    const { reportPet } = useContext(ApiContext);
 
     let DEBUG = true;
 
     function handleSubmit(event) {
         event.preventDefault();
 
-        if (DEBUG) console.log('files from PetReport', files);
-        //if the user uploaded an image, we save the img first, then send the report pet query
-        
-
-        // TODO: FIX: response status don't update to empty values
-        // TODO: FIX: reportPet API request works, but now with storeSingleImage
-
-
-        if (files.length > 0) {
-            storeImage(files, (res) => console.log(res));
-        }
+        if (DEBUG) console.log('files - PetReport', files);
 
         reportPet({
             token,
+            img: files,
             petstatus: status,
             petlocation: location,
             species,
-            petsize,
+            petsize: size,
             breed,
             sex,
             color: colors,
@@ -81,9 +69,9 @@ const PetReport = () => {
             uniquefeature,
             postdescription: description,
             successCallback: res => {
+                console.log('res from PetReport')
                 setSuccessMsg(res)
-                setPetId(res.rows[0].id)
-                setPetSize('')
+                setSize('')
                 setStatus('')
                 setSpecies('')
                 setBreed('')
@@ -95,31 +83,13 @@ const PetReport = () => {
                 setLocation('')
                 setDescription('')
                 setPreview('')
-
-                // place here the storeImage function from below
+                // setPetId(res.rows[0].id)
             },
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');
             }, 5000)),
-            errorCallback: err => setErrorMsg(err),
-            errorTimeout: () => (setTimeout(() => {
-                setErrorMsg('');
-            }, 5000))
-        });
-
-
-        // Put this function into the successCallback of reportPet function:
-        storeImage({
-            petId,
-            token,
-            files,
-            successCallback: res => {
-                console.log(res)
-            },
-            successTimeout: () => (setTimeout(() => {
-                setSuccessMsg('');
-            }, 5000)),
-            errorCallback: err => setErrorMsg(err),
+            // errorCallback: err => setErrorMsg(err),
+            errorCallback: err => console.log('err from PetReport', err),
             errorTimeout: () => (setTimeout(() => {
                 setErrorMsg('');
             }, 5000))
@@ -148,17 +118,12 @@ const PetReport = () => {
     {/* combine these parameters into 1 searchbar OR 
     separate them to several input fields: municipality, zip, district, street */}
 
- 
     const errorSuccessMessage = (
         <div className='message'>
             <p className='errorMessage'>{errorMsg}</p>
             <p className='successMessage'>{successMsg}</p>
         </div>
     )
-    
-    
-            
-    
 
         return (  
             <main className='formMain'>
@@ -168,7 +133,7 @@ const PetReport = () => {
                         <form 
                             method='POST' 
                             onSubmit={handleSubmit}
-                            // enctype='multipart/form-data' 
+                            encType='multipart/form-data' 
                         >
                             <div className='filterBox'>
                                 <h2 className='categoryHeadline'>Status</h2>
@@ -253,8 +218,8 @@ const PetReport = () => {
                                 </div>
                             </div>
                             <PetReportOptionalData 
-                                petsize={petsize} 
-                                setPetSize={setPetSize} 
+                                size={size} 
+                                setSize={setSize} 
                                 breed={breed} 
                                 setBreed={setBreed} 
                                 sex={sex} 

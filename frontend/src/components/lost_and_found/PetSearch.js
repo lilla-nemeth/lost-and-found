@@ -80,14 +80,14 @@ const PetSearchBox = () => {
                         <h2 style={styles.speciesCategory}>Status</h2>
                         <ul className='radioList'>
                             <li className='checkboxOption'>
-                                <input type='checkbox' id='lost' name='status' />
+                                <input type='checkbox' id='lost' name='petstatus' />
                                 <label for='lost' className='checkboxContainer'>
                                     Lost
                                 </label>
                                 <div class="checkboxCheck"><div class="checkboxCheckInside"></div></div>
                             </li>
                             <li className='checkboxOption'>
-                                <input type='checkbox' id='found' name='status' />
+                                <input type='checkbox' id='found' name='petstatus' />
                                 <label for='found' className='checkboxContainer'>
                                     Found
                                 </label>
@@ -97,7 +97,7 @@ const PetSearchBox = () => {
                                 </div>
                             </li>
                             <li className='checkboxOption'>
-                                <input type='checkbox' id='reunited' name='status' />
+                                <input type='checkbox' id='reunited' name='petstatus' />
                                 <label for='reunited' className='checkboxContainer'>
                                     Reunited
                                 </label>
