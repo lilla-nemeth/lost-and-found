@@ -113,9 +113,9 @@ app.get('/username', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch user'}));
 })
 
-// user dashboard - post/report a pet
-app.post('/reportpet', authMw, (request, response) => {
-    let userId = request.userId;
+// user dashboard - update one pet's datas (by id):
+app.put('/editpet/:id', authMw, (request, response) => {
+    let id = request.params.id;
     let petstatus = request.body.petstatus;
     let petlocation = request.body.petlocation;
     let species = request.body.species;
@@ -127,63 +127,7 @@ app.post('/reportpet', authMw, (request, response) => {
     let uniquefeature = request.body.uniquefeature;
     let postdescription = request.body.postdescription;
 
-    pool.query('INSERT INTO pets(userId, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *', [userId, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription])
-    .then(
-        (res) => {
-            response.status(200).json({msg: 'Pet successfully added'})
-            response.status(200).json(res.rows)
-            // petId:
-            console.log(res.rows[0].id)
-        }
-    )
-    .catch((err) => response.status(400).json({msg: 'Failed to add new pet'}))
-
-});
-
-
-// make a GET request also for images!
-
-// Multer 1 file:
-app.post('/single/:petId', [authMw, upload.single('image')], (request, response) => {
-    // let image = request.file;
-    let petId = request.params.petId;
-    let filename = request.file.filename;
-    let filepath = request.file.path;
-    let mimetype = request.file.mimetype;
-    let size = request.file.size;
-    console.log("PETID FROM Backend", petId)
-
-    // console.log('image', image);
-    console.log('--filename, mimetype, size--', filename, mimetype, size);
-    console.log('--filepath--', filepath);
-
-    pool.query('INSERT INTO images(petId, filename, filepath, mimetype, size) VALUES ($1, $2, $3, $4, $5) RETURNING *', [petId, filename, filepath, mimetype, size])
-    .then((res) => response.status(200).json({msg: 'Image is successfully uploaded'}))
-    .catch((err) => response.status(400).json({msg: 'Failed to upload the image'}))
-});
-
-// Multer mulitple files:
-app.post('/multiple', [authMw, upload.array('images', 7)], (request, response) => {
-    let images = request.files
-
-    console.log("multiple image upload", images);
-    response.status(200).json({msg: 'Multiple file upload success'})
-});
-
-// user dashboard - update one pet's datas (by id):
-app.put('/editpet/:id', authMw, (request, response) => {
-    let id = request.params.id;
-    let petstatus = request.body.petstatus;
-    let petlocation = request.body.petlocation;
-    let petsize = request.body.petsize;
-    let breed = request.body.breed;
-    let sex = request.body.sex;
-    let color = request.body.color;
-    let age = request.body.age;
-    let uniquefeature = request.body.uniquefeature;
-    let postdescription = request.body.postdescription;
-
-    pool.query('UPDATE pets SET petstatus=$1, petlocation=$2, petsize=$3, breed=$4, sex=$5, color=$6, age=$7, uniquefeature=$8, postdescription=$9 WHERE id=$10', [petstatus, petlocation, petsize, breed, sex, color, age, uniquefeature, postdescription, id])
+    pool.query('UPDATE pets SET petstatus=$1, petlocation=$2, species=$3, petsize=$4, breed=$5, sex=$6, color=$7, age=$8, uniquefeature=$9, postdescription=$10 WHERE id=$11', [petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription, id])
     .then((res) => response.status(200).json({msg: 'Post is successfully updated'}))
     .catch((err) => response.status(400).json({msg: 'Failed to update your post'}));
 });
@@ -274,5 +218,89 @@ app.post('/login', [isEmailValid], (request, response) => {
     })
     .catch((err) => response.status(400).json({msg: 'User not found'}))
 });
+
+// user dashboard - post/report a pet
+// app.post('/reportpet', authMw, (request, response) => {
+app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
+    let userId = request.userId;
+    let img = request.file.buffer.toString('base64');
+    let petstatus = request.body.petstatus;
+    let petlocation = request.body.petlocation;
+    let species = request.body.species;
+    let petsize = request.body.petsize;
+    let breed = request.body.breed;
+    let sex = request.body.sex;
+    let color = request.body.color;
+    let age = request.body.age;
+    let uniquefeature = request.body.uniquefeature;
+    let postdescription = request.body.postdescription;
+
+    if (DEBUG) console.log('request.file + toString ~',request.file.buffer.toString('base64'));
+
+    // pool.query('INSERT INTO pets(userId, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *', [userId, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription])
+    pool.query('INSERT INTO pets(userId, img, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *', [userId, img, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription])
+    .then(
+        (res) => {
+            response.status(200).json({msg: 'Pet successfully added'})
+            response.status(200).json(res.rows)
+            console.log(res)
+            // petId:
+            // console.log(res.rows[0].id)
+        }
+    )
+    .catch((err) => response.status(400).json({msg: 'Failed to add new pet'}))
+    // .catch((err) => console.log(err))
+
+});
+
+// make a GET request also for images!
+
+// Multer 1 file:
+// app.post('/single/:petId', [authMw, upload.single('image')], (request, response) => {
+//     // let image = request.file;
+//     let petId = request.params.petId;
+//     let filename = request.file.filename;
+//     let filepath = request.file.path;
+//     let mimetype = request.file.mimetype;
+//     let size = request.file.size;
+//     console.log("PETID FROM Backend", petId)
+
+//     // console.log('image', image);
+//     console.log('--filename, mimetype, size--', filename, mimetype, size);
+//     console.log('--filepath--', filepath);
+
+//     pool.query('INSERT INTO images(petId, filename, filepath, mimetype, size) VALUES ($1, $2, $3, $4, $5) RETURNING *', [petId, filename, filepath, mimetype, size])
+//     .then((res) => response.status(200).json({msg: 'Image is successfully uploaded'}))
+//     .catch((err) => response.status(400).json({msg: 'Failed to upload the image'}))
+// });
+
+
+// // TEST IMAGE POST:
+// app.post('/image', upload.single('file'), (req, res) => {
+//     let content = req.body.content
+//     console.log('req.file--',req.file)
+//     let img = req.file.buffer.toString('base64')
+//     console.log('img--', img)
+
+//     pool.query("insert into post(content, imgHere) values ($1, $2)", [content, img])
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err))
+
+// })
+
+// // TEST IMAGE GET:
+// app.get('/image', (req, res) => {
+//    pool.query("select * from post")
+//    .then(response => res.json(response.rows))
+//    .catch(err => res.json(err))
+// })
+
+// // Multer mulitple files:
+// app.post('/multiple', [authMw, upload.array('images', 7)], (request, response) => {
+//     let images = request.files
+
+//     console.log("multiple image upload", images);
+//     response.status(200).json({msg: 'Multiple file upload success'})
+// });
 
 app.listen(port, () => console.log("Server is running on 3003"));

@@ -14,11 +14,11 @@ CREATE TABLE users (
     modified TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-
 -- add place for object
 CREATE TABLE pets (
     id SERIAL PRIMARY KEY,
     userId INT NOT NULL REFERENCES users,
+    img TEXT,
     petstatus VARCHAR(50),
     petlocation VARCHAR(50),
     species VARCHAR(50),
@@ -40,16 +40,20 @@ CREATE TABLE pets (
     -- street VARCHAR(50),
 
 
-CREATE TABLE images (
-    id SERIAL NOT NULL PRIMARY KEY,
-    petId INT NOT NULL REFERENCES pets,
-    filename TEXT UNIQUE NOT NULL,
-    filepath TEXT NOT NULL,
-    mimetype TEXT NOT NULL,
-    size BIGINT NOT NULL
-);
+-- CREATE TABLE images (
+--     id SERIAL NOT NULL PRIMARY KEY,
+--     petId INT NOT NULL REFERENCES pets,
+--     filename TEXT UNIQUE NOT NULL,
+--     filepath TEXT NOT NULL,
+--     mimetype TEXT NOT NULL,
+--     size BIGINT NOT NULL
+-- );
 
 
+-- CREATE TABLE post (
+--     id SERIAL NOT NULL PRIMARY KEY,
+--     content VARCHAR(255),
+--     imgHERE TEXT NOT NULL
+-- );
 
-
-    -- petId INT NOT NULL REFERENCES pets,
+    -- img TEXT NOT NULL,

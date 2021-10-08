@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
-import { ApiContext } from '../../contexts/ApiContext';
+import React from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
 const ImageUpload = (props) => {
     const { files, setFiles, preview, setPreview } = props;
-
-    const { storeSingleImage, storeMultipleImages } = useContext(ApiContext);
 
     let DEBUG = true;
 
@@ -14,28 +11,19 @@ const ImageUpload = (props) => {
         setPreview(URL.createObjectURL(event.target.files[0]));
     }
 
-    // function handleSubmit(event) {
-    //     event.preventDefault(); 
-
-    //     if (files.length > 0) {
-    //         storeSingleImage(files, (res) => console.log(res));
-    //     }
-        // storeMultipleImages(files, (res) => console.log(res));
-
-    // }
-
     if (DEBUG) console.log('files from ImageUpload', files);
     if (DEBUG) console.log('files.length from ImageUpload', files.length);
 
-    {/* <form enctype='multipart/form-data' onSubmit={handleSubmit} className='imageUploadContainer'> */}
-    {/* </form> */}
+    // removed from input, placed into the form tag (PetReport):
+    // enctype='multipart/form-data'
+
 
     return (  
         <>
             <div className='imageUploadContainer'>
                 {!preview ? 
                     <>
-                        <input type="file" name="image" id="file" enctype='multipart/form-data' className="inputFile" onChange={fileChangeHandler} />
+                        <input type="file" name="file" id="file" className="inputFile" onChange={fileChangeHandler} />
                         <label for="file" className='inputLabel'>Choose a file</label>
                     </> 
                     :

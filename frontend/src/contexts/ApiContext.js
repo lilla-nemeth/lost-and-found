@@ -100,6 +100,7 @@ export default function ApiContextProvider(props) {
     function reportPet({
         // TODO: other location data enable when mapbox is implemented
         token,
+        img,
         petstatus,
         petlocation,
         species, 
@@ -115,6 +116,21 @@ export default function ApiContextProvider(props) {
         errorCallback,
         errorTimeout
     }) {
+
+        const data = new FormData();
+    
+        data.append('file', img);
+        data.append('petstatus', petstatus);
+        data.append('petlocation', petlocation);
+        data.append('species', species);
+        data.append('petsize', petsize);
+        data.append('breed', breed);
+        data.append('sex', sex);
+        data.append('color', color);
+        data.append('age', age);
+        data.append('uniquefeature', uniquefeature);
+        data.append('postdescription', postdescription);
+
         let options = {
             method: 'post',
             url: 'http://localhost:3003/reportpet',
@@ -123,18 +139,7 @@ export default function ApiContextProvider(props) {
                 'Content-Type': 'application/json',
                 'x-auth-token': token
             },
-            data: {
-                petstatus,
-                petlocation,
-                species,
-                petsize,
-                breed,
-                sex,
-                color,
-                age,
-                uniquefeature,
-                postdescription
-            }
+            data: data
         };
         axios(options)
         .then(
@@ -154,61 +159,62 @@ export default function ApiContextProvider(props) {
         );
     }
     
-    function storeImage({petId, token, fileArr, callback, errorCallback}) {
+    // function storeImage({petId, token, fileArr, callback, errorCallback}) {
 
-        const formData = new FormData();
-        if (DEBUG) console.log('file data', fileArr)
+    //     const formData = new FormData();
+    //     if (DEBUG) console.log('file data', fileArr)
 
-        formData.append('image', fileArr);
+    //     formData.append('image', fileArr);
 
-        if (DEBUG) console.log("form data from axios 1", formData)
-        let options = {
-            method: 'post',
-            url: `http://localhost:3003/single/${petId}`,
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'x-auth-token': token
-            },
-            data: formData
-        };
+    //     if (DEBUG) console.log("form data from axios 1", formData)
+    //     let options = {
+    //         method: 'post',
+    //         url: `http://localhost:3003/single/${petId}`,
+    //         mode: 'cors',
+    //         headers: {
+    //             'Content-Type': 'multipart/form-data',
+    //             'x-auth-token': token
+    //         },
+    //         data: formData
+    //     };
         
-        axios(options)
-        .then(res => console.log('storeSingleImage res from ApiContext', res))
-        .catch(err => console.log('storeSingleImage err from ApiContext', err));
-    }
+    //     axios(options)
+    //     .then(res => console.log('storeSingleImage res from ApiContext', res))
+    //     .catch(err => console.log('storeSingleImage err from ApiContext', err));
+    // }
 
-    function storeImages({token, fileArr, successCallback, errorCallback}) {
-        const formData = new FormData();
-        if (DEBUG) console.log('file data', fileArr)
+    // function storeImages({token, fileArr, successCallback, errorCallback}) {
+    //     const formData = new FormData();
+    //     if (DEBUG) console.log('file data', fileArr)
 
-        // fileArr.forEach((file) => {
-        //     formData.append("image", file);
-        // })
-        for(let i = 0; i < fileArr.length; i++) {
-            formData.append(`image${i}`, fileArr[i]);
-        }
-        if (DEBUG) console.log("form data from axios", formData)
-        let options = {
-            method: 'post',
-            url: 'http://localhost:3003/multiple',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'x-auth-token': token
-            },
-            data: formData
+    //     // fileArr.forEach((file) => {
+    //     //     formData.append("image", file);
+    //     // })
+    //     for(let i = 0; i < fileArr.length; i++) {
+    //         formData.append(`image${i}`, fileArr[i]);
+    //     }
+    //     if (DEBUG) console.log("form data from axios", formData)
+    //     let options = {
+    //         method: 'post',
+    //         url: 'http://localhost:3003/multiple',
+    //         mode: 'cors',
+    //         headers: {
+    //             'Content-Type': 'multipart/form-data',
+    //             'x-auth-token': token
+    //         },
+    //         data: formData
             
-        };
-        axios(options)
-        .then(res => {
-            console.log('res', res)
-            if(successCallback) {
-                successCallback(res)
-            }
-        })
-        .catch(err => console.log('err', err.message));
-    }
+    //     };
+    //     axios(options)
+    //     .then(res => {
+    //         console.log('res', res)
+    //         if(successCallback) {
+    //             successCallback(res)
+    //         }
+    //     })
+    //     .catch(err => console.log('err', err.message));
+    // }
+
 
     function pagination({limit, offset, successCallback, errorCallback}) {
         let options = {
@@ -247,7 +253,7 @@ export default function ApiContextProvider(props) {
     }
 
     return (
-        <ApiContext.Provider value={{registerUser, loginUser, getUsername, reportPet, storeImage, storeImages, pagination, getAllPets}}>
+        <ApiContext.Provider value={{registerUser, loginUser, getUsername, reportPet, pagination, getAllPets}}>
             { props.children }
         </ApiContext.Provider>
     )

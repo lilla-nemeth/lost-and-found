@@ -68,10 +68,10 @@ const PetList = () => {
     }
 
     // petStatus helper function:
-    function petStatus(status) {
-        if (status === 'found') {
+    function petStatus(petstatus) {
+        if (petstatus === 'found') {
             return 'Found'
-        } else if (status === 'lost') {
+        } else if (petstatus === 'lost') {
             return 'Lost';
         } else {
             return 'Reunited';
@@ -100,7 +100,7 @@ const PetList = () => {
                     <div className='petCard' key={pet.id}>
                         <div className='petCardInner'>
                             <div className='petListPicture'>
-                                Place of Picture
+                                <img src={`data:image/jpg;base64,${pet.img}`} />
                             </div>
                             <div className='petTextBox'>
                                 <div className='petStatus'>
