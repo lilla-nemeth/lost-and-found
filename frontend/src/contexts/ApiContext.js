@@ -159,63 +159,6 @@ export default function ApiContextProvider(props) {
         );
     }
     
-    // function storeImage({petId, token, fileArr, callback, errorCallback}) {
-
-    //     const formData = new FormData();
-    //     if (DEBUG) console.log('file data', fileArr)
-
-    //     formData.append('image', fileArr);
-
-    //     if (DEBUG) console.log("form data from axios 1", formData)
-    //     let options = {
-    //         method: 'post',
-    //         url: `http://localhost:3003/single/${petId}`,
-    //         mode: 'cors',
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data',
-    //             'x-auth-token': token
-    //         },
-    //         data: formData
-    //     };
-        
-    //     axios(options)
-    //     .then(res => console.log('storeSingleImage res from ApiContext', res))
-    //     .catch(err => console.log('storeSingleImage err from ApiContext', err));
-    // }
-
-    // function storeImages({token, fileArr, successCallback, errorCallback}) {
-    //     const formData = new FormData();
-    //     if (DEBUG) console.log('file data', fileArr)
-
-    //     // fileArr.forEach((file) => {
-    //     //     formData.append("image", file);
-    //     // })
-    //     for(let i = 0; i < fileArr.length; i++) {
-    //         formData.append(`image${i}`, fileArr[i]);
-    //     }
-    //     if (DEBUG) console.log("form data from axios", formData)
-    //     let options = {
-    //         method: 'post',
-    //         url: 'http://localhost:3003/multiple',
-    //         mode: 'cors',
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data',
-    //             'x-auth-token': token
-    //         },
-    //         data: formData
-            
-    //     };
-    //     axios(options)
-    //     .then(res => {
-    //         console.log('res', res)
-    //         if(successCallback) {
-    //             successCallback(res)
-    //         }
-    //     })
-    //     .catch(err => console.log('err', err.message));
-    // }
-
-
     function pagination({limit, offset, successCallback, errorCallback}) {
         let options = {
             method: 'get',
@@ -226,10 +169,10 @@ export default function ApiContextProvider(props) {
             }
         };
         axios(options)
-        .then((res) => {
+        .then(res => {
             if (successCallback) successCallback(res)
         })
-        .catch((err) => {
+        .catch(err => {
             if (errorCallback) errorCallback(err)
         })
     }
@@ -244,16 +187,33 @@ export default function ApiContextProvider(props) {
             }
         };
         axios(options)
-        .then((res) => {
+        .then(res => {
             if (successCallback) successCallback(res)
         })
-        .catch((err) => {
+        .catch(err => {
             if (errorCallback) errorCallback(err)
         })
     }
 
+    // successCallback, errorCallback
+    function getOnePet({id, successCallback, errorCallback}) {
+        let options = {
+            method: 'get',
+            url: `http://localhost:3003/pets/${id}`,
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        axios(options)
+        .then(res => {if (successCallback) successCallback(res)})
+        // .then(res => console.log('api res',res))
+        // .catch(err => {if (errorCallback) errorCallback(err.response.data.msg)})
+        .catch(err => console.log('api err', err))
+    }
+
     return (
-        <ApiContext.Provider value={{registerUser, loginUser, getUsername, reportPet, pagination, getAllPets}}>
+        <ApiContext.Provider value={{registerUser, loginUser, getUsername, reportPet, pagination, getAllPets, getOnePet}}>
             { props.children }
         </ApiContext.Provider>
     )

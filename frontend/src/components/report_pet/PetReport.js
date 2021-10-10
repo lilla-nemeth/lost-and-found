@@ -32,7 +32,6 @@ const PetReport = () => {
         display: 'hideInputs',
     });
 
-    // Optional Data:
     const [size, setSize] = useState('');
     const [breed, setBreed] = useState('');
     const [sex, setSex] = useState('');
@@ -40,7 +39,6 @@ const PetReport = () => {
     const [age, setAge] = useState('');
     const [uniquefeature, setUniquefeature] = useState('');
 
-    // success/error messages
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     // const [isRequired, setIsRequired] = useState(false);
@@ -83,7 +81,6 @@ const PetReport = () => {
                 setLocation('')
                 setDescription('')
                 setPreview('')
-                // setPetId(res.rows[0].id)
             },
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');

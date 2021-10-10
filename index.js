@@ -53,7 +53,16 @@ app.get('/pets/total', (request, response) => {
     pool.query('SELECT COUNT(*) FROM pets')
     .then((res) => response.status(200).json(res.rows[0].count))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch the total amount of pets'}));
-})
+});
+
+// from pets table get one pet by id
+app.get('/pets/:id', (request, response) => {
+    let id = request.params.id;
+
+    pool.query('SELECT * FROM pets WHERE id=$1', [id])
+    .then((res) => response.status(200).json(res.rows))
+    .catch((err) => response.status(400).json({msg: 'Failed to fetch pet by id'}));
+});
 
 // TEST
 // app.get('/search', (request, response) => {
@@ -94,15 +103,6 @@ app.get('/search?', (request, response) => {
     pool.query(selectAll)
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Pet not found'}));  
-});
-
-// from pets table get one pet by id
-app.get('/pets/:id', authMw, (request, response) => {
-    let id = request.params.id;
-
-    pool.query('SELECT * FROM pets WHERE id=$1', [id])
-    .then((res) => response.status(200).json(res.rows))
-    .catch((err) => response.status(400).json({msg: 'Failed to fetch pet by id'}));
 });
 
 app.get('/username', authMw, (request, response) => {
