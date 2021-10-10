@@ -205,10 +205,24 @@ table {
   background: #ebebeb; 
 }
 
-.petListPicture {
+.petPictureContainer {
   flex: 50%;
-  padding: 40px;
+  position: relative;
+  overflow: hidden;
   background: #aaaaaa;
+  /* padding: 40px; */
+
+  /* height: 450px; */
+
+}
+.petPicture {
+    margin: auto;
+    object-fit: cover;
+    min-height: 100%;
+    min-width: 100%;
+    max-height: 150%;
+    width: 100%;
+    /* object-fit: cover; */
 }
 
 /* note: set the colors for lost and found - 1-1 color/status */
@@ -235,6 +249,7 @@ table {
 .petDate {
   margin: 10px 0;
   font: 300 15px/1.2 'Poppins', sans-serif;
+  text-transform: capitalize;
 }
 
 .petPlace {
@@ -271,14 +286,6 @@ table {
 }
 
 /* Report - Picture */
-.petPicture {
-  cursor: pointer; 
-  position: relative;
-  object-fit: cover;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
 
 .imageUploadContainer {
   border: 3px dashed rgb(34 102 96); 

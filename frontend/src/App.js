@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
 import './App.css';
@@ -8,10 +8,11 @@ import Login from './components/login-register/Login';
 import PetHome from './components/lost_and_found/PetHome';
 import PetReport from './components/report_pet/PetReport';
 import PetLandingPage from './components/landing_page/PetLandingPage';
-import ImageUploadTest from './components/ImageUploadTest';
+import PetProfile from './components/lost_and_found/PetProfile';
 
 function App() {
   const { token } = useContext(AuthContext);
+  const [id, setId] = useState();
 
   let DEBUG = false;
 
@@ -28,9 +29,13 @@ function App() {
           <Route path='/register'>
             <Register />
           </Route>
-          <Route exact path='/lostandfound'>
+          <Route path='/lostandfound'>
             <Navbar />
             <PetHome />
+          </Route>
+          <Route path={'/petprofile/:id'}>
+            <Navbar />
+            <PetProfile/>
           </Route>
           <Route exact path='/'>
             <Navbar />
@@ -50,10 +55,6 @@ function App() {
       <>
         <BrowserRouter>
           <Switch>
-          <Route path='/image'>
-              <Navbar />
-              <ImageUploadTest />
-            </Route>
             <Route path='/reportpet'>
               <Navbar />
               <PetReport />
@@ -61,6 +62,10 @@ function App() {
             <Route path='/lostandfound'>
               <Navbar />
               <PetHome />
+            </Route>
+            <Route path={'/petprofile/:id'}>
+              <Navbar />
+              <PetProfile/>
             </Route>
             <Route exact path='/'>
               <Navbar />

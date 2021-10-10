@@ -41,6 +41,9 @@ const Navbar = () => {
             })
     },[token]);
 
+    // for Link tag:
+    // activeStyle={{color: 'red'}}
+    // activeClassName={'active'}
     
     return (  
         <div style={styles.navbarContainer}>
@@ -62,7 +65,7 @@ const Navbar = () => {
                             <li className='username'>Hi {user}!</li>
                         </ul>
                         <ul style={{display: 'flex', textAlign: 'right'}}>
-                            <li><Link className='navLink' to='/image'>image upload</Link></li>
+                            <li><Link className='navLink' to='/petprofile/:id'>Pet Profile</Link></li>
 
                             <li><Link className='navLink' to='/lostandfound'>Lost & Found</Link></li>
                             <li><Link className='navLink' to='/reportpet'>Report Pet</Link></li>

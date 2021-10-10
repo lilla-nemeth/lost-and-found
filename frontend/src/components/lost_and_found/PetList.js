@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { ApiContext } from '../../contexts/ApiContext';
 import createHistory from 'history/createBrowserHistory';
 import Loader from '../generic/Loader';
 import { v4 as uuidv4 } from 'uuid';
-import Sugar from 'sugar';
+import { petDate } from './HelperFunctions.js';
 
 const PetList = () => {
 
@@ -57,30 +58,12 @@ const PetList = () => {
             numberArr.push(i);
         }
         return numberArr;
-    } 
-
-    // convertDate helper function:
-    function convertDate(timestamp) {
-        let dateBySugar = Sugar.Date.create(timestamp)
-        let formattedDateBySugar = Sugar.Date.format(dateBySugar, '{dd}/{MM}/{yyyy}');
-        
-        return formattedDateBySugar;
-    }
-
-    // petStatus helper function:
-    function petStatus(petstatus) {
-        if (petstatus === 'found') {
-            return 'Found'
-        } else if (petstatus === 'lost') {
-            return 'Lost';
-        } else {
-            return 'Reunited';
-        }
     }
 
     // lost -> since (in progress cases)
     // found -> since (in progress cases)
     // reunited -> until (ready to close cases)
+
 
     createHistory().replace('/lostandfound');
 
@@ -90,17 +73,15 @@ const PetList = () => {
         );
     }
 
-    {/* <button className='formButton'>View Pet</button> */}
-
     return (  
         <div className='petContainer'>
             <h1 className='lostAndFoundHeadline'>Lost and Found Pets</h1>
-        {pets.map(pet => {
-            return (
+            {pets.map(pet => {
+                return (
                     <div className='petCard' key={pet.id}>
                         <div className='petCardInner'>
-                            <div className='petListPicture'>
-                                <img src={`data:image/jpg;base64,${pet.img}`} />
+                            <div className='petPictureContainer'>
+                                <img className='petPicture' src={`data:image/jpg;base64,${pet.img}`} />
                             </div>
                             <div className='petTextBox'>
                                 <div className='petStatus'>
@@ -113,22 +94,17 @@ const PetList = () => {
                                     #{pet.id}
                                 </div>
                                 <div className='petDate'>
-                                    {
-                                        pet.petstatus === 'lost' || pet.petstatus === 'found' 
-                                        ? 
-                                        petStatus(pet.petstatus) + ': ' + convertDate(pet.since) 
-                                        : 
-                                        petStatus(pet.petstatus) + ': ' + convertDate(pet.until)
-                                    }
+                                {petDate(pet.petstatus, pet.since, pet.until)}
                                 </div>
                                 <div className='petPlace'>
                                     {pet.petlocation}
                                 </div>
+                                <Link to={`/petprofile/${pet.id}`}><button className='formButton'>View Pet</button></Link>
                             </div>
                         </div>
                     </div>
-            )
-        })} 
+                )
+            })} 
 
             <div className='pagination'>{numberIncreases().map(page => {
                     return (
