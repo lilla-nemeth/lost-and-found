@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ApiContext } from '../../contexts/ApiContext';
+import { AppStateContext } from '../../contexts/AppStateContext';
 import createHistory from 'history/createBrowserHistory';
 import Loader from '../generic/Loader';
 import { v4 as uuidv4 } from 'uuid';
-import { petDate } from './HelperFunctions.js';
+import { petDate } from '../HelperFunctions.js';
 
 const PetList = () => {
 
@@ -12,53 +12,56 @@ const PetList = () => {
     // if Lost is checked, then show the since info: pets > pet.since
     // if Found is checked, then show the until info: pets > pet.until
 
-    const [pets, setPets] = useState([]);
-    // we get string and we need to convert it to number before saving into the state:
-    const [total, setTotal] = useState(0);
-    // the default skip: 
-    const [offset, setOffset] = useState(0);
+    // const [pets, setPets] = useState([]);
 
-    const [loader, setLoader] = useState(true);
+    // // we get string and we need to convert it to number before saving into the state:
+    // const [total, setTotal] = useState(0);
+    // // the default skip: 
+    // const [offset, setOffset] = useState(0);
 
-    // success/error messages
-    const [successMsg, setSuccessMsg] = useState('');
-    const [errorMsg, setErrorMsg] = useState('');
+    // const [loader, setLoader] = useState(true);
 
-    const { pagination, getAllPets } = useContext(ApiContext);
+    // // success/error messages
+    // const [successMsg, setSuccessMsg] = useState('');
+    // const [errorMsg, setErrorMsg] = useState('');
+
+    const { pets, numberIncreases, setOffset, limit, loader } = useContext(AppStateContext);
 
     let DEBUG = true;
 
-    let limit = 6;
+    // let limit = 6;
 
-    useEffect(() => {
-        pagination({
-            limit,
-            offset,
-            successCallback: res => {
-                setLoader(false);
-                setPets(res.data);
-                getAllPets({
-                    successCallback: res => {
-                        setSuccessMsg(res.data.msg);
-                        setTotal(Number(res.data));
-                    }
-                })
-            },
-            errorCallback: err => setSuccessMsg(err.data.msg)
-        })
-    },[offset]);
+    // useEffect(() => {
+    //     fetchPets({
+    //         limit,
+    //         offset,
+    //         successCallback: res => {
+    //             // setPets(res.data);
+    //             setLoader(false);
+    //             getAllPets({
+    //                 successCallback: res => {
+    //                     setSuccessMsg(res.data.msg);
+    //                     setTotal(Number(res.data));
+    //                 }
+    //             })
+    //         },
+    //         errorCallback: err => setSuccessMsg(err.data.msg)
+    //     })
+    // },[offset]);
 
-    let numberOfPages = total / limit;  
+    // console.log('getAllPets - setTotal',total)
 
 
-    function numberIncreases() {
-        let numberArr = []
+    // let numberOfPages = total / limit;  
 
-        for (let i = 0; i < numberOfPages; i++) {
-            numberArr.push(i);
-        }
-        return numberArr;
-    }
+    // function numberIncreases() {
+    //     let numberArr = []
+
+    //     for (let i = 0; i < numberOfPages; i++) {
+    //         numberArr.push(i);
+    //     }
+    //     return numberArr;
+    // }
 
     // lost -> since (in progress cases)
     // found -> since (in progress cases)
@@ -72,6 +75,8 @@ const PetList = () => {
             <Loader />
         );
     }
+
+    if (DEBUG) console.log('pets arr from PetList', pets);
 
     return (  
         <div className='petContainer'>
@@ -90,13 +95,13 @@ const PetList = () => {
                                 <div className='petSpecies'>
                                     {pet.species}
                                 </div>
-                                <div className='petId'>
+                                <div className='petMainInfo'>
                                     #{pet.id}
                                 </div>
-                                <div className='petDate'>
-                                {petDate(pet.petstatus, pet.since, pet.until)}
+                                <div className='petMainInfo'>
+                                    {petDate(pet.petstatus, pet.since, pet.until)}
                                 </div>
-                                <div className='petPlace'>
+                                <div className='petMainInfo'>
                                     {pet.petlocation}
                                 </div>
                                 <Link to={`/petprofile/${pet.id}`}><button className='formButton'>View Pet</button></Link>

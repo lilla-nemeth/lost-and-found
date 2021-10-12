@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ApiContext } from '../../contexts/ApiContext';
+import { AuthContext } from '../../contexts/AuthContext';
+import { AppStateContext } from '../../contexts/AppStateContext';
 import createHistory from 'history/createBrowserHistory';
-import Logo from './Logo';
+import Logo from '../generic/Logo';
 import BackgroundImages from './BackgroundImages';
 import PasswordShowHide from './PasswordShowHide';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
-import { AuthContext } from '../../contexts/AuthContext';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -17,7 +17,7 @@ const Login = () => {
     let DEBUG = true;
 
     const { setToken } = useContext(AuthContext);
-    const { loginUser } = useContext(ApiContext);
+    const { loginUser } = useContext(AppStateContext);
 
     // if (DEBUG) console.log(token, setToken)
 

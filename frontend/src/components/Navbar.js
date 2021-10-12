@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as PetPawLogo } from '../assets/icons/dogpaw.svg';
 import { AuthContext } from '../contexts/AuthContext';
-import { ApiContext } from '../contexts/ApiContext';
+import { AppStateContext } from '../contexts/AppStateContext';
 
 const styles = {
     navbar: {
@@ -22,10 +22,9 @@ const styles = {
 }
 
 const Navbar = () => {
-    const [user, setUser] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const { token, handleLogOut } = useContext(AuthContext);
-    const { getUsername } = useContext(ApiContext);
+    const { getUsername, user } = useContext(AppStateContext);
 
 
     let DEBUG = true;
@@ -33,7 +32,6 @@ const Navbar = () => {
     useEffect(() => {
             getUsername({
                 token,
-                setUser,
                 errorCallback: err => setErrorMsg(err),
                 errorTimeout: () => (setTimeout(() => {
                    setErrorMsg('');
@@ -65,8 +63,6 @@ const Navbar = () => {
                             <li className='username'>Hi {user}!</li>
                         </ul>
                         <ul style={{display: 'flex', textAlign: 'right'}}>
-                            <li><Link className='navLink' to='/petprofile/:id'>Pet Profile</Link></li>
-
                             <li><Link className='navLink' to='/lostandfound'>Lost & Found</Link></li>
                             <li><Link className='navLink' to='/reportpet'>Report Pet</Link></li>
                             <li><button className='logOutButton' onClick={() => handleLogOut()}>Log Out</button></li>

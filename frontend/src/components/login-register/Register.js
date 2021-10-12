@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ApiContext } from '../../contexts/ApiContext';
+import { AppStateContext } from '../../contexts/AppStateContext';
 import createHistory from 'history/createBrowserHistory';
 import BackgroundImages from './BackgroundImages';
-import Logo from './Logo';
+import Logo from '../generic/Logo';
 import PasswordShowHide from './PasswordShowHide';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
 import { ReactComponent as UsernameIcon } from '../../assets/icons/username.svg';
@@ -57,7 +57,7 @@ const Register = () => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
-    const { registerUser } = useContext(ApiContext);
+    const { registerUser } = useContext(AppStateContext);
 
     let DEBUG = true;
 

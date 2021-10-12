@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { ApiContext } from '../../contexts/ApiContext';
+import { AppStateContext } from '../../contexts/AppStateContext';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 
 const LocationSearch = () => {
     const [search, setSearch] = useState('');
 
-    const { searchWord } = useContext(ApiContext);
+    const { searchWord } = useContext(AppStateContext);
 
     let DEBUG = true;
 
