@@ -162,6 +162,76 @@ table {
   z-index: -1;
 }
 
+/* PetProfile - PetProfileCard */
+.petProfileContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.petProfileCard {
+  border-radius: 25px;  
+  box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
+  background: rgba(255,255,255);
+  display: flex;
+  /* width: 60%; */
+  /* padding: 100px; */
+  padding: 50px;
+  justify-content: center;
+  align-items: center;
+
+  width: 70%;
+  /* min-width: 70%; */
+} 
+
+.petProfileCardInner {
+  display: flex;
+  width: 100%;
+  /* width: 900px;
+  height: 600px; */
+}
+
+.petProfilePictureContainer {
+  /* flex: 50%; */
+  position: relative;
+  overflow: hidden;
+  background: #aaaaaa; 
+  width: 50%;
+  position: relative;
+  /* height: 450px; */
+  overflow: hidden;
+  /* width: 100%; */
+
+}
+
+.petProfilePicture {
+  position: absolute;
+  top: 50%;    
+  left: 50%;
+  right: 50%;
+  margin: auto;
+  transform: translate( -50%, -50%);
+  object-fit: cover;
+  min-height: 100%;
+  min-width: 100%;
+  max-height: 150%;
+  max-width: 150%;
+}
+
+.petProfileTextBox {
+
+    /* flex: 50%; */
+    padding: 40px;
+    background: #ebebeb; 
+    min-height: 300px;
+    width: 50%;
+  
+    /* max-width: 40%; */
+    overflow-wrap: break-word;
+
+}
+
 /* Lost & Found - PetList */
 .lostAndFoundHeadline {
   font: 700 38px/1.2 'Poppins', sans-serif;
@@ -176,7 +246,7 @@ table {
 .petContainer {
 	display: flex;
 	flex-wrap: wrap;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
 }
 
@@ -200,34 +270,52 @@ table {
 }
 
 .petTextBox {
-  flex: 50%;
+  /* flex: 50%; */
   padding: 40px;
   background: #ebebeb; 
+  min-height: 300px;
+
+  /* max-width: 40%; */
+  overflow-wrap: break-word;
 }
 
 .petPictureContainer {
-  flex: 50%;
+  /* flex: 50%; */
+/*  */
   position: relative;
   overflow: hidden;
   background: #aaaaaa;
+  height: 350px;
   /* padding: 40px; */
-
   /* height: 450px; */
-
 }
+
 .petPicture {
-    margin: auto;
-    object-fit: cover;
-    min-height: 100%;
-    min-width: 100%;
-    max-height: 150%;
-    width: 100%;
-    /* object-fit: cover; */
+  position: absolute;
+  top: 50%;    
+  left: 50%;
+  right: 50%;
+  margin: auto;
+  transform: translate( -50%, -50%);
+  object-fit: cover;
+  min-height: 100%;
+  min-width: 100%;
+  max-height: 150%;
+  max-width: 150%;
+
+  /* margin: auto;
+  object-fit: cover;
+  min-height: 100%;
+  min-width: 100%;
+  max-height: 150%;
+  width: 100%;
+  justify-content: center;
+  align-items: center; */
 }
 
 /* note: set the colors for lost and found - 1-1 color/status */
 .petStatus {
-  font: 500 15px/1.2;
+  font: 500 15px/1.2 'Poppins', sans-serif;;
   text-transform: uppercase;
   border: 1px solid black;
   padding: 10px;
@@ -241,21 +329,19 @@ table {
   text-transform: capitalize;
 }
 
-.petId {
-  margin: 10px 0;
-  font: 300 15px/1.2 'Poppins', sans-serif;
-}
-
-.petDate {
+.petMainInfo,
+.petOptionalInfo {
   margin: 10px 0;
   font: 300 15px/1.2 'Poppins', sans-serif;
   text-transform: capitalize;
+  overflow-wrap: break-word;
 }
 
-.petPlace {
-  flex-direction: row;
-  margin: 10px 0;
-  font: 300 15px/1.2 'Poppins', sans-serif;
+.tableCell {
+  /* width: 50%; */
+  min-width: 100px;
+  padding-right: 20px;
+  overflow-wrap: anywhere;
 }
 
 .petProfileButton {

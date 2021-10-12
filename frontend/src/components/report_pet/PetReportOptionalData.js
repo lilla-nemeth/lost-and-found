@@ -114,8 +114,8 @@ const PetReportOptionalData = (props) => {
                         <RadioButton 
                             id={'unknownSex'} 
                             name={'sex'} 
-                            value={'unknownSex'} 
-                            checked={sex === 'unknownSex'} 
+                            value={'unknown'} 
+                            checked={sex === 'unknown'} 
                             onChange={event => {setSex(event.target.value)}} 
                             labelFor={'unknownSex'} 
                             labelName={'Unknown'}
@@ -129,7 +129,7 @@ const PetReportOptionalData = (props) => {
                         <Checkbox
                             id={'black'} 
                             name={'color'} 
-                            value={'black'} 
+                            value={'black '} 
                             checked={colors.includes('black')} 
                             onChange={() => changeCheckboxValue(colors, setColors, 'black')}
                             labelFor={'black'} 
@@ -139,7 +139,7 @@ const PetReportOptionalData = (props) => {
                         <Checkbox
                             id={'brown'} 
                             name={'color'} 
-                            value={'brown'} 
+                            value={'brown '} 
                             checked={colors.includes('brown')} 
                             onChange={() => changeCheckboxValue(colors, setColors, 'brown')}
                             labelFor={'brown'} 
@@ -148,7 +148,7 @@ const PetReportOptionalData = (props) => {
                         <Checkbox
                             id={'cream'} 
                             name={'color'} 
-                            value={'cream'} 
+                            value={'cream '} 
                             checked={colors.includes('cream')} 
                             onChange={() => changeCheckboxValue(colors, setColors, 'cream')} 
                             labelFor={'cream'} 
@@ -157,7 +157,7 @@ const PetReportOptionalData = (props) => {
                         <Checkbox
                             id={'grey'} 
                             name={'color'} 
-                            value={'grey'} 
+                            value={'grey '} 
                             checked={colors.includes('grey')} 
                             onChange={() => changeCheckboxValue(colors, setColors, 'grey')} 
                             labelFor={'grey'} 
@@ -166,7 +166,7 @@ const PetReportOptionalData = (props) => {
                         <Checkbox
                             id={'red'} 
                             name={'color'} 
-                            value={'red'} 
+                            value={'red '} 
                             checked={colors.includes('red')} 
                             onChange={() => changeCheckboxValue(colors, setColors, 'red')} 
                             labelFor={'red'} 
@@ -175,7 +175,7 @@ const PetReportOptionalData = (props) => {
                         <Checkbox
                             id={'white'} 
                             name={'color'} 
-                            value={'white'} 
+                            value={'white '} 
                             checked={colors.includes('white')} 
                             onChange={() => changeCheckboxValue(colors, setColors, 'white')} 
                             labelFor={'white'} 
@@ -185,8 +185,8 @@ const PetReportOptionalData = (props) => {
                             id={'otherColor'} 
                             name={'color'} 
                             value={'otherColor'} 
-                            checked={colors.includes('otherColor')} 
-                            onChange={() => changeCheckboxValue(colors, setColors, 'otherColor')}  
+                            checked={colors.includes('other')} 
+                            onChange={() => changeCheckboxValue(colors, setColors, 'other')}  
                             labelFor={'otherColor'} 
                             labelName={'Other'}  
                         /> 
@@ -238,8 +238,8 @@ const PetReportOptionalData = (props) => {
                         <RadioButton 
                             id={'unknownAge'} 
                             name={'age'} 
-                            value={'unknownAge'} 
-                            checked={age === 'unknownAge'} 
+                            value={'unknown'} 
+                            checked={age === 'unknown'} 
                             onChange={event => {setAge(event.target.value)}} 
                             labelFor={'unknownAge'} 
                             labelName={'Unknown'}

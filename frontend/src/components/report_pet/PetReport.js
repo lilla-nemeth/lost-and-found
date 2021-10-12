@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
-import { ApiContext } from '../../contexts/ApiContext';
+import { AppStateContext } from '../../contexts/AppStateContext';
 import createHistory from 'history/createBrowserHistory';
 import PetReportOptionalData from './PetReportOptionalData';
 import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg'
@@ -44,7 +44,7 @@ const PetReport = () => {
     // const [isRequired, setIsRequired] = useState(false);
 
     const { token } = useContext(AuthContext);
-    const { reportPet } = useContext(ApiContext);
+    const { reportPet } = useContext(AppStateContext);
 
     let DEBUG = true;
 

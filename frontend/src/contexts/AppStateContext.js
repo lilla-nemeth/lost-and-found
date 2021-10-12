@@ -1,11 +1,58 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const ApiContext = createContext();
+export const AppStateContext = createContext();
 
-export default function ApiContextProvider(props) {
+export default function AppStateContextProvider(props) {
+    const [pets, setPets] = useState([]);
+    const [user, setUser] = useState('');
 
     let DEBUG = true;
+
+    // we get string and we need to convert it to number before saving into the state:
+    const [total, setTotal] = useState(0);
+    // the default skip: 
+    const [offset, setOffset] = useState(0);
+    const [loader, setLoader] = useState(true);
+
+    // error messages
+    const [errorMsg, setErrorMsg] = useState('');
+
+    let limit = 6;
+
+    useEffect(() => {
+        fetchPets({
+            limit,
+            offset,
+            successCallback: res => {
+                setPets(res.data);
+                setLoader(false);
+                getAllPets({
+                    successCallback: res => {
+                        setTotal(Number(res.data));
+                    }
+                })
+            },
+            errorCallback: err => setErrorMsg(err.data.msg)
+        })
+    },[offset]);
+
+    console.log('getAllPets - setTotal',total)
+
+
+    let numberOfPages = total / limit;  
+
+    function numberIncreases() {
+        let numberArr = []
+
+        for (let i = 0; i < numberOfPages; i++) {
+            numberArr.push(i);
+        }
+        return numberArr;
+    }
+
+
+
 
     // named input when we have many arguments
     // cannot mess up the order (in object {})
@@ -71,7 +118,7 @@ export default function ApiContextProvider(props) {
         )
     }
 
-    function getUsername({token, setUser, errorCallback, errorTimeout}) {
+    function getUsername({token, errorCallback, errorTimeout}) {
 
         let options = {
             method: 'get',
@@ -159,7 +206,7 @@ export default function ApiContextProvider(props) {
         );
     }
     
-    function pagination({limit, offset, successCallback, errorCallback}) {
+    function fetchPets({limit, offset, successCallback, errorCallback}) {
         let options = {
             method: 'get',
             url: `http://localhost:3003/pets/${limit}/${offset}`,
@@ -195,26 +242,23 @@ export default function ApiContextProvider(props) {
         })
     }
 
-    // successCallback, errorCallback
-    function getOnePet({id, successCallback, errorCallback}) {
-        let options = {
-            method: 'get',
-            url: `http://localhost:3003/pets/${id}`,
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-        axios(options)
-        .then(res => {if (successCallback) successCallback(res)})
-        // .then(res => console.log('api res',res))
-        // .catch(err => {if (errorCallback) errorCallback(err.response.data.msg)})
-        .catch(err => console.log('api err', err))
-    }
+    // function getOnePet({id, successCallback, errorCallback}) {
+    //     let options = {
+    //         method: 'get',
+    //         url: `http://localhost:3003/pets/${id}`,
+    //         mode: 'cors',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     };
+    //     axios(options)
+    //     .then(res => {if (successCallback) successCallback(res)})
+    //     .catch(err => console.log('api err', err))
+    // }
 
     return (
-        <ApiContext.Provider value={{registerUser, loginUser, getUsername, reportPet, pagination, getAllPets, getOnePet}}>
+        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, user, reportPet, fetchPets, getAllPets, pets, numberIncreases, setOffset, limit, loader}}>
             { props.children }
-        </ApiContext.Provider>
+        </AppStateContext.Provider>
     )
 }

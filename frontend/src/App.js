@@ -12,11 +12,10 @@ import PetProfile from './components/lost_and_found/PetProfile';
 
 function App() {
   const { token } = useContext(AuthContext);
-  const [id, setId] = useState();
 
   let DEBUG = false;
 
-  if (DEBUG) console.log('APP component', token);
+  if (DEBUG) console.log('App.js', token);
 
   if (!token) {
     return (
