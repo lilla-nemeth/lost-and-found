@@ -11,12 +11,12 @@ export function convertDate(timestamp) {
 export function petDate(petstatus, since, until, className) {
     if (petstatus === 'lost' || petstatus === 'found' ) {
         return <>
-            <td className={className}>{petstatus}:</td>
+            <td className={className}>{petstatus}</td>
             <td className={className}>{convertDate(since)}</td>
         </>
     } else {
         return <>
-            <td className={className}>{petstatus}:</td>
+            <td className={className}>{petstatus}</td>
             <td className={className}>{convertDate(until)}</td>
         </>
     }
@@ -27,7 +27,7 @@ export function isInputEmpty(nameOfAttribute, attribute, className) {
         return <td></td>
     } else {
         return <>
-            <td className={className}>{nameOfAttribute}:</td>
+            <td className={className}>{nameOfAttribute}</td>
             <td className={className}>{attribute}</td>
         </>
     }

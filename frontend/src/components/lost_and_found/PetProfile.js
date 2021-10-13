@@ -4,7 +4,7 @@ import { AppStateContext } from '../../contexts/AppStateContext';
 import createHistory from 'history/createBrowserHistory';
 import Loader from '../generic/Loader';
 import { Link } from 'react-router-dom';
-import PetCard from '../generic/PetCard';
+import PetProfileCard from '../generic/PetProfileCard';
 
 const styles = {
     main: {
@@ -14,20 +14,9 @@ const styles = {
     }
 }
 
-// props
 const PetProfile = () => {
-    // with useParams is possible to get the params from url in the component
     const { id } = useParams();
-    const [onePet, setOnePet] = useState([]);
-    const { getAllPets, pets, setPets } = useContext(AppStateContext);
-
-
-
-    const [loader, setLoader] = useState(false);
-
-    // success/error messages
-    const [successMsg, setSuccessMsg] = useState('');
-    const [errorMsg, setErrorMsg] = useState('');
+    const { pets, loader } = useContext(AppStateContext);
 
     let DEBUG = false;
 
@@ -37,41 +26,19 @@ const PetProfile = () => {
     function getPetById(id, arr) {
         for (let i = 0; i < arr.length; i++) {
             if (id == arr[i].id) {
-                return <PetCard pet={arr[i]} />;
+                return <PetProfileCard pet={arr[i]} />;
             }
         }
     }
     
-
-    // function getPetById(id, arr) {
-    //     return arr.find(pet => pet.id == id)
-    // }
     console.log("return of getPetById", getPetById(id, pets))
     if (DEBUG) console.log(getPetById(id, pets));
 
 
-    // useEffect(() => {
-
-
-    // },[id]);
-
-
-    // useEffect(() => {
-    //     // setPets(pets)
-
-    //     getPetById(id, pets)
-
-    // },[]);
-
     createHistory().replace(`/petprofile/${id}`);
-
 
     if (DEBUG) console.log('typeof id', typeof id)
     if (DEBUG) console.log('id', id)
-
-
-
-
 
     if (loader) {
         return (
@@ -83,8 +50,10 @@ const PetProfile = () => {
         <>
         <main style={styles.main}>
             <section>
-                <Link to={'/lostandfound'}><button className='formButton'>Back to the Lost and Found Page</button></Link>
-                {getPetById(id, pets)}
+                <Link to={'/lostandfound'}>
+                    <button className='formButton'>Back to the Lost and Found Page</button>
+                </Link>
+                    {getPetById(id, pets)}
             </section>
         </main>
         </>

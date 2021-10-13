@@ -45,7 +45,37 @@ table {
 	border-spacing: 0;
 }
 
-/* NAVBAR */
+/* NAVBAR, FOOTER */
+.navbar {
+  list-style-type: none;
+  background: #226660;
+  overflow: hidden;
+  box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerWithPicture {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+}
+
+.footerWithoutPicture {
+  background: rgb(176, 240, 235);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  color: #226660;
+}
+
 .navLogo {
   text-align: center;
   width: 20px;
@@ -78,22 +108,32 @@ table {
   transition: transform 0.2s linear;
 }
 
-.username {
-  text-align: center;
-  padding: 22.5px;
-  text-decoration: none;
-  color: #fff;
-  font: 400 15px/1.2 'Poppins', sans-serif;
-  display: inline-block; 
+.navPositionLeft {
+  display: flex; 
+  align-content: flex-start;
 }
 
+.navPositionRight {
+  display: flex; 
+  text-align: right;
+}
+
+.footerText,
+.username,
 .navLink {
   text-align: center;
   padding: 22.5px;
   text-decoration: none;
-  color: rgb(183, 223, 219);
-  font: 300 15px/1.2 'Poppins', sans-serif;
+  font: 400 15px/1.2 'Poppins', sans-serif;
   display: inline-block; 
+}
+
+.username {
+  color: #fff;
+}
+
+.navLink {
+  color: rgb(183, 223, 219);
 }
 
 .navLink:after {
@@ -135,14 +175,6 @@ table {
 }
 
 /* Landing Page */
-.landingPageBox {
-  z-index: 2;
-  width: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .landingPageHeadline {
   font: 700 62px/1.2 'Poppins', sans-serif;
   color: #fff;
@@ -188,6 +220,7 @@ table {
 .petProfileCardInner {
   display: flex;
   width: 100%;
+  min-height: 600px;
   /* width: 900px;
   height: 600px; */
 }
@@ -335,13 +368,21 @@ table {
   font: 300 15px/1.2 'Poppins', sans-serif;
   text-transform: capitalize;
   overflow-wrap: break-word;
+  line-height: 30px;
 }
 
 .tableCell {
   /* width: 50%; */
-  min-width: 100px;
   padding-right: 20px;
   overflow-wrap: anywhere;
+  /* line-height: 30px; */
+  /* min-width: 110px;
+  max-width: 300px; */
+}
+
+.tableCell:first-child { 
+  font: 600 15px/1.2 'Poppins', sans-serif;
+  width: 150px;
 }
 
 .petProfileButton {

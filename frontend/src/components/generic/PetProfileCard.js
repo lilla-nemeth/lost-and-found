@@ -1,25 +1,10 @@
 import React from 'react';
 import { petDate, isInputEmpty } from '../HelperFunctions.js';
 
-const PetCard = (props) => {
+const PetProfileCard = (props) => {
     const { pet } = props;
 
-
-    const style = {
-        td: {
-            width: '50%'
-        }
-    }
-
     let DEBUG = true;
-
-
-    // Write a function for that: 
-    // If pet inputs are empty then the PetCard doesn't show those fields
-
-
-
-    if (DEBUG) console.log('isInputEmpty func',isInputEmpty('Unique feature', (pet.uniquefeature)))
 
     return (
         <div className='petProfileContainer'>
@@ -49,14 +34,8 @@ const PetCard = (props) => {
                             <td classname='tableCell'>
                             </td>
                           </tr>
-                          <tr>
-                            <td classname='tableCell'>
-                                <div className='petMainInfo'>
-                                    #{pet.id}
-                                </div>
-                            </td>
-                            <td classname='tableCell'>
-                            </td>
+                          <tr className='petMainInfo'>
+                            {isInputEmpty('ID', ('#' + pet.id), 'tableCell')}
                           </tr>
                           <tr className='petMainInfo'>
                             {petDate(pet.petstatus, pet.since, pet.until, 'tableCell')}
@@ -90,4 +69,4 @@ const PetCard = (props) => {
     )
 }
 
-export default PetCard;
+export default PetProfileCard;
