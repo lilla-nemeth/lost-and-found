@@ -7,7 +7,7 @@ const PetLandingPage = () => {
 
     return (
         <div>
-            <div className='landingPageBox'>
+            <div>
                  <h1 className='landingPageHeadline'>Find Your<br/>Lost Pet</h1>
                 <video className='landingPageVideo' autoPlay loop muted>
                     <source src={Video} type='video/mp4'/>

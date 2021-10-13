@@ -5,18 +5,20 @@ export const AppStateContext = createContext();
 
 export default function AppStateContextProvider(props) {
     const [pets, setPets] = useState([]);
-    const [user, setUser] = useState('');
-
-    let DEBUG = true;
+    const [user, setUser] = useState([]);
+    const [username, setUsername] = useState('');
 
     // we get string and we need to convert it to number before saving into the state:
     const [total, setTotal] = useState(0);
+
     // the default skip: 
     const [offset, setOffset] = useState(0);
     const [loader, setLoader] = useState(true);
 
     // error messages
     const [errorMsg, setErrorMsg] = useState('');
+
+    let DEBUG = true;
 
     let limit = 6;
 
@@ -131,7 +133,7 @@ export default function AppStateContextProvider(props) {
         };
         axios(options)
         .then(
-            res => setUser(res.data)
+            res => {console.log('user data', res); setUsername(res.data)}
         )
         .catch(
             err => {if (
@@ -143,6 +145,13 @@ export default function AppStateContextProvider(props) {
             ) errorCallback(err.response.data.msg, errorTimeout())}
         );
     }
+
+    // function getUser() {
+    //     let options = {
+    //         method: 'get',
+    //     }
+    // }
+
 
     function reportPet({
         // TODO: other location data enable when mapbox is implemented
