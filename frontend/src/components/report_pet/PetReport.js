@@ -46,7 +46,7 @@ const PetReport = () => {
     const { token } = useContext(AuthContext);
     const { reportPet } = useContext(AppStateContext);
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     function handleSubmit(event) {
         event.preventDefault();

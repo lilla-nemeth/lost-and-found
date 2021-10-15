@@ -23,7 +23,7 @@ export function petDate(petstatus, since, until, className) {
 }
 
 export function isInputEmpty(nameOfAttribute, attribute, className) {
-    if (attribute == '') {
+    if (attribute === '') {
         return <td></td>
     } else {
         return <>

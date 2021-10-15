@@ -1,11 +1,12 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { AuthContext } from './AuthContext';
 
 export const AppStateContext = createContext();
 
 export default function AppStateContextProvider(props) {
     const [pets, setPets] = useState([]);
-    const [user, setUser] = useState([]);
+    const [users, setUsers] = useState([]);
     const [username, setUsername] = useState('');
 
     // we get string and we need to convert it to number before saving into the state:
@@ -18,7 +19,9 @@ export default function AppStateContextProvider(props) {
     // error messages
     const [errorMsg, setErrorMsg] = useState('');
 
-    let DEBUG = true;
+    const { token } = useContext(AuthContext);
+
+    let DEBUG = false;
 
     let limit = 6;
 
@@ -39,7 +42,16 @@ export default function AppStateContextProvider(props) {
         })
     },[offset]);
 
-    console.log('getAllPets - setTotal',total)
+    useEffect(() => {
+        getUsers({
+            token,
+            successCallback: res => setUsers(res.data),
+            // errorCallback: err => setErrorMsg(err.data.msg)
+            errorCallback: err => console.log(err)
+        })
+    }, [users]);
+
+    if (DEBUG) console.log('getAllPets - setTotal',total)
 
 
     let numberOfPages = total / limit;  
@@ -99,7 +111,6 @@ export default function AppStateContextProvider(props) {
             }
         };
         
-        // if (DEBUG) console.log(token);
         axios(options)
         .then(
             res => {        
@@ -133,7 +144,7 @@ export default function AppStateContextProvider(props) {
         };
         axios(options)
         .then(
-            res => {console.log('user data', res); setUsername(res.data)}
+            res => setUsername(res.data)
         )
         .catch(
             err => {if (
@@ -146,11 +157,6 @@ export default function AppStateContextProvider(props) {
         );
     }
 
-    // function getUser() {
-    //     let options = {
-    //         method: 'get',
-    //     }
-    // }
 
 
     function reportPet({
@@ -251,22 +257,35 @@ export default function AppStateContextProvider(props) {
         })
     }
 
-    // function getOnePet({id, successCallback, errorCallback}) {
-    //     let options = {
-    //         method: 'get',
-    //         url: `http://localhost:3003/pets/${id}`,
-    //         mode: 'cors',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     };
-    //     axios(options)
-    //     .then(res => {if (successCallback) successCallback(res)})
-    //     .catch(err => console.log('api err', err))
-    // }
+    function getUsers({token, successCallback, errorCallback}) {
+
+        let options = {
+            method: 'get',
+            url: 'http://localhost:3003/user',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': token
+            }
+        };
+        axios(options)
+        .then(res => {
+                if (successCallback) successCallback(res)
+                // console.log(res)
+            }
+            // res => console.log('setusers appstate', res.data)
+        )
+        .catch(
+            err => {
+                // if (errorCallback) errorCallback(err)
+                console.log(err)
+            }
+        );
+
+    }
 
     return (
-        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, user, reportPet, fetchPets, getAllPets, pets, numberIncreases, setOffset, limit, loader}}>
+        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, getUsers, users, reportPet, fetchPets, getAllPets, pets, numberIncreases, setOffset, limit, loader}}>
             { props.children }
         </AppStateContext.Provider>
     )
