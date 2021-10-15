@@ -7,7 +7,8 @@ import { AppStateContext } from '../contexts/AppStateContext';
 const Navbar = () => {
     const [errorMsg, setErrorMsg] = useState('');
     const { token, handleLogOut } = useContext(AuthContext);
-    const { getUsername, user } = useContext(AppStateContext);
+  
+    const { getUsername, username } = useContext(AppStateContext);
 
     let DEBUG = false;
     
@@ -25,7 +26,7 @@ const Navbar = () => {
     // activeStyle={{color: 'red'}}
     // activeClassName={'active'}
 
-    if (DEBUG) console.log(user);
+    if (DEBUG) console.log('USERNAME NAVBAR', username);
     
     return (  
         <div>
@@ -42,7 +43,7 @@ const Navbar = () => {
                                 <Link className='navLink' to='/lostandfound'>Lost & Found</Link>
                             </li>
                             <li>
-                                <Link className='navLink' disabled>Report Pet</Link>
+                                <Link className='navLink' to='' disabled>Report Pet</Link>
                             </li>
                             <li>
                                 <Link className='navLink' to='/login'>Login</Link>
@@ -60,7 +61,7 @@ const Navbar = () => {
                                     <PetPawLogo className='navLogoInner'/>
                                 </Link>
                             </li>
-                            <li className='username'>Hi {user}!</li>
+                            <li className='username'>Hi {username}!</li>
                         </ul>
                         <ul className='navPositionRight'>
                             <li>

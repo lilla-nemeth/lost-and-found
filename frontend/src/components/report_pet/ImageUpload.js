@@ -4,7 +4,7 @@ import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 const ImageUpload = (props) => {
     const { files, setFiles, preview, setPreview } = props;
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     function fileChangeHandler(event) {
         setFiles((event.target.files[0]));
@@ -13,10 +13,6 @@ const ImageUpload = (props) => {
 
     if (DEBUG) console.log('files from ImageUpload', files);
     if (DEBUG) console.log('files.length from ImageUpload', files.length);
-
-    // removed from input, placed into the form tag (PetReport):
-    // enctype='multipart/form-data'
-
 
     return (  
         <>
@@ -28,7 +24,7 @@ const ImageUpload = (props) => {
                     </> 
                     :
                     <>
-                        <button className='deleteButton' onClick={() => setFiles([])}><DeleteIcon /></button>
+                        <button className='deleteButton' onClick={() => {setFiles([]); setPreview('')}}><DeleteIcon /></button>
                         <div className='previewContainer'>
                             <img src={preview} className='previewImage'/>
                         </div> 

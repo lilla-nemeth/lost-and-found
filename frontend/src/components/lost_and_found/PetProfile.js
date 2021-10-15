@@ -16,11 +16,12 @@ const styles = {
 
 const PetProfile = () => {
     const { id } = useParams();
-    const { pets, loader } = useContext(AppStateContext);
+    const { pets, users, loader } = useContext(AppStateContext);
 
-    let DEBUG = false;
+    let DEBUG = true;
 
-    if (DEBUG) console.log('pets array PetProfile', pets)
+    // if (DEBUG) console.log('pets array PetProfile', pets)
+    if (DEBUG) console.log('users from PetProfile', users)
 
 
     function getPetById(id, arr) {
@@ -30,9 +31,27 @@ const PetProfile = () => {
             }
         }
     }
-    
-    console.log("return of getPetById", getPetById(id, pets))
-    if (DEBUG) console.log(getPetById(id, pets));
+
+    // primaryId = user id
+    // secondaryId = userId from pets
+    // arr = user array
+    // function getUserById(userArr, petArr, arr) {
+    //     for (let i = 0; i < arr.length; i++) {
+    //         if (petArr.id == userArr[i].id) {
+    //             return arr;
+    //         }
+    //     }        
+    // }
+    // if (DEBUG) console.log('getUserById - user', getUserById(user.id, pets.userid, user))
+
+
+
+
+
+
+    // if (DEBUG) console.log("return of getPetById", getPetById(id, pets));
+    // if (DEBUG) console.log(getPetById(id, pets));
+
 
 
     createHistory().replace(`/petprofile/${id}`);
@@ -50,10 +69,14 @@ const PetProfile = () => {
         <>
         <main style={styles.main}>
             <section>
-                <Link to={'/lostandfound'}>
-                    <button className='formButton'>Back to the Lost and Found Page</button>
-                </Link>
-                    {getPetById(id, pets)}
+                {getPetById(id, pets)}
+                <div className='backButtonContainer'>
+                    <div className='backButtonBox'>
+                        <Link to={'/lostandfound'}>
+                            <button className='backButton'>Back to the Lost and Found Page</button>
+                        </Link>
+                    </div>
+                </div>
             </section>
         </main>
         </>

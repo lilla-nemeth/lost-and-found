@@ -29,7 +29,7 @@ const PetList = () => {
             <h1 className='lostAndFoundHeadline'>Lost and Found Pets</h1>
             {pets.map(pet => {
                 return (
-                    <PetListCard pet={pet}/>
+                    <PetListCard key={pet.id} pet={pet}/>
                 )
             })} 
             <div className='pagination'>{numberIncreases().map(page => {

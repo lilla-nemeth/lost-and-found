@@ -113,14 +113,12 @@ app.get('/username', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch username'}));
 })
 
-// app.get('/user', authMw, (request, response) => {
-//     let id = request.userId;
+app.get('/user', authMw, (request, response) => {
 
-//     pool.query('SELECT * FROM users WHERE id=$1', [id])
-//     // .then((res) => response.status(200).json(res.rows))
-//     .then((res) => console.log(res.rows))
-//     .catch((err) => response.status(400).json({msg: 'Failed to fetch user'}));
-// })
+    pool.query('SELECT * FROM users')
+    .then((res) => response.status(200).json(res.rows))
+    .catch((err) => response.status(400).json({msg: 'Failed to fetch user'}));
+})
 
 // user dashboard - update one pet's datas (by id):
 app.put('/editpet/:id', authMw, (request, response) => {
