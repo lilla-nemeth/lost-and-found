@@ -19,8 +19,7 @@ const Hamburger = ({hamburgerOpen}) => {
         }
         </>
     )
-
-
+    
 }
 
 export default Hamburger;

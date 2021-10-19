@@ -657,8 +657,13 @@ input[type=checkbox]:checked ~ label{
   font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: space-around;
-  width: 100%;
+  width: 100vw;
   align-items: center;
+
+  /* justifyContent: center;
+  flexDirection: column;
+  width: fit-content;
+  margin: 25px 100px; */
 }
 
 .logoContainer {
@@ -698,6 +703,7 @@ input[type=checkbox]:checked ~ label{
   width: 30%;
   border-radius: 25px; 
   box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
+  min-width: 400px;
 }
 
 .formHeadline {
@@ -710,6 +716,13 @@ input[type=checkbox]:checked ~ label{
 .signUpText {
   font: 400 15px / 1.2 Poppins, sans-serif;
   display: flex;
+}
+
+.acceptedPasswordText {
+  padding-top: 20px;
+  font: 400 14px / 1.2 Poppins, sans-serif;
+  color: #acacac;
+  font-style: italic;
 }
 
 .message {
@@ -1038,6 +1051,7 @@ input[type=checkbox]:checked ~ label{
 
 /* Media Queries */
 
+
 @media only screen and (min-width: 200px) and (max-width: 768px) {
 
   .navLink {
@@ -1104,7 +1118,66 @@ input[type=checkbox]:checked ~ label{
 
 }
 
-@media only screen and (min-width: 200px) {
+@media only screen and (min-width: 200px) and (max-width: 1024px) {
+  .container {
+    flex-direction: column-reverse;
+    /* margin-top: 30px; */
+    margin-top: 130px;
+    padding: unset;
+  }
+
+  .loginFormBox, 
+  .registerFormBox {
+    width: 50%;
+    min-width: unset;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logoContainer {
+    padding-top: 25px;
+  }
+
+  .logoNavContainer {
+    /* padding-bottom: 150px; */
+  }
+
+  .loginText,
+  .signUpText {
+    flex-direction: column;
+  }
+
+  .formLink {
+    padding: unset;
+  }
+
+  .formLabel {
+    display: none;
+  }
+
+  .fade-in1,
+  .fade-in2,
+  .fade-out1,
+  .fade-out2 {
+    /* min-height: 950px; */
+    min-height: 1000px;
+    /* min-height: 1200px; */
+  }
+
+  .footerText {
+    /* padding: unset; */
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .footerWithPicture {
+    /* bottom: -150px; */
+    bottom: -270px;
+  }
+}
+
+/* @media only screen and (min-width: 200px) {
   .formBox {
     width: 150%;
   }
@@ -1290,7 +1363,6 @@ input[type=checkbox]:checked ~ label{
     width: 70%;
   }
 
-  /* Navbar */
   .navMainList {
     display: flex;
   }
@@ -1328,7 +1400,6 @@ input[type=checkbox]:checked ~ label{
     width: 30%;
   }
 
-  /* Pet Profile - Card */
    .petProfileContainer {
     display: flex;
     justify-content: center;
@@ -1414,7 +1485,7 @@ input[type=checkbox]:checked ~ label{
   .petCard {
     width: 15%;
   }
-} 
+}  */
 
 
 

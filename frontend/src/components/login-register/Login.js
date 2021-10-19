@@ -10,16 +10,16 @@ import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
 
 const Login = () => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     const { setToken } = useContext(AuthContext);
     const { loginUser } = useContext(AppStateContext);
 
-    // if (DEBUG) console.log(token, setToken)
+    if (DEBUG) console.log(setToken);
 
     function handleSubmit(event) {
             event.preventDefault();
@@ -37,11 +37,8 @@ const Login = () => {
 
     createHistory().replace('/login');
 
-
-    // if (DEBUG) console.log('PASSWORDVALUES', pwValues.pw);
-
     return (  
-        <main>
+        <main className='formMain'>
             <BackgroundImages />
             <section className='container'>
                 <div className='logoContainer'>
