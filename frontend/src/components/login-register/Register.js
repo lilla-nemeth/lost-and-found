@@ -89,7 +89,7 @@ const Register = () => {
             <div className='logoContainer'>
                 <Logo />
             </div>
-            <div className='formBox'>
+            <div className='registerFormBox'>
                     <h2 className='formHeadline'>Register</h2>
                     <div className='loginText'>
                         <p>Already have an account?</p>

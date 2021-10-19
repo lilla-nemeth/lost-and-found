@@ -6,14 +6,6 @@ import Loader from '../generic/Loader';
 import { Link } from 'react-router-dom';
 import PetProfileCard from '../generic/PetProfileCard';
 
-const styles = {
-    main: {
-        fontFamily: '"Poppins", sans-serif',
-        background: '#B0F0EB',
-        overflow: 'hidden'
-    }
-}
-
 const PetProfile = () => {
     const { id } = useParams();
     const { pets, users, loader } = useContext(AppStateContext);
@@ -67,7 +59,7 @@ const PetProfile = () => {
 
     return (  
         <>
-        <main style={styles.main}>
+        <main className='petMain'>
             <section>
                 {getPetById(id, pets)}
                 <div className='backButtonContainer'>

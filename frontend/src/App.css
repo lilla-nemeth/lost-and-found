@@ -46,7 +46,10 @@ table {
 }
 
 /* NAVBAR, FOOTER */
-.navbar {
+.navigation {
+  width: 100%;
+  height: 70px;
+  font: 400 15px/1.2 'Poppins', sans-serif;
   list-style-type: none;
   background: #226660;
   overflow: hidden;
@@ -55,8 +58,28 @@ table {
   width: 100%;
   z-index: 100;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;  
 }
+  
+.navMainList {
+  flex-wrap: wrap;
+  float: right;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  display: flex;
+}
+
+.navList {
+  list-style-type: none;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.hamburger {
+  display: none;
+  z-index: 6;
+} 
 
 .footerWithPicture {
   width: 100%;
@@ -78,8 +101,8 @@ table {
 
 .navLogo {
   text-align: center;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   padding: 10px;
   margin: 10px;
   display: inline-block;
@@ -89,7 +112,7 @@ table {
 }
 
 .navLogoInner {
-  height: 20px;
+  height: 25px;
   fill: rgb(183, 223, 219);
 }
 
@@ -126,6 +149,7 @@ table {
   text-decoration: none;
   font: 400 15px/1.2 'Poppins', sans-serif;
   display: inline-block; 
+  padding-top: 25px;
 }
 
 .username {
@@ -151,7 +175,6 @@ table {
 .logOutButton {
   text-align: center;
   padding: 22.5px;
-
   text-decoration: none;
   font: 400 15px/1.2 'Poppins', sans-serif;
   display: inline-block; 
@@ -252,6 +275,12 @@ table {
 }
 
 /* Lost & Found - PetList */
+.petMain {
+  font-family: "Poppins", sans-serif;
+  background: #B0F0EB;
+  overflow: hidden;
+}
+
 .lostAndFoundHeadline {
   font: 700 38px/1.2 'Poppins', sans-serif;
   display: flex;
@@ -268,12 +297,10 @@ table {
 .petContainer {
 	display: flex;
 	flex-wrap: wrap;
-  /* align-items: center; */
   justify-content: center;
 }
 
 .petCard {
-	/* width: 20%; */
   background: rgba(255,255,255); 
   margin-bottom: 60px;
   margin-right: 30px;
@@ -292,24 +319,17 @@ table {
 }
 
 .petTextBox {
-  /* flex: 50%; */
   padding: 40px;
   background: #ebebeb; 
   min-height: 300px;
-
-  /* max-width: 40%; */
   overflow-wrap: break-word;
 }
 
 .petPictureContainer {
-  /* flex: 50%; */
-/*  */
   position: relative;
   overflow: hidden;
   background: #aaaaaa;
   height: 350px;
-  /* padding: 40px; */
-  /* height: 450px; */
 }
 
 .petPicture {
@@ -324,15 +344,6 @@ table {
   min-width: 100%;
   max-height: 150%;
   max-width: 150%;
-
-  /* margin: auto;
-  object-fit: cover;
-  min-height: 100%;
-  min-width: 100%;
-  max-height: 150%;
-  width: 100%;
-  justify-content: center;
-  align-items: center; */
 }
 
 /* note: set the colors for lost and found - 1-1 color/status */
@@ -361,12 +372,8 @@ table {
 }
 
 .tableCell {
-  /* width: 50%; */
   padding-right: 20px;
   overflow-wrap: anywhere;
-  /* line-height: 30px; */
-  /* min-width: 110px;
-  max-width: 300px; */
 }
 
 .tableCell:first-child { 
@@ -402,7 +409,6 @@ table {
 }
 
 /* Report - Picture */
-
 .imageUploadContainer {
   border: 3px dashed rgb(34 102 96); 
   justify-content: center;
@@ -413,8 +419,6 @@ table {
   background: rgba(183, 223, 219, 0.2);
 }
 
-
-/* TEST */
 .inputFile {
 	width: 0.1px;
 	height: 0.1px;
@@ -438,19 +442,11 @@ table {
   text-align: center;
 }
 
-/* .inputfile:focus,
-.inputLabel:focus,
-.inputfile:hover,
-.inputLabel:hover {
-  background: #fff;
-} */
-
 .previewContainer {
   position: relative;
   height: 450px;
   overflow: hidden;
   width: 100%;
-  /* z-index: 3; */
 }
 
 .previewImage {
@@ -465,8 +461,6 @@ table {
   min-width: 100%;
   max-height: 150%;
   max-width: 150%;
-  /* z-index: 3; */
-
 }
 
 
@@ -691,7 +685,16 @@ input[type=checkbox]:checked ~ label{
   background: rgba(255,255,255); 
   padding: 50px; 
   height: fit-content;
-  /* width: 450px; */
+  width: 30%;
+  border-radius: 25px; 
+  box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
+}
+
+.loginFormBox,
+.registerFormBox {
+  background: rgba(255,255,255); 
+  padding: 50px; 
+  height: fit-content;
   width: 30%;
   border-radius: 25px; 
   box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
@@ -725,17 +728,10 @@ input[type=checkbox]:checked ~ label{
 
 .inputBox,
 .searchBox {
-  /* padding-top: 10px; */
   display: flex;
 }
 
-/* #region,
-#search {
-  text-transform: capitalize;
-} */
-
 .showInputs {
-  /* display: block; */
 	transition: height 300ms ease-in-out, opacity 700ms ease-in-out;
 }
 
@@ -755,7 +751,6 @@ input[type=checkbox]:checked ~ label{
   box-shadow: 0px 12px 12px -12px rgb(0 0 0 / 50%);
 }
 
-
 .backButtonContainer {
   display: flex;
   justify-content: center;
@@ -772,7 +767,6 @@ input[type=checkbox]:checked ~ label{
 
 .backButton {
   background: none;
-  /* background: #DDD; */
   background: rgb(34, 102, 96);
   padding: 20px;
   border-radius: 0.25rem;
@@ -795,8 +789,6 @@ input[type=checkbox]:checked ~ label{
   z-index: 1;
 }
 
-
-
 .formButton {
   padding: 20px;
   border-radius: 0.25rem;
@@ -804,7 +796,6 @@ input[type=checkbox]:checked ~ label{
   color: #fff;
   cursor: pointer;
   border: none;
-  /* z-index: 2; */
 }
 
 .formButton:hover {
@@ -821,7 +812,6 @@ input[type=checkbox]:checked ~ label{
   cursor: pointer;
   z-index: 4;
   font: 400 15px/1.2 'Poppins', sans-serif;
-
   position: absolute;
   top: 0;
   right: 0;
@@ -838,7 +828,6 @@ input[type=checkbox]:checked ~ label{
   cursor: pointer;
   z-index: 4;
   font: 400 15px/1.2 'Poppins', sans-serif;
-
   position: absolute;
   top: 0;
   right: 70px;
@@ -918,7 +907,6 @@ input[type=checkbox]:checked ~ label{
   color: rgb(34, 102, 96);
 }
 
-
 /* Paw Loader */
 #loaderContainer {
   display: flex;
@@ -996,12 +984,10 @@ input[type=checkbox]:checked ~ label{
   }
 }
 
-
 /* PET REPORT */
 .categoryHeadline {
   padding: 45px 0px 15px;
 }
-
 
 /* PET REPORT - MAP */
 .map-container {
@@ -1011,7 +997,6 @@ input[type=checkbox]:checked ~ label{
 .mapboxgl-ctrl-geocoder {
   display: flex;
   width: 400px !important;
-  /* justify-content: space-between; */
 }
 
 .mapboxgl-ctrl-geocoder {
@@ -1031,27 +1016,16 @@ input[type=checkbox]:checked ~ label{
   text-transform: capitalize;
 }
 
-
 .mapboxgl-ctrl-geocoder--icon,
 .mapboxgl-ctrl-geocoder--icon-search {
   margin: 12px;
   width: 30px !important;
   height: 30px !important;
-  /* margin: 0; */
   padding: 0;
-
   position: unset !important;
-
   cursor: pointer;
   background: none;
   fill: rgb(172, 172, 172) !important;
-
-  /* padding: 18px; */
-  /* width: fit-content; */
-  /* border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 2px solid rgb(34, 102, 96); */
 }
 
 .mapboxgl-ctrl-geocoder--icon:hover,
@@ -1061,7 +1035,75 @@ input[type=checkbox]:checked ~ label{
 }
 
 
+
 /* Media Queries */
+
+@media only screen and (min-width: 200px) and (max-width: 768px) {
+
+  .navLink {
+    color: #B0F0EB;
+    font: 400 25px/1.2 'Poppins', sans-serif;
+  }
+
+  .navList:hover {
+    color: #226660;
+  }
+
+  .navMainList {
+    display: none;
+  }
+
+  .navMainListMobile {
+    background: #226660;
+    width: 100vw;
+    margin-top: 69px;
+    position: fixed;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hamburger {
+    cursor: pointer;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    margin-left: 10px;
+    z-index: 10;
+  }
+
+  .burgerActive,
+  .burgerInactive {
+    background: #B0F0EB;
+    margin: 6px auto;
+    width: 27px;
+    height: 4px;
+    transition: all 0.3s ease-in-out;
+  } 
+
+  .burgerActive:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+  }
+
+  .burgerActive:nth-child(2) {
+    opacity: 0;
+  }
+
+  .burgerActive:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+  }
+
+  .burgerActive, 
+  .burgerInactive {
+    transition: all 0.3s ease-in-out;
+  }
+
+}
+
 @media only screen and (min-width: 200px) {
   .formBox {
     width: 150%;
@@ -1103,7 +1145,6 @@ input[type=checkbox]:checked ~ label{
     line-height: unset;
   } 
 
-  /* Pet Profile - Card */
   .petProfileCardInner {
     display: flex;
     flex-direction: column;
@@ -1248,6 +1289,24 @@ input[type=checkbox]:checked ~ label{
   .petCard {
     width: 70%;
   }
+
+  /* Navbar */
+  .navMainList {
+    display: flex;
+  }
+
+  .navLink {
+    font: 400 15px/1.2 'Poppins', sans-serif;
+  }
+
+  .navMainListMobile {
+    display: none;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
 } 
 
 @media only screen and (min-width: 992px) {
@@ -1356,3 +1415,7 @@ input[type=checkbox]:checked ~ label{
     width: 15%;
   }
 } 
+
+
+
+

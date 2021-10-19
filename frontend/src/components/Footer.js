@@ -5,7 +5,6 @@ const Footer = (props) => {
 
     let DEBUG = true;
 
-
     return ( 
         <>
         { isFooterBgTransparent ? 
