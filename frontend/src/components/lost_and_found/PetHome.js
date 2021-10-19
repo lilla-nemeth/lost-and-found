@@ -4,17 +4,9 @@ import PetSearch from './PetSearch';
 import PetAdvancedSearch from './PetAdvancedSearch';
 
 
-const styles = {
-    main: {
-        fontFamily: '"Poppins", sans-serif',
-        background: '#B0F0EB',
-        overflow: 'hidden'
-    }
-}
-
 const PetHome = () => {
     return (  
-        <main style={styles.main}>
+        <main className='petMain'>
             <section>
                 {/* FIX PETSEARCH AND PETADVANCEDSEARCH COMPONENTS */}
                 {/* <PetSearch />

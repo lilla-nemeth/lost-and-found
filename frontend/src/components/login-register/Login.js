@@ -47,7 +47,7 @@ const Login = () => {
                 <div className='logoContainer'>
                     <Logo />
                 </div>
-                <div className='formBox'>
+                <div className='loginFormBox'>
                         <h2 className='formHeadline'>Login</h2>
                         <div className='signUpText'>
                             <p>Don't have an account?</p>
