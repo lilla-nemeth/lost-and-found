@@ -51,7 +51,7 @@ const Logo = () => {
                     </div>
                 </Link>
             </div>
-            <div style={styles.navBack}>
+            <div className='logoNavContainer'>
                 <Link style={styles.navBackLink} to='/'>
                     <div style={styles.navBackText}>
                         <NavBackArrow style={styles.navBackArrow}/>

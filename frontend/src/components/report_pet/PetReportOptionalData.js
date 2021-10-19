@@ -3,8 +3,6 @@ import RadioButton from '../generic/RadioButton';
 import Checkbox from '../generic/Checkbox';
 import TextInput from '../generic/TextInput';
 
-// Radiobuttons and checkboxes: Check the value attributes! change them if necessary: {''} -> {}
-
 const PetReportOptionalData = (props) => {
     const { 
         size,
@@ -25,9 +23,6 @@ const PetReportOptionalData = (props) => {
 
     let DEBUG = true;
 
-
-    const [checkboxValues, setCheckboxValues] = useState();
-
     function changeCheckboxValue(array, setArray, value) {
         if (array.includes(value)) {
             return setArray(array.filter(e => e != value))
@@ -35,7 +30,6 @@ const PetReportOptionalData = (props) => {
             return setArray([...array, value])
         }
     }
-
 
     return (  
             <div className={optionalInputs.display}>
@@ -256,7 +250,6 @@ const PetReportOptionalData = (props) => {
                         value={uniquefeature}
                         placeholder={'unique feature'}
                         onChange={event => setUniquefeature(event.target.value)}
-                        // required={!isRequired}
                     />
                 </div>
             </div>

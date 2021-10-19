@@ -27,7 +27,6 @@ const PetReport = () => {
     const [species, setSpecies] = useState('');
     const [description, setDescription] = useState('');
 
-    // Show/hide additional data:
     const [optionalInputs, setOptionalInputs] = useState({
         display: 'hideInputs',
     });
@@ -41,7 +40,6 @@ const PetReport = () => {
 
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
-    // const [isRequired, setIsRequired] = useState(false);
 
     const { token } = useContext(AuthContext);
     const { reportPet } = useContext(AppStateContext);
@@ -67,7 +65,7 @@ const PetReport = () => {
             uniquefeature,
             postdescription: description,
             successCallback: res => {
-                console.log('res from PetReport')
+                if (DEBUG) console.log('res from PetReport')
                 setSuccessMsg(res)
                 setSize('')
                 setStatus('')
@@ -85,8 +83,8 @@ const PetReport = () => {
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');
             }, 5000)),
-            // errorCallback: err => setErrorMsg(err),
-            errorCallback: err => console.log('err from PetReport', err),
+            // errorCallback: err => console.log('err from PetReport', err),
+            errorCallback: err => setErrorMsg(err),
             errorTimeout: () => (setTimeout(() => {
                 setErrorMsg('');
             }, 5000))
@@ -120,7 +118,7 @@ const PetReport = () => {
             <p className='errorMessage'>{errorMsg}</p>
             <p className='successMessage'>{successMsg}</p>
         </div>
-    )
+    );
 
         return (  
             <main className='formMain'>
