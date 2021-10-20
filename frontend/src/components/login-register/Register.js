@@ -45,7 +45,7 @@ const Register = () => {
     return (
         <main className='formMain'>
             <BackgroundImages />
-            <section className='container'>
+            <section className='registerContainer'>
                 <div className='logoContainer'>
                     <Logo />
                 </div>
