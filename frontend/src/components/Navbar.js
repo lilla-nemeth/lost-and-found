@@ -26,41 +26,47 @@ const Navbar = () => {
 
     if (DEBUG) console.log('USERNAME NAVBAR', username);
 
-    function returnUnprotectedNavLinks() {
+    function returnUnprotectedNavLinks(className) {
         return (
             <>
-                <li className='navList'><Link className='navLink' to='/lostandfound' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Lost & Found</Link></li>
-                <li className='navList'><Link className='navLink' to='' disabled>Report Pet</Link></li>
-                <li className='navList'><Link className='navLink' to='/login' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Login</Link></li>
-                <li className='navList'><Link className='navLink' to='/register' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Register</Link></li>     
+                <li className='navList'><Link className={className} to='/lostandfound' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Lost & Found</Link></li>
+                <li className='navList'><Link className={className} to='' disabled>Report Pet</Link></li>
+                <li className='navList'><Link className={className} to='/login' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Login</Link></li>
+                <li className='navList'><Link className={className} to='/register' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Register</Link></li>     
             </>
         )
     }
 
-    function returnProtectedNavLinks() {
+    function returnProtectedNavLinks(className, buttonClassName) {
         return (
             <>
-                <li><Link className='navLink' to='/lostandfound' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Lost & Found</Link></li>
-                <li><Link className='navLink' to='/reportpet' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Report Pet</Link></li>
-                <li><button className='logOutButton' onClick={() => {handleLogOut(); setHamburgerOpen(!hamburgerOpen)}}>Log Out</button></li>  
+                <li><Link className={className} to='/lostandfound' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Lost & Found</Link></li>
+                <li><Link className={className} to='/reportpet' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Report Pet</Link></li>
+                <li><button className={buttonClassName} onClick={() => {handleLogOut(); setHamburgerOpen(!hamburgerOpen)}}>Log Out</button></li>  
             </>
         )
     }
 
-    function isNavbarOpen(isOpen, listFunction) {
+    function isNavbarOpen(isOpen) {
         if (isOpen) {
             return (
                 <>
+                    <ul className='navMainList' style={{display: 'none'}}>
+                        {returnProtectedNavLinks('navLinkDesktop', 'logOutButtonDesktop')}
+                    </ul>
                     <ul className='navMainListMobile' style={{display: 'flex'}}>
-                        {listFunction}
+                        {returnProtectedNavLinks('navLinkMobile', 'logOutButtonMobile')}
                     </ul>
                 </>
             )
         } else {
             return (
                 <>
+                    <ul className='navMainList' style={{display: 'flex'}}>
+                        {returnProtectedNavLinks('navLinkDesktop', 'logOutButtonDesktop')}
+                    </ul>
                     <ul className='navMainListMobile' style={{display: 'none'}}>
-                        {listFunction}
+                        {returnProtectedNavLinks('navLinkMobile', 'logOutButtonMobile')}
                     </ul>
                 </>
             )
@@ -73,10 +79,7 @@ const Navbar = () => {
                 {!token ?
                     <>
                         <Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link>
-                        <ul className='navMainList'>
-                            {returnUnprotectedNavLinks()}
-                        </ul>
-                            {isNavbarOpen(hamburgerOpen, returnUnprotectedNavLinks())}
+                            {isNavbarOpen(hamburgerOpen)}
                     </>
                     :
                     <>
@@ -84,12 +87,9 @@ const Navbar = () => {
                             <Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link>
                             <li className='username'>Hi {username}!</li>
                         </div>
-                        <div className='navMainList'>
-                            <ul className='navPositionRight'>
-                                {returnProtectedNavLinks()}
-                            </ul>
-                        </div>
-                            {isNavbarOpen(hamburgerOpen, returnProtectedNavLinks())}
+                            {/* <ul className='navPositionRight'>
+                            </ul>  */}
+                            {isNavbarOpen(hamburgerOpen)}
                     </>
                 }
                 <div className="hamburger" onClick={() => setHamburgerOpen(!hamburgerOpen)}>

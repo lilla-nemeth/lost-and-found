@@ -67,7 +67,7 @@ table {
   margin: 0px;
   padding: 0px;
   overflow: hidden;
-  display: flex;
+  /* display: flex; */
 }
 
 .navList {
@@ -143,7 +143,8 @@ table {
 
 .footerText,
 .username,
-.navLink {
+.navLinkMobile,
+.navLinkDesktop {
   text-align: center;
   padding: 22.5px;
   text-decoration: none;
@@ -156,11 +157,13 @@ table {
   color: #fff;
 }
 
-.navLink {
+.navLinkMobile,
+.navLinkDesktop {
   color: rgb(183, 223, 219);
 }
 
-.navLink:after {
+.navLinkMobile:after,
+.navLinkDesktop::after {
   display: block;
   content: '';
   border-bottom: solid 2px rgb(183, 223, 219); 
@@ -168,11 +171,13 @@ table {
   transition: transform 180ms ease-in-out;
 }
 
-.navLink:hover:after {
+.navLinkMobile:hover:after,
+.navLinkDesktop:hover:after {
   transform: scaleX(1);
 }
 
-.logOutButton {
+.logOutButtonDesktop,
+.logOutButtonMobile {
   text-align: center;
   padding: 22.5px;
   text-decoration: none;
@@ -184,7 +189,8 @@ table {
   background: rgb(71, 163, 156);
 }
 
-.logOutButton:hover {
+.logOutButtonDesktop:hover,
+.logOutButtonMobile:hover {
   background: rgb(183, 223, 219);
   transition: background 0.2s linear;
 }
@@ -1067,7 +1073,17 @@ input[type=checkbox]:checked ~ label{
 
 @media only screen and (min-width: 200px) and (max-width: 768px) {
 
-  .navLink {
+  .navLinkDesktop,
+  .logOutButtonDesktop {
+    display: none;
+  }
+
+  .navLinkMobile {
+    color: #B0F0EB;
+  }
+
+  .logOutButtonMobile,
+  .navLinkMobile {
     color: #B0F0EB;
     font: 400 25px/1.2 'Poppins', sans-serif;
   }
@@ -1131,7 +1147,6 @@ input[type=checkbox]:checked ~ label{
 
 }
 
-
 @media only screen and (min-width: 200px) and (max-width: 400px) {
   .loginContainer,
   .registerContainer {
@@ -1148,9 +1163,8 @@ input[type=checkbox]:checked ~ label{
   }
 
   .footerWithPicture {
-    position: unset;
-    bottom: unset;
-    background: rgb(172, 172, 172);
+    position: absolute;
+    bottom: 0;
   }
 
   .fade-in1,
@@ -1185,9 +1199,8 @@ input[type=checkbox]:checked ~ label{
   }
 
   .footerWithPicture {
-    position: unset;
-    bottom: unset;
-    background: rgb(172, 172, 172);
+    position: absolute;
+    bottom: 0;
   }
 }
 
@@ -1412,7 +1425,7 @@ input[type=checkbox]:checked ~ label{
 
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
   .formBox {
     width: 90%;
   }
@@ -1425,7 +1438,7 @@ input[type=checkbox]:checked ~ label{
     display: flex;
   }
 
-  .navLink {
+  .navLinkDesktop {
     font: 400 15px/1.2 'Poppins', sans-serif;
   }
 
