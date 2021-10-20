@@ -12,6 +12,7 @@ const Navbar = () => {
     const { token, handleLogOut } = useContext(AuthContext);
     const { getUsername, username } = useContext(AppStateContext);
 
+
     let DEBUG = false;
     
     useEffect(() => {
@@ -26,7 +27,7 @@ const Navbar = () => {
 
     if (DEBUG) console.log('USERNAME NAVBAR', username);
 
-    function returnUnprotectedNavLinks(className) {
+    function returnUnprotectedLinks(className) {
         return (
             <>
                 <li className='navList'><Link className={className} to='/lostandfound' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Lost & Found</Link></li>
@@ -37,7 +38,7 @@ const Navbar = () => {
         )
     }
 
-    function returnProtectedNavLinks(className, buttonClassName) {
+    function returnProtectedLinks(className, buttonClassName) {
         return (
             <>
                 <li><Link className={className} to='/lostandfound' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Lost & Found</Link></li>
@@ -47,26 +48,27 @@ const Navbar = () => {
         )
     }
 
-    function isNavbarOpen(isOpen) {
+    function isNavbarOpen(isOpen, callbackDesktop, callbackMobile, navStyle, logOutStyle) {
         if (isOpen) {
             return (
                 <>
                     <ul className='navMainList' style={{display: 'none'}}>
-                        {returnProtectedNavLinks('navLinkDesktop', 'logOutButtonDesktop')}
+                        {callbackDesktop(navStyle, logOutStyle)}
                     </ul>
                     <ul className='navMainListMobile' style={{display: 'flex'}}>
-                        {returnProtectedNavLinks('navLinkMobile', 'logOutButtonMobile')}
+                        {callbackMobile(navStyle, logOutStyle)}
                     </ul>
                 </>
             )
-        } else {
+        } 
+        else {
             return (
                 <>
                     <ul className='navMainList' style={{display: 'flex'}}>
-                        {returnProtectedNavLinks('navLinkDesktop', 'logOutButtonDesktop')}
+                        {callbackDesktop(navStyle, logOutStyle)}
                     </ul>
                     <ul className='navMainListMobile' style={{display: 'none'}}>
-                        {returnProtectedNavLinks('navLinkMobile', 'logOutButtonMobile')}
+                        {callbackMobile(navStyle, logOutStyle)}
                     </ul>
                 </>
             )
@@ -79,7 +81,10 @@ const Navbar = () => {
                 {!token ?
                     <>
                         <Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link>
-                            {isNavbarOpen(hamburgerOpen)}
+                            {isNavbarOpen(hamburgerOpen, 
+                                () => returnUnprotectedLinks('navLinkDesktop', 'logOutButtonDesktop'),
+                                () => returnUnprotectedLinks('navLinkMobile', 'logOutButtonMobile')
+                            )}
                     </>
                     :
                     <>
@@ -87,9 +92,10 @@ const Navbar = () => {
                             <Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link>
                             <li className='username'>Hi {username}!</li>
                         </div>
-                            {/* <ul className='navPositionRight'>
-                            </ul>  */}
-                            {isNavbarOpen(hamburgerOpen)}
+                            {isNavbarOpen(hamburgerOpen, 
+                                () => returnProtectedLinks('navLinkDesktop', 'logOutButtonDesktop'),
+                                () => returnProtectedLinks('navLinkMobile', 'logOutButtonMobile')
+                            )}
                     </>
                 }
                 <div className="hamburger" onClick={() => setHamburgerOpen(!hamburgerOpen)}>

@@ -1438,13 +1438,14 @@ input[type=checkbox]:checked ~ label{
     display: flex;
   }
 
+  .navMainListMobile {
+    display: none;
+  }
+
   .navLinkDesktop {
     font: 400 15px/1.2 'Poppins', sans-serif;
   }
 
-  .navMainListMobile {
-    display: none;
-  }
 
   .hamburger {
     display: none;
