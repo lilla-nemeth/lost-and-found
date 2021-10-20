@@ -40,7 +40,7 @@ const Login = () => {
     return (  
         <main className='formMain'>
             <BackgroundImages />
-            <section className='container'>
+            <section className='loginContainer'>
                 <div className='logoContainer'>
                     <Logo />
                 </div>

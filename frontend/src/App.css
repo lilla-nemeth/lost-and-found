@@ -649,7 +649,8 @@ input[type=checkbox]:checked ~ label{
 }
 
 /* LOGIN, REGISTRATION WITH LOGO */
-.container {
+.registerContainer,
+.loginContainer {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -861,6 +862,13 @@ input[type=checkbox]:checked ~ label{
   background: none;
 }
 
+
+.showHidePassword,
+.formLabel {
+  padding: 22px;
+}
+
+
 .showHidePassword:hover {
   fill: #226660;
   transition: fill 0.2s linear;
@@ -871,10 +879,14 @@ input[type=checkbox]:checked ~ label{
   transform: scaleY(-1);
 }
 
+
+.searchButton {  
+  padding: 18px;
+}
+
 .showHidePassword,
 .searchButton,
 .formLabel {  
-  padding: 18px;
   width: fit-content;
   border-top: none;
   border-left: none;
@@ -895,7 +907,8 @@ input[type=checkbox]:checked ~ label{
 
 .formInput,
 .searchInput {
-  padding: 16px 0;
+  /* padding: 16px 0; */
+  padding: 22px 0;
   width: 100%;
   border-bottom: 2px solid rgb(34, 102, 96);
   border-top: none;
@@ -1118,29 +1131,87 @@ input[type=checkbox]:checked ~ label{
 
 }
 
-@media only screen and (min-width: 200px) and (max-width: 1024px) {
-  .container {
+
+@media only screen and (min-width: 200px) and (max-width: 400px) {
+  .loginContainer,
+  .registerContainer {
     flex-direction: column-reverse;
-    /* margin-top: 30px; */
-    margin-top: 130px;
     padding: unset;
   }
 
+  .loginContainer {
+    margin-top: 60px;
+  }
+
+  .registerContainer {
+    margin-top: 170px;
+  }
+
+  .footerWithPicture {
+    position: unset;
+    bottom: unset;
+    background: rgb(172, 172, 172);
+  }
+
+  .fade-in1,
+  .fade-in2,
+  .fade-out1,
+  .fade-out2 {
+    min-height: 1000px;
+  }
+
+}
+
+@media only screen and (min-width: 400px) and (max-width: 600px) {
+  .loginContainer,
+  .registerContainer  {
+    flex-direction: column-reverse;
+    padding: unset;
+  }
+
+  .loginContainer {
+    margin-top: -10px;
+  }
+
+  .registerContainer {
+    margin-top: 90px;
+  }
+
+  .fade-in1,
+  .fade-in2,
+  .fade-out1,
+  .fade-out2 {
+    min-height: 950px;
+  }
+
+  .footerWithPicture {
+    position: unset;
+    bottom: unset;
+    background: rgb(172, 172, 172);
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1024px) {
+  .loginContainer,
+  .registerContainer  {
+    flex-direction: column-reverse;
+    padding: unset;
+  }
+}
+
+@media only screen and (min-width: 200px) and (max-width: 1024px) {
+
+
   .loginFormBox, 
   .registerFormBox {
-    width: 50%;
+    width: 60%;
     min-width: unset;
-
     display: flex;
     flex-direction: column;
   }
 
   .logoContainer {
     padding-top: 25px;
-  }
-
-  .logoNavContainer {
-    /* padding-bottom: 150px; */
   }
 
   .loginText,
@@ -1156,28 +1227,15 @@ input[type=checkbox]:checked ~ label{
     display: none;
   }
 
-  .fade-in1,
-  .fade-in2,
-  .fade-out1,
-  .fade-out2 {
-    /* min-height: 950px; */
-    min-height: 1000px;
-    /* min-height: 1200px; */
-  }
-
   .footerText {
-    /* padding: unset; */
+
     display: flex;
     flex-wrap: wrap;
   }
 
-  .footerWithPicture {
-    /* bottom: -150px; */
-    bottom: -270px;
-  }
-}
+} 
 
-/* @media only screen and (min-width: 200px) {
+@media only screen and (min-width: 200px) {
   .formBox {
     width: 150%;
   }
@@ -1485,7 +1543,7 @@ input[type=checkbox]:checked ~ label{
   .petCard {
     width: 15%;
   }
-}  */
+} 
 
 
 
