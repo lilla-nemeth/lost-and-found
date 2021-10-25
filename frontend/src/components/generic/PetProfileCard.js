@@ -4,12 +4,13 @@ import PetUserData from './PetUserData.js';
 
 
 const PetProfileCard = (props) => {
-    const { pet, user, token } = props;
+    const { pet, user } = props;
 
 
-    let DEBUG = false;
+    let DEBUG = true;
 
-    if (DEBUG) console.log(pet.userid)
+    // if (DEBUG) console.log(pet.userid)
+    if (DEBUG) console.log('PetProfileCard - user', user)
 
     return (
         <div className='petProfileContainer'>
@@ -66,7 +67,7 @@ const PetProfileCard = (props) => {
                             <tr className='petOptionalInfo'>
                               {isInputEmpty('Description', (pet.postdescription), 'tableCell')}
                             </tr>
-                            {!token ? <></> : <PetUserData user={user} />}
+                            {!user ? <></> : <PetUserData user={user} />}
                           </tbody>
                         </table>
                     </div>

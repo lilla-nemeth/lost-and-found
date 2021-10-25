@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import PetListCard from '../generic/PetListCard';
 
 const PetList = () => {
-    const { users, pets, numberIncreases, setOffset, limit, loader } = useContext(AppStateContext);
+    const { pets, numberIncreases, setOffset, limit, loader } = useContext(AppStateContext);
 
     let DEBUG = false;
 
@@ -22,8 +22,7 @@ const PetList = () => {
         );
     }
 
-    // if (DEBUG) console.log('pets arr from PetList', pets);
-    if (DEBUG) console.log('users arr from PetList', users);
+    if (DEBUG) console.log('pets arr from PetList', pets);
 
     return (  
         <div className='petContainer'>
