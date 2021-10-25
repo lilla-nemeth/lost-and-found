@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import createHistory from 'history/createBrowserHistory';
+import { isFieldRequired } from '../HelperFunctions.js';
 import Logo from '../generic/Logo';
 import BackgroundImages from './BackgroundImages';
 import PasswordShowHide from './PasswordShowHide';
@@ -13,17 +14,21 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    
+    const { setToken } = useContext(AuthContext);
+    const { loginUser } = useContext(AppStateContext);
 
     let DEBUG = false;
 
-    const { setToken } = useContext(AuthContext);
-    const { loginUser } = useContext(AppStateContext);
+    let disabled = !password || !email;
+
+    let required = true;
 
     if (DEBUG) console.log(setToken);
 
     function handleSubmit(event) {
-            event.preventDefault();
-    
+        event.preventDefault();
+
             loginUser({
                 setToken,
                 email,
@@ -73,7 +78,13 @@ const Login = () => {
                             </div>
                             <PasswordShowHide password={password} setPassword={setPassword} />
                             <div>
-                                <button type='submit' className='formButton'>Login</button>
+                                <button 
+                                    type='submit' 
+                                    className={disabled ? 'formButtonInactive' :'formButton'}
+                                    disabled={disabled}
+                                >
+                                    Login
+                                </button>
                             </div>
                         </form>
                     </div>

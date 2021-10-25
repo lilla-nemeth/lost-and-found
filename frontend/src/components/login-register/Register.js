@@ -21,6 +21,8 @@ const Register = () => {
 
     let DEBUG = false;
 
+    let disabled = !password || !email;
+
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -112,7 +114,13 @@ const Register = () => {
                             </div>
                             <PasswordShowHide password={password} setPassword={setPassword} />
                             <div>
-                                <button className='formButton'>Register</button>
+                                <button 
+                                    type='submit' 
+                                    className={disabled ? 'formButtonInactive' :'formButton'}
+                                    disabled={disabled}
+                                >
+                                    Register
+                                </button>
                             </div>
                         </form>
                     </div>

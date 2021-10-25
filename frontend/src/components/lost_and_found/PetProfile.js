@@ -1,55 +1,45 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import createHistory from 'history/createBrowserHistory';
 import Loader from '../generic/Loader';
 import { Link } from 'react-router-dom';
 import PetProfileCard from '../generic/PetProfileCard';
+import { AuthContext } from '../../contexts/AuthContext';
+
 
 const PetProfile = () => {
     const { id } = useParams();
-    const { pets, users, loader } = useContext(AppStateContext);
+    const { pets, users, loader} = useContext(AppStateContext);
+    const { token } = useContext(AuthContext);
 
     let DEBUG = true;
 
     // if (DEBUG) console.log('pets array PetProfile', pets)
-    if (DEBUG) console.log('users from PetProfile', users)
+    // if (DEBUG) console.log('users from PetProfile', users)
 
-
-    function getPetById(id, arr) {
-        for (let i = 0; i < arr.length; i++) {
-            if (id == arr[i].id) {
-                return <PetProfileCard pet={arr[i]} />;
+    function getPetAndUserData(id, petArr, userArr, token) {
+        for (let i = 0; i < petArr.length; i++) {
+                for (let j = 0; j < userArr.length; j++) {
+                    if (id == petArr[i].id) {
+                        if (petArr[i].userid == userArr[j].id) {
+                            if (!token) {
+                                return <PetProfileCard pet={petArr[i]} />;
+                            } else {
+                                return <PetProfileCard pet={petArr[i]} user={userArr[j]} token={token} />;
+                            }
+                        }
+                    }
             }
         }
     }
 
-    // primaryId = user id
-    // secondaryId = userId from pets
-    // arr = user array
-    // function getUserById(userArr, petArr, arr) {
-    //     for (let i = 0; i < arr.length; i++) {
-    //         if (petArr.id == userArr[i].id) {
-    //             return arr;
-    //         }
-    //     }        
-    // }
-    // if (DEBUG) console.log('getUserById - user', getUserById(user.id, pets.userid, user))
-
-
-
-
-
-
-    // if (DEBUG) console.log("return of getPetById", getPetById(id, pets));
-    // if (DEBUG) console.log(getPetById(id, pets));
-
-
+    // if (DEBUG) console.log(getPetAndUserData(id, pets, users));
 
     createHistory().replace(`/petprofile/${id}`);
 
-    if (DEBUG) console.log('typeof id', typeof id)
-    if (DEBUG) console.log('id', id)
+    // if (DEBUG) console.log('typeof id', typeof id)
+    // if (DEBUG) console.log('id', id)
 
     if (loader) {
         return (
@@ -61,7 +51,8 @@ const PetProfile = () => {
         <>
         <main className='petMain'>
             <section>
-                {getPetById(id, pets)}
+                {/* {getPetAndUserData(id, pets)} */}
+                {getPetAndUserData(id, pets, users, token)}
                 <div className='backButtonContainer'>
                     <div className='backButtonBox'>
                         <Link to={'/lostandfound'}>

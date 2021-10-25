@@ -1,8 +1,11 @@
 import React from 'react';
 import { petDate, isInputEmpty } from '../HelperFunctions.js';
+import PetUserData from './PetUserData.js';
+
 
 const PetProfileCard = (props) => {
-    const { pet } = props;
+    const { pet, user, token } = props;
+
 
     let DEBUG = false;
 
@@ -15,7 +18,6 @@ const PetProfileCard = (props) => {
                     <div className='petProfilePictureContainer'>
                         <img className='petProfilePicture' alt='img' src={`data:image/jpg;base64,${pet.img}`} />
                     </div>
-
                     <div className='petProfileTextBox'>
                         <table style={{width: '100%'}}>
                           <tbody>
@@ -64,6 +66,7 @@ const PetProfileCard = (props) => {
                             <tr className='petOptionalInfo'>
                               {isInputEmpty('Description', (pet.postdescription), 'tableCell')}
                             </tr>
+                            {!token ? <></> : <PetUserData user={user} />}
                           </tbody>
                         </table>
                     </div>
