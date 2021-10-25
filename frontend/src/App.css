@@ -274,7 +274,8 @@ table {
 
 .petProfileTextBox {
     padding: 40px;
-    background: #ebebeb; 
+    border: 2px solid #ddd;
+    border-left: 0;
     min-height: 300px;
     width: 50%;
     overflow-wrap: break-word;
@@ -326,7 +327,8 @@ table {
 
 .petTextBox {
   padding: 40px;
-  background: #ebebeb; 
+  border: 2px solid #ddd;
+  border-top: 0;
   min-height: 300px;
   overflow-wrap: break-word;
 }
@@ -1282,6 +1284,7 @@ input[type=checkbox]:checked ~ label{
   .petProfileTextBox,
   .petTextBox {
     border-radius: 0 0 25px 25px;
+    /* border: none; */
   }
 
   .lostAndFoundHeadline {
@@ -1326,6 +1329,7 @@ input[type=checkbox]:checked ~ label{
 
   .petProfileTextBox {
     width: auto;
+    border: none;
   }
 
   .backButtonBox {
@@ -1337,6 +1341,10 @@ input[type=checkbox]:checked ~ label{
     width: auto;
   }
 
+  .petTextBox {
+    border: none;
+  }
+  
 }
 
 @media only screen and (min-width: 300px) {
@@ -1358,6 +1366,7 @@ input[type=checkbox]:checked ~ label{
   .petProfileTextBox,
   .petTextBox {
     border-radius: 0 0 25px 25px;
+    border: none;
   }
 }
 
@@ -1382,8 +1391,14 @@ input[type=checkbox]:checked ~ label{
     border-radius: 25px 25px 0 0;
   }
 
-  .petProfileTextBox,
   .petTextBox {
+    border-radius: 0 0 25px 25px;
+    /* border: 2px solid #ddd;
+    border-top: 0; */
+    border: none;
+  }
+
+  .petProfileTextBox {
     border-radius: 0 0 25px 25px;
   }
 
@@ -1409,7 +1424,9 @@ input[type=checkbox]:checked ~ label{
   .petProfileTextBox,
   .petTextBox {
     border-radius: 0 0 25px 25px;
+    border: none;
   }
+  
 }
 
 
@@ -1432,6 +1449,13 @@ input[type=checkbox]:checked ~ label{
   .petProfileTextBox,
   .petTextBox {
     border-radius: 0;
+    border: 2px solid #ddd;
+    border-top: 0;
+  }
+
+  .petProfileTextBox {
+    border: 2px solid #ddd;
+    border-top: 0;
   }
 
   .lostAndFoundHeadline {
@@ -1487,7 +1511,7 @@ input[type=checkbox]:checked ~ label{
     width: 30%;
   }
 
-   .petProfileContainer {
+  .petProfileContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1541,11 +1565,12 @@ input[type=checkbox]:checked ~ label{
   }
   
   .petProfileTextBox {
-      padding: 40px;
-      background: #ebebeb; 
-      min-height: 300px;
-      width: 50%;
-      overflow-wrap: break-word;
+    padding: 40px;
+    border: 2px solid #ddd;
+    border-left: 0;
+    min-height: 300px;
+    width: 50%;
+    overflow-wrap: break-word;
   }
   
   .backButtonBox {

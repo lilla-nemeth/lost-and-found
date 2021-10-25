@@ -114,7 +114,8 @@ app.get('/username', authMw, (request, response) => {
 })
 
 // Get all users
-app.get('/users', authMw, (request, response) => {
+// app.get('/users', (request, response) => {
+    app.get('/users', authMw, (request, response) => {
 
     // pool.query('SELECT * FROM users INNER JOIN pets ON users.id = pets.userId')
     pool.query('SELECT * FROM users')

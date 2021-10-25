@@ -10,26 +10,31 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 const PetProfile = () => {
     const { id } = useParams();
-    const { pets, users, loader} = useContext(AppStateContext);
+    const { pets, users, loader } = useContext(AppStateContext);
     const { token } = useContext(AuthContext);
 
     let DEBUG = true;
 
     // if (DEBUG) console.log('pets array PetProfile', pets)
-    // if (DEBUG) console.log('users from PetProfile', users)
+    if (DEBUG) console.log('users from PetProfile', users)
+    if (DEBUG) console.log('users from PetProfile', users.length)
 
-    function getPetAndUserData(id, petArr, userArr, token) {
-        for (let i = 0; i < petArr.length; i++) {
+    function getPetAndUserData(id, petArr, userArr) {
+        if (userArr.length > 0) {
+            for (let i = 0; i < petArr.length; i++) {
                 for (let j = 0; j < userArr.length; j++) {
                     if (id == petArr[i].id) {
                         if (petArr[i].userid == userArr[j].id) {
-                            if (!token) {
-                                return <PetProfileCard pet={petArr[i]} />;
-                            } else {
-                                return <PetProfileCard pet={petArr[i]} user={userArr[j]} token={token} />;
-                            }
+                            return <PetProfileCard pet={petArr[i]} user={userArr[j]} />;
                         }
                     }
+                }
+            }
+        } else {
+            for (let i = 0; i < petArr.length; i++) {
+                if (id == petArr[i].id) {
+                    return <PetProfileCard pet={petArr[i]} />;
+                }
             }
         }
     }
@@ -52,7 +57,7 @@ const PetProfile = () => {
         <main className='petMain'>
             <section>
                 {/* {getPetAndUserData(id, pets)} */}
-                {getPetAndUserData(id, pets, users, token)}
+                {getPetAndUserData(id, pets, users)}
                 <div className='backButtonContainer'>
                     <div className='backButtonBox'>
                         <Link to={'/lostandfound'}>
