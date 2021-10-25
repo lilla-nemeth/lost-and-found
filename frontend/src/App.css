@@ -442,10 +442,11 @@ table {
   align-items: center;
   font: 700 28px/1.2 "Poppins", sans-serif;
   position: absolute;
-  top: 50%;
+  /* top: 50%; */
   z-index: 2;
   cursor: pointer;
   text-align: center;
+  height: 450px;
 }
 
 .previewContainer {
@@ -800,13 +801,27 @@ input[type=checkbox]:checked ~ label{
 }
 
 .optionalButton,
-.formButton {
-  cursor: pointer;
+.formButton,
+.formButtonInactive {
   border: none;
   text-transform: uppercase;
   width: 100%;
   margin-top: 40px;
   z-index: 1;
+}
+
+.optionalButton,
+.formButton {
+  cursor: pointer;
+}
+
+.formButtonInactive {
+  padding: 20px;
+  border-radius: 0.25rem;
+  /* background: rgb(131, 131, 131); */
+  background: #acacac;
+  color: #fff;
+  border: none;
 }
 
 .formButton {

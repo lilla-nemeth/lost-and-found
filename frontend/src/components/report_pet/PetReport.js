@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import createHistory from 'history/createBrowserHistory';
+import { isFieldRequired } from '../HelperFunctions.js';
 import PetReportOptionalData from './PetReportOptionalData';
 import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg'
 
@@ -41,54 +42,83 @@ const PetReport = () => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
-    const { token } = useContext(AuthContext);
-    const { reportPet } = useContext(AppStateContext);
+    const [loader, setLoader] = useState(true);
 
-    let DEBUG = false;
+    const { token } = useContext(AuthContext);
+    const { reportPet, fetchPets, limit, offset, setPets, getAllPets, setTotal } = useContext(AppStateContext);
+
+    let DEBUG = true;
+
+    let disabled = !status || !location || !species || !description || !preview;
+
+    let required = true;
+
 
     function handleSubmit(event) {
         event.preventDefault();
 
-        if (DEBUG) console.log('files - PetReport', files);
+        // if (DEBUG) console.log('files - PetReport', files);
+        if (DEBUG) console.log('disabled before handleSubmit', disabled)
 
-        reportPet({
-            token,
-            img: files,
-            petstatus: status,
-            petlocation: location,
-            species,
-            petsize: size,
-            breed,
-            sex,
-            color: colors,
-            age,
-            uniquefeature,
-            postdescription: description,
-            successCallback: res => {
-                if (DEBUG) console.log('res from PetReport')
-                setSuccessMsg(res)
-                setSize('')
-                setStatus('')
-                setSpecies('')
-                setBreed('')
-                setSex('')
-                setColors('')
-                setAge('')
-                setUniquefeature('')
-                setErrorMsg('')
-                setLocation('')
-                setDescription('')
-                setPreview('')
-            },
-            successTimeout: () => (setTimeout(() => {
-                setSuccessMsg('');
-            }, 5000)),
-            // errorCallback: err => console.log('err from PetReport', err),
-            errorCallback: err => setErrorMsg(err),
-            errorTimeout: () => (setTimeout(() => {
-                setErrorMsg('');
-            }, 5000))
-        });
+        
+        if (!disabled) {
+            if (DEBUG) console.log('handleSubmit disabled', disabled)
+            reportPet({
+                token,
+                img: files,
+                petstatus: status,
+                petlocation: location,
+                species,
+                petsize: size,
+                breed,
+                sex,
+                color: colors,
+                age,
+                uniquefeature,
+                postdescription: description,
+                successCallback: res => {
+            
+                    fetchPets({
+                        limit,
+                        offset,
+                        successCallback: res => {
+                            setPets(res.data);
+                            setLoader(false);
+                            getAllPets({
+                                successCallback: res => {
+                                    setTotal(Number(res.data));
+                                }
+                            })
+                        }
+                    })
+            
+                    if (DEBUG) console.log('res from PetReport')
+                    setSuccessMsg(res)
+                    setSize('')
+                    setStatus('')
+                    setSpecies('')
+                    setBreed('')
+                    setSex('')
+                    setColors('')
+                    setAge('')
+                    setUniquefeature('')
+                    setErrorMsg('')
+                    setLocation('')
+                    setDescription('')
+                    setPreview('')
+                },
+                successTimeout: () => (setTimeout(() => {
+                    setSuccessMsg('');
+                }, 5000)),
+                // errorCallback: err => console.log('err from PetReport', err),
+                // errorCallback: err => setErrorMsg(err.data.msg),
+                errorCallback: err => console.log(err),
+                errorTimeout: () => (setTimeout(() => {
+                    setErrorMsg('');
+                }, 5000))
+            });
+        } 
+
     }
 
     createHistory().replace('/reportpet');
@@ -131,7 +161,7 @@ const PetReport = () => {
                             encType='multipart/form-data' 
                         >
                             <div className='filterBox'>
-                                <h2 className='categoryHeadline'>Status</h2>
+                                <h2 className='categoryHeadline'>Status {isFieldRequired(required)}</h2>
                                 <ul className='radioList'>
                                     <RadioButton 
                                         id={'lost'} 
@@ -156,7 +186,7 @@ const PetReport = () => {
                                {/* <DragnDropZone files={files} setFiles={setFiles}/> */}
                                <ImageUpload files={files} setFiles={setFiles} preview={preview} setPreview={setPreview} />
                             <div className='filterBox'> 
-                                <h2 className='categoryHeadline'>Species</h2>
+                                <h2 className='categoryHeadline'>Species {isFieldRequired(required)}</h2>
                                 <ul className='radioList'>
                                     <RadioButton 
                                         id={'dog'} 
@@ -186,7 +216,7 @@ const PetReport = () => {
                                 </ul>
                             </div>                   
                             <div className='filterBox'> 
-                                <h2 className='categoryHeadline'>Location</h2>
+                                <h2 className='categoryHeadline'>Location {isFieldRequired(required)}</h2>
                                 <TextInput 
                                     id={'location'}
                                     name={'location'}
@@ -196,7 +226,7 @@ const PetReport = () => {
                                 />
                             </div>
                             <TextArea 
-                                headlineName={'Description'}
+                                headlineName={`Description ${isFieldRequired(required)}`}
                                 id={'description'} 
                                 name={description} 
                                 value={description} 
@@ -230,7 +260,12 @@ const PetReport = () => {
                             />
                             { optionalInputs.display === 'showInputs' ? errorSuccessMessage : '' }
                             <div>
-                                <button className='formButton'>Report</button>
+                                <button
+                                    className={disabled ? 'formButtonInactive' : 'formButton'}
+                                    disabled={disabled}
+                                >
+                                        Report
+                                </button>
                             </div>
                         </form>
                     </div>

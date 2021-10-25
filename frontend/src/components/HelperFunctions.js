@@ -32,3 +32,17 @@ export function isInputEmpty(nameOfAttribute, attribute, className) {
         </>
     }
 }
+
+// export function requiredFieldsError(field, setter, fieldName) {
+//     if (!field) {
+//         return setter(`${fieldName} field is empty.`);
+//     } 
+// }
+
+export function isFieldRequired(requiredField) {
+    if (requiredField) {
+        return '*';
+    } else {
+        return '(optional)'
+    }
+}

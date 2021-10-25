@@ -113,12 +113,21 @@ app.get('/username', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch username'}));
 })
 
-app.get('/user', authMw, (request, response) => {
+// Get all users
+app.get('/users', authMw, (request, response) => {
 
+    // pool.query('SELECT * FROM users INNER JOIN pets ON users.id = pets.userId')
     pool.query('SELECT * FROM users')
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch user'}));
 })
+
+app.get('/pets/userId', authMw, (request, response) => {
+    pool.query('SELECT pets.userId FROM pets')
+
+    .then((res) => response.status(200).json(res.rows))
+    .catch((err) => response.status(400).json({msg: 'Failed to fetch userIds of pets'}));
+});
 
 // user dashboard - update one pet's datas (by id):
 app.put('/editpet/:id', authMw, (request, response) => {

@@ -6,7 +6,7 @@ export default function AuthContextProvider(props) {
 
     const [token, setToken] = useState(null);
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     useEffect(() => {
 

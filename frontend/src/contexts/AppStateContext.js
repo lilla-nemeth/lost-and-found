@@ -5,6 +5,8 @@ import { AuthContext } from './AuthContext';
 export const AppStateContext = createContext();
 
 export default function AppStateContextProvider(props) {
+    const { token } = useContext(AuthContext);
+
     const [pets, setPets] = useState([]);
     const [users, setUsers] = useState([]);
     const [username, setUsername] = useState('');
@@ -19,13 +21,18 @@ export default function AppStateContextProvider(props) {
     // error messages
     const [errorMsg, setErrorMsg] = useState('');
 
-    const { token } = useContext(AuthContext);
 
     let DEBUG = false;
 
     let limit = 6;
 
+    // if (DEBUG) console.log('token from AuthContext, AppStateContext 1', token);
+
+    // if (DEBUG) console.log('users arr - AppStateContext 1', users);
+
+
     useEffect(() => {
+
         fetchPets({
             limit,
             offset,
@@ -40,18 +47,25 @@ export default function AppStateContextProvider(props) {
             },
             errorCallback: err => setErrorMsg(err.data.msg)
         })
+
     },[offset]);
 
     useEffect(() => {
         getUsers({
             token,
             successCallback: res => setUsers(res.data),
-            // errorCallback: err => setErrorMsg(err.data.msg)
-            errorCallback: err => console.log(err)
+            errorCallback: err => console.log(err),
+            // errorCallback: err => setErrorMsg(err),
+            // errorTimeout: () => (setTimeout(() => {
+            //    setErrorMsg('');
+            // }, 5000))
         })
-    }, [users]);
+    },[token]);
+    
 
-    if (DEBUG) console.log('getAllPets - setTotal',total)
+    // if (DEBUG) console.log('token from AuthContext, AppStateContext 2', token);
+    if (DEBUG) console.log('users arr - AppStateContext', users);
+    if (DEBUG) console.log('pets arr - AppStateContext', pets)
 
 
     let numberOfPages = total / limit;  
@@ -180,7 +194,9 @@ export default function AppStateContextProvider(props) {
     }) {
 
         const data = new FormData();
-    
+
+        // let DEBUG = true;
+
         data.append('file', img);
         data.append('petstatus', petstatus);
         data.append('petlocation', petlocation);
@@ -206,7 +222,7 @@ export default function AppStateContextProvider(props) {
         axios(options)
         .then(
             res => {
-                if (DEBUG) console.log(res)
+                // if (DEBUG) console.log('reportPet res',res)
                if (successCallback) successCallback(res.data.msg, successTimeout())
         }
         )
@@ -257,11 +273,11 @@ export default function AppStateContextProvider(props) {
         })
     }
 
+    //  errorTimeout
     function getUsers({token, successCallback, errorCallback}) {
-
         let options = {
             method: 'get',
-            url: 'http://localhost:3003/user',
+            url: 'http://localhost:3003/users',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
@@ -269,23 +285,35 @@ export default function AppStateContextProvider(props) {
             }
         };
         axios(options)
-        .then(res => {
+        .then(
+            res => {
+                // setUsers(res.data)
                 if (successCallback) successCallback(res)
-                // console.log(res)
+                
+
+                // if (DEBUG) successCallback(console.log('res, AppStateContext 3', res)) 
             }
-            // res => console.log('setusers appstate', res.data)
         )
         .catch(
-            err => {
-                // if (errorCallback) errorCallback(err)
-                console.log(err)
-            }
+            // err => {if (
+            // err && 
+            // err.response && 
+            // err.response.data && 
+            // err.response.data.msg && 
+            // errorCallback
+            // ) errorCallback(err.response.data.msg)}
+            // err => console.log(err)
+
+            err => {if (errorCallback) errorCallback(err)}
+            // err => {if (DEBUG) errorCallback(console.log('err, AppStateContext 3', err)) }
         );
 
     }
 
+    // getUsers({token, successCallback: res => setUsers(res.data), errorCallback: err => console.log(err)})
+
     return (
-        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, getUsers, users, reportPet, fetchPets, getAllPets, pets, numberIncreases, setOffset, limit, loader}}>
+        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, getUsers, users, reportPet, fetchPets, getAllPets, pets, setPets, setTotal, numberIncreases, offset, setOffset, limit, loader}}>
             { props.children }
         </AppStateContext.Provider>
     )
