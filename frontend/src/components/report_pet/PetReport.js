@@ -13,10 +13,10 @@ import TextInput from '../generic/TextInput';
 import TextArea from '../generic/TextArea';
 
 import ImageUpload from './ImageUpload';
-import LocationSearch from './LocationSearch';
-import MapboxMap from './MapboxMap';
-import DragnDropZone from './DragnDropZone';
-import DropZoneTest from './DropZoneTest';
+import LocationSearch from './unused/LocationSearch';
+import MapboxMap from './unused/MapboxMap';
+import DragnDropZone from './unused/DragnDropZone';
+import DropZoneTest from './unused/DropZoneTest';
 
 
 // petstatusOptions -> reunited option comes later with post editing:

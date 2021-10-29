@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
+import { ReactComponent as SearchIcon } from '../../../assets/icons/search.svg';
 
 const LocationSearch = () => {
     const [search, setSearch] = useState('');
