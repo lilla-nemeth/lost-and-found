@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TextInput = (props) => {
-    const { headlineName, id, name, value, placeholder, onChange, required } = props;
+    const { headlineName, id, name, type, value, placeholder, onChange, required } = props;
 
     let DEBUG = true;
 
@@ -11,11 +11,10 @@ const TextInput = (props) => {
                     className='formInput' 
                     id={id}
                     name={name} 
-                    type='text' 
+                    type={type} 
                     value={value}
                     placeholder={placeholder}
                     onChange={onChange}
-                    // required={required}
                 />
             </div>
     );

@@ -2,14 +2,12 @@ import React from 'react';
 import { petDate, isInputEmpty } from '../HelperFunctions.js';
 import PetUserData from './PetUserData.js';
 
-
 const PetProfileCard = (props) => {
     const { pet, user } = props;
 
+    let DEBUG = false;
 
-    let DEBUG = true;
-
-    // if (DEBUG) console.log(pet.userid)
+    if (DEBUG) console.log(pet.userid)
     if (DEBUG) console.log('PetProfileCard - user', user)
 
     return (

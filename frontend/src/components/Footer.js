@@ -5,22 +5,12 @@ const Footer = (props) => {
 
     let DEBUG = true;
 
-    return ( 
-        <>
-        { isFooterBgTransparent ? 
-            <div className='footerWithPicture'>
-                <div className='footerText'>
-                    &copy; {new Date().getFullYear()} Lost & Found by Lilla Németh
-                </div>
+    return (
+        <div className={isFooterBgTransparent ? 'footerWithPicture' : 'footerWithoutPicture'}>
+            <div className='footerText'>
+                &copy; {new Date().getFullYear()} Lost & Found by Lilla Németh
             </div>
-        :    
-            <div className='footerWithoutPicture'>
-                <div className='footerText'>
-                    &copy; {new Date().getFullYear()} Lost & Found by Lilla Németh
-                </div>
-            </div> 
-        }
-        </>
+        </div>
     );
 }
 

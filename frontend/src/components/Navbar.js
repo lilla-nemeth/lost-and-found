@@ -12,7 +12,6 @@ const Navbar = () => {
     const { token, handleLogOut } = useContext(AuthContext);
     const { getUsername, username } = useContext(AppStateContext);
 
-
     let DEBUG = false;
     
     useEffect(() => {
@@ -48,15 +47,15 @@ const Navbar = () => {
         )
     }
 
-    function isNavbarOpen(isOpen, callbackDesktop, callbackMobile, navStyle, logOutStyle) {
+    function isNavbarOpen(isOpen, setNavDesktop, setNavMobile, navStyle, logOutStyle) {
         if (isOpen) {
             return (
                 <>
                     <ul className='navMainList' style={{display: 'none'}}>
-                        {callbackDesktop(navStyle, logOutStyle)}
+                        {setNavDesktop(navStyle, logOutStyle)}
                     </ul>
                     <ul className='navMainListMobile' style={{display: 'flex'}}>
-                        {callbackMobile(navStyle, logOutStyle)}
+                        {setNavMobile(navStyle, logOutStyle)}
                     </ul>
                 </>
             )
@@ -65,10 +64,10 @@ const Navbar = () => {
             return (
                 <>
                     <ul className='navMainList' style={{display: 'flex'}}>
-                        {callbackDesktop(navStyle, logOutStyle)}
+                        {setNavDesktop(navStyle, logOutStyle)}
                     </ul>
                     <ul className='navMainListMobile' style={{display: 'none'}}>
-                        {callbackMobile(navStyle, logOutStyle)}
+                        {setNavMobile(navStyle, logOutStyle)}
                     </ul>
                 </>
             )

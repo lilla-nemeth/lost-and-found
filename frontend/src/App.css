@@ -45,20 +45,57 @@ table {
 	border-spacing: 0;
 }
 
-/* NAVBAR, FOOTER */
+
+/* Variables */
+:root {
+  /* Colors */
+  --clr-white: rgb(255, 255, 255);
+  --clr-lightgrey: rgb(221, 221, 221);
+  --clr-lightaquamarine: rgba(129, 180, 175, 0.2);
+  --clr-grey: rgb(170, 170, 170);
+  --clr-black: rgb(0, 0, 0);
+  --clr-aquamarine: rgb(176, 240, 235);
+  --clr-green: rgb(71, 163, 156);
+  --clr-darkgreen: rgb(34, 102, 96);
+  --clr-success: green;
+  --clr-error: red;
+
+  /* Fonts */
+  --font-family: 'Poppins', sans-serif;
+  --font-standard: 400 15px/1.2 'Poppins', sans-serif;
+  --font-thin: 300 15px/1.2 'Poppins', sans-serif;
+  --font-landingpage: 700 62px/1.2 'Poppins', sans-serif;
+  --font-input: 700 28px/1.2 "Poppins", sans-serif;
+
+  /* Shadow */
+  --shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
+
+  /* Radius */
+  --radius: 25px; 
+  --radius-circle: 30px;
+
+  /* Width */
+  --width100: 100%;
+
+  /* Height */
+
+}
+
+
+/* Navbar, Footer */
 .navigation {
+  background: var(--clr-darkgreen);
+  box-shadow: var(--shadow);
+  font: var(--font-standard);
   width: 100%;
+  display: flex; 
+  justify-content: space-between;   
+
   height: 70px;
-  font: 400 15px/1.2 'Poppins', sans-serif;
   list-style-type: none;
-  background: #226660;
   overflow: hidden;
-  box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
   position: fixed;
-  width: 100%;
   z-index: 100;
-  display: flex;
-  justify-content: space-between;  
 }
   
 .navMainList {
@@ -67,7 +104,6 @@ table {
   margin: 0px;
   padding: 0px;
   overflow: hidden;
-  /* display: flex; */
 }
 
 .navList {
@@ -82,21 +118,21 @@ table {
 } 
 
 .footerWithPicture {
+  color: var(--clr-white);
   width: 100%;
   display: flex;
   justify-content: center;
   position: absolute;
   bottom: 0;
-  color: #fff;
 }
 
 .footerWithoutPicture {
-  background: rgb(176, 240, 235);
+  background: var(--clr-aquamarine);
+  color: var(--clr-darkgreen);
   width: 100%;
+  position: absolute;
   display: flex;
   justify-content: center;
-  position: absolute;
-  color: #226660;
 }
 
 .navLogo {
@@ -106,27 +142,27 @@ table {
   padding: 10px;
   margin: 10px;
   display: inline-block;
-  color: rgb(183, 223, 219);
+  color: var(--clr-aquamarine);
   border: 2px solid transparent;
-  border-radius: 100%;
+  border-radius: var(--radius-circle);
 }
 
 .navLogoInner {
   height: 25px;
-  fill: rgb(183, 223, 219);
+  fill: var(--clr-aquamarine);
 }
 
 .navLogo:hover {
+  border: 2px solid var(--clr-aquamarine);
+  border-radius: var(--radius-circle);
   margin: 10px;
-  border: 2px solid rgb(183, 223, 219);
-  border-radius: 100%;
   transition: border 0.2s linear;
 }
 
 .navLogoInner:after {
   display: block;
   content: '';
-  border-bottom: solid 2px rgb(183, 223, 219); 
+  border-bottom: solid 2px var(--clr-aquamarine); 
   transform: scaleX(0);  
   transition: transform 0.2s linear;
 }
@@ -148,25 +184,25 @@ table {
   text-align: center;
   padding: 22.5px;
   text-decoration: none;
-  font: 400 15px/1.2 'Poppins', sans-serif;
+  font: var(--font-standard);
   display: inline-block; 
   padding-top: 25px;
 }
 
 .username {
-  color: #fff;
+  color: var(--clr-white);
 }
 
 .navLinkMobile,
 .navLinkDesktop {
-  color: rgb(183, 223, 219);
+  color: var(--clr-aquamarine);
 }
 
 .navLinkMobile:after,
 .navLinkDesktop::after {
   display: block;
   content: '';
-  border-bottom: solid 2px rgb(183, 223, 219); 
+  border-bottom: solid 2px var(--clr-aquamarine); 
   transform: scaleX(0);  
   transition: transform 180ms ease-in-out;
 }
@@ -178,20 +214,20 @@ table {
 
 .logOutButtonDesktop,
 .logOutButtonMobile {
+  font: var(--font-standard);
+  color: var(--clr-darkgreen);
+  background: var(--clr-green);
   text-align: center;
   padding: 22.5px;
   text-decoration: none;
-  font: 400 15px/1.2 'Poppins', sans-serif;
   display: inline-block; 
   cursor: pointer;
-  color: rgb(34, 102, 96);
   border: none;
-  background: rgb(71, 163, 156);
 }
 
 .logOutButtonDesktop:hover,
 .logOutButtonMobile:hover {
-  background: rgb(183, 223, 219);
+  background: var(--clr-aquamarine);
   transition: background 0.2s linear;
 }
 
@@ -205,8 +241,8 @@ table {
 
 /* Landing Page */
 .landingPageHeadline {
-  font: 700 62px/1.2 'Poppins', sans-serif;
-  color: #fff;
+  font: var(--font-landingpage);
+  color: var(--clr-white);
   position: absolute;
   top: 50%;
   left: 10%;
@@ -232,9 +268,9 @@ table {
 }
 
 .petProfileCard {
-  border-radius: 25px;  
-  box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
-  background: rgba(255,255,255);
+  box-shadow: var(--shadow);
+  background: var(--clr-white);
+  border-radius: var(--radius);  
   display: flex;
   padding: 50px;
   justify-content: center;
@@ -252,7 +288,7 @@ table {
 .petProfilePictureContainer {
   position: relative;
   overflow: hidden;
-  background: #aaaaaa; 
+  background: var(--clr-grey); 
   width: 50%;
   position: relative;
   overflow: hidden;
@@ -274,7 +310,7 @@ table {
 
 .petProfileTextBox {
     padding: 40px;
-    border: 2px solid #ddd;
+    border: 2px solid var(--clr-lightgrey);
     border-left: 0;
     min-height: 300px;
     width: 50%;
@@ -283,8 +319,8 @@ table {
 
 /* Lost & Found - PetList */
 .petMain {
-  font-family: "Poppins", sans-serif;
-  background: #B0F0EB;
+  font-family: var(--font-family);
+  background: var(--clr-aquamarine);
   overflow: hidden;
 }
 
@@ -308,26 +344,18 @@ table {
 }
 
 .petCard {
-  background: rgba(255,255,255); 
+  background: var(--clr-white); 
+  border-radius: var(--radius); 
+  box-shadow: var(--shadow);
   margin-bottom: 60px;
   margin-right: 30px;
   margin-left: 30px;
   padding: 50px;
-  border-radius: 25px; 
-  box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
 } 
-
-.petCard:nth-child(even) {
-  background: rgba(255,255,255); 
-}
-
-.petCard:nth-child(odd) {
-  background: rgba(255,255,255); 
-}
 
 .petTextBox {
   padding: 40px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--clr-lightgrey);
   border-top: 0;
   min-height: 300px;
   overflow-wrap: break-word;
@@ -336,7 +364,7 @@ table {
 .petPictureContainer {
   position: relative;
   overflow: hidden;
-  background: #aaaaaa;
+  background: var(--clr-grey);
   height: 350px;
 }
 
@@ -356,9 +384,9 @@ table {
 
 /* note: set the colors for lost and found - 1-1 color/status */
 .petStatus {
-  font: 500 15px/1.2 'Poppins', sans-serif;;
+  font: 500 15px/1.2 'Poppins', sans-serif;
   text-transform: uppercase;
-  border: 1px solid black;
+  border: 1px solid var(--clr-black);
   padding: 10px;
   width: fit-content;
 }
@@ -373,7 +401,7 @@ table {
 .petMainInfo,
 .petOptionalInfo {
   margin: 10px 0;
-  font: 300 15px/1.2 'Poppins', sans-serif;
+  font: var(--font-thin);
   text-transform: capitalize;
   overflow-wrap: break-word;
   line-height: 30px;
@@ -390,8 +418,8 @@ table {
 }
 
 .petProfileButton {
+  font: var(--font-standard);
   margin: 10px 0;
-  font: 400 15px/1.2 'Poppins', sans-serif;
   cursor: pointer;
   width: 100%;
   padding: 15px;
@@ -407,13 +435,21 @@ table {
 }
 
 .paginationNumbers {
-  padding: 20px; 
-  background: rgba(255,255,255,0.7);
-  margin: 0 7px;
+  border-radius: var(--radius-circle);
   text-align: center;
+  padding: 20px;
+  color: var(--clr-green);
+  border: 2px solid var(--clr-green);
+  margin: 0 7px;
   width: 15px; 
   cursor: pointer;
-  border-radius: 30px;
+}
+
+.paginationNumbers:hover {
+  background: var(--clr-green);
+  border: 2px solid var(--clr-green);
+  color: var(--clr-aquamarine);
+  transition: background 0.2s linear;
 }
 
 /* Report - Picture */
@@ -424,7 +460,12 @@ table {
   position: relative;
   height: 450px;
   overflow: hidden;
-  background: rgba(183, 223, 219, 0.2);
+  background: var(--clr-lightaquamarine);
+}
+
+.imageUploadContainer:hover {
+  background: var(--clr-white);
+  transition: background 0.2s linear;
 }
 
 .inputFile {
@@ -438,13 +479,12 @@ table {
 
 .inputFile,
 .inputLabel {
+  font: var(--font-input);
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font: 700 28px/1.2 "Poppins", sans-serif;
   position: absolute;
-  /* top: 50%; */
   z-index: 2;
   cursor: pointer;
   text-align: center;
@@ -471,7 +511,6 @@ table {
   max-height: 150%;
   max-width: 150%;
 }
-
 
 .filterBox {
   padding: 0 0 45px;
@@ -515,7 +554,7 @@ ul li label{
 }
 
 ul li:hover label{
-	color: rgb(71, 163, 156);
+	color: var(--clr-green);
 }
 
 ul li .radioCheck{
@@ -542,11 +581,11 @@ ul li .checkboxCheck{
 }
 
 ul li:hover .radioCheck {
-  border: 2px solid #47a39c;
+  border: 2px solid var(--clr-green);
 }
 
 ul li:hover .checkboxCheck {
-  border: 2px solid #47a39c;
+  border: 2px solid var(--clr-green);
 }
 
 ul li .radioCheck::before {
@@ -579,27 +618,67 @@ input[type=checkbox]:checked ~ .checkboxCheck {
 }
 
 input[type=radio]:checked ~ .radioCheck::before{
-  background: #000;
+  background: var(--clr-black);
 }
 
 input[type=checkbox]:checked ~ .checkboxCheck::before{
   left: 6px;
   width: 5px;
   height: 11px;
-  border: solid #000;
+  border: solid var(--clr-black);
   border-width: 0 4px 4px 0;
   transform: rotate(45deg);
 }
 
 input[type=radio]:checked ~ label{
-  color: #000;
+  color: var(--clr-black);
 }
 
 input[type=checkbox]:checked ~ label{
-  color: #000;
+  color: var(--clr-black);
 }
 
 /* BACKGROUND FOR LOGIN/REGISTRATION */
+
+/* Logo */
+.logoBox {
+  padding: 25px;
+  border: 4px solid var(--clr-white);
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+}
+
+.logo {
+  fill: var(--clr-white);
+}
+
+.navBackLink {
+  text-decoration: none;
+}
+
+.navBackText {
+  height: fit-content;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  cursor: pointer;
+  color: var(--clr-white);
+  font: 300 15px/1.2 "Poppins", sans-serif;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.navBackArrow {
+  fill: var(--clr-white);
+  transform: scaleX(-1);
+  width: 18px;
+  height: 18px;
+  padding-left: 10px;
+}
+
+
 .fade-in1 {
   background-position: center;
   background-repeat: no-repeat;
@@ -657,23 +736,18 @@ input[type=checkbox]:checked ~ label{
   transition: opacity 1s ease-in-out;
 }
 
-/* LOGIN, REGISTRATION WITH LOGO */
+/* Login, Registration with Logo */
 .registerContainer,
 .loginContainer {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-family);
   display: flex;
   justify-content: space-around;
   width: 100vw;
   align-items: center;
-
-  /* justifyContent: center;
-  flexDirection: column;
-  width: fit-content;
-  margin: 25px 100px; */
 }
 
 .logoContainer {
@@ -683,8 +757,8 @@ input[type=checkbox]:checked ~ label{
 }
 
 .formMain {
-  font-family: "Poppins", sans-serif;
-  background: #B0F0EB;
+  font-family: var(--font-family);
+  background: var(--clr-aquamarine);
   overflow: hidden;
 }
 
@@ -697,29 +771,29 @@ input[type=checkbox]:checked ~ label{
 }
 
 .formBox {
-  background: rgba(255,255,255); 
+  background: var(--clr-white); 
+  border-radius: var(--radius); 
+  box-shadow: var(--shadow);
   padding: 50px; 
   height: fit-content;
   width: 30%;
-  border-radius: 25px; 
-  box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
 }
 
 .loginFormBox,
 .registerFormBox {
-  background: rgba(255,255,255); 
+  background: var(--clr-white); 
+  border-radius: var(--radius); 
+  box-shadow: var(--shadow);
   padding: 50px; 
   height: fit-content;
   width: 30%;
-  border-radius: 25px; 
-  box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
   min-width: 400px;
 }
 
 .formHeadline {
   font: 500 30px/1.2 'Poppins', sans-serif;
   padding-bottom: 30px;
-  color: #226660;
+  color: var(--clr-darkgreen);
 }
 
 .loginText,
@@ -731,7 +805,7 @@ input[type=checkbox]:checked ~ label{
 .acceptedPasswordText {
   padding-top: 20px;
   font: 400 14px / 1.2 Poppins, sans-serif;
-  color: #acacac;
+  color: var(--clr-grey);
   font-style: italic;
 }
 
@@ -742,16 +816,17 @@ input[type=checkbox]:checked ~ label{
 }
 
 .errorMessage {
-  color: red;
+  color: var(--clr-error);
 }
 
 .successMessage {
-  color: green;
+  color: var(--clr-success);
 }
 
 .inputBox,
 .searchBox {
   display: flex;
+  width: 100%;
 }
 
 .showInputs {
@@ -770,7 +845,7 @@ input[type=checkbox]:checked ~ label{
   justify-content: space-between;
   align-items: center;
   justify-content: center;
-  background: rgb(255,255,255);
+  background: var(--clr-white);
   box-shadow: 0px 12px 12px -12px rgb(0 0 0 / 50%);
 }
 
@@ -789,11 +864,10 @@ input[type=checkbox]:checked ~ label{
 }
 
 .backButton {
-  background: none;
-  background: rgb(34, 102, 96);
+  background: var(--clr-darkgreen);
   padding: 20px;
   border-radius: 0.25rem;
-  color: #fff;
+  color: var(--clr-white);
   cursor: pointer;
   border: none;
   cursor: pointer;
@@ -820,51 +894,50 @@ input[type=checkbox]:checked ~ label{
 .formButtonInactive {
   padding: 20px;
   border-radius: 0.25rem;
-  /* background: rgb(131, 131, 131); */
-  background: #acacac;
-  color: #fff;
+  background: var(--clr-grey);
+  color: var(--clr-white);
   border: none;
 }
 
 .formButton {
   padding: 20px;
   border-radius: 0.25rem;
-  background: rgb(34, 102, 96);
-  color: #fff;
+  background: var(--clr-darkgreen);
+  color: var(--clr-white);
   cursor: pointer;
   border: none;
 }
 
 .formButton:hover {
-  background: rgb(71, 163, 156);
+  background: var(--clr-green);
 }
 
 .deleteButton {
   border-radius: 0.25rem;
-  background: rgb(34, 102, 96);
-  color: #fff;
+  background: var(--clr-darkgreen);
+  color: var(--clr-white);
   width: 60px;
   height: 60px;
   border: none;
   cursor: pointer;
   z-index: 4;
-  font: 400 15px/1.2 'Poppins', sans-serif;
+  font: var(--font-standard);
   position: absolute;
   top: 0;
   right: 0;
-  fill: #fff;
+  fill: var(--clr-white);
 }
 
 .changePictureButton {
   border-radius: 0.25rem;
-  background: rgb(34, 102, 96);
-  color: #fff;
+  background: var(--clr-darkgreen);
+  color: var(--clr-white);
   width: 60px;
   height: 60px;
   border: none;
   cursor: pointer;
   z-index: 4;
-  font: 400 15px/1.2 'Poppins', sans-serif;
+  font: var(--font-standard);
   position: absolute;
   top: 0;
   right: 70px;
@@ -872,15 +945,15 @@ input[type=checkbox]:checked ~ label{
 
 .deleteButton:hover,
 .changePictureButton:hover {
-  background: rgb(71, 163, 156);
+  background: var(--clr-green);
 }
 
 .formLabel {
-  fill: #226660;
+  fill: var(--clr-darkgreen);
 }
 
 .showHidePassword {
-  fill:rgb(172, 172, 172);
+  fill: var(--clr-grey);
   cursor: pointer;
   background: none;
 }
@@ -891,9 +964,8 @@ input[type=checkbox]:checked ~ label{
   padding: 22px;
 }
 
-
 .showHidePassword:hover {
-  fill: #226660;
+  fill: var(--clr-darkgreen);
   transition: fill 0.2s linear;
 }
 
@@ -901,7 +973,6 @@ input[type=checkbox]:checked ~ label{
   padding: 16px;
   transform: scaleY(-1);
 }
-
 
 .searchButton {  
   padding: 18px;
@@ -914,46 +985,43 @@ input[type=checkbox]:checked ~ label{
   border-top: none;
   border-left: none;
   border-right: none;
-  border-bottom: 2px solid rgb(34, 102, 96);
+  border-bottom: 2px solid var(--clr-darkgreen);
 }
 
 .searchButton {
   cursor: pointer;
   background: none;
-  fill: rgb(172, 172, 172);
+  fill: var(--clr-grey);
 }
 
 .searchButton:hover {
-  fill: rgb(34, 102, 96); 
+  fill: var(--clr-darkgreen);
   transition: fill 0.2s linear;
 }
 
-.formInput,
-.searchInput {
-  /* padding: 16px 0; */
+.formInput {
   padding: 22px 0;
   width: 100%;
-  border-bottom: 2px solid rgb(34, 102, 96);
+  border-bottom: 2px solid var(--clr-darkgreen);
   border-top: none;
   border-left: none;
   border-right: none;
   background: none;
-  font: 300 15px/1.2 'Poppins', sans-serif;
+  font: var(--font-thin);
 }
 
-.formInput:focus,
-.searchInput:focus {
+.formInput:focus {
   outline: none;
 }
 
 .formLink {
   text-decoration: none;
-  color: rgb(71, 163, 156);
+  color: var(--clr-green);
   padding-left: 5px;
 }
 
 .formLink:hover {
-  color: rgb(34, 102, 96);
+  color: var(--clr-darkgreen);
 }
 
 /* Paw Loader */
@@ -962,7 +1030,7 @@ input[type=checkbox]:checked ~ label{
   justify-content: center;
   align-items: center;
   min-height: 90vh;
-  background: rgb(176, 240, 235);
+  background: var(--clr-aquamarine);
 }
 
 #loader {
@@ -1033,12 +1101,12 @@ input[type=checkbox]:checked ~ label{
   }
 }
 
-/* PET REPORT */
+/* Pet Report */
 .categoryHeadline {
   padding: 45px 0px 15px;
 }
 
-/* PET REPORT - MAP */
+/* Pet Report - Map */
 .map-container {
   height: 450px;
 }
@@ -1074,20 +1142,17 @@ input[type=checkbox]:checked ~ label{
   position: unset !important;
   cursor: pointer;
   background: none;
-  fill: rgb(172, 172, 172) !important;
+  fill: var(--clr-grey) !important;
 }
 
 .mapboxgl-ctrl-geocoder--icon:hover,
 .mapboxgl-ctrl-geocoder--icon-search:hover {
-  fill: rgb(34, 102, 96); 
+  fill: var(--clr-darkgreen); 
   transition: fill 0.2s linear;
 }
 
 
-
 /* Media Queries */
-
-
 @media only screen and (min-width: 200px) and (max-width: 768px) {
 
   .navLinkDesktop,
@@ -1096,17 +1161,17 @@ input[type=checkbox]:checked ~ label{
   }
 
   .navLinkMobile {
-    color: #B0F0EB;
+    color: var(--clr-aquamarine);
   }
 
   .logOutButtonMobile,
   .navLinkMobile {
-    color: #B0F0EB;
+    color: var(--clr-aquamarine);
     font: 400 25px/1.2 'Poppins', sans-serif;
   }
 
   .navList:hover {
-    color: #226660;
+    color: var(--clr-darkgreen);
   }
 
   .navMainList {
@@ -1114,7 +1179,7 @@ input[type=checkbox]:checked ~ label{
   }
 
   .navMainListMobile {
-    background: #226660;
+    background: var(--clr-darkgreen);
     width: 100vw;
     margin-top: 69px;
     position: fixed;
@@ -1138,7 +1203,7 @@ input[type=checkbox]:checked ~ label{
 
   .burgerActive,
   .burgerInactive {
-    background: #B0F0EB;
+    background: var(--clr-aquamarine);
     margin: 6px auto;
     width: 27px;
     height: 4px;
@@ -1284,7 +1349,6 @@ input[type=checkbox]:checked ~ label{
   .petProfileTextBox,
   .petTextBox {
     border-radius: 0 0 25px 25px;
-    /* border: none; */
   }
 
   .lostAndFoundHeadline {
@@ -1319,7 +1383,7 @@ input[type=checkbox]:checked ~ label{
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    background: #aaaaaa;
+    background: var(--clr-grey);
     width: 50%;
     position: relative;
     height: 450px;
@@ -1393,8 +1457,6 @@ input[type=checkbox]:checked ~ label{
 
   .petTextBox {
     border-radius: 0 0 25px 25px;
-    /* border: 2px solid #ddd;
-    border-top: 0; */
     border: none;
   }
 
@@ -1403,7 +1465,6 @@ input[type=checkbox]:checked ~ label{
   }
 
 } 
-
 
 @media only screen and (min-width: 500px) {
   .formBox {
@@ -1449,12 +1510,12 @@ input[type=checkbox]:checked ~ label{
   .petProfileTextBox,
   .petTextBox {
     border-radius: 0;
-    border: 2px solid #ddd;
+    border: 2px solid var(--clr-lightgrey);
     border-top: 0;
   }
 
   .petProfileTextBox {
-    border: 2px solid #ddd;
+    border: 2px solid var(--clr-lightgrey);
     border-top: 0;
   }
 
@@ -1482,7 +1543,7 @@ input[type=checkbox]:checked ~ label{
   }
 
   .navLinkDesktop {
-    font: 400 15px/1.2 'Poppins', sans-serif;
+    font: var(--font-standard);
   }
 
 
@@ -1494,7 +1555,7 @@ input[type=checkbox]:checked ~ label{
 
 @media only screen and (min-width: 992px) {
   .formBox {
-    width: 70%;
+    width: 50%;
   }
 
   .petCard {
@@ -1504,7 +1565,7 @@ input[type=checkbox]:checked ~ label{
 
 @media only screen and (min-width: 1200px) {
   .formBox {
-    width: 70%;
+    width: 50%;
   }
 
   .petCard {
@@ -1519,9 +1580,9 @@ input[type=checkbox]:checked ~ label{
   }
   
   .petProfileCard {
-    border-radius: 25px;  
-    box-shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
-    background: rgba(255,255,255);
+    border-radius: var(--radius);  
+    box-shadow: var(--shadow);
+    background: var(--clr-white);
     display: flex;
     padding: 50px;
     justify-content: center;
@@ -1540,7 +1601,7 @@ input[type=checkbox]:checked ~ label{
   .petProfilePictureContainer {
     position: relative;
     overflow: hidden;
-    background: #aaaaaa; 
+    background: var(--clr-grey); 
     width: 50%;
     position: relative;
     overflow: hidden;
@@ -1566,7 +1627,7 @@ input[type=checkbox]:checked ~ label{
   
   .petProfileTextBox {
     padding: 40px;
-    border: 2px solid #ddd;
+    border: 2px solid var(--clr-lightgrey);
     border-left: 0;
     min-height: 300px;
     width: 50%;

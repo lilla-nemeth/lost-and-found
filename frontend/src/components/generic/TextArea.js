@@ -20,7 +20,6 @@ const TextArea = (props) => {
                     rows={rows}
                     cols={cols}
                     onChange={onChange}
-                    // required 
                 >
                 </textarea>
             </div>

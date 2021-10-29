@@ -46,11 +46,12 @@ export default function AppStateContextProvider(props) {
                 })
             },
             errorCallback: err => setErrorMsg(err.data.msg)
-        })
+        });
 
     },[offset]);
 
     useEffect(() => {
+
         getUsers({
             token,
             successCallback: res => setUsers(res.data),
@@ -59,7 +60,8 @@ export default function AppStateContextProvider(props) {
             // errorTimeout: () => (setTimeout(() => {
             //    setErrorMsg('');
             // }, 5000))
-        })
+        });
+
     },[token]);
     
 
