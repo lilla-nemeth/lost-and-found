@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ReactComponent as PetPawLogo } from '../assets/icons/dogpaw.svg';
 import { AuthContext } from '../contexts/AuthContext';
 import { AppStateContext } from '../contexts/AppStateContext';
+import { handleError } from './HelperFunctions.js';
 import Hamburger from './Hamburger';
 import { Link } from 'react-router-dom';
 
@@ -17,10 +18,9 @@ const Navbar = () => {
     useEffect(() => {
             getUsername({
                 token,
-                errorCallback: err => setErrorMsg(err),
-                errorTimeout: () => (setTimeout(() => {
-                   setErrorMsg('');
-                }, 5000))
+                errorCallback: err => {
+                    handleError(err, setErrorMsg);
+                }
             })
     },[token]);
 

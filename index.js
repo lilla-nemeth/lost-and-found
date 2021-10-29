@@ -26,7 +26,7 @@ const devSettings = {
 
 const pool = new Pool(devSettings);
 
-// from pets table get all pets by userId - user get all his/her added pets
+// get all pets by userId - user get all his/her added pets
 app.get('/pets', authMw, (request, response) => {
     let userId = request.userId;
 

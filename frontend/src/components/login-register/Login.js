@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import createHistory from 'history/createBrowserHistory';
-import { isFieldRequired } from '../HelperFunctions.js';
+import { handleError } from '../HelperFunctions.js';
 import Logo from '../generic/Logo';
 import BackgroundImages from './BackgroundImages';
 import PasswordShowHide from './PasswordShowHide';
@@ -22,8 +22,6 @@ const Login = () => {
 
     let disabled = !password || !email;
 
-    let required = true;
-
     if (DEBUG) console.log(setToken);
 
     function handleSubmit(event) {
@@ -33,10 +31,9 @@ const Login = () => {
                 setToken,
                 email,
                 pw: password,
-                errorCallback: err => setErrorMsg(err),
-                errorTimeout: () => (setTimeout(() => {
-                    setErrorMsg('');
-                }, 5000))
+                errorCallback: err => {
+                    handleError(err, setErrorMsg);
+                }
             });
     }
 

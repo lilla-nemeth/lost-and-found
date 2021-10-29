@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import createHistory from 'history/createBrowserHistory';
+import { handleError } from '../HelperFunctions.js';
 import { isFieldRequired } from '../HelperFunctions.js';
 import PetReportOptionalData from './PetReportOptionalData';
 import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg';
@@ -12,16 +13,17 @@ import TextInput from '../generic/TextInput';
 import TextArea from '../generic/TextArea';
 
 import ImageUpload from './ImageUpload';
-import DragnDropZone from './DragnDropZone';
 import LocationSearch from './LocationSearch';
 import MapboxMap from './MapboxMap';
-// import DropZoneTest from './DropZoneTest';
+import DragnDropZone from './DragnDropZone';
+import DropZoneTest from './DropZoneTest';
 
 
 // petstatusOptions -> reunited option comes later with post editing:
 
 const PetReport = () => {
     const [preview, setPreview] = useState(null);
+    // petstatusOptions -> reunited option comes later with post editing:
     const [status, setStatus] = useState('');
     const [files, setFiles] = useState([]);
     const [location, setLocation] = useState('');
@@ -77,7 +79,6 @@ const PetReport = () => {
                 uniquefeature,
                 postdescription: description,
                 successCallback: res => {
-            
                     fetchPets({
                         limit,
                         offset,
@@ -91,7 +92,6 @@ const PetReport = () => {
                             })
                         }
                     })
-            
                     if (DEBUG) console.log('res from PetReport')
                     setSuccessMsg(res)
                     setSize('')
@@ -110,12 +110,9 @@ const PetReport = () => {
                 successTimeout: () => (setTimeout(() => {
                     setSuccessMsg('');
                 }, 5000)),
-                // errorCallback: err => console.log('err from PetReport', err),
-                // errorCallback: err => setErrorMsg(err.data.msg),
-                errorCallback: err => console.log(err),
-                errorTimeout: () => (setTimeout(() => {
-                    setErrorMsg('');
-                }, 5000))
+                errorCallback: err => {
+                    handleError(err, setErrorMsg);
+                }
             });
         } 
 

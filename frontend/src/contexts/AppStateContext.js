@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from './AuthContext';
+import { handleError } from '../components/HelperFunctions.js';
 
 export const AppStateContext = createContext();
 
@@ -21,18 +22,12 @@ export default function AppStateContextProvider(props) {
     // error messages
     const [errorMsg, setErrorMsg] = useState('');
 
-
     let DEBUG = false;
 
     let limit = 6;
 
-    // if (DEBUG) console.log('token from AuthContext, AppStateContext 1', token);
-
-    // if (DEBUG) console.log('users arr - AppStateContext 1', users);
-
 
     useEffect(() => {
-
         fetchPets({
             limit,
             offset,
@@ -45,27 +40,25 @@ export default function AppStateContextProvider(props) {
                     }
                 })
             },
-            errorCallback: err => setErrorMsg(err.data.msg)
+            errorCallback: err => {
+                handleError(err, setErrorMsg);
+            }
         });
-
     },[offset]);
 
+    
     useEffect(() => {
-
         getUsers({
             token,
             successCallback: res => setUsers(res.data),
-            errorCallback: err => console.log(err),
-            // errorCallback: err => setErrorMsg(err),
-            // errorTimeout: () => (setTimeout(() => {
-            //    setErrorMsg('');
-            // }, 5000))
+            errorCallback: err => {
+                handleError(err, setErrorMsg);
+            }
         });
-
     },[token]);
-    
 
-    // if (DEBUG) console.log('token from AuthContext, AppStateContext 2', token);
+
+    if (DEBUG) console.log('token from AuthContext in AppStateContext', token);
     if (DEBUG) console.log('users arr - AppStateContext', users);
     if (DEBUG) console.log('pets arr - AppStateContext', pets)
 
@@ -81,12 +74,9 @@ export default function AppStateContextProvider(props) {
         return numberArr;
     }
 
-
-
-
     // named input when we have many arguments
     // cannot mess up the order (in object {})
-    function registerUser({email, username, phone, pw, successCallback, successTimeout, errorCallback, errorTimeout}) {
+    function registerUser({email, username, phone, pw, successCallback, successTimeout, errorCallback}) {
         
         let options = {
             method: 'post',
@@ -108,11 +98,11 @@ export default function AppStateContextProvider(props) {
             res => {if (successCallback) successCallback(res.data.msg, successTimeout())}
         )
         .catch(
-            err => {if (errorCallback) errorCallback(err.response.data.msg, errorTimeout())}
+            err => {if (err && errorCallback) errorCallback(err)}
         )
     }
 
-    function loginUser({setToken, email, pw, errorCallback, errorTimeout}) {
+    function loginUser({setToken, email, pw, errorCallback}) {
 
         let options = {
             method: 'post',
@@ -137,17 +127,11 @@ export default function AppStateContextProvider(props) {
             }
         )
         .catch(
-            err => {if (            
-                err && 
-                err.response && 
-                err.response.data && 
-                err.response.data.msg && 
-                errorCallback
-                ) errorCallback(err.response.data.msg, errorTimeout())}
+            err => {if (err && errorCallback) errorCallback(err)}
         )
     }
 
-    function getUsername({token, errorCallback, errorTimeout}) {
+    function getUsername({token, errorCallback}) {
 
         let options = {
             method: 'get',
@@ -163,13 +147,7 @@ export default function AppStateContextProvider(props) {
             res => setUsername(res.data)
         )
         .catch(
-            err => {if (
-            err && 
-            err.response && 
-            err.response.data && 
-            err.response.data.msg && 
-            errorCallback
-            ) errorCallback(err.response.data.msg, errorTimeout())}
+            err => {if (err && errorCallback) errorCallback(err)}
         );
     }
 
@@ -191,13 +169,9 @@ export default function AppStateContextProvider(props) {
         postdescription,
         successCallback,
         successTimeout,
-        errorCallback,
-        errorTimeout
+        errorCallback
     }) {
-
         const data = new FormData();
-
-        // let DEBUG = true;
 
         data.append('file', img);
         data.append('petstatus', petstatus);
@@ -224,18 +198,11 @@ export default function AppStateContextProvider(props) {
         axios(options)
         .then(
             res => {
-                // if (DEBUG) console.log('reportPet res',res)
                if (successCallback) successCallback(res.data.msg, successTimeout())
         }
         )
         .catch(
-            err => {if (errorCallback) errorCallback(
-                err &&
-                err.response &&
-                err.response.data &&
-                err.response.data.msg, 
-                errorTimeout())
-            }
+            err => {if (err && errorCallback) errorCallback(err)}
         );
     }
     
@@ -252,9 +219,9 @@ export default function AppStateContextProvider(props) {
         .then(res => {
             if (successCallback) successCallback(res)
         })
-        .catch(err => {
-            if (errorCallback) errorCallback(err)
-        })
+        .catch(
+            err => {if (err && errorCallback) errorCallback(err)}
+        )
     }
     
     function getAllPets({successCallback, errorCallback}) {
@@ -267,15 +234,14 @@ export default function AppStateContextProvider(props) {
             }
         };
         axios(options)
-        .then(res => {
-            if (successCallback) successCallback(res)
-        })
-        .catch(err => {
-            if (errorCallback) errorCallback(err)
-        })
+        .then(
+            res => {if (successCallback) successCallback(res)}
+        )
+        .catch(
+            err => {if (err && errorCallback) errorCallback(err)}
+        );
     }
 
-    //  errorTimeout
     function getUsers({token, successCallback, errorCallback}) {
         let options = {
             method: 'get',
@@ -289,28 +255,14 @@ export default function AppStateContextProvider(props) {
         axios(options)
         .then(
             res => {
-                // setUsers(res.data)
                 if (successCallback) successCallback(res)
-                // if (DEBUG) successCallback(console.log('res, AppStateContext 3', res)) 
             }
         )
         .catch(
-            // err => {if (
-            // err && 
-            // err.response && 
-            // err.response.data && 
-            // err.response.data.msg && 
-            // errorCallback
-            // ) errorCallback(err.response.data.msg)}
-            // err => console.log(err)
-
-            err => {if (errorCallback) errorCallback(err)}
-            // err => {if (DEBUG) errorCallback(console.log('err, AppStateContext 3', err)) }
+            err => {if (err && errorCallback) errorCallback(err)}
         );
 
     }
-
-    // getUsers({token, successCallback: res => setUsers(res.data), errorCallback: err => console.log(err)})
 
     return (
         <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, getUsers, users, reportPet, fetchPets, getAllPets, pets, setPets, setTotal, numberIncreases, offset, setOffset, limit, loader}}>

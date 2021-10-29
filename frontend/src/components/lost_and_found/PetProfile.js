@@ -5,19 +5,18 @@ import createHistory from 'history/createBrowserHistory';
 import Loader from '../generic/Loader';
 import { Link } from 'react-router-dom';
 import PetProfileCard from '../generic/PetProfileCard';
-import { AuthContext } from '../../contexts/AuthContext';
 
 
 const PetProfile = () => {
     const { id } = useParams();
     const { pets, users, loader } = useContext(AppStateContext);
-    const { token } = useContext(AuthContext);
 
-    let DEBUG = true;
+    let DEBUG = false;
 
-    // if (DEBUG) console.log('pets array PetProfile', pets)
-    if (DEBUG) console.log('users from PetProfile', users)
-    if (DEBUG) console.log('users from PetProfile', users.length)
+    if (DEBUG) console.log('pets array PetProfile', pets);
+    if (DEBUG) console.log('users from PetProfile', users);
+    if (DEBUG) console.log('users from PetProfile', users.length);
+
 
     function getPetAndUserData(id, petArr, userArr) {
         if (userArr.length > 0) {
@@ -39,12 +38,12 @@ const PetProfile = () => {
         }
     }
 
-    // if (DEBUG) console.log(getPetAndUserData(id, pets, users));
+    if (DEBUG) console.log(getPetAndUserData(id, pets, users));
 
     createHistory().replace(`/petprofile/${id}`);
 
-    // if (DEBUG) console.log('typeof id', typeof id)
-    // if (DEBUG) console.log('id', id)
+    if (DEBUG) console.log('typeof id', typeof id)
+    if (DEBUG) console.log('id', id)
 
     if (loader) {
         return (
@@ -56,12 +55,11 @@ const PetProfile = () => {
         <>
         <main className='petMain'>
             <section>
-                {/* {getPetAndUserData(id, pets)} */}
                 {getPetAndUserData(id, pets, users)}
                 <div className='backButtonContainer'>
                     <div className='backButtonBox'>
                         <Link to={'/lostandfound'}>
-                            <button className='backButton'>Back to the Lost and Found Page</button>
+                            <button className='backButton'>Back to the Pet List</button>
                         </Link>
                     </div>
                 </div>
