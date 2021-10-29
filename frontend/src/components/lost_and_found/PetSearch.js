@@ -159,7 +159,7 @@ const PetSearchBox = () => {
                                 </div>
                             </div> */}
 
-                        {/* Reference for advanced search: */}
+
                         {/* Place for PetAdvancedSearch component */}
 
                         {/* { optionalInputs.display === 'showInputs' ? errorSuccessMessage : '' }   */}

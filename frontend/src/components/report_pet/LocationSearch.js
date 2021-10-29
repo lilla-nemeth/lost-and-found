@@ -1,11 +1,8 @@
-import React, { useState, useContext } from 'react';
-import { AppStateContext } from '../../contexts/AppStateContext';
+import React, { useState } from 'react';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 
 const LocationSearch = () => {
     const [search, setSearch] = useState('');
-
-    const { searchWord } = useContext(AppStateContext);
 
     let DEBUG = true;
 
@@ -13,7 +10,6 @@ const LocationSearch = () => {
     function handleChange(event) {
         setSearch(event.target.value);
     }
-
 
     return (  
         <>

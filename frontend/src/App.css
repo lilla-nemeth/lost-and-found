@@ -83,14 +83,25 @@ table {
 
 
 /* Navbar, Footer */
-.navigation {
+.navigationWithPicture {
   background: var(--clr-darkgreen);
   box-shadow: var(--shadow);
   font: var(--font-standard);
   width: 100%;
   display: flex; 
   justify-content: space-between;   
+  height: 70px;
+  list-style-type: none;
+  overflow: hidden;
+  position: fixed;
+  z-index: 100;
+}
 
+.navigationWithoutPicture {
+  font: var(--font-standard);
+  width: 100%;
+  display: flex; 
+  justify-content: space-between;   
   height: 70px;
   list-style-type: none;
   overflow: hidden;
@@ -142,18 +153,22 @@ table {
   padding: 10px;
   margin: 10px;
   display: inline-block;
-  color: var(--clr-aquamarine);
+  /* color: var(--clr-aquamarine); */
+  color: var(--clr-white);
   border: 2px solid transparent;
   border-radius: var(--radius-circle);
+  z-index: 2;
 }
 
 .navLogoInner {
   height: 25px;
-  fill: var(--clr-aquamarine);
+  /* fill: var(--clr-aquamarine); */
+  fill: var(--clr-white);
 }
 
 .navLogo:hover {
-  border: 2px solid var(--clr-aquamarine);
+  /* border: 2px solid var(--clr-aquamarine); */
+  border: 2px solid var(--clr-white);
   border-radius: var(--radius-circle);
   margin: 10px;
   transition: border 0.2s linear;
@@ -162,7 +177,8 @@ table {
 .navLogoInner:after {
   display: block;
   content: '';
-  border-bottom: solid 2px var(--clr-aquamarine); 
+  /* border-bottom: solid 2px var(--clr-aquamarine);  */
+  border-bottom: solid 2px var(--clr-white); 
   transform: scaleX(0);  
   transition: transform 0.2s linear;
 }
@@ -195,14 +211,16 @@ table {
 
 .navLinkMobile,
 .navLinkDesktop {
-  color: var(--clr-aquamarine);
+  /* color: var(--clr-aquamarine); */
+  color: var(--clr-white);
 }
 
 .navLinkMobile:after,
 .navLinkDesktop::after {
   display: block;
   content: '';
-  border-bottom: solid 2px var(--clr-aquamarine); 
+  /* border-bottom: solid 2px var(--clr-aquamarine);  */
+  border-bottom: solid 2px var(--clr-white); 
   transform: scaleX(0);  
   transition: transform 180ms ease-in-out;
 }
@@ -244,7 +262,7 @@ table {
   font: var(--font-landingpage);
   color: var(--clr-white);
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 10%;
 }
 
@@ -1161,12 +1179,14 @@ input[type=checkbox]:checked ~ label{
   }
 
   .navLinkMobile {
-    color: var(--clr-aquamarine);
+    /* color: var(--clr-aquamarine); */
+    color: var(--clr-white);
   }
 
   .logOutButtonMobile,
   .navLinkMobile {
-    color: var(--clr-aquamarine);
+    /* color: var(--clr-aquamarine); */
+    color: var(--clr-white);
     font: 400 25px/1.2 'Poppins', sans-serif;
   }
 
@@ -1181,7 +1201,7 @@ input[type=checkbox]:checked ~ label{
   .navMainListMobile {
     background: var(--clr-darkgreen);
     width: 100vw;
-    margin-top: 69px;
+    /* margin-top: 69px; */
     position: fixed;
     z-index: 1;
     display: flex;
@@ -1203,7 +1223,8 @@ input[type=checkbox]:checked ~ label{
 
   .burgerActive,
   .burgerInactive {
-    background: var(--clr-aquamarine);
+    /* background: var(--clr-aquamarine); */
+    background: var(--clr-white);
     margin: 6px auto;
     width: 27px;
     height: 4px;

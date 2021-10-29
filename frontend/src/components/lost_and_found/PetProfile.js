@@ -15,7 +15,6 @@ const PetProfile = () => {
 
     if (DEBUG) console.log('pets array PetProfile', pets);
     if (DEBUG) console.log('users from PetProfile', users);
-    if (DEBUG) console.log('users from PetProfile', users.length);
 
 
     function getPetAndUserData(id, petArr, userArr) {

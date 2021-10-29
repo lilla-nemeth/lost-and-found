@@ -6,12 +6,14 @@ import { handleError } from './HelperFunctions.js';
 import Hamburger from './Hamburger';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [errorMsg, setErrorMsg] = useState('');
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
     
     const { token, handleLogOut } = useContext(AuthContext);
     const { getUsername, username } = useContext(AppStateContext);
+
+    const { transparent } = props;
 
     let DEBUG = false;
     
@@ -76,7 +78,7 @@ const Navbar = () => {
 
     return (  
         <div>
-            <div className='navigation'>
+            <div className={transparent ? 'navigationWithoutPicture' : 'navigationWithPicture'}>
                 {!token ?
                     <>
                         <Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link>
@@ -100,9 +102,6 @@ const Navbar = () => {
                 <div className="hamburger" onClick={() => setHamburgerOpen(!hamburgerOpen)}>
                     <Hamburger hamburgerOpen={hamburgerOpen}/>
                 </div>
-            </div>
-            <div className='message'>
-                <p className='errorMessage'>{errorMsg}</p>
             </div>
         </div>
     );

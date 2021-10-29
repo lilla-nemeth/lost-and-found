@@ -14,7 +14,7 @@ import PetProfile from './components/lost_and_found/PetProfile';
 function App() {
   const { token } = useContext(AuthContext);
 
-  let isFooterBgTransparent = true;
+  let transparent = true;
 
   let DEBUG = false;
 
@@ -28,11 +28,11 @@ function App() {
         <Switch>
           <Route path='/login'>
             <Login />
-            <Footer isFooterBgTransparent={isFooterBgTransparent}/>
+            <Footer transparent={transparent} />
           </Route>
           <Route path='/register'>
             <Register />
-            <Footer isFooterBgTransparent={isFooterBgTransparent} />
+            <Footer transparent={transparent} />
           </Route>
           <Route path='/lostandfound'>
             <Navbar />
@@ -45,14 +45,14 @@ function App() {
             <Footer />
           </Route>
           <Route exact path='/'>
-            <Navbar />
+            <Navbar transparent={transparent} />
             <PetLandingPage />
-            <Footer isFooterBgTransparent={isFooterBgTransparent} />
+            <Footer transparent={transparent} />
           </Route>
           <Route path='*'>
-            <Navbar />
+            <Navbar transparent={transparent}/>
             <PetLandingPage />
-            <Footer isFooterBgTransparent={isFooterBgTransparent} />
+            <Footer transparent={transparent} />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -80,9 +80,9 @@ function App() {
               <Footer />
             </Route>
             <Route exact path='/'>
-              <Navbar />
-              <PetLandingPage />
-              <Footer isFooterBgTransparent={isFooterBgTransparent} />
+              <Navbar transparent={transparent} />
+              <PetLandingPage  />
+              <Footer transparent={transparent} />
             </Route>
             <Route path='*'>
               <Navbar />

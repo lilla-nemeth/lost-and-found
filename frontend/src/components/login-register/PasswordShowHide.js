@@ -7,9 +7,8 @@ const PasswordShowHide = (props) => {
     const { password, setPassword } = props;
     const [showPassword, setShowPassword] = useState(false);
 
-    let DEBUG = true;
+    let DEBUG = false;
     
-    // TO FIX: CURSOR SHOULD BE AT THE END OF THE PASSWORD TEXT AFTER CLICK 
     function handleClickShowPw() {
         setShowPassword(!showPassword);
     }

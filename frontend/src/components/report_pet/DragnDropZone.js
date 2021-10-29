@@ -48,7 +48,7 @@ const DragnDropZone = (props) => {
 
     const { files, setFiles } = props;
     
-    let DEBUG = true;
+    let DEBUG = false;
     
     const {getRootProps, getInputProps} = useDropzone({
         accept: 'image/*',
