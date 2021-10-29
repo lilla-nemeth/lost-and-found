@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import createHistory from 'history/createBrowserHistory';
+import { handleError } from '../HelperFunctions.js';
 import BackgroundImages from './BackgroundImages';
 import Logo from '../generic/Logo';
 import PasswordShowHide from './PasswordShowHide';
@@ -35,10 +36,9 @@ const Register = () => {
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');
             }, 5000)),
-            errorCallback: err => setErrorMsg(err),
-            errorTimeout: () => (setTimeout(() => {
-                setErrorMsg('');
-            }, 5000))
+            errorCallback: err => {
+                handleError(err, setErrorMsg);
+            }
         });
     }
     

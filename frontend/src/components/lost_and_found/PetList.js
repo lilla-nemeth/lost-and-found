@@ -27,22 +27,22 @@ const PetList = () => {
     return (  
         <div className='petContainer'>
             <h1 className='lostAndFoundHeadline'>Lost and Found Pets</h1>
-            {pets.map(pet => {
-                return (
-                    <PetListCard key={pet.id} pet={pet}/>
-                )
-            })} 
-            <div className='pagination'>{numberIncreases().map(page => {
+                {pets.map(pet => {
                     return (
-                        <div 
-                            key={uuidv4()}
-                            onClick={() => setOffset(page * limit)} 
-                            className='paginationNumbers'
-                        >
-                            {page + 1}
-                        </div>
+                        <PetListCard key={pet.id} pet={pet}/>
                     )
-                })}
+                })} 
+            <div className='pagination'>{numberIncreases().map(page => {
+                return (
+                    <div 
+                        key={uuidv4()}
+                        onClick={() => setOffset(page * limit)} 
+                        className='paginationNumbers'
+                    >
+                        {page + 1}
+                    </div>
+                )
+            })}
             </div> 
         </div>
     );

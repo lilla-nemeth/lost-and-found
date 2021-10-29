@@ -1,5 +1,17 @@
 import Sugar from 'sugar';    
 
+// for only errors from backend (err.response.data.msg):
+export function handleError(err, setter) {
+    setter(        
+        err
+        &&err.response
+        &&err.response.data
+        &&err.response.data.msg
+    );
+    setTimeout(() => {
+        setter('');
+    }, 5500);
+}
 
 export function convertDate(timestamp) {
     let dateBySugar = Sugar.Date.create(timestamp)
@@ -10,15 +22,19 @@ export function convertDate(timestamp) {
 
 export function petDate(petstatus, since, until, className) {
     if (petstatus === 'lost' || petstatus === 'found' ) {
-        return <>
-            <td className={className}>{petstatus}</td>
-            <td className={className}>{convertDate(since)}</td>
-        </>
+        return (
+            <>
+                <td className={className}>{petstatus}</td>
+                <td className={className}>{convertDate(since)}</td>
+            </>
+        );
     } else {
-        return <>
-            <td className={className}>{petstatus}</td>
-            <td className={className}>{convertDate(until)}</td>
-        </>
+        return (
+            <>
+                <td className={className}>{petstatus}</td>
+                <td className={className}>{convertDate(until)}</td>
+            </>
+        );
     }
 }
 
@@ -26,32 +42,35 @@ export function isInputEmpty(nameOfAttribute, attribute, className) {
     if (attribute === '') {
         return <td></td>
     } else {
-        return <>
-            <td className={className}>{nameOfAttribute}</td>
-            <td className={className}>{attribute}</td>
-        </>
+        return (
+            <>
+                <td className={className}>{nameOfAttribute}</td>
+                <td className={className}>{attribute}</td>
+            </>
+        );
     }
 }
-
-// export function requiredFieldsError(field, setter, fieldName) {
-//     if (!field) {
-//         return setter(`${fieldName} field is empty.`);
-//     } 
-// }
 
 export function isFieldRequired(requiredField) {
     if (requiredField) {
         return '*';
     } else {
-        return '(optional)'
+        return '(optional)';
     }
 }
 
 export function changeCheckboxValue(array, setArray, value) {
     if (array.includes(value)) {
-        return setArray(array.filter(e => e != value))
+        return setArray(array.filter(el => el != value));
     } else {
-        return setArray([...array, value])
+        return setArray([...array, value]);
     }
 }
+
+// Error message from frontend:
+// export function requiredFieldsError(field, setter, fieldName) {
+//     if (!field) {
+//         return setter(`${fieldName} field is empty.`);
+//     } 
+// }
 
