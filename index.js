@@ -209,22 +209,15 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
     let uniquefeature = request.body.uniquefeature;
     let postdescription = request.body.postdescription;
 
-    if (DEBUG) console.log('request.file + toString ~',request.file.buffer.toString('base64'));
-
     // pool.query('INSERT INTO pets(userId, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *', [userId, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription])
     pool.query('INSERT INTO pets(userId, img, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *', [userId, img, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription])
     .then(
         (res) => {
             response.status(200).json({msg: 'Pet successfully added'})
             response.status(200).json(res.rows)
-            console.log(res)
-            // petId:
-            // console.log(res.rows[0].id)
         }
     )
     .catch((err) => response.status(400).json({msg: 'Failed to add new pet'}))
-    // .catch((err) => console.log(err))
-
 });
 
 // ****** Working queries, but unused on the frontend side ******
