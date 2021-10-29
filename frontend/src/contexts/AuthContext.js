@@ -11,7 +11,7 @@ export default function AuthContextProvider(props) {
     useEffect(() => {
 
        let tokenFromLocalStorage = localStorage.getItem('token');
-    //    if (DEBUG) console.log('AUTH, USEEFFECT',tokenFromLocalStorage);
+       if (DEBUG) console.log('AUTH, USEEFFECT',tokenFromLocalStorage);
 
        if (tokenFromLocalStorage) {
            setToken(tokenFromLocalStorage);
@@ -19,7 +19,7 @@ export default function AuthContextProvider(props) {
 
     },[]);
     
-    // if (DEBUG) console.log(token);
+    if (DEBUG) console.log(token);
     
     function handleLogOut() {
         localStorage.removeItem('token');

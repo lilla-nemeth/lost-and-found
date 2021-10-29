@@ -4,7 +4,7 @@ import { AppStateContext } from '../../contexts/AppStateContext';
 import createHistory from 'history/createBrowserHistory';
 import { isFieldRequired } from '../HelperFunctions.js';
 import PetReportOptionalData from './PetReportOptionalData';
-import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg'
+import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg';
 
 // generic components:
 import RadioButton from '../generic/RadioButton';
@@ -47,7 +47,7 @@ const PetReport = () => {
     const { token } = useContext(AuthContext);
     const { reportPet, fetchPets, limit, offset, setPets, getAllPets, setTotal } = useContext(AppStateContext);
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     let disabled = !status || !location || !species || !description || !preview;
 
@@ -57,7 +57,7 @@ const PetReport = () => {
     function handleSubmit(event) {
         event.preventDefault();
 
-        // if (DEBUG) console.log('files - PetReport', files);
+        if (DEBUG) console.log('files - PetReport', files);
         if (DEBUG) console.log('disabled before handleSubmit', disabled)
 
         
@@ -209,6 +209,7 @@ const PetReport = () => {
                                     <TextInput 
                                         id={'otherSpecies'}
                                         name={'species'}
+                                        type={'text'}
                                         value={species === 'dog' || species === 'cat' ? '' : species}
                                         placeholder={'Other'}
                                         onChange={event => setSpecies(event.target.value)}
@@ -220,6 +221,7 @@ const PetReport = () => {
                                 <TextInput 
                                     id={'location'}
                                     name={'location'}
+                                    type={'text'}
                                     value={location}
                                     placeholder={'Location'}
                                     onChange={event => setLocation(event.target.value)}

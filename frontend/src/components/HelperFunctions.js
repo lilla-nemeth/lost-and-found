@@ -46,3 +46,12 @@ export function isFieldRequired(requiredField) {
         return '(optional)'
     }
 }
+
+export function changeCheckboxValue(array, setArray, value) {
+    if (array.includes(value)) {
+        return setArray(array.filter(e => e != value))
+    } else {
+        return setArray([...array, value])
+    }
+}
+

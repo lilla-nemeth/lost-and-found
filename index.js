@@ -64,47 +64,6 @@ app.get('/pets/:id', (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch pet by id'}));
 });
 
-// TEST
-// app.get('/search', (request, response) => {
-
-    // let petstatus = request.body.petstatus;
-    // let petlocation = request.body.petlocation;
-
-    // let species = request.body.species;
-    // let petsize = request.body.petsize;
-    // let breed = request.body.breed;
-    // let sex = request.body.sex;
-    // let color = request.body.color;
-    // let age = request.body.age;
-    // let uniquefeature = request.body.uniquefeature;
-    // let postdescription = request.body.postdescription;
-
-//     pool.query("SELECT to_tsvector('english', 'a fat cat sat on a mat - it ate a fat rats')")
-//     .then((res) => console.log(res))
-//     .catch((err) => console.log(err));
-// });
-
-// DETAILED SEARCH
-app.get('/search?', (request, response) => {
-    let selectAll = 'SELECT * FROM pets';
-
-    // add the other columns of pets!
-    const existingParams = ['petstatus', 'petsize','sex'].filter(field => request.query[field]);
-
-    // if the new existingParams array is not empty then
-    // we add the WHERE word to the existingParams - which is necessary to the query and 
-    // existingParams + WHERE + loop the existingParams and create a new array
-    // with the params + ? + AND word  
-    if (existingParams.length) {
-        selectAll += ' WHERE ';
-        selectAll += existingParams.map(field => `${field} = '${request.query[field]}'`).join(' AND ');      
-    }
-
-    pool.query(selectAll)
-    .then((res) => response.status(200).json(res.rows))
-    .catch((err) => response.status(400).json({msg: 'Pet not found'}));  
-});
-
 app.get('/username', authMw, (request, response) => {
     let id = request.userId;
 
@@ -114,10 +73,8 @@ app.get('/username', authMw, (request, response) => {
 })
 
 // Get all users
-// app.get('/users', (request, response) => {
-    app.get('/users', authMw, (request, response) => {
+app.get('/users', authMw, (request, response) => {
 
-    // pool.query('SELECT * FROM users INNER JOIN pets ON users.id = pets.userId')
     pool.query('SELECT * FROM users')
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch user'}));
@@ -270,7 +227,7 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
 
 });
 
-// make a GET request also for images!
+// ****** Working queries, but unused on the frontend side ******
 
 // Multer 1 file:
 // app.post('/single/:petId', [authMw, upload.single('image')], (request, response) => {
@@ -319,5 +276,49 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
 //     console.log("multiple image upload", images);
 //     response.status(200).json({msg: 'Multiple file upload success'})
 // });
+
+
+// Search
+
+// TEST
+// app.get('/search', (request, response) => {
+
+    // let petstatus = request.body.petstatus;
+    // let petlocation = request.body.petlocation;
+
+    // let species = request.body.species;
+    // let petsize = request.body.petsize;
+    // let breed = request.body.breed;
+    // let sex = request.body.sex;
+    // let color = request.body.color;
+    // let age = request.body.age;
+    // let uniquefeature = request.body.uniquefeature;
+    // let postdescription = request.body.postdescription;
+
+//     pool.query("SELECT to_tsvector('english', 'a fat cat sat on a mat - it ate a fat rats')")
+//     .then((res) => console.log(res))
+//     .catch((err) => console.log(err));
+// });
+
+// DETAILED SEARCH
+app.get('/search?', (request, response) => {
+    let selectAll = 'SELECT * FROM pets';
+
+    // add the other columns of pets!
+    const existingParams = ['petstatus', 'petsize','sex'].filter(field => request.query[field]);
+
+    // if the new existingParams array is not empty then
+    // we add the WHERE word to the existingParams - which is necessary to the query and 
+    // existingParams + WHERE + loop the existingParams and create a new array
+    // with the params + ? + AND word  
+    if (existingParams.length) {
+        selectAll += ' WHERE ';
+        selectAll += existingParams.map(field => `${field} = '${request.query[field]}'`).join(' AND ');      
+    }
+
+    pool.query(selectAll)
+    .then((res) => response.status(200).json(res.rows))
+    .catch((err) => response.status(400).json({msg: 'Pet not found'}));  
+});
 
 app.listen(port, () => console.log("Server is running on 3003"));

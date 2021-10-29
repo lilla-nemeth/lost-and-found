@@ -1,23 +1,15 @@
 import React from 'react';
 
-const Hamburger = ({hamburgerOpen}) => {
+const Hamburger = (props) => {
+
+    const { hamburgerOpen } = props;
 
     return(
-        <>
-        {hamburgerOpen ? 
-            <div className="hamburger">
-                <div className="burgerActive"></div>
-                <div className="burgerActive"></div>
-                <div className="burgerActive"></div> 
-            </div>
-        :   
-            <div className="hamburger">
-                <div className="burgerInactive"></div>
-                <div className="burgerInactive"></div>
-                <div className="burgerInactive"></div> 
-            </div> 
-        }
-        </>
+        <div className='hamburger'>
+            <div className={hamburgerOpen ? 'burgerActive' : 'burgerInactive'}></div>
+            <div className={hamburgerOpen ? 'burgerActive' : 'burgerInactive'}></div>
+            <div className={hamburgerOpen ? 'burgerActive' : 'burgerInactive'}></div> 
+        </div>
     )
     
 }

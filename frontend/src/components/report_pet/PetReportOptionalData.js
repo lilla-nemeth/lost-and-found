@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import RadioButton from '../generic/RadioButton';
 import Checkbox from '../generic/Checkbox';
 import TextInput from '../generic/TextInput';
+import { changeCheckboxValue } from '../HelperFunctions.js';
 
 const PetReportOptionalData = (props) => {
     const { 
@@ -22,14 +23,6 @@ const PetReportOptionalData = (props) => {
     } = props;
 
     let DEBUG = true;
-
-    function changeCheckboxValue(array, setArray, value) {
-        if (array.includes(value)) {
-            return setArray(array.filter(e => e != value))
-        } else {
-            return setArray([...array, value])
-        }
-    }
 
     return (  
             <div className={optionalInputs.display}>
@@ -128,7 +121,6 @@ const PetReportOptionalData = (props) => {
                             onChange={() => changeCheckboxValue(colors, setColors, 'black')}
                             labelFor={'black'} 
                             labelName={'Black'}
-                            // something required...?
                         />
                         <Checkbox
                             id={'brown'} 
@@ -247,6 +239,7 @@ const PetReportOptionalData = (props) => {
                         headlineName={'Unique feature'}
                         id={'uniquefeature'}
                         name={'uniquefeature'}
+                        type={'text'}
                         value={uniquefeature}
                         placeholder={'unique feature'}
                         onChange={event => setUniquefeature(event.target.value)}
