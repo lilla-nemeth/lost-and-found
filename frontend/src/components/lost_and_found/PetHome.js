@@ -1,6 +1,6 @@
 import React from 'react';
 import PetList from './PetList';
-import PetSearch from './PetSearch';
+import PetSearch from './unused/PetSearch';
 
 
 const PetHome = () => {

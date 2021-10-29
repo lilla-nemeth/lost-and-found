@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
-import { isFieldRequired, changeCheckboxValue } from '../HelperFunctions.js';
-import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg';
+import { ReactComponent as SearchIcon } from '../../../assets/icons/search.svg';
+import { isFieldRequired, changeCheckboxValue } from '../../HelperFunctions.js';
+import { ReactComponent as ArrowDown} from '../../../assets/icons/togglearrow.svg';
 
 // generic components:
-import TextInput from '../generic/TextInput';
-import RadioButton from '../generic/RadioButton';
-import Checkbox from '../generic/Checkbox';
-import TextArea from '../generic/TextArea';
+import TextInput from '../../generic/TextInput';
+import RadioButton from '../../generic/RadioButton';
+import Checkbox from '../../generic/Checkbox';
+import TextArea from '../../generic/TextArea';
 
 const PetSearchBox = () => {
     const [location, setLocation] = useState('');

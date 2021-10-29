@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ReactComponent as PetPawLogo } from '../assets/icons/dogpaw.svg';
-import { AuthContext } from '../contexts/AuthContext';
-import { AppStateContext } from '../contexts/AppStateContext';
-import { handleError } from './HelperFunctions.js';
+import { ReactComponent as PetPawLogo } from '../../assets/icons/dogpaw.svg';
+import { AuthContext } from '../../contexts/AuthContext';
+import { AppStateContext } from '../../contexts/AppStateContext';
+import { handleError } from '../HelperFunctions.js';
 import Hamburger from './Hamburger';
 import { Link } from 'react-router-dom';
 
