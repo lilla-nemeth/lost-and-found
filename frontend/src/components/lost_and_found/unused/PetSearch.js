@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { ReactComponent as SearchIcon } from '../../../assets/icons/search.svg';
 import { isFieldRequired, changeCheckboxValue } from '../../HelperFunctions.js';
 import { ReactComponent as ArrowDown} from '../../../assets/icons/togglearrow.svg';
+import { AppStateContext } from '../../../contexts/AppStateContext';
+import { handleError } from '../../HelperFunctions.js';
 
 // generic components:
 import TextInput from '../../generic/TextInput';
@@ -9,7 +11,9 @@ import RadioButton from '../../generic/RadioButton';
 import Checkbox from '../../generic/Checkbox';
 import TextArea from '../../generic/TextArea';
 
-const PetSearchBox = () => {
+const PetSearch = () => {
+    const { pets } = useContext(AppStateContext);
+
     const [location, setLocation] = useState('');
     const [status, setStatus] = useState('');
     const [species, setSpecies] = useState('');
@@ -30,6 +34,8 @@ const PetSearchBox = () => {
     // const [age, setAge] = useState('');
     // const [uniquefeature, setUniquefeature] = useState('');
 
+    const { searchFields } = useContext(AppStateContext);
+
     let DEBUG = false;
 
     let disabled = !status || !location || !species;
@@ -39,7 +45,17 @@ const PetSearchBox = () => {
     function handleSubmit(event) {
         event.preventDefault();
 
-        // place for petSearch API
+        // searchFields({
+        //     key: 'status' ,
+        //     value: status          
+        //     successCallback: res => setSuccessMsg(res.data.msg),
+        //     successTimeout: () => (setTimeout(() => {
+        //         setSuccessMsg('');
+        //     }, 5000)),
+        //     errorCallback: err => {
+        //         handleError(err, setErrorMsg);
+        //     }
+        // })
     }
 
     function showOptionalInputs() {
@@ -134,6 +150,8 @@ const PetSearchBox = () => {
                                 />
                             </ul>
                         </div>
+
+
                         <div className='filterBox'>
                             <h2 className='categoryHeadline'>Location {isFieldRequired(required)}</h2>
                             <div className='searchBox'>
@@ -179,4 +197,4 @@ const PetSearchBox = () => {
     );
 }
  
-export default PetSearchBox;
+export default PetSearch;

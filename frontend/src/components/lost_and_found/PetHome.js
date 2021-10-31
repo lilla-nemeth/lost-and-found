@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import createHistory from 'history/createBrowserHistory';
+import { AppStateContext } from '../../contexts/AppStateContext';
+import Loader from '../generic/Loader';
 import PetList from './PetList';
-import PetSearch from './unused/PetSearch';
+import PetPage from './PetPage';
 
 
 const PetHome = () => {
+    const { loader } = useContext(AppStateContext);
+
+    createHistory().replace('/lostandfound');
+
+    if (loader) {
+        return (
+            <Loader />
+        );
+    }
+
     return (  
         <main className='petMain'>
             <section>
-                {/* pet search API comes later */}
-                {/* <PetSearch /> */}
                 <PetList />
+                <PetPage />
             </section>
         </main>
     );

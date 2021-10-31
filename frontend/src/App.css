@@ -144,6 +144,8 @@ table {
   position: absolute;
   display: flex;
   justify-content: center;
+  
+  padding-bottom: 7px;
 }
 
 .navLogo {
@@ -153,7 +155,6 @@ table {
   padding: 10px;
   margin: 10px;
   display: inline-block;
-  /* color: var(--clr-aquamarine); */
   color: var(--clr-white);
   border: 2px solid transparent;
   border-radius: var(--radius-circle);
@@ -162,12 +163,10 @@ table {
 
 .navLogoInner {
   height: 25px;
-  /* fill: var(--clr-aquamarine); */
   fill: var(--clr-white);
 }
 
 .navLogo:hover {
-  /* border: 2px solid var(--clr-aquamarine); */
   border: 2px solid var(--clr-white);
   border-radius: var(--radius-circle);
   margin: 10px;
@@ -177,7 +176,6 @@ table {
 .navLogoInner:after {
   display: block;
   content: '';
-  /* border-bottom: solid 2px var(--clr-aquamarine);  */
   border-bottom: solid 2px var(--clr-white); 
   transform: scaleX(0);  
   transition: transform 0.2s linear;
@@ -202,7 +200,6 @@ table {
   text-decoration: none;
   font: var(--font-standard);
   display: inline-block; 
-  padding-top: 25px;
 }
 
 .username {
@@ -211,7 +208,6 @@ table {
 
 .navLinkMobile,
 .navLinkDesktop {
-  /* color: var(--clr-aquamarine); */
   color: var(--clr-white);
 }
 
@@ -219,7 +215,6 @@ table {
 .navLinkDesktop::after {
   display: block;
   content: '';
-  /* border-bottom: solid 2px var(--clr-aquamarine);  */
   border-bottom: solid 2px var(--clr-white); 
   transform: scaleX(0);  
   transition: transform 180ms ease-in-out;
@@ -246,6 +241,9 @@ table {
   border-radius: var(--radius-circle);
   color: var(--clr-white);
   border: 2px solid var(--clr-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .logOutButtonMobile {
@@ -358,7 +356,7 @@ table {
   font: 700 38px/1.2 'Poppins', sans-serif;
   display: flex;
   width: 100%;
-  padding-top: 100px;
+  /* padding-top: 100px; */
   padding-bottom: 100px;
   justify-content: center;
   align-items: center;
@@ -460,7 +458,7 @@ table {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 40px 0 40px 0;
   width: 100%;
 }
 
@@ -797,7 +795,7 @@ input[type=checkbox]:checked ~ label{
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 90px;
+  padding: 140px 90px 90px 90px;
 }
 
 .formBox {
@@ -1191,13 +1189,11 @@ input[type=checkbox]:checked ~ label{
   }
 
   .navLinkMobile {
-    /* color: var(--clr-aquamarine); */
     color: var(--clr-white);
   }
 
   .logOutButtonMobile,
   .navLinkMobile {
-    /* color: var(--clr-aquamarine); */
     color: var(--clr-white);
     font: 400 25px/1.2 'Poppins', sans-serif;
   }
@@ -1213,7 +1209,6 @@ input[type=checkbox]:checked ~ label{
   .navMainListMobile {
     background: var(--clr-darkgreen);
     width: 100vw;
-    /* margin-top: 69px; */
     position: fixed;
     z-index: 1;
     display: flex;
@@ -1235,7 +1230,6 @@ input[type=checkbox]:checked ~ label{
 
   .burgerActive,
   .burgerInactive {
-    /* background: var(--clr-aquamarine); */
     background: var(--clr-white);
     margin: 6px auto;
     width: 27px;

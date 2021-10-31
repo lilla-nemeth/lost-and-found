@@ -1,4 +1,16 @@
-import Sugar from 'sugar';    
+import Sugar from 'sugar';  
+
+
+export function numberIncreases(total, limit) {
+    let numberOfPages = total / limit;  
+
+    let numberArr = []
+
+    for (let i = 0; i < numberOfPages; i++) {
+        numberArr.push(i);
+    }
+    return numberArr;
+}
 
 // for only errors from backend (err.response.data.msg):
 export function handleError(err, setter) {
