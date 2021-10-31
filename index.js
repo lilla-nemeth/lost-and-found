@@ -209,7 +209,6 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
     let uniquefeature = request.body.uniquefeature;
     let postdescription = request.body.postdescription;
 
-    // pool.query('INSERT INTO pets(userId, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *', [userId, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription])
     pool.query('INSERT INTO pets(userId, img, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *', [userId, img, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription])
     .then(
         (res) => {
@@ -219,6 +218,7 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
     )
     .catch((err) => response.status(400).json({msg: 'Failed to add new pet'}))
 });
+
 
 // ****** Working queries, but unused on the frontend side ******
 
@@ -271,34 +271,12 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
 // });
 
 
-// Search
-
-// TEST
-// app.get('/search', (request, response) => {
-
-    // let petstatus = request.body.petstatus;
-    // let petlocation = request.body.petlocation;
-
-    // let species = request.body.species;
-    // let petsize = request.body.petsize;
-    // let breed = request.body.breed;
-    // let sex = request.body.sex;
-    // let color = request.body.color;
-    // let age = request.body.age;
-    // let uniquefeature = request.body.uniquefeature;
-    // let postdescription = request.body.postdescription;
-
-//     pool.query("SELECT to_tsvector('english', 'a fat cat sat on a mat - it ate a fat rats')")
-//     .then((res) => console.log(res))
-//     .catch((err) => console.log(err));
-// });
-
-// DETAILED SEARCH
+// Search (radio buttons and checkboxes)
 app.get('/search?', (request, response) => {
     let selectAll = 'SELECT * FROM pets';
 
-    // add the other columns of pets!
-    const existingParams = ['petstatus', 'petsize','sex'].filter(field => request.query[field]);
+    // except: id, petlocation, uniquefeature and postdescription - they will be text input fields
+    const existingParams = ['petstatus', 'species', 'petsize', 'breed', 'sex', 'color', 'age'].filter(field => request.query[field]);
 
     // if the new existingParams array is not empty then
     // we add the WHERE word to the existingParams - which is necessary to the query and 
@@ -309,9 +287,13 @@ app.get('/search?', (request, response) => {
         selectAll += existingParams.map(field => `${field} = '${request.query[field]}'`).join(' AND ');      
     }
 
+    if (DEBUG) console.log('existingParams - search', existingParams);
+    if (DEBUG) console.log('selectAll - search', selectAll);
+
     pool.query(selectAll)
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Pet not found'}));  
 });
+
 
 app.listen(port, () => console.log("Server is running on 3003"));

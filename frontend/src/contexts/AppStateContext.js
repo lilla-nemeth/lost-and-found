@@ -12,7 +12,7 @@ export default function AppStateContextProvider(props) {
     const [users, setUsers] = useState([]);
     const [username, setUsername] = useState('');
 
-    // we get string and we need to convert it to number before saving into the state:
+    // value of total is string, convert it to number before saving into the state:
     const [total, setTotal] = useState(0);
 
     // the default skip: 
@@ -60,19 +60,7 @@ export default function AppStateContextProvider(props) {
 
     if (DEBUG) console.log('token from AuthContext in AppStateContext', token);
     if (DEBUG) console.log('users arr - AppStateContext', users);
-    if (DEBUG) console.log('pets arr - AppStateContext', pets)
-
-
-    let numberOfPages = total / limit;  
-
-    function numberIncreases() {
-        let numberArr = []
-
-        for (let i = 0; i < numberOfPages; i++) {
-            numberArr.push(i);
-        }
-        return numberArr;
-    }
+    if (DEBUG) console.log('pets arr - AppStateContext', pets);
 
     // named input when we have many arguments
     // cannot mess up the order (in object {})
@@ -152,7 +140,6 @@ export default function AppStateContextProvider(props) {
     }
 
 
-
     function reportPet({
         // TODO: other location data enable when mapbox is implemented
         token,
@@ -205,7 +192,7 @@ export default function AppStateContextProvider(props) {
             err => {if (err && errorCallback) errorCallback(err)}
         );
     }
-    
+
     function fetchPets({limit, offset, successCallback, errorCallback}) {
         let options = {
             method: 'get',
@@ -261,11 +248,32 @@ export default function AppStateContextProvider(props) {
         .catch(
             err => {if (err && errorCallback) errorCallback(err)}
         );
-
     }
 
+    // function searchFields({key, value, successCallback, successTimeout, errorCallback}) {
+
+    //     let options = {
+    //         method: 'get',
+    //         url: `http://localhost:3003/search?${key}=${value}`,
+    //         // url: `http://localhost:3003/search?${key}=${value}&`,
+    //         // url: 'http://localhost:3003/search?',
+    //         mode: 'cors',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     };
+    //     axios(options)
+    //     .then(
+    //         // res => {if (res && successCallback) successCallback(res, successTimeout())}
+    //         res => console.log('searchFields res', res)
+    //     )
+    //     .catch(
+    //         err => {if (err && errorCallback) errorCallback(err)}
+    //     );
+    // }
+
     return (
-        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, getUsers, users, reportPet, fetchPets, getAllPets, pets, setPets, setTotal, numberIncreases, offset, setOffset, limit, loader}}>
+        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, getUsers, users, reportPet, fetchPets, getAllPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader}}>
             { props.children }
         </AppStateContext.Provider>
     )
