@@ -3,7 +3,7 @@ import React from 'react';
 const TextInput = (props) => {
     const { headlineName, id, name, type, value, placeholder, onChange, required } = props;
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     return (  
             <div className='inputBox'>

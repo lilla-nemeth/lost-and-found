@@ -3,7 +3,7 @@ import React from 'react';
 const RadioButton = (props) => {
     const { id, name, value, checked, onChange, labelFor, labelName, required } = props;
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     return (
         <>

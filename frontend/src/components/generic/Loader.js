@@ -2,7 +2,7 @@ import React from 'react';
 
 const Loader = () => {
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     const DogPaw = ({ fill }) => {
         return <svg version='1.1' 

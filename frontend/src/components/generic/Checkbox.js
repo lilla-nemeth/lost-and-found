@@ -3,7 +3,7 @@ import React from 'react';
 const Checkbox = (props) => {
     const { id, name, value, checked, onChange, labelFor, labelName } = props;
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     return (  
         <>

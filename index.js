@@ -9,7 +9,7 @@ const path = require('path');
 
 const { authMw, isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid, upload } = require('./middlewares.js');
 
-let DEBUG = true;
+let DEBUG = false;
 
 app.use(cors());
 app.use(express.json());

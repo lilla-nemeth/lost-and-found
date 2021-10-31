@@ -19,7 +19,7 @@ const MapboxMap = () => {
     const [lat, setLat] = useState(65.00440031202271);
     const [zoom, setZoom] = useState(6);
 
-    let DEBUG = true;
+    let DEBUG = false;
     // if (DEBUG) console.log('from MapboxMap component', mapboxgl.accessToken);
     // container: render the map inside a specific DOM element.
 

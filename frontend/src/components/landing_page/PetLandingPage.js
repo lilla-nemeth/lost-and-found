@@ -3,7 +3,7 @@ import Video from '../../assets/video/dogvideo.mp4';
 
 const PetLandingPage = () => {
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     return (
         <div>

@@ -30,7 +30,7 @@ const PetSearchBox = () => {
     // const [age, setAge] = useState('');
     // const [uniquefeature, setUniquefeature] = useState('');
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     let disabled = !status || !location || !species;
 

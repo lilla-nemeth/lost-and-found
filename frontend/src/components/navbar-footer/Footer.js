@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = (props) => {
     const { transparent } = props;
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     return (
         <div className={transparent ? 'footerWithPicture' : 'footerWithoutPicture'}>

@@ -4,7 +4,7 @@ import { ReactComponent as SearchIcon } from '../../../assets/icons/search.svg';
 const LocationSearch = () => {
     const [search, setSearch] = useState('');
 
-    let DEBUG = true;
+    let DEBUG = false;
 
 
     function handleChange(event) {
