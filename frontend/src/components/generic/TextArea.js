@@ -3,7 +3,7 @@ import React from 'react';
 const TextArea = (props) => {
     const { headlineName, id, name, value, placeholder, rows, cols, onChange, required } = props;
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     return (  
         <div className='filterBox'> 

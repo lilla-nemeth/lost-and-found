@@ -37,7 +37,7 @@ const DropZoneTest = () => {
     const [files, setFiles] = useState([]);
     const [errors, setErrors] = useState('');
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     // const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     //     const acceptedFilesMapped = acceptedFiles.map(file => {

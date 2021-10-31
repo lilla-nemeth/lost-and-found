@@ -22,7 +22,7 @@ const PetReportOptionalData = (props) => {
         optionalInputs 
     } = props;
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     return (  
             <div className={optionalInputs.display}>

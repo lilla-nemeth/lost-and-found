@@ -5,7 +5,7 @@ import { ReactComponent as NavBackArrow } from '../../assets/icons/navbackarrow.
 
 const Logo = () => {
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     return (  
         <>

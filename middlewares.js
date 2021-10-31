@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 
-let DEBUG = true;
+let DEBUG = false;
 
 function authMw (request, response, next) {
     // token is the headers part of the request:

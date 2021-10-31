@@ -72,7 +72,7 @@ table {
 
   /* Radius */
   --radius: 25px; 
-  --radius-circle: 30px;
+  --radius-circle: 60px;
 
   /* Width */
   --width100: 100%;
@@ -223,6 +223,7 @@ table {
   border-bottom: solid 2px var(--clr-white); 
   transform: scaleX(0);  
   transition: transform 180ms ease-in-out;
+  margin-top: 5px;
 }
 
 .navLinkMobile:hover:after,
@@ -233,19 +234,30 @@ table {
 .logOutButtonDesktop,
 .logOutButtonMobile {
   font: var(--font-standard);
-  color: var(--clr-darkgreen);
-  background: var(--clr-green);
   text-align: center;
-  padding: 22.5px;
+  margin: 10px 10px 15px 10px;
+  padding-right: 22.5px;
+  padding-left: 22.5px;
   text-decoration: none;
   display: inline-block; 
   cursor: pointer;
   border: none;
+  background: transparent;
+  border-radius: var(--radius-circle);
+  color: var(--clr-white);
+  border: 2px solid var(--clr-white);
+}
+
+.logOutButtonMobile {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .logOutButtonDesktop:hover,
 .logOutButtonMobile:hover {
   background: var(--clr-aquamarine);
+  color: var(--clr-darkgreen);
+  border: 2px solid var(--clr-aquamarine);
   transition: background 0.2s linear;
 }
 
