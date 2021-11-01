@@ -27,10 +27,18 @@ const devSettings = {
 const pool = new Pool(devSettings);
 
 // get all pets by userId - user get all his/her added pets
-app.get('/pets', authMw, (request, response) => {
+app.get('/userpets', authMw, (request, response) => {
     let userId = request.userId;
 
     pool.query('SELECT * FROM pets WHERE userId=$1', [userId])
+    .then((res) => response.status(200).json(res.rows))
+    .catch((err) => response.status(400).json({msg: "Failed to fetch user's pets"}));
+});
+
+// get all pets
+app.get('/allpets', (request, response) => {
+
+    pool.query('SELECT * FROM pets')
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch all pets'}));
 });
@@ -80,14 +88,7 @@ app.get('/users', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch user'}));
 })
 
-app.get('/pets/userId', authMw, (request, response) => {
-    pool.query('SELECT pets.userId FROM pets')
-
-    .then((res) => response.status(200).json(res.rows))
-    .catch((err) => response.status(400).json({msg: 'Failed to fetch userIds of pets'}));
-});
-
-// user dashboard - update one pet's datas (by id):
+// user dashboard - update one pet's data (by id):
 app.put('/editpet/:id', authMw, (request, response) => {
     let id = request.params.id;
     let petstatus = request.body.petstatus;
@@ -293,6 +294,22 @@ app.get('/search?', (request, response) => {
     pool.query(selectAll)
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Pet not found'}));  
+});
+
+// ~* - is case insensitive
+app.get('/searchpets', (request, response) => {
+
+    // It works:
+    // pool.query("SELECT * FROM pets WHERE petstatus LIKE '%lost%' OR petstatus LIKE '%lost%'")
+    // it also works, but case sensitive:
+    // pool.query("SELECT * FROM pets WHERE petstatus LIKE ANY (array['%lost%', '%found%', '%reunited%'])")
+
+    // works, case insensitive (~*), use multiple queries with UNION (if possible)
+    // pool.query("SELECT * FROM pets WHERE petstatus ~* 'lost|found|reunited'")
+
+    pool.query("SELECT * FROM pets WHERE petstatus ~* 'lost|found|reunited'")
+    .then((res) => response.status(200).json(res.rows))
+    .catch((err) => response.status(400).json({msg: 'Pet not found'}));
 });
 
 

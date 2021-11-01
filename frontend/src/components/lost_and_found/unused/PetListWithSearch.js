@@ -4,7 +4,7 @@ import PetListCard from '../../generic/PetListCard';
 import Search from './Search';
 import PetSearch from './PetSearch';
 
-const PetList = () => {
+const PetListWithSearch = () => {
     // TODO: Fix it: Search from all pets
     const [search, setSearch] = useState('');
 
@@ -26,10 +26,6 @@ const PetList = () => {
     const { pets } = useContext(AppStateContext);
 
     let DEBUG = false;
-
-    // lost -> since (in progress cases)
-    // found -> since (in progress cases)
-    // reunited -> until (ready to close cases)
 
     if (DEBUG) console.log('pets arr from PetList', pets);
 
@@ -91,4 +87,4 @@ const PetList = () => {
     );
 }
  
-export default PetList;
+export default PetListWithSearch;

@@ -47,7 +47,7 @@ const PetReport = () => {
     const [loader, setLoader] = useState(true);
 
     const { token } = useContext(AuthContext);
-    const { reportPet, fetchPets, limit, offset, setPets, getAllPets, setTotal } = useContext(AppStateContext);
+    const { reportPet, fetchPets, limit, offset, setPets, getNumberOfPets, setTotal } = useContext(AppStateContext);
 
     let DEBUG = false;
 
@@ -85,7 +85,7 @@ const PetReport = () => {
                         successCallback: res => {
                             setPets(res.data);
                             setLoader(false);
-                            getAllPets({
+                            getNumberOfPets({
                                 successCallback: res => {
                                     setTotal(Number(res.data));
                                 }

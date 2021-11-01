@@ -9,6 +9,7 @@ export default function AppStateContextProvider(props) {
     const { token } = useContext(AuthContext);
 
     const [pets, setPets] = useState([]);
+
     const [users, setUsers] = useState([]);
     const [username, setUsername] = useState('');
 
@@ -34,7 +35,7 @@ export default function AppStateContextProvider(props) {
             successCallback: res => {
                 setPets(res.data);
                 setLoader(false);
-                getAllPets({
+                getNumberOfPets({
                     successCallback: res => {
                         setTotal(Number(res.data));
                     }
@@ -209,7 +210,7 @@ export default function AppStateContextProvider(props) {
         )
     }
     
-    function getAllPets({successCallback, errorCallback}) {
+    function getNumberOfPets({successCallback, errorCallback}) {
         let options = {
             method: 'get',
             url: 'http://localhost:3003/pets/total',
@@ -226,6 +227,27 @@ export default function AppStateContextProvider(props) {
             err => {if (err && errorCallback) errorCallback(err)}
         );
     }
+
+    // successTimeout, 
+    function getAllPets({successCallback, errorCallback}) {
+
+        let options = {
+            method: 'get',
+            url: 'http://localhost:3003/allpets',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        axios(options)
+        .then(
+            res => {if (res && successCallback) successCallback(res)}
+        )
+        .catch(
+            err => {if (err && errorCallback) errorCallback(err)}
+        );
+    }
+
 
     function getUsers({token, successCallback, errorCallback}) {
         let options = {
@@ -248,30 +270,8 @@ export default function AppStateContextProvider(props) {
         );
     }
 
-    // function searchFields({key, value, successCallback, successTimeout, errorCallback}) {
-
-    //     let options = {
-    //         method: 'get',
-    //         url: `http://localhost:3003/search?${key}=${value}`,
-    //         // url: `http://localhost:3003/search?${key}=${value}&`,
-    //         // url: 'http://localhost:3003/search?',
-    //         mode: 'cors',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     };
-    //     axios(options)
-    //     .then(
-    //         // res => {if (res && successCallback) successCallback(res, successTimeout())}
-    //         res => console.log('searchFields res', res)
-    //     )
-    //     .catch(
-    //         err => {if (err && errorCallback) errorCallback(err)}
-    //     );
-    // }
-
     return (
-        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, getUsers, users, reportPet, fetchPets, getAllPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader}}>
+        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, getUsers, users, reportPet, fetchPets, getNumberOfPets, getAllPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader}}>
             { props.children }
         </AppStateContext.Provider>
     )
