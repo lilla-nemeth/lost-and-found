@@ -79,6 +79,7 @@ export function changeCheckboxValue(array, setArray, value) {
     }
 }
 
+
 // Error message from frontend:
 // export function requiredFieldsError(field, setter, fieldName) {
 //     if (!field) {

@@ -14,9 +14,9 @@ import TextArea from '../../generic/TextArea';
 const PetSearch = (props) => {
     const { pets } = useContext(AppStateContext);
 
-    const { search, setSearch, searchValues, setSearchValues, values } = props;
+    // const { search, setSearch, searchValues, setSearchValues, values } = props;
+    const { status, setStatus, species, setSpecies } = props;
 
-    // const [status, setStatus] = useState('');
     // const [species, setSpecies] = useState('');
 
     // const [search, setSearch] = useState('');
@@ -41,10 +41,10 @@ const PetSearch = (props) => {
     // const [age, setAge] = useState('');
     // const [uniquefeature, setUniquefeature] = useState('');
 
-    let DEBUG = false;
+    let DEBUG = true;
 
     // let disabled = !status || !search || !species;
-    let disabled = !search || !searchValues;
+    // let disabled = !search || !searchValues;
 
     let required = true;
 
@@ -71,45 +71,26 @@ const PetSearch = (props) => {
         </div>
     );
 
-    function handleSubmit(event) {
-        event.preventDefault();
-    }
+    // function handleSubmit(event) {
+    //     event.preventDefault();
+    // }
+    if (DEBUG) console.log(species);
 
     return (  
         <main className='formMain'>
             <section className='formSection'>
             <div className='formBox'>
                     <h2 className='formHeadline'>Search Pet</h2>
-                    <form onSubmit={handleSubmit}>
+                    {/* <form onSubmit={handleSubmit}> */}
                         <div className='filterBox'>
-                            <h2 className='categoryHeadline'>Status {isFieldRequired(required)}</h2>
+                            <h2 className='categoryHeadline'>Status</h2>
                             <ul className='radioList'>
-
-                            {/* {values && values.map(value => <label>  
-                                <input  
-                                    type='checkbox' 
-                                    checked={searchValues.includes(value)}
-                                    onChange={event => {
-                                            const checked = searchValues.includes(value);
-                                            setSearchValues(prev => 
-                                                checked
-                                                ? 
-                                                prev.filter(searchV => searchV !== value)
-                                                :
-                                                [...prev, value]
-                                            );
-                                        }
-                                    }
-                                />
-                                {value}  </label>)
-                            } */}
-
                                 <Checkbox
                                     id={'lost'} 
                                     name={'status'} 
                                     value={'lost'} 
-                                    checked={searchValues.includes('lost')} 
-                                    onChange={() => changeCheckboxValue(searchValues, setSearchValues, 'lost')}
+                                    checked={status.includes('lost')} 
+                                    onChange={() => changeCheckboxValue(status, setStatus, 'lost')}
                                     labelFor={'lost'} 
                                     labelName={'Lost'}
                                 />
@@ -117,31 +98,23 @@ const PetSearch = (props) => {
                                     id={'found'} 
                                     name={'status'} 
                                     value={'found'} 
-                                    checked={searchValues.includes('found')} 
-                                    onChange={() => changeCheckboxValue(searchValues, setSearchValues, 'found')}
+                                    checked={status.includes('found')} 
+                                    onChange={() => changeCheckboxValue(status, setStatus, 'found')}
                                     labelFor={'found'} 
                                     labelName={'Found'}
                                 />
-                                <Checkbox
-                                    id={'reunited'} 
-                                    name={'status'} 
-                                    value={'reunited'} 
-                                    checked={searchValues.includes('reunited')} 
-                                    onChange={() => changeCheckboxValue(searchValues, setSearchValues, 'reunited')}
-                                    labelFor={'reunited'} 
-                                    labelName={'Reunited'}
-                                />
+                                {/* Reunited is currently unused, comes later with pet profile editing */}
                             </ul>
                         </div>
                         <div className='filterBox'> 
-                            <h2 className='categoryHeadline'>Species {isFieldRequired(required)}</h2>
+                            <h2 className='categoryHeadline'>Species</h2>
                             <ul className='radioList'>
                                 <RadioButton 
                                     id={'dog'} 
                                     name={'species'} 
                                     value={'dog'} 
-                                    checked={searchValues === 'dog'} 
-                                    onChange={event => setSearchValues(event.target.value)} 
+                                    checked={species === 'dog'} 
+                                    onChange={event => setSpecies(event.target.value)} 
                                     labelFor={'dog'} 
                                     labelName={'Dog'} 
                                 />
@@ -149,8 +122,8 @@ const PetSearch = (props) => {
                                     id={'cat'} 
                                     name={'species'} 
                                     value={'cat'} 
-                                    checked={searchValues === 'cat'} 
-                                    onChange={event => setSearchValues(event.target.value)} 
+                                    checked={species === 'cat'} 
+                                    onChange={event => setSpecies(event.target.value)} 
                                     labelFor={'cat'} 
                                     labelName={'Cat'} 
                                 />
@@ -158,8 +131,8 @@ const PetSearch = (props) => {
                                     id={'other'} 
                                     name={'species'} 
                                     value={'other'} 
-                                    checked={searchValues === 'other'} 
-                                    onChange={event => setSearchValues(event.target.value)} 
+                                    checked={species === 'other'} 
+                                    onChange={event => setSpecies(event.target.value)} 
                                     labelFor={'other'} 
                                     labelName={'Other'} 
                                 />
@@ -167,7 +140,7 @@ const PetSearch = (props) => {
                         </div>
 
 
-                        <div className='filterBox'>
+                        {/* <div className='filterBox'>
                             <h2 className='categoryHeadline'>Search {isFieldRequired(required)}</h2>
                             <div className='searchBox'>
                                 <TextInput 
@@ -182,7 +155,7 @@ const PetSearch = (props) => {
                                      <SearchIcon/>
                                  </button>
                             </div>
-                        </div>            
+                        </div>             */}
 
                         {/* { optionalInputs.display === 'hideInputs' ? errorSuccessMessage : '' }
                             <div className='optionalButton' onClick={() => showOptionalInputs()}>
@@ -193,15 +166,15 @@ const PetSearch = (props) => {
                             </div> */}
                         {/* { optionalInputs.display === 'showInputs' ? errorSuccessMessage : '' }   */}
 
-                        <div>
+                        {/* <div>
                             <button
                                 // className={disabled ? 'formButtonInactive' : 'formButton'}
                                 // disabled={disabled}
                             >
                                 Search
                             </button>
-                        </div>      
-                    </form>
+                        </div>       */}
+                    {/* </form> */}
                 </div>
             </section>
         </main>

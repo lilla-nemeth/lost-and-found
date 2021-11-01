@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import createHistory from 'history/createBrowserHistory';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import Loader from '../generic/Loader';
-import PetList from './PetList';
 import PetPage from './PetPage';
+import PetList from './PetList';
+import PetListWithFilters from './unused/PetListWithFilters';
+import PetListWithSearch from './unused/PetListWithSearch';
 
 
 const PetHome = () => {
