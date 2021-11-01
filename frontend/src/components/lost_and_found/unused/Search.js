@@ -1,6 +1,6 @@
 import React from 'react';
-import TextInput from './TextInput';
-import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
+import TextInput from '../../generic/TextInput';
+import { ReactComponent as SearchIcon } from '../../../assets/icons/search.svg';
 
 const Search = (props) => {
     const { search, setSearch } = props;
