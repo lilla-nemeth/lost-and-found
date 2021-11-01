@@ -80,7 +80,6 @@ export default function AppStateContextProvider(props) {
                 pw,
             },
         };
-
         axios(options)
         .then(
             res => {if (successCallback) successCallback(res.data.msg, successTimeout())}
@@ -104,7 +103,6 @@ export default function AppStateContextProvider(props) {
                 pw
             }
         };
-        
         axios(options)
         .then(
             res => {        

@@ -356,7 +356,7 @@ table {
   font: 700 38px/1.2 'Poppins', sans-serif;
   display: flex;
   width: 100%;
-  /* padding-top: 100px; */
+  padding-top: 150px;
   padding-bottom: 100px;
   justify-content: center;
   align-items: center;
