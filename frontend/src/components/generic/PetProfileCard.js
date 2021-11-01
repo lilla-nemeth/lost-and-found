@@ -51,6 +51,9 @@ const PetProfileCard = (props) => {
                               {isInputEmpty('Size', (pet.petsize), 'tableCell')}
                             </tr>
                             <tr className='petOptionalInfo'>
+                              {isInputEmpty('Sex', (pet.sex), 'tableCell')}
+                            </tr>
+                            <tr className='petOptionalInfo'>
                               {isInputEmpty('Breed', (pet.breed), 'tableCell')}
                             </tr>
                             <tr className='petOptionalInfo'>

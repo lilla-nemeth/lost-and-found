@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TextInput = (props) => {
-    const { headlineName, id, name, type, value, placeholder, onChange, required } = props;
+    const { id, name, type, value, placeholder, onChange } = props;
 
     let DEBUG = false;
 

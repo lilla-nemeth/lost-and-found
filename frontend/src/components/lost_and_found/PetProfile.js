@@ -5,11 +5,13 @@ import createHistory from 'history/createBrowserHistory';
 import Loader from '../generic/Loader';
 import { Link } from 'react-router-dom';
 import PetProfileCard from '../generic/PetProfileCard';
+import { AuthContext } from '../../contexts/AuthContext';
 
 
 const PetProfile = () => {
     const { id } = useParams();
     const { pets, users, loader } = useContext(AppStateContext);
+    const { token } = useContext(AuthContext);
 
     let DEBUG = false;
 
@@ -18,7 +20,7 @@ const PetProfile = () => {
 
 
     function getPetAndUserData(id, petArr, userArr) {
-        if (userArr.length > 0) {
+        if (token && userArr.length > 0) {
             for (let i = 0; i < petArr.length; i++) {
                 for (let j = 0; j < userArr.length; j++) {
                     if (id == petArr[i].id) {

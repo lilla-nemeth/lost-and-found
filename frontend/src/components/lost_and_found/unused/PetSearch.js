@@ -11,19 +11,26 @@ import RadioButton from '../../generic/RadioButton';
 import Checkbox from '../../generic/Checkbox';
 import TextArea from '../../generic/TextArea';
 
-const PetSearch = () => {
+const PetSearch = (props) => {
     const { pets } = useContext(AppStateContext);
 
-    const [location, setLocation] = useState('');
-    const [status, setStatus] = useState('');
-    const [species, setSpecies] = useState('');
+    const { search, setSearch, searchValues, setSearchValues, values } = props;
 
+    // const [status, setStatus] = useState('');
+    // const [species, setSpecies] = useState('');
+
+    // const [search, setSearch] = useState('');
+    
     const [optionalInputs, setOptionalInputs] = useState({
         display: 'hideInputs',
     });
-
+    
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    
+
+    
+    
 
     // PetAdvancedSearch (optional):
     // const [description, setDescription] = useState('');
@@ -34,29 +41,16 @@ const PetSearch = () => {
     // const [age, setAge] = useState('');
     // const [uniquefeature, setUniquefeature] = useState('');
 
-    const { searchFields } = useContext(AppStateContext);
-
     let DEBUG = false;
 
-    let disabled = !status || !location || !species;
+    // let disabled = !status || !search || !species;
+    let disabled = !search || !searchValues;
 
     let required = true;
 
-    function handleSubmit(event) {
-        event.preventDefault();
 
-        // searchFields({
-        //     key: 'status' ,
-        //     value: status          
-        //     successCallback: res => setSuccessMsg(res.data.msg),
-        //     successTimeout: () => (setTimeout(() => {
-        //         setSuccessMsg('');
-        //     }, 5000)),
-        //     errorCallback: err => {
-        //         handleError(err, setErrorMsg);
-        //     }
-        // })
-    }
+
+
 
     function showOptionalInputs() {
         if (optionalInputs.display === 'hideInputs') {
@@ -77,24 +71,45 @@ const PetSearch = () => {
         </div>
     );
 
+    function handleSubmit(event) {
+        event.preventDefault();
+    }
+
     return (  
         <main className='formMain'>
             <section className='formSection'>
             <div className='formBox'>
                     <h2 className='formHeadline'>Search Pet</h2>
-                    <form 
-                        method='POST' 
-                        onSubmit={handleSubmit}
-                    >
+                    <form onSubmit={handleSubmit}>
                         <div className='filterBox'>
                             <h2 className='categoryHeadline'>Status {isFieldRequired(required)}</h2>
                             <ul className='radioList'>
+
+                            {/* {values && values.map(value => <label>  
+                                <input  
+                                    type='checkbox' 
+                                    checked={searchValues.includes(value)}
+                                    onChange={event => {
+                                            const checked = searchValues.includes(value);
+                                            setSearchValues(prev => 
+                                                checked
+                                                ? 
+                                                prev.filter(searchV => searchV !== value)
+                                                :
+                                                [...prev, value]
+                                            );
+                                        }
+                                    }
+                                />
+                                {value}  </label>)
+                            } */}
+
                                 <Checkbox
                                     id={'lost'} 
                                     name={'status'} 
                                     value={'lost'} 
-                                    checked={status.includes('lost')} 
-                                    onChange={() => changeCheckboxValue(status, setStatus, 'lost')}
+                                    checked={searchValues.includes('lost')} 
+                                    onChange={() => changeCheckboxValue(searchValues, setSearchValues, 'lost')}
                                     labelFor={'lost'} 
                                     labelName={'Lost'}
                                 />
@@ -102,8 +117,8 @@ const PetSearch = () => {
                                     id={'found'} 
                                     name={'status'} 
                                     value={'found'} 
-                                    checked={status.includes('found')} 
-                                    onChange={() => changeCheckboxValue(status, setStatus, 'found')}
+                                    checked={searchValues.includes('found')} 
+                                    onChange={() => changeCheckboxValue(searchValues, setSearchValues, 'found')}
                                     labelFor={'found'} 
                                     labelName={'Found'}
                                 />
@@ -111,8 +126,8 @@ const PetSearch = () => {
                                     id={'reunited'} 
                                     name={'status'} 
                                     value={'reunited'} 
-                                    checked={status.includes('reunited')} 
-                                    onChange={() => changeCheckboxValue(status, setStatus, 'reunited')}
+                                    checked={searchValues.includes('reunited')} 
+                                    onChange={() => changeCheckboxValue(searchValues, setSearchValues, 'reunited')}
                                     labelFor={'reunited'} 
                                     labelName={'Reunited'}
                                 />
@@ -125,8 +140,8 @@ const PetSearch = () => {
                                     id={'dog'} 
                                     name={'species'} 
                                     value={'dog'} 
-                                    checked={species === 'dog'} 
-                                    onChange={event => setSpecies(event.target.value)} 
+                                    checked={searchValues === 'dog'} 
+                                    onChange={event => setSearchValues(event.target.value)} 
                                     labelFor={'dog'} 
                                     labelName={'Dog'} 
                                 />
@@ -134,8 +149,8 @@ const PetSearch = () => {
                                     id={'cat'} 
                                     name={'species'} 
                                     value={'cat'} 
-                                    checked={species === 'cat'} 
-                                    onChange={event => setSpecies(event.target.value)} 
+                                    checked={searchValues === 'cat'} 
+                                    onChange={event => setSearchValues(event.target.value)} 
                                     labelFor={'cat'} 
                                     labelName={'Cat'} 
                                 />
@@ -143,8 +158,8 @@ const PetSearch = () => {
                                     id={'other'} 
                                     name={'species'} 
                                     value={'other'} 
-                                    checked={species === 'other'} 
-                                    onChange={event => setSpecies(event.target.value)} 
+                                    checked={searchValues === 'other'} 
+                                    onChange={event => setSearchValues(event.target.value)} 
                                     labelFor={'other'} 
                                     labelName={'Other'} 
                                 />
@@ -153,15 +168,15 @@ const PetSearch = () => {
 
 
                         <div className='filterBox'>
-                            <h2 className='categoryHeadline'>Location {isFieldRequired(required)}</h2>
+                            <h2 className='categoryHeadline'>Search {isFieldRequired(required)}</h2>
                             <div className='searchBox'>
                                 <TextInput 
-                                    id={'location'}
-                                    name={'location'}
+                                    id={'Search'}
+                                    name={'Search'}
                                     type={'search'}
-                                    value={location}
-                                    placeholder={'Location'}
-                                    onChange={event => setLocation(event.target.value)}
+                                    value={search}
+                                    placeholder={'Location or another keyword'}
+                                    onChange={event => setSearch(event.target.value)}
                                 />
                                  <button className='searchButton'>
                                      <SearchIcon/>
@@ -176,16 +191,12 @@ const PetSearch = () => {
                                     <ArrowDown style={{height: '16px'}}/>
                                 </div>
                             </div> */}
-
-
-                        {/* Place for PetAdvancedSearch component */}
-
                         {/* { optionalInputs.display === 'showInputs' ? errorSuccessMessage : '' }   */}
 
                         <div>
                             <button
-                                className={disabled ? 'formButtonInactive' : 'formButton'}
-                                disabled={disabled}
+                                // className={disabled ? 'formButtonInactive' : 'formButton'}
+                                // disabled={disabled}
                             >
                                 Search
                             </button>
@@ -194,7 +205,7 @@ const PetSearch = () => {
                 </div>
             </section>
         </main>
-    );
+    ); 
 }
  
 export default PetSearch;
