@@ -36,5 +36,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "proxy": "http://localhost:3003"
 }
