@@ -71,7 +71,7 @@ export default function AppStateContextProvider(props) {
         
         let options = {
             method: 'post',
-            url: 'http://localhost:3003/register',
+            url: '/register',
             data: {
                 email,
                 username,
@@ -92,7 +92,7 @@ export default function AppStateContextProvider(props) {
 
         let options = {
             method: 'post',
-            url: 'http://localhost:3003/login',
+            url: '/login',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ export default function AppStateContextProvider(props) {
 
         let options = {
             method: 'get',
-            url: 'http://localhost:3003/username',
+            url: '/username',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
@@ -170,7 +170,7 @@ export default function AppStateContextProvider(props) {
 
         let options = {
             method: 'post',
-            url: 'http://localhost:3003/reportpet',
+            url: '/reportpet',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
@@ -192,7 +192,7 @@ export default function AppStateContextProvider(props) {
     function fetchPets({limit, offset, successCallback, errorCallback}) {
         let options = {
             method: 'get',
-            url: `http://localhost:3003/pets/${limit}/${offset}`,
+            url: `/pets/${limit}/${offset}`,
             mode: 'cors',        
             headers: {
                 'Content-Type': 'application/json'
@@ -210,7 +210,7 @@ export default function AppStateContextProvider(props) {
     function getNumberOfPets({successCallback, errorCallback}) {
         let options = {
             method: 'get',
-            url: 'http://localhost:3003/pets/total',
+            url: '/pets/total',
             mode: 'cors',        
             headers: {
                 'Content-Type': 'application/json'
@@ -229,7 +229,7 @@ export default function AppStateContextProvider(props) {
 
         let options = {
             method: 'get',
-            url: 'http://localhost:3003/allpets',
+            url: '/allpets',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
@@ -248,7 +248,7 @@ export default function AppStateContextProvider(props) {
     function getUsers({token, successCallback, errorCallback}) {
         let options = {
             method: 'get',
-            url: 'http://localhost:3003/users',
+            url: '/users',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',

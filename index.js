@@ -14,6 +14,10 @@ let DEBUG = false;
 app.use(cors());
 app.use(express.json());
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, 'frontend/build')));  
+} 
+
 const port = process.env.PORT || 3003;
 
 const devSettings = {
@@ -24,7 +28,14 @@ const devSettings = {
     database: process.env.PG_DATABASE
 }
 
-const pool = new Pool(devSettings);
+const prodSettings = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: process.env.NODE_ENV === 'production' ? false : true
+    }
+}
+
+const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : devSettings);
 
 // get all pets by userId
 app.get('/userpets', authMw, (request, response) => {
@@ -277,5 +288,8 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
 //     .catch((err) => response.status(400).json({msg: 'Pet not found'}));
 // });
 
+app.get('*', (request, response) => {
+    response.sendFile(path.join(__dirname, "frontend/build/index.html"));
+});
 
 app.listen(port, () => console.log("Server is running on 3003"));
