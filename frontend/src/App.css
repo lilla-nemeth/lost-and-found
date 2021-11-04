@@ -76,9 +76,6 @@ table {
 
   /* Width */
   --width100: 100%;
-
-  /* Height */
-
 }
 
 
@@ -410,7 +407,6 @@ table {
   max-width: 150%;
 }
 
-/* note: set the colors for lost and found - 1-1 color/status */
 .petStatus {
   font: 500 15px/1.2 'Poppins', sans-serif;
   text-transform: uppercase;
@@ -433,6 +429,10 @@ table {
   text-transform: capitalize;
   overflow-wrap: break-word;
   line-height: 30px;
+}
+
+.table {
+  width: 100%;
 }
 
 .tableCell {
@@ -544,7 +544,7 @@ table {
   padding: 0 0 45px;
 }
 
-/* CHANGE THE UL LI TO CLASSES!*/
+/* Radio buttons, checkboxes */
 .radioList {
   display: flex;
   flex-flow: row wrap;
@@ -666,7 +666,7 @@ input[type=checkbox]:checked ~ label{
   color: var(--clr-black);
 }
 
-/* BACKGROUND FOR LOGIN/REGISTRATION */
+/* Background, Logo in Login-Registration */
 
 /* Logo */
 .logoBox {
@@ -764,7 +764,7 @@ input[type=checkbox]:checked ~ label{
   transition: opacity 1s ease-in-out;
 }
 
-/* Login, Registration with Logo */
+/* Login, Registration form */
 .registerContainer,
 .loginContainer {
   position: absolute;
@@ -1083,12 +1083,10 @@ input[type=checkbox]:checked ~ label{
 
 #thirdDigitalPad {
   animation-delay: 0.3s;
-
 }
 
 #forthDigitalPad {
   animation-delay: 0.4s;
-
 }
 
 @keyframes load {
@@ -1134,7 +1132,7 @@ input[type=checkbox]:checked ~ label{
   padding: 45px 0px 15px;
 }
 
-/* Pet Report - Map */
+/* Pet Report - MapBox */
 .map-container {
   height: 450px;
 }
@@ -1322,8 +1320,6 @@ input[type=checkbox]:checked ~ label{
 }
 
 @media only screen and (min-width: 200px) and (max-width: 1024px) {
-
-
   .loginFormBox, 
   .registerFormBox {
     width: 60%;
@@ -1350,7 +1346,6 @@ input[type=checkbox]:checked ~ label{
   }
 
   .footerText {
-
     display: flex;
     flex-wrap: wrap;
   }
@@ -1573,7 +1568,6 @@ input[type=checkbox]:checked ~ label{
     font: var(--font-standard);
   }
 
-
   .hamburger {
     display: none;
   }
@@ -1632,7 +1626,6 @@ input[type=checkbox]:checked ~ label{
     width: 50%;
     position: relative;
     overflow: hidden;
-
     flex-direction: row;
     display: flex;
     height: unset;

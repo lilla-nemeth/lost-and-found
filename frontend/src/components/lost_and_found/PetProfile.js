@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import PetProfileCard from '../generic/PetProfileCard';
 import { AuthContext } from '../../contexts/AuthContext';
 
-
 const PetProfile = () => {
     const { id } = useParams();
     const { pets, users, loader } = useContext(AppStateContext);

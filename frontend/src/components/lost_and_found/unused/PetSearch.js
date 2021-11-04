@@ -12,13 +12,9 @@ import Checkbox from '../../generic/Checkbox';
 import TextArea from '../../generic/TextArea';
 
 const PetSearch = (props) => {
-    const { pets } = useContext(AppStateContext);
-
-    // const { search, setSearch, searchValues, setSearchValues, values } = props;
     const { status, setStatus, species, setSpecies } = props;
-
+    const { pets } = useContext(AppStateContext);
     // const [species, setSpecies] = useState('');
-
     // const [search, setSearch] = useState('');
     
     const [optionalInputs, setOptionalInputs] = useState({
@@ -28,10 +24,6 @@ const PetSearch = (props) => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     
-
-    
-    
-
     // PetAdvancedSearch (optional):
     // const [description, setDescription] = useState('');
     // const [size, setSize] = useState('');
@@ -41,16 +33,11 @@ const PetSearch = (props) => {
     // const [age, setAge] = useState('');
     // const [uniquefeature, setUniquefeature] = useState('');
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     // let disabled = !status || !search || !species;
-    // let disabled = !search || !searchValues;
 
     let required = true;
-
-
-
-
 
     function showOptionalInputs() {
         if (optionalInputs.display === 'hideInputs') {
@@ -138,8 +125,6 @@ const PetSearch = (props) => {
                                 />
                             </ul>
                         </div>
-
-
                         {/* <div className='filterBox'>
                             <h2 className='categoryHeadline'>Search {isFieldRequired(required)}</h2>
                             <div className='searchBox'>

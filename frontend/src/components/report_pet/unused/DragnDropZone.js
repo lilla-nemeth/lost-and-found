@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
 
-
 const styles = {
     dropZone: {
         border: '3px dashed rgb(34 102 96)', 
@@ -45,7 +44,6 @@ const styles = {
 }
 
 const DragnDropZone = (props) => {
-
     const { files, setFiles } = props;
     
     let DEBUG = false;
@@ -62,9 +60,8 @@ const DragnDropZone = (props) => {
         }
     });
 
-    // console.log('files', files.length)
-    // files is an object:
-    // console.log('typeof files',typeof files) 
+    // if (DEBUG) console.log('files', files.length)
+    // if (DEBUG) console.log('typeof files', typeof files) 
 
     // Place of Preview Image
     const images = files && files.map(file => (
@@ -75,9 +72,8 @@ const DragnDropZone = (props) => {
         </div>
     ));
 
-    // OTHER TASKS FOR IMAGE UPLOADING:
-    // Features (later): - upload bar with percent
-    // Backend: multer npm middleware --> put it into the petreport request; test with Postman; store the pics in Cloudinary;   
+    // TODO: for image uploading:
+    // upload bar with percentage
 
     return (  
         <div>

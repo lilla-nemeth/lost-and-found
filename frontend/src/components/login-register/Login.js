@@ -73,7 +73,10 @@ const Login = () => {
                                     onChange={event => setEmail(event.target.value)}
                                 />
                             </div>
-                            <PasswordShowHide password={password} setPassword={setPassword} />
+                            <PasswordShowHide 
+                                password={password} 
+                                setPassword={setPassword} 
+                            />
                             <div>
                                 <button 
                                     type='submit' 

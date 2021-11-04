@@ -6,7 +6,6 @@ const LocationSearch = () => {
 
     let DEBUG = false;
 
-
     function handleChange(event) {
         setSearch(event.target.value);
     }

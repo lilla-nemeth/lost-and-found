@@ -8,12 +8,6 @@ import img05 from '../../assets/images/05backgroundImg.jpg';
 import img06 from '../../assets/images/06backgroundImg.jpg';
 import img07 from '../../assets/images/07backgroundImg.jpg';
 
-// Need a function to decide: 
-// if the component is Login, starts the picture from e.g. the 4th element OR
-// use a different hooks with arrays, like 
-// instead images1, images2 -> loginImages1, loginImages2, registerImages1, registerImages2 
-
-// SHOW DIFFERENT PICTURE THAN IN REGISTER PAGE
 const BackgroundImage = () => {
     const [fadeEffect1, setFadeEffect1] = useState({
       fade: 'fade-in1'
@@ -27,7 +21,6 @@ const BackgroundImage = () => {
 
     let DEBUG = false;
 
-    // 7000
     useEffect(() => {
       const imagesInterval = setInterval(() => {
         changeImagesIndex(images2);
@@ -73,8 +66,6 @@ const BackgroundImage = () => {
           })
       }
     }
-
-
 
     const urlImages1 = `url('${images1[indexImages]}')`;
     const urlImages2 = `url('${images2[indexImages]}')`;

@@ -19,8 +19,8 @@ const Checkbox = (props) => {
                 <label for={labelFor} className='checkboxContainer'>
                     {labelName}
                 </label>
-                <div className="checkboxCheck">
-                    <div className="checkboxCheckInside">
+                <div className='checkboxCheck'>
+                    <div className='checkboxCheckInside'>
                     </div>
                 </div>
             </li>

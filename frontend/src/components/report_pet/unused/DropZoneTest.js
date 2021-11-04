@@ -2,34 +2,14 @@ import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 const styles = {
-    inputImage: {
-        // textAlign: 'center',
-        // lineHeight: '300px',
-    },
-    // if I want to see it when the picture dropped to the container
-    // inputText: {
-    //     position: 'absolute', 
-    //     top: '0', 
-    //     textAlign: 'center', 
-    //     right: '0', 
-    //     left: '0',
-    // },
     previewContainer: {
         display: 'flex',
-        // flexDirection: 'column',
         justifyContent: 'center',
         position: 'relative',
         height: '300px',
         width: '300px',
         overflow: 'hidden', 
         position: 'absolute', 
-        // bottom: '0',
-        // top: '0',
-    },
-    previewImage: {
-        // minWidth: '100%',
-        // opacity: '70%'
-
     }
 }
 
@@ -70,7 +50,6 @@ const DropZoneTest = () => {
         }
 
     });
-
 
     const images = files.map(file => (
         <div key={file.name}>

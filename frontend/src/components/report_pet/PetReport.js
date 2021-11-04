@@ -18,13 +18,18 @@ import MapboxMap from './unused/MapboxMap';
 import DragnDropZone from './unused/DragnDropZone';
 import DropZoneTest from './unused/DropZoneTest';
 
-
 // petstatusOptions -> reunited option comes later with post editing:
 
+// (Maybe class component would be more reasonable...)
 const PetReport = () => {
-    const [preview, setPreview] = useState(null);
-    // petstatusOptions -> reunited option comes later with post editing:
+    const { token } = useContext(AuthContext);
+    const { reportPet, fetchPets, limit, offset, setPets, getNumberOfPets, setTotal } = useContext(AppStateContext);
+
+    const [loader, setLoader] = useState(true);
+
+    // status -> reunited option comes later with post editing
     const [status, setStatus] = useState('');
+    const [preview, setPreview] = useState(null);
     const [files, setFiles] = useState([]);
     const [location, setLocation] = useState('');
     const [species, setSpecies] = useState('');
@@ -44,27 +49,18 @@ const PetReport = () => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
-    const [loader, setLoader] = useState(true);
-
-    const { token } = useContext(AuthContext);
-    const { reportPet, fetchPets, limit, offset, setPets, getNumberOfPets, setTotal } = useContext(AppStateContext);
-
     let DEBUG = false;
 
     let disabled = !status || !location || !species || !description || !preview;
 
     let required = true;
 
-
     function handleSubmit(event) {
         event.preventDefault();
 
         if (DEBUG) console.log('files - PetReport', files);
-        if (DEBUG) console.log('disabled before handleSubmit', disabled)
-
-        
+    
         if (!disabled) {
-            if (DEBUG) console.log('handleSubmit disabled', disabled)
             reportPet({
                 token,
                 img: files,
@@ -120,7 +116,6 @@ const PetReport = () => {
 
     createHistory().replace('/reportpet');
 
-
     function showOptionalInputs() {
         if (optionalInputs.display === 'hideInputs') {
             setOptionalInputs({
@@ -132,13 +127,6 @@ const PetReport = () => {
             })
         }
     }
-
-    {/* remove the map refreshing whenever input event is active */}
-    {/* <MapboxMap /> */}
-    
-    {/* if I'll use Mapbox API and convert the input into a search bar */}
-    {/* combine these parameters into 1 searchbar OR 
-    separate them to several input fields: municipality, zip, district, street */}
 
     const errorSuccessMessage = (
         <div className='message'>
@@ -180,7 +168,6 @@ const PetReport = () => {
                                     />
                                 </ul>
                             </div>
-                               {/* <DragnDropZone files={files} setFiles={setFiles}/> */}
                                <ImageUpload files={files} setFiles={setFiles} preview={preview} setPreview={setPreview} />
                             <div className='filterBox'> 
                                 <h2 className='categoryHeadline'>Species {isFieldRequired(required)}</h2>
