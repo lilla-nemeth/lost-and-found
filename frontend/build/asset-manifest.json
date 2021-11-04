@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a19049ed.chunk.css",
+    "main.js": "/static/js/main.c2a7acc2.chunk.js",
+    "main.js.map": "/static/js/main.c2a7acc2.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.f1fe218f.js",
+    "runtime-main.js.map": "/static/js/runtime-main.f1fe218f.js.map",
+    "static/js/2.be7cb583.chunk.js": "/static/js/2.be7cb583.chunk.js",
+    "static/js/2.be7cb583.chunk.js.map": "/static/js/2.be7cb583.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.a19049ed.chunk.css.map": "/static/css/main.a19049ed.chunk.css.map",
+    "static/js/2.be7cb583.chunk.js.LICENSE.txt": "/static/js/2.be7cb583.chunk.js.LICENSE.txt",
+    "static/media/01backgroundImg.c75e5d45.jpg": "/static/media/01backgroundImg.c75e5d45.jpg",
+    "static/media/02backgroundImg.e2afb785.jpg": "/static/media/02backgroundImg.e2afb785.jpg",
+    "static/media/03backgroundImg.11d27a2a.jpg": "/static/media/03backgroundImg.11d27a2a.jpg",
+    "static/media/04backgroundImg.b819bc21.jpg": "/static/media/04backgroundImg.b819bc21.jpg",
+    "static/media/05backgroundImg.aaa7371b.jpg": "/static/media/05backgroundImg.aaa7371b.jpg",
+    "static/media/06backgroundImg.286423f3.jpg": "/static/media/06backgroundImg.286423f3.jpg",
+    "static/media/07backgroundImg.cd48cef2.jpg": "/static/media/07backgroundImg.cd48cef2.jpg",
+    "static/media/delete.f8bfe5d3.svg": "/static/media/delete.f8bfe5d3.svg",
+    "static/media/dogpaw.8515e918.svg": "/static/media/dogpaw.8515e918.svg",
+    "static/media/dogvideo.56a0582d.mp4": "/static/media/dogvideo.56a0582d.mp4",
+    "static/media/email.56058da1.svg": "/static/media/email.56058da1.svg",
+    "static/media/hidepassword.87a0d7a6.svg": "/static/media/hidepassword.87a0d7a6.svg",
+    "static/media/navbackarrow.26f4160b.svg": "/static/media/navbackarrow.26f4160b.svg",
+    "static/media/password.da0b5766.svg": "/static/media/password.da0b5766.svg",
+    "static/media/phone.cc30b9a0.svg": "/static/media/phone.cc30b9a0.svg",
+    "static/media/search.6630d2ca.svg": "/static/media/search.6630d2ca.svg",
+    "static/media/showpassword.12cef2ec.svg": "/static/media/showpassword.12cef2ec.svg",
+    "static/media/togglearrow.9dfa4920.svg": "/static/media/togglearrow.9dfa4920.svg",
+    "static/media/username.3b2327e4.svg": "/static/media/username.3b2327e4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f1fe218f.js",
+    "static/js/2.be7cb583.chunk.js",
+    "static/css/main.a19049ed.chunk.css",
+    "static/js/main.c2a7acc2.chunk.js"
+  ]
+}
