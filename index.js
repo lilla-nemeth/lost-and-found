@@ -14,11 +14,11 @@ let DEBUG = false;
 app.use(cors());
 app.use(express.json());
 
+const port = process.env.PORT || 3003;
+
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'frontend/build')));  
 } 
-
-const port = process.env.PORT || 3003;
 
 const devSettings = {
     host: process.env.PG_HOST,
@@ -31,8 +31,7 @@ const devSettings = {
 const prodSettings = {
     connectionString: process.env.DATABASE_URL,
     ssl: {
-        rejectUnauthorized: process.env.NODE_ENV === 'production' ? false : true,
-        rejectUnauthorized: false
+        rejectUnauthorized: process.env.NODE_ENV === 'production' ? false : true
     }
 }
 
