@@ -26,7 +26,7 @@ const devSettings = {
 
 const pool = new Pool(devSettings);
 
-// get all pets by userId - user get all his/her added pets
+// get all pets by userId
 app.get('/userpets', authMw, (request, response) => {
     let userId = request.userId;
 
@@ -43,10 +43,11 @@ app.get('/allpets', (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch all pets'}));
 });
  
-// Pagination:
+// get/fetch limited amount of pets
+
+// limit = fetch
+// offset = skip
 app.get('/pets/:fetch/:skip', (request, response) => {
-    // limit = fetch
-    // offset = skip
     let limit = request.params.fetch;
     let offset = request.params.skip;
 
@@ -55,7 +56,7 @@ app.get('/pets/:fetch/:skip', (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch pets'}));
 });
 
-// get the total amount of pets
+// get the total amount (number) of pets
 app.get('/pets/total', (request, response) => {
 
     pool.query('SELECT COUNT(*) FROM pets')
@@ -80,7 +81,7 @@ app.get('/username', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch username'}));
 })
 
-// Get all users
+// get all users
 app.get('/users', authMw, (request, response) => {
 
     pool.query('SELECT * FROM users')
@@ -88,7 +89,7 @@ app.get('/users', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to fetch user'}));
 })
 
-// user dashboard - update one pet's data (by id):
+// edit pet by user (user dashboard)
 app.put('/editpet/:id', authMw, (request, response) => {
     let id = request.params.id;
     let petstatus = request.body.petstatus;
@@ -107,7 +108,7 @@ app.put('/editpet/:id', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to update your post'}));
 });
 
-// user dashboard - edit user's data
+// edit user data (user dashboard)
 app.put('/editprofile', [isPasswordValid, isPhoneValid, isUsernameValid, authMw, isEmailValid], (request, response) => {
     let id = request.userId;
     let username = request.body.username;
@@ -121,7 +122,7 @@ app.put('/editprofile', [isPasswordValid, isPhoneValid, isUsernameValid, authMw,
     .catch((err) => response.status(400).json({msg: 'Failed to update your profile'}))
 });
 
-// user dashboard - delete one pet by id
+// delete 1 pet by user (user dashboard)
 app.delete('/deletepet/:id', authMw, (request, response) => {
     let id = request.params.id
 
@@ -130,7 +131,7 @@ app.delete('/deletepet/:id', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to delete the pet'}));
 });
 
-// user dashboard - delete all pets
+// delete all pets by user (user dashboard)
 app.delete('/deleteallpets', authMw, (request, response) => {
     let userId = request.userId;
 
@@ -139,7 +140,7 @@ app.delete('/deleteallpets', authMw, (request, response) => {
     .catch((err) => response.status(400).json({msg: 'Failed to delete all pets'}));
 });
 
-// user dashboard - delete all pets and after the user account (secondary key -> primary key)
+// delete user - delete user and the connected pets (user dashboard)
 app.delete('/deleteuser', authMw, (request, response) => {
     let userId = request.userId;
 
@@ -165,23 +166,18 @@ app.post('/register', [isEmailValid, isPhoneValid, isUsernameValid, isPasswordVa
     .catch((err) => response.status(400).json({msg: 'Failed to create user'}))
 });
 
+// login
 app.post('/login', [isEmailValid], (request, response) => {
     let email = request.body.email;
     let pw = request.body.pw;
     
     pool.query('SELECT * FROM users WHERE email=$1', [email])
     .then((res) => {
-        // amennyiben egy elemet térít vissza a res (response), akkor biztosan a 0. eleme a válasznak a user adatai:
         let userObject = res.rows[0];
         let encryptedPw = userObject.pw;
 
-        // amennyiben a res.rows létezik (tehát van adatunk) és a bcrypt könyvtár user által megadott jelszava egyezik a hashelt jelszóval akkor (true), ha nem (false):
-        // bcrypt beépített funkciója (compare), ami szintén .then-nel és .catch-csel folytatódik:
-
         res.rows && bcrypt.compare(pw, encryptedPw)
-        // mégegy .then (async in async); isMatch az egy boolean érték lesz (true/false)
         .then((isMatch) => {
-            // amennyiben isMatch igaz, jöhet a token (jwt), a sign (signature) beépített funkciója azt kéri imputnak, hogy valamely egyedi adatát adjuk meg a usernek (pl. id) és kér egy általunk beírt titkot (r4uqSKqC6L)
             if (isMatch) {
                 jwt.sign({id: userObject.id }, 'r4uqSKqC6L', (err, token) => {
                     response.status(200).json(token);
@@ -194,8 +190,7 @@ app.post('/login', [isEmailValid], (request, response) => {
     .catch((err) => response.status(400).json({msg: 'User not found'}))
 });
 
-// user dashboard - post/report a pet
-// app.post('/reportpet', authMw, (request, response) => {
+// report pet by user
 app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
     let userId = request.userId;
     let img = request.file.buffer.toString('base64');
@@ -221,7 +216,7 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
 });
 
 
-// ****** Working queries, but unused on the frontend side ******
+// *** Working, but unused queries on frontend side ***
 
 // Multer 1 file:
 // app.post('/single/:petId', [authMw, upload.single('image')], (request, response) => {
@@ -243,74 +238,44 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
 // });
 
 
-// // TEST IMAGE POST:
-// app.post('/image', upload.single('file'), (req, res) => {
-//     let content = req.body.content
-//     console.log('req.file--',req.file)
-//     let img = req.file.buffer.toString('base64')
-//     console.log('img--', img)
-
-//     pool.query("insert into post(content, imgHere) values ($1, $2)", [content, img])
-//     .then(res => console.log(res))
-//     .catch(err => console.log(err))
-
-// })
-
-// // TEST IMAGE GET:
-// app.get('/image', (req, res) => {
-//    pool.query("select * from post")
-//    .then(response => res.json(response.rows))
-//    .catch(err => res.json(err))
-// })
-
 // // Multer mulitple files:
 // app.post('/multiple', [authMw, upload.array('images', 7)], (request, response) => {
 //     let images = request.files
 
 //     console.log("multiple image upload", images);
-//     response.status(200).json({msg: 'Multiple file upload success'})
+//     response.status(200).json({msg: 'Images are successfully uploaded'})
 // });
 
 
-// Search (radio buttons and checkboxes)
-app.get('/search?', (request, response) => {
-    let selectAll = 'SELECT * FROM pets';
+// search (radio buttons and checkboxes)
+// app.get('/search?', (request, response) => {
+//     let selectAll = 'SELECT * FROM pets';
+//     const existingParams = ['petstatus', 'species', 'petsize', 'breed', 'sex', 'color', 'age'].filter(field => request.query[field]);
 
-    // except: id, petlocation, uniquefeature and postdescription - they will be text input fields
-    const existingParams = ['petstatus', 'species', 'petsize', 'breed', 'sex', 'color', 'age'].filter(field => request.query[field]);
+//     if (existingParams.length) {
+//         selectAll += ' WHERE ';
+//         selectAll += existingParams.map(field => `${field} = '${request.query[field]}'`).join(' AND ');      
+//     }
 
-    // if the new existingParams array is not empty then
-    // we add the WHERE word to the existingParams - which is necessary to the query and 
-    // existingParams + WHERE + loop the existingParams and create a new array
-    // with the params + ? + AND word  
-    if (existingParams.length) {
-        selectAll += ' WHERE ';
-        selectAll += existingParams.map(field => `${field} = '${request.query[field]}'`).join(' AND ');      
-    }
+//     if (DEBUG) console.log('existingParams - search', existingParams);
+//     if (DEBUG) console.log('selectAll - search', selectAll);
 
-    if (DEBUG) console.log('existingParams - search', existingParams);
-    if (DEBUG) console.log('selectAll - search', selectAll);
+//     pool.query(selectAll)
+//     .then((res) => response.status(200).json(res.rows))
+//     .catch((err) => response.status(400).json({msg: 'Pet not found'}));  
+// });
 
-    pool.query(selectAll)
-    .then((res) => response.status(200).json(res.rows))
-    .catch((err) => response.status(400).json({msg: 'Pet not found'}));  
-});
+// app.get('/searchpets', (request, response) => {
+//     // 1st option:
+//     // pool.query("SELECT * FROM pets WHERE petstatus LIKE '%lost%' OR petstatus LIKE '%lost%'")
+//     // 2nd option (but it is case sensitive):
+//     // pool.query("SELECT * FROM pets WHERE petstatus LIKE ANY (array['%lost%', '%found%', '%reunited%'])")
 
-// ~* - is case insensitive
-app.get('/searchpets', (request, response) => {
-
-    // It works:
-    // pool.query("SELECT * FROM pets WHERE petstatus LIKE '%lost%' OR petstatus LIKE '%lost%'")
-    // it also works, but case sensitive:
-    // pool.query("SELECT * FROM pets WHERE petstatus LIKE ANY (array['%lost%', '%found%', '%reunited%'])")
-
-    // works, case insensitive (~*), use multiple queries with UNION (if possible)
-    // pool.query("SELECT * FROM pets WHERE petstatus ~* 'lost|found|reunited'")
-
-    pool.query("SELECT * FROM pets WHERE petstatus ~* 'lost|found|reunited'")
-    .then((res) => response.status(200).json(res.rows))
-    .catch((err) => response.status(400).json({msg: 'Pet not found'}));
-});
+//     // 3rd option (case insensitive):
+//     pool.query("SELECT * FROM pets WHERE petstatus ~* 'lost|found'")
+//     .then((res) => response.status(200).json(res.rows))
+//     .catch((err) => response.status(400).json({msg: 'Pet not found'}));
+// });
 
 
 app.listen(port, () => console.log("Server is running on 3003"));

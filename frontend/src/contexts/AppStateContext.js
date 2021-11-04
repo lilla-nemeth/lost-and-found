@@ -9,24 +9,17 @@ export default function AppStateContextProvider(props) {
     const { token } = useContext(AuthContext);
 
     const [pets, setPets] = useState([]);
-
     const [users, setUsers] = useState([]);
     const [username, setUsername] = useState('');
-
-    // value of total is string, convert it to number before saving into the state:
     const [total, setTotal] = useState(0);
-
-    // the default skip: 
     const [offset, setOffset] = useState(0);
     const [loader, setLoader] = useState(true);
-
-    // error messages
     const [errorMsg, setErrorMsg] = useState('');
+    // const [allPets, setAllPets] = useState([]);
 
     let DEBUG = false;
 
     let limit = 6;
-
 
     useEffect(() => {
         fetchPets({
@@ -47,7 +40,6 @@ export default function AppStateContextProvider(props) {
         });
     },[offset]);
 
-    
     useEffect(() => {
         getUsers({
             token,
@@ -58,22 +50,28 @@ export default function AppStateContextProvider(props) {
         });
     },[token]);
 
+    // useEffect(() => {
+    //     getAllPets({
+    //         successCallback: res => {
+    //             setAllPets(res.data)
+    //         },
+    //         errorCallback: err => {
+    //             handleError(err, setErrorMsg);
+    //         }
+    //     });
+    // },[]);
 
-    if (DEBUG) console.log('token from AuthContext in AppStateContext', token);
+
+    if (DEBUG) console.log('token - AppStateContext', token);
     if (DEBUG) console.log('users arr - AppStateContext', users);
     if (DEBUG) console.log('pets arr - AppStateContext', pets);
+    // if (DEBUG) console.log('allPets arr - AppStateContext', allPets);
 
-    // named input when we have many arguments
-    // cannot mess up the order (in object {})
     function registerUser({email, username, phone, pw, successCallback, successTimeout, errorCallback}) {
         
         let options = {
             method: 'post',
             url: 'http://localhost:3003/register',
-            // mode: 'cors',
-            // headers: {
-            //     'Content-Type': 'application/json',
-            // },
             data: {
                 email,
                 username,
@@ -140,7 +138,6 @@ export default function AppStateContextProvider(props) {
 
 
     function reportPet({
-        // TODO: other location data enable when mapbox is implemented
         token,
         img,
         petstatus,
@@ -227,8 +224,7 @@ export default function AppStateContextProvider(props) {
             err => {if (err && errorCallback) errorCallback(err)}
         );
     }
-
-    // successTimeout, 
+ 
     function getAllPets({successCallback, errorCallback}) {
 
         let options = {
@@ -271,7 +267,7 @@ export default function AppStateContextProvider(props) {
     }
 
     return (
-        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, getUsers, users, reportPet, fetchPets, getNumberOfPets, getAllPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader}}>
+        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, users, reportPet, fetchPets, getNumberOfPets, getAllPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader}}>
             { props.children }
         </AppStateContext.Provider>
     )

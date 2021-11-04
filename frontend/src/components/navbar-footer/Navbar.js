@@ -7,12 +7,11 @@ import Hamburger from './Hamburger';
 import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
+    const { token, handleLogOut } = useContext(AuthContext);
+    const { getUsername, username } = useContext(AppStateContext);
     const [errorMsg, setErrorMsg] = useState('');
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
     
-    const { token, handleLogOut } = useContext(AuthContext);
-    const { getUsername, username } = useContext(AppStateContext);
-
     const { transparent } = props;
 
     let DEBUG = false;

@@ -14,7 +14,6 @@ CREATE TABLE users (
     modified TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
--- add place for object
 CREATE TABLE pets (
     id SERIAL PRIMARY KEY,
     userId INT NOT NULL REFERENCES users,
@@ -33,27 +32,9 @@ CREATE TABLE pets (
     until TIMESTAMP
 );
 
+-- Columns for detailed location:
     -- region VARCHAR(50),
     -- municipality VARCHAR(50),
     -- zip INT,
     -- district VARCHAR(50),
     -- street VARCHAR(50),
-
-
--- CREATE TABLE images (
---     id SERIAL NOT NULL PRIMARY KEY,
---     petId INT NOT NULL REFERENCES pets,
---     filename TEXT UNIQUE NOT NULL,
---     filepath TEXT NOT NULL,
---     mimetype TEXT NOT NULL,
---     size BIGINT NOT NULL
--- );
-
-
--- CREATE TABLE post (
---     id SERIAL NOT NULL PRIMARY KEY,
---     content VARCHAR(255),
---     imgHERE TEXT NOT NULL
--- );
-
-    -- img TEXT NOT NULL,

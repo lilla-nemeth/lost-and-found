@@ -16,7 +16,7 @@ const PetListCard = (props) => {
                         <img className='petPicture' alt='img' src={`data:image/jpg;base64,${pet.img}`} />
                     </div>
                     <div className='petTextBox'>
-                        <table style={{width: '100%'}}>
+                        <table className='table'>
                             <tbody>
                                 <tr>
                                     <td className='tableCell'>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const RadioButton = (props) => {
-    const { id, name, value, checked, onChange, labelFor, labelName, required } = props;
+    const { id, name, value, checked, onChange, labelFor, labelName } = props;
 
     let DEBUG = false;
 
@@ -15,7 +15,6 @@ const RadioButton = (props) => {
                     value={value} 
                     checked={checked} 
                     onChange={onChange}
-                    // required={required}
                 />
                 <label for={labelFor}>
                     {labelName}

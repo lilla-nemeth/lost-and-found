@@ -7,7 +7,6 @@ import PetList from './PetList';
 import PetListWithFilters from './unused/PetListWithFilters';
 import PetListWithSearch from './unused/PetListWithSearch';
 
-
 const PetHome = () => {
     const { loader } = useContext(AppStateContext);
 

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Hamburger = (props) => {
-
     const { hamburgerOpen } = props;
 
     return(

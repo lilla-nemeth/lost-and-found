@@ -1,6 +1,5 @@
 import Sugar from 'sugar';  
 
-
 export function numberIncreases(total, limit) {
     let numberOfPages = total / limit;  
 
@@ -78,7 +77,6 @@ export function changeCheckboxValue(array, setArray, value) {
         return setArray([...array, value]);
     }
 }
-
 
 // Error message from frontend:
 // export function requiredFieldsError(field, setter, fieldName) {

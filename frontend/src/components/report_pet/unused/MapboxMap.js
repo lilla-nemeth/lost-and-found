@@ -13,7 +13,7 @@ const styles = {
 
 const MapboxMap = () => {
     const mapContainer = useRef(null);
-    // The ref will prevent the map from reloading when the user interacts with the map:
+    // The ref will prevent the map from reloading when the user interacts with the map
     const map = useRef(null);
     const [lng, setLng] = useState(25.975399273184166);
     const [lat, setLat] = useState(65.00440031202271);
@@ -21,7 +21,7 @@ const MapboxMap = () => {
 
     let DEBUG = false;
     // if (DEBUG) console.log('from MapboxMap component', mapboxgl.accessToken);
-    // container: render the map inside a specific DOM element.
+    // container: render the map inside a specific DOM element
 
     useEffect(() => {
         // Basic data of map
