@@ -274,8 +274,29 @@ export default function AppStateContextProvider(props) {
         );
     }
 
+    function deleteOnePet({id, token, successCallback, errorCallback}) {
+        let options = {
+            method: 'delete',
+            url: `/deletepet/${id}`,
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': token
+            }
+        };
+        axios(options)
+        .then(
+            res => {
+                if (successCallback) successCallback(res)
+            }
+        )
+        .catch(
+            err => {if (err && errorCallback) errorCallback(err)}
+        );
+    }
+
     return (
-        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, users, reportPet, fetchPets, getNumberOfPets, getAllPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader}}>
+        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, users, reportPet, fetchPets, getNumberOfPets, getAllPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader, deleteOnePet}}>
             { props.children }
         </AppStateContext.Provider>
     )

@@ -32,7 +32,8 @@ const prodSettings = {
     connectionString: process.env.DATABASE_URL,
     ssl: {
         // rejectUnauthorized: process.env.NODE_ENV === 'production' ? false : true
-        rejectUnauthorized: false
+        rejectUnauthorized: true
+        // rejectUnauthorized: false
     }
 }
 
