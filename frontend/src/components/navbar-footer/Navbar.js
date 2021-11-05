@@ -23,7 +23,7 @@ const Navbar = (props) => {
                     handleError(err, setErrorMsg);
                 }
             })
-    },[token]);
+    },[getUsername, token]);
 
     if (DEBUG) console.log('USERNAME NAVBAR', username);
 

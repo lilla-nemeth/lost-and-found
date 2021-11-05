@@ -38,7 +38,7 @@ export default function AppStateContextProvider(props) {
                 handleError(err, setErrorMsg);
             }
         });
-    },[offset]);
+    },[limit, offset]);
 
     useEffect(() => {
         getUsers({
