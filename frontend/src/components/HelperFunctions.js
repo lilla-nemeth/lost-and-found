@@ -1,3 +1,4 @@
+import React from 'react';
 import Sugar from 'sugar';  
 
 export function numberIncreases(total, limit) {
