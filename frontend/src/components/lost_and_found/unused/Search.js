@@ -5,7 +5,7 @@ import { ReactComponent as SearchIcon } from '../../../assets/icons/search.svg';
 const Search = (props) => {
     const { search, setSearch } = props;
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     return (  
         <div className='formMain'>

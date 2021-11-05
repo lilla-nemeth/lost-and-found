@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react';
+import { createBrowserHistory } from 'history';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
-import createHistory from 'history/createBrowserHistory';
 import { handleError } from '../HelperFunctions.js';
 import Logo from '../generic/Logo';
 import BackgroundImages from './BackgroundImages';
 import PasswordShowHide from './PasswordShowHide';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
+
+let history = createBrowserHistory();
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -37,7 +39,7 @@ const Login = () => {
             });
     }
 
-    createHistory().replace('/login');
+    history.replace('/login');
 
     return (  
         <main className='formMain'>

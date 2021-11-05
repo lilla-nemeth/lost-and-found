@@ -41,17 +41,25 @@ export default function AppStateContextProvider(props) {
     },[limit, offset]);
 
     useEffect(() => {
-        getUsers({
-            token,
-            successCallback: res => setUsers(res.data),
-            errorCallback: err => {
-                handleError(err, setErrorMsg);
-            }
-        });
+       if (token) {
+            getUsername({
+                token,
+                errorCallback: err => {
+                    handleError(err, setErrorMsg);
+                }
+            });
+            getUsers({
+                token,
+                successCallback: res => setUsers(res.data),
+                errorCallback: err => {
+                    handleError(err, setErrorMsg);
+                }
+            });
+       }
     },[token]);
 
     // useEffect(() => {
-    //     getAllPets({
+    //     getAllPets({get
     //         successCallback: res => {
     //             setAllPets(res.data)
     //         },

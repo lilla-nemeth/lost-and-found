@@ -5,7 +5,7 @@ import PetListCard from '../generic/PetListCard';
 const PetList = () => {
     const { pets } = useContext(AppStateContext);
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     return (  
         <>

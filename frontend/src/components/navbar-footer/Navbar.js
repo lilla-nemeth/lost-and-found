@@ -8,22 +8,12 @@ import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
     const { token, handleLogOut } = useContext(AuthContext);
-    const { getUsername, username } = useContext(AppStateContext);
-    const [errorMsg, setErrorMsg] = useState('');
+    const { username } = useContext(AppStateContext);
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
     
     const { transparent } = props;
 
     let DEBUG = false;
-    
-    useEffect(() => {
-            getUsername({
-                token,
-                errorCallback: err => {
-                    handleError(err, setErrorMsg);
-                }
-            })
-    },[getUsername, token]);
 
     if (DEBUG) console.log('USERNAME NAVBAR', username);
 

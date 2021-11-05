@@ -17,7 +17,7 @@ export default function AuthContextProvider(props) {
            setToken(tokenFromLocalStorage);
        }
 
-    },[]);
+    },[token]);
     
     if (DEBUG) console.log(token);
     

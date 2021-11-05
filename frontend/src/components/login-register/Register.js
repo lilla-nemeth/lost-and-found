@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
+import { createBrowserHistory } from 'history';
 import { Link } from 'react-router-dom';
 import { AppStateContext } from '../../contexts/AppStateContext';
-import createHistory from 'history/createBrowserHistory';
 import { handleError } from '../HelperFunctions.js';
 import BackgroundImages from './BackgroundImages';
 import Logo from '../generic/Logo';
@@ -9,6 +9,8 @@ import PasswordShowHide from './PasswordShowHide';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
 import { ReactComponent as UsernameIcon } from '../../assets/icons/username.svg';
 import { ReactComponent as PhoneIcon } from '../../assets/icons/phone.svg';
+
+let history = createBrowserHistory();
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -42,7 +44,7 @@ const Register = () => {
         });
     }
     
-    createHistory().replace('/register');
+    history.replace('/register');
 
     return (
         <main className='formMain'>
