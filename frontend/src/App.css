@@ -366,6 +366,7 @@ table {
 	display: flex;
 	flex-wrap: wrap;
   justify-content: center;
+  min-height: 100vh;
 }
 
 .petCard {
@@ -1057,6 +1058,7 @@ input[type=checkbox]:checked ~ label{
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
   min-height: 90vh;
   background: var(--clr-aquamarine);
 }
