@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
+import { createBrowserHistory } from 'history';
 import { useParams } from 'react-router';
 import { AppStateContext } from '../../contexts/AppStateContext';
-import createHistory from 'history/createBrowserHistory';
 import Loader from '../generic/Loader';
 import { Link } from 'react-router-dom';
 import PetProfileCard from '../generic/PetProfileCard';
 import { AuthContext } from '../../contexts/AuthContext';
+
+let history = createBrowserHistory();
 
 const PetProfile = () => {
     const { id } = useParams();
@@ -40,7 +42,7 @@ const PetProfile = () => {
 
     if (DEBUG) console.log(getPetAndUserData(id, pets, users));
 
-    createHistory().replace(`/petprofile/${id}`);
+    history.replace(`/petprofile/${id}`);
 
     if (DEBUG) console.log('typeof id', typeof id)
     if (DEBUG) console.log('id', id)

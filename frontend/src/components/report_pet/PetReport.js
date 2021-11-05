@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
+import { createBrowserHistory } from 'history';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
-import createHistory from 'history/createBrowserHistory';
 import { handleError } from '../HelperFunctions.js';
 import { isFieldRequired } from '../HelperFunctions.js';
 import PetReportOptionalData from './PetReportOptionalData';
@@ -17,6 +17,8 @@ import LocationSearch from './unused/LocationSearch';
 import MapboxMap from './unused/MapboxMap';
 import DragnDropZone from './unused/DragnDropZone';
 import DropZoneTest from './unused/DropZoneTest';
+
+let history = createBrowserHistory();
 
 // petstatusOptions -> reunited option comes later with post editing:
 
@@ -114,7 +116,7 @@ const PetReport = () => {
 
     }
 
-    createHistory().replace('/reportpet');
+    history.replace('/reportpet');
 
     function showOptionalInputs() {
         if (optionalInputs.display === 'hideInputs') {
