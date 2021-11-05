@@ -34,11 +34,11 @@ const DropZoneTest = () => {
             const rejectedFilesMessages = rejectedFiles.map(file => {
                 file.errors.map(err => {
                     if (err.code === 'file-too-large') {
-                        setErrors(`Error: ${err.message}`);
+                        return setErrors(`Error: ${err.message}`);
                     }
 
                     if (err.code === 'file-invalid-type') {
-                        setErrors(`Error: ${err.message}`);
+                        return setErrors(`Error: ${err.message}`);
                     }
                 });
             });
@@ -84,8 +84,6 @@ const DropZoneTest = () => {
             </div>
         </div>
     );
-
-
 
 }
  

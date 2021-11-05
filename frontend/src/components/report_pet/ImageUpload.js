@@ -26,7 +26,7 @@ const ImageUpload = (props) => {
                     <>
                         <button className='deleteButton' onClick={() => {setFiles([]); setPreview('')}}><DeleteIcon /></button>
                         <div className='previewContainer'>
-                            <img src={preview} className='previewImage'/>
+                            <img src={preview} alt='image preview' className='previewImage'/>
                         </div> 
                     </>
                 }

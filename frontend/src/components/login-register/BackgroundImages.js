@@ -31,7 +31,7 @@ const BackgroundImage = () => {
         if (imagesInterval) {
           return () => clearInterval(imagesInterval);
       }
-    }, [images1, images2, fadeEffect1, fadeEffect2]);
+    }, [images1, images2, fadeEffect1, fadeEffect2, changeImagesIndex, fadeInOut1, fadeInOut2]);
 
 
     function changeImagesIndex(arr) {
