@@ -1,6 +1,6 @@
-import { useContext } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useContext } from 'react';
 import { AuthContext } from './contexts/AuthContext';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/navbar-footer/Navbar';
 import Footer from './components/navbar-footer/Footer';
@@ -10,6 +10,7 @@ import PetHome from './components/lost_and_found/PetHome';
 import PetReport from './components/report_pet/PetReport';
 import PetLandingPage from './components/landing_page/PetLandingPage';
 import PetProfile from './components/lost_and_found/PetProfile';
+
 
 function App() {
   const { token } = useContext(AuthContext);
