@@ -33,6 +33,7 @@ const Navbar = (props) => {
             <>
                 <li><Link className={className} to='/lostandfound' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Lost & Found</Link></li>
                 <li><Link className={className} to='/reportpet' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Report Pet</Link></li>
+                <li><Link className={className} to='/dashboard' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Dashboard</Link></li>
                 <li><button className={buttonClassName} onClick={() => {handleLogOut(); setHamburgerOpen(!hamburgerOpen)}}>Log Out</button></li>  
             </>
         )

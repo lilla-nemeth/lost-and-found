@@ -116,7 +116,7 @@ const PetReportOptionalData = (props) => {
                         <Checkbox
                             id={'black'} 
                             name={'color'} 
-                            value={'black '} 
+                            value={'black'} 
                             checked={colors.includes('black')} 
                             onChange={() => changeCheckboxValue(colors, setColors, 'black')}
                             labelFor={'black'} 

@@ -10,6 +10,7 @@ import PetHome from './components/lost_and_found/PetHome';
 import PetReport from './components/report_pet/PetReport';
 import PetLandingPage from './components/landing_page/PetLandingPage';
 import PetProfile from './components/lost_and_found/PetProfile';
+import Dashboard from './components/dashboard/Dashboard';
 
 
 function App() {
@@ -68,6 +69,11 @@ function App() {
             <Route path='/reportpet'>
               <Navbar />
               <PetReport />
+              <Footer />
+            </Route>
+            <Route path='/dashboard'>
+              <Navbar />
+              <Dashboard />
               <Footer />
             </Route>
             <Route path='/lostandfound'>
