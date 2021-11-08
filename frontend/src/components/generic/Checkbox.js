@@ -16,7 +16,7 @@ const Checkbox = (props) => {
                     checked={checked} 
                     onChange={onChange}
                 />
-                <label for={labelFor} className='checkboxContainer'>
+                <label for={labelFor}>
                     {labelName}
                 </label>
                 <div className='checkboxCheck'>

@@ -112,11 +112,10 @@ const PetReport = () => {
                     handleError(err, setErrorMsg);
                 }
             });
+
         } 
 
     }
-
-    history.replace('/reportpet');
 
     function showOptionalInputs() {
         if (optionalInputs.display === 'hideInputs') {
@@ -130,6 +129,8 @@ const PetReport = () => {
         }
     }
 
+    history.replace('/reportpet');
+    
     const errorSuccessMessage = (
         <div className='message'>
             <p className='errorMessage'>{errorMsg}</p>
@@ -252,7 +253,7 @@ const PetReport = () => {
                                     className={disabled ? 'formButtonInactive' : 'formButton'}
                                     disabled={disabled}
                                 >
-                                        Report
+                                  Report Pet
                                 </button>
                             </div>
                         </form>
