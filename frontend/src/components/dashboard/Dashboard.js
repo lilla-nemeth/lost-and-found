@@ -12,11 +12,7 @@ let history = createBrowserHistory();
 const Dashboard = () => {
     const { token } = useContext(AuthContext);
     const { userPets, setUserPets, deleteOnePet } = useContext(AppStateContext);
-
-    const [checked, setChecked] = useState(false);
-
-    const [colors, setColors] = useState([]);
-
+    
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
@@ -25,10 +21,6 @@ const Dashboard = () => {
     if (DEBUG) console.log(userPets);
 
     history.replace('/dashboard');
-
-    // button is disabled if the checkbox is unchecked:
-    let disabled = !checked;
-
 
     function deleteUsersPet(id) {
 
@@ -50,7 +42,7 @@ const Dashboard = () => {
     function uploadedPets() {
         return userPets.map(pet => {
             return (
-                <UserPetCard key={pet.id} pet={pet}  />
+                <UserPetCard key={pet.id} pet={pet} deleteUsersPet={deleteUsersPet} />
             )
         });
     }
