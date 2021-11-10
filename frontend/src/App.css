@@ -214,8 +214,6 @@ table {
   cursor: pointer;
 }
 
-
-
 .sidebarLink:after,
 .navLinkMobile:after,
 .navLinkDesktop::after {
@@ -1112,7 +1110,7 @@ input[type=checkbox]:checked ~ label{
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  min-height: 90vh;
+  min-height: 100vh;
   background: var(--clr-paleyellow);
 }
 
