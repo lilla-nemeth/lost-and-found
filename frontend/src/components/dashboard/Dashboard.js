@@ -4,7 +4,8 @@ import { AppStateContext } from '../../contexts/AppStateContext';
 import { AuthContext } from '../../contexts/AuthContext';
 import { handleError, changeCheckboxValue } from '../HelperFunctions.js';
 import Checkbox from '../generic/Checkbox';
-import PetListCard from '../generic/PetListCard';
+import UserPetCard from '../generic/UserPetCard';
+import Sidebar from './Sidebar';
 
 let history = createBrowserHistory();
 
@@ -49,7 +50,7 @@ const Dashboard = () => {
     function uploadedPets() {
         return userPets.map(pet => {
             return (
-                <PetListCard key={pet.id} pet={pet}  />
+                <UserPetCard key={pet.id} pet={pet}  />
             )
         });
     }
@@ -58,42 +59,49 @@ const Dashboard = () => {
     return (
         <main className='petMain'>
             <section>
-                <div className='petContainer'>
-                    <h1 className='lostAndFoundHeadline'>My Posts</h1>
-                    {/* <button onClick={() => deleteUsersPet(pet.id)}>Delete Pet</button> */}
-                    {/* {uploadedPets} */}
-                    <div className='filterBox'> 
-                            {/* <input
-                                type='checkbox'
-                                checked={checked}
-                                onChange={event => setChecked(event.target.checked)}
-                            />
-                            <label>Select</label> */}
-                        <ul className='radioList'>
-                            {/* <Checkbox
-                                id={'black'} 
-                                name={'color'} 
-                                value={'black'} 
-                                checked={colors.includes('black')} 
-                                onChange={() => changeCheckboxValue(colors, setColors, 'black')}
-                                labelFor={'black'} 
-                                labelName={'Black'}
-                            />  */}
-                        </ul>
+                <h1 className='lostAndFoundHeadline'>My Posts</h1>
+                    <div className='dashboardContainer'>
+                        <div className='dashboardSidebar'>
+                            <Sidebar />
+                        </div>
+                        <div className='dashboardBox'>
+                            {uploadedPets()}
+                        </div>
                     </div>
-                    <div>
-                        {/* <button 
-                            className={disabled ? 'formButtonInactive' : 'formButton'}
-                            disabled={disabled}
-                        >
-                            Delete Pet
-                        </button> */}
-                    </div>
-                    {uploadedPets()}
-                </div>
             </section>
         </main>
     );
 }
  
 export default Dashboard;
+
+
+                        // <button onClick={() => deleteUsersPet(pet.id)}>Delete Pet</button>
+                        // {uploadedPets}
+                        // <div className='filterBox'> 
+                        //         <input
+                        //             type='checkbox'
+                        //             checked={checked}
+                        //             onChange={event => setChecked(event.target.checked)}
+                        //         />
+                        //         <label>Select</label>
+                        //     <ul className='radioList'>
+                        //         <Checkbox
+                        //             id={'black'} 
+                        //             name={'color'} 
+                        //             value={'black'} 
+                        //             checked={colors.includes('black')} 
+                        //             onChange={() => changeCheckboxValue(colors, setColors, 'black')}
+                        //             labelFor={'black'} 
+                        //             labelName={'Black'}
+                        //         />
+                        //     </ul>
+                        // </div>
+                        // <div>
+                        //     <button 
+                        //         className={disabled ? 'formButtonInactive' : 'formButton'}
+                        //         disabled={disabled}
+                        //     >
+                        //         Delete Pet
+                        //     </button>
+                        // </div>
