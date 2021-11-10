@@ -52,14 +52,14 @@ table {
   --clr-white: rgb(255, 255, 255);
   --clr-lightgrey: rgb(221, 221, 221);
   --clr-lightaquamarine: rgba(129, 180, 175, 0.2);
-  --clr-paleyellow: rgb(244, 242, 234);
-  --clr-grey: rgb(170, 170, 170);
+  --clr-palebrown: rgb(244, 242, 234);
+  --clr-brown: rgb(208 203 184);
   --clr-black: rgb(0, 0, 0);
   --clr-aquamarine: rgb(176, 240, 235);
   --clr-green: rgb(71, 163, 156);
   --clr-darkgreen: rgb(34, 102, 96);
-  --clr-success: green;
-  --clr-error: red;
+  --clr-success: rgb(71, 163, 156);
+  --clr-error: rgb(205, 0, 0);
 
   /* Fonts */
   --font-family: 'Poppins', sans-serif;
@@ -70,6 +70,7 @@ table {
 
   /* Shadow */
   --shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
+  --shadow-selected: 7px 12px 24px -8px rgba(71, 163, 156, 0.60);
 
   /* Radius */
   --radius: 25px; 
@@ -136,8 +137,8 @@ table {
 }
 
 .footerWithoutPicture {
-  background: var(--clr-paleyellow);
-  color: var(--clr-darkgreen);
+  background: var(--clr-palebrown);
+  color: var(--clr-brown);
   width: 100%;
   position: absolute;
   display: flex;
@@ -187,6 +188,84 @@ table {
   display: flex; 
   text-align: right;
 }
+
+
+
+
+
+/* Beginning of test link */
+
+.navbar-container ul {
+  text-align: center;
+}
+
+.navbar-container ul li {
+	display: inline-block;
+  font: var(--font-standard);
+  text-align: center;
+  width: 100%;
+}
+
+.navbar-container ul li a {
+	color: var(--clr-brown);
+	text-decoration: none;
+	display: inline-block;	
+	padding: 25px;
+	transition: color 0.5s;
+}
+
+.navbar-container ul li a:hover {
+  color: var(--clr-darkgreen);
+}
+
+.navbar-container ul li .underline {
+	height: 3px;
+	background-color: transparent;
+	width: 0%;
+	transition: width 0.2s, background-color 0.5s;
+	margin: 0 auto;
+}
+
+.navbar-container ul li.active-link .underline {
+	width: 100%;
+	background-color: var(--clr-brown);
+}
+
+.navbar-container ul li:hover .underline {
+	background-color: var(--clr-darkgreen);
+  color: var(--clr-brown);
+	width: 100%;
+}
+
+.navbar-container ul li:active a {
+	transition: none;
+	color: var(--clr-green);
+}
+
+.navbar-container ul li:active .underline {
+	transition: none;
+	background-color: var(--clr-green);
+}
+
+
+/* End of test link */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .sidebarLink,
 .footerText,
@@ -304,7 +383,6 @@ table {
 /* Dashboard - userPetCard */
 .dashboardContainer {
   display: flex;
-
   flex-wrap: wrap;
   justify-content: center;
   min-height: 100vh;
@@ -312,19 +390,24 @@ table {
 
 .sidebar {
   padding: 50px;
-  margin: 25px 0 25px 0;
-  border: var(--clr-green) 2px solid;
+  border: var(--clr-brown) 4px solid;
   border-radius: var(--radius);
+  margin-bottom: 60px;
 }
 
 .dashboardSidebar {
   width: 20%;
   display: flex;
   justify-content: center;
+  padding-right: 5%;
 }
 
 .dashboardBox {
-  width: 60%;
+  width: 50%;
+}
+
+.userPetCardContainer {
+  padding: 0 0 60px 0;
 }
 
 .userPetCardContainer,
@@ -338,9 +421,9 @@ table {
   padding-top: 120px;
 }
 
+.userPetCardSelected
 .userPetCard,
 .petProfileCard {
-  box-shadow: var(--shadow);
   background: var(--clr-white);
   border-radius: var(--radius);  
   display: flex;
@@ -350,10 +433,20 @@ table {
   max-height: 70%;
 } 
 
+.userPetCard,
+.petProfileCard {
+  box-shadow: var(--shadow);
+}
+
+/* .userPetCardSelected {
+  box-shadow: var(--shadow-selected);
+} */
+
 .petProfileCard {
   width: 70%;
 } 
 
+/* .userPetCardSelected, */
 .userPetCard {
   width: 100%;
 }
@@ -369,7 +462,7 @@ table {
 .petProfilePictureContainer {
   position: relative;
   overflow: hidden;
-  background: var(--clr-grey); 
+  background: var(--clr-brown); 
   width: 50%;
   position: relative;
   overflow: hidden;
@@ -392,8 +485,7 @@ table {
 
 .userPetCardTextBox,
 .petProfileTextBox {
-    padding: 40px;
-    border: 4px solid var(--clr-paleyellow);
+    padding: 0 0 0 40px;
     border-left: 0;
     min-height: 300px;
     width: 50%;
@@ -403,7 +495,7 @@ table {
 /* Lost & Found - PetList */
 .petMain {
   font-family: var(--font-family);
-  background: var(--clr-paleyellow);
+  background: var(--clr-palebrown);
   overflow: hidden;
 }
 
@@ -438,8 +530,9 @@ table {
 } 
 
 .petTextBox {
-  padding: 40px;
-  border: 4px solid var(--clr-paleyellow);
+  /* padding: 40px; */
+  padding: 40px 0 0 0;
+  border: 4px solid var(--clr-palebrown);
   border-top: 0;
   min-height: 300px;
   overflow-wrap: break-word;
@@ -448,7 +541,7 @@ table {
 .petPictureContainer {
   position: relative;
   overflow: hidden;
-  background: var(--clr-grey);
+  background: var(--clr-brown);
   height: 350px;
 }
 
@@ -485,7 +578,7 @@ table {
 .petOptionalInfo {
   margin: 10px 0;
   font: var(--font-thin);
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   overflow-wrap: break-word;
   line-height: 30px;
 }
@@ -501,6 +594,7 @@ table {
 
 .tableCell:first-child { 
   font: 600 15px/1.2 'Poppins', sans-serif;
+  text-transform: capitalize;
   width: 150px;
 }
 
@@ -541,17 +635,19 @@ table {
 
 /* Report - Picture */
 .imageUploadContainer {
-  border: 3px dashed rgb(34 102 96); 
+  border: 4px dashed var(--clr-brown); 
   justify-content: center;
   align-items: center;
   position: relative;
   height: 450px;
   overflow: hidden;
-  background: var(--clr-lightaquamarine);
+  background: var(--clr-white);
+
 }
 
 .imageUploadContainer:hover {
-  background: var(--clr-white);
+  background: var(--clr-lightaquamarine);
+  border: 4px dashed var(--clr-darkgreen); 
   transition: background 0.2s linear;
 }
 
@@ -725,6 +821,73 @@ input[type=checkbox]:checked ~ label{
   color: var(--clr-black);
 }
 
+/* Test checkbox */
+.checkboxContainer {
+  /* display: block; */
+  position: relative;
+  padding-left: 50px;
+  margin-bottom: 25px;
+  cursor: pointer;
+  font-size: 25px;
+  user-select: none;
+  align-items: center;
+
+  display: flex;
+  justify-content: end;
+}
+
+.checkboxContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  height: 30px;
+  width: 30px;
+  border: 2px solid var(--clr-brown);
+  padding: 3px;
+  background: var(--clr-palebrown);
+  border-radius: 0.25rem;
+}
+
+.checkboxContainer:hover input ~ .checkmark {
+  background-color: var(--clr-green);
+  border: 2px solid var(--clr-green);
+  border-radius: 0.25rem;
+}
+
+.checkboxContainer input:checked ~ .checkmark {
+  background-color: var(--clr-darkgreen);
+  border: 2px solid var(--clr-darkgreen);
+  border-radius: 0.25rem;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkboxContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkboxContainer .checkmark:after {
+  left: 12px;
+  top: 4px;
+  width: 9px;
+  height: 18px;
+  border: solid var(--clr-white);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+
 /* Background, Logo in Login-Registration */
 
 /* Logo */
@@ -885,7 +1048,7 @@ input[type=checkbox]:checked ~ label{
 .acceptedPasswordText {
   padding-top: 20px;
   font: 400 14px / 1.2 Poppins, sans-serif;
-  color: var(--clr-grey);
+  color: var(--clr-brown);
   font-style: italic;
 }
 
@@ -974,7 +1137,7 @@ input[type=checkbox]:checked ~ label{
 .formButtonInactive {
   padding: 20px;
   border-radius: 0.25rem;
-  background: var(--clr-grey);
+  background: var(--clr-brown);
   color: var(--clr-white);
   border: none;
 }
@@ -1033,7 +1196,7 @@ input[type=checkbox]:checked ~ label{
 }
 
 .showHidePassword {
-  fill: var(--clr-grey);
+  fill: var(--clr-brown);
   cursor: pointer;
   background: none;
 }
@@ -1071,7 +1234,7 @@ input[type=checkbox]:checked ~ label{
 .searchButton {
   cursor: pointer;
   background: none;
-  fill: var(--clr-grey);
+  fill: var(--clr-brown);
 }
 
 .searchButton:hover {
@@ -1111,7 +1274,7 @@ input[type=checkbox]:checked ~ label{
   align-items: center;
   min-height: 100vh;
   min-height: 100vh;
-  background: var(--clr-paleyellow);
+  background: var(--clr-palebrown);
 }
 
 #loader {
@@ -1221,7 +1384,7 @@ input[type=checkbox]:checked ~ label{
   position: unset !important;
   cursor: pointer;
   background: none;
-  fill: var(--clr-grey) !important;
+  fill: var(--clr-brown) !important;
 }
 
 .mapboxgl-ctrl-geocoder--icon:hover,
@@ -1440,6 +1603,7 @@ input[type=checkbox]:checked ~ label{
   .tableCell:nth-child(2) {
     overflow-wrap: anywhere;
     width: unset;
+    padding-right: 0 !important;
   }
 
   .tableCell {
@@ -1463,7 +1627,7 @@ input[type=checkbox]:checked ~ label{
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    background: var(--clr-grey);
+    background: var(--clr-brown);
     width: 50%;
     position: relative;
     height: 450px;
@@ -1475,6 +1639,7 @@ input[type=checkbox]:checked ~ label{
   .petProfileTextBox {
     width: auto;
     border: none;
+    padding: 40px;
   }
 
   .backButtonBox {
@@ -1504,6 +1669,11 @@ input[type=checkbox]:checked ~ label{
     width: 80%;
   }
   
+  .userPetCardTextBox,
+  .petProfileTextBox {
+    padding: 40px;
+  }
+
 }
 
 
@@ -1522,6 +1692,10 @@ input[type=checkbox]:checked ~ label{
     width: 80%;
   }
 
+  .userPetCardTextBox,
+  .petProfileTextBox {
+    padding: 40px;
+  }
 
 } 
 
@@ -1550,20 +1724,24 @@ input[type=checkbox]:checked ~ label{
     padding: 50px;
   }
 
+  .userPetCardPictureContainer,
   .petProfilePictureContainer,
   .petPictureContainer {
     border-radius: 0;
   }
 
+  .userPetCardTextBox,
   .petProfileTextBox,
   .petTextBox {
     border-radius: 0;
-    border: 4px solid var(--clr-paleyellow);
+    /* border: 4px solid var(--clr-palebrown); */
+    padding: 40px 0 0 0;
     border-top: 0;
   }
 
+  .userPetCardTextBox,
   .petProfileTextBox {
-    border: 4px solid var(--clr-paleyellow);
+    /* border: 4px solid var(--clr-palebrown); */
     border-top: 0;
   }
 
@@ -1608,7 +1786,8 @@ input[type=checkbox]:checked ~ label{
   .petCard {
     width: 70%;
   }
-} 
+
+}
 
 @media only screen and (min-width: 1200px) {
   .formBox {
@@ -1620,7 +1799,7 @@ input[type=checkbox]:checked ~ label{
   }
 
   .userPetCardContainer {
-    padding: 30px 0 30px 0;
+    padding: 0 0 60px 0;
   }
 
   .userPetCardContainer,
@@ -1632,23 +1811,32 @@ input[type=checkbox]:checked ~ label{
 
   .userPetCardContainer {
     min-width: 60%;
-    padding: 30px 0 30px 0;
+    padding: 0 0 60px 0;
   }
   
   .petProfileContainer {
     padding-top: 120px;
   }
 
+  /* .userPetCardSelected, */
   .userPetCard,
   .petProfileCard {  
-    border-radius: var(--radius);  
-    box-shadow: var(--shadow);
     background: var(--clr-white);
     display: flex;
     padding: 50px;
     justify-content: center;
     align-items: center;
+    border-radius: var(--radius); 
   }
+
+  .userPetCard,
+  .petProfileCard {  
+    box-shadow: var(--shadow);
+  }
+
+  /* .userPetCardSelected {
+    box-shadow: var(--shadow-selected);
+  } */
 
   .petProfileCard {
     width: 70%;
@@ -1671,7 +1859,7 @@ input[type=checkbox]:checked ~ label{
   .petProfilePictureContainer {
     position: relative;
     overflow: hidden;
-    background: var(--clr-grey); 
+    background: var(--clr-brown); 
     width: 50%;
     position: relative;
     overflow: hidden;
@@ -1698,8 +1886,9 @@ input[type=checkbox]:checked ~ label{
   
   .userPetCardTextBox,
   .petProfileTextBox {
-    padding: 40px;
-    border: 4px solid var(--clr-paleyellow);
+    /* padding: 40px; */
+    padding: 0 0 0 40px;
+    /* border: 4px solid var(--clr-palebrown); */
     border-left: 0;
     min-height: 300px;
     width: 50%;

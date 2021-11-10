@@ -12,11 +12,7 @@ let history = createBrowserHistory();
 const Dashboard = () => {
     const { token } = useContext(AuthContext);
     const { userPets, setUserPets, deleteOnePet } = useContext(AppStateContext);
-
-    const [checked, setChecked] = useState(false);
-
-    const [colors, setColors] = useState([]);
-
+    
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
@@ -25,10 +21,6 @@ const Dashboard = () => {
     if (DEBUG) console.log(userPets);
 
     history.replace('/dashboard');
-
-    // button is disabled if the checkbox is unchecked:
-    let disabled = !checked;
-
 
     function deleteUsersPet(id) {
 
@@ -50,7 +42,7 @@ const Dashboard = () => {
     function uploadedPets() {
         return userPets.map(pet => {
             return (
-                <UserPetCard key={pet.id} pet={pet}  />
+                <UserPetCard key={pet.id} pet={pet} deleteUsersPet={deleteUsersPet} />
             )
         });
     }
@@ -74,34 +66,3 @@ const Dashboard = () => {
 }
  
 export default Dashboard;
-
-
-                        // <button onClick={() => deleteUsersPet(pet.id)}>Delete Pet</button>
-                        // {uploadedPets}
-                        // <div className='filterBox'> 
-                        //         <input
-                        //             type='checkbox'
-                        //             checked={checked}
-                        //             onChange={event => setChecked(event.target.checked)}
-                        //         />
-                        //         <label>Select</label>
-                        //     <ul className='radioList'>
-                        //         <Checkbox
-                        //             id={'black'} 
-                        //             name={'color'} 
-                        //             value={'black'} 
-                        //             checked={colors.includes('black')} 
-                        //             onChange={() => changeCheckboxValue(colors, setColors, 'black')}
-                        //             labelFor={'black'} 
-                        //             labelName={'Black'}
-                        //         />
-                        //     </ul>
-                        // </div>
-                        // <div>
-                        //     <button 
-                        //         className={disabled ? 'formButtonInactive' : 'formButton'}
-                        //         disabled={disabled}
-                        //     >
-                        //         Delete Pet
-                        //     </button>
-                        // </div>

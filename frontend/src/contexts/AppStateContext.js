@@ -23,6 +23,33 @@ export default function AppStateContextProvider(props) {
     let limit = 6;
 
     useEffect(() => {
+        if (token) {
+             getUsername({
+                 token,
+                 errorCallback: err => {
+                     handleError(err, setErrorMsg);
+                 }
+             });
+             getUserPets({
+                 token,
+                 successCallback: res => {
+                     setUserPets(res.data)
+                 },
+                 errorCallback: err => {
+                     handleError(err, setErrorMsg);
+                 }
+             });
+             getUsers({
+                 token,
+                 successCallback: res => setUsers(res.data),
+                 errorCallback: err => {
+                     handleError(err, setErrorMsg);
+                 }
+             });
+        }
+     },[token]);
+     
+    useEffect(() => {
         fetchPets({
             limit,
             offset,
@@ -40,33 +67,6 @@ export default function AppStateContextProvider(props) {
             }
         });
     },[limit, offset]);
-
-    useEffect(() => {
-       if (token) {
-            getUsername({
-                token,
-                errorCallback: err => {
-                    handleError(err, setErrorMsg);
-                }
-            });
-            getUserPets({
-                token,
-                successCallback: res => {
-                    setUserPets(res.data)
-                },
-                errorCallback: err => {
-                    handleError(err, setErrorMsg);
-                }
-            });
-            getUsers({
-                token,
-                successCallback: res => setUsers(res.data),
-                errorCallback: err => {
-                    handleError(err, setErrorMsg);
-                }
-            });
-       }
-    },[token]);
 
     // useEffect(() => {
     //     getAllPets({
