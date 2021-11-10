@@ -139,7 +139,7 @@ const PetReport = () => {
     );
 
         return (  
-            <main className='formMain'>
+            <main className='petMain'>
                 <section className='formSection'>
                 <div className='formBox'>
                         <h2 className='formHeadline'>Report Pet</h2>
