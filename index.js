@@ -31,8 +31,8 @@ const devSettings = {
 const prodSettings = {
     connectionString: process.env.DATABASE_URL,
     ssl: {
-        // rejectUnauthorized: process.env.NODE_ENV === 'production' ? false : true
-        rejectUnauthorized: true
+        rejectUnauthorized: process.env.NODE_ENV === 'production' ? false : true
+        // rejectUnauthorized: true
         // rejectUnauthorized: false
     }
 }
