@@ -10,7 +10,6 @@ export default function AppStateContextProvider(props) {
     const { token } = useContext(AuthContext);
 
     const [allPets, setAllPets] = useState([]);
-    const [userPets, setUserPets] = useState([]);
     const [pets, setPets] = useState([]);
     const [users, setUsers] = useState([]);
     const [username, setUsername] = useState('');
@@ -27,15 +26,6 @@ export default function AppStateContextProvider(props) {
         if (token) {
              getUsername({
                  token,
-                 errorCallback: err => {
-                     handleError(err, setErrorMsg);
-                 }
-             });
-             getUserPets({
-                 token,
-                 successCallback: res => {
-                     setUserPets(res.data)
-                 },
                  errorCallback: err => {
                      handleError(err, setErrorMsg);
                  }
@@ -201,7 +191,8 @@ export default function AppStateContextProvider(props) {
         axios(options)
         .then(
             res => {
-               if (successCallback) successCallback(res.data.msg, successTimeout())
+                // console.log(res.status === 200)
+               if (successCallback) successCallback('Pet successfully added', successTimeout())
         }
         )
         .catch(
@@ -330,7 +321,7 @@ export default function AppStateContextProvider(props) {
     }
 
     return (
-        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, users, reportPet, fetchPets, getNumberOfPets, allPets, userPets, setUserPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader, deleteOnePet}}>
+        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, users, reportPet, fetchPets, getNumberOfPets, allPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader, deleteOnePet, getUserPets}}>
             { props.children }
         </AppStateContext.Provider>
     )
