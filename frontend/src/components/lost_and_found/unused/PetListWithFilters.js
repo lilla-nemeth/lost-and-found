@@ -16,7 +16,7 @@ const PetListWithFilters = () => {
 
     return (  
         <>
-            <div className='petContainer'>
+            <div className='petListContainer'>
                 <h1 className='lostAndFoundHeadline'>Lost and Found Pets</h1>
                 <PetSearch status={status} setStatus={setStatus} species={species} setSpecies={setSpecies} />
                 

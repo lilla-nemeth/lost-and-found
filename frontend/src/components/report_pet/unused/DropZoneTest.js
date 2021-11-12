@@ -70,7 +70,7 @@ const DropZoneTest = () => {
 
     return (  
         <div>
-            <div className='petPicture'>
+            <div className='petListPicture'>
                 <div style={styles.inputImage} {...getRootProps()}>
                     {/* <div style={{overflow: 'hidden', position: 'absolute', bottom: '0'}}> */}
                         {images}

@@ -89,7 +89,7 @@ const PetsFromAllPets = () => {
     return (
         <main className='petMain'>
             <section>
-                <div className='petContainer'>
+                <div className='petListContainer'>
                     <h1 className='lostAndFoundHeadline'>My Posts</h1>
                     {/* <button onClick={() => deleteUsersPet(pet.id)}>Delete Pet</button> */}
                     {listUsersPets(allPets, users, username)}
