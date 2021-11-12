@@ -13,12 +13,12 @@ const PetListCard = (props) => {
     if (DEBUG) console.log(pet);
 
         return (
-            <div className='petCard' key={pet.id}>
-                <div className='petCardInner'>
-                    <div className='petPictureContainer'>
-                        <img className='petPicture' alt='img' src={`data:image/jpg;base64,${pet.img}`} />
+            <div className='petListCard' key={pet.id}>
+                <div className='petListCardInner'>
+                    <div className='petListPictureContainer'>
+                        <img className='petListPicture' alt='img' src={`data:image/jpg;base64,${pet.img}`} />
                     </div>
-                    <div className='petTextBox'>
+                    <div className='petListTextBox'>
                         <table className='table'>
                             <tbody>
                                 <tr>

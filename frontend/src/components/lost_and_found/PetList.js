@@ -9,7 +9,7 @@ const PetList = () => {
 
     return (  
         <>
-            <div className='petContainer'>
+            <div className='petListContainer'>
                 <h1 className='lostAndFoundHeadline'>Lost and Found Pets</h1>
                     {pets.map(pet => {
                             return (

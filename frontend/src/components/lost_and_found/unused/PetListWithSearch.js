@@ -35,7 +35,7 @@ const PetListWithSearch = () => {
     return (  
         <>
             <Search search={search} setSearch={setSearch} />
-            <div className='petContainer'>
+            <div className='petListContainer'>
                 <h1 className='lostAndFoundHeadline'>Lost and Found Pets</h1>
                     {search == '' ?
                     pets.map(pet => {

@@ -77,7 +77,7 @@ const DragnDropZone = (props) => {
 
     return (  
         <div>
-            <div className='petPicture'>
+            <div className='petListPicture'>
                 <div style={styles.dropZone} {...getRootProps()}>
                         {files.length > 0 && <button className='deleteButton' onClick={() => setFiles([])}>X</button>}
                         {images}
