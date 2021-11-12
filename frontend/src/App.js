@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AuthContext } from './contexts/AuthContext';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
@@ -12,6 +12,14 @@ import PetLandingPage from './components/landing_page/PetLandingPage';
 import PetProfile from './components/lost_and_found/PetProfile';
 import Dashboard from './components/dashboard/Dashboard';
 
+import img01 from './assets/images/01backgroundImg.jpg'
+import img02 from './assets/images/02backgroundImg.jpg';
+import img03 from './assets/images/03backgroundImg.jpg';
+import img04 from './assets/images/04backgroundImg.jpg';
+import img05 from './assets/images/05backgroundImg.jpg';
+import img06 from './assets/images/06backgroundImg.jpg';
+import img07 from './assets/images/07backgroundImg.jpg';
+import Video from './assets/video/dogvideo.mp4';
 
 function App() {
   const { token } = useContext(AuthContext);
@@ -22,6 +30,34 @@ function App() {
 
   if (DEBUG) console.log('App.js', token);
 
+  useEffect(() => {
+    cacheImages(images)
+  })
+  
+  async function cacheImages(srcArr) {
+    const promises = await srcArr.map(src => {
+      return new Promise(function (resolve, reject) {
+        const img = new Image();
+  
+        img.src = src
+        img.onload = resolve()
+        img.onerror = reject()
+      })
+    }) 
+  
+    await Promise.all(promises)
+  }
+  
+  let images = [
+    img01,
+    img02,
+    img03,
+    img04,
+    img05,
+    img06,
+    img07,
+    Video
+  ]
 
   if (!token) {
     return (
