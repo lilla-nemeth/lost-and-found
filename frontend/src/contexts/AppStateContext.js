@@ -5,6 +5,7 @@ import { handleError } from '../components/HelperFunctions.js';
 
 export const AppStateContext = createContext();
 
+
 export default function AppStateContextProvider(props) {
     const { token } = useContext(AuthContext);
 
@@ -18,7 +19,7 @@ export default function AppStateContextProvider(props) {
     const [loader, setLoader] = useState(true);
     const [errorMsg, setErrorMsg] = useState('');
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     let limit = 6;
 
@@ -50,24 +51,26 @@ export default function AppStateContextProvider(props) {
      },[token]);
      
     useEffect(() => {
-        fetchPets({
-            limit,
-            offset,
-            successCallback: res => {
-                setPets(res.data);
-                setLoader(false);
-                getNumberOfPets({
-                    successCallback: res => {
-                        setTotal(Number(res.data));
-                    }
-                })
-            },
-            errorCallback: err => {
-                handleError(err, setErrorMsg);
-            }
-        });
+            fetchPets({
+                limit,
+                offset,
+                successCallback: res => {
+                    setPets(res.data);
+                    setLoader(false);
+                    getNumberOfPets({
+                        successCallback: res => {
+                            setTotal(Number(res.data));
+                        }
+                    })
+                },
+                errorCallback: err => {
+                    handleError(err, setErrorMsg);
+                }
+            });
+        
     },[limit, offset]);
 
+    if (DEBUG) console.log(pets);
     // useEffect(() => {
     //     getAllPets({
     //         successCallback: res => {

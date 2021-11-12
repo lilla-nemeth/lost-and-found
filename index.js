@@ -43,7 +43,7 @@ const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : dev
 app.get('/userpets', authMw, (request, response) => {
     let userId = request.userId;
 
-    pool.query('SELECT * FROM pets WHERE userId=$1', [userId])
+    pool.query('SELECT * FROM pets WHERE userId=$1 ORDER BY since DESC', [userId])
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: "Failed to fetch user's pets"}));
 });
@@ -64,7 +64,7 @@ app.get('/pets/:fetch/:skip', (request, response) => {
     let limit = request.params.fetch;
     let offset = request.params.skip;
 
-    pool.query('SELECT * FROM pets LIMIT $1 OFFSET $2', [limit, offset])
+    pool.query('SELECT * FROM pets ORDER BY since DESC LIMIT $1 OFFSET $2', [limit, offset])
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch pets'}));
 });

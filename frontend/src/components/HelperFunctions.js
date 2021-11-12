@@ -33,7 +33,7 @@ export function convertDate(timestamp) {
 }
 
 export function petDate(petstatus, since, until, className) {
-    if (petstatus === 'lost' || petstatus === 'found' ) {
+    if (petstatus === 'lost' || petstatus === 'found') {
         return (
             <>
                 <td className={className}>{petstatus}</td>
