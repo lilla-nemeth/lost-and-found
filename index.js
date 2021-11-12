@@ -221,8 +221,7 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
     pool.query('INSERT INTO pets(userId, img, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *', [userId, img, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription])
     .then(
         (res) => {
-            response.status(200).json({msg: 'Pet successfully added'})
-            response.status(200).json(res.rows)
+            return response.status(200).json(res.rows, {msg: 'Pet successfully added'})
         }
     )
     .catch((err) => response.status(400).json({msg: 'Failed to add new pet'}))
