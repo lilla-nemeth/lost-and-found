@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { createBrowserHistory } from 'history';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -11,16 +11,29 @@ let history = createBrowserHistory();
 
 const Dashboard = () => {
     const { token } = useContext(AuthContext);
-    const { userPets, setUserPets, deleteOnePet } = useContext(AppStateContext);
+    const { getUserPets, deleteOnePet } = useContext(AppStateContext);
+    const [userPets, setUserPets] = useState([]);
     
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
     let DEBUG = true;
 
-    if (DEBUG) console.log(userPets);
+    // if (DEBUG) console.log(userPets);
 
     history.replace('/dashboard');
+
+    useEffect(() => {
+        getUserPets({
+            token,
+            successCallback: res => {
+                setUserPets(res.data)
+            },
+            errorCallback: err => {
+                handleError(err, setErrorMsg);
+            }
+        });
+    }, [token]);
 
     function deleteUsersPet(id) {
 
