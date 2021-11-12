@@ -14,36 +14,36 @@ import Video from '../../assets/video/dogvideo.mp4';
 // import 'mapbox-gl/dist/mapbox-gl.css';
 // import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
-useEffect(() => {
-  cacheImages(images)
+// useEffect(() => {
+//   cacheImages(images)
 
 
-})
+// })
 
-async function cacheImages(srcArr) {
-  const promises = await srcArr.map(src => {
-    return new Promise(function (resolve, reject) {
-      const img = new Image();
+// async function cacheImages(srcArr) {
+//   const promises = await srcArr.map(src => {
+//     return new Promise(function (resolve, reject) {
+//       const img = new Image();
 
-      img.src = src
-      img.onload = resolve()
-      img.onerror = reject()
-    })
-  }) 
+//       img.src = src
+//       img.onload = resolve()
+//       img.onerror = reject()
+//     })
+//   }) 
 
-  await Promise.all(promises)
-}
+//   await Promise.all(promises)
+// }
 
-let images = [
-  img01,
-  img02,
-  img03,
-  img04,
-  img05,
-  img06,
-  img07,
-  Video
-]
+// let images = [
+//   img01,
+//   img02,
+//   img03,
+//   img04,
+//   img05,
+//   img06,
+//   img07,
+//   Video
+// ]
 
 ReactDOM.render(
   <React.StrictMode>
