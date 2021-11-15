@@ -5,7 +5,6 @@ import { handleError } from '../components/HelperFunctions.js';
 
 export const AppStateContext = createContext();
 
-
 export default function AppStateContextProvider(props) {
     const { token } = useContext(AuthContext);
 

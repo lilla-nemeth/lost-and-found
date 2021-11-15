@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { createBrowserHistory } from 'history';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import { AuthContext } from '../../contexts/AuthContext';
+import Loader from '../generic/Loader';
 import { handleError, changeCheckboxValue } from '../HelperFunctions.js';
 import Checkbox from '../generic/Checkbox';
 import UserPetCard from '../generic/UserPetCard';
@@ -13,13 +14,14 @@ const Dashboard = () => {
     const { token } = useContext(AuthContext);
     const { getUserPets, deleteOnePet } = useContext(AppStateContext);
     const [userPets, setUserPets] = useState([]);
+    const [loader, setLoader] = useState(true);
     
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
     let DEBUG = true;
 
-    // if (DEBUG) console.log(userPets);
+    // if (DEBUG) console.log('userPets', userPets);
 
     history.replace('/dashboard');
 
@@ -27,7 +29,8 @@ const Dashboard = () => {
         getUserPets({
             token,
             successCallback: res => {
-                setUserPets(res.data)
+                setUserPets(res.data);
+                setLoader(false);
             },
             errorCallback: err => {
                 handleError(err, setErrorMsg);
@@ -41,7 +44,15 @@ const Dashboard = () => {
             id,
             token,
             successCallback: res => {
-                setUserPets('');
+                getUserPets({
+                    token,
+                    successCallback: res => {
+                        setUserPets(res.data)
+                    },
+                    errorCallback: err => {
+                        handleError(err, setErrorMsg);
+                    }
+                });
                 setSuccessMsg(res);
             },
             successTimeout: () => (setTimeout(() => {
@@ -52,6 +63,12 @@ const Dashboard = () => {
         })
     }
 
+    if (loader) {
+        return (
+            <Loader />
+        );
+    }
+
     function uploadedPets() {
         return userPets.map(pet => {
             return (
@@ -60,6 +77,8 @@ const Dashboard = () => {
         });
     }
         
+    if (DEBUG) console.log('userPets', userPets);
+    
     return (
         <main className='petMain'>
             <section>
