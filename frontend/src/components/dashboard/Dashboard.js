@@ -12,16 +12,16 @@ let history = createBrowserHistory();
 
 const Dashboard = () => {
     const { token } = useContext(AuthContext);
-    const { getUserPets, deleteOnePet } = useContext(AppStateContext);
+    const { getUserPets, deleteOnePet, fetchPets, limit, offset, setPets, getNumberOfPets, setTotal } = useContext(AppStateContext);
     const [userPets, setUserPets] = useState([]);
     const [loader, setLoader] = useState(true);
     
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
-    let DEBUG = true;
+    let DEBUG = false;
 
-    // if (DEBUG) console.log('userPets', userPets);
+    if (DEBUG) console.log('userPets', userPets);
 
     history.replace('/dashboard');
 
@@ -48,18 +48,29 @@ const Dashboard = () => {
                     token,
                     successCallback: res => {
                         setUserPets(res.data)
-                    },
-                    errorCallback: err => {
-                        handleError(err, setErrorMsg);
                     }
                 });
                 setSuccessMsg(res);
+                fetchPets({
+                    limit,
+                    offset,
+                    successCallback: res => {
+                        setPets(res.data);
+                        setLoader(false);
+                        getNumberOfPets({
+                            successCallback: res => {
+                                setTotal(Number(res.data));
+                            }
+                        })
+                    }
+                })
             },
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');
             }, 5000)),
             errorCallback: err => 
                 handleError(err, setErrorMsg)
+
         })
     }
 
