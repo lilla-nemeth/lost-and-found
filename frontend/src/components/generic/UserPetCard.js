@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { petDate, isInputEmpty } from '../HelperFunctions.js';
 
-const UserpetListCard = (props) => {
+const UserPetCard = (props) => {
     const { pet, deleteUsersPet } = props;
 
     const [checked, setChecked] = useState(false);
@@ -13,13 +13,13 @@ const UserpetListCard = (props) => {
     if (DEBUG) console.log(pet);
 
     return (
-        <div className='userpetListCardContainer'>
-            <div className='userpetListCard'>
-                <div className='userpetListCardInner'>
-                    <div className='userpetListCardPictureContainer'>
-                        <img className='userpetListCardPicture' alt='img' src={`data:image/jpg;base64,${pet.img}`} />
+        <div className='userPetContainer'>
+            <div className='userPet'>
+                <div className='userPetInner'>
+                    <div className='userPetPictureContainer'>
+                        <img className='userPetPicture' alt='img' src={`data:image/jpg;base64,${pet.img}`} />
                     </div>
-                    <div className='userpetListCardTextBox'>
+                    <div className='userPetTextBox'>
                         <table className='table'>
                             <tbody>
                                 <tr>
@@ -75,4 +75,4 @@ const UserpetListCard = (props) => {
     );
 }
 
-export default UserpetListCard;
+export default UserPetCard;
