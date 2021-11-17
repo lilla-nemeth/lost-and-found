@@ -12,9 +12,8 @@ let history = createBrowserHistory();
 
 const Dashboard = () => {
     const { token } = useContext(AuthContext);
-    const { getUserPets, deleteOnePet, fetchPets, limit, offset, setPets, getNumberOfPets, setTotal } = useContext(AppStateContext);
-    const [userPets, setUserPets] = useState([]);
-    const [loader, setLoader] = useState(true);
+    const { getUserPets, deleteOnePet, userPets, setUserPets, fetchPets, limit, offset, setPets, getNumberOfPets, setTotal, loader, setLoader } = useContext(AppStateContext);
+    // const [loader, setLoader] = useState(true);
     
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
@@ -25,21 +24,7 @@ const Dashboard = () => {
 
     history.replace('/dashboard');
 
-    useEffect(() => {
-        getUserPets({
-            token,
-            successCallback: res => {
-                setUserPets(res.data);
-                setLoader(false);
-            },
-            errorCallback: err => {
-                handleError(err, setErrorMsg);
-            }
-        });
-    }, [token]);
-
     function deleteUsersPet(id) {
-
         deleteOnePet({
             id,
             token,
@@ -72,12 +57,6 @@ const Dashboard = () => {
                 handleError(err, setErrorMsg)
 
         })
-    }
-
-    if (loader) {
-        return (
-            <Loader />
-        );
     }
 
     function uploadedPets() {

@@ -25,7 +25,7 @@ let history = createBrowserHistory();
 // (Maybe class component would be more reasonable...)
 const PetReport = () => {
     const { token } = useContext(AuthContext);
-    const { reportPet, fetchPets, limit, offset, setPets, getNumberOfPets, setTotal } = useContext(AppStateContext);
+    const { reportPet, getUserPets, setUserPets, fetchPets, limit, offset, setPets, getNumberOfPets, setTotal } = useContext(AppStateContext);
 
     const [loader, setLoader] = useState(true);
 
@@ -89,7 +89,13 @@ const PetReport = () => {
                                 }
                             })
                         }
-                    })
+                    });
+                    getUserPets({
+                        token,
+                        successCallback: res => {
+                            setUserPets(res.data)
+                        }
+                    });
                     if (DEBUG) console.log('res from PetReport')
                     setSuccessMsg(res)
                     setSize('')
@@ -224,13 +230,13 @@ const PetReport = () => {
                                 cols={'10'}
                                 onChange={event => setDescription(event.target.value)} 
                             />
-                            { optionalInputs.display === 'hideInputs' ? errorSuccessMessage : '' }
                             <div className='optionalButton' onClick={() => showOptionalInputs()}>
                                     Optional Data
                                 <div className='arrowDown'>
                                     <ArrowDown style={{height: '16px'}}/>
                                 </div>
                             </div>
+                            { optionalInputs.display === 'hideInputs' ? errorSuccessMessage : '' }
                             <PetReportOptionalData 
                                 size={size} 
                                 setSize={setSize} 

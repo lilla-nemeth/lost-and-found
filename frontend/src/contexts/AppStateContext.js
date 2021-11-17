@@ -10,6 +10,7 @@ export default function AppStateContextProvider(props) {
 
     const [allPets, setAllPets] = useState([]);
     const [pets, setPets] = useState([]);
+    const [userPets, setUserPets] = useState([]);
     const [users, setUsers] = useState([]);
     const [username, setUsername] = useState('');
     const [total, setTotal] = useState(0);
@@ -36,6 +37,16 @@ export default function AppStateContextProvider(props) {
                      handleError(err, setErrorMsg);
                  }
              });
+             getUserPets({
+                token,
+                successCallback: res => {
+                    setUserPets(res.data);
+                    setLoader(false);
+                },
+                errorCallback: err => {
+                    handleError(err, setErrorMsg);
+                }
+            });
         }
      },[token]);
      
@@ -257,7 +268,7 @@ export default function AppStateContextProvider(props) {
     function getUserPets({token, successCallback, errorCallback}) {
         let options = {
             method: 'get',
-            url: '/userpets',
+            url: '/userPets',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
@@ -320,7 +331,7 @@ export default function AppStateContextProvider(props) {
     }
 
     return (
-        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, users, reportPet, fetchPets, getNumberOfPets, allPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader, deleteOnePet, getUserPets}}>
+        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, users, userPets, setUserPets, reportPet, fetchPets, getNumberOfPets, allPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader, deleteOnePet, getUserPets}}>
             { props.children }
         </AppStateContext.Provider>
     )

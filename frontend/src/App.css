@@ -74,6 +74,8 @@ table {
 
   /* Radius */
   --radius: 25px; 
+  --radius2: 30px; 
+  --radius-button: 4px;
   --radius-circle: 60px;
 
   /* Width */
@@ -416,10 +418,10 @@ table {
   min-height: 100vh;
 }
 
-.userpetListCard,
+.userPet,
 .petListCard {
   background: var(--clr-white); 
-  border-radius: var(--radius); 
+  border-radius: 25px; 
   box-shadow: var(--shadow);
   padding: 50px;
 }
@@ -441,7 +443,7 @@ table {
   position: relative;
   overflow: hidden;
   background: var(--clr-brown);
-  height: 280px;
+  height: 250px;
 }
 
 .petListPicture {
@@ -458,11 +460,11 @@ table {
   max-width: 150%;
 }
 
-.userpetListCardContainer {
+.userPetContainer {
   padding: 0 0 60px 0;
 }
 
-.userpetListCardContainer,
+.userPetContainer,
 .petProfileContainer {
   display: flex;
   justify-content: center;
@@ -473,7 +475,7 @@ table {
   padding-top: 120px;
 }
 
-.userpetListCard,
+.userPet,
 .petProfileCard {
   background: var(--clr-white);
   border-radius: var(--radius);  
@@ -484,7 +486,7 @@ table {
   max-height: 70%;
 } 
 
-.userpetListCard,
+.userPet,
 .petProfileCard {
   box-shadow: var(--shadow);
 }
@@ -494,7 +496,7 @@ table {
   width: 70%;
 } 
 
-.userpetListCard {
+.userPet {
   width: 100%;
 }
 
@@ -502,14 +504,14 @@ table {
   min-height: 600px;
 }
 
-.userpetListCardInner,
+.userPetInner,
 .petProfileCardInner {
   display: flex;
   width: 100%;
   min-height: 600px;
 }
 
-.userpetListCardPictureContainer,
+.userPetPictureContainer,
 .petProfilePictureContainer {
   position: relative;
   overflow: hidden;
@@ -519,7 +521,7 @@ table {
   overflow: hidden;
 }
 
-.userpetListCardPicture,
+.userPetPicture,
 .petProfilePicture {
   position: absolute;
   top: 50%;    
@@ -534,7 +536,7 @@ table {
   max-width: 150%;
 }
 
-.userpetListCardTextBox,
+.userPetTextBox,
 .petProfileTextBox {
     padding: 0 0 0 40px;
     border-left: 0;
@@ -581,7 +583,7 @@ table {
 .tableCell:first-child { 
   font: 600 15px/1.2 'Poppins', sans-serif;
   text-transform: capitalize;
-  width: 150px;
+  min-width: 80px;
 }
 
 .petProfileButton {
@@ -730,7 +732,7 @@ ul li .radioCheck{
   display: block;
   position: absolute;
   border: 2px solid;
-  border-radius: 100%;
+  border-radius: var(--radius-circle);
   height: 20px;
   width: 20px;
   top: 0;
@@ -761,7 +763,7 @@ ul li .radioCheck::before {
   display: block;
   position: absolute;
 	content: '';
-  border-radius: 100%;
+  border-radius: var(--radius-circle);
   height: 10px;
   width: 10px;
   top: 5px;
@@ -838,19 +840,19 @@ input[type=checkbox]:checked ~ label{
   border: 2px solid var(--clr-brown);
   padding: 3px;
   background: var(--clr-palebrown);
-  border-radius: 0.25rem;
+  border-radius: var(--radius);
 }
 
 .checkboxContainer:hover input ~ .checkmark {
   background-color: var(--clr-green);
   border: 2px solid var(--clr-green);
-  border-radius: 0.25rem;
+  border-radius: var(--radius);
 }
 
 .checkboxContainer input:checked ~ .checkmark {
   background-color: var(--clr-darkgreen);
   border: 2px solid var(--clr-darkgreen);
-  border-radius: 0.25rem;
+  border-radius: var(--radius);
 }
 
 .checkmark:after {
@@ -880,7 +882,7 @@ input[type=checkbox]:checked ~ label{
 .logoBox {
   padding: 25px;
   border: 4px solid var(--clr-white);
-  border-radius: 100%;
+  border-radius: var(--radius-circle);
   width: 30px;
   height: 30px;
   margin: auto;
@@ -1069,6 +1071,8 @@ input[type=checkbox]:checked ~ label{
   width: 0px;
 }
 
+
+/* Buttons */
 .optionalButton {
   display: flex;
   justify-content: space-between;
@@ -1086,8 +1090,8 @@ input[type=checkbox]:checked ~ label{
 .backButtonBox {
   display: flex;
   justify-content: flex-end;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   padding-left: 100px;
   width: 70%;
 }
@@ -1095,7 +1099,7 @@ input[type=checkbox]:checked ~ label{
 .backButton {
   background: var(--clr-darkgreen);
   padding: 20px;
-  border-radius: 0.25rem;
+  border-radius: var(--radius-button);
   color: var(--clr-white);
   cursor: pointer;
   border: none;
@@ -1108,41 +1112,52 @@ input[type=checkbox]:checked ~ label{
 .optionalButton,
 .formButton,
 .formButtonInactive {
+  width: 100%;
+}
+
+.optionalButton,
+.formButton,
+.formButtonInactive,
+.deleteTextButtonInactive {
   border: none;
   text-transform: uppercase;
-  width: 100%;
   margin-top: 40px;
   z-index: 1;
 }
 
-.optionalButton,
-.formButton {
-  cursor: pointer;
+.formButtonInactive,
+.deleteTextButtonInactive,
+.formButton,
+.deleteTextButton {
+  padding: 20px;
+  border-radius: var(--radius-button);
+  color: var(--clr-white);
+  border: none;
 }
 
+.deleteTextButtonInactive,
 .formButtonInactive {
-  padding: 20px;
-  border-radius: 0.25rem;
   background: var(--clr-brown);
-  color: var(--clr-white);
-  border: none;
 }
 
-.formButton {
-  padding: 20px;
-  border-radius: 0.25rem;
-  background: var(--clr-darkgreen);
-  color: var(--clr-white);
+.deleteTextButton,
+.formButton,
+.optionalButton {
   cursor: pointer;
-  border: none;
 }
 
-.formButton:hover {
+.deleteTextButton,
+.formButton {
+  background: var(--clr-darkgreen);
+}
+
+.formButton:hover,
+.deleteTextButton:hover {
   background: var(--clr-green);
 }
 
 .deleteButton {
-  border-radius: 0.25rem;
+  border-radius: var(--radius);
   background: var(--clr-darkgreen);
   color: var(--clr-white);
   width: 60px;
@@ -1158,7 +1173,7 @@ input[type=checkbox]:checked ~ label{
 }
 
 .changePictureButton {
-  border-radius: 0.25rem;
+  border-radius: var(--radius);
   background: var(--clr-darkgreen);
   color: var(--clr-white);
   width: 60px;
@@ -1186,7 +1201,6 @@ input[type=checkbox]:checked ~ label{
   cursor: pointer;
   background: none;
 }
-
 
 .showHidePassword,
 .formLabel {
@@ -1483,26 +1497,79 @@ input[type=checkbox]:checked ~ label{
     min-height: 1000px;
   }
 
-
-  .userpetListCard,
+  /* Pet Cards */
+  .userPet,
   .petProfileCard,
   .petListCard {
     padding: 0;
+    border-radius: var(--radius);
   }
 
-  .userpetListCardPictureContainer,
+  .petProfileCard,
+  .petListCard {
+    width: 80%;
+  }
+
+  .userPet {
+    width: 100%;
+  }
+
+  .userPetPictureContainer,
   .petProfilePictureContainer,
   .petListPictureContainer {
     border-radius: 25px 25px 0 0;
   }
 
-  .userpetListCardTextBox,
+  .userPetTextBox,
   .petProfileTextBox,
   .petListTextBox {
     border: none;
-    padding: 50px;
+    padding: 25px;
   }
 
+  .formButtonInactive,
+  .deleteTextButtonInactive,
+  .formButton,
+  .deleteTextButton,
+  .backButton {
+    border-radius: var(--radius-button);
+  }
+
+  .userPetInner,
+  .petProfileCardInner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: unset;
+  }
+
+  .userPetPictureContainer,
+  .petProfilePictureContainer {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .userPetTextBox,
+  .petProfileTextBox {
+    width: auto;
+  }
+
+  .backButtonBox {
+    display:unset;
+    justify-content:unset;
+    /* padding-top: 25px;
+    padding-bottom: 25px; */
+    padding-left: 0;
+    width: auto;
+    width: 70%;
+  }
+
+  .backButton {
+    width: 100%;
+  }
 
 }
 
@@ -1532,6 +1599,73 @@ input[type=checkbox]:checked ~ label{
     position: absolute;
     bottom: 0;
   }
+
+  /* Pet Cards */
+  .userPet,
+  .petProfileCard,
+  .petListCard {
+    padding: 0;
+    width: 80%;
+    border-radius: var(--radius);
+  }
+
+  .userPetPictureContainer,
+  .petProfilePictureContainer,
+  .petListPictureContainer {
+    border-radius: 25px 25px 0 0;
+  }
+
+  .userPetTextBox,
+  .petProfileTextBox,
+  .petListTextBox {
+    border: none;
+    padding: 50px 25px 25px 25px;
+  }
+
+  .formButtonInactive,
+  .deleteTextButtonInactive,
+  .formButton,
+  .deleteTextButton,
+  .backButton {
+    border-radius: var(--radius-button);
+  }
+
+  .userPetInner,
+  .petProfileCardInner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: unset;
+  }
+
+  .userPetPictureContainer,
+  .petProfilePictureContainer {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .userPetTextBox,
+  .petProfileTextBox {
+    width: auto;
+  }
+
+  .backButtonBox {
+    display:unset;
+    justify-content:unset;
+    /* padding-top: 25px;
+    padding-bottom: 25px; */
+    padding-left: 0;
+    width: auto;
+    width: 70%;
+  }
+
+  .backButton {
+    width: 100%;
+  }
+
 }
 
 @media only screen and (min-width: 600px) and (max-width: 1024px) {
@@ -1540,6 +1674,199 @@ input[type=checkbox]:checked ~ label{
     flex-direction: column-reverse;
     padding: unset;
   }
+
+  .userPetInner,
+  .petProfileCardInner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: unset;
+  }
+
+  .userPetPictureContainer,
+  .petProfilePictureContainer {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .userPetTextBox,
+  .petProfileTextBox {
+    width: auto;
+  }
+
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  /* Pet Cards */
+  .userPet,
+  .petProfileCard,
+  .petListCard {
+    padding: 50px;
+    width: 70%;
+  }
+
+  .userPetPictureContainer,
+  .petProfilePictureContainer,
+  .petListPictureContainer {
+    border: none;
+  }
+
+  .userPetTextBox,
+  .petProfileTextBox,
+  .petListTextBox {
+    border: none;
+    padding: 50px 0 0;
+  }
+
+  .userPetInner,
+  .petProfileCardInner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: unset;
+  }
+
+  .userPetPictureContainer,
+  .petProfilePictureContainer {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .userPetTextBox,
+  .petProfileTextBox {
+    width: auto;
+  }
+
+  .backButtonBox {
+    display:unset;
+    justify-content:unset;
+    /* padding-top: 25px;
+    padding-bottom: 25px; */
+    padding-left: 0;
+    width: auto;
+    width: 70%;
+  }
+
+  .backButton {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+  /* Pet Cards */
+  .userPetInner,
+  .petProfileCardInner {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: unset;
+  }
+
+  .userPetPictureContainer,
+  .petProfilePictureContainer {
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .userPetTextBox,
+  .petProfileTextBox {
+    width: 100%;
+  }
+
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 2100px) {
+  /* Pet Cards */
+  .userPet, 
+  .petProfileCard, 
+  .petListCard {
+    padding: 50px;
+    width: 20%;
+  }
+
+  .userPet, 
+  .petProfileCard {
+    padding: 50px;
+    width: 70%;
+  }
+  
+  .userPetInner,
+  .petProfileCardInner {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: unset;
+  }
+
+  .userPetPictureContainer,
+  .petProfilePictureContainer {
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .userPetTextBox,
+  .petProfileTextBox {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1400px) and (max-width: 2100px) {
+  /* Pet Cards */
+  .petListCard {
+    padding: 50px;
+    width: 15%;
+  }
+  
+  .userPet, 
+  .petProfileCard {
+    padding: 50px;
+    /* width: 15%; */
+  }
+  
+}
+
+@media only screen and (min-width: 2100px) {
+  .userPet, 
+  .petProfileCard, 
+  .petListCard {
+    padding: 50px;
+    width: 12%;
+  }
+
+  .userPetInner,
+  .petProfileCardInner {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: unset;
+  }
+
+  .userPetPictureContainer,
+  .petProfilePictureContainer {
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .userPetTextBox,
+  .petProfileTextBox {
+    width: 100%;
+  }
+
 }
 
 @media only screen and (min-width: 200px) and (max-width: 1024px) {
@@ -1576,12 +1903,13 @@ input[type=checkbox]:checked ~ label{
 } 
 
 /* Organise this part below:  */
+/* 
 @media only screen and (min-width: 200px) {
   .formBox {
     width: 150%;
   }
   
-  .userpetListCard,
+  .userPet,
   .petProfileCard,
   .petListCard {
     padding: 0;
@@ -1589,19 +1917,19 @@ input[type=checkbox]:checked ~ label{
     border-radius: 25px;
   }
   
-  .userpetListCardPictureContainer,
+  .userPetPictureContainer,
   .petProfilePictureContainer,
   .petListPictureContainer {
     border-radius: 25px 25px 0 0;
   }
 
-  .userpetListCardTextBox,
+  .userPetTextBox,
   .petProfileTextBox,
   .petListTextBox {
     border-radius: 0 0 25px 25px;
   }
 
-  .userpetListCardTextBox,
+  .userPetTextBox,
   .petListTextBox {
     padding: 50px;
   }
@@ -1627,7 +1955,7 @@ input[type=checkbox]:checked ~ label{
     line-height: unset;
   } 
 
-  .userpetListCardInner,
+  .userPetInner,
   .petProfileCardInner {
     display: flex;
     flex-direction: column;
@@ -1635,7 +1963,7 @@ input[type=checkbox]:checked ~ label{
     min-height: unset;
   }
 
-  .userpetListCardPictureContainer,
+  .userPetPictureContainer,
   .petProfilePictureContainer {
     display: flex;
     flex-direction: column;
@@ -1649,7 +1977,7 @@ input[type=checkbox]:checked ~ label{
     width: 100%;
   }
 
-  .userpetListCardTextBox,
+  .userPetTextBox,
   .petProfileTextBox {
     width: auto;
     border: none;
@@ -1682,7 +2010,8 @@ input[type=checkbox]:checked ~ label{
     width: 80%;
   }
   
-  .userpetListCardTextBox,
+  .userPetTextBox,
+  .petListTextBox,
   .petProfileTextBox {
     padding: 50px;
   }
@@ -1695,8 +2024,9 @@ input[type=checkbox]:checked ~ label{
     width: 120%;
   }
 
+  .petProfileCard,
   .petListCard {
-    padding: 50px;
+    padding: 50px
   }
 
   .petProfileCard,
@@ -1705,7 +2035,7 @@ input[type=checkbox]:checked ~ label{
     width: 80%;
   }
 
-  .userpetListCardTextBox,
+  .userPetTextBox,
   .petProfileTextBox {
     padding: 50px;
   }
@@ -1737,13 +2067,13 @@ input[type=checkbox]:checked ~ label{
     padding: 50px;
   }
 
-  .userpetListCardPictureContainer,
+  .userPetPictureContainer,
   .petProfilePictureContainer,
   .petListPictureContainer {
     border-radius: 0;
   }
 
-  .userpetListCardTextBox,
+  .userPetTextBox,
   .petProfileTextBox,
   .petListTextBox {
     border-radius: 0;
@@ -1751,7 +2081,7 @@ input[type=checkbox]:checked ~ label{
     border-top: 0;
   }
 
-  .userpetListCardTextBox,
+  .userPetTextBox,
   .petProfileTextBox {
     border-top: 0;
   }
@@ -1809,18 +2139,18 @@ input[type=checkbox]:checked ~ label{
     width: 30%;
   }
 
-  .userpetListCardContainer {
+  .userPetContainer {
     padding: 0 0 60px 0;
   }
 
-  .userpetListCardContainer,
+  .userPetContainer,
   .petProfileContainer {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .userpetListCardContainer {
+  .userPetContainer {
     min-width: 60%;
     padding: 0 0 60px 0;
   }
@@ -1829,7 +2159,7 @@ input[type=checkbox]:checked ~ label{
     padding-top: 120px;
   }
 
-  .userpetListCard,
+  .userPet,
   .petProfileCard {  
     background: var(--clr-white);
     display: flex;
@@ -1839,7 +2169,7 @@ input[type=checkbox]:checked ~ label{
     border-radius: var(--radius); 
   }
 
-  .userpetListCard,
+  .userPet,
   .petProfileCard {  
     box-shadow: var(--shadow);
   }
@@ -1849,7 +2179,7 @@ input[type=checkbox]:checked ~ label{
     max-height: 70%;
   } 
   
-  .userpetListCardInner,
+  .userPetInner,
   .petProfileCardInner {
     display: flex;
     width: 100%;
@@ -1861,7 +2191,7 @@ input[type=checkbox]:checked ~ label{
     min-height: 600px;
   }
 
-  .userpetListCardPictureContainer,
+  .userPetPictureContainer,
   .petProfilePictureContainer {
     position: relative;
     overflow: hidden;
@@ -1875,7 +2205,7 @@ input[type=checkbox]:checked ~ label{
     border-radius: unset;
   }
 
-  .userpetListCardPicture,
+  .userPetPicture,
   .petProfilePicture {
     position: absolute;
     top: 50%;    
@@ -1890,7 +2220,7 @@ input[type=checkbox]:checked ~ label{
     max-width: 150%;
   }
   
-  .userpetListCardTextBox,
+  .userPetTextBox,
   .petProfileTextBox {
     padding: 0 0 0 40px;
     border-left: 0;
@@ -1924,7 +2254,7 @@ input[type=checkbox]:checked ~ label{
   .petListCard {
     width: 15%;
   }
-}  
+}   */
 
 
 
