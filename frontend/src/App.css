@@ -163,6 +163,7 @@ table {
 
 .navLogoInner {
   height: 25px;
+  width: 25px;
   fill: var(--clr-white);
 }
 
@@ -395,6 +396,7 @@ table {
   font-family: var(--font-family);
   background: var(--clr-palebrown);
   overflow: hidden;
+  min-height: 100vh;
 }
 
 .lostAndFoundHeadline {
@@ -497,7 +499,7 @@ table {
 } 
 
 .userPet {
-  width: 100%;
+  width: 70%;
 }
 
 .petProfileCardInner {
@@ -543,6 +545,9 @@ table {
     min-height: 300px;
     width: 50%;
     overflow-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /* End of PetCards */
@@ -576,14 +581,13 @@ table {
 }
 
 .tableCell {
-  padding-right: 20px;
   overflow-wrap: anywhere;
 }
 
 .tableCell:first-child { 
   font: 600 15px/1.2 'Poppins', sans-serif;
   text-transform: capitalize;
-  min-width: 80px;
+  min-width: 100px;
 }
 
 .petProfileButton {
@@ -840,19 +844,19 @@ input[type=checkbox]:checked ~ label{
   border: 2px solid var(--clr-brown);
   padding: 3px;
   background: var(--clr-palebrown);
-  border-radius: var(--radius);
+  border-radius: var(--radius-button);
 }
 
 .checkboxContainer:hover input ~ .checkmark {
   background-color: var(--clr-green);
   border: 2px solid var(--clr-green);
-  border-radius: var(--radius);
+  border-radius: var(--radius-button);
 }
 
 .checkboxContainer input:checked ~ .checkmark {
   background-color: var(--clr-darkgreen);
   border: 2px solid var(--clr-darkgreen);
-  border-radius: var(--radius);
+  border-radius: var(--radius-button);
 }
 
 .checkmark:after {
@@ -1007,7 +1011,7 @@ input[type=checkbox]:checked ~ label{
   box-shadow: var(--shadow);
   padding: 50px; 
   height: fit-content;
-  width: 30%;
+  width: 40%;
 }
 
 .loginFormBox,
@@ -1395,7 +1399,7 @@ input[type=checkbox]:checked ~ label{
 
 
 /* Media Queries */
-@media only screen and (min-width: 200px) and (max-width: 768px) {
+@media only screen and (min-width: 100px) and (max-width: 768px) {
 
   .navLinkDesktop,
   .logOutButtonDesktop {
@@ -1468,9 +1472,13 @@ input[type=checkbox]:checked ~ label{
     transition: all 0.3s ease-in-out;
   }
 
+  .userPetPictureContainer {
+    height: 300px;
+  }
+
 }
 
-@media only screen and (min-width: 200px) and (max-width: 400px) {
+@media only screen and (min-width: 100px) and (max-width: 400px) {
   .loginContainer,
   .registerContainer {
     flex-direction: column-reverse;
@@ -1547,9 +1555,16 @@ input[type=checkbox]:checked ~ label{
   .petProfilePictureContainer {
     display: flex;
     flex-direction: column;
-    height: 500px;
     overflow: hidden;
     width: 100%;
+  }
+
+  .userPetPictureContainer {
+    height: 300px;
+  }
+  
+  .petProfilePictureContainer {
+    height: 500px;
   }
 
   .userPetTextBox,
@@ -1560,8 +1575,6 @@ input[type=checkbox]:checked ~ label{
   .backButtonBox {
     display:unset;
     justify-content:unset;
-    /* padding-top: 25px;
-    padding-bottom: 25px; */
     padding-left: 0;
     width: auto;
     width: 70%;
@@ -1642,9 +1655,16 @@ input[type=checkbox]:checked ~ label{
   .petProfilePictureContainer {
     display: flex;
     flex-direction: column;
-    height: 500px;
     overflow: hidden;
     width: 100%;
+  }
+
+  .userPetPictureContainer {
+    height: 300px;
+  }
+  
+  .petProfilePictureContainer {
+    height: 500px;
   }
 
   .userPetTextBox,
@@ -1655,8 +1675,6 @@ input[type=checkbox]:checked ~ label{
   .backButtonBox {
     display:unset;
     justify-content:unset;
-    /* padding-top: 25px;
-    padding-bottom: 25px; */
     padding-left: 0;
     width: auto;
     width: 70%;
@@ -1687,9 +1705,12 @@ input[type=checkbox]:checked ~ label{
   .petProfilePictureContainer {
     display: flex;
     flex-direction: column;
-    height: 500px;
     overflow: hidden;
     width: 100%;
+  }
+  
+  .petProfilePictureContainer {
+    height: 500px;
   }
 
   .userPetTextBox,
@@ -1733,7 +1754,6 @@ input[type=checkbox]:checked ~ label{
   .petProfilePictureContainer {
     display: flex;
     flex-direction: column;
-    height: 500px;
     overflow: hidden;
     width: 100%;
   }
@@ -1746,8 +1766,6 @@ input[type=checkbox]:checked ~ label{
   .backButtonBox {
     display:unset;
     justify-content:unset;
-    /* padding-top: 25px;
-    padding-bottom: 25px; */
     padding-left: 0;
     width: auto;
     width: 70%;
@@ -1756,6 +1774,7 @@ input[type=checkbox]:checked ~ label{
   .backButton {
     width: 100%;
   }
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
@@ -1772,7 +1791,6 @@ input[type=checkbox]:checked ~ label{
   .petProfilePictureContainer {
     display: flex;
     flex-direction: row;
-    height: 500px;
     overflow: hidden;
     width: 100%;
   }
@@ -1811,7 +1829,6 @@ input[type=checkbox]:checked ~ label{
   .petProfilePictureContainer {
     display: flex;
     flex-direction: row;
-    height: 500px;
     overflow: hidden;
     width: 100%;
   }
@@ -1857,7 +1874,7 @@ input[type=checkbox]:checked ~ label{
   .petProfilePictureContainer {
     display: flex;
     flex-direction: row;
-    height: 500px;
+    /* height: 500px; */
     overflow: hidden;
     width: 100%;
   }
@@ -1869,7 +1886,7 @@ input[type=checkbox]:checked ~ label{
 
 }
 
-@media only screen and (min-width: 200px) and (max-width: 1024px) {
+@media only screen and (min-width: 100px) and (max-width: 1024px) {
   .loginFormBox, 
   .registerFormBox {
     width: 60%;
@@ -1898,6 +1915,30 @@ input[type=checkbox]:checked ~ label{
   .footerText {
     display: flex;
     flex-wrap: wrap;
+  }
+
+  .navbar-container ul li {
+    width: 60%;
+  }
+
+  .dashboardContainer {
+    flex-direction: column;
+  }
+
+  .dashboardBox {
+    width: unset;
+  }
+
+  .dashboardSidebar {
+    width: unset;
+    padding-right: unset;
+  }
+
+  .sidebar {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    padding: 46px;
   }
 
 } 
@@ -2101,21 +2142,7 @@ input[type=checkbox]:checked ~ label{
     width: 70%;
   }
 
-  .navMainList {
-    display: flex;
-  }
 
-  .navMainListMobile {
-    display: none;
-  }
-
-  .navLinkDesktop {
-    font: var(--font-standard);
-  }
-
-  .hamburger {
-    display: none;
-  }
 
 } 
 
