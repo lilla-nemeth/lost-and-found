@@ -523,7 +523,7 @@ table {
 }
 
 .petProfilePictureContainer {
-  height: 500px;
+  min-height: 600px;
 }
 
 .userPetPicture,
@@ -1769,6 +1769,10 @@ input[type=checkbox]:checked ~ label{
     flex-direction: column;
     overflow: hidden;
     width: 100%;
+  }
+
+  .petProfilePictureContainer {
+    height: 500px;
   }
 
   .userPetTextBox,
