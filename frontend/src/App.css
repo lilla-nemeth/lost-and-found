@@ -522,6 +522,10 @@ table {
   overflow: hidden;
 }
 
+.petProfilePictureContainer {
+  height: 500px;
+}
+
 .userPetPicture,
 .petProfilePicture {
   position: absolute;
