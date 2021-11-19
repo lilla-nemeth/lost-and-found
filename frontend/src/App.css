@@ -150,8 +150,8 @@ table {
 
 .navLogo {
   text-align: center;
-  width: 25px;
-  height: 25px;
+  height: 25px !important;
+  width: 25px !important;
   padding: 10px;
   margin: 10px;
   display: inline-block;
@@ -162,8 +162,8 @@ table {
 }
 
 .navLogoInner {
-  height: 25px;
-  width: 25px;
+  height: 25px !important;
+  width: 25px !important;
   fill: var(--clr-white);
 }
 
@@ -384,7 +384,6 @@ table {
   width: 20%;
   display: flex;
   justify-content: center;
-  padding-right: 5%;
 }
 
 .dashboardBox {
@@ -1518,10 +1517,6 @@ input[type=checkbox]:checked ~ label{
     width: 80%;
   }
 
-  .userPet {
-    width: 100%;
-  }
-
   .userPetPictureContainer,
   .petProfilePictureContainer,
   .petListPictureContainer {
@@ -1584,6 +1579,11 @@ input[type=checkbox]:checked ~ label{
     width: 100%;
   }
 
+  .sidebar {
+    width: 70%;
+    padding: unset;
+  }
+
 }
 
 @media only screen and (min-width: 400px) and (max-width: 600px) {
@@ -1618,8 +1618,12 @@ input[type=checkbox]:checked ~ label{
   .petProfileCard,
   .petListCard {
     padding: 0;
-    width: 80%;
     border-radius: var(--radius);
+  }
+
+  .petProfileCard,
+  .petListCard {
+    width: 80%;
   }
 
   .userPetPictureContainer,
@@ -1682,6 +1686,11 @@ input[type=checkbox]:checked ~ label{
 
   .backButton {
     width: 100%;
+  }
+
+  .sidebar {
+    width: 70%;
+    padding: unset;
   }
 
 }
@@ -1775,6 +1784,13 @@ input[type=checkbox]:checked ~ label{
     width: 100%;
   }
 
+  .sidebar {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    padding: 46px;
+  }
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
@@ -1798,6 +1814,13 @@ input[type=checkbox]:checked ~ label{
   .userPetTextBox,
   .petProfileTextBox {
     width: 100%;
+  }
+
+  .sidebar {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    padding: 46px;
   }
 
 }
@@ -1931,14 +1954,6 @@ input[type=checkbox]:checked ~ label{
 
   .dashboardSidebar {
     width: unset;
-    padding-right: unset;
-  }
-
-  .sidebar {
-    width: 70%;
-    display: flex;
-    justify-content: center;
-    padding: 46px;
   }
 
 } 
