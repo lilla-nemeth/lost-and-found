@@ -1017,7 +1017,7 @@ input[type=checkbox]:checked ~ label{
   box-shadow: var(--shadow);
   padding: 50px; 
   height: fit-content;
-  width: 40%;
+  width: 50%;
 }
 
 .loginFormBox,
@@ -1591,6 +1591,10 @@ input[type=checkbox]:checked ~ label{
     padding: unset;
   }
 
+  .formBox {
+    width: 100%;
+  }
+
 }
 
 @media only screen and (min-width: 400px) and (max-width: 600px) {
@@ -1700,6 +1704,9 @@ input[type=checkbox]:checked ~ label{
     padding: unset;
   }
 
+  .formBox {
+    width: 100%;
+  }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 1024px) {
@@ -1804,6 +1811,7 @@ input[type=checkbox]:checked ~ label{
 
 }
 
+
 @media only screen and (min-width: 851px) {
   .navLinkDesktop,
   .logOutButtonDesktop {
@@ -1814,6 +1822,36 @@ input[type=checkbox]:checked ~ label{
 
   .navMainList {
     flex-wrap: unset;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 700px) {
+  .formBox {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 800px) {
+  .formBox {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 900px) {
+  .formBox {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1000px)  {
+  .formBox {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1100px) {
+  .formBox {
+    width: 50%;
   }
 }
 
