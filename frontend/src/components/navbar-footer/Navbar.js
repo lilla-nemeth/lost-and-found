@@ -66,6 +66,8 @@ const Navbar = (props) => {
         }
     }
 
+    if (DEBUG) console.log('hamburgerOpen', hamburgerOpen);
+
     return (  
         <div>
             <div className={transparent ? 'navigationWithoutPicture' : 'navigationWithPicture'}>
