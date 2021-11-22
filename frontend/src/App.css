@@ -267,6 +267,9 @@ table {
 
 .username {
   color: var(--clr-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .navLinkMobile,
@@ -1402,7 +1405,7 @@ input[type=checkbox]:checked ~ label{
 
 
 /* Media Queries */
-@media only screen and (min-width: 100px) and (max-width: 768px) {
+@media only screen and (min-width: 100px) and (max-width: 850px) {
 
   .navLinkDesktop,
   .logOutButtonDesktop {
@@ -1733,7 +1736,7 @@ input[type=checkbox]:checked ~ label{
 
 }
 
-@media only screen and (min-width: 600px) and (max-width: 768px) {
+@media only screen and (min-width: 600px) and (max-width: 800px) {
   /* Pet Cards */
   .userPet,
   .petProfileCard,
@@ -1799,6 +1802,19 @@ input[type=checkbox]:checked ~ label{
     padding: 46px;
   }
 
+}
+
+@media only screen and (min-width: 851px) {
+  .navLinkDesktop,
+  .logOutButtonDesktop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .navMainList {
+    flex-wrap: unset;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
@@ -1905,7 +1921,6 @@ input[type=checkbox]:checked ~ label{
   .petProfilePictureContainer {
     display: flex;
     flex-direction: row;
-    /* height: 500px; */
     overflow: hidden;
     width: 100%;
   }

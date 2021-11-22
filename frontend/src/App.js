@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { AuthContext } from './contexts/AuthContext';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
+import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/navbar-footer/Navbar';
 import Footer from './components/navbar-footer/Footer';
 import Register from './components/login-register/Register';
@@ -63,54 +64,15 @@ function App() {
     return (
       <>
       <BrowserRouter>
-        <Switch>
-          <Route path='/login'>
-            <Login />
-            <Footer transparent={transparent} />
-          </Route>
-          <Route path='/register'>
-            <Register />
-            <Footer transparent={transparent} />
-          </Route>
-          <Route path='/lostandfound'>
-            <Navbar />
-            <PetHome />
-            <Footer />
-          </Route>
-          <Route path={'/petprofile/:id'}>
-            <Navbar />
-            <PetProfile />
-            <Footer />
-          </Route>
-          <Route exact path='/'>
-            <Navbar transparent={transparent} />
-            <PetLandingPage />
-            <Footer transparent={transparent} />
-          </Route>
-          <Route path='*'>
-            <Navbar transparent={transparent}/>
-            <PetLandingPage />
-            <Footer transparent={transparent} />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-      </>
-    );
-  }
-
-    return (
-      <>
-        <BrowserRouter>
+        <ScrollToTop>
           <Switch>
-            <Route path='/reportpet'>
-              <Navbar />
-              <PetReport />
-              <Footer />
+            <Route path='/login'>
+              <Login />
+              <Footer transparent={transparent} />
             </Route>
-            <Route path='/dashboard'>
-              <Navbar />
-              <Dashboard />
-              <Footer />
+            <Route path='/register'>
+              <Register />
+              <Footer transparent={transparent} />
             </Route>
             <Route path='/lostandfound'>
               <Navbar />
@@ -119,20 +81,63 @@ function App() {
             </Route>
             <Route path={'/petprofile/:id'}>
               <Navbar />
-              <PetProfile/>
+              <PetProfile />
               <Footer />
             </Route>
             <Route exact path='/'>
               <Navbar transparent={transparent} />
-              <PetLandingPage  />
+              <PetLandingPage />
               <Footer transparent={transparent} />
             </Route>
             <Route path='*'>
-              <Navbar />
-              <PetReport />
-              <Footer />
+              <Navbar transparent={transparent}/>
+              <PetLandingPage />
+              <Footer transparent={transparent} />
             </Route>
           </Switch>
+        </ScrollToTop>
+      </BrowserRouter>
+      </>
+    );
+  }
+
+    return (
+      <>
+        <BrowserRouter>
+          <ScrollToTop>
+            <Switch>
+              <Route path='/reportpet'>
+                <Navbar />
+                <PetReport />
+                <Footer />
+              </Route>
+              <Route path='/dashboard'>
+                <Navbar />
+                <Dashboard />
+                <Footer />
+              </Route>
+              <Route path='/lostandfound'>
+                <Navbar />
+                <PetHome />
+                <Footer />
+              </Route>
+              <Route path={'/petprofile/:id'}>
+                <Navbar />
+                <PetProfile/>
+                <Footer />
+              </Route>
+              <Route exact path='/'>
+                <Navbar transparent={transparent} />
+                <PetLandingPage  />
+                <Footer transparent={transparent} />
+              </Route>
+              <Route path='*'>
+                <Navbar />
+                <PetReport />
+                <Footer />
+              </Route>
+            </Switch>
+          </ScrollToTop>
         </BrowserRouter>
       </>
     );
