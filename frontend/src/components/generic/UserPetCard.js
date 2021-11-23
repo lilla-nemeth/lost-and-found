@@ -5,23 +5,33 @@ const UserPetCard = (props) => {
     const { pet, deleteUsersPet, allChecked, parentCallback } = props;
     const [checked, setChecked] = useState(false);
 
-
     let DEBUG = false;
 
     let disabled = !checked;
 
-    // if (DEBUG) console.log(pet);
+    if (DEBUG) console.log(pet);
     if (DEBUG) console.log('disabled', disabled);
     if (DEBUG) console.log('allChecked', allChecked);
 
+    const buttonCardChecked = (
+        <div>
+            <button 
+                className={disabled ? 'deletePetButtonInactive' : 'deletePetButton'}
+                disabled={disabled}
+                onClick={() => deleteUsersPet(pet.id)}
+            >
+                Delete Pet
+            </button>
+        </div>
+    );
 
-    // function switchCheckboxState(event) {
-    //     if (checked) {
-    //         setChecked(event.target.checked);
-    //     } else if (allChecked) {
-    //         setAllChecked(allChecked);
-    //     }
-    // }
+    const buttonAllChecked = (
+        <div>
+            <button className='deletePetButtonInvisible'>
+                Delete Pet
+            </button>
+        </div>
+    );
 
     return (
         <div className='userPetContainer'>
@@ -41,14 +51,12 @@ const UserPetCard = (props) => {
                                     </td>
                                     <td className='tableCell'>
                                         <label className='checkboxContainer'>
-                                          <input
-                                            type='checkbox'
-                                            // checked={allChecked || parentCallback(!checked)}
-                                            checked={allChecked || parentCallback(!checked)}
-                                            // onChange={event => setChecked(event.target.checked)}
-                                            onChange={() => {setChecked(!checked); parentCallback(!checked);}}
-                                          />
-                                          <span class='checkmark'></span>
+                                            <input
+                                              type='checkbox'
+                                              checked={allChecked || (checked || parentCallback(checked))}
+                                              onChange={() => {setChecked(!checked); parentCallback(!checked);}}
+                                            />
+                                            <span class='checkmark'></span>
                                         </label>
                                     </td>
                                 </tr>
@@ -72,15 +80,7 @@ const UserPetCard = (props) => {
                                 </tr>
                             </tbody>
                         </table>
-                        <div>
-                            <button 
-                                className={disabled ? 'formButtonInactive' : 'formButton'}
-                                disabled={disabled}
-                                onClick={() => deleteUsersPet(pet.id)}
-                            >
-                                Delete Pet
-                            </button>
-                        </div>
+                        { allChecked ? buttonAllChecked : buttonCardChecked }
                     </div>
                 </div>
             </div>

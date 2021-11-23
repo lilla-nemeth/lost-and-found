@@ -1141,14 +1141,30 @@ input[type=checkbox]:checked ~ label{
   padding-bottom: 15px;
 }
 
+
+.deletePetButtonInvisible {
+  border: none;
+  margin-top: 40px;
+  padding: 20px;
+  text-transform: uppercase;
+  border-radius: var(--radius-button);
+  width: 100%;
+  visibility: unset;
+  opacity: 0;
+}
+
 /* .deleteAllButtonInactive,
 .deleteAllButton, */
+.deletePetButton,
+.deletePetButtonInactive,
 .optionalButton,
 .formButton,
 .formButtonInactive {
   width: 100%;
 }
 
+.deletePetButtonInactive,
+.deletePetButton,
 .deleteAllButtonInactive,
 .deleteAllButton,
 .optionalButton,
@@ -1160,6 +1176,8 @@ input[type=checkbox]:checked ~ label{
   z-index: 1;
 }
 
+.deletePetButtonInactive,
+.deletePetButton,
 .optionalButton,
 .formButton,
 .formButtonInactive,
@@ -1167,6 +1185,8 @@ input[type=checkbox]:checked ~ label{
   margin-top: 40px;
 }
 
+.deletePetButtonInactive,
+.deletePetButton,
 .deleteAllButtonInactive,
 .deleteAllButton,
 .formButtonInactive,
@@ -1179,12 +1199,14 @@ input[type=checkbox]:checked ~ label{
   border: none;
 }
 
+.deletePetButtonInactive,
 .deleteAllButtonInactive,
 .deleteTextButtonInactive,
 .formButtonInactive {
   background: var(--clr-brown);
 }
 
+.deletePetButton,
 .deleteAllButton,
 .deleteTextButton,
 .formButton,
@@ -1192,13 +1214,14 @@ input[type=checkbox]:checked ~ label{
   cursor: pointer;
 }
 
+.deletePetButton,
 .deleteAllButton,
 .deleteTextButton,
 .formButton {
   background: var(--clr-darkgreen);
 }
 
-
+.deletePetButton:hover,
 .deleteAllButton:hover,
 .formButton:hover,
 .deleteTextButton:hover {

@@ -123,7 +123,6 @@ const Dashboard = () => {
         });
     }
 
-        
     // if (DEBUG) console.log('userPets', userPets);
     
     return (
