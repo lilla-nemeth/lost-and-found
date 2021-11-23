@@ -14,7 +14,7 @@ const SelectAll = (props) => {
                         disabledAll={disabledAll}
                         onClick={() => deleteUserAllPets()}
                     >
-                        Delete All Selected
+                        Delete All Pets
                     </button>
                 </div>
                 <div>
@@ -22,8 +22,7 @@ const SelectAll = (props) => {
                       <input
                         type='checkbox'
                         checked={allChecked}
-                        // onChange={event => setAllChecked(event.target.checked)}
-                        onChange={() => {setAllChecked(!allChecked); setPetCardChecked(!petCardChecked)}}
+                        onChange={() => {setAllChecked(!allChecked); setPetCardChecked(petCardChecked)}}
                       />
                       <span class='checkmark'></span>
                     </label>
