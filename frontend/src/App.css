@@ -380,7 +380,18 @@ table {
   padding: 50px;
   border: var(--clr-brown) 4px solid;
   border-radius: var(--radius);
-  margin-bottom: 60px;
+  margin-bottom: 44px;
+}
+
+.selectBox {
+  padding: 50px;
+  border: var(--clr-brown) 4px solid;
+  border-radius: var(--radius);
+  margin-bottom: 44px;
+
+  display: flex;
+  flex-direction: column;
+  width: 70%;
 }
 
 .dashboardSidebar {
@@ -391,6 +402,11 @@ table {
 
 .dashboardBox {
   width: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
 }
 
 /* Lost & Found */
@@ -465,7 +481,8 @@ table {
 }
 
 .userPetContainer {
-  padding: 0 0 60px 0;
+  padding: 0 0 30px 0;
+  width: 100%;
 }
 
 .userPetContainer,
@@ -633,7 +650,7 @@ table {
 
 /* Report - Picture */
 .imageUploadContainer {
-  border: 4px dashed var(--clr-brown); 
+  border: 4px dashed var(--clr-darkgreen); 
   justify-content: center;
   align-items: center;
   position: relative;
@@ -645,7 +662,6 @@ table {
 
 .imageUploadContainer:hover {
   background: var(--clr-lightaquamarine);
-  border: 4px dashed var(--clr-darkgreen); 
   transition: background 0.2s linear;
 }
 
@@ -1119,22 +1135,40 @@ input[type=checkbox]:checked ~ label{
   z-index: 1;
 }
 
+.deleteAllButtonBox {
+  display: flex;
+  justify-content: end;
+  padding-bottom: 15px;
+}
+
+/* .deleteAllButtonInactive,
+.deleteAllButton, */
 .optionalButton,
 .formButton,
 .formButtonInactive {
   width: 100%;
 }
 
+.deleteAllButtonInactive,
+.deleteAllButton,
 .optionalButton,
 .formButton,
 .formButtonInactive,
 .deleteTextButtonInactive {
   border: none;
   text-transform: uppercase;
-  margin-top: 40px;
   z-index: 1;
 }
 
+.optionalButton,
+.formButton,
+.formButtonInactive,
+.deleteTextButtonInactive {
+  margin-top: 40px;
+}
+
+.deleteAllButtonInactive,
+.deleteAllButton,
 .formButtonInactive,
 .deleteTextButtonInactive,
 .formButton,
@@ -1145,29 +1179,34 @@ input[type=checkbox]:checked ~ label{
   border: none;
 }
 
+.deleteAllButtonInactive,
 .deleteTextButtonInactive,
 .formButtonInactive {
   background: var(--clr-brown);
 }
 
+.deleteAllButton,
 .deleteTextButton,
 .formButton,
 .optionalButton {
   cursor: pointer;
 }
 
+.deleteAllButton,
 .deleteTextButton,
 .formButton {
   background: var(--clr-darkgreen);
 }
 
+
+.deleteAllButton:hover,
 .formButton:hover,
 .deleteTextButton:hover {
   background: var(--clr-green);
 }
 
 .deleteButton {
-  border-radius: var(--radius);
+  border-radius: var(--radius-button);
   background: var(--clr-darkgreen);
   color: var(--clr-white);
   width: 60px;

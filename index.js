@@ -148,7 +148,9 @@ app.delete('/deletepet/:id', authMw, (request, response) => {
 app.delete('/deleteallpets', authMw, (request, response) => {
     let userId = request.userId;
 
-    pool.query('DELETE FROM pets WHERE userId=1', [userId])
+    pool.query('DELETE FROM pets WHERE userId=$1', [userId])
+    // .then((res) => console.log(res))
+    // .catch((err) => console.log(err));
     .then((res) => response.status(200).json({msg: 'All pets are successfully deleted'}))
     .catch((err) => response.status(400).json({msg: 'Failed to delete all pets'}));
 });
