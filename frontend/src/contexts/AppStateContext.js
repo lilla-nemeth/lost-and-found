@@ -82,10 +82,10 @@ export default function AppStateContextProvider(props) {
     //     });  
     // },[]);
 
-    // if (DEBUG) console.log('token - AppStateContext', token);
-    // if (DEBUG) console.log('users arr - AppStateContext', users);
-    // if (DEBUG) console.log('pets arr - AppStateContext', pets);
-    // if (DEBUG) console.log('allPets arr - AppStateContext', allPets);
+    if (DEBUG) console.log('token - AppStateContext', token);
+    if (DEBUG) console.log('users arr - AppStateContext', users);
+    if (DEBUG) console.log('pets arr - AppStateContext', pets);
+    if (DEBUG) console.log('allPets arr - AppStateContext', allPets);
 
     function registerUser({email, username, phone, pw, successCallback, successTimeout, errorCallback}) {
         
@@ -201,7 +201,6 @@ export default function AppStateContextProvider(props) {
         axios(options)
         .then(
             res => {
-                // console.log(res.status === 200)
                if (successCallback) successCallback('Pet successfully added', successTimeout())
         }
         )
@@ -330,8 +329,30 @@ export default function AppStateContextProvider(props) {
         );
     }
 
+    function deleteAllPets({token, successCallback, successTimeout, errorCallback}) {
+        let options = {
+            method: 'delete',
+            url: '/deleteallpets',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': token
+            }
+        };
+        axios(options)
+        .then(
+            res => {
+                if (successCallback) successCallback(res.data.msg, successTimeout())
+            }
+            
+        )
+        .catch(
+            err => {if (err && errorCallback) errorCallback(err)}
+        );
+    }
+
     return (
-        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, users, userPets, setUserPets, reportPet, fetchPets, getNumberOfPets, allPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader, deleteOnePet, getUserPets}}>
+        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, users, userPets, setUserPets, reportPet, fetchPets, getNumberOfPets, allPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader, deleteOnePet, deleteAllPets, getUserPets}}>
             { props.children }
         </AppStateContext.Provider>
     )

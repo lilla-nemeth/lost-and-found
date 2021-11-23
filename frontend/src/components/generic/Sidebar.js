@@ -9,9 +9,8 @@ const Sidebar = (props) => {
 
         return (
             <div className='sidebar'>
-               <div className='navbar-container'>
-                <ul className='sidebarList'>
-
+                <div className='navbar-container'>
+                    <ul className='sidebarList'>
 		                <li className={active ? 'nav-link active-link' : 'nav-link'}>
                             <Link to='/dashboard' onClick={() => setActive(!active)}>Delete Pet</Link>
 		                	<div className='underline'></div>
@@ -21,7 +20,6 @@ const Sidebar = (props) => {
 		                	<div className='underline'></div>
 		                </li>
 	                </ul>
-             
                 </div>
             </div>
         );

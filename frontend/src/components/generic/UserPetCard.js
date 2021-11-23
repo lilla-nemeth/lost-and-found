@@ -2,15 +2,26 @@ import React, { useState } from 'react';
 import { petDate, isInputEmpty } from '../HelperFunctions.js';
 
 const UserPetCard = (props) => {
-    const { pet, deleteUsersPet } = props;
-
+    const { pet, deleteUsersPet, allChecked, parentCallback } = props;
     const [checked, setChecked] = useState(false);
+
 
     let DEBUG = false;
 
     let disabled = !checked;
 
-    if (DEBUG) console.log(pet);
+    // if (DEBUG) console.log(pet);
+    if (DEBUG) console.log('disabled', disabled);
+    if (DEBUG) console.log('allChecked', allChecked);
+
+
+    // function switchCheckboxState(event) {
+    //     if (checked) {
+    //         setChecked(event.target.checked);
+    //     } else if (allChecked) {
+    //         setAllChecked(allChecked);
+    //     }
+    // }
 
     return (
         <div className='userPetContainer'>
@@ -32,8 +43,10 @@ const UserPetCard = (props) => {
                                         <label className='checkboxContainer'>
                                           <input
                                             type='checkbox'
-                                            checked={checked}
-                                            onChange={event => setChecked(event.target.checked)}
+                                            // checked={allChecked || parentCallback(!checked)}
+                                            checked={allChecked || parentCallback(!checked)}
+                                            // onChange={event => setChecked(event.target.checked)}
+                                            onChange={() => {setChecked(!checked); parentCallback(!checked);}}
                                           />
                                           <span class='checkmark'></span>
                                         </label>
@@ -61,11 +74,11 @@ const UserPetCard = (props) => {
                         </table>
                         <div>
                             <button 
-                            className={disabled ? 'formButtonInactive' : 'formButton'}
-                            disabled={disabled}
-                            onClick={() => deleteUsersPet(pet.id)}
+                                className={disabled ? 'formButtonInactive' : 'formButton'}
+                                disabled={disabled}
+                                onClick={() => deleteUsersPet(pet.id)}
                             >
-                            Delete Pet
+                                Delete Pet
                             </button>
                         </div>
                     </div>
