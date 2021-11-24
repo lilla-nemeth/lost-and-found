@@ -3,9 +3,10 @@ import { createBrowserHistory } from 'history';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import Loader from '../generic/Loader';
 import PetPage from './PetPage';
-import PetList from './PetList';
+import PetList from './unused/PetList';
 import PetListWithFilters from './unused/PetListWithFilters';
-import PetListWithSearch from './unused/PetListWithSearch';
+import PetSearch from './unused/PetSearch';
+import PetListWithSearch from './PetListWithSearch';
 
 let history = createBrowserHistory();
 
@@ -23,7 +24,8 @@ const PetHome = () => {
     return (  
         <main className='petMain'>
             <section>
-                <PetList />
+                {/* <PetList /> */}
+                <PetListWithSearch />
                 <PetPage />
             </section>
         </main>

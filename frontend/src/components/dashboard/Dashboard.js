@@ -18,7 +18,9 @@ const Dashboard = () => {
         deleteOnePet, 
         deleteAllPets, 
         userPets, 
-        setUserPets, 
+        setUserPets,
+        getAllPets,
+        setAllPets,
         fetchPets, 
         limit, 
         offset, 
@@ -65,7 +67,12 @@ const Dashboard = () => {
                             }
                         })
                     }
-                })
+                });
+                getAllPets({
+                    successCallback: res => {
+                        setAllPets(res.data)
+                    }
+                });
             },
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');
@@ -95,7 +102,12 @@ const Dashboard = () => {
                             }
                         })
                     }
-                })
+                });
+                getAllPets({
+                    successCallback: res => {
+                        setAllPets(res.data)
+                    }
+                });  
             },
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');

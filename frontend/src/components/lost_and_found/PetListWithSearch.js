@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { AppStateContext } from '../../../contexts/AppStateContext';
-import PetListCard from '../../generic/PetListCard';
-import Search from './Search';
+import { AppStateContext } from '../../contexts/AppStateContext';
+import PetListCard from '../generic/PetListCard';
+import Search from '../generic/Search';
 
 const PetListWithSearch = () => {
     // now the allPets is 'inactive' in the AppStateContext
@@ -34,13 +34,13 @@ const PetListWithSearch = () => {
 
     return (  
         <>
+            <h1 className='lostAndFoundHeadline'>Lost and Found Pets</h1>
             <Search search={search} setSearch={setSearch} />
             <div className='petListContainer'>
-                <h1 className='lostAndFoundHeadline'>Lost and Found Pets</h1>
-                    {search == '' ?
+                    {search === '' ?
                     pets.map(pet => {
                             return (
-                                <PetListCard key={pet.id} pet={pet}/>
+                                <PetListCard key={pet.id} pet={pet} />
                             );
                         })
                     :

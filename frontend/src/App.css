@@ -420,7 +420,6 @@ table {
 .lostAndFoundHeadline {
   font: 700 38px/1.2 'Poppins', sans-serif;
   display: flex;
-  width: 100%;
   padding-top: 150px;
   padding-bottom: 100px;
   justify-content: center;
@@ -447,16 +446,22 @@ table {
 }
 
 .petListCard {
-  margin-bottom: 60px;
-  margin-right: 30px;
-  margin-left: 30px;
+  margin-bottom: 40px;
+  margin-right: 20px;
+  margin-left: 20px;
+  width: 20%;
+  /* height: fit-content; */
+  /* min-height: 720px; */
 }
 
 .petListTextBox {
   padding: 40px 0 0 0;
   border-top: 0;
-  min-height: 300px;
+  min-height: 430px;
   overflow-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .petListPictureContainer {
@@ -1019,21 +1024,38 @@ input[type=checkbox]:checked ~ label{
   justify-content: center;
 }
 
+.searchFormSection,
 .formSection {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.formSection {
   padding: 140px 90px 90px 90px;
 }
 
+.searchFormSection {
+  padding: 0px 0px 90px 0px;
+}
+
+/* .searchFormBox,
 .formBox {
+
+} */
+
+.formBox {
+  width: 50%;
   background: var(--clr-white); 
   border-radius: var(--radius); 
   box-shadow: var(--shadow);
   padding: 50px; 
   height: fit-content;
-  width: 50%;
+}
+
+.searchFormBox {
+  width: 80%;
 }
 
 .loginFormBox,
@@ -1653,6 +1675,7 @@ input[type=checkbox]:checked ~ label{
     padding: unset;
   }
 
+  /* .searchFormBox, */
   .formBox {
     width: 100%;
   }
@@ -1766,6 +1789,7 @@ input[type=checkbox]:checked ~ label{
     padding: unset;
   }
 
+  /* .searchFormBox, */
   .formBox {
     width: 100%;
   }
@@ -1888,30 +1912,35 @@ input[type=checkbox]:checked ~ label{
 }
 
 @media only screen and (min-width: 600px) and (max-width: 700px) {
+  /* .searchFormBox, */
   .formBox {
     width: 90%;
   }
 }
 
 @media only screen and (min-width: 700px) and (max-width: 800px) {
+  /* .searchFormBox, */
   .formBox {
     width: 80%;
   }
 }
 
 @media only screen and (min-width: 800px) and (max-width: 900px) {
+  /* .searchFormBox, */
   .formBox {
     width: 70%;
   }
 }
 
 @media only screen and (min-width: 900px) and (max-width: 1000px)  {
+  /* .searchFormBox, */
   .formBox {
     width: 60%;
   }
 }
 
 @media only screen and (min-width: 1000px) and (max-width: 1100px) {
+  /* .searchFormBox, */
   .formBox {
     width: 50%;
   }
@@ -1984,6 +2013,10 @@ input[type=checkbox]:checked ~ label{
   .petProfileTextBox {
     width: 100%;
   }
+
+  /* .searchBox {
+    max-width: 70%;
+  } */
 }
 
 @media only screen and (min-width: 1400px) and (max-width: 2100px) {
@@ -2029,6 +2062,10 @@ input[type=checkbox]:checked ~ label{
   .petProfileTextBox {
     width: 100%;
   }
+
+  /* .searchBox {
+    max-width: 70%;
+  } */
 
 }
 
@@ -2080,347 +2117,6 @@ input[type=checkbox]:checked ~ label{
   }
 
 } 
-
-/* Organise this part below:  */
-/* 
-@media only screen and (min-width: 200px) {
-  .formBox {
-    width: 150%;
-  }
-  
-  .userPet,
-  .petProfileCard,
-  .petListCard {
-    padding: 0;
-    width: 80%;
-    border-radius: 25px;
-  }
-  
-  .userPetPictureContainer,
-  .petProfilePictureContainer,
-  .petListPictureContainer {
-    border-radius: 25px 25px 0 0;
-  }
-
-  .userPetTextBox,
-  .petProfileTextBox,
-  .petListTextBox {
-    border-radius: 0 0 25px 25px;
-  }
-
-  .userPetTextBox,
-  .petListTextBox {
-    padding: 50px;
-  }
-
-  .lostAndFoundHeadline {
-    padding-bottom: 50px;
-  }
-  
-  .tableCell:first-child {
-    width: 20px;
-  }
-
-  .tableCell:nth-child(2) {
-    overflow-wrap: anywhere;
-    width: unset;
-    padding-right: 0 !important;
-  }
-
-  .tableCell {
-    padding-right: 20px;
-    width: 0;
-    overflow-wrap:normal;
-    line-height: unset;
-  } 
-
-  .userPetInner,
-  .petProfileCardInner {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: unset;
-  }
-
-  .userPetPictureContainer,
-  .petProfilePictureContainer {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    background: var(--clr-brown);
-    width: 50%;
-    position: relative;
-    height: 450px;
-    overflow: hidden;
-    width: 100%;
-  }
-
-  .userPetTextBox,
-  .petProfileTextBox {
-    width: auto;
-    border: none;
-    padding: 40px;
-  }
-
-  .backButtonBox {
-    display:unset;
-    justify-content:unset;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    padding-left: 0;
-    width: auto;
-  }
-
-  .petListTextBox {
-    border: none;
-  }
-  
-}
-
-@media only screen and (min-width: 300px) {
-  .formBox {
-    width: 120%;
-  }
-
-  .petProfileCard,
-  .petListCard {
-    padding: 0;
-    width: 80%;
-  }
-  
-  .userPetTextBox,
-  .petListTextBox,
-  .petProfileTextBox {
-    padding: 50px;
-  }
-
-}
-
-
-@media only screen and (min-width: 400px) {
-  .formBox {
-    width: 120%;
-  }
-
-  .petProfileCard,
-  .petListCard {
-    padding: 50px
-  }
-
-  .petProfileCard,
-  .petListCard {
-    padding: 0;
-    width: 80%;
-  }
-
-  .userPetTextBox,
-  .petProfileTextBox {
-    padding: 50px;
-  }
-
-} 
-
-@media only screen and (min-width: 500px) {
-  .formBox {
-    width: 100%;
-  }
-
-  .petProfileCard,
-  .petListCard {
-    padding: 0;
-    width: 80%;
-  }
-  
-}
-
-
-@media only screen and (min-width: 600px) {
-  .formBox {
-    width: 100%;
-  }
-
-  .petProfileCard,
-  .petListCard {
-    width: 70%;
-    padding: 50px;
-  }
-
-  .userPetPictureContainer,
-  .petProfilePictureContainer,
-  .petListPictureContainer {
-    border-radius: 0;
-  }
-
-  .userPetTextBox,
-  .petProfileTextBox,
-  .petListTextBox {
-    border-radius: 0;
-    padding: 40px 0 0 0;
-    border-top: 0;
-  }
-
-  .userPetTextBox,
-  .petProfileTextBox {
-    border-top: 0;
-  }
-
-  .lostAndFoundHeadline {
-    padding-bottom: 100px;
-  }
-
-}
-
-@media only screen and (min-width: 769px) {
-  .formBox {
-    width: 90%;
-  }
-
-  .petListCard {
-    width: 70%;
-  }
-
-
-
-} 
-
-@media only screen and (min-width: 992px) {
-  .formBox {
-    width: 50%;
-  }
-
-  .petListCard {
-    width: 70%;
-  }
-
-}
-
-@media only screen and (min-width: 1200px) {
-  .formBox {
-    width: 50%;
-  }
-
-  .petListCard {
-    width: 30%;
-  }
-
-  .userPetContainer {
-    padding: 0 0 60px 0;
-  }
-
-  .userPetContainer,
-  .petProfileContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .userPetContainer {
-    min-width: 60%;
-    padding: 0 0 60px 0;
-  }
-  
-  .petProfileContainer {
-    padding-top: 120px;
-  }
-
-  .userPet,
-  .petProfileCard {  
-    background: var(--clr-white);
-    display: flex;
-    padding: 50px;
-    justify-content: center;
-    align-items: center;
-    border-radius: var(--radius); 
-  }
-
-  .userPet,
-  .petProfileCard {  
-    box-shadow: var(--shadow);
-  }
-
-  .petProfileCard {
-    width: 70%;
-    max-height: 70%;
-  } 
-  
-  .userPetInner,
-  .petProfileCardInner {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-  }
-
-
-  .petProfileCardInner {
-    min-height: 600px;
-  }
-
-  .userPetPictureContainer,
-  .petProfilePictureContainer {
-    position: relative;
-    overflow: hidden;
-    background: var(--clr-brown); 
-    width: 50%;
-    position: relative;
-    overflow: hidden;
-    flex-direction: row;
-    display: flex;
-    height: unset;
-    border-radius: unset;
-  }
-
-  .userPetPicture,
-  .petProfilePicture {
-    position: absolute;
-    top: 50%;    
-    left: 50%;
-    right: 50%;
-    margin: auto;
-    transform: translate( -50%, -50%);
-    object-fit: cover;
-    min-height: 100%;
-    min-width: 100%;
-    max-height: 150%;
-    max-width: 150%;
-  }
-  
-  .userPetTextBox,
-  .petProfileTextBox {
-    padding: 0 0 0 40px;
-    border-left: 0;
-    min-height: 300px;
-    width: 50%;
-    overflow-wrap: break-word;
-    border-radius: unset;
-  }
-  
-  .backButtonBox {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    padding-left: 100px;
-    width: 70%;
-  }
-}
-
-@media only screen and (min-width: 1600px) {
-  .petListCard {
-    width: 20%;
-  }
-}
-
-@media only screen and (min-width: 2100px) {
-  .formBox {
-    width: 30%;
-  }
-
-  .petListCard {
-    width: 15%;
-  }
-}   */
-
 
 
 
