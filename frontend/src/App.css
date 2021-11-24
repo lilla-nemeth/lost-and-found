@@ -2024,6 +2024,7 @@ input[type=checkbox]:checked ~ label{
   .petListCard {
     padding: 50px;
     width: 15%;
+    height: fit-content;
   }
   
   .userPet, 
