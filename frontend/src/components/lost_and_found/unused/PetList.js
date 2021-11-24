@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { AppStateContext } from '../../contexts/AppStateContext';
-import PetListCard from '../generic/PetListCard';
+import { AppStateContext } from '../../../contexts/AppStateContext';
+import PetListCard from '../../generic/PetListCard';
 
 const PetList = () => {
     const { pets } = useContext(AppStateContext);

@@ -25,7 +25,7 @@ let history = createBrowserHistory();
 // (Maybe class component would be more reasonable...)
 const PetReport = () => {
     const { token } = useContext(AuthContext);
-    const { reportPet, getUserPets, setUserPets, fetchPets, limit, offset, setPets, getNumberOfPets, setTotal } = useContext(AppStateContext);
+    const { reportPet, getUserPets, setUserPets, getAllPets, setAllPets, fetchPets, limit, offset, setPets, getNumberOfPets, setTotal } = useContext(AppStateContext);
 
     const [loader, setLoader] = useState(true);
 
@@ -90,6 +90,11 @@ const PetReport = () => {
                             })
                         }
                     });
+                    getAllPets({
+                        successCallback: res => {
+                            setAllPets(res.data)
+                        }
+                    });  
                     getUserPets({
                         token,
                         successCallback: res => {

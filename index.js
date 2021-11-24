@@ -51,7 +51,7 @@ app.get('/userpets', authMw, (request, response) => {
 // get all pets
 app.get('/allpets', (request, response) => {
 
-    pool.query('SELECT * FROM pets')
+    pool.query('SELECT * FROM pets ORDER BY since DESC')
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch all pets'}));
 });
