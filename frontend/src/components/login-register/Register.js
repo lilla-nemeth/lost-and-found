@@ -22,29 +22,33 @@ const Register = () => {
 
     const { registerUser } = useContext(AppStateContext);
 
-    let DEBUG = false;
+    let DEBUG = true;
 
-    let disabled = !password || !email;
+    let disabled = !password || !email || !username || !phone;
 
     function handleSubmit(event) {
         event.preventDefault();
 
-        registerUser({
-            email,
-            username,
-            phone,
-            pw:password,
-            successCallback: res => setSuccessMsg(res),
-            successTimeout: () => (setTimeout(() => {
-                setSuccessMsg('');
-            }, 5000)),
-            errorCallback: err => {
-                handleError(err, setErrorMsg);
-            }
-        });
+        if (!disabled) {
+            registerUser({
+                email,
+                username,
+                phone,
+                pw:password,
+                successCallback: res => setSuccessMsg(res),
+                successTimeout: () => (setTimeout(() => {
+                    setSuccessMsg('');
+                }, 5000)),
+                errorCallback: err => {
+                    handleError(err, setErrorMsg);
+                }
+            });
+        }
     }
     
     history.replace('/register');
+
+    if (DEBUG) console.log(errorMsg);
 
     return (
         <main className='formMain'>
@@ -118,8 +122,8 @@ const Register = () => {
                             <div>
                                 <button 
                                     type='submit' 
-                                    className={disabled ? 'formButtonInactive' :'formButton'}
-                                    disabled={disabled}
+                                    className={disabled || errorMsg != '' ? 'formButtonInactive' :'formButton'}
+                                    disabled={disabled || errorMsg != ''}
                                 >
                                     Register
                                 </button>

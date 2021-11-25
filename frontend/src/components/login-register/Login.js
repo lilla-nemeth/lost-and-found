@@ -29,6 +29,7 @@ const Login = () => {
     function handleSubmit(event) {
         event.preventDefault();
 
+        if (!disabled) {
             loginUser({
                 setToken,
                 email,
@@ -37,6 +38,7 @@ const Login = () => {
                     handleError(err, setErrorMsg);
                 }
             });
+        }
     }
 
     history.replace('/login');
@@ -82,8 +84,8 @@ const Login = () => {
                             <div>
                                 <button 
                                     type='submit' 
-                                    className={disabled ? 'formButtonInactive' :'formButton'}
-                                    disabled={disabled}
+                                    className={disabled || errorMsg != '' ? 'formButtonInactive' :'formButton'}
+                                    disabled={disabled || errorMsg != ''}
                                 >
                                     Login
                                 </button>
