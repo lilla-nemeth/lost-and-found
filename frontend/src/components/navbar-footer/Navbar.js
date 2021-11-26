@@ -82,7 +82,7 @@ const Navbar = (props) => {
                     :
                     <>
                         <div className='navPositionLeft'>
-                            <Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link>
+                            <Link className='navLogo' to='/lostandfound'><PetPawLogo className='navLogoInner'/></Link>
                             <li className='username'>Hi {username}!</li>
                         </div>
                             {isNavbarOpen(hamburgerOpen, 

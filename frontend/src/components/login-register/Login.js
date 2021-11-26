@@ -22,7 +22,7 @@ const Login = () => {
 
     let DEBUG = false;
 
-    let disabled = !password || !email;
+    let disabled = !password || !email || errorMsg != '' || successMsg != '';
 
     if (DEBUG) console.log(setToken);
 
@@ -84,8 +84,8 @@ const Login = () => {
                             <div>
                                 <button 
                                     type='submit' 
-                                    className={disabled || errorMsg != '' ? 'formButtonInactive' :'formButton'}
-                                    disabled={disabled || errorMsg != ''}
+                                    className={disabled ? 'formButtonInactive' :'formButton'}
+                                    disabled={disabled}
                                 >
                                     Login
                                 </button>
