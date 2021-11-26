@@ -65,7 +65,8 @@ table {
   --font-family: 'Poppins', sans-serif;
   --font-standard: 400 17px/1.2 'Poppins', sans-serif;
   --font-thin: 300 17px/1.2 'Poppins', sans-serif;
-  --font-landingpage: 700 62px/1.2 'Poppins', sans-serif;
+  --font-landingpage: 700 100px/1.2 'Poppins', sans-serif;
+  --font-landingpage-mobile: 700 17vw/1.2 'Poppins', sans-serif;
   --font-input: 700 28px/1.2 "Poppins", sans-serif;
 
   /* Shadow */
@@ -159,27 +160,41 @@ table {
   border: 2px solid transparent;
   border-radius: var(--radius-circle);
   z-index: 2;
+  cursor: pointer;
 }
 
 .navLogoInner {
   height: 25px !important;
   width: 25px !important;
   fill: var(--clr-white);
+  padding: 12px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.navLogoInner:hover {
+  fill: var(--clr-aquamarine);
 }
 
 .navLogo:hover {
-  border: 2px solid var(--clr-white);
+  border: 2px solid var(--clr-aquamarine);
   border-radius: var(--radius-circle);
   margin: 10px;
   transition: border 0.2s linear;
+
+  /* background-color: var(--clr-darkgreen); */
 }
 
 .navLogoInner:after {
   display: block;
   content: '';
-  border-bottom: solid 2px var(--clr-white); 
+  padding: 10px;
+  border-bottom: solid 2px var(--clr-aquamarine); 
   transform: scaleX(0);  
+  padding: 10px;
   transition: transform 0.2s linear;
+  /* background-color: var(--clr-darkgreen); */
 }
 
 .navPositionLeft {
@@ -198,18 +213,18 @@ table {
 
 /* Beginning of test link */
 
-.navbar-container ul {
+.sidebarList {
   text-align: center;
 }
 
-.navbar-container ul li {
+.sidebarListElement {
 	display: inline-block;
   font: var(--font-standard);
   text-align: center;
   width: 100%;
 }
 
-.navbar-container ul li a {
+.sidebarInactiveLink {
 	color: var(--clr-brown);
 	text-decoration: none;
 	display: inline-block;	
@@ -217,39 +232,54 @@ table {
 	transition: color 0.5s;
 }
 
-.navbar-container ul li a:hover {
+.sidebarActiveLink {
   color: var(--clr-darkgreen);
+  text-decoration: none;
+  display: inline-block;
+  padding: 25px 0;
+  transition: color 0.5s;
+  border-bottom: 3px solid var(--clr-darkgreen);
+  width: 100%;
+  margin: -3px auto;
+  transition: width 0.2s, background-color 0.5s;
+
 }
 
-.navbar-container ul li .underline {
+.sidebarActiveLink:hover {
+  background: var(--clr-palebrown);
+  border-bottom: 3px solid var(--clr-green);
+  z-index: 1;
+}
+
+.sidebarLinkUnderline {
 	height: 3px;
 	background-color: transparent;
 	width: 0%;
 	transition: width 0.2s, background-color 0.5s;
 	margin: 0 auto;
+  z-index: 0;
 }
 
-.navbar-container ul li.active-link .underline {
+.sidebarActiveLink {
 	width: 100%;
-	background-color: var(--clr-brown);
+	color: var(--clr-darkgreen);
 }
 
-.navbar-container ul li:hover .underline {
+/* .sidebarListElement .sidebarLinkUnderline {
+	width: 100%;
 	background-color: var(--clr-darkgreen);
-  color: var(--clr-brown);
+} */
+
+/* Hover */
+.sidebarInactiveLink:hover,
+.sidebarActiveLink:hover {
+  color: var(--clr-green);
+}
+
+.sidebarListElement:hover .sidebarLinkUnderline {
+	background-color: var(--clr-green);
 	width: 100%;
 }
-
-.navbar-container ul li:active a {
-	transition: none;
-	color: var(--clr-green);
-}
-
-.navbar-container ul li:active .underline {
-	transition: none;
-	background-color: var(--clr-green);
-}
-
 
 /* End of test link */
 
@@ -277,6 +307,16 @@ table {
   color: var(--clr-white);
 }
 
+.navLinkMobile:hover,
+.navLinkDesktop:hover {
+  color: var(--clr-aquamarine);
+}
+
+.navLinkMobile:after,
+.navLinkDesktop:after {
+  border-bottom: solid 2px var(--clr-aquamarine); 
+}
+
 .sidebarLink {
   color: var(--clr-darkgreen);
   cursor: pointer;
@@ -290,11 +330,6 @@ table {
   transform: scaleX(0);  
   transition: transform 180ms ease-in-out;
   margin-top: 5px;
-}
-
-.navLinkMobile:after,
-.navLinkDesktop::after {
-  border-bottom: solid 2px var(--clr-white); 
 }
 
 .sidebarLink:after {
@@ -355,6 +390,7 @@ table {
   position: absolute;
   top: 40%;
   left: 10%;
+  line-height: 100px;
 }
 
 .landingPageVideo {
@@ -508,8 +544,6 @@ table {
   display: flex;
   padding: 50px;
   justify-content: center;
-  align-items: center;
-  max-height: 70%;
 } 
 
 .userPet,
@@ -1238,6 +1272,7 @@ input[type=checkbox]:checked ~ label{
   background: var(--clr-darkgreen);
 }
 
+.backButton:hover,
 .deletePetButton:hover,
 .deleteAllButton:hover,
 .formButton:hover,
@@ -1522,6 +1557,7 @@ input[type=checkbox]:checked ~ label{
   }
 
   .hamburger {
+    /* background: var(--clr-white); */
     cursor: pointer;
     display: block;
     margin-top: auto;
@@ -1531,14 +1567,24 @@ input[type=checkbox]:checked ~ label{
     z-index: 10;
   }
 
+  /* .hamburgerInner:hover {
+    background: var(--clr-aquamarine);
+  } */
+  
   .burgerActive,
   .burgerInactive {
     background: var(--clr-white);
+    /* background: var(--clr-darkgreen); */
     margin: 6px auto;
     width: 27px;
     height: 4px;
     transition: all 0.3s ease-in-out;
   } 
+  
+  /* .burgerInactive:hover,
+  .burgerActive:hover {
+    background: var(--clr-darkgreen);
+  } */
 
   .burgerActive:nth-child(1) {
     transform: translateY(10px) rotate(45deg);
@@ -1674,6 +1720,14 @@ input[type=checkbox]:checked ~ label{
     width: 100%;
   }
 
+  .landingPageHeadline {
+    font: var(--font-landingpage-mobile);
+    top: 60%;
+    left: 5%;
+    right: 5%;
+    padding: 10px;
+  }
+
 }
 
 @media only screen and (min-width: 400px) and (max-width: 600px) {
@@ -1785,6 +1839,14 @@ input[type=checkbox]:checked ~ label{
 
   .formBox {
     width: 100%;
+  }
+
+  .landingPageHeadline {
+    font: var(--font-landingpage-mobile);
+    top: 60%;
+    left: 5%;
+    right: 5%;
+    padding: 10px;
   }
 }
 
@@ -2100,9 +2162,9 @@ input[type=checkbox]:checked ~ label{
     flex-wrap: wrap;
   }
 
-  .navbar-container ul li {
+  /* .sidebarContainer ul li {
     width: 60%;
-  }
+  } */
 
   .dashboardContainer {
     flex-direction: column;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 
 const Sidebar = (props) => {
@@ -9,15 +9,29 @@ const Sidebar = (props) => {
 
         return (
             <div className='sidebar'>
-                <div className='navbar-container'>
+                <div className='sidebarContainer'>
                     <ul className='sidebarList'>
-		                <li className={active ? 'nav-link active-link' : 'nav-link'}>
-                            <Link to='/dashboard' onClick={() => setActive(!active)}>Delete Pet</Link>
-		                	<div className='underline'></div>
+                        <li className='sidebarListElement'>
+                            <NavLink 
+                                to='/dashboard' 
+                                activeClassName='sidebarActiveLink'
+                                className='sidebarInactiveLink'
+                                onClick={() => setActive(!active)}
+                            >
+                                Delete Pet
+                            </NavLink>
+		                	<div className='sidebarLinkUnderline'></div>
 		                </li>
-		                <li className={!active ? 'nav-link active-link' : 'nav-link'}>
-                            <Link to='/reportpet' onClick={() => setActive(!active)}>Report Another Pet</Link>
-		                	<div className='underline'></div>
+                        <li className='sidebarListElement'>
+                            <NavLink 
+                                to='/reportpet' 
+                                activeClassName='sidebarActiveLink'
+                                className='sidebarInactiveLink'
+                                onClick={() => setActive(!active)}
+                            >
+                                Report Another Pet
+                            </NavLink>
+		                	<div className='sidebarLinkUnderline'></div>
 		                </li>
 	                </ul>
                 </div>

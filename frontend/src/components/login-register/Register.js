@@ -22,9 +22,9 @@ const Register = () => {
 
     const { registerUser } = useContext(AppStateContext);
 
-    let DEBUG = true;
+    let DEBUG = false;
 
-    let disabled = !password || !email || !username || !phone;
+    let disabled = !password || !email || !username || !phone || errorMsg != '' || successMsg != '';
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -122,8 +122,8 @@ const Register = () => {
                             <div>
                                 <button 
                                     type='submit' 
-                                    className={disabled || errorMsg != '' ? 'formButtonInactive' :'formButton'}
-                                    disabled={disabled || errorMsg != ''}
+                                    className={disabled ? 'formButtonInactive' :'formButton'}
+                                    disabled={disabled}
                                 >
                                     Register
                                 </button>

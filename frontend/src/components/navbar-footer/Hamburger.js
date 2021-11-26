@@ -5,9 +5,11 @@ const Hamburger = (props) => {
 
     return(
         <div className='hamburger'>
-            <div className={hamburgerOpen ? 'burgerActive' : 'burgerInactive'}></div>
-            <div className={hamburgerOpen ? 'burgerActive' : 'burgerInactive'}></div>
-            <div className={hamburgerOpen ? 'burgerActive' : 'burgerInactive'}></div> 
+            <div className='hamburgerInner'>
+                <div className={hamburgerOpen ? 'burgerActive' : 'burgerInactive'}></div>
+                <div className={hamburgerOpen ? 'burgerActive' : 'burgerInactive'}></div>
+                <div className={hamburgerOpen ? 'burgerActive' : 'burgerInactive'}></div> 
+            </div>
         </div>
     )
     

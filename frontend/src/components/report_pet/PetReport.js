@@ -53,7 +53,7 @@ const PetReport = () => {
 
     let DEBUG = false;
 
-    let disabled = !status || !location || !species || !description || !preview;
+    let disabled = !status || !location || !species || !description || !preview || errorMsg != '' || successMsg != '';
 
     let required = true;
 
