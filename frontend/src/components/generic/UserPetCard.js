@@ -1,27 +1,46 @@
 import React, { useState } from 'react';
 import { petDate, isInputEmpty } from '../HelperFunctions.js';
+import LoaderButton from './LoaderButton.js';
 
 const UserPetCard = (props) => {
-    const { pet, deleteUsersPet, allChecked, parentCallback } = props;
+    const { pet, deleteUserPet, allChecked, parentCallback } = props;
     const [checked, setChecked] = useState(false);
+    const [deleting, setDeleting] = useState(false);
 
     let DEBUG = false;
-
+    
     let disabled = !checked;
-
+    
     if (DEBUG) console.log(pet);
     if (DEBUG) console.log('disabled', disabled);
     if (DEBUG) console.log('allChecked', allChecked);
+    
+    DEBUG = true;
+    
+    if (DEBUG) console.log('deleting', !deleting);
 
     const buttonCardChecked = (
-        <div>
-            <button 
-                className={disabled ? 'deletePetButtonInactive' : 'deletePetButton'}
-                disabled={disabled}
-                onClick={() => deleteUsersPet(pet.id)}
-            >
-                Delete Pet
-            </button>
+        <div> 
+            {!deleting ?
+                <button 
+                    className={disabled ? 'deletePetButtonInactive' : 'deletePetButton'}
+                    disabled={disabled}
+                    onClick={() => {setDeleting(!false); deleteUserPet(pet.id)}}
+                >
+                    <div className='deletePetButtonText'>Delete Pet</div> 
+                </button>
+            :
+                <button 
+                    className='deletePetButtonInactive'
+                    disabled={disabled}
+                    onClick={() => deleteUserPet(pet.id)}
+                >
+                <>
+                    <LoaderButton />
+                    <div className='deletePetButtonText'>Deleting...</div>
+                </> 
+                </button>
+            }
         </div>
     );
 

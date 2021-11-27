@@ -207,11 +207,13 @@ table {
   text-align: right;
 }
 
-
-
-
-
-/* Beginning of test link */
+/* Sidebar links */
+.sidebar {
+  padding: 50px;
+  border: var(--clr-brown) 4px solid;
+  border-radius: var(--radius);
+  margin-bottom: 29px;
+}
 
 .sidebarList {
   text-align: center;
@@ -242,7 +244,6 @@ table {
   width: 100%;
   margin: -3px auto;
   transition: width 0.2s, background-color 0.5s;
-
 }
 
 .sidebarActiveLink:hover {
@@ -265,12 +266,6 @@ table {
 	color: var(--clr-darkgreen);
 }
 
-/* .sidebarListElement .sidebarLinkUnderline {
-	width: 100%;
-	background-color: var(--clr-darkgreen);
-} */
-
-/* Hover */
 .sidebarInactiveLink:hover,
 .sidebarActiveLink:hover {
   color: var(--clr-green);
@@ -281,9 +276,6 @@ table {
 	width: 100%;
 }
 
-/* End of test link */
-
-.sidebarLink,
 .footerText,
 .username,
 .navLinkMobile,
@@ -317,12 +309,6 @@ table {
   border-bottom: solid 2px var(--clr-aquamarine); 
 }
 
-.sidebarLink {
-  color: var(--clr-darkgreen);
-  cursor: pointer;
-}
-
-.sidebarLink:after,
 .navLinkMobile:after,
 .navLinkDesktop::after {
   display: block;
@@ -332,11 +318,6 @@ table {
   margin-top: 5px;
 }
 
-.sidebarLink:after {
-  border-bottom: solid 2px var(--clr-darkgreen); 
-}
-
-.sidebarLink:hover:after,
 .navLinkMobile:hover:after,
 .navLinkDesktop:hover:after {
   transform: scaleX(1);
@@ -412,13 +393,6 @@ table {
   min-height: 100vh;
 }
 
-.sidebar {
-  padding: 50px;
-  border: var(--clr-brown) 4px solid;
-  border-radius: var(--radius);
-  margin-bottom: 44px;
-}
-
 .selectBox {
   padding: 50px;
   border: var(--clr-brown) 4px solid;
@@ -438,11 +412,9 @@ table {
 
 .dashboardBox {
   width: 50%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
 }
 
 /* Lost & Found */
@@ -1192,7 +1164,6 @@ input[type=checkbox]:checked ~ label{
   padding-bottom: 15px;
 }
 
-
 .deletePetButtonInvisible {
   border: none;
   margin-top: 40px;
@@ -1201,7 +1172,27 @@ input[type=checkbox]:checked ~ label{
   border-radius: var(--radius-button);
   width: 100%;
   visibility: unset;
+  display: flex;
+  height: 60px;
   opacity: 0;
+}
+
+#loaderButtonContainer {
+  height: 20px;
+  width: 20px;
+  padding-right: 15px;
+}
+
+.deleteAllButtonText {
+  height: 25px;
+}
+
+.deletePetButton,
+.deletePetButtonInactive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
 }
 
 /* .deleteAllButtonInactive,
@@ -1405,6 +1396,11 @@ input[type=checkbox]:checked ~ label{
   height: 95px;
   width: 95px;
 }
+
+/* #loaderButtonContainer {
+  height: 25px;
+  width: 25px;
+} */
 
 .paw {
   animation-name: load;
@@ -2162,9 +2158,9 @@ input[type=checkbox]:checked ~ label{
     flex-wrap: wrap;
   }
 
-  /* .sidebarContainer ul li {
+  .sidebarListElement {
     width: 60%;
-  } */
+  }
 
   .dashboardContainer {
     flex-direction: column;

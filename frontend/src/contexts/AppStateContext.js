@@ -67,7 +67,6 @@ export default function AppStateContextProvider(props) {
                     handleError(err, setErrorMsg);
                 }
             });
-        
     },[limit, offset]);
 
     if (DEBUG) console.log(pets);
@@ -201,8 +200,8 @@ export default function AppStateContextProvider(props) {
         axios(options)
         .then(
             res => {
-               if (successCallback) successCallback('Pet successfully added', successTimeout())
-        }
+               if (successCallback) successCallback(successTimeout())
+            }
         )
         .catch(
             err => {if (err && errorCallback) errorCallback(err)}
