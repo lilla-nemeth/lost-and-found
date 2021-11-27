@@ -26,14 +26,17 @@ const Dashboard = () => {
         offset, 
         setPets, 
         getNumberOfPets, 
-        setTotal, 
+        setTotal,
+        loader, 
         setLoader 
     } = useContext(AppStateContext);
     const [allChecked, setAllChecked] = useState(false);
     const [petCardChecked, setPetCardChecked] = useState('');
+    const [deleting, setDeleting] = useState(false);
 
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    const [successButtonMsg, setSuccessButtonMsg] = useState('Deleting...');
 
     let DEBUG = false;
 
@@ -43,7 +46,7 @@ const Dashboard = () => {
 
     history.replace('/dashboard');
 
-    function deleteUsersPet(id) {
+    function deleteUserPet(id) {
         deleteOnePet({
             id,
             token,
@@ -55,6 +58,10 @@ const Dashboard = () => {
                     }
                 });
                 setSuccessMsg(res);
+                setDeleting(true);
+                // setTimeout(() => {
+                //     setDeleting(false);
+                // }, 3000);
                 fetchPets({
                     limit,
                     offset,
@@ -86,9 +93,12 @@ const Dashboard = () => {
         deleteAllPets({
             token,
             successCallback: res => {
-                if (DEBUG) console.log(res)
                 setUserPets([]);
-                setSuccessMsg(res);
+                // setSuccessMsg(res);
+                setDeleting(true);
+                // setTimeout(() => {
+                //     setDeleting(false);
+                // }, 3000);
                 setAllChecked('');
                 fetchPets({
                     limit,
@@ -127,7 +137,7 @@ const Dashboard = () => {
                 <UserPetCard 
                     key={pet.id} 
                     pet={pet} 
-                    deleteUsersPet={deleteUsersPet} 
+                    deleteUserPet={deleteUserPet} 
                     allChecked={allChecked} 
                     parentCallback={handleCallback}
                 />
@@ -135,7 +145,13 @@ const Dashboard = () => {
         });
     }
 
-    // if (DEBUG) console.log('userPets', userPets);
+    if (DEBUG) console.log('userPets', userPets);
+
+    if (loader) {
+        return (
+            <Loader />
+        );
+    }
     
     return (
         <main className='petMain'>

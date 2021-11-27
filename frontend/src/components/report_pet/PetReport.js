@@ -6,6 +6,8 @@ import { handleError } from '../HelperFunctions.js';
 import { isFieldRequired } from '../HelperFunctions.js';
 import PetReportOptionalData from './PetReportOptionalData';
 import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg';
+import Loader from '../generic/Loader';
+import LoaderButton from '../generic/LoaderButton';
 
 // generic components:
 import RadioButton from '../generic/RadioButton';
@@ -25,9 +27,21 @@ let history = createBrowserHistory();
 // (Maybe class component would be more reasonable...)
 const PetReport = () => {
     const { token } = useContext(AuthContext);
-    const { reportPet, getUserPets, setUserPets, getAllPets, setAllPets, fetchPets, limit, offset, setPets, getNumberOfPets, setTotal } = useContext(AppStateContext);
-
-    const [loader, setLoader] = useState(true);
+    const { 
+        reportPet, 
+        getUserPets, 
+        setUserPets, 
+        getAllPets, 
+        setAllPets, 
+        fetchPets, 
+        limit, 
+        offset, 
+        setPets, 
+        getNumberOfPets, 
+        setTotal, 
+        loader, 
+        setLoader 
+    } = useContext(AppStateContext);
 
     // status -> reunited option comes later with post editing
     const [status, setStatus] = useState('');
@@ -50,6 +64,8 @@ const PetReport = () => {
 
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    const [successButtonMsg, setSuccessButtonMsg] = useState('');
+    const [uploading, setUploading] = useState(false);
 
     let DEBUG = false;
 
@@ -77,6 +93,9 @@ const PetReport = () => {
                 uniquefeature,
                 postdescription: description,
                 successCallback: res => {
+                    setUploading(true);
+                    setSuccessButtonMsg('Uploading...');
+                    // setSuccessMsg(res);
                     fetchPets({
                         limit,
                         offset,
@@ -102,7 +121,6 @@ const PetReport = () => {
                         }
                     });
                     if (DEBUG) console.log('res from PetReport')
-                    setSuccessMsg(res)
                     setSize('')
                     setStatus('')
                     setSpecies('')
@@ -116,14 +134,20 @@ const PetReport = () => {
                     setDescription('')
                     setPreview('')
                 },
-                successTimeout: () => (setTimeout(() => {
-                    setSuccessMsg('');
-                }, 5000)),
+                successTimeout: () => {
+                    setTimeout(() => {
+                        setSuccessButtonMsg('Done!');
+                        setSuccessMsg('Pet successfully uploaded');
+                    }, 1500);
+                    setTimeout(() => {
+                        setSuccessMsg('');
+                        setSuccessButtonMsg('Report Pet');
+                    }, 3000)
+                },
                 errorCallback: err => {
                     handleError(err, setErrorMsg);
                 }
             });
-
         } 
 
     }
@@ -148,6 +172,12 @@ const PetReport = () => {
             <p className='successMessage'>{successMsg}</p>
         </div>
     );
+
+    if (loader) {
+        return (
+            <Loader />
+        );
+    }
 
         return (  
             <main className='petMain'>
@@ -259,14 +289,38 @@ const PetReport = () => {
                                 style={{zIndex: 1}}
                             />
                             { optionalInputs.display === 'showInputs' ? errorSuccessMessage : '' }
-                            <div>
-                                <button
-                                    className={disabled ? 'formButtonInactive' : 'formButton'}
+                            {!uploading ?
+                                <button 
+                                    className={disabled ? 'deletePetButtonInactive' : 'deletePetButton'}
                                     disabled={disabled}
                                 >
-                                  Report Pet
+                                    <>
+                                        <div className='deletePetButtonText'>
+                                            Report Pet
+                                        </div>
+                                    </>
                                 </button>
-                            </div>
+                            :
+                                <button 
+                                    className={disabled ? 'deletePetButtonInactive' : 'deletePetButton'}
+                                    disabled={disabled}
+                                >
+                                    {successButtonMsg === 'Uploading...' ?
+                                    <>
+                                        <LoaderButton />
+                                        <div className='deletePetButtonText'>
+                                            {successButtonMsg}
+                                        </div>
+                                    </> 
+                                    :                                     
+                                    <>  
+                                        <div className='deletePetButtonText'>
+                                            {successButtonMsg}
+                                        </div>
+                                    </> 
+                                    }
+                                </button>
+                            }
                         </form>
                     </div>
                 </section>
