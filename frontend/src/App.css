@@ -1082,11 +1082,20 @@ input[type=checkbox]:checked ~ label{
   display: flex;
 }
 
+.acceptedPasswordTextActive,
 .acceptedPasswordText {
   padding-top: 20px;
   font: 400 14px / 1.2 Poppins, sans-serif;
-  color: var(--clr-brown);
   font-style: italic;
+  height: 50px;
+}
+
+.acceptedPasswordTextActive {
+  color: var(--clr-darkgreen);
+}
+
+.acceptedPasswordText {
+  color: var(--clr-brown);
 }
 
 .message {
