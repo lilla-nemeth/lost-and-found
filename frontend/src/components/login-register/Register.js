@@ -48,7 +48,7 @@ const Register = () => {
     
     history.replace('/register');
 
-    if (DEBUG) console.log(errorMsg);
+    if (DEBUG) console.log('errorMsg', errorMsg);
 
     return (
         <main className='formMain'>
@@ -108,17 +108,19 @@ const Register = () => {
                                     name='phone' 
                                     placeholder='phone'
                                     value={phone}
+                                    minLength=''
                                     required 
                                     onChange={event => setPhone(event.target.value)}
                                 />
                             </div>
-                            <div className='acceptedPasswordText'>
-                                At least 8 characters, 
-                                must contain one upper-case letter, 
-                                one lower-case letter, 
-                                one digit and one special character
-                            </div>
                             <PasswordShowHide password={password} setPassword={setPassword} />
+                                <div className={password ? 'acceptedPasswordTextActive' : 'acceptedPasswordText'}>
+                                    At least 8 characters, 
+                                    must contain one upper-case and
+                                    one lower-case letter, 
+                                    one digit and one special character from these:
+                                    ! # $ @ ^ % & ? * + , - . : ;
+                                </div>
                             <div>
                                 <button 
                                     type='submit' 

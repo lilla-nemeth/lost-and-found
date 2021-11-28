@@ -4,13 +4,8 @@ const multer = require('multer');
 let DEBUG = false;
 
 function authMw (request, response, next) {
-    // token is the headers part of the request:
     let token = request.headers['x-auth-token'];
-    
-    // jsonwebtoken addig nem engedi tovább, amíg nem sikerült beazonosítani a felszhasználót 
-    // a dekódolt token tartalmazza a felhasználó id-t + a megadott 
-    
-    // decodedToken az egy objektum, amiben van az id meg iat (issued at, létrehozás dátuma):
+
     if (token) {
         jwt.verify(token, 'r4uqSKqC6L', (err, decodedToken) => {
             if (decodedToken) {
@@ -96,17 +91,24 @@ function isEmailValid (request, response, next) {
 
 function isPhoneValid (request, response, next) {
     let phone = request.body.phone;
+    
+    const phoneRegex = /^\d+$/;
+
+    let validByPhoneRegex = phoneRegex.test(phone);
+    if (!validByPhoneRegex) {
+        response.status(400).json({msg: 'Phone number must contain only digits'})
+    }
 
     if (!phone) {
         response.status(400).json({msg: 'Phone number is required'})
     }
 
     if (phone.length < 3) {
-        response.status(400).json({msg: 'Phone number is too short'})
+        response.status(400).json({msg: 'Phone number is too short (min. 3 digits)'})
     }
 
-    if (phone.length > 10) {
-        response.status(400).json({msg: 'Phone number is too long'})
+    if (phone.length > 15) {
+        response.status(400).json({msg: 'Phone number is too long (max. 15 digits)'})
     }
 
     next();
@@ -120,7 +122,11 @@ function isPasswordValid (request, response, next) {
     const pwUppercase = /^(?=.*[A-Z])/; 
     const pwLowercase = /^(?=.*[a-z])/; 
     const pwDigit =  /^(?=.*\d)/; 
-    const pwSpecialCharacters = /^(?=.*[!#$@^%&?*+,-./:;<=>_`{|}~])/;
+    // const pwAllowedSpecialCharacters = /^(?=.*[!#$@^%&?*+,-.\/:;<=>_`{|}~])/;
+    const pwAllowedSpecialCharacters = /^(?=.*[!#$@^%&?*+,-.:;])/;
+    // const pwSpecialCharacters = /^(?=.*[§đ½¡”»£¤«“‰„‚\/\\°¿´˛¸€ÞþıŒœ ̛˚˝¯¨əßÐðĸøØÆæ'˘><Ʒʒ·×Ŋŋ—µ,‘’˙–~@#$%^&*+=`|{}:;!.?_\"()\[\]-])/;
+    // const pwSpecialCharacters = /[§đ½¡”»£¤«“‰„‚\/\\°¿´˛¸€ÞþıŒœ ̛˚˝¯¨əßÐðĸøØÆæ'˘><Ʒʒ·×Ŋŋ—µ,‘’˙–~@#$%^&*+=`|{}:;!.?_\"()\[\]-]/gm;
+// /^(?=.*[!#$@^%&?*+,-.\/\\:;<=>_`{|}~])/
 
     if (!password) {
         response.status(400).json({msg: 'Password field is required'});
@@ -145,9 +151,9 @@ function isPasswordValid (request, response, next) {
         response.status(400).json({msg: 'Password must contain at least one number'})
     }
 
-    let isContainSpecialCharacter = pwSpecialCharacters.test(password);
+    let isContainSpecialCharacter = pwAllowedSpecialCharacters.test(password);
     if (!isContainSpecialCharacter) {
-        response.status(400).json({msg: 'Password must contain at least one special character: /^(?=.*[!#$@^%&?*+,-./:;<=>_`{|}~])/'})
+        response.status(400).json({msg: 'Password must contain at least one special characters'})
     }
 
     next();
