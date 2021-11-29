@@ -37,39 +37,43 @@ const Dashboard = () => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [successButtonMsg, setSuccessButtonMsg] = useState('Deleting...');
+    const [loading, setLoading] = useState(false);
 
     let DEBUG = false;
 
     if (DEBUG) console.log('userPets', userPets);
 
-    let disabledAll = !allChecked;
+
 
     history.replace('/dashboard');
 
     function deleteUserPet(id) {
+
+        setLoading(true);
         deleteOnePet({
             id,
             token,
             successCallback: res => {
+                setLoading(false);
                 getUserPets({
                     token,
                     successCallback: res => {
+                        setLoading(false);
                         setUserPets(res.data)
                     }
                 });
                 setSuccessMsg(res);
                 setDeleting(true);
-                // setTimeout(() => {
-                //     setDeleting(false);
-                // }, 3000);
                 fetchPets({
                     limit,
                     offset,
                     successCallback: res => {
+                        setLoading(false);
                         setPets(res.data);
                         setLoader(false);
                         getNumberOfPets({
                             successCallback: res => {
+                                setLoading(false);
                                 setTotal(Number(res.data));
                             }
                         })
@@ -77,37 +81,41 @@ const Dashboard = () => {
                 });
                 getAllPets({
                     successCallback: res => {
-                        setAllPets(res.data)
+                        setLoading(false);
+                        setAllPets(res.data);
                     }
                 });
             },
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');
             }, 5000)),
-            errorCallback: err => 
-                handleError(err, setErrorMsg)
+            errorCallback: err => {
+                setLoading(false);
+                handleError(err, setErrorMsg);
+            }
         })
     }
 
     function deleteUserAllPets() {
+
+        setLoading(true);
         deleteAllPets({
             token,
             successCallback: res => {
+                setLoading(false);
                 setUserPets([]);
-                // setSuccessMsg(res);
                 setDeleting(true);
-                // setTimeout(() => {
-                //     setDeleting(false);
-                // }, 3000);
                 setAllChecked('');
                 fetchPets({
                     limit,
                     offset,
                     successCallback: res => {
+                        setLoading(false);
                         setPets(res.data);
                         setLoader(false);
                         getNumberOfPets({
                             successCallback: res => {
+                                setLoading(false);
                                 setTotal(Number(res.data));
                             }
                         })
@@ -115,6 +123,7 @@ const Dashboard = () => {
                 });
                 getAllPets({
                     successCallback: res => {
+                        setLoading(false);
                         setAllPets(res.data)
                     }
                 });  
@@ -122,8 +131,10 @@ const Dashboard = () => {
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');
             }, 5000)),
-            errorCallback: err => 
-                handleError(err, setErrorMsg)
+            errorCallback: err => {
+                setLoading(false);
+                handleError(err, setErrorMsg);
+            }
         })
     }
 
@@ -140,6 +151,7 @@ const Dashboard = () => {
                     deleteUserPet={deleteUserPet} 
                     allChecked={allChecked} 
                     parentCallback={handleCallback}
+                    loading={loading}
                 />
             )
         });
@@ -164,11 +176,12 @@ const Dashboard = () => {
                         <div className='dashboardBox'>
                             <SelectAll 
                                 deleteUserAllPets={deleteUserAllPets} 
-                                disabledAll={disabledAll} 
+                                // disabledAll={disabledAll} 
                                 allChecked={allChecked} 
                                 setAllChecked={setAllChecked} 
                                 petCardChecked={petCardChecked}
                                 setPetCardChecked={setPetCardChecked}
+                                loading={loading}
                             />
                             {uploadedPets()}
                         </div>

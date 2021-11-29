@@ -22,7 +22,7 @@ export function handleError(err, setter) {
     );
     setTimeout(() => {
         setter('');
-    }, 2500);
+    }, 5000);
 }
 
 export function convertDate(timestamp) {

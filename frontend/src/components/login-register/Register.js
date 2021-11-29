@@ -19,27 +19,30 @@ const Register = () => {
     const [phone, setPhone] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const { registerUser } = useContext(AppStateContext);
 
-    let DEBUG = false;
+    let DEBUG = true;
 
-    let disabled = !password || !email || !username || !phone || errorMsg != '' || successMsg != '';
+    let disabled = !password || !email || !username || !phone || loading
 
     function handleSubmit(event) {
         event.preventDefault();
-
+        
         if (!disabled) {
+            setLoading(true)
             registerUser({
                 email,
                 username,
                 phone,
                 pw:password,
-                successCallback: res => setSuccessMsg(res),
+                successCallback: res => {setSuccessMsg(res); setLoading(false)},
                 successTimeout: () => (setTimeout(() => {
                     setSuccessMsg('');
                 }, 5000)),
                 errorCallback: err => {
+                    setLoading(false);
                     handleError(err, setErrorMsg);
                 }
             });

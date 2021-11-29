@@ -7,7 +7,8 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const path = require('path');
 
-const { authMw, isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid, upload } = require('./middlewares.js');
+// const { authMw, isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid, upload } = require('./middlewares.js');
+const { authMw, isFormValid, upload } = require('./middlewares.js');
 
 let DEBUG = false;
 
@@ -54,6 +55,7 @@ app.get('/allpets', (request, response) => {
     pool.query('SELECT * FROM pets ORDER BY since DESC')
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: 'Failed to fetch all pets'}));
+    // .catch((err) =>console.log(err));
 });
  
 // get/fetch limited amount of pets
@@ -122,7 +124,7 @@ app.put('/editpet/:id', authMw, (request, response) => {
 });
 
 // edit user data (user dashboard)
-app.put('/editprofile', [isPasswordValid, isPhoneValid, isUsernameValid, authMw, isEmailValid], (request, response) => {
+app.put('/editprofile', [authMw, isFormValid], (request, response) => {
     let id = request.userId;
     let username = request.body.username;
     let email = request.body.email;
@@ -169,7 +171,7 @@ app.delete('/deleteuser', authMw, (request, response) => {
 });
 
 // register
-app.post('/register', [isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid], (request, response) => {
+app.post('/register', [isFormValid], (request, response) => {
     let username = request.body.username;
     let email = request.body.email;
     let pw = request.body.pw;
@@ -178,11 +180,11 @@ app.post('/register', [isEmailValid, isPhoneValid, isUsernameValid, isPasswordVa
 
     pool.query('INSERT INTO users(username, email, pw, phone) VALUES ($1, $2, $3, $4) RETURNING *', [username, email, encryptedPw, phone])
     .then((res) => response.status(200).json({msg: 'User succesfully created'}))
-    .catch((err) => response.status(400).json({msg: 'Failed to create user'}))
+    .catch((err) => {isFormValid ? isFormValid : console.log(err); response.status(400).json({msg: 'Failed to create user'})});
 });
 
 // login
-app.post('/login', [isEmailValid], (request, response) => {
+app.post('/login', [isFormValid], (request, response) => {
     let email = request.body.email;
     let pw = request.body.pw;
     
@@ -202,7 +204,7 @@ app.post('/login', [isEmailValid], (request, response) => {
             }
         });
     })
-    .catch((err) => response.status(400).json({msg: 'User not found'}))
+    .catch((err) => {isFormValid ? isFormValid : console.log(err); response.status(400).json({msg: 'User not found'})});
 });
 
 // report pet by user
