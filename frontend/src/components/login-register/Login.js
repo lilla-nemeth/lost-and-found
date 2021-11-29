@@ -16,13 +16,14 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    const [loading, setLoading] = useState(false);
     
     const { setToken } = useContext(AuthContext);
     const { loginUser } = useContext(AppStateContext);
 
     let DEBUG = false;
 
-    let disabled = !password || !email || errorMsg != '' || successMsg != '';
+    let disabled = !password || !email || loading;
 
     if (DEBUG) console.log(setToken);
 
@@ -30,11 +31,14 @@ const Login = () => {
         event.preventDefault();
 
         if (!disabled) {
+            setLoading(true);
             loginUser({
                 setToken,
                 email,
                 pw: password,
+                successCallback: () => setLoading(false),
                 errorCallback: err => {
+                    setLoading(false);
                     handleError(err, setErrorMsg);
                 }
             });

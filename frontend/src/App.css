@@ -728,7 +728,7 @@ table {
 .radioList {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .checkboxOption,
@@ -754,9 +754,9 @@ ul li input[type=checkbox]{
 ul li label{
   display: block;
   position: relative;
-  padding: 5px 0 5px 40px;
+  padding: 5px 0 5px 45px;
   z-index: 9;
-  width: 85px;
+  width: 103px;
   cursor: pointer;
   transition: all 0.2s linear;
 }
@@ -1104,6 +1104,13 @@ input[type=checkbox]:checked ~ label{
   font: 400 15px / 1.2 Poppins, sans-serif;
 }
 
+.messagePetReport {
+  height: 30px;
+  padding-top: 20px;
+  font: 400 16px / 1.2 Poppins, sans-serif;
+  text-align: center;
+}
+
 .errorMessage {
   color: var(--clr-error);
 }
@@ -1336,9 +1343,20 @@ input[type=checkbox]:checked ~ label{
   transition: fill 0.2s linear;
 }
 
+.arrowUp,
 .arrowDown {
-  padding: 16px;
+  padding: 16px 0 16px 16px;
+  /* transform: scaleY(-1); */
+}
+
+.arrowDown {
   transform: scaleY(-1);
+  transition: transform 0.2s linear;
+}
+
+.arrowUp {
+  transform: scaleY(1);
+  transition: transform 0.2s linear;
 }
 
 .searchButton {  

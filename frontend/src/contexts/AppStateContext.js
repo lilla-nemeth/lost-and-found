@@ -107,7 +107,7 @@ export default function AppStateContextProvider(props) {
         )
     }
 
-    function loginUser({setToken, email, pw, errorCallback}) {
+    function loginUser({setToken, email, pw, successCallback, errorCallback}) {
 
         let options = {
             method: 'post',
@@ -128,6 +128,9 @@ export default function AppStateContextProvider(props) {
 
                 localStorage.setItem('token', tokenRes);
                 setToken(tokenRes);
+                if(successCallback) {
+                    successCallback()
+                }
             }
         )
         .catch(

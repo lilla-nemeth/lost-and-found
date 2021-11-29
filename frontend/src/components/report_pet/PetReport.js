@@ -65,11 +65,12 @@ const PetReport = () => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [successButtonMsg, setSuccessButtonMsg] = useState('');
-    const [uploading, setUploading] = useState(false);
+    const [uploadingButton, setUploadingButton] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     let DEBUG = false;
 
-    let disabled = !status || !location || !species || !description || !preview || errorMsg != '' || successMsg != '';
+    let disabled = !status || !location || !species || !description || !preview || loading;
 
     let required = true;
 
@@ -79,6 +80,7 @@ const PetReport = () => {
         if (DEBUG) console.log('files - PetReport', files);
     
         if (!disabled) {
+            setLoading(true);
             reportPet({
                 token,
                 img: files,
@@ -93,7 +95,8 @@ const PetReport = () => {
                 uniquefeature,
                 postdescription: description,
                 successCallback: res => {
-                    setUploading(true);
+                    setLoading(false);
+                    setUploadingButton(true);
                     setSuccessButtonMsg('Uploading...');
                     // setSuccessMsg(res);
                     fetchPets({
@@ -145,6 +148,7 @@ const PetReport = () => {
                     }, 3000)
                 },
                 errorCallback: err => {
+                    setLoading(false);
                     handleError(err, setErrorMsg);
                 }
             });
@@ -167,7 +171,7 @@ const PetReport = () => {
     history.replace('/reportpet');
     
     const errorSuccessMessage = (
-        <div className='message'>
+        <div className='messagePetReport'>
             <p className='errorMessage'>{errorMsg}</p>
             <p className='successMessage'>{successMsg}</p>
         </div>
@@ -267,7 +271,7 @@ const PetReport = () => {
                             />
                             <div className='optionalButton' onClick={() => showOptionalInputs()}>
                                     Optional Data
-                                <div className='arrowDown'>
+                                <div className={optionalInputs.display === 'hideInputs' ? 'arrowDown' : 'arrowUp'}>
                                     <ArrowDown style={{height: '16px'}}/>
                                 </div>
                             </div>
@@ -289,7 +293,7 @@ const PetReport = () => {
                                 style={{zIndex: 1}}
                             />
                             { optionalInputs.display === 'showInputs' ? errorSuccessMessage : '' }
-                            {!uploading ?
+                            {!uploadingButton ?
                                 <button 
                                     className={disabled ? 'deletePetButtonInactive' : 'deletePetButton'}
                                     disabled={disabled}

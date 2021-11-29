@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 
 
 const SelectAll = (props) => {
-    const { deleteUserAllPets, disabledAll, allChecked, setAllChecked, petCardChecked, setPetCardChecked } = props;
+    const { deleteUserAllPets, allChecked, setAllChecked, petCardChecked, setPetCardChecked, loading } = props;
+
+    let disabledAll = !allChecked || loading;
 
     let DEBUG = false;
 
