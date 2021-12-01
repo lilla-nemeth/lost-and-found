@@ -3,13 +3,13 @@ import { petDate, isInputEmpty } from '../HelperFunctions.js';
 import LoaderButton from './LoaderButton.js';
 
 const UserPetCard = (props) => {
-    const { pet, deleteUserPet, allChecked, parentCallback, loading} = props;
+    const { pet, deleteUserPet, allChecked, parentCallback} = props;
     const [checked, setChecked] = useState(false);
     const [deleting, setDeleting] = useState(false);
 
     let DEBUG = false;
 
-    let disabledLocal = !checked || loading;
+    let disabledLocal = !checked
 
     if (DEBUG) console.log(pet);
     // if (DEBUG) console.log('disabled', disabledOne);
@@ -79,7 +79,7 @@ const UserPetCard = (props) => {
                                               checked={allChecked || (checked || parentCallback(checked))}
                                               onChange={() => {setChecked(!checked); parentCallback(!checked)}}
                                             />
-                                            <span class='checkmark'></span>
+                                            <span className='checkmark'></span>
                                         </label>
                                     </td>
                                 </tr>
