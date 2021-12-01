@@ -203,7 +203,7 @@ export default function AppStateContextProvider(props) {
         axios(options)
         .then(
             res => {
-               if (successCallback) successCallback(successTimeout())
+               if (successCallback) successCallback(res, successTimeout())
             }
         )
         .catch(

@@ -3,7 +3,7 @@ const multer = require('multer');
 
 let DEBUG = false;
 
-function authMw (request, response, next) {
+function authMw(request, response, next) {
     let token = request.headers['x-auth-token'];
 
     if (token) {
@@ -21,8 +21,7 @@ function authMw (request, response, next) {
     }
 }
 
-
-function isFormValid (request, response, next) {
+function isFormValid(request, response, next) {
     let email = request.body.email;
     let password = request.body.pw;
     let username = request.body.username;
@@ -42,7 +41,7 @@ function isFormValid (request, response, next) {
     let validByEmailRegex = emailRegex.test(email);
     let emailParts = email.split("@");
     let domainParts = emailParts[1].split('.');
-    let isFirstCharacterValid = usernameFirstCharacter.test(username);
+    let isFirstCharacterPassTheTest = usernameFirstCharacter.test(username);
     let validByUsernameRegex = usernameRegex.test(username);
     let validByPhoneRegex = phoneRegex.test(phone);
     let isContainUppercase = pwUppercase.test(password);
@@ -53,107 +52,74 @@ function isFormValid (request, response, next) {
     let message = '';
 
     if (!username && !phone) {
-        // return middleware for login
-
+        // login
         if (!email) {    
-            if (DEBUG) console.log(message);
             message = 'Email field is required';
         } else if (!validByEmailRegex) {
-            if (DEBUG) console.log(message);
             message = 'Email format is not valid';
-        } else if (email.length > 254) {
-            if (DEBUG) console.log(message);
+        } else if (email.length > 254) { 
             message = 'Email length exceeds the maximum';
         } else if (emailParts[0].length > 64) {
-            if (DEBUG) console.log(message);
             message = 'Email username is too long';
-        } else if (domainParts.some(function(part) {return part.length > 63;})) {
-            if (DEBUG) console.log(message);
+        } else if (domainParts.some(function(part) {return part.length > 63})) {
             message = 'Email domain name is too long';
         } else if (!password) {
-            if (DEBUG) console.log(message);
             message = 'Password field is required';
         } else if (password.length < 8) {
-            if (DEBUG) console.log(message);
             message = 'Password must contain at least 8 characters';
         } else if (!isContainUppercase) {
-            if (DEBUG) console.log(message);
             message = 'Password must contain at least one uppercase letter';
         } else if (!isContainLowercase) {
-            if (DEBUG) console.log(message);
             message = 'Password must contain at least one lowercase letter';
         } else if (!isContainDigit) {
-            if (DEBUG) console.log(message);
             message = 'Password must contain at least one number';
         } else if (!isContainSpecialCharacter) {
-            if (DEBUG) console.log(message);
             message = 'Password must contain at least one special character'; 
         } 
 
     } else {
-        // return middleware for register
+        // register
         if (!email) {
-            if (DEBUG) console.log(message);
             message = 'Email field is required';
         } else if (!validByEmailRegex) {
-            if (DEBUG) console.log(message);
             message = 'Email format is not valid';
         } else if (email.length > 254) {
-            if (DEBUG) console.log(message);
             message = 'Email length exceeds the maximum';
         } else if (emailParts[0].length > 64) {
-            if (DEBUG) console.log(message);
             message = 'Email username is too long';
-        } else if (domainParts.some(function(part) {return part.length > 63;})) {
-            if (DEBUG) console.log(message);
+        } else if (domainParts.some(function(part) {return part.length > 63})) {
             message = 'Email domain name is too long';
         } else if (!username) {
-            if (DEBUG) console.log(message);
             message = 'Username field is required';
         } else if (username.length < 2) {
-            if (DEBUG) console.log(message);
             message = 'Username must contain at least 2 characters';
         } else if (username.length > 30) {
-            if (DEBUG) console.log(message);
             message = 'Username must be less than 30 characters';
-        } else if (!isFirstCharacterValid) {
-            if (DEBUG) console.log(message);
+        } else if (!isFirstCharacterPassTheTest) {
             message = 'Username must start with a letter';
         } else if (!validByUsernameRegex) {
-            if (DEBUG) console.log(message);
-            message = 'Username contains invalid character';
+            message = 'Username contains invalid characters';
         } else if (!phone) {
-            if (DEBUG) console.log(message);
             message = 'Phone number is required';
         } else if (!validByPhoneRegex) {
-            if (DEBUG) console.log(message);
             message = 'Phone number must contain only digits';
         } else if (phone.length < 3) {
-            if (DEBUG) console.log(message);
             message = 'Phone number is too short (min. 3 digits)';
         } else if (phone.length > 15) {
-            if (DEBUG) console.log(message);
             message = 'Phone number is too long (max. 15 digits)';
         } else if (!password) {
-            if (DEBUG) console.log(message);
             message = 'Password field is required';
         } else if (password.length < 8) {
-            if (DEBUG) console.log(message);
             message = 'Password must contain at least 8 characters';
         } else if (!isContainUppercase) {
-            if (DEBUG) console.log(message);
             message = 'Password must contain at least one uppercase letter';
         } else if (!isContainLowercase) {
-            if (DEBUG) console.log(message);
             message = 'Password must contain at least one lowercase letter';
         } else if (!isContainDigit) {
-            if (DEBUG) console.log(message);
             message = 'Password must contain at least one number';
         } else if (!isContainSpecialCharacter) {
-            if (DEBUG) console.log(message);
             message = 'Password must contain at least one special character'; 
         } 
-        
     } 
 
     if (message != '') {
