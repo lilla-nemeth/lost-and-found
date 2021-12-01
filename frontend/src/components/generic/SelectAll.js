@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 
 const SelectAll = (props) => {
-    const { deleteUserAllPets, allChecked, setAllChecked, petCardChecked, setPetCardChecked, disabledAll } = props;
+    const { deleteUserAllPets, allChecked, setAllChecked, petCardChecked, setPetCardChecked, disable } = props;
 
     let DEBUG = false;
 
@@ -10,8 +10,8 @@ const SelectAll = (props) => {
             <div className='selectBox'>
                 <div className='deleteAllButtonBox'>
                     <button 
-                        className={disabledAll ? 'deleteAllButtonInactive' : 'deleteAllButton'}
-                        disabledAll={disabledAll}
+                        className={disable ? 'deleteAllButtonInactive' : 'deleteAllButton'}
+                        disable={disable}
                         onClick={() => deleteUserAllPets()}
                     >
                         Delete All Pets
@@ -24,7 +24,7 @@ const SelectAll = (props) => {
                         checked={allChecked}
                         onChange={() => {setAllChecked(!allChecked); setPetCardChecked(petCardChecked)}}
                       />
-                      <span class='checkmark'></span>
+                      <span className='checkmark'></span>
                     </label>
                 </div>
             </div>

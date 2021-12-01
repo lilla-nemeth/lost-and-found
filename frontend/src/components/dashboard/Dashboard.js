@@ -42,13 +42,7 @@ const Dashboard = () => {
 
     let DEBUG = false;
 
-
-    // let disabledOne = !petCardChecked || loading;
-    let disabledOne = !petCardChecked || loading;
-
-
-    
-    let disabledAll = !allChecked || loading;
+    let disable = !allChecked || loading;
 
     if (DEBUG) console.log('userPets', userPets);
 
@@ -57,56 +51,53 @@ const Dashboard = () => {
     function deleteUserPet(id) {
         setLoading(true);
 
-        deleteOnePet({
-            id,
-            token,
-            successCallback: res => {
-                setLoading(false);
-                getUserPets({
-                    token,
-                    successCallback: res => {
-                        // setLoading(false);
-                        setUserPets(res.data)
-                    }
-                });
-                setSuccessMsg(res);
-                setDeleting(true);
-                fetchPets({
-                    limit,
-                    offset,
-                    successCallback: res => {
-                        // setLoading(false);
-                        setPets(res.data);
-                        setLoader(false);
-                        getNumberOfPets({
-                            successCallback: res => {
-                                // setLoading(false);
-                                setTotal(Number(res.data));
-                            }
-                        })
-                    }
-                });
-                getAllPets({
-                    successCallback: res => {
-                        setLoading(false);
-                        setAllPets(res.data);
-                    }
-                });
-            },
-            successTimeout: () => (setTimeout(() => {
-                setSuccessMsg('');
-            }, 5000)),
-            errorCallback: err => {
-                setLoading(false);
-                handleError(err, setErrorMsg);
-            }
-        })
-    }
+            deleteOnePet({
+                id,
+                token,
+                successCallback: res => {
+                    setLoading(false);
+                    getUserPets({
+                        token,
+                        successCallback: res => {
+                            setUserPets(res.data)
+                        }
+                    });
+                    setSuccessMsg(res);
+                    setDeleting(true);
+                    fetchPets({
+                        limit,
+                        offset,
+                        successCallback: res => {
+                            setPets(res.data);
+                            setLoader(false);
+                            getNumberOfPets({
+                                successCallback: res => {
+                                    setTotal(Number(res.data));
+                                }
+                            })
+                        }
+                    });
+                    getAllPets({
+                        successCallback: res => {
+                            setLoading(false);
+                            setAllPets(res.data);
+                        }
+                    });
+                },
+                successTimeout: () => (setTimeout(() => {
+                    setSuccessMsg('');
+                }, 5000)),
+                errorCallback: err => {
+                    setLoading(false);
+                    handleError(err, setErrorMsg);
+                }
+            })
+        }
 
     function deleteUserAllPets() {
         setLoading(true);
 
-        if (!disabledAll) {
+        if (!disable) {
             deleteAllPets({
                 token,
                 successCallback: res => {
@@ -157,7 +148,6 @@ const Dashboard = () => {
                     deleteUserPet={deleteUserPet} 
                     allChecked={allChecked} 
                     parentCallback={handleCallback}
-                    // disabledOne={disabledOne}
                 />
             )
         });
@@ -186,7 +176,7 @@ const Dashboard = () => {
                                 setAllChecked={setAllChecked} 
                                 petCardChecked={petCardChecked}
                                 setPetCardChecked={setPetCardChecked}
-                                disabledAll={disabledAll}
+                                disable={disable}
                             />
                             {uploadedPets()}
                         </div>
