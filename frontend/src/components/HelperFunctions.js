@@ -20,9 +20,11 @@ export function handleError(err, setter) {
         &&err.response.data
         &&err.response.data.msg
     );
-    setTimeout(() => {
+    let timeOut = setTimeout(() => {
         setter('');
     }, 5000);
+
+    clearTimeout(timeOut);
 }
 
 export function convertDate(timestamp) {
