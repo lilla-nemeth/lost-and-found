@@ -18,13 +18,13 @@ const SelectAll = (props) => {
                     </button>
                 </div>
                 <div>
-                    <label className='checkboxContainer'>
+                    <label className='bigCheckboxContainer'>
                       <input
                         type='checkbox'
                         checked={allChecked}
                         onChange={() => {setAllChecked(!allChecked); setPetCardChecked(petCardChecked)}}
                       />
-                      <span className='checkmark'></span>
+                      <span className='bigCheckmark'></span>
                     </label>
                 </div>
             </div>
