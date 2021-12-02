@@ -3,6 +3,16 @@ import { AuthContext } from './contexts/AuthContext';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import ScrollToTop from './components/ScrollToTop';
+
+import Video from './assets/video/dogvideo.mp4';
+import img01 from './assets/images/01backgroundImg.jpg'
+import img02 from './assets/images/02backgroundImg.jpg';
+import img03 from './assets/images/03backgroundImg.jpg';
+import img04 from './assets/images/04backgroundImg.jpg';
+import img05 from './assets/images/05backgroundImg.jpg';
+import img06 from './assets/images/06backgroundImg.jpg';
+import img07 from './assets/images/07backgroundImg.jpg';
+
 import Navbar from './components/navbar-footer/Navbar';
 import Footer from './components/navbar-footer/Footer';
 import Register from './components/login-register/Register';
@@ -12,15 +22,6 @@ import PetReport from './components/report_pet/PetReport';
 import PetLandingPage from './components/landing_page/PetLandingPage';
 import PetProfile from './components/lost_and_found/PetProfile';
 import Dashboard from './components/dashboard/Dashboard';
-
-import img01 from './assets/images/01backgroundImg.jpg'
-import img02 from './assets/images/02backgroundImg.jpg';
-import img03 from './assets/images/03backgroundImg.jpg';
-import img04 from './assets/images/04backgroundImg.jpg';
-import img05 from './assets/images/05backgroundImg.jpg';
-import img06 from './assets/images/06backgroundImg.jpg';
-import img07 from './assets/images/07backgroundImg.jpg';
-import Video from './assets/video/dogvideo.mp4';
 
 function App() {
   const { token } = useContext(AuthContext);
@@ -50,14 +51,14 @@ function App() {
   }
   
   let images = [
+    Video,
     img01,
     img02,
     img03,
     img04,
     img05,
     img06,
-    img07,
-    Video
+    img07
   ]
 
   if (!token) {
