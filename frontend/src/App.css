@@ -1755,7 +1755,7 @@ input[type=checkbox]:checked ~ label{
 
   .landingPageHeadline {
     font: var(--font-landingpage-mobile);
-    top: 60%;
+    top: 50%;
     left: 5%;
     right: 5%;
     padding: 10px;
@@ -1893,7 +1893,7 @@ input[type=checkbox]:checked ~ label{
 
   .landingPageHeadline {
     font: var(--font-landingpage-mobile);
-    top: 60%;
+    top: 50%;
     left: 5%;
     right: 5%;
     padding: 10px;
@@ -2267,7 +2267,7 @@ input[type=checkbox]:checked ~ label{
     left: unset;
     transform: unset;
   }
-  
+
 }
 
 
