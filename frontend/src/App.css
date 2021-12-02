@@ -64,8 +64,8 @@ table {
   /* Fonts */
   --font-family: 'Poppins', sans-serif;
   --font-formheadline: 500 30px/1.2 'Poppins', sans-serif;
-  --font-standard: 400 14px/1.2 'Poppins', sans-serif;
-  --font-thin: 300 14px/1.2 'Poppins', sans-serif;
+  --font-standard: 400 15px/1.2 'Poppins', sans-serif;
+  --font-thin: 300 15px/1.2 'Poppins', sans-serif;
   --font-landingpage: 700 100px/1.2 'Poppins', sans-serif;
   --font-landingpage-mobile: 700 14vw/1.2 'Poppins', sans-serif;
   --font-input: 700 28px/1.2 "Poppins", sans-serif;
@@ -479,7 +479,7 @@ table {
   margin-right: 20px;
   margin-left: 20px;
   width: 25%;
-  /* height: fit-content; */
+  height: fit-content;
   /* min-height: 720px; */
 }
 
@@ -608,7 +608,7 @@ table {
 /* End of PetCards */
 
 .petStatus {
-  font: 500 14px/1.2 'Poppins', sans-serif;
+  font: 500 15px/1.2 'Poppins', sans-serif;
   text-transform: uppercase;
   border: 1px solid var(--clr-black);
   padding: 10px;
@@ -620,6 +620,8 @@ table {
   font-size: 35px;
   margin: 40px 0 30px 0;
   text-transform: capitalize;
+  overflow-wrap: anywhere;
+  padding: 30px 0 15px 0;
 }
 
 .petMainInfo,
@@ -640,9 +642,10 @@ table {
 }
 
 .tableCell:first-child { 
-  font: 600 14px/1.2 'Poppins', sans-serif;
+  font: 600 15px/1.2 'Poppins', sans-serif;
   text-transform: capitalize;
-  min-width: 100px;
+  /* min-width: 100px; */
+  width: 100px;
 }
 
 .petProfileButton {
@@ -669,7 +672,8 @@ table {
   color: var(--clr-green);
   border: 2px solid var(--clr-green);
   margin: 0 7px;
-  width: 15px; 
+  width: 15px;
+  height: 15px; 
   cursor: pointer;
 }
 
@@ -960,7 +964,7 @@ input[type=checkbox]:checked ~ label{
   padding-bottom: 20px;
   cursor: pointer;
   color: var(--clr-white);
-  font: 300 14px/1.2 "Poppins", sans-serif;
+  font: 300 15px/1.2 "Poppins", sans-serif;
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -1106,20 +1110,20 @@ input[type=checkbox]:checked ~ label{
 
 .formHeadline {
   font: var(--font-formheadline);
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   color: var(--clr-darkgreen);
 }
 
 .loginText,
 .signUpText {
-  font: 400 14px / 1.2 Poppins, sans-serif;
+  font: 400 15px / 1.2 Poppins, sans-serif;
   display: flex;
 }
 
 .acceptedPasswordTextActive,
 .acceptedPasswordText {
   padding-top: 20px;
-  font: 400 14px / 1.2 Poppins, sans-serif;
+  font: 400 15px / 1.2 Poppins, sans-serif;
   font-style: italic;
 }
 
@@ -1134,13 +1138,13 @@ input[type=checkbox]:checked ~ label{
 .message {
   height: 30px;
   padding-top: 10px;
-  font: 400 14px / 1.2 Poppins, sans-serif;
+  font: 400 15px / 1.2 Poppins, sans-serif;
 }
 
 .messagePetReport {
   height: 30px;
   padding-top: 20px;
-  font: 400 16px / 1.2 Poppins, sans-serif;
+  font: 400 15px / 1.2 Poppins, sans-serif;
   text-align: center;
 }
 
@@ -1670,6 +1674,7 @@ input[type=checkbox]:checked ~ label{
   .petListCard {
     padding: 0;
     border-radius: var(--radius);
+    /* height: fit-content; */
   }
 
   .petProfileCard,
@@ -1737,6 +1742,10 @@ input[type=checkbox]:checked ~ label{
 
   .backButton {
     width: 100%;
+  }
+
+  .selectBox {
+    width: 50%;
   }
 
   .sidebar {
@@ -1863,6 +1872,10 @@ input[type=checkbox]:checked ~ label{
 
   .backButton {
     width: 100%;
+  }
+
+  .selectBox {
+    width: 50%;
   }
 
   .sidebar {
