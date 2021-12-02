@@ -294,6 +294,7 @@ table {
   padding: 22.5px;
   text-decoration: none;
   font: var(--font-standard);
+  background: var(--clr-palebrown);
   /* width: 90%; */
 }
 
@@ -419,10 +420,9 @@ table {
   border: var(--clr-brown) 4px solid;
   border-radius: var(--radius);
   margin-bottom: 44px;
-
   display: flex;
-  flex-direction: column;
   width: 70%;
+  justify-content: end;
 }
 
 .dashboardSidebar {
@@ -872,8 +872,8 @@ input[type=checkbox]:checked ~ label{
 }
 
 /* Test checkbox */
+.bigCheckboxContainer,
 .checkboxContainer {
-  /* display: block; */
   position: relative;
   padding-left: 50px;
   margin-bottom: 25px;
@@ -881,11 +881,15 @@ input[type=checkbox]:checked ~ label{
   font-size: 25px;
   user-select: none;
   align-items: center;
-
   display: flex;
   justify-content: end;
 }
 
+.bigCheckboxContainer {
+  margin-left: 20px;
+}
+
+.bigCheckboxContainer input,
 .checkboxContainer input {
   position: absolute;
   opacity: 0;
@@ -895,35 +899,48 @@ input[type=checkbox]:checked ~ label{
 }
 
 .checkmark {
-  position: absolute;
-  top: 0;
   height: 30px;
   width: 30px;
+}
+
+.bigCheckmark {
+    height: 45px;
+    width: 45px;
+}
+
+.checkmark,
+.bigCheckmark {
+  position: absolute;
+  top: 0;
   border: 2px solid var(--clr-brown);
   padding: 3px;
   background: var(--clr-palebrown);
   border-radius: var(--radius-button);
 }
 
-.checkboxContainer:hover input ~ .checkmark {
+.checkboxContainer:hover input ~ .checkmark,
+.bigCheckboxContainer:hover input ~ .bigCheckmark {
   background-color: var(--clr-green);
   border: 2px solid var(--clr-green);
   border-radius: var(--radius-button);
 }
 
-.checkboxContainer input:checked ~ .checkmark {
+.checkboxContainer input:checked ~ .checkmark,
+.bigCheckboxContainer input:checked ~ .bigCheckmark {
   background-color: var(--clr-darkgreen);
   border: 2px solid var(--clr-darkgreen);
   border-radius: var(--radius-button);
 }
 
-.checkmark:after {
+.checkmark:after,
+.bigCheckmark:after {
   content: "";
   position: absolute;
   display: none;
 }
 
-.checkboxContainer input:checked ~ .checkmark:after {
+.checkboxContainer input:checked ~ .checkmark:after,
+.bigCheckboxContainer input:checked ~ .bigCheckmark:after {
   display: block;
 }
 
@@ -937,6 +954,15 @@ input[type=checkbox]:checked ~ label{
   transform: rotate(45deg);
 }
 
+.bigCheckboxContainer .bigCheckmark:after {
+  left: 18px;
+  top: 6px;
+  width: 12.5px;
+  height: 25px;
+  border: solid var(--clr-white);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
 
 /* Background, Logo in Login-Registration */
 
@@ -1214,7 +1240,6 @@ input[type=checkbox]:checked ~ label{
 .deleteAllButtonBox {
   display: flex;
   justify-content: end;
-  padding-bottom: 15px;
 }
 
 .deletePetButtonInvisible {
@@ -1451,7 +1476,6 @@ input[type=checkbox]:checked ~ label{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   min-height: 100vh;
   background: var(--clr-palebrown);
 }
@@ -1745,11 +1769,16 @@ input[type=checkbox]:checked ~ label{
   }
 
   .selectBox {
-    width: 50%;
+    width: unset;
+    padding: 20px;
+  }
+
+  .sidebarList {
+    padding-top: 25px;
   }
 
   .sidebar {
-    width: 70%;
+    width: unset;
     padding: unset;
   }
 
@@ -1765,24 +1794,19 @@ input[type=checkbox]:checked ~ label{
     padding: 10px;
   }
 
-  /* .footerWithPicture {
-    bottom: -360px;
-  } */
-
   .footerText {
-    /* top: 155px; */
     position: absolute;
   }
 
   .landingPageVideo {
-    min-height: 1400px;
+    min-height: 600px;
   }
 
 }
 
 @media only screen and (min-width: 400px) and (max-width: 600px) {
   .loginContainer,
-  .registerContainer  {
+  .registerContainer {
     flex-direction: column-reverse;
     padding: unset;
   }
@@ -1874,8 +1898,22 @@ input[type=checkbox]:checked ~ label{
     width: 100%;
   }
 
+  .bigCheckboxContainer {
+    padding-right: 25px;
+  }
+
   .selectBox {
-    width: 50%;
+    width: 70%;
+    padding: unset;
+    display: flex;
+    flex-direction: row;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    /* justify-content: center; */
+  }
+
+  .sidebarList {
+    padding-top: 25px;
   }
 
   .sidebar {
@@ -1900,7 +1938,7 @@ input[type=checkbox]:checked ~ label{
   } */
 
   .landingPageVideo {
-    min-height: 1400px;
+    min-height: 700px;
   }
 
 }
@@ -1935,6 +1973,14 @@ input[type=checkbox]:checked ~ label{
   .userPetTextBox,
   .petProfileTextBox {
     width: auto;
+  }
+
+  .selectBox {
+    display: flex;
+    flex-direction: row;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    /* justify-content: center; */
   }
 
 }
@@ -2215,10 +2261,8 @@ input[type=checkbox]:checked ~ label{
     flex-direction: column;
   }
 
-  .dashboardBox {
-    width: unset;
-  }
-
+  /* .selectBox, */
+  .dashboardBox,
   .dashboardSidebar {
     width: unset;
   }
