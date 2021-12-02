@@ -6,6 +6,7 @@ import { handleError } from '../HelperFunctions.js';
 import BackgroundImages from './BackgroundImages';
 import Logo from '../generic/Logo';
 import PasswordShowHide from './PasswordShowHide';
+import Footer from '../navbar-footer/Footer';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
 import { ReactComponent as UsernameIcon } from '../../assets/icons/username.svg';
 import { ReactComponent as PhoneIcon } from '../../assets/icons/phone.svg';
@@ -23,7 +24,7 @@ const Register = () => {
 
     const { registerUser } = useContext(AppStateContext);
 
-    let DEBUG = true;
+    let DEBUG = false;
 
     let disabled = !password || !email || !username || !phone || loading
 
@@ -135,7 +136,7 @@ const Register = () => {
                             </div>
                         </form>
                     </div>
-            </section>      
+            </section>  
     </main>
     );
 }

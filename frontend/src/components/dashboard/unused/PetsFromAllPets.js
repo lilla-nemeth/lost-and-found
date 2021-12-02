@@ -19,10 +19,7 @@ const PetsFromAllPets = () => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
 
-
-    let DEBUG = true;
-
-
+    let DEBUG = false;
 
     history.replace('/dashboard');
 

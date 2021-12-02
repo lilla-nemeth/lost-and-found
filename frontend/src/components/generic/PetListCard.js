@@ -2,9 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { petDate, isInputEmpty } from '../HelperFunctions.js';
 
-
-
-
 const PetListCard = (props) => {
     const { pet } = props;
 
