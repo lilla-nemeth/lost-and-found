@@ -131,12 +131,18 @@ table {
 } 
 
 .footerWithPicture {
-  color: var(--clr-white);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  bottom: 0;
+  /* background: var(--clr-darkgreen); */
+    color: var(--clr-white);
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    position: absolute;
+    text-align: center;
+    top: 10%;
+    z-index: -1;
+    /* min-height: 925px; */
 }
 
 .footerWithoutPicture {
@@ -276,7 +282,21 @@ table {
 	width: 100%;
 }
 
-.footerText,
+/* .footerText {
+  overflow-wrap: break-word;
+  display: flex;
+  justify-content: center;
+} */
+
+.footerText {
+  text-align: center;
+  padding: 22.5px;
+  text-decoration: none;
+  font: var(--font-standard);
+  /* width: 90%; */
+}
+
+/* .footerText, */
 .username,
 .navLinkMobile,
 .navLinkDesktop {
@@ -957,13 +977,17 @@ input[type=checkbox]:checked ~ label{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  filter: brightness(90%); 
+  overflow: hidden; 
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  /* min-height: 1400px; */
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  filter: brightness(90%);
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
@@ -972,26 +996,35 @@ input[type=checkbox]:checked ~ label{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  filter: brightness(90%); 
+  overflow: hidden; 
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  /* min-height: 1400px; */
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  filter: brightness(90%);
   transition: opacity 1s ease-in-out;
 }
+
 
 .fade-in2 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
+  overflow: hidden; 
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  /* min-height: 1400px; */
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -1;
   filter: brightness(90%);
   transition: opacity 1s ease-in-out;
 }
@@ -1000,12 +1033,16 @@ input[type=checkbox]:checked ~ label{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
+  overflow: hidden; 
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  /* min-height: 1400px; */
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -1;
   filter: brightness(90%);
   transition: opacity 1s ease-in-out;
 }
@@ -1087,7 +1124,6 @@ input[type=checkbox]:checked ~ label{
   padding-top: 20px;
   font: 400 14px / 1.2 Poppins, sans-serif;
   font-style: italic;
-  height: 50px;
 }
 
 .acceptedPasswordTextActive {
@@ -1543,7 +1579,6 @@ input[type=checkbox]:checked ~ label{
 
 /* Media Queries */
 @media only screen and (min-width: 100px) and (max-width: 850px) {
-
   .navLinkDesktop,
   .logOutButtonDesktop {
     display: none;
@@ -1580,7 +1615,6 @@ input[type=checkbox]:checked ~ label{
   }
 
   .hamburger {
-    /* background: var(--clr-white); */
     cursor: pointer;
     display: block;
     margin-top: auto;
@@ -1589,25 +1623,15 @@ input[type=checkbox]:checked ~ label{
     margin-left: 10px;
     z-index: 10;
   }
-
-  /* .hamburgerInner:hover {
-    background: var(--clr-aquamarine);
-  } */
   
   .burgerActive,
   .burgerInactive {
     background: var(--clr-white);
-    /* background: var(--clr-darkgreen); */
     margin: 6px auto;
     width: 27px;
     height: 4px;
     transition: all 0.3s ease-in-out;
   } 
-  
-  /* .burgerInactive:hover,
-  .burgerActive:hover {
-    background: var(--clr-darkgreen);
-  } */
 
   .burgerActive:nth-child(1) {
     transform: translateY(10px) rotate(45deg);
@@ -1641,22 +1665,6 @@ input[type=checkbox]:checked ~ label{
 
   .loginContainer {
     margin-top: 60px;
-  }
-
-  .registerContainer {
-    margin-top: 170px;
-  }
-
-  .footerWithPicture {
-    position: absolute;
-    bottom: 0;
-  }
-
-  .fade-in1,
-  .fade-in2,
-  .fade-out1,
-  .fade-out2 {
-    min-height: 1000px;
   }
 
   /* Pet Cards */
@@ -1751,6 +1759,16 @@ input[type=checkbox]:checked ~ label{
     padding: 10px;
   }
 
+  /* .footerWithPicture {
+    bottom: -360px;
+  } */
+
+  .footerText {
+    /* top: 155px; */
+    position: absolute;
+  }
+
+
 }
 
 @media only screen and (min-width: 400px) and (max-width: 600px) {
@@ -1764,20 +1782,11 @@ input[type=checkbox]:checked ~ label{
     margin-top: -10px;
   }
 
-  .registerContainer {
-    margin-top: 90px;
-  }
-
   .fade-in1,
   .fade-in2,
   .fade-out1,
   .fade-out2 {
     min-height: 950px;
-  }
-
-  .footerWithPicture {
-    position: absolute;
-    bottom: 0;
   }
 
   /* Pet Cards */
@@ -1871,6 +1880,11 @@ input[type=checkbox]:checked ~ label{
     right: 5%;
     padding: 10px;
   }
+
+  /* .footerWithPicture {
+    bottom: -130px;
+  } */
+
 }
 
 @media only screen and (min-width: 600px) and (max-width: 1024px) {
@@ -1978,7 +1992,6 @@ input[type=checkbox]:checked ~ label{
   }
 
 }
-
 
 @media only screen and (min-width: 851px) {
   .navLinkDesktop,
@@ -2148,10 +2161,6 @@ input[type=checkbox]:checked ~ label{
     width: 100%;
   }
 
-  /* .searchBox {
-    max-width: 70%;
-  } */
-
 }
 
 @media only screen and (min-width: 100px) and (max-width: 1024px) {
@@ -2180,11 +2189,6 @@ input[type=checkbox]:checked ~ label{
     display: none;
   }
 
-  .footerText {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
   .sidebarListElement {
     width: 60%;
   }
@@ -2201,9 +2205,27 @@ input[type=checkbox]:checked ~ label{
     width: unset;
   }
 
+  .registerContainer, 
+  .loginContainer {
+    top: 10px;
+    left: unset;
+    transform: unset;
+  }
+
+  .fade-in1,
+  .fade-in2,
+  .fade-out1,
+  .fade-out2 {
+    min-height: 1400px;
+  }
+
 } 
 
+@media only screen and (min-width: 1025px) {
 
+  .footerWithPicture {
+    min-height: unset;
+  }
 
-
+}
 

@@ -71,7 +71,7 @@ function App() {
               <Footer transparent={transparent} />
             </Route>
             <Route path='/register'>
-              <Register />
+              <Register  />
               <Footer transparent={transparent} />
             </Route>
             <Route path='/lostandfound'>

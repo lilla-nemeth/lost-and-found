@@ -5,6 +5,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import { handleError } from '../HelperFunctions.js';
 import Logo from '../generic/Logo';
+import Footer from '../navbar-footer/Footer';
 import BackgroundImages from './BackgroundImages';
 import PasswordShowHide from './PasswordShowHide';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';

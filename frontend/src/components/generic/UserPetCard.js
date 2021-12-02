@@ -12,13 +12,7 @@ const UserPetCard = (props) => {
     let disabledLocal = !checked
 
     if (DEBUG) console.log(pet);
-    // if (DEBUG) console.log('disabled', disabledOne);
     if (DEBUG) console.log('allChecked', allChecked);
-    
-    DEBUG = true;
-    
-    if (DEBUG) console.log('deleting', !deleting);
-
 
     const buttonCardChecked = (
         <div> 

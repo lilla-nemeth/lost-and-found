@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Footer = (props) => {
+
     const { transparent } = props;
 
     let DEBUG = false;
