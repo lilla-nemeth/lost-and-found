@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 
 const SelectAll = (props) => {
     const { deleteUserAllPets, allChecked, setAllChecked, petCardChecked, setPetCardChecked, disable } = props;
