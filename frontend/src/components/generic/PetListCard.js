@@ -28,12 +28,8 @@ const PetListCard = (props) => {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className='tableCell'>
-                                        <div className='petSpecies'>
-                                            {pet.species}
-                                        </div>
-                                    </td>
-                                    <td className='tableCell'>
+                                    <td colspan='2' className='petSpecies'>
+                                      {pet.species}
                                     </td>
                                 </tr>
                                 <tr className='petMainInfo'>
