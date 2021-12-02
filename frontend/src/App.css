@@ -295,7 +295,7 @@ table {
   text-decoration: none;
   font: var(--font-standard);
   background: var(--clr-palebrown);
-  /* width: 90%; */
+  width: 100vw;
 }
 
 /* .footerText, */
@@ -645,7 +645,7 @@ table {
   font: 600 15px/1.2 'Poppins', sans-serif;
   text-transform: capitalize;
   /* min-width: 100px; */
-  width: 100px;
+  width: 110px;
 }
 
 .petProfileButton {
@@ -1799,7 +1799,7 @@ input[type=checkbox]:checked ~ label{
   }
 
   .landingPageVideo {
-    min-height: 600px;
+    min-height: 800px;
   }
 
 }
@@ -2279,7 +2279,7 @@ input[type=checkbox]:checked ~ label{
   .fade-in2,
   .fade-out1,
   .fade-out2 {
-    min-height: 1400px;
+    min-height: 1600px;
   }
 
 } 
