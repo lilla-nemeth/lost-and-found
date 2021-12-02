@@ -68,11 +68,11 @@ function App() {
           <Switch>
             <Route path='/login'>
               <Login />
-              <Footer transparent={transparent} />
+              {/* <Footer transparent={transparent} /> */}
             </Route>
             <Route path='/register'>
               <Register  />
-              <Footer transparent={transparent} />
+              {/* <Footer transparent={transparent} /> */}
             </Route>
             <Route path='/lostandfound'>
               <Navbar />

@@ -63,10 +63,11 @@ table {
 
   /* Fonts */
   --font-family: 'Poppins', sans-serif;
-  --font-standard: 400 17px/1.2 'Poppins', sans-serif;
-  --font-thin: 300 17px/1.2 'Poppins', sans-serif;
+  --font-formheadline: 500 30px/1.2 'Poppins', sans-serif;
+  --font-standard: 400 14px/1.2 'Poppins', sans-serif;
+  --font-thin: 300 14px/1.2 'Poppins', sans-serif;
   --font-landingpage: 700 100px/1.2 'Poppins', sans-serif;
-  --font-landingpage-mobile: 700 17vw/1.2 'Poppins', sans-serif;
+  --font-landingpage-mobile: 700 14vw/1.2 'Poppins', sans-serif;
   --font-input: 700 28px/1.2 "Poppins", sans-serif;
 
   /* Shadow */
@@ -607,7 +608,7 @@ table {
 /* End of PetCards */
 
 .petStatus {
-  font: 500 15px/1.2 'Poppins', sans-serif;
+  font: 500 14px/1.2 'Poppins', sans-serif;
   text-transform: uppercase;
   border: 1px solid var(--clr-black);
   padding: 10px;
@@ -639,7 +640,7 @@ table {
 }
 
 .tableCell:first-child { 
-  font: 600 15px/1.2 'Poppins', sans-serif;
+  font: 600 14px/1.2 'Poppins', sans-serif;
   text-transform: capitalize;
   min-width: 100px;
 }
@@ -959,7 +960,7 @@ input[type=checkbox]:checked ~ label{
   padding-bottom: 20px;
   cursor: pointer;
   color: var(--clr-white);
-  font: 300 15px/1.2 "Poppins", sans-serif;
+  font: 300 14px/1.2 "Poppins", sans-serif;
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -979,11 +980,10 @@ input[type=checkbox]:checked ~ label{
   background-size: cover;
   overflow: hidden; 
   position: absolute;
-  width: 100%;
+  width: 100vw;
   left: 50%;
   top: 50%;
   height: 100%;
-  /* min-height: 1400px; */
   object-fit: cover;
   transform: translate(-50%, -50%);
   z-index: -1;
@@ -998,11 +998,10 @@ input[type=checkbox]:checked ~ label{
   background-size: cover;
   overflow: hidden; 
   position: absolute;
-  width: 100%;
+  width: 100vw;
   left: 50%;
   top: 50%;
   height: 100%;
-  /* min-height: 1400px; */
   object-fit: cover;
   transform: translate(-50%, -50%);
   z-index: -1;
@@ -1017,11 +1016,10 @@ input[type=checkbox]:checked ~ label{
   background-size: cover;
   overflow: hidden; 
   position: absolute;
-  width: 100%;
+  width: 100vw;
   left: 50%;
   top: 50%;
   height: 100%;
-  /* min-height: 1400px; */
   object-fit: cover;
   transform: translate(-50%, -50%);
   z-index: -1;
@@ -1035,11 +1033,10 @@ input[type=checkbox]:checked ~ label{
   background-size: cover;
   overflow: hidden; 
   position: absolute;
-  width: 100%;
+  width: 100vw;
   left: 50%;
   top: 50%;
   height: 100%;
-  /* min-height: 1400px; */
   object-fit: cover;
   transform: translate(-50%, -50%);
   z-index: -1;
@@ -1108,14 +1105,14 @@ input[type=checkbox]:checked ~ label{
 }
 
 .formHeadline {
-  font: 500 30px/1.2 'Poppins', sans-serif;
+  font: var(--font-formheadline);
   padding-bottom: 30px;
   color: var(--clr-darkgreen);
 }
 
 .loginText,
 .signUpText {
-  font: 400 15px / 1.2 Poppins, sans-serif;
+  font: 400 14px / 1.2 Poppins, sans-serif;
   display: flex;
 }
 
@@ -1137,7 +1134,7 @@ input[type=checkbox]:checked ~ label{
 .message {
   height: 30px;
   padding-top: 10px;
-  font: 400 15px / 1.2 Poppins, sans-serif;
+  font: 400 14px / 1.2 Poppins, sans-serif;
 }
 
 .messagePetReport {
@@ -1554,7 +1551,7 @@ input[type=checkbox]:checked ~ label{
   border-left: none;
   border-right: none;
   background: none;
-  font: 300 15px/1.2 'Poppins', sans-serif !important;
+  font: var(--font-thin) !important;
   text-transform: capitalize;
 }
 
@@ -1768,6 +1765,9 @@ input[type=checkbox]:checked ~ label{
     position: absolute;
   }
 
+  .landingPageVideo {
+    min-height: 1400px;
+  }
 
 }
 
@@ -1782,6 +1782,7 @@ input[type=checkbox]:checked ~ label{
     margin-top: -10px;
   }
 
+  .landingPageVideo,
   .fade-in1,
   .fade-in2,
   .fade-out1,
@@ -1884,6 +1885,10 @@ input[type=checkbox]:checked ~ label{
   /* .footerWithPicture {
     bottom: -130px;
   } */
+
+  .landingPageVideo {
+    min-height: 1400px;
+  }
 
 }
 
@@ -2212,6 +2217,7 @@ input[type=checkbox]:checked ~ label{
     transform: unset;
   }
 
+
   .fade-in1,
   .fade-in2,
   .fade-out1,
@@ -2228,4 +2234,26 @@ input[type=checkbox]:checked ~ label{
   }
 
 }
+
+@media only screen and (min-width: 1025px) and (max-width: 1280px){
+
+  /* .landingPageVideo, */
+  .fade-in1,
+  .fade-in2,
+  .fade-out1,
+  .fade-out2 {
+    min-height: 950px;
+  }
+
+  .registerContainer,
+  .loginContainer {
+    padding-top: 20px;
+    width: 100vw;
+    top: unset;
+    left: unset;
+    transform: unset;
+  }
+}
+
+
 
