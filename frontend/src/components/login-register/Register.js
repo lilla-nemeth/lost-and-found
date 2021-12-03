@@ -6,7 +6,6 @@ import { handleError, clearError } from '../HelperFunctions.js';
 import BackgroundImages from './BackgroundImages';
 import Logo from '../generic/Logo';
 import PasswordShowHide from './PasswordShowHide';
-import Footer from '../navbar-footer/Footer';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
 import { ReactComponent as UsernameIcon } from '../../assets/icons/username.svg';
 import { ReactComponent as PhoneIcon } from '../../assets/icons/phone.svg';
@@ -123,8 +122,7 @@ const Register = () => {
                                     At least 8 characters, 
                                     must contain one upper-case and
                                     one lower-case letter, 
-                                    one digit and one special character from these:
-                                    ! # $ @ ^ % & ? * + , - . : ;
+                                    one digit and one special character from these:! # $ @ ^ % & ? * + , - . : ;
                                 </div>
                             <div>
                                 <button 
