@@ -14,31 +14,13 @@ CREATE TABLE users (
     modified TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE pets (
-    id SERIAL PRIMARY KEY,
-    userId INT NOT NULL REFERENCES users,
-    img TEXT,
-    petstatus VARCHAR(50),
-    petlocation VARCHAR(50),
-    species VARCHAR(50),
-    petsize VARCHAR(50),
-    breed VARCHAR(255),
-    sex VARCHAR(50),
-    color VARCHAR(255),
-    age VARCHAR(50),
-    uniquefeature VARCHAR(255),
-    postdescription VARCHAR(255),
-    since TIMESTAMP NOT NULL DEFAULT NOW(),
-    until TIMESTAMP
-);
-
 -- CREATE TABLE pets (
 --     id SERIAL PRIMARY KEY,
 --     userId INT NOT NULL REFERENCES users,
 --     img TEXT,
 --     petstatus VARCHAR(50),
---     petlocation VARCHAR(255),
---     species VARCHAR(255),
+--     petlocation VARCHAR(50),
+--     species VARCHAR(50),
 --     petsize VARCHAR(50),
 --     breed VARCHAR(255),
 --     sex VARCHAR(50),
@@ -49,6 +31,24 @@ CREATE TABLE pets (
 --     since TIMESTAMP NOT NULL DEFAULT NOW(),
 --     until TIMESTAMP
 -- );
+
+CREATE TABLE pets (
+    id SERIAL PRIMARY KEY,
+    userId INT NOT NULL REFERENCES users,
+    img TEXT,
+    petstatus VARCHAR(50),
+    petlocation VARCHAR(255),
+    species VARCHAR(255),
+    petsize VARCHAR(50),
+    breed VARCHAR(255),
+    sex VARCHAR(50),
+    color VARCHAR(255),
+    age VARCHAR(50),
+    uniquefeature VARCHAR(255),
+    postdescription VARCHAR(255),
+    since TIMESTAMP NOT NULL DEFAULT NOW(),
+    until TIMESTAMP
+);
 
 -- Columns for detailed location:
     -- region VARCHAR(50),
