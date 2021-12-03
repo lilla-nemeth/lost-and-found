@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const path = require('path');
 
-// const { authMw, isEmailValid, isPhoneValid, isUsernameValid, isPasswordValid, upload } = require('./middlewares.js');
 const { authMw, isFormValid, upload } = require('./middlewares.js');
 
 let DEBUG = false;

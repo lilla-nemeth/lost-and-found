@@ -110,7 +110,6 @@ function isFormValid(request, response, next) {
     } else {
         next();
     }
-
 }
 
     // Multer file storage - V1:
