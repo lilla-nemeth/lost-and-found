@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { createBrowserHistory } from 'history';
 import { Link } from 'react-router-dom';
 import { AppStateContext } from '../../contexts/AppStateContext';
-import { handleError } from '../HelperFunctions.js';
+import { handleError, clearError } from '../HelperFunctions.js';
 import BackgroundImages from './BackgroundImages';
 import Logo from '../generic/Logo';
 import PasswordShowHide from './PasswordShowHide';
@@ -44,6 +44,7 @@ const Register = () => {
                 }, 5000)),
                 errorCallback: err => {
                     setLoading(false);
+                    clearError();
                     handleError(err, setErrorMsg);
                 }
             });

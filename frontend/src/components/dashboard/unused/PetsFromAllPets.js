@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { createBrowserHistory } from 'history';
 import { AppStateContext } from '../../../contexts/AppStateContext';
 import { AuthContext } from '../../../contexts/AuthContext';
-import { handleError, changeCheckboxValue } from '../../HelperFunctions.js';
+import { handleError, clearError } from '../../HelperFunctions.js';
 import Checkbox from '../../generic/Checkbox';
 import PetListCard from '../../generic/PetListCard';
 
@@ -42,8 +42,10 @@ const PetsFromAllPets = () => {
             successTimeout: () => (setTimeout(() => {
                 setSuccessMsg('');
             }, 5000)),
-            errorCallback: err => 
-                handleError(err, setErrorMsg)
+            errorCallback: err => {
+                clearError();
+                handleError(err, setErrorMsg);
+            }
         })
     }
 

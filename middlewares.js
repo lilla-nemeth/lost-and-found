@@ -57,26 +57,9 @@ function isFormValid(request, response, next) {
             message = 'Email field is required';
         } else if (!validByEmailRegex) {
             message = 'Email format is not valid';
-        } else if (email.length > 254) { 
-            message = 'Email length exceeds the maximum';
-        } else if (emailParts[0].length > 64) {
-            message = 'Email username is too long';
-        } else if (domainParts.some(function(part) {return part.length > 63})) {
-            message = 'Email domain name is too long';
         } else if (!password) {
             message = 'Password field is required';
-        } else if (password.length < 8) {
-            message = 'Password must contain at least 8 characters';
-        } else if (!isContainUppercase) {
-            message = 'Password must contain at least one uppercase letter';
-        } else if (!isContainLowercase) {
-            message = 'Password must contain at least one lowercase letter';
-        } else if (!isContainDigit) {
-            message = 'Password must contain at least one number';
-        } else if (!isContainSpecialCharacter) {
-            message = 'Password must contain at least one special character'; 
         } 
-
     } else {
         // register
         if (!email) {

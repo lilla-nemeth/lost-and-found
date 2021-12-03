@@ -3,7 +3,7 @@ import { createBrowserHistory } from 'history';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
-import { handleError } from '../HelperFunctions.js';
+import { handleError, clearError } from '../HelperFunctions.js';
 import Logo from '../generic/Logo';
 import Footer from '../navbar-footer/Footer';
 import BackgroundImages from './BackgroundImages';
@@ -40,6 +40,7 @@ const Login = () => {
                 successCallback: () => setLoading(false),
                 errorCallback: err => {
                     setLoading(false);
+                    clearError();
                     handleError(err, setErrorMsg);
                 }
             });

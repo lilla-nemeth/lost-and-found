@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { createBrowserHistory } from 'history';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
-import { handleError } from '../HelperFunctions.js';
+import { handleError, clearError } from '../HelperFunctions.js';
 import { isFieldRequired } from '../HelperFunctions.js';
 import PetReportOptionalData from './PetReportOptionalData';
 import { ReactComponent as ArrowDown} from '../../assets/icons/togglearrow.svg';
@@ -24,7 +24,6 @@ let history = createBrowserHistory();
 
 // petstatusOptions -> reunited option comes later with post editing:
 
-// (Maybe class component would be more reasonable...)
 const PetReport = () => {
     const { token } = useContext(AuthContext);
     const { 
@@ -149,6 +148,7 @@ const PetReport = () => {
                 },
                 errorCallback: err => {
                     setLoading(false);
+                    clearError();
                     handleError(err, setErrorMsg);
                 }
             });

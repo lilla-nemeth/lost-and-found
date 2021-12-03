@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from './AuthContext';
-import { handleError } from '../components/HelperFunctions.js';
+import { handleError, clearError } from '../components/HelperFunctions.js';
 
 export const AppStateContext = createContext();
 
@@ -24,26 +24,29 @@ export default function AppStateContextProvider(props) {
 
     useEffect(() => {
         if (token) {
-             getUsername({
-                 token,
-                 errorCallback: err => {
-                     handleError(err, setErrorMsg);
-                 }
-             });
-             getUsers({
-                 token,
-                 successCallback: res => setUsers(res.data),
-                 errorCallback: err => {
-                     handleError(err, setErrorMsg);
-                 }
-             });
-             getUserPets({
+            getUsername({
+                token,
+                errorCallback: err => {
+                    clearError();
+                    handleError(err, setErrorMsg);
+                }
+            });
+            getUsers({
+                token,
+                successCallback: res => setUsers(res.data),
+                errorCallback: err => {
+                    clearError();
+                    handleError(err, setErrorMsg);
+                }
+            });
+            getUserPets({
                 token,
                 successCallback: res => {
                     setUserPets(res.data);
                     setLoader(false);
                 },
                 errorCallback: err => {
+                    clearError();
                     handleError(err, setErrorMsg);
                 }
             });
@@ -64,6 +67,7 @@ export default function AppStateContextProvider(props) {
                     })
                 },
                 errorCallback: err => {
+                    clearError();
                     handleError(err, setErrorMsg);
                 }
             });
@@ -76,6 +80,7 @@ export default function AppStateContextProvider(props) {
                 setAllPets(res.data)
             },
             errorCallback: err => {
+                clearError();
                 handleError(err, setErrorMsg);
             }
         });  

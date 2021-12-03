@@ -24,7 +24,6 @@ const PetHome = () => {
     return (  
         <main className='petMain'>
             <section>
-                {/* <PetList /> */}
                 <PetListWithSearch />
                 <PetPage />
             </section>

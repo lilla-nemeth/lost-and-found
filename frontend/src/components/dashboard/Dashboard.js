@@ -3,7 +3,7 @@ import { createBrowserHistory } from 'history';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import { AuthContext } from '../../contexts/AuthContext';
 import Loader from '../generic/Loader';
-import { handleError, changeCheckboxValue } from '../HelperFunctions.js';
+import { handleError, clearError } from '../HelperFunctions.js';
 import Checkbox from '../generic/Checkbox';
 import UserPetCard from '../generic/UserPetCard';
 import Sidebar from '../generic/Sidebar';
@@ -89,6 +89,7 @@ const Dashboard = () => {
                 }, 5000)),
                 errorCallback: err => {
                     setLoading(false);
+                    clearError();
                     handleError(err, setErrorMsg);
                 }
             })
@@ -129,6 +130,7 @@ const Dashboard = () => {
                 }, 5000)),
                 errorCallback: err => {
                     setLoading(false);
+                    clearError();
                     handleError(err, setErrorMsg);
                 }
             })

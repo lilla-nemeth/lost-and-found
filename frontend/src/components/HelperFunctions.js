@@ -13,6 +13,8 @@ export function numberIncreases(total, limit) {
 }
 
 // for only errors from backend (err.response.data.msg):
+let timeOut;
+
 export function handleError(err, setter) {
     setter(        
         err
@@ -20,10 +22,14 @@ export function handleError(err, setter) {
         &&err.response.data
         &&err.response.data.msg
     );
-    let timeOut = setTimeout(() => {
+
+    timeOut = setTimeout(() => {
         setter('');
     }, 5000);
 
+}
+
+export function clearError() {
     clearTimeout(timeOut);
 }
 
