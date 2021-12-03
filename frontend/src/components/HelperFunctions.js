@@ -26,7 +26,6 @@ export function handleError(err, setter) {
     timeOut = setTimeout(() => {
         setter('');
     }, 5000);
-
 }
 
 export function clearError() {
