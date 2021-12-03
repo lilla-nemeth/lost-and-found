@@ -60,9 +60,6 @@ const DragnDropZone = (props) => {
         }
     });
 
-    // if (DEBUG) console.log('files', files.length)
-    // if (DEBUG) console.log('typeof files', typeof files) 
-
     // Place of Preview Image
     const images = files && files.map(file => (
         <div key={file.name}>

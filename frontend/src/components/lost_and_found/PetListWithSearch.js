@@ -4,7 +4,6 @@ import PetListCard from '../generic/PetListCard';
 import Search from '../generic/Search';
 
 const PetListWithSearch = () => {
-    // now the allPets is 'inactive' in the AppStateContext
     const { pets, allPets } = useContext(AppStateContext);
     const [search, setSearch] = useState('');
     const [searchColumns, setSearchColumns] = useState([
@@ -54,7 +53,7 @@ const PetListWithSearch = () => {
                         }
                     }).map(pet => {
                         return (
-                            <PetListCard key={pet.id} pet={pet}/>
+                            <PetListCard key={pet.id} pet={pet} />
                         );
                     })}
 

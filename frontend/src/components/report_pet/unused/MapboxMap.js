@@ -20,7 +20,6 @@ const MapboxMap = () => {
     const [zoom, setZoom] = useState(6);
 
     let DEBUG = false;
-    // if (DEBUG) console.log('from MapboxMap component', mapboxgl.accessToken);
     // container: render the map inside a specific DOM element
 
     useEffect(() => {

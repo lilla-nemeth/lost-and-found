@@ -2,11 +2,10 @@ import React, { useState, useContext } from 'react';
 import { createBrowserHistory } from 'history';
 import { Link } from 'react-router-dom';
 import { AppStateContext } from '../../contexts/AppStateContext';
-import { handleError } from '../HelperFunctions.js';
+import { handleError, clearError } from '../HelperFunctions.js';
 import BackgroundImages from './BackgroundImages';
 import Logo from '../generic/Logo';
 import PasswordShowHide from './PasswordShowHide';
-import Footer from '../navbar-footer/Footer';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
 import { ReactComponent as UsernameIcon } from '../../assets/icons/username.svg';
 import { ReactComponent as PhoneIcon } from '../../assets/icons/phone.svg';
@@ -44,6 +43,7 @@ const Register = () => {
                 }, 5000)),
                 errorCallback: err => {
                     setLoading(false);
+                    clearError();
                     handleError(err, setErrorMsg);
                 }
             });
@@ -122,8 +122,7 @@ const Register = () => {
                                     At least 8 characters, 
                                     must contain one upper-case and
                                     one lower-case letter, 
-                                    one digit and one special character from these:
-                                    ! # $ @ ^ % & ? * + , - . : ;
+                                    one digit and one special character from these:! # $ @ ^ % & ? * + , - . : ;
                                 </div>
                             <div>
                                 <button 

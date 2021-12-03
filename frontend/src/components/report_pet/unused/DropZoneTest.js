@@ -72,9 +72,7 @@ const DropZoneTest = () => {
         <div>
             <div className='petListPicture'>
                 <div style={styles.inputImage} {...getRootProps()}>
-                    {/* <div style={{overflow: 'hidden', position: 'absolute', bottom: '0'}}> */}
                         {images}
-                    {/* </div> */}
                         <input {...getInputProps()} type='file'/>
                         <p style={{lineHeight: '300px',textAlign: 'center'}}>
                             Drop files here

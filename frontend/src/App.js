@@ -130,7 +130,7 @@ function App() {
               <Route exact path='/'>
                 <Navbar transparent={transparent} />
                 <PetLandingPage  />
-                <Footer transparent={transparent} />
+                {/* <Footer transparent={transparent} /> */}
               </Route>
               <Route path='*'>
                 <Navbar />
