@@ -2,14 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ReactComponent as PetPawLogo } from '../../assets/icons/dogpaw.svg';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
-import { handleError } from '../HelperFunctions.js';
 import Hamburger from './Hamburger';
 import { Link } from 'react-router-dom';
+import Modal from './Modal';
 
 const Navbar = (props) => {
     const { token, handleLogOut } = useContext(AuthContext);
     const { username } = useContext(AppStateContext);
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
     
     const { transparent } = props;
 
@@ -21,7 +22,7 @@ const Navbar = (props) => {
         return (
             <>
                 <li className='navList'><Link className={className} to='/lostandfound' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Lost & Found</Link></li>
-                <li className='navList'><Link className={className} to='' disabled>Report Pet</Link></li>
+                <Modal className={className} />
                 <li className='navList'><Link className={className} to='/login' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Login</Link></li>
                 <li className='navList'><Link className={className} to='/register' onClick={() => setHamburgerOpen(!hamburgerOpen)}>Register</Link></li>     
             </>
