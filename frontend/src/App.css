@@ -432,6 +432,7 @@ table {
   background: var(--clr-palebrown);
   overflow: hidden;
   min-height: 100vh;
+  width: 100%;
 }
 
 .lostAndFoundHeadline {
