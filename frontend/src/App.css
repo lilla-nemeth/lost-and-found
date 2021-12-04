@@ -124,6 +124,7 @@ table {
   list-style-type: none;
   justify-content: flex-end;
   align-items: center;
+  z-index: 1;
 }
 
 .hamburger {
@@ -294,6 +295,7 @@ table {
   text-decoration: none;
   font: var(--font-standard);
   display: inline-block; 
+  z-index: 0;
 }
 
 .username {
@@ -392,7 +394,7 @@ table {
   height: 100%; 
   object-fit: cover; 
   transform: translate(-50%, -50%); 
-  z-index: -1;
+  z-index: -4;
 }
 
 /* Dashboard */
@@ -1545,9 +1547,13 @@ body.modalActive {
   position: fixed;
 }
 
+.modalStyle {
+  z-index: 2;
+}
+
 .modalOverlay {
   background: rgba(49,49,49,0.8);
-  z-index: 1;
+  z-index: 4;
   /* cursor: pointer; */
 }
 
@@ -2111,7 +2117,7 @@ body.modalActive {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    z-index: -1;
+    /* z-index: -1; */
   }
 
   #reportPetLink {
