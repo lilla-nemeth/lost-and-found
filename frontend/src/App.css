@@ -1653,15 +1653,20 @@ body.modalActive {
   .navLinkMobile {
     color: var(--clr-white);
     font: 400 25px/1.2 'Poppins', sans-serif;
-    z-index: -1;
+    z-index: 0;
   }
 
   #reportPetLink {
      z-index: 0;
   }
 
+  .modalStyle,
+  .modalOverlay {
+    position: unset;
+  }
+
   .modalContent {
-    z-index: 3;
+    z-index: 4;
   }
 
   .navList:hover {
