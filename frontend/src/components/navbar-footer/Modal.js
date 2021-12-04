@@ -16,7 +16,7 @@ const Modal = (props) => {
 
     return (
         <>
-            <li className='navList'>
+            <li className='navList' >
                 <Link 
                     className={className} 
                     id='reportPetLink'
