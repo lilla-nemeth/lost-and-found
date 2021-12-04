@@ -64,6 +64,7 @@ table {
   /* Fonts */
   --font-family: 'Poppins', sans-serif;
   --font-formheadline: 500 30px/1.2 'Poppins', sans-serif;
+  --font-modal: 300 20px/1.2 'Poppins', sans-serif;
   --font-standard: 400 15px/1.2 'Poppins', sans-serif;
   --font-thin: 300 15px/1.2 'Poppins', sans-serif;
   --font-landingpage: 700 100px/1.2 'Poppins', sans-serif;
@@ -162,7 +163,7 @@ table {
   color: var(--clr-white);
   border: 2px solid transparent;
   border-radius: var(--radius-circle);
-  z-index: 2;
+  z-index: -1;
   cursor: pointer;
 }
 
@@ -349,6 +350,7 @@ table {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  z-index: -1;
 }
 
 .logOutButtonMobile {
@@ -1525,6 +1527,72 @@ input[type=checkbox]:checked ~ label{
   padding: 45px 0px 15px;
 }
 
+/* Modal */
+
+body.modalActive {
+  overflow-y: hidden;
+}
+
+.modalStyle,
+.modalOverlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.modalOverlay {
+  background: rgba(49,49,49,0.8);
+  z-index: 1;
+  /* cursor: pointer; */
+}
+
+.modalContent {
+  position: absolute;
+  font: var(--font-modal);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--clr-white);
+  border-radius: var(--radius);
+  padding: 80px;
+  width: 20%;
+  min-width: 100px;
+  cursor: pointer;
+  z-index: 22;
+  /* padding: 50px; */
+  /* height: 50px; */
+  /* line-height: 1.4; */
+
+}
+
+.modalClose {
+  border-radius: var(--radius-button);
+  background: var(--clr-darkgreen);
+  color: var(--clr-white);
+  width: 60px;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+  z-index: 4;
+  font: var(--font-standard);
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  fill: var(--clr-white);
+}
+
+.modalClose:hover {
+  background: var(--clr-green);
+}
+
+
+
+
+
 /* Pet Report - MapBox */
 .map-container {
   height: 450px;
@@ -1585,6 +1653,15 @@ input[type=checkbox]:checked ~ label{
   .navLinkMobile {
     color: var(--clr-white);
     font: 400 25px/1.2 'Poppins', sans-serif;
+    z-index: -1;
+  }
+
+  #reportPetLink {
+     z-index: 0;
+  }
+
+  .modalContent {
+    z-index: 3;
   }
 
   .navList:hover {
@@ -1593,6 +1670,10 @@ input[type=checkbox]:checked ~ label{
 
   .navMainList {
     display: none;
+  }
+
+  .navLogo {
+    z-index: 2;
   }
 
   .navMainListMobile {
@@ -2024,6 +2105,11 @@ input[type=checkbox]:checked ~ label{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: -1;
+  }
+
+  #reportPetLink {
+    z-index: 1;
   }
 
   .navMainList {
