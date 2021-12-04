@@ -74,7 +74,9 @@ const Navbar = (props) => {
             <div className={transparent ? 'navigationWithoutPicture' : 'navigationWithPicture'}>
                 {!token ?
                     <>
-                        <Link className='navLogo' to='/'><PetPawLogo className='navLogoInner'/></Link>
+                        <Link className='navLogo' to='/' onClick={() => setHamburgerOpen(!hamburgerOpen)}>
+                            <PetPawLogo className='navLogoInner'/>
+                        </Link>
                             {isNavbarOpen(hamburgerOpen, 
                                 () => returnUnprotectedLinks('navLinkDesktop', 'logOutButtonDesktop'),
                                 () => returnUnprotectedLinks('navLinkMobile', 'logOutButtonMobile')
@@ -83,7 +85,9 @@ const Navbar = (props) => {
                     :
                     <>
                         <div className='navPositionLeft'>
-                            <Link className='navLogo' to='/lostandfound'><PetPawLogo className='navLogoInner'/></Link>
+                            <Link className='navLogo' to='/lostandfound' onClick={() => setHamburgerOpen(!hamburgerOpen)}>
+                                <PetPawLogo className='navLogoInner'/>
+                            </Link>
                             <li className='username'>Hi {username}!</li>
                         </div>
                             {isNavbarOpen(hamburgerOpen, 
