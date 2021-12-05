@@ -34,9 +34,9 @@ function isFormValid(request, response, next) {
     const pwUppercase = /^(?=.*[A-Z])/; 
     const pwLowercase = /^(?=.*[a-z])/; 
     const pwDigit =  /^(?=.*\d)/; 
-    const pwAllowedSpecialCharacters = /^(?=.*[!#$@^%&?*+,-.:;])/;
+    const pwAllowedSpecialCharacters = /^(?=.*[§đ½¡”»£¤«“‰„‚\/\\°¿´˛¸€ÞþıŒœ ̛˚˝¯¨əßÐðĸøØÆæ'˘><Ʒʒ·×Ŋŋ—µ,‘’˙–~@#$%^&*+=`|{}:;!.?_\"()\[\]-])/;
+    // const pwAllowedSpecialCharacters = /^(?=.*[!#$@^%&?*+,-.:;])/;
     // const pwAllowedSpecialCharacters = /^(?=.*[!#$@^%&?*+,-.\/:;<=>_`{|}~])/;
-    // const pwSpecialCharacters = /^(?=.*[§đ½¡”»£¤«“‰„‚\/\\°¿´˛¸€ÞþıŒœ ̛˚˝¯¨əßÐðĸøØÆæ'˘><Ʒʒ·×Ŋŋ—µ,‘’˙–~@#$%^&*+=`|{}:;!.?_\"()\[\]-])/;
     
     let validByEmailRegex = emailRegex.test(email);
     let emailParts = email.split("@");
