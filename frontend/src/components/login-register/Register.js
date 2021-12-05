@@ -122,7 +122,7 @@ const Register = () => {
                                     At least 8 characters, 
                                     must contain one upper-case and
                                     one lower-case letter, 
-                                    one digit and one special character from these:! # $ @ ^ % & ? * + , - . : ;
+                                    one digit and one special character.
                                 </div>
                             <div>
                                 <button 
