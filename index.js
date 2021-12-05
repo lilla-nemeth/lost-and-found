@@ -179,7 +179,15 @@ app.post('/register', [isFormValid], (request, response) => {
 
     pool.query('INSERT INTO users(username, email, pw, phone) VALUES ($1, $2, $3, $4) RETURNING *', [username, email, encryptedPw, phone])
     .then((res) => response.status(200).json({msg: 'User succesfully created'}))
-    .catch((err) => {isFormValid ? isFormValid : console.log(err); response.status(400).json({msg: 'Failed to create user'})});
+    .catch((err) => {
+        if (err.code === '23505' && err.constraint === 'users_email_key') {
+            response.status(400).json({msg: 'Email address is already exists'});
+        } else if (err.code === '23505' && err.constraint === 'users_phone_key') {
+            response.status(400).json({msg: 'Phone number is already exists'});
+        } else if (err.code != '23505' && isFormValid) {
+            isFormValid;
+        }
+    });
 });
 
 // login
@@ -199,7 +207,7 @@ app.post('/login', [isFormValid], (request, response) => {
                     response.status(200).json(token);
                 });
             } else {
-                response.status(403).json({msg: 'Passwords do not match'})
+                response.status(403).json({msg: 'Passwords do not match'});
             }
         });
     })
