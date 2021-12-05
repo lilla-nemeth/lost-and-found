@@ -27,8 +27,8 @@ function isFormValid(request, response, next) {
     let username = request.body.username;
     let phone = request.body.phone;
     
-    const usernameRegex = /^[a-zA-Z][A-Za-z0-9_\.]*$/;
-    const usernameFirstCharacter = /^[a-zA-Z]/;
+    const usernameRegex = /^[A-Za-z0-9öÖäÄåÅ_\.]*$/;
+    const usernameFirstCharacter = /^[a-zA-ZöÖäÄåÅ]/;
     const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
     const phoneRegex = /^\d+$/;
     const pwUppercase = /^(?=.*[A-Z])/; 

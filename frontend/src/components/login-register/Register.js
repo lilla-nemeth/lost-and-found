@@ -37,7 +37,11 @@ const Register = () => {
                 username,
                 phone,
                 pw:password,
-                successCallback: res => {setSuccessMsg(res); setLoading(false)},
+                successCallback: res => {
+                    setErrorMsg('');
+                    setSuccessMsg(res); 
+                    setLoading(false);
+                },
                 successTimeout: () => (setTimeout(() => {
                     setSuccessMsg('');
                 }, 5000)),

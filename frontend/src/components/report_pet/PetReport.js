@@ -97,7 +97,6 @@ const PetReport = () => {
                     setLoading(false);
                     setUploadingButton(true);
                     setSuccessButtonMsg('Uploading...');
-                    // setSuccessMsg(res);
                     fetchPets({
                         limit,
                         offset,
@@ -123,6 +122,7 @@ const PetReport = () => {
                         }
                     });
                     if (DEBUG) console.log('res from PetReport')
+                    setErrorMsg('');
                     setSize('')
                     setStatus('')
                     setSpecies('')
@@ -131,7 +131,6 @@ const PetReport = () => {
                     setColors('')
                     setAge('')
                     setUniquefeature('')
-                    setErrorMsg('')
                     setLocation('')
                     setDescription('')
                     setPreview('')
