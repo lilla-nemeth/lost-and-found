@@ -43,8 +43,12 @@ const Register = () => {
                     setLoading(false);
                 },
                 successTimeout: () => (setTimeout(() => {
+                    setEmail('');
+                    setUsername('');
+                    setPhone('');
+                    setPassword('');
                     setSuccessMsg('');
-                }, 5000)),
+                }, 1500)),
                 errorCallback: err => {
                     setLoading(false);
                     clearError();

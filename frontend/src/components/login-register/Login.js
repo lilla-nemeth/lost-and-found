@@ -37,7 +37,11 @@ const Login = () => {
                 setToken,
                 email,
                 pw: password,
-                successCallback: () => setLoading(false),
+                successCallback: () => {
+                    setLoading(false);
+                    setEmail('');
+                    setPassword('');
+                },
                 errorCallback: err => {
                     setLoading(false);
                     clearError();
