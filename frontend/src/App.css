@@ -120,7 +120,7 @@ table {
   margin: 0px;
   padding: 0px;
   overflow: hidden;
-  padding-right: 18px;
+  /* padding-right: 18px; */
 }
 
 .navList {
@@ -363,6 +363,13 @@ table {
 .logOutButtonMobile {
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-left: 28px;
+  margin-right: 28px;
+}
+
+.logOutButtonDesktop {
+  margin-left: 28px;
+  margin-right: 28px;
 }
 
 .logOutButtonDesktop:hover,
@@ -1009,7 +1016,7 @@ input[type=checkbox]:checked ~ label{
   filter: brightness(90%);
   opacity: 0;
   transition: opacity 1s ease-in-out;
-  /* width: 100vw; */
+  width: 100vw;
 }
 
 .fade-out1 {
@@ -1026,7 +1033,7 @@ input[type=checkbox]:checked ~ label{
   z-index: -1;
   filter: brightness(90%);
   transition: opacity 1s ease-in-out;
-  /* width: 100vw; */
+  width: 100vw;
 }
 
 .fade-in2 {
@@ -1043,7 +1050,7 @@ input[type=checkbox]:checked ~ label{
   z-index: -1;
   filter: brightness(90%);
   transition: opacity 1s ease-in-out;
-  /* width: 100vw; */
+  width: 100vw;
 }
 
 .fade-out2 {
@@ -1060,7 +1067,7 @@ input[type=checkbox]:checked ~ label{
   z-index: -1;
   filter: brightness(90%);
   transition: opacity 1s ease-in-out;
-  /* width: 100vw; */
+  width: 100vw;
 }
 
 /* Login, Registration form */
@@ -1704,6 +1711,7 @@ body.modalActive {
     height: 100vh;
     justify-content: center;
     align-items: center;
+    /* padding-right: 18px; */
   }
 
   .hamburger {
