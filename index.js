@@ -42,8 +42,12 @@ const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : dev
 // get all pets by userId
 app.get('/userpets', authMw, (request, response) => {
     let userId = request.userId;
+    let isadmin = request.isadmin;
 
-    pool.query('SELECT * FROM pets WHERE userId=$1 ORDER BY since DESC', [userId])
+    let adminQuery = 'SELECT * FROM pets ORDER BY since DESC';
+    let userQuery = `SELECT * FROM pets WHERE userId=${userId} ORDER BY since DESC`; 
+
+    pool.query(isadmin ? adminQuery : userQuery)
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({msg: "Failed to fetch user's pets"}));
 });
@@ -139,6 +143,7 @@ app.put('/editprofile', [authMw, isFormValid], (request, response) => {
 // delete 1 pet by user (user dashboard)
 app.delete('/deletepet/:id', authMw, (request, response) => {
     let id = request.params.id
+    // let isadmin = request.isadmin;
 
     pool.query('DELETE FROM pets WHERE id=$1', [id])
     .then((res) => response.status(200).json({msg: 'Pet is successfully deleted'}))
@@ -148,12 +153,17 @@ app.delete('/deletepet/:id', authMw, (request, response) => {
 // delete all pets by user (user dashboard)
 app.delete('/deleteallpets', authMw, (request, response) => {
     let userId = request.userId;
+    let isadmin = request.isadmin;
 
-    pool.query('DELETE FROM pets WHERE userId=$1', [userId])
+    let adminQuery = 'DELETE FROM pets';
+    let userQuery = `DELETE FROM pets WHERE userId=${userId}`;
+
+    pool.query(isadmin ? adminQuery : userQuery)
     // .then((res) => console.log(res))
     // .catch((err) => console.log(err));
     .then((res) => response.status(200).json({msg: 'All pets are successfully deleted'}))
     .catch((err) => response.status(400).json({msg: 'Failed to delete all pets'}));
+    // .catch((err) => console.log(err));
 });
 
 // delete user - delete user and the connected pets (user dashboard)
@@ -200,10 +210,12 @@ app.post('/login', [isFormValid], (request, response) => {
         let userObject = res.rows[0];
         let encryptedPw = userObject.pw;
 
+        console.log(userObject)
         res.rows && bcrypt.compare(pw, encryptedPw)
         .then((isMatch) => {
             if (isMatch) {
-                jwt.sign({id: userObject.id }, 'r4uqSKqC6L', (err, token) => {
+                jwt.sign({id: userObject.id, isadmin: userObject.isadmin}, 'r4uqSKqC6L', (err, token) => {
+                    console.log(token)
                     response.status(200).json(token);
                 });
             } else {
