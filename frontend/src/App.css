@@ -120,6 +120,7 @@ table {
   margin: 0px;
   padding: 0px;
   overflow: hidden;
+  padding-right: 18px;
 }
 
 .navList {
@@ -204,11 +205,13 @@ table {
 .navPositionLeft {
   display: flex; 
   align-content: flex-start;
+  z-index: 1;
 }
 
 .navPositionRight {
   display: flex; 
   text-align: right;
+  z-index: 1;
 }
 
 /* Sidebar links */
@@ -750,6 +753,7 @@ table {
 ul li{
   position: relative;
   display: flex;
+  z-index: 1;
 }
 
 ul li input[type=radio]{
@@ -996,7 +1000,6 @@ input[type=checkbox]:checked ~ label{
   background-size: cover;
   overflow: hidden; 
   position: absolute;
-  width: 100vw;
   left: 50%;
   top: 50%;
   height: 100%;
@@ -1006,6 +1009,7 @@ input[type=checkbox]:checked ~ label{
   filter: brightness(90%);
   opacity: 0;
   transition: opacity 1s ease-in-out;
+  /* width: 100vw; */
 }
 
 .fade-out1 {
@@ -1014,7 +1018,6 @@ input[type=checkbox]:checked ~ label{
   background-size: cover;
   overflow: hidden; 
   position: absolute;
-  width: 100vw;
   left: 50%;
   top: 50%;
   height: 100%;
@@ -1023,6 +1026,7 @@ input[type=checkbox]:checked ~ label{
   z-index: -1;
   filter: brightness(90%);
   transition: opacity 1s ease-in-out;
+  /* width: 100vw; */
 }
 
 .fade-in2 {
@@ -1031,7 +1035,6 @@ input[type=checkbox]:checked ~ label{
   background-size: cover;
   overflow: hidden; 
   position: absolute;
-  width: 100vw;
   left: 50%;
   top: 50%;
   height: 100%;
@@ -1040,6 +1043,7 @@ input[type=checkbox]:checked ~ label{
   z-index: -1;
   filter: brightness(90%);
   transition: opacity 1s ease-in-out;
+  /* width: 100vw; */
 }
 
 .fade-out2 {
@@ -1048,7 +1052,6 @@ input[type=checkbox]:checked ~ label{
   background-size: cover;
   overflow: hidden; 
   position: absolute;
-  width: 100vw;
   left: 50%;
   top: 50%;
   height: 100%;
@@ -1057,6 +1060,7 @@ input[type=checkbox]:checked ~ label{
   z-index: -1;
   filter: brightness(90%);
   transition: opacity 1s ease-in-out;
+  /* width: 100vw; */
 }
 
 /* Login, Registration form */
@@ -1709,6 +1713,7 @@ body.modalActive {
     margin-bottom: auto;
     margin-right: 10px;
     margin-left: 10px;
+    /* padding-right: 10px; */
     z-index: 10;
   }
   

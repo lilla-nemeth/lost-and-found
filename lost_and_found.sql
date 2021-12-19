@@ -1,11 +1,11 @@
 CREATE DATABASE lostandfound
     WITH 
     OWNER = postgres
-    ENCODING = 'UTF8'
     CONNECTION LIMIT = -1;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
+    isadmin BOOLEAN DEFAULT FALSE,
     username VARCHAR(50),
     email VARCHAR(50) UNIQUE,
     pw VARCHAR(255),

@@ -274,7 +274,7 @@ export default function AppStateContextProvider(props) {
     function getUserPets({token, successCallback, errorCallback}) {
         let options = {
             method: 'get',
-            url: '/userPets',
+            url: '/userpets',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',

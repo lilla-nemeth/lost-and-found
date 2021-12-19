@@ -11,6 +11,8 @@ function authMw(request, response, next) {
             if (decodedToken) {
                 // userId = id from the token:
                 request.userId = decodedToken.id;
+                // add isadmin status to the token (false/true):
+                request.isadmin = decodedToken.isadmin;
                 next();
             } else {
                 response.status(401).json({msg: 'Token is not valid'})
