@@ -120,7 +120,11 @@ table {
   margin: 0px;
   padding: 0px;
   overflow: hidden;
-  /* padding-right: 18px; */
+}
+
+.navMainList,
+.navMainListMobile {
+  padding-right: 20px;
 }
 
 .navList {
@@ -363,14 +367,8 @@ table {
 .logOutButtonMobile {
   padding-top: 20px;
   padding-bottom: 20px;
-  margin-left: 28px;
-  margin-right: 28px;
 }
 
-.logOutButtonDesktop {
-  margin-left: 28px;
-  margin-right: 28px;
-}
 
 .logOutButtonDesktop:hover,
 .logOutButtonMobile:hover {
@@ -1544,7 +1542,6 @@ input[type=checkbox]:checked ~ label{
 }
 
 /* Modal */
-
 body.modalActive {
   overflow-y: hidden;
 }
@@ -1721,8 +1718,12 @@ body.modalActive {
     margin-bottom: auto;
     margin-right: 10px;
     margin-left: 10px;
-    /* padding-right: 10px; */
     z-index: 10;
+    /* padding-right: 10px; */
+  }
+
+  body.burgerOverflow {
+    overflow-y: hidden;
   }
   
   .burgerActive,
