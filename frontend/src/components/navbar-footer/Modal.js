@@ -12,7 +12,7 @@ const Modal = (props) => {
         document.body.classList.add('modalActive');
       } else {
         document.body.classList.remove('modalActive');
-      }
+    }
 
     return (
         <>
