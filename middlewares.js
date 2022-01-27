@@ -31,7 +31,7 @@ function isFormValid(request, response, next) {
     
     const usernameRegex = /^[A-Za-z0-9öÖäÄåÅ_\.]*$/;
     const usernameFirstCharacter = /^[a-zA-ZöÖäÄåÅ]/;
-    const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+    const emailRegex = /^[-!#$%&'.*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
     const phoneRegex = /^\d+$/;
     const pwUppercase = /^(?=.*[A-Z])/; 
     const pwLowercase = /^(?=.*[a-z])/; 
@@ -78,7 +78,7 @@ function isFormValid(request, response, next) {
             message = 'Username field is required';
         } else if (username.length < 2) {
             message = 'Username must contain at least 2 characters';
-        } else if (username.length > 30) {
+        } else if (username.length > 29) {
             message = 'Username must be less than 30 characters';
         } else if (!isFirstCharacterPassTheTest) {
             message = 'Username must start with a letter';
@@ -101,7 +101,7 @@ function isFormValid(request, response, next) {
         } else if (!isContainLowercase) {
             message = 'Password must contain at least one lowercase letter';
         } else if (!isContainDigit) {
-            message = 'Password must contain at least one number';
+            message = 'Password must contain at least one digit';
         } else if (!isContainSpecialCharacter) {
             message = 'Password must contain at least one special character'; 
         } 
