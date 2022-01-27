@@ -190,6 +190,7 @@ app.post('/register', [isFormValid], (request, response) => {
     pool.query('INSERT INTO users(username, email, pw, phone) VALUES ($1, $2, $3, $4) RETURNING *', [username, email, encryptedPw, phone])
     .then((res) => response.status(200).json({msg: 'User succesfully created'}))
     .catch((err) => {
+        console.log(err);
         if (err.code === '23505' && err.constraint === 'users_email_key') {
             response.status(400).json({msg: 'Email address is already exists'});
         } else if (err.code === '23505' && err.constraint === 'users_phone_key') {

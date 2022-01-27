@@ -25,7 +25,7 @@ const Register = () => {
 
     let DEBUG = false;
 
-    let disabled = !password || !email || !username || !phone || loading
+    let disabled = !password || !email || !username || !phone || loading;
 
     function handleSubmit(event) {
         event.preventDefault();
