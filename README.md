@@ -1,7 +1,7 @@
 # Lost and Found
 
 Lost and Found is an application, where everyone can search from missing pets and registrated users are allowed to upload pet profiles.
-It was created with Node.js, Express, JavaScript and React.
+It was created with Node.js, Express, JavaScript and React with custom UI.
 
 ## Features
 
