@@ -36,7 +36,7 @@ npm install
 
 nodemon index.js
 
-Is running on port 3003.
+Is running on port 3003
 
 ### Run - Client
 
