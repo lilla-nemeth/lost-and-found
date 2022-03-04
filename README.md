@@ -5,7 +5,7 @@ It was created with Node.js, Express, JavaScript and React.
 
 ## Installation
 
-npm install or npm i
+npm install  
 
 ### Run - Server
 
@@ -15,5 +15,6 @@ Is running on port 3003.
 
 ### Run - Client
 
-cd frontend
+cd frontend  
+
 npm start
