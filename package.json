@@ -1,14 +1,14 @@
 {
-  "name": "lost_and_found_dog_app",
+  "name": "lost_and_found",
   "version": "1.0.0",
-  "description": "",
+  "description": "Lost & Found App",
   "main": "index.js",
   "scripts": {
     "heroku-postbuild": "cd frontend && npm i && npm run build",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Lilla Németh",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
