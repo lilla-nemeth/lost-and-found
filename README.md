@@ -1,7 +1,9 @@
 # Lost and Found
 
+## Description
+
 Lost and Found is an application, where everyone can search from missing pets and registrated users are allowed to upload pet profiles.
-It was created with Node.js, Express, JavaScript and React.
+It was created with Node.js, Express, PostgreSQL, JavaScript and React with custom UI.
 
 ## Features
 
@@ -32,18 +34,27 @@ Other:
 - Use the search queries
 - Use the mapbox map
 
-## Installation
+## Install the dependencies
 
+```
 npm install
+```
 
 ### Run - Server
 
+```
 nodemon index.js
+```
 
 Is running on port 3003
 
 ### Run - Client
 
+```
 cd frontend
-
 npm start
+```
+
+### License
+
+MIT
