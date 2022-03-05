@@ -11,26 +11,22 @@ It was created with Node.js, Express, PostgreSQL, JavaScript and React with cust
 - Login/Log out
 
 For all users:
-
 - Fetch all lost and found pets
 - Search from all pets
 
 For logged in users:
-
 - Uploading pet profile with image
-- Required and optional data options during uploading
+- Required and optional data options during uploading 
 - Dashboard and contact informations of uploaded profiles (phone, email)
 - Can delete own pet profiles
 
 ## Future of the project
 
-Dashboard:
-
+Dashboard: 
 - Updating pet profiles - "reunited" pet category
-- User profile with picture uploading
+- User profile with picture uploading  
 
 Other:
-
 - Use the search queries
 - Use the mapbox map
 
@@ -51,7 +47,7 @@ Is running on port 3003
 ### Run - Client
 
 ```
-cd frontend
+cd frontend  
 npm start
 ```
 
