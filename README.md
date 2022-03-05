@@ -40,7 +40,9 @@ Other:
 npm install
 ```
 
-### Run - Server
+### Run
+
+Server
 
 ```
 nodemon index.js
@@ -48,7 +50,7 @@ nodemon index.js
 
 Is running on port 3003
 
-### Run - Client
+Client
 
 ```
 cd frontend
