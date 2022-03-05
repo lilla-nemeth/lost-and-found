@@ -55,6 +55,6 @@ cd frontend
 npm start
 ```
 
-### License
+## License
 
 MIT
