@@ -40,7 +40,7 @@ Other:
 npm install
 ```
 
-### Run
+## Run
 
 Server
 
