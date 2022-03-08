@@ -36,9 +36,6 @@ Other:
 
 ## Installing, running locally  
 
-Prerequisite  
-Node version 16.13.0 or higher.
-</br></br>
 Clone the repo
 
 ```
