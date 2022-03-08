@@ -49,7 +49,7 @@ git clone https://github.com/lilla-nemeth/todo.git
 
 Go to the project root directory
 ```
-cd todo
+cd lost-and-found
 ```
 
 Install the dependencies
