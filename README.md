@@ -42,7 +42,7 @@ Node version 16.13.0 or higher.
 Clone the repo
 
 ```
-git clone https://github.com/lilla-nemeth/todo.git
+git clone https://github.com/lilla-nemeth/lost-and-found.git
 ```
 
 ### Server
