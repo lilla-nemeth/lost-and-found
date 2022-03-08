@@ -34,27 +34,50 @@ Other:
 - Use the search queries
 - Use the mapbox map
 
-## Install the dependencies
+## Installing, running locally  
+
+Prerequisite  
+Node version 16.13.0 or higher.
+</br></br>
+Clone the repo
+
+```
+git clone https://github.com/lilla-nemeth/todo.git
+```
+
+### Server
+
+Go to the project root directory
+```
+cd todo
+```
+
+Install the dependencies
 
 ```
 npm install
 ```
 
-## Run
-
-Server
-
+Run the server
 ```
 nodemon index.js
 ```
+Server is running on port 3003
+</br></br>
+### Client
 
-Is running on port 3003
-
-
-Client
-
+Go to the frontend folder
 ```
 cd frontend
+```
+Install the dependencies
+
+```
+npm install
+```
+
+Start the client
+```
 npm start
 ```
 
