@@ -4,37 +4,34 @@ import { ReactComponent as HidePasswordIcon } from '../../assets/icons/hidepassw
 import { ReactComponent as ShowPasswordIcon } from '../../assets/icons/showpassword.svg';
 
 const PasswordShowHide = (props) => {
-    const { password, setPassword } = props;
-    const [showPassword, setShowPassword] = useState(false);
+  const { password, setPassword } = props;
+  const [showPassword, setShowPassword] = useState(false);
 
-    let DEBUG = false;
-    
-    function handleClickShowPw() {
-        setShowPassword(!showPassword);
-    }
+  let DEBUG = false;
 
-    return (  
-        <div className='inputBox' >
-            <label className='formLabel' for='password'>
-                <PasswordIcon />
-            </label>
-            <input 
-                className='formInput'
-                type={showPassword ? 'text' : 'password'}
-                name='password' 
-                placeholder='password' 
-                value={password}
-                required 
-                onChange={event => setPassword(event.target.value)}
-            />
-                <div
-                    className='showHidePassword'
-                    onClick={handleClickShowPw}
-                >
-                  {showPassword ? <ShowPasswordIcon /> : <HidePasswordIcon />}
-                </div>
-        </div>
-    );
-}
- 
+  function handleClickShowPw() {
+    setShowPassword(!showPassword);
+  }
+
+  return (
+    <div className='inputBox'>
+      <label className='formLabel' htmlFor='password'>
+        <PasswordIcon />
+      </label>
+      <input
+        className='formInput'
+        type={showPassword ? 'text' : 'password'}
+        name='password'
+        placeholder='password'
+        value={password}
+        required
+        onChange={(event) => setPassword(event.target.value)}
+      />
+      <div className='showHidePassword' onClick={handleClickShowPw}>
+        {showPassword ? <ShowPasswordIcon /> : <HidePasswordIcon />}
+      </div>
+    </div>
+  );
+};
+
 export default PasswordShowHide;
