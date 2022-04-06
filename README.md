@@ -34,7 +34,7 @@ Other:
 - Use the search queries
 - Use the mapbox map
 
-## Installing, running locally
+## Installing, running locally  
 
 Clone the repo
 
@@ -45,7 +45,6 @@ git clone https://github.com/lilla-nemeth/lost-and-found.git
 ### Server
 
 Go to the project root directory
-
 ```
 cd lost-and-found
 ```
@@ -57,22 +56,17 @@ npm install
 ```
 
 Run the server
-
 ```
 nodemon index.js
 ```
-
 Server is running on port 3003
 </br></br>
-
 ### Client
 
 Go to the frontend folder
-
 ```
 cd frontend
 ```
-
 Install the dependencies
 
 ```
@@ -80,7 +74,6 @@ npm install
 ```
 
 Start the client
-
 ```
 npm start
 ```
