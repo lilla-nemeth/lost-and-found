@@ -4,8 +4,8 @@ const cors = require('cors');
 const { Pool } = require('pg');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 const path = require('path');
+require('dotenv').config();
 
 const { authMw, isFormValid, upload } = require('./middlewares.js');
 
