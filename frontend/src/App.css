@@ -1451,6 +1451,10 @@ input[type=checkbox]:checked ~ label{
   outline: none;
 }
 
+.formInput:invalid {
+  box-shadow: none;
+}
+
 .formLink {
   text-decoration: none;
   color: var(--clr-green);
