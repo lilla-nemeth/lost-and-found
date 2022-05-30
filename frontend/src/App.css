@@ -1,50 +1,130 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
 
 /* CSS RESET */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
-
 
 /* Variables */
 :root {
@@ -69,15 +149,15 @@ table {
   --font-thin: 300 15px/1.2 'Poppins', sans-serif;
   --font-landingpage: 700 100px/1.2 'Poppins', sans-serif;
   --font-landingpage-mobile: 700 14vw/1.2 'Poppins', sans-serif;
-  --font-input: 700 28px/1.2 "Poppins", sans-serif;
+  --font-input: 700 28px/1.2 'Poppins', sans-serif;
 
   /* Shadow */
-  --shadow: 7px 12px 24px -8px rgba(0,0,0,0.40);
-  --shadow-selected: 7px 12px 24px -8px rgba(71, 163, 156, 0.60);
+  --shadow: 7px 12px 24px -8px rgba(0, 0, 0, 0.4);
+  --shadow-selected: 7px 12px 24px -8px rgba(71, 163, 156, 0.6);
 
   /* Radius */
-  --radius: 25px; 
-  --radius2: 30px; 
+  --radius: 25px;
+  --radius2: 30px;
   --radius-button: 4px;
   --radius-circle: 60px;
 
@@ -92,8 +172,8 @@ table {
   font: var(--font-standard);
   /* width: 100%; */
   width: 100vw;
-  display: flex; 
-  justify-content: space-between;   
+  display: flex;
+  justify-content: space-between;
   height: 70px;
   list-style-type: none;
   overflow: hidden;
@@ -105,15 +185,15 @@ table {
   font: var(--font-standard);
   /* width: 100%; */
   width: 100vw;
-  display: flex; 
-  justify-content: space-between;   
+  display: flex;
+  justify-content: space-between;
   height: 70px;
   list-style-type: none;
   overflow: hidden;
   position: fixed;
   z-index: 100;
 }
-  
+
 .navMainList {
   flex-wrap: wrap;
   float: right;
@@ -137,19 +217,19 @@ table {
 .hamburger {
   display: none;
   z-index: 6;
-} 
+}
 
 .footerWithPicture {
-    color: var(--clr-white);
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    position: absolute;
-    text-align: center;
-    top: 10%;
-    z-index: -1;
+  color: var(--clr-white);
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  position: absolute;
+  text-align: center;
+  top: 10%;
+  z-index: -1;
 }
 
 .footerWithoutPicture {
@@ -200,20 +280,20 @@ table {
   display: block;
   content: '';
   padding: 10px;
-  border-bottom: solid 2px var(--clr-aquamarine); 
-  transform: scaleX(0);  
+  border-bottom: solid 2px var(--clr-aquamarine);
+  transform: scaleX(0);
   padding: 10px;
   transition: transform 0.2s linear;
 }
 
 .navPositionLeft {
-  display: flex; 
+  display: flex;
   align-content: flex-start;
   z-index: 1;
 }
 
 .navPositionRight {
-  display: flex; 
+  display: flex;
   text-align: right;
   z-index: 1;
 }
@@ -231,18 +311,18 @@ table {
 }
 
 .sidebarListElement {
-	display: inline-block;
+  display: inline-block;
   font: var(--font-standard);
   text-align: center;
   width: 100%;
 }
 
 .sidebarInactiveLink {
-	color: var(--clr-brown);
-	text-decoration: none;
-	display: inline-block;	
-	padding: 25px;
-	transition: color 0.5s;
+  color: var(--clr-brown);
+  text-decoration: none;
+  display: inline-block;
+  padding: 25px;
+  transition: color 0.5s;
 }
 
 .sidebarActiveLink {
@@ -264,17 +344,17 @@ table {
 }
 
 .sidebarLinkUnderline {
-	height: 3px;
-	background-color: transparent;
-	width: 0%;
-	transition: width 0.2s, background-color 0.5s;
-	margin: 0 auto;
+  height: 3px;
+  background-color: transparent;
+  width: 0%;
+  transition: width 0.2s, background-color 0.5s;
+  margin: 0 auto;
   z-index: 0;
 }
 
 .sidebarActiveLink {
-	width: 100%;
-	color: var(--clr-darkgreen);
+  width: 100%;
+  color: var(--clr-darkgreen);
 }
 
 .sidebarInactiveLink:hover,
@@ -283,8 +363,8 @@ table {
 }
 
 .sidebarListElement:hover .sidebarLinkUnderline {
-	background-color: var(--clr-green);
-	width: 100%;
+  background-color: var(--clr-green);
+  width: 100%;
 }
 
 .footerText {
@@ -303,7 +383,7 @@ table {
   padding: 22.5px;
   text-decoration: none;
   font: var(--font-standard);
-  display: inline-block; 
+  display: inline-block;
   z-index: 0;
 }
 
@@ -326,14 +406,14 @@ table {
 
 .navLinkMobile:after,
 .navLinkDesktop:after {
-  border-bottom: solid 2px var(--clr-aquamarine); 
+  border-bottom: solid 2px var(--clr-aquamarine);
 }
 
 .navLinkMobile:after,
 .navLinkDesktop::after {
   display: block;
   content: '';
-  transform: scaleX(0);  
+  transform: scaleX(0);
   transition: transform 180ms ease-in-out;
   margin-top: 5px;
 }
@@ -351,7 +431,7 @@ table {
   padding-right: 22.5px;
   padding-left: 22.5px;
   text-decoration: none;
-  display: inline-block; 
+  display: inline-block;
   cursor: pointer;
   border: none;
   background: transparent;
@@ -368,7 +448,6 @@ table {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-
 
 .logOutButtonDesktop:hover,
 .logOutButtonMobile:hover {
@@ -397,14 +476,14 @@ table {
 }
 
 .landingPageVideo {
-  position: absolute; 
-  width: 100%; 
-  left: 50%; 
-  top: 50%; 
-  object-fit: cover; 
-  transform: translate(-50%, -50%); 
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
   z-index: -4;
-  height: 100%; 
+  height: 100%;
 }
 
 /* Dashboard */
@@ -461,16 +540,16 @@ table {
 
 /* Beginning of petCards: PetListCard, PetProfileCard, PetUserCard */
 .petListContainer {
-	display: flex;
-	flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   min-height: 100vh;
 }
 
 .userPet,
 .petListCard {
-  background: var(--clr-white); 
-  border-radius: 25px; 
+  background: var(--clr-white);
+  border-radius: 25px;
   box-shadow: var(--shadow);
   padding: 50px;
 }
@@ -502,11 +581,11 @@ table {
 
 .petListPicture {
   position: absolute;
-  top: 50%;    
+  top: 50%;
   left: 50%;
   right: 50%;
   margin: auto;
-  transform: translate( -50%, -50%);
+  transform: translate(-50%, -50%);
   object-fit: cover;
   min-height: 100%;
   min-width: 100%;
@@ -533,11 +612,11 @@ table {
 .userPet,
 .petProfileCard {
   background: var(--clr-white);
-  border-radius: var(--radius);  
+  border-radius: var(--radius);
   display: flex;
   padding: 50px;
   justify-content: center;
-} 
+}
 
 .userPet,
 .petProfileCard {
@@ -546,7 +625,7 @@ table {
 
 .petProfileCard {
   width: 70%;
-} 
+}
 
 .userPet {
   width: 70%;
@@ -567,7 +646,7 @@ table {
 .petProfilePictureContainer {
   position: relative;
   overflow: hidden;
-  background: var(--clr-brown); 
+  background: var(--clr-brown);
   width: 50%;
   position: relative;
   overflow: hidden;
@@ -580,11 +659,11 @@ table {
 .userPetPicture,
 .petProfilePicture {
   position: absolute;
-  top: 50%;    
+  top: 50%;
   left: 50%;
   right: 50%;
   margin: auto;
-  transform: translate( -50%, -50%);
+  transform: translate(-50%, -50%);
   object-fit: cover;
   min-height: 100%;
   min-width: 100%;
@@ -594,14 +673,14 @@ table {
 
 .userPetTextBox,
 .petProfileTextBox {
-    padding: 0 0 0 40px;
-    border-left: 0;
-    min-height: 300px;
-    width: 50%;
-    overflow-wrap: break-word;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  padding: 0 0 0 40px;
+  border-left: 0;
+  min-height: 300px;
+  width: 50%;
+  overflow-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 /* End of PetCards */
 
@@ -638,7 +717,7 @@ table {
   overflow-wrap: anywhere;
 }
 
-.tableCell:first-child { 
+.tableCell:first-child {
   font: 600 15px/1.2 'Poppins', sans-serif;
   text-transform: capitalize;
   width: 110px;
@@ -669,7 +748,7 @@ table {
   border: 2px solid var(--clr-green);
   margin: 0 7px;
   width: 15px;
-  height: 15px; 
+  height: 15px;
   cursor: pointer;
 }
 
@@ -682,7 +761,7 @@ table {
 
 /* Report - Picture */
 .imageUploadContainer {
-  border: 4px dashed var(--clr-darkgreen); 
+  border: 4px dashed var(--clr-darkgreen);
   justify-content: center;
   align-items: center;
   position: relative;
@@ -697,12 +776,12 @@ table {
 }
 
 .inputFile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
 .inputFile,
@@ -728,11 +807,11 @@ table {
 
 .previewImage {
   position: absolute;
-  top: 50%;    
+  top: 50%;
   left: 50%;
   right: 50%;
   margin: auto;
-  transform: translate( -50%, -50%);
+  transform: translate(-50%, -50%);
   object-fit: cover;
   min-height: 100%;
   min-width: 100%;
@@ -755,23 +834,23 @@ table {
   margin-top: 15px;
 }
 
-ul li{
+ul li {
   position: relative;
   display: flex;
   z-index: 1;
 }
 
-ul li input[type=radio]{
+ul li input[type='radio'] {
   position: absolute;
   visibility: hidden;
 }
 
-ul li input[type=checkbox]{
+ul li input[type='checkbox'] {
   position: absolute;
   visibility: hidden;
 }
 
-ul li label{
+ul li label {
   display: block;
   position: relative;
   padding: 5px 0 5px 45px;
@@ -781,11 +860,11 @@ ul li label{
   transition: all 0.2s linear;
 }
 
-ul li:hover label{
-	color: var(--clr-green);
+ul li:hover label {
+  color: var(--clr-green);
 }
 
-ul li .radioCheck{
+ul li .radioCheck {
   display: block;
   position: absolute;
   border: 2px solid;
@@ -797,7 +876,7 @@ ul li .radioCheck{
   transition: border 0.2s linear;
 }
 
-ul li .checkboxCheck{
+ul li .checkboxCheck {
   display: block;
   position: absolute;
   border: 2px solid;
@@ -819,7 +898,7 @@ ul li:hover .checkboxCheck {
 ul li .radioCheck::before {
   display: block;
   position: absolute;
-	content: '';
+  content: '';
   border-radius: var(--radius-circle);
   height: 10px;
   width: 10px;
@@ -832,24 +911,24 @@ ul li .radioCheck::before {
 ul li .checkboxCheck::before {
   display: block;
   position: absolute;
-	content: '';
-  margin: auto; 
+  content: '';
+  margin: auto;
 }
 
 /* Radio & Checkbox Inputs */
-input[type=radio]:checked ~ .radioCheck {
+input[type='radio']:checked ~ .radioCheck {
   border: 2px solid;
 }
 
-input[type=checkbox]:checked ~ .checkboxCheck {
+input[type='checkbox']:checked ~ .checkboxCheck {
   border: 2px solid;
 }
 
-input[type=radio]:checked ~ .radioCheck::before{
+input[type='radio']:checked ~ .radioCheck::before {
   background: var(--clr-black);
 }
 
-input[type=checkbox]:checked ~ .checkboxCheck::before{
+input[type='checkbox']:checked ~ .checkboxCheck::before {
   left: 6px;
   width: 5px;
   height: 11px;
@@ -858,11 +937,11 @@ input[type=checkbox]:checked ~ .checkboxCheck::before{
   transform: rotate(45deg);
 }
 
-input[type=radio]:checked ~ label{
+input[type='radio']:checked ~ label {
   color: var(--clr-black);
 }
 
-input[type=checkbox]:checked ~ label{
+input[type='checkbox']:checked ~ label {
   color: var(--clr-black);
 }
 
@@ -929,7 +1008,7 @@ input[type=checkbox]:checked ~ label{
 
 .checkmark:after,
 .bigCheckmark:after {
-  content: "";
+  content: '';
   position: absolute;
   display: none;
 }
@@ -985,7 +1064,7 @@ input[type=checkbox]:checked ~ label{
   padding-bottom: 20px;
   cursor: pointer;
   color: var(--clr-white);
-  font: 300 15px/1.2 "Poppins", sans-serif;
+  font: 300 15px/1.2 'Poppins', sans-serif;
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -1003,7 +1082,7 @@ input[type=checkbox]:checked ~ label{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  overflow: hidden; 
+  overflow: hidden;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -1021,7 +1100,7 @@ input[type=checkbox]:checked ~ label{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  overflow: hidden; 
+  overflow: hidden;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -1038,7 +1117,7 @@ input[type=checkbox]:checked ~ label{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  overflow: hidden; 
+  overflow: hidden;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -1055,7 +1134,7 @@ input[type=checkbox]:checked ~ label{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  overflow: hidden; 
+  overflow: hidden;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -1106,10 +1185,10 @@ input[type=checkbox]:checked ~ label{
 
 .formBox {
   width: 40%;
-  background: var(--clr-white); 
-  border-radius: var(--radius); 
+  background: var(--clr-white);
+  border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 50px; 
+  padding: 50px;
   height: fit-content;
 }
 
@@ -1119,10 +1198,10 @@ input[type=checkbox]:checked ~ label{
 
 .loginFormBox,
 .registerFormBox {
-  background: var(--clr-white); 
-  border-radius: var(--radius); 
+  background: var(--clr-white);
+  border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 50px; 
+  padding: 50px;
   height: fit-content;
   width: 30%;
   min-width: 400px;
@@ -1183,12 +1262,12 @@ input[type=checkbox]:checked ~ label{
 }
 
 .showInputs {
-	transition: height 300ms ease-in-out, opacity 700ms ease-in-out;
+  transition: height 300ms ease-in-out, opacity 700ms ease-in-out;
 }
 
 .hideInputs {
-	height: 0px;
-	opacity: 0;
+  height: 0px;
+  opacity: 0;
   z-index: -1000;
   width: 0px;
 }
@@ -1411,13 +1490,13 @@ input[type=checkbox]:checked ~ label{
   transition: transform 0.2s linear;
 }
 
-.searchButton {  
+.searchButton {
   padding: 18px;
 }
 
 .showHidePassword,
 .searchButton,
-.formLabel {  
+.formLabel {
   width: fit-content;
   border-top: none;
   border-left: none;
@@ -1503,40 +1582,40 @@ input[type=checkbox]:checked ~ label{
 }
 
 @keyframes load {
-    0% {
-      visibility: visible;
-      opacity: 0
-    }
-    25% {
-      visibility: visible;
-      opacity: 1
-    }
-    75% {
-      visibility: hidden;
-      opacity: 1
-    }
-    100% {
-      visibility: hidden;
-      opacity: 0
-    }
+  0% {
+    visibility: visible;
+    opacity: 0;
+  }
+  25% {
+    visibility: visible;
+    opacity: 1;
+  }
+  75% {
+    visibility: hidden;
+    opacity: 1;
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+  }
 }
 
 @keyframes load {
   0% {
     visibility: visible;
-    opacity: 0
+    opacity: 0;
   }
   25% {
     visibility: visible;
-    opacity: 1
+    opacity: 1;
   }
   75% {
     visibility: hidden;
-    opacity: 1
+    opacity: 1;
   }
   100% {
     visibility: hidden;
-    opacity: 0
+    opacity: 0;
   }
 }
 
@@ -1566,7 +1645,7 @@ body.modalActive {
 }
 
 .modalOverlay {
-  background: rgba(49,49,49,0.8);
+  background: rgba(49, 49, 49, 0.8);
   z-index: 4;
   /* cursor: pointer; */
 }
@@ -1587,7 +1666,6 @@ body.modalActive {
   /* padding: 50px; */
   /* height: 50px; */
   /* line-height: 1.4; */
-
 }
 
 .modalClose {
@@ -1609,10 +1687,6 @@ body.modalActive {
 .modalClose:hover {
   background: var(--clr-green);
 }
-
-
-
-
 
 /* Pet Report - MapBox */
 .map-container {
@@ -1655,7 +1729,7 @@ body.modalActive {
 
 .mapboxgl-ctrl-geocoder--icon:hover,
 .mapboxgl-ctrl-geocoder--icon-search:hover {
-  fill: var(--clr-darkgreen); 
+  fill: var(--clr-darkgreen);
   transition: fill 0.2s linear;
 }
 
@@ -1678,7 +1752,7 @@ body.modalActive {
   }
 
   #reportPetLink {
-     z-index: 0;
+    z-index: 0;
   }
 
   .modalStyle,
@@ -1729,7 +1803,7 @@ body.modalActive {
   body.burgerOverflow {
     overflow-y: hidden;
   }
-  
+
   .burgerActive,
   .burgerInactive {
     background: var(--clr-white);
@@ -1737,7 +1811,7 @@ body.modalActive {
     width: 27px;
     height: 4px;
     transition: all 0.3s ease-in-out;
-  } 
+  }
 
   .burgerActive:nth-child(1) {
     transform: translateY(10px) rotate(45deg);
@@ -1751,7 +1825,7 @@ body.modalActive {
     transform: translateY(-10px) rotate(-45deg);
   }
 
-  .burgerActive, 
+  .burgerActive,
   .burgerInactive {
     transition: all 0.3s ease-in-out;
   }
@@ -1759,7 +1833,6 @@ body.modalActive {
   .userPetPictureContainer {
     height: 300px;
   }
-
 }
 
 @media only screen and (min-width: 100px) and (max-width: 400px) {
@@ -1826,7 +1899,7 @@ body.modalActive {
   .userPetPictureContainer {
     height: 300px;
   }
-  
+
   .petProfilePictureContainer {
     height: 500px;
   }
@@ -1837,8 +1910,8 @@ body.modalActive {
   }
 
   .backButtonBox {
-    display:unset;
-    justify-content:unset;
+    display: unset;
+    justify-content: unset;
     padding-left: 0;
     width: auto;
     width: 70%;
@@ -1881,7 +1954,6 @@ body.modalActive {
   .landingPageVideo {
     min-height: 800px;
   }
-
 }
 
 @media only screen and (min-width: 400px) and (max-width: 600px) {
@@ -1956,7 +2028,7 @@ body.modalActive {
   .userPetPictureContainer {
     height: 300px;
   }
-  
+
   .petProfilePictureContainer {
     height: 500px;
   }
@@ -1967,8 +2039,8 @@ body.modalActive {
   }
 
   .backButtonBox {
-    display:unset;
-    justify-content:unset;
+    display: unset;
+    justify-content: unset;
     padding-left: 0;
     width: auto;
     width: 70%;
@@ -2015,12 +2087,11 @@ body.modalActive {
   .landingPageVideo {
     min-height: 700px;
   }
-
 }
 
 @media only screen and (min-width: 600px) and (max-width: 1024px) {
   .loginContainer,
-  .registerContainer  {
+  .registerContainer {
     flex-direction: column-reverse;
     padding: unset;
   }
@@ -2040,7 +2111,7 @@ body.modalActive {
     overflow: hidden;
     width: 100%;
   }
-  
+
   .petProfilePictureContainer {
     height: 500px;
   }
@@ -2056,7 +2127,6 @@ body.modalActive {
     padding-top: 50px;
     padding-bottom: 50px;
   }
-
 }
 
 @media only screen and (min-width: 600px) and (max-width: 800px) {
@@ -2107,8 +2177,8 @@ body.modalActive {
   }
 
   .backButtonBox {
-    display:unset;
-    justify-content:unset;
+    display: unset;
+    justify-content: unset;
     padding-left: 0;
     width: auto;
     width: 70%;
@@ -2128,7 +2198,6 @@ body.modalActive {
   .searchFormBox {
     width: 70%;
   }
-
 }
 
 @media only screen and (min-width: 851px) {
@@ -2147,7 +2216,6 @@ body.modalActive {
   .navMainList {
     flex-wrap: unset;
   }
-
 }
 
 @media only screen and (min-width: 600px) and (max-width: 700px) {
@@ -2168,7 +2236,7 @@ body.modalActive {
   }
 }
 
-@media only screen and (min-width: 900px) and (max-width: 1000px)  {
+@media only screen and (min-width: 900px) and (max-width: 1000px) {
   .formBox {
     width: 55%;
   }
@@ -2209,7 +2277,6 @@ body.modalActive {
     justify-content: center;
     padding: 46px;
   }
-
 }
 
 @media only screen and (min-width: 800px) and (max-width: 2100px) {
@@ -2220,19 +2287,19 @@ body.modalActive {
 
 @media only screen and (min-width: 1200px) and (max-width: 2100px) {
   /* Pet Cards */
-  .userPet, 
-  .petProfileCard, 
+  .userPet,
+  .petProfileCard,
   .petListCard {
     padding: 50px;
     width: 20%;
   }
 
-  .userPet, 
+  .userPet,
   .petProfileCard {
     padding: 50px;
     width: 70%;
   }
-  
+
   .userPetInner,
   .petProfileCardInner {
     display: flex;
@@ -2266,17 +2333,16 @@ body.modalActive {
     width: 15%;
     height: fit-content;
   }
-  
-  .userPet, 
+
+  .userPet,
   .petProfileCard {
     padding: 50px;
   }
-  
 }
 
 @media only screen and (min-width: 2100px) {
-  .userPet, 
-  .petProfileCard, 
+  .userPet,
+  .petProfileCard,
   .petListCard {
     padding: 50px;
     width: 12%;
@@ -2302,11 +2368,10 @@ body.modalActive {
   .petProfileTextBox {
     width: 100%;
   }
-
 }
 
 @media only screen and (min-width: 100px) and (max-width: 1024px) {
-  .loginFormBox, 
+  .loginFormBox,
   .registerFormBox {
     width: 60%;
     min-width: unset;
@@ -2344,7 +2409,7 @@ body.modalActive {
     width: unset;
   }
 
-  .registerContainer, 
+  .registerContainer,
   .loginContainer {
     top: 10px;
     left: unset;
@@ -2357,19 +2422,15 @@ body.modalActive {
   .fade-out2 {
     min-height: 1600px;
   }
-
-} 
+}
 
 @media only screen and (min-width: 1025px) {
-
   .footerWithPicture {
     min-height: unset;
   }
-
 }
 
-@media only screen and (min-width: 1025px) and (max-width: 1280px){
-
+@media only screen and (min-width: 1025px) and (max-width: 1280px) {
   .fade-in1,
   .fade-in2,
   .fade-out1,
@@ -2385,8 +2446,4 @@ body.modalActive {
     left: unset;
     transform: unset;
   }
-
 }
-
-
-
