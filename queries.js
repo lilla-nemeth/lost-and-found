@@ -17,10 +17,9 @@ const INSERT_PET_VALUES = `INSERT INTO pets(userId, img, petstatus, petlocation,
 
 const UPDATE_PET = `UPDATE pets SET petstatus=$1, petlocation=$2, species=$3, petsize=$4, breed=$5, sex=$6, color=$7, age=$8, uniquefeature=$9, postdescription=$10 WHERE id=$11`;
 
-const DELETE_ALL_PETS = `DELETE FROM pets`
+const DELETE_ALL_PETS = `DELETE FROM pets`;
 const DELETE_PET_BY_ID = `${DELETE_ALL_PETS} ${BY_ID}`;
 const DELETE_PET_BY_USER = `${DELETE_ALL_PETS} ${BY_USER_ID}`;
-
 
 /* User Queries */ 
 const SELECT_ALL_USERS = `${SELECT_ALL} users`;
