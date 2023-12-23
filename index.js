@@ -7,7 +7,30 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 require('dotenv').config();
 
-const { authMw, isFormValid, upload } = require('./middlewares.js');
+const { 
+  authMw, 
+  isFormValid, 
+  upload 
+} = require('./middlewares.js');
+
+const {     
+  SELECT_PETS_BY_DESC_DATE,
+  SELECT_PETS_BY_PAGINATION,
+  SELECT_TOTAL_NUM_OF_PETS,
+  SELECT_PET_BY_ID,
+  SELECT_ALL_USERS,
+  SELECT_USER_BY_ID,
+  SELECT_PETS_BY_USER,
+  SELECT_USER_BY_EMAIL,
+  UPDATE_PET,
+  UPDATE_USER,
+  DELETE_ALL_PETS,
+  DELETE_PET_BY_ID,
+  DELETE_PET_BY_USER,
+  DELETE_USER_BY_ID,
+  INSERT_PET_VALUES,
+  INSERT_USER_VALUES
+} = require('./queries.js');
 
 let DEBUG = false;
 
@@ -46,11 +69,11 @@ app.get('/userpets', authMw, (request, response) => {
   let userId = request.userId;
   let isadmin = request.isadmin;
 
-  let adminQuery = 'SELECT * FROM pets ORDER BY since DESC';
-  let userQuery = `SELECT * FROM pets WHERE userId=${userId} ORDER BY since DESC`;
+  let adminQuery = SELECT_PETS_BY_DESC_DATE;
+  let userQuery = SELECT_PETS_BY_USER;
 
   pool
-    .query(isadmin ? adminQuery : userQuery)
+    .query(isadmin ? adminQuery : userQuery, [userId])
     .then((res) => response.status(200).json(res.rows))
     .catch((err) =>
       response.status(400).json({ msg: "Failed to fetch user's pets" })
@@ -60,24 +83,20 @@ app.get('/userpets', authMw, (request, response) => {
 // get all pets
 app.get('/allpets', (request, response) => {
   pool
-    .query('SELECT * FROM pets ORDER BY since DESC')
+    .query(SELECT_PETS_BY_DESC_DATE)
     .then((res) => response.status(200).json(res.rows))
     .catch((err) =>
       response.status(400).json({ msg: 'Failed to fetch all pets' })
     );
-  // .catch((err) =>console.log(err));
 });
 
-// get/fetch limited amount of pets
-
-// limit = fetch
-// offset = skip
+// get/fetch limited amount of pets to pagination
 app.get('/pets/:fetch/:skip', (request, response) => {
   let limit = request.params.fetch;
   let offset = request.params.skip;
 
   pool
-    .query('SELECT * FROM pets ORDER BY since DESC LIMIT $1 OFFSET $2', [
+    .query(SELECT_PETS_BY_PAGINATION, [
       limit,
       offset,
     ])
@@ -88,7 +107,7 @@ app.get('/pets/:fetch/:skip', (request, response) => {
 // get the total amount (number) of pets
 app.get('/pets/total', (request, response) => {
   pool
-    .query('SELECT COUNT(*) FROM pets')
+    .query(SELECT_TOTAL_NUM_OF_PETS)
     .then((res) => response.status(200).json(res.rows[0].count))
     .catch((err) =>
       response
@@ -102,7 +121,7 @@ app.get('/pets/:id', (request, response) => {
   let id = request.params.id;
 
   pool
-    .query('SELECT * FROM pets WHERE id=$1', [id])
+    .query(SELECT_PET_BY_ID, [id])
     .then((res) => response.status(200).json(res.rows))
     .catch((err) =>
       response.status(400).json({ msg: 'Failed to fetch pet by id' })
@@ -113,7 +132,7 @@ app.get('/username', authMw, (request, response) => {
   let id = request.userId;
 
   pool
-    .query('SELECT * FROM users WHERE id=$1', [id])
+    .query(SELECT_USER_BY_ID, [id])
     .then((res) => response.status(200).json(res.rows[0].username))
     .catch((err) =>
       response.status(400).json({ msg: 'Failed to fetch username' })
@@ -123,7 +142,7 @@ app.get('/username', authMw, (request, response) => {
 // get all users
 app.get('/users', authMw, (request, response) => {
   pool
-    .query('SELECT * FROM users')
+    .query(SELECT_ALL_USERS)
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({ msg: 'Failed to fetch user' }));
 });
@@ -143,8 +162,8 @@ app.put('/editpet/:id', authMw, (request, response) => {
   let postdescription = request.body.postdescription;
 
   pool
-    .query(
-      'UPDATE pets SET petstatus=$1, petlocation=$2, species=$3, petsize=$4, breed=$5, sex=$6, color=$7, age=$8, uniquefeature=$9, postdescription=$10 WHERE id=$11',
+    .query( 
+      UPDATE_PET,
       [
         petstatus,
         petlocation,
@@ -178,8 +197,14 @@ app.put('/editprofile', [authMw, isFormValid], (request, response) => {
 
   pool
     .query(
-      'UPDATE users SET username=$1, email=$2, pw=$3, phone=$4 WHERE id=$5',
-      [username, email, encryptedPw, phone, id]
+      UPDATE_USER,
+      [
+        username, 
+        email, 
+        encryptedPw, 
+        phone, 
+        id
+      ]
     )
     .then((res) =>
       response.status(200).json({ msg: 'Profile is succesfully updated' })
@@ -195,7 +220,7 @@ app.delete('/deletepet/:id', authMw, (request, response) => {
   // let isadmin = request.isadmin;
 
   pool
-    .query('DELETE FROM pets WHERE id=$1', [id])
+    .query(DELETE_PET_BY_ID, [id])
     .then((res) =>
       response.status(200).json({ msg: 'Pet is successfully deleted' })
     )
@@ -209,20 +234,17 @@ app.delete('/deleteallpets', authMw, (request, response) => {
   let userId = request.userId;
   let isadmin = request.isadmin;
 
-  let adminQuery = 'DELETE FROM pets';
-  let userQuery = `DELETE FROM pets WHERE userId=${userId}`;
+  let adminQuery = DELETE_ALL_PETS;
+  let userQuery = DELETE_PET_BY_USER;
 
   pool
-    .query(isadmin ? adminQuery : userQuery)
-    // .then((res) => console.log(res))
-    // .catch((err) => console.log(err));
+    .query(isadmin ? adminQuery : userQuery, [userId])
     .then((res) =>
       response.status(200).json({ msg: 'All pets are successfully deleted' })
     )
     .catch((err) =>
       response.status(400).json({ msg: 'Failed to delete all pets' })
     );
-  // .catch((err) => console.log(err));
 });
 
 // delete user - delete user and the connected pets (user dashboard)
@@ -230,10 +252,10 @@ app.delete('/deleteuser', authMw, (request, response) => {
   let userId = request.userId;
 
   pool
-    .query('DELETE FROM pets WHERE userId=$1', [userId])
+    .query(DELETE_PET_BY_USER, [userId])
     .then((res) => {
       pool
-        .query('DELETE FROM users WHERE id=$1', [userId])
+        .query(DELETE_USER_BY_ID, [userId])
         .then((res) =>
           response.status(200).json({
             msg: 'Your account and your posts are successfully deleted',
@@ -258,14 +280,13 @@ app.post('/register', [isFormValid], (request, response) => {
 
   pool
     .query(
-      'INSERT INTO users(username, email, pw, phone) VALUES ($1, $2, $3, $4) RETURNING *',
+      INSERT_USER_VALUES,
       [username, email, encryptedPw, phone]
     )
     .then((res) =>
       response.status(200).json({ msg: 'User succesfully created' })
     )
     .catch((err) => {
-      console.log(err);
       if (err.code === '23505' && err.constraint === 'users_email_key') {
         response.status(400).json({ msg: 'Email address is already exists' });
       } else if (err.code === '23505' && err.constraint === 'users_phone_key') {
@@ -282,12 +303,11 @@ app.post('/login', [isFormValid], (request, response) => {
   let pw = request.body.pw;
 
   pool
-    .query('SELECT * FROM users WHERE email=$1', [email])
+    .query(SELECT_USER_BY_EMAIL, [email])
     .then((res) => {
       let userObject = res.rows[0];
       let encryptedPw = userObject.pw;
 
-      console.log(userObject);
       res.rows &&
         bcrypt.compare(pw, encryptedPw).then((isMatch) => {
           if (isMatch) {
@@ -295,7 +315,6 @@ app.post('/login', [isFormValid], (request, response) => {
               { id: userObject.id, isadmin: userObject.isadmin },
               'r4uqSKqC6L',
               (err, token) => {
-                console.log(token);
                 response.status(200).json(token);
               }
             );
@@ -327,7 +346,7 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
 
   pool
     .query(
-      'INSERT INTO pets(userId, img, petstatus, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *',
+      INSERT_PET_VALUES,
       [
         userId,
         img,
@@ -360,11 +379,6 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
 //     let filepath = request.file.path;
 //     let mimetype = request.file.mimetype;
 //     let size = request.file.size;
-//     console.log("PETID FROM Backend", petId)
-
-//     // console.log('image', image);
-//     console.log('--filename, mimetype, size--', filename, mimetype, size);
-//     console.log('--filepath--', filepath);
 
 //     pool.query('INSERT INTO images(petId, filename, filepath, mimetype, size) VALUES ($1, $2, $3, $4, $5) RETURNING *', [petId, filename, filepath, mimetype, size])
 //     .then((res) => response.status(200).json({msg: 'Image is successfully uploaded'}))
@@ -375,7 +389,6 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
 // app.post('/multiple', [authMw, upload.array('images', 7)], (request, response) => {
 //     let images = request.files
 
-//     console.log("multiple image upload", images);
 //     response.status(200).json({msg: 'Images are successfully uploaded'})
 // });
 
@@ -388,9 +401,6 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
 //         selectAll += ' WHERE ';
 //         selectAll += existingParams.map(field => `${field} = '${request.query[field]}'`).join(' AND ');
 //     }
-
-//     if (DEBUG) console.log('existingParams - search', existingParams);
-//     if (DEBUG) console.log('selectAll - search', selectAll);
 
 //     pool.query(selectAll)
 //     .then((res) => response.status(200).json(res.rows))
