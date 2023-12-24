@@ -35,23 +35,12 @@ const MapboxMap = () => {
                    maximumAge: 0
                 });
         } else { 
-            console.log('Geolocation is not supported by this browser.');
+            console.log('Geolocation is not supported by your browser.');
         }
     }
     
     function showPosition(position) {
-        let newLat;
-        let newLng;
-   
-        if (position) {
-            newLat = position.coords.latitude;
-            newLng = position.coords.longitude;
-        } 
-        setLat(newLat);
-        setLng(newLng);
-
-        createMap(newLng, newLat);
-
+        createMap(position.coords.longitude, position.coords.latitude);
     }
 
     function fallbackPosition() {
@@ -68,6 +57,7 @@ const MapboxMap = () => {
             zoom: zoom
         });
 
+        // Changes the latitude, longitude and zoom whenever the user interacts with the map
         map.current.on('move', () => {
             setLng(map.current.getCenter().lng.toFixed(4));
             setLat(map.current.getCenter().lat.toFixed(4));
@@ -79,12 +69,6 @@ const MapboxMap = () => {
     useEffect(() => {
         // Ask user for location permission in the browser
         getLocation();
-
-        // Basic data of map
-
-
-
-
 
         // Navigation buttons
         // const nav = new mapboxgl.NavigationControl();
@@ -122,6 +106,10 @@ const MapboxMap = () => {
                     </button>
                 </div>
             </div> */}
+
+            <div className="sidebar">
+            Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+            </div>
             <div ref={mapContainer} className="map-container" />
         </>
       );
