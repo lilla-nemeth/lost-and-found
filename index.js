@@ -13,6 +13,32 @@ const {
   upload 
 } = require('./middlewares.js');
 
+const {
+  ERROR_MSG_FETCH_USER_PETS,
+  ERROR_MSG_FETCH_ALL_PETS,
+  ERROR_MSG_FETCH_PETS,
+  ERROR_MSG_FETCH_TOTAL_PETS,
+  ERROR_MSG_FETCH_PET,
+  ERROR_MSG_UPDATE_PET,
+  ERROR_MSG_FETCH_USERNAME,
+  ERROR_MSG_FETCH_USER,
+  ERROR_MSG_UPDATE_USER,
+  ERROR_MSG_DELETE_PET,
+  ERROR_MSG_DELETE_PETS,
+  ERROR_MSG_CREATE_PET,
+  ERROR_MSG_DELETE_USER,
+  ERROR_MSG_USED_EMAIL,
+  ERROR_MSG_USED_PHONE,
+  ERROR_MSG_INCORRECT_PASSWORD,
+  ERROR_MSG_NOT_FOUND_USER,
+  SUCCESS_MSG_CREATED_USER,
+  SUCCESS_MSG_UPDATED_PET,
+  SUCCESS_MSG_UPDATED_USER,
+  SUCCESS_MSG_DELETED_PET,
+  SUCCESS_MSG_DELETED_PETS,
+  SUCCESS_MSG_DELETED_USER_AND_PETS
+} = require('./messages.js');
+
 const {     
   SELECT_PETS_BY_DESC_DATE,
   SELECT_PETS_BY_PAGINATION,
@@ -76,7 +102,7 @@ app.get('/userpets', authMw, (request, response) => {
     .query(isadmin ? adminQuery : userQuery, [userId])
     .then((res) => response.status(200).json(res.rows))
     .catch((err) =>
-      response.status(400).json({ msg: "Failed to fetch user's pets" })
+      response.status(400).json({ msg: ERROR_MSG_FETCH_USER_PETS })
     );
 });
 
@@ -86,7 +112,7 @@ app.get('/allpets', (request, response) => {
     .query(SELECT_PETS_BY_DESC_DATE)
     .then((res) => response.status(200).json(res.rows))
     .catch((err) =>
-      response.status(400).json({ msg: 'Failed to fetch all pets' })
+      response.status(400).json({ msg: ERROR_MSG_FETCH_ALL_PETS })
     );
 });
 
@@ -101,7 +127,7 @@ app.get('/pets/:fetch/:skip', (request, response) => {
       offset,
     ])
     .then((res) => response.status(200).json(res.rows))
-    .catch((err) => response.status(400).json({ msg: 'Failed to fetch pets' }));
+    .catch((err) => response.status(400).json({ msg: ERROR_MSG_FETCH_PETS }));
 });
 
 // get the total amount (number) of pets
@@ -112,7 +138,7 @@ app.get('/pets/total', (request, response) => {
     .catch((err) =>
       response
         .status(400)
-        .json({ msg: 'Failed to fetch the total amount of pets' })
+        .json({ msg: ERROR_MSG_FETCH_TOTAL_PETS })
     );
 });
 
@@ -124,7 +150,7 @@ app.get('/pets/:id', (request, response) => {
     .query(SELECT_PET_BY_ID, [id])
     .then((res) => response.status(200).json(res.rows))
     .catch((err) =>
-      response.status(400).json({ msg: 'Failed to fetch pet by id' })
+      response.status(400).json({ msg: ERROR_MSG_FETCH_PET })
     );
 });
 
@@ -135,7 +161,7 @@ app.get('/username', authMw, (request, response) => {
     .query(SELECT_USER_BY_ID, [id])
     .then((res) => response.status(200).json(res.rows[0].username))
     .catch((err) =>
-      response.status(400).json({ msg: 'Failed to fetch username' })
+      response.status(400).json({ msg: ERROR_MSG_FETCH_USERNAME })
     );
 });
 
@@ -144,7 +170,7 @@ app.get('/users', authMw, (request, response) => {
   pool
     .query(SELECT_ALL_USERS)
     .then((res) => response.status(200).json(res.rows))
-    .catch((err) => response.status(400).json({ msg: 'Failed to fetch user' }));
+    .catch((err) => response.status(400).json({ msg: ERROR_MSG_FETCH_USER }));
 });
 
 // edit pet by user (user dashboard)
@@ -179,10 +205,10 @@ app.put('/editpet/:id', authMw, (request, response) => {
       ]
     )
     .then((res) =>
-      response.status(200).json({ msg: 'Post is successfully updated' })
+      response.status(200).json({ msg: SUCCESS_MSG_UPDATED_PET })
     )
     .catch((err) =>
-      response.status(400).json({ msg: 'Failed to update your post' })
+      response.status(400).json({ msg: ERROR_MSG_UPDATE_PET })
     );
 });
 
@@ -207,10 +233,10 @@ app.put('/editprofile', [authMw, isFormValid], (request, response) => {
       ]
     )
     .then((res) =>
-      response.status(200).json({ msg: 'Profile is succesfully updated' })
+      response.status(200).json({ msg: SUCCESS_MSG_UPDATED_USER })
     )
     .catch((err) =>
-      response.status(400).json({ msg: 'Failed to update your profile' })
+      response.status(400).json({ msg: ERROR_MSG_UPDATE_USER })
     );
 });
 
@@ -222,10 +248,10 @@ app.delete('/deletepet/:id', authMw, (request, response) => {
   pool
     .query(DELETE_PET_BY_ID, [id])
     .then((res) =>
-      response.status(200).json({ msg: 'Pet is successfully deleted' })
+      response.status(200).json({ msg: SUCCESS_MSG_DELETED_PET })
     )
     .catch((err) =>
-      response.status(400).json({ msg: 'Failed to delete the pet' })
+      response.status(400).json({ msg: ERROR_MSG_DELETE_PET })
     );
 });
 
@@ -240,10 +266,10 @@ app.delete('/deleteallpets', authMw, (request, response) => {
   pool
     .query(isadmin ? adminQuery : userQuery, [userId])
     .then((res) =>
-      response.status(200).json({ msg: 'All pets are successfully deleted' })
+      response.status(200).json({ msg: SUCCESS_MSG_DELETED_PETS })
     )
     .catch((err) =>
-      response.status(400).json({ msg: 'Failed to delete all pets' })
+      response.status(400).json({ msg: ERROR_MSG_DELETE_PETS })
     );
 });
 
@@ -258,15 +284,15 @@ app.delete('/deleteuser', authMw, (request, response) => {
         .query(DELETE_USER_BY_ID, [userId])
         .then((res) =>
           response.status(200).json({
-            msg: 'Your account and your posts are successfully deleted',
+            msg: SUCCESS_MSG_DELETED_USER_AND_PETS,
           })
         )
         .catch((err) =>
-          response.status(400).json({ msg: 'Failed to delete your account' })
+          response.status(400).json({ msg: ERROR_MSG_DELETE_USER })
         );
     })
     .catch((err) =>
-      response.status(400).json({ msg: 'Failed to delete your posts' })
+      response.status(400).json({ msg: ERROR_MSG_DELETE_PETS })
     );
 });
 
@@ -284,13 +310,13 @@ app.post('/register', [isFormValid], (request, response) => {
       [username, email, encryptedPw, phone]
     )
     .then((res) =>
-      response.status(200).json({ msg: 'User succesfully created' })
+      response.status(200).json({ msg: SUCCESS_MSG_CREATED_USER })
     )
     .catch((err) => {
       if (err.code === '23505' && err.constraint === 'users_email_key') {
-        response.status(400).json({ msg: 'Email address is already exists' });
+        response.status(400).json({ msg: ERROR_MSG_USED_EMAIL });
       } else if (err.code === '23505' && err.constraint === 'users_phone_key') {
-        response.status(400).json({ msg: 'Phone number is already exists' });
+        response.status(400).json({ msg: ERROR_MSG_USED_PHONE });
       } else if (err.code != '23505' && isFormValid) {
         isFormValid;
       }
@@ -319,13 +345,13 @@ app.post('/login', [isFormValid], (request, response) => {
               }
             );
           } else {
-            response.status(403).json({ msg: 'Passwords do not match' });
+            response.status(403).json({ msg: ERROR_MSG_INCORRECT_PASSWORD });
           }
         });
     })
     .catch((err) => {
       isFormValid ? isFormValid : console.log(err);
-      response.status(400).json({ msg: 'User not found' });
+      response.status(400).json({ msg: ERROR_MSG_NOT_FOUND_USER });
     });
 });
 
@@ -364,9 +390,8 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
     )
     .then((res) => response.status(200).json(res.rows))
     .catch((err) =>
-      response.status(400).json({ msg: 'Failed to add new pet' })
+      response.status(400).json({ msg:  ERROR_MSG_CREATE_PET })
     );
-  // .catch((err) => console.log(err))
 });
 
 // *** Working, but unused queries on frontend side ***
