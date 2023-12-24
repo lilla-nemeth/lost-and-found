@@ -48,6 +48,32 @@ const MapboxMap = () => {
         createMap(24.9344, 60.1797);
     }
 
+    function changeCoordsByUser(map) {
+        map.current.on('move', () => {
+            setLng(map.current.getCenter().lng.toFixed(4));
+            setLat(map.current.getCenter().lat.toFixed(4));
+            setZoom(map.current.getZoom().toFixed(2));
+        });
+    }
+
+    function addNavigationButtons(map) {
+        // Navigation buttons
+        const nav = new mapboxgl.NavigationControl();
+        map.current.addControl(nav, 'bottom-right');
+    }
+
+    function addSearchBar(map) {
+        // Search location
+        const geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl,
+            marker: true, // Do not use the default marker style
+            placeholder: 'Search location',
+        });
+
+        map.current.addControl(geocoder);
+    }
+
     function createMap(lng, lat) {
         if (map.current) return;
         map.current = new mapboxgl.Map({
@@ -58,32 +84,15 @@ const MapboxMap = () => {
         });
 
         // Changes the latitude, longitude and zoom whenever the user interacts with the map
-        map.current.on('move', () => {
-            setLng(map.current.getCenter().lng.toFixed(4));
-            setLat(map.current.getCenter().lat.toFixed(4));
-            setZoom(map.current.getZoom().toFixed(2));
-        });
+        changeCoordsByUser(map);
+        addNavigationButtons(map);
+        addSearchBar(map);
     }
 
 
     useEffect(() => {
         // Ask user for location permission in the browser
         getLocation();
-
-        // Navigation buttons
-        // const nav = new mapboxgl.NavigationControl();
-        // currentMap.addControl(nav, 'bottom-right');
-
-        // 'Search location'
-        // const geocoder = new MapboxGeocoder({
-        //     accessToken: mapboxgl.accessToken,
-        //     mapboxgl: mapboxgl,
-        //     // marker: false, // Do not use the default marker style
-        //     placeholder: 'Search City',
-        // });
-
-        // currentMap.addControl(geocoder);
-        // if (DEBUG) console.log(geocoder);
     });
 
 
@@ -106,9 +115,8 @@ const MapboxMap = () => {
                     </button>
                 </div>
             </div> */}
-
             <div className="sidebar">
-            Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
             </div>
             <div ref={mapContainer} className="map-container" />
         </>
