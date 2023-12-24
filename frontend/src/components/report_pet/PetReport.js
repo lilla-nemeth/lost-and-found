@@ -15,6 +15,7 @@ import TextInput from '../generic/TextInput';
 import TextArea from '../generic/TextArea';
 
 import ImageUpload from './ImageUpload';
+import MapboxMap from './unused/MapboxMap.js';
 // import LocationSearch from './unused/LocationSearch';
 // import MapboxMap from './unused/MapboxMap';
 // import DragnDropZone from './unused/DragnDropZone';
@@ -252,7 +253,7 @@ const PetReport = () => {
                 />
               </ul>
             </div>
-            <div className='filterBox'>
+            {/* <div className='filterBox'>
               <h2 className='categoryHeadline'>
                 Location {isFieldRequired(required)}
               </h2>
@@ -264,7 +265,8 @@ const PetReport = () => {
                 placeholder={'Location'}
                 onChange={(event) => setLocation(event.target.value)}
               />
-            </div>
+            </div> */}
+            <MapboxMap />
             <TextArea
               headlineName={`Description ${isFieldRequired(required)}`}
               id={'description'}

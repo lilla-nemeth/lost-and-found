@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { ReactComponent as SearchIcon } from '../../../assets/icons/search.svg';
 
@@ -12,42 +12,97 @@ const styles = {
 }
 
 const MapboxMap = () => {
+    // mapContainer renders the map inside a specific DOM element
     const mapContainer = useRef(null);
     // The ref will prevent the map from reloading when the user interacts with the map
     const map = useRef(null);
-    const [lng, setLng] = useState(25.975399273184166);
-    const [lat, setLat] = useState(65.00440031202271);
-    const [zoom, setZoom] = useState(6);
+    const [lng, setLng] = useState(null);
+    const [lat, setLat] = useState(null);
+    const [zoom, setZoom] = useState(9);
 
     let DEBUG = false;
-    // container: render the map inside a specific DOM element
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                // Success:
+                showPosition, 
+                // Error:
+                fallbackPosition, 
+                {
+                   enableHighAccuracy: true,
+                   timeout: 5000,
+                   maximumAge: 0
+                });
+        } else { 
+            console.log('Geolocation is not supported by this browser.');
+        }
+    }
+    
+    function showPosition(position) {
+        let newLat;
+        let newLng;
+   
+        if (position) {
+            newLat = position.coords.latitude;
+            newLng = position.coords.longitude;
+        } 
+        setLat(newLat);
+        setLng(newLng);
+
+        createMap(newLng, newLat);
+
+    }
+
+    function fallbackPosition() {
+        // Helsinki fallback coords
+        createMap(24.9344, 60.1797);
+    }
+
+    function createMap(lng, lat) {
+        if (map.current) return;
+        map.current = new mapboxgl.Map({
+            container: mapContainer.current,
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [lng, lat],
+            zoom: zoom
+        });
+
+        map.current.on('move', () => {
+            setLng(map.current.getCenter().lng.toFixed(4));
+            setLat(map.current.getCenter().lat.toFixed(4));
+            setZoom(map.current.getZoom().toFixed(2));
+        });
+    }
+
 
     useEffect(() => {
+        // Ask user for location permission in the browser
+        getLocation();
+
         // Basic data of map
-        let currentMap = map.current;
-        if (currentMap) return;
-        currentMap = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [lng, lat],
-        zoom: zoom
-        });
+
+
+
+
 
         // Navigation buttons
-        const nav = new mapboxgl.NavigationControl();
-        currentMap.addControl(nav, 'bottom-right');
+        // const nav = new mapboxgl.NavigationControl();
+        // currentMap.addControl(nav, 'bottom-right');
 
         // 'Search location'
-        const geocoder = new MapboxGeocoder({
-            accessToken: mapboxgl.accessToken,
-            mapboxgl: mapboxgl,
-            // marker: false, // Do not use the default marker style
-            placeholder: 'Search City',
-        });
+        // const geocoder = new MapboxGeocoder({
+        //     accessToken: mapboxgl.accessToken,
+        //     mapboxgl: mapboxgl,
+        //     // marker: false, // Do not use the default marker style
+        //     placeholder: 'Search City',
+        // });
 
-        currentMap.addControl(geocoder);
-        if (DEBUG) console.log(geocoder);
+        // currentMap.addControl(geocoder);
+        // if (DEBUG) console.log(geocoder);
     });
+
+
 
     // Additional search settings: ZONE/DISTANCE, e.g: 5-10-25-50-75-100 km
     return (

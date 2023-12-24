@@ -5,8 +5,8 @@ import { Integrations } from '@sentry/tracing';
 import App from './App';
 import AuthContextProvider from './contexts/AuthContext';
 import AppStateContextProvider from './contexts/AppStateContext';
-// import 'mapbox-gl/dist/mapbox-gl.css';
-// import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 Sentry.init({
   dsn: 'https://3e23ef08f38d4d7d9b956e81b8e2a466@o1077602.ingest.sentry.io/6080787',
