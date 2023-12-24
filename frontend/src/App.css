@@ -1697,7 +1697,7 @@ a.mapboxgl-ctrl-logo {
   display: none !important;
 }
 
-.mapboxgl-ctrl-geocoder {
+/* .mapboxgl-ctrl-geocoder {
   display: flex;
   width: 400px !important;
 }
@@ -1735,7 +1735,7 @@ a.mapboxgl-ctrl-logo {
 .mapboxgl-ctrl-geocoder--icon-search:hover {
   fill: var(--clr-darkgreen);
   transition: fill 0.2s linear;
-}
+} */
 
 /* Media Queries */
 @media only screen and (min-width: 100px) and (max-width: 850px) {
