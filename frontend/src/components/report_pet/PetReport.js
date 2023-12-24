@@ -266,6 +266,10 @@ const PetReport = () => {
                 onChange={(event) => setLocation(event.target.value)}
               />
             </div> */}
+            
+            {/* PetReport needs and object of location name and coords(lng and lat), 
+            user only will see the location name, 
+            and lng and lat is needed for the map  */}
             <MapboxMap />
             <TextArea
               headlineName={`Description ${isFieldRequired(required)}`}

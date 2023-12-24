@@ -67,7 +67,7 @@ const MapboxMap = () => {
         const geocoder = new MapboxGeocoder({
             accessToken: mapboxgl.accessToken,
             mapboxgl: mapboxgl,
-            marker: true, // Do not use the default marker style
+            marker: true,
             placeholder: 'Search location',
         });
 
