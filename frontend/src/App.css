@@ -1693,6 +1693,10 @@ body.modalActive {
   height: 450px;
 }
 
+a.mapboxgl-ctrl-logo {
+  display: none !important;
+}
+
 .mapboxgl-ctrl-geocoder {
   display: flex;
   width: 400px !important;
