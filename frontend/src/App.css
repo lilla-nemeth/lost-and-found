@@ -559,7 +559,7 @@ table {
   margin-right: 20px;
   margin-left: 20px;
   width: 25%;
-  height: fit-content;
+  height: 600px;
 }
 
 .petListTextBox {
@@ -569,7 +569,7 @@ table {
   overflow-wrap: break-word;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
 }
 
 .petListPictureContainer {
@@ -2357,7 +2357,7 @@ a.mapboxgl-ctrl-logo {
   .petListCard {
     padding: 50px;
     width: 15%;
-    height: fit-content;
+    height: 600px;
   }
 
   .userPet,
