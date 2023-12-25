@@ -1718,46 +1718,17 @@ a.mapboxgl-ctrl-logo {
   width: 28px !important;
   height: 35px !important;
 }
-
-/* .mapboxgl-ctrl-geocoder {
-  display: flex;
-  width: 400px !important;
-}
-
 .mapboxgl-ctrl-geocoder {
-  width: 120% !important;
+  width: 300px !important;
 }
-
-.mapboxgl-ctrl-geocoder--input {
-  padding: unset !important;
-  height: auto !important;
-  width: unset !important;
-  border-bottom: 2px solid rgb(34, 102, 96);
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  background: none;
-  font: var(--font-thin) !important;
-  text-transform: capitalize;
-}
-
 .mapboxgl-ctrl-geocoder--icon,
 .mapboxgl-ctrl-geocoder--icon-search {
-  margin: 12px;
-  width: 30px !important;
-  height: 30px !important;
-  padding: 0;
-  position: unset !important;
-  cursor: pointer;
-  background: none;
   fill: var(--clr-brown) !important;
 }
 
-.mapboxgl-ctrl-geocoder--icon:hover,
-.mapboxgl-ctrl-geocoder--icon-search:hover {
-  fill: var(--clr-darkgreen);
-  transition: fill 0.2s linear;
-} */
+.mapboxgl-ctrl-geocoder--icon-close {
+    margin-top: 10px !important;
+}
 
 /* Media Queries */
 @media only screen and (min-width: 100px) and (max-width: 850px) {
