@@ -2,7 +2,7 @@ import React from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
 const ImageUpload = (props) => {
-  const { files, setFiles, preview, setPreview } = props;
+  const { setFiles, preview, setPreview } = props;
 
   let DEBUG = false;
 
