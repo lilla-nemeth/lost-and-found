@@ -121,8 +121,20 @@ const MapboxMap = (props) => {
             reverseGeocode: true
         });
 
+        const fullscreen = new mapboxgl.FullscreenControl();
+
+        const geolocate = new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true,
+            showUserHeading: true
+        });
+
         map.current.addControl(geocoder);
-        
+        map.current.addControl(fullscreen);
+        map.current.addControl(geolocate);
+
     }
 
     function createMap(lng, lat) {
