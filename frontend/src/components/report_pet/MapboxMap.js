@@ -65,8 +65,7 @@ const MapboxMap = (props) => {
         map.current.addControl(nav, 'bottom-right');
     }
 
-    function addSearchBar(map) {
-
+    function addGeocoder(map) {
         function coordinatesGeocoder(query) {
             // Regex for lng and lat coords
             const matches = query.match(
@@ -77,6 +76,7 @@ const MapboxMap = (props) => {
                 return null;
             }
 
+            // To search by coords
             function coordinateFeature(lng, lat) {
                 return {
                     center: [lng, lat],
@@ -117,7 +117,7 @@ const MapboxMap = (props) => {
             marker: {
                 color: 'rgb(34, 102, 96)'
             },
-            placeholder: 'Search location or with coordinates, try: -40, 170',
+            placeholder: 'Search location or coordinates (e.g.: -40, 170)',
             reverseGeocode: true
         });
 
@@ -137,13 +137,11 @@ const MapboxMap = (props) => {
         // Changes the latitude, longitude and zoom whenever the user interacts with the map
         changeCoordsByUser(map);
         addNavigationButtons(map);
-        addSearchBar(map);
+        addGeocoder(map);
 
         // Clean up on unmount
         return () => map.remove();
-        
     }
-
 
     useEffect(() => {
         // Ask user for location permission in the browser
