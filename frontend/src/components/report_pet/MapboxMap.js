@@ -134,7 +134,6 @@ const MapboxMap = (props) => {
         map.current.addControl(geocoder);
         map.current.addControl(fullscreen);
         map.current.addControl(geolocate);
-
     }
 
     function createMap(lng, lat) {
