@@ -45,7 +45,8 @@ const PetReport = () => {
   const [status, setStatus] = useState('');
   const [preview, setPreview] = useState(null);
   const [files, setFiles] = useState([]);
-  const [location, setLocation] = useState('');
+  // const [location, setLocation] = useState('');
+  const [location, setLocation] = useState([]);
   const [species, setSpecies] = useState('');
   const [description, setDescription] = useState('');
 
@@ -77,8 +78,6 @@ const PetReport = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    if (DEBUG) console.log('files - PetReport', files);
 
     if (!disabled) {
       setLoading(true);
@@ -132,7 +131,8 @@ const PetReport = () => {
           setColors('');
           setAge('');
           setUniquefeature('');
-          setLocation('');
+          // setLocation('');
+          setLocation([]);
           setDescription('');
           setPreview('');
         },
@@ -270,7 +270,8 @@ const PetReport = () => {
             {/* PetReport needs and object of location name and coords(lng and lat), 
             user only will see the location name, 
             and lng and lat is needed for the map  */}
-            <MapboxMap />
+            <MapboxMap setLocation={setLocation} />
+            {/* {console.log(location)} */}
             <TextArea
               headlineName={`Description ${isFieldRequired(required)}`}
               id={'description'}

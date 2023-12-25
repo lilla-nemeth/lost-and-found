@@ -11,7 +11,9 @@ const styles = {
     }
 }
 
-const MapboxMap = () => {
+const MapboxMap = (props) => {
+    const { setLocation } = props;
+
     // mapContainer renders the map inside a specific DOM element
     const mapContainer = useRef(null);
     // The ref will prevent the map from reloading when the user interacts with the map
@@ -53,6 +55,13 @@ const MapboxMap = () => {
             setLng(map.current.getCenter().lng.toFixed(4));
             setLat(map.current.getCenter().lat.toFixed(4));
             setZoom(map.current.getZoom().toFixed(2));
+
+            setLocation([
+                {
+                    lat: map.current.getCenter().lat.toFixed(4), 
+                    lng: map.current.getCenter().lng.toFixed(4)
+                }
+            ]);
         });
     }
 
@@ -118,7 +127,7 @@ const MapboxMap = () => {
                     </button>
                 </div>
             </div> */}
-            <div className="sidebar">
+            <div className="sidebar" >
                 Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
             </div>
             <div ref={mapContainer} className="map-container" />
