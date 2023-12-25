@@ -15,9 +15,8 @@ import TextInput from '../generic/TextInput';
 import TextArea from '../generic/TextArea';
 
 import ImageUpload from './ImageUpload';
-import MapboxMap from './unused/MapboxMap.js';
+import MapboxMap from './MapboxMap.js';
 // import LocationSearch from './unused/LocationSearch';
-// import MapboxMap from './unused/MapboxMap';
 // import DragnDropZone from './unused/DragnDropZone';
 // import DropZoneTest from './unused/DropZoneTest';
 
@@ -45,22 +44,18 @@ const PetReport = () => {
   const [status, setStatus] = useState('');
   const [preview, setPreview] = useState(null);
   const [files, setFiles] = useState([]);
-  // const [location, setLocation] = useState('');
   const [location, setLocation] = useState([]);
   const [species, setSpecies] = useState('');
   const [description, setDescription] = useState('');
-
   const [optionalInputs, setOptionalInputs] = useState({
     display: 'hideInputs',
   });
-
   const [size, setSize] = useState('');
   const [breed, setBreed] = useState('');
   const [sex, setSex] = useState('');
   const [colors, setColors] = useState([]);
   const [age, setAge] = useState('');
   const [uniquefeature, setUniquefeature] = useState('');
-
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [successButtonMsg, setSuccessButtonMsg] = useState('');
@@ -71,10 +66,8 @@ const PetReport = () => {
 
   let DEBUG = false;
 
-  let disabled =
-    !status || !location || !species || !description || !preview || loading;
-
-  let required = true;
+  const disabled = !status || !location || !species || !description || !preview || loading;
+  const required = true;
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -131,8 +124,7 @@ const PetReport = () => {
           setColors('');
           setAge('');
           setUniquefeature('');
-          // setLocation('');
-          setLocation([]);
+          setLocation('');
           setDescription('');
           setPreview('');
         },
@@ -215,7 +207,6 @@ const PetReport = () => {
               </ul>
             </div>
             <ImageUpload
-              files={files}
               setFiles={setFiles}
               preview={preview}
               setPreview={setPreview}
@@ -253,25 +244,12 @@ const PetReport = () => {
                 />
               </ul>
             </div>
-            {/* <div className='filterBox'>
+            <div className='filterBox'>
               <h2 className='categoryHeadline'>
                 Location {isFieldRequired(required)}
               </h2>
-              <TextInput
-                id={'location'}
-                name={'location'}
-                type={'text'}
-                value={location}
-                placeholder={'Location'}
-                onChange={(event) => setLocation(event.target.value)}
-              />
-            </div> */}
-            
-            {/* PetReport needs and object of location name and coords(lng and lat), 
-            user only will see the location name, 
-            and lng and lat is needed for the map  */}
-            <MapboxMap setLocation={setLocation} />
-            {/* {console.log(location)} */}
+              <MapboxMap setLocation={setLocation} />
+            </div>
             <TextArea
               headlineName={`Description ${isFieldRequired(required)}`}
               id={'description'}
