@@ -11,10 +11,7 @@ const PetUserData = (props) => {
                 <td className='tableCell' style={{paddingTop: '50px'}}>
                 </td>
                     <tr className='petOptionalInfo'>
-                        {isInputEmpty('user ID', ('#' + user.id), 'tableCell')}
-                    </tr>
-                    <tr className='petOptionalInfo'>
-                        {isInputEmpty('user', (user.username), 'tableCell')}
+                        {isInputEmpty('uploader', (user.username), 'tableCell')}
                     </tr>
                     <tr className='petOptionalInfo'>
                         {isInputEmpty('email', (user.email), 'tableCell')}
