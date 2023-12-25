@@ -78,7 +78,7 @@ const MapboxMap = () => {
         if (map.current) return;
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
-            style: 'mapbox://styles/mapbox/streets-v12',
+            style: 'mapbox://styles/l1ll4n3m/clqkvquob00mw01o939rncxn5',
             center: [lng, lat],
             zoom: zoom
         });
@@ -87,6 +87,9 @@ const MapboxMap = () => {
         changeCoordsByUser(map);
         addNavigationButtons(map);
         addSearchBar(map);
+
+        // Clean up on unmount
+        return () => map.remove();
     }
 
 
