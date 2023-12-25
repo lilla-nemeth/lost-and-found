@@ -33,8 +33,10 @@ const PetProfileCard = (props) => {
     .setLngLat([arr[0], arr[1]])
     .addTo(map.current);
 
-    map.current.addControl(marker);
+    const fullscreen = new mapboxgl.FullscreenControl();
 
+    map.current.addControl(marker);
+    map.current.addControl(fullscreen);
   }
 
   useEffect(() => {
