@@ -1697,6 +1697,28 @@ a.mapboxgl-ctrl-logo {
   display: none !important;
 }
 
+.mapboxgl-ctrl-geocoder .suggestions 
+> .active 
+> a, 
+.mapboxgl-ctrl-geocoder .suggestions 
+> li 
+> a:hover {
+  width: 100%;
+}
+
+.mapboxgl-ctrl-geocoder--powered-by {
+  display: none !important;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+  padding: 25px 40px !important;
+}
+
+.mapboxgl-ctrl-geocoder--icon-search {
+  width: 28px !important;
+  height: 35px !important;
+}
+
 /* .mapboxgl-ctrl-geocoder {
   display: flex;
   width: 400px !important;
