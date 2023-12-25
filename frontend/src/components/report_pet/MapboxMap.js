@@ -117,7 +117,7 @@ const MapboxMap = (props) => {
             marker: {
                 color: 'rgb(34, 102, 96)'
             },
-            placeholder: 'Search location or coordinates (e.g.: -40, 170)',
+            placeholder: 'Search location or coordinates',
             reverseGeocode: true
         });
 
