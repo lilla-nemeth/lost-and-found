@@ -6,19 +6,15 @@ import { handleError, clearError } from '../HelperFunctions.js';
 import { isFieldRequired } from '../HelperFunctions.js';
 import PetReportOptionalData from './PetReportOptionalData';
 import { ReactComponent as ArrowDown } from '../../assets/icons/togglearrow.svg';
-import Loader from '../generic/Loader';
-import LoaderButton from '../generic/LoaderButton';
+import ImageUpload from './ImageUpload';
+import MapboxMap from './MapboxMap.js';
 
 // generic components:
+import Loader from '../generic/Loader';
+import LoaderButton from '../generic/LoaderButton';
 import RadioButton from '../generic/RadioButton';
 import TextInput from '../generic/TextInput';
 import TextArea from '../generic/TextArea';
-
-import ImageUpload from './ImageUpload';
-import MapboxMap from './MapboxMap.js';
-// import LocationSearch from './unused/LocationSearch';
-// import DragnDropZone from './unused/DragnDropZone';
-// import DropZoneTest from './unused/DropZoneTest';
 
 // petstatusOptions -> reunited option comes later with post editing:
 
@@ -243,23 +239,21 @@ const PetReport = () => {
                   onChange={(event) => setSpecies(event.target.value)}
                 />
               </ul>
-            </div>
-            <div className='filterBox'>
               <h2 className='categoryHeadline'>
                 Location {isFieldRequired(required)}
               </h2>
               <MapboxMap setLocation={setLocation} />
+              <TextArea
+                headlineName={`Description ${isFieldRequired(required)}`}
+                id={'description'}
+                name={description}
+                value={description}
+                placeholder={'Description'}
+                rows={'6'}
+                cols={'10'}
+                onChange={(event) => setDescription(event.target.value)}
+              />
             </div>
-            <TextArea
-              headlineName={`Description ${isFieldRequired(required)}`}
-              id={'description'}
-              name={description}
-              value={description}
-              placeholder={'Description'}
-              rows={'6'}
-              cols={'10'}
-              onChange={(event) => setDescription(event.target.value)}
-            />
             <div
               className='optionalButton'
               onClick={() => showOptionalInputs()}

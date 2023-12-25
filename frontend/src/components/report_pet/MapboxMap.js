@@ -148,29 +148,11 @@ const MapboxMap = (props) => {
         getLocation();
     }, []);
 
-
-
-    // Additional search settings: ZONE/DISTANCE, e.g: 5-10-25-50-75-100 km
     return (
         <>
-            {/* <div style={{padding: '0 0 45px'}}>
-                <h2 style={styles.categoryHeadline}>Location</h2>
-                <div className='searchBox'>
-                    <input  className='searchInput'
-                            id='search' 
-                            type='search' 
-                            placeholder='City, Region or Zip' 
-                            // value={search} 
-                            // onChange={handleChange} 
-                    />
-                    <button className='searchButton'>
-                        <SearchIcon/>
-                    </button>
-                </div>
-            </div> */}
-            <div className="sidebar" >
+            {/* <div className="sidebar" >
                 Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-            </div>
+            </div> */}
             <div ref={mapContainer} className="map-container" />
         </>
       );
