@@ -113,7 +113,8 @@ const MapboxMap = (props) => {
             localGeocoder: coordinatesGeocoder,
             mapboxgl: mapboxgl,
             marker: {
-                color: 'rgb(34, 102, 96)'
+                color: 'rgb(34, 102, 96)',
+                scale: 1.5
             },
             placeholder: 'Search location or coordinates',
             reverseGeocode: true

@@ -28,7 +28,8 @@ const PetProfileCard = (props) => {
    
     const marker = new mapboxgl.Marker({
       color: 'rgb(34, 102, 96)',
-      draggable: false
+      draggable: false,
+      scale: 1.5
     })
     .setLngLat([arr[0], arr[1]])
     .addTo(map.current);
@@ -72,6 +73,9 @@ const PetProfileCard = (props) => {
                     </tr>
                     <tr className='petMainInfo'>
                       {petDate(pet.petstatus, pet.since, pet.until, 'tableCell')}
+                    </tr>
+                    <tr className='petOptionalInfo'>
+                      {isInputEmpty('Location', pet.petlocation, 'tableCell')}
                     </tr>
                   </tbody>
                 </table>
