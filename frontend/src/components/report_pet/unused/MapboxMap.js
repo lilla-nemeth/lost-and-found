@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import { ReactComponent as SearchIcon } from '../../../assets/icons/search.svg';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
@@ -56,12 +55,7 @@ const MapboxMap = (props) => {
             setLat(map.current.getCenter().lat.toFixed(4));
             setZoom(map.current.getZoom().toFixed(2));
 
-            setLocation([
-                {
-                    lat: map.current.getCenter().lat.toFixed(4), 
-                    lng: map.current.getCenter().lng.toFixed(4)
-                }
-            ]);
+            setLocation([[map.current.getCenter().lng.toFixed(4)], [map.current.getCenter().lat.toFixed(4)]]);
         });
     }
 
@@ -72,15 +66,63 @@ const MapboxMap = (props) => {
     }
 
     function addSearchBar(map) {
+
+        function coordinatesGeocoder(query) {
+            // Regex for lng and lat coords
+            const matches = query.match(
+                /^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i
+            );
+
+            if (!matches) {
+                return null;
+            }
+
+            function coordinateFeature(lng, lat) {
+                return {
+                    center: [lng, lat],
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [lng, lat]
+                    },
+                    place_name: 'Lat: ' + lat + ' Lng: ' + lng,
+                    place_type: ['coordinate'],
+                    properties: {},
+                    type: 'Feature'
+                }
+            }
+
+            const coord1 = Number(matches[1]);
+            const coord2 = Number(matches[2]);
+            const geocodes = [];
+
+            if (coord2 < -90 || coord2 > 90) {
+                // must be lat, lng
+                geocodes.push(coordinateFeature(coord2, coord1));
+            }
+                 
+            if (geocodes.length === 0) {
+                // else could be either lng, lat or lat, lng
+                geocodes.push(coordinateFeature(coord1, coord2));
+                geocodes.push(coordinateFeature(coord2, coord1));
+            }
+                 
+            return geocodes;
+        }
+
         // Search location
         const geocoder = new MapboxGeocoder({
             accessToken: mapboxgl.accessToken,
+            localGeocoder: coordinatesGeocoder,
             mapboxgl: mapboxgl,
-            marker: true,
-            placeholder: 'Search location',
+            marker: {
+                color: 'rgb(34, 102, 96)'
+            },
+            placeholder: 'Search location or with coordinates, try: -40, 170',
+            reverseGeocode: true
         });
 
         map.current.addControl(geocoder);
+        
     }
 
     function createMap(lng, lat) {
@@ -99,13 +141,14 @@ const MapboxMap = (props) => {
 
         // Clean up on unmount
         return () => map.remove();
+        
     }
 
 
     useEffect(() => {
         // Ask user for location permission in the browser
         getLocation();
-    });
+    }, []);
 
 
 
