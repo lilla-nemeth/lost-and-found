@@ -7,8 +7,6 @@ const PetListCard = (props) => {
 
   let DEBUG = false;
 
-  if (DEBUG) console.log(pet);
-
   return (
     <div className='petListCard' key={pet.id}>
       <div className='petListCardInner'>

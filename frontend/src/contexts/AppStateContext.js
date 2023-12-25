@@ -73,7 +73,6 @@ export default function AppStateContextProvider(props) {
             });
     },[limit, offset]);
 
-    if (DEBUG) console.log(pets);
     useEffect(() => {
         getAllPets({
             successCallback: res => {
@@ -85,11 +84,6 @@ export default function AppStateContextProvider(props) {
             }
         });  
     },[]);
-
-    if (DEBUG) console.log('token - AppStateContext', token);
-    if (DEBUG) console.log('users arr - AppStateContext', users);
-    if (DEBUG) console.log('pets arr - AppStateContext', pets);
-    if (DEBUG) console.log('allPets arr - AppStateContext', allPets);
 
     function registerUser({email, username, phone, pw, successCallback, successTimeout, errorCallback}) {
         

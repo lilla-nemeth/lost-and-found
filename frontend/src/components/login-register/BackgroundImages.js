@@ -69,8 +69,6 @@ const BackgroundImage = () => {
 
     const urlImages1 = `url('${images1[indexImages]}')`;
     const urlImages2 = `url('${images2[indexImages]}')`;
-    if (DEBUG) console.log(`url('${images1[indexImages]}')`);
-    if (DEBUG) console.log(`url('${images2[indexImages]}')`);
 
     return (
       <>

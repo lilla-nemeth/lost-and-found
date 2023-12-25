@@ -10,15 +10,12 @@ export default function AuthContextProvider(props) {
     useEffect(() => {
 
        let tokenFromLocalStorage = localStorage.getItem('token');
-       if (DEBUG) console.log('AuthContext - token', tokenFromLocalStorage);
 
        if (tokenFromLocalStorage) {
            setToken(tokenFromLocalStorage);
        }
 
     },[token]);
-    
-    if (DEBUG) console.log(token);
     
     function handleLogOut() {
         localStorage.removeItem('token');

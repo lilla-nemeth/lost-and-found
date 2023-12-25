@@ -25,8 +25,6 @@ const Login = () => {
 
   let disabled = !password || !email || loading;
 
-  if (DEBUG) console.log(setToken);
-
   function handleSubmit(event) {
     event.preventDefault();
 

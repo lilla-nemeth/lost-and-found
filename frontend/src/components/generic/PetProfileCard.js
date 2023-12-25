@@ -7,9 +7,6 @@ const PetProfileCard = (props) => {
 
   let DEBUG = false;
 
-  if (DEBUG) console.log(pet.userid);
-  if (DEBUG) console.log('PetProfileCard - user', user);
-
   return (
     <div className='petProfileContainer'>
       <div className='petProfileCard'>

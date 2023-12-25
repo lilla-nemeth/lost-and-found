@@ -22,10 +22,6 @@ const PetListWithSearch = () => {
 
 	let DEBUG = false;
 
-	if (DEBUG) console.log('pets arr from PetList', pets);
-	if (DEBUG) console.log('allPets arr from PetList', allPets);
-	if (DEBUG) console.log(allPets[0]);
-
 	// Alternative:
 	// pet.petstatus.toLowerCase().includes(search.toLowerCase())
 

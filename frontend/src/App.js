@@ -30,8 +30,6 @@ function App() {
 
   let DEBUG = false;
 
-  if (DEBUG) console.log('App.js', token);
-
   useEffect(() => {
     cacheImages(images);
   });

@@ -11,9 +11,6 @@ const ImageUpload = (props) => {
     setPreview(URL.createObjectURL(event.target.files[0]));
   }
 
-  if (DEBUG) console.log('files from ImageUpload', files);
-  if (DEBUG) console.log('files.length from ImageUpload', files.length);
-
   return (
     <>
       <div className='imageUploadContainer'>
