@@ -1693,10 +1693,6 @@ body.modalActive {
   height: 450px;
 }
 
-a.mapboxgl-ctrl-logo {
-  display: none !important;
-}
-
 .mapboxgl-ctrl-geocoder .suggestions 
 > .active 
 > a, 
@@ -1704,10 +1700,6 @@ a.mapboxgl-ctrl-logo {
 > li 
 > a:hover {
   width: 100%;
-}
-
-.mapboxgl-ctrl-geocoder--powered-by {
-  display: none !important;
 }
 
 .mapboxgl-ctrl-geocoder--input {
