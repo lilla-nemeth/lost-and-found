@@ -25,58 +25,16 @@ const PetProfileCard = (props) => {
         center: [arr[0], arr[1]],
         zoom: zoom
     });
+   
+    const marker = new mapboxgl.Marker({
+      color: 'rgb(34, 102, 96)',
+      draggable: false
+    })
+    .setLngLat([arr[0], arr[1]])
+    .addTo(map.current);
 
-    // <LocationMark />
-    map.current.on('load', () => {
-      // Load an image from an external URL.
-      map.current.loadImage(
-      // Test cat image, only url of img is accepted :/
-      'https://docs.mapbox.com/mapbox-gl-js/assets/cat.png',
-      (error, image) => {
-      if (error) throw error;
-       
-      // Add the image to the map style.
-      map.current.addImage('cat', image);
-       
-      // Add a data source containing one point feature.
-      map.current.addSource('point', {
-        'type': 'geojson',
-        'data': {
-        'type': 'FeatureCollection',
-        'features': [
-            {
-              'type': 'Feature',
-              'geometry': {
-                'type': 'Point',
-                'coordinates': [arr[0], arr[1]]
-              },
-              'properties': {
-                'title': pet.species
-              }
-            }
-          ]
-        }
-      });
-      
-          map.current.addLayer({
-            'id': 'points',
-            'type': 'symbol',
-            'source': 'point', // reference the data source
-            'layout': {
-              'icon-image': 'cat', // reference the image
-              'icon-size': 0.25,
-              'text-field': ['get', 'title'],
-              'text-font': [
-                'Open Sans Semibold',
-                'Arial Unicode MS Bold'
-              ],
-              'text-offset': [0, 3],
-              'text-anchor': 'top'
-            }
-          });
-        }
-      );
-    });
+    map.current.addControl(marker);
+
   }
 
   useEffect(() => {
