@@ -197,7 +197,7 @@ const MapboxMap = (props) => {
                         <SearchIcon onChange={handleChange} />
                     </div>
                     <input 
-                        className='formInput'
+                        className='formInput locationInput'
                         placeholder='search places' 
                         name='places' 
                         id='places' 
@@ -211,10 +211,10 @@ const MapboxMap = (props) => {
                     return (
                         <div 
                             className='locationSuggestion'
-                            key={place.id} 
-                            style={{padding: '12px 0px 12px 0px', background: 'white', borderTop: 'solid 1px rgb(208 203 184)', lineHeight: '82%'}}>
-                            <div className='locationSuggestionText' style={{fontSize: '13px'}}>{place.text}</div>
-                            <p className='locationSuggestionName' style={{color: 'rgb(119,116,104,1)', paddingTop: '8px', fontSize: '13px'}}>{place.place_name}</p>   
+                            key={place.id}
+                            onClick={() => setQuery(place.place_name)}>
+                            <div className='locationSuggestionText'>{place.text}</div>
+                            <p className='locationSuggestionName'>{place.place_name}</p>   
                         </div>
                     )
                 })}

@@ -132,7 +132,8 @@ table {
   --clr-white: rgb(255, 255, 255);
   --clr-lightgrey: rgb(221, 221, 221);
   --clr-lightaquamarine: rgba(129, 180, 175, 0.2);
-  --clr-palebrown: rgb(244, 242, 234);
+  --clr-lightbrown: rgb(244, 242, 234);
+  --clr-darkbrown: rgb(145, 141, 128);
   --clr-brown: rgb(208 203 184);
   --clr-black: rgb(0, 0, 0);
   --clr-aquamarine: rgb(176, 240, 235);
@@ -233,7 +234,7 @@ table {
 }
 
 .footerWithoutPicture {
-  background: var(--clr-palebrown);
+  background: var(--clr-lightbrown);
   color: var(--clr-brown);
   width: 100%;
   position: absolute;
@@ -338,7 +339,7 @@ table {
 }
 
 .sidebarActiveLink:hover {
-  background: var(--clr-palebrown);
+  background: var(--clr-lightbrown);
   border-bottom: 3px solid var(--clr-green);
   z-index: 1;
 }
@@ -372,7 +373,7 @@ table {
   padding: 22.5px;
   text-decoration: none;
   font: var(--font-standard);
-  background: var(--clr-palebrown);
+  background: var(--clr-lightbrown);
   width: 100vw;
 }
 
@@ -520,7 +521,7 @@ table {
 /* Lost & Found */
 .petMain {
   font-family: var(--font-family);
-  background: var(--clr-palebrown);
+  background: var(--clr-lightbrown);
   overflow: hidden;
   min-height: 100vh;
   width: 100%;
@@ -988,7 +989,7 @@ input[type='checkbox']:checked ~ label {
   top: 0;
   border: 2px solid var(--clr-brown);
   padding: 3px;
-  background: var(--clr-palebrown);
+  background: var(--clr-lightbrown);
   border-radius: var(--radius-button);
 }
 
@@ -1544,7 +1545,7 @@ input[type='checkbox']:checked ~ label {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: var(--clr-palebrown);
+  background: var(--clr-lightbrown);
 }
 
 #loader {
@@ -1714,6 +1715,32 @@ body.modalActive {
 
 .mapboxgl-ctrl-geocoder--icon-close {
     margin-top: 10px !important;
+}
+
+.locationInput {
+  padding-right: 18px !important;
+}
+
+.locationSuggestion {
+  padding: 12px 18px 12px 18px;
+  background: var(--clr-white); 
+  border-top: solid 1px var(--clr-brown);
+  line-height: '82%';
+}
+
+.locationSuggestion:hover {
+  background-color: var(--clr-lightbrown);
+  cursor: pointer;
+}
+
+.locationSuggestionText {
+  font-size: 13px;
+}
+
+.locationSuggestionName {
+  color: var(--clr-darkbrown); 
+  padding-top: 8px; 
+  font-size: 13px;
 }
 
 /* Media Queries */
