@@ -9,39 +9,43 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 const PetProfileCard = (props) => {
   const { pet, user } = props;
 
+
+
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [zoom, setZoom] = useState(9);
 
   function renderMap(pet) {
-    const arr = pet.petlocation.split(/[,]+/);
-    // arr[0] = lng
-    // arr[1] = lat
+    console.log(pet)
+    // console.log(pet.petlocation)
+    // const arr = pet.petlocation.split(/[,]+/);
+    // // arr[0] = lng
+    // // arr[1] = lat
 
-    if (map.current) return;
-    map.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/l1ll4n3m/clqkvquob00mw01o939rncxn5',
-        center: [arr[0], arr[1]],
-        zoom: zoom
-    });
+    // if (map.current) return;
+    // map.current = new mapboxgl.Map({
+    //     container: mapContainer.current,
+    //     style: 'mapbox://styles/l1ll4n3m/clqkvquob00mw01o939rncxn5',
+    //     center: [arr[0], arr[1]],
+    //     zoom: zoom
+    // });
    
-    const marker = new mapboxgl.Marker({
-      color: 'rgb(34, 102, 96)',
-      draggable: false,
-      scale: 1.5
-    })
-    .setLngLat([arr[0], arr[1]])
-    .addTo(map.current);
+    // const marker = new mapboxgl.Marker({
+    //   color: 'rgb(34, 102, 96)',
+    //   draggable: false,
+    //   scale: 1.5
+    // })
+    // .setLngLat([arr[0], arr[1]])
+    // .addTo(map.current);
 
-    const fullscreen = new mapboxgl.FullscreenControl();
+    // const fullscreen = new mapboxgl.FullscreenControl();
 
-    map.current.addControl(marker);
-    map.current.addControl(fullscreen);
+    // map.current.addControl(marker);
+    // map.current.addControl(fullscreen);
   }
 
   useEffect(() => {
-    renderMap(pet);
+    // renderMap(pet);
 }, []);
   
   let DEBUG = false;
@@ -80,7 +84,7 @@ const PetProfileCard = (props) => {
                   </tbody>
                 </table>
                 <div style={{width: '100%'}}>
-                  <div ref={mapContainer} className="map-container" />
+                  {/* <div ref={mapContainer} className="map-container" /> */}
                 </div>
                 <table>
                   <tbody>

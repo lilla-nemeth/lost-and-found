@@ -40,7 +40,7 @@ const PetReport = () => {
   const [status, setStatus] = useState('');
   const [preview, setPreview] = useState(null);
   const [files, setFiles] = useState([]);
-  const [location, setLocation] = useState([]);
+  const [location, setLocation] = useState('');
   const [species, setSpecies] = useState('');
   const [description, setDescription] = useState('');
   const [optionalInputs, setOptionalInputs] = useState({

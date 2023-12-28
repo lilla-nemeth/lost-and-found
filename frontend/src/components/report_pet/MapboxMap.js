@@ -23,7 +23,7 @@ const MapboxMap = (props) => {
     const [lat, setLat] = useState(null);
     const [zoom, setZoom] = useState(9);
     const [places, setPlaces] = useState([]);
-    const [selectedPlace, setSelectedPlace] = useState([]);
+    // const [selectedPlace, setSelectedPlace] = useState([]);
     const [query, setQuery] = useState('');
     const [display, setDisplay] = useState('block');
 
@@ -61,7 +61,7 @@ const MapboxMap = (props) => {
             setLat(map.current.getCenter().lat.toFixed(4));
             setZoom(map.current.getZoom().toFixed(2));
 
-            setLocation([[map.current.getCenter().lng.toFixed(4)], [map.current.getCenter().lat.toFixed(4)]]);
+            // setLocation([[map.current.getCenter().lng.toFixed(4)], [map.current.getCenter().lat.toFixed(4)]]);
         });
     }
 
@@ -138,6 +138,16 @@ const MapboxMap = (props) => {
             showUserHeading: true
         });
 
+        
+        const marker = new mapboxgl.Marker({ 
+            color: 'black'
+        })
+        .setLngLat([lng, lat])
+        .addTo(map);
+        
+        map.current.addControl(marker);
+
+
         // map.current.addControl(geocoder);
         map.current.addControl(fullscreen);
         map.current.addControl(geolocate);
@@ -190,9 +200,9 @@ const MapboxMap = (props) => {
 
     return (
         <>
-            {/* <div className="sidebar" >
+            <div className="sidebar" >
                 Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-            </div> */}
+            </div>
             <div ref={mapContainer} className='map-container' />
                 <div className='inputBox' style={{padding: '10px 0 0 0 !important'}}>
                     <div className='searchButton'>
@@ -217,8 +227,10 @@ const MapboxMap = (props) => {
                             onClick={() => {
                                 setQuery(place.place_name), 
                                 setDisplay('none'), 
-                                setSelectedPlace(place), 
-                                console.log(selectedPlace)
+                                // setSelectedPlace(place), 
+                                setLng(place.center[0]),
+                                setLat(place.center[1]),
+                                setLocation(`${place.center} ~~~ ${place.place_name}`)
                             }}>
                             <div className='locationSuggestionText'>{place.text}</div>
                             <p className='locationSuggestionName'>{place.place_name}</p>   
