@@ -23,7 +23,9 @@ const MapboxMap = (props) => {
     const [lat, setLat] = useState(null);
     const [zoom, setZoom] = useState(9);
     const [places, setPlaces] = useState([]);
+    const [selectedPlace, setSelectedPlace] = useState([]);
     const [query, setQuery] = useState('');
+    const [display, setDisplay] = useState('block');
 
     let DEBUG = false;
 
@@ -70,61 +72,61 @@ const MapboxMap = (props) => {
     }
 
     function addGeocoder(map) {
-        function coordinatesGeocoder(query) {
-            // fetchSearchData(query);
+        // function coordinatesGeocoder(query) {
+        //     // fetchSearchData(query);
 
-            // Regex for lng and lat coords
-            const matches = query.match(
-                /^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i
-            );
+        //     // Regex for lng and lat coords
+        //     const matches = query.match(
+        //         /^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i
+        //     );
 
-            if (!matches) {
-                return null;
-            }
+        //     if (!matches) {
+        //         return null;
+        //     }
 
-            // Reverse geocoding, converting geographic coordinates into a text description
-            function coordinateFeature(lng, lat) {
-                return {
-                    center: [lng, lat],
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [lng, lat]
-                    },
-                    place_name: 'Lat: ' + lat + ' Lng: ' + lng,
-                    place_type: ['coordinate'],
-                    properties: {},
-                    type: 'Feature'
-                }
-            }
+        //     // Reverse geocoding, converting geographic coordinates into a text description
+        //     function coordinateFeature(lng, lat) {
+        //         return {
+        //             center: [lng, lat],
+        //             geometry: {
+        //                 type: 'Point',
+        //                 coordinates: [lng, lat]
+        //             },
+        //             place_name: 'Lat: ' + lat + ' Lng: ' + lng,
+        //             place_type: ['coordinate'],
+        //             properties: {},
+        //             type: 'Feature'
+        //         }
+        //     }
 
-            const coord1 = Number(matches[1]);
-            const coord2 = Number(matches[2]);
-            const geocodes = [];
+        //     const coord1 = Number(matches[1]);
+        //     const coord2 = Number(matches[2]);
+        //     const geocodes = [];
 
-            if (coord2 < -90 || coord2 > 90) {
-                geocodes.push(coordinateFeature(coord2, coord1));
-            }
+        //     if (coord2 < -90 || coord2 > 90) {
+        //         geocodes.push(coordinateFeature(coord2, coord1));
+        //     }
                  
-            if (geocodes.length === 0) {
-                geocodes.push(coordinateFeature(coord1, coord2));
-                geocodes.push(coordinateFeature(coord2, coord1));
-            }
+        //     if (geocodes.length === 0) {
+        //         geocodes.push(coordinateFeature(coord1, coord2));
+        //         geocodes.push(coordinateFeature(coord2, coord1));
+        //     }
                  
-            return geocodes;
-        }
+        //     return geocodes;
+        // }
 
         // Search location
-        const geocoder = new MapboxGeocoder({
-            accessToken: mapboxgl.accessToken,
-            localGeocoder: coordinatesGeocoder,
-            mapboxgl: mapboxgl,
-            marker: {
-                color: 'rgb(34, 102, 96)',
-                scale: 1.5
-            },
-            placeholder: 'Search location or coordinates',
-            reverseGeocode: true
-        });
+        // const geocoder = new MapboxGeocoder({
+        //     accessToken: mapboxgl.accessToken,
+        //     localGeocoder: coordinatesGeocoder,
+        //     mapboxgl: mapboxgl,
+        //     marker: {
+        //         color: 'rgb(34, 102, 96)',
+        //         scale: 1.5
+        //     },
+        //     placeholder: 'Search location or coordinates',
+        //     reverseGeocode: true
+        // });
 
         const fullscreen = new mapboxgl.FullscreenControl();
 
@@ -136,7 +138,7 @@ const MapboxMap = (props) => {
             showUserHeading: true
         });
 
-        map.current.addControl(geocoder);
+        // map.current.addControl(geocoder);
         map.current.addControl(fullscreen);
         map.current.addControl(geolocate);
     }
@@ -164,7 +166,6 @@ const MapboxMap = (props) => {
         const data = await response.json();
 
         setPlaces(data.features);
-        // console.log(places)
     }
 
     function handleChange(e) {
@@ -172,6 +173,7 @@ const MapboxMap = (props) => {
 
         if (e.target.value) {
             fetchPlaces(query);
+            setDisplay('block');
         } else {
             setPlaces('');
         }
@@ -206,13 +208,18 @@ const MapboxMap = (props) => {
                         onChange={handleChange}
                     />
                 </div>
-            <div>
+            <div style={{display: display}}>
                 {places && places.map(place => {
                     return (
                         <div 
                             className='locationSuggestion'
                             key={place.id}
-                            onClick={() => setQuery(place.place_name)}>
+                            onClick={() => {
+                                setQuery(place.place_name), 
+                                setDisplay('none'), 
+                                setSelectedPlace(place), 
+                                console.log(selectedPlace)
+                            }}>
                             <div className='locationSuggestionText'>{place.text}</div>
                             <p className='locationSuggestionName'>{place.place_name}</p>   
                         </div>
