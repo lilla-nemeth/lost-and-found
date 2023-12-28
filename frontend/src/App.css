@@ -1505,14 +1505,8 @@ input[type='checkbox']:checked ~ label {
 }
 
 .searchButton {
-  cursor: pointer;
   background: none;
   fill: var(--clr-brown);
-}
-
-.searchButton:hover {
-  fill: var(--clr-darkgreen);
-  transition: fill 0.2s linear;
 }
 
 .formInput {

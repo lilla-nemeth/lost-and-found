@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import TextInput from '../generic/TextInput';
+import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
@@ -20,6 +22,8 @@ const MapboxMap = (props) => {
     const [lng, setLng] = useState(null);
     const [lat, setLat] = useState(null);
     const [zoom, setZoom] = useState(9);
+    const [places, setPlaces] = useState([]);
+    const [query, setQuery] = useState('');
 
     let DEBUG = false;
 
@@ -67,6 +71,8 @@ const MapboxMap = (props) => {
 
     function addGeocoder(map) {
         function coordinatesGeocoder(query) {
+            // fetchSearchData(query);
+
             // Regex for lng and lat coords
             const matches = query.match(
                 /^[ ]*(?:Lat: )?(-?\d+\.?\d*)[, ]+(?:Lng: )?(-?\d+\.?\d*)[ ]*$/i
@@ -76,7 +82,7 @@ const MapboxMap = (props) => {
                 return null;
             }
 
-            // To search by coords
+            // Reverse geocoding, converting geographic coordinates into a text description
             function coordinateFeature(lng, lat) {
                 return {
                     center: [lng, lat],
@@ -153,19 +159,68 @@ const MapboxMap = (props) => {
         return () => map.remove();
     }
 
+    const fetchPlaces = async(query) => {
+        const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?language=en&access_token=${mapboxgl.accessToken}`);
+        const data = await response.json();
+
+        setPlaces(data.features);
+        // console.log(places)
+    }
+
+    function handleChange(e) {
+        setQuery(e.target.value);
+
+        if (e.target.value) {
+            fetchPlaces(query);
+        } else {
+            setPlaces('');
+        }
+    }
+
     useEffect(() => {
-        // Ask user for location permission in the browser
         getLocation();
     }, []);
+
+    useEffect(() => {
+        fetchPlaces(query);
+    }, [query]);
+
 
     return (
         <>
             {/* <div className="sidebar" >
                 Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
             </div> */}
-            <div ref={mapContainer} className="map-container" />
+            <div ref={mapContainer} className='map-container' />
+                <div className='inputBox' style={{padding: '10px 0 0 0 !important'}}>
+                    <div className='searchButton'>
+                        <SearchIcon onChange={handleChange} />
+                    </div>
+                    <input 
+                        className='formInput'
+                        placeholder='search places' 
+                        name='places' 
+                        id='places' 
+                        type='text'
+                        value={query}
+                        onChange={handleChange}
+                    />
+                </div>
+            <div>
+                {places && places.map(place => {
+                    return (
+                        <div 
+                            className='locationSuggestion'
+                            key={place.id} 
+                            style={{padding: '12px 0px 12px 0px', background: 'white', borderTop: 'solid 1px rgb(208 203 184)', lineHeight: '82%'}}>
+                            <div className='locationSuggestionText' style={{fontSize: '13px'}}>{place.text}</div>
+                            <p className='locationSuggestionName' style={{color: 'rgb(119,116,104,1)', paddingTop: '8px', fontSize: '13px'}}>{place.place_name}</p>   
+                        </div>
+                    )
+                })}
+            </div>
         </>
-      );
+    );
 }
  
 export default MapboxMap;
