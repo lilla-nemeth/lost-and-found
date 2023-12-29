@@ -5,6 +5,7 @@ const { Pool } = require('pg');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const path = require('path');
+const axios = require('axios');
 require('dotenv').config();
 
 const { 
@@ -171,6 +172,20 @@ app.get('/users', authMw, (request, response) => {
     .query(SELECT_ALL_USERS)
     .then((res) => response.status(200).json(res.rows))
     .catch((err) => response.status(400).json({ msg: ERROR_MSG_FETCH_USER }));
+});
+
+// search pet location
+app.get('/searchlocation/:query', (request, response) => {
+  const query = request.params.query;
+  const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${process.env.API_KEY}`;
+
+  axios.get(url)
+    .then(res => {
+      response.status(200).json(res.data)
+    })
+    .catch(err => {
+      response.status(500).json({ error: err.message })
+    });
 });
 
 // edit pet by user (user dashboard)
