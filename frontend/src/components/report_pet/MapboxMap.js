@@ -66,9 +66,21 @@ const MapboxMap = (props) => {
     }
 
     function addNavigationButtons(map) {
-        // Navigation buttons
         const nav = new mapboxgl.NavigationControl();
         map.current.addControl(nav, 'bottom-right');
+    }
+
+    function addMaker(map, lng, lat) {
+        new mapboxgl.Marker({ 
+            color: 'rgb(34, 102, 96)'
+        })
+        .setLngLat([lng, lat])
+        .addTo(map.current);
+    }
+
+    function addFullscreenControl(map) {
+        const fullscreen = new mapboxgl.FullscreenControl();
+        map.current.addControl(fullscreen);
     }
 
     function addGeocoder(map) {
@@ -128,29 +140,8 @@ const MapboxMap = (props) => {
         //     reverseGeocode: true
         // });
 
-        const fullscreen = new mapboxgl.FullscreenControl();
-
-        const geolocate = new mapboxgl.GeolocateControl({
-            positionOptions: {
-                enableHighAccuracy: true
-            },
-            trackUserLocation: true,
-            showUserHeading: true
-        });
-
-        
-        const marker = new mapboxgl.Marker({ 
-            color: 'black'
-        })
-        .setLngLat([lng, lat])
-        .addTo(map);
-        
-        map.current.addControl(marker);
-
-
         // map.current.addControl(geocoder);
-        map.current.addControl(fullscreen);
-        map.current.addControl(geolocate);
+        
     }
 
     function createMap(lng, lat) {
@@ -162,18 +153,37 @@ const MapboxMap = (props) => {
             zoom: zoom
         });
 
+       
+
+        const geolocate = new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true,
+            showUserHeading: true
+        });
+
+        // map.current.addControl(fullscreen);
+        map.current.addControl(geolocate);
+        
         // Changes the latitude, longitude and zoom whenever the user interacts with the map
         changeCoordsByUser(map);
         addNavigationButtons(map);
         addGeocoder(map);
+        addMaker(map, lng, lat)
+        addFullscreenControl(map)
 
         // Clean up on unmount
-        return () => map.remove();
+        return () => map.current.remove();
     }
 
-    const fetchPlaces = async(query) => {
-        const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?language=en&access_token=${mapboxgl.accessToken}`);
-        const data = await response.json();
+    const fetchPlaces = async(endpoint) => {
+        const forwardGeocodingRes = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${endpoint}.json?access_token=${mapboxgl.accessToken}`);
+        // const forwardGeocodingRes = await fetch(`https://api.mapbox.com/search/searchbox/v1/suggest?q=${endpoint}.json?access_token=${mapboxgl.accessToken}`);
+        // console.log(forwardGeocodingRes)
+        // const reverseGeocodingRes = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${endpoint}/${lng},${lat}.json?access_token=${mapboxgl.accessToken}`);
+        const data = await forwardGeocodingRes.json();
+        // const data = await reverseGeocodingRes.json();
 
         setPlaces(data.features);
     }
@@ -191,6 +201,7 @@ const MapboxMap = (props) => {
 
     useEffect(() => {
         getLocation();
+        // createMap(lng, lat)
     }, []);
 
     useEffect(() => {
@@ -230,7 +241,8 @@ const MapboxMap = (props) => {
                                 // setSelectedPlace(place), 
                                 setLng(place.center[0]),
                                 setLat(place.center[1]),
-                                setLocation(`${place.center} ~~~ ${place.place_name}`)
+                                setLocation(`${place.center} ~~~ ${place.place_name}`),
+                                createMap(place.center[0], place.center[1])
                             }}>
                             <div className='locationSuggestionText'>{place.text}</div>
                             <p className='locationSuggestionName'>{place.place_name}</p>   
