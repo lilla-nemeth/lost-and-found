@@ -29,7 +29,7 @@ const MapboxMap = (props) => {
 
     let DEBUG = false;
 
-    function getLocation() {
+    function getLocation(lng, lat) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 // Success:
@@ -81,6 +81,17 @@ const MapboxMap = (props) => {
     function addFullscreenControl(map) {
         const fullscreen = new mapboxgl.FullscreenControl();
         map.current.addControl(fullscreen);
+    }
+
+    function addGeolocateControl(map) {
+        const geolocate = new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true,
+            showUserHeading: true
+        });
+        map.current.addControl(geolocate);
     }
 
     function addGeocoder(map) {
@@ -147,31 +158,38 @@ const MapboxMap = (props) => {
     function createMap(lng, lat) {
         if (map.current) return;
         map.current = new mapboxgl.Map({
+            accessToken: mapboxgl.accessToken,
             container: mapContainer.current,
             style: 'mapbox://styles/l1ll4n3m/clqkvquob00mw01o939rncxn5',
             center: [lng, lat],
             zoom: zoom
         });
 
-       
-
-        const geolocate = new mapboxgl.GeolocateControl({
-            positionOptions: {
-                enableHighAccuracy: true
-            },
-            trackUserLocation: true,
-            showUserHeading: true
-        });
-
-        // map.current.addControl(fullscreen);
-        map.current.addControl(geolocate);
-        
-        // Changes the latitude, longitude and zoom whenever the user interacts with the map
         changeCoordsByUser(map);
         addNavigationButtons(map);
         addGeocoder(map);
-        addMaker(map, lng, lat)
-        addFullscreenControl(map)
+        addMaker(map, lng, lat);
+        addFullscreenControl(map);
+        addGeolocateControl(map);
+
+        // const geocoder = new MapboxGeocoder({
+        //     accessToken: mapboxgl.accessToken,
+        //     types: 'poi',
+        //     // see https://docs.mapbox.com/api/search/#geocoding-response-object for information about the schema of each response feature
+        //     render: function (item) {
+        //     // extract the item's maki icon or use a default
+        //     const maki = item.properties.maki || 'marker';
+        //     return `<div class='geocoder-dropdown-item'>
+        //     <img class='geocoder-dropdown-icon' src='https://unpkg.com/@mapbox/maki@6.1.0/icons/${maki}-15.svg'>
+        //     <span class='geocoder-dropdown-text'>
+        //     ${item.text}
+        //     </span>
+        //     </div>`;
+        //     },
+        //     mapboxgl: mapboxgl
+        // });
+
+        // map.current.addControl(geocoder);
 
         // Clean up on unmount
         return () => map.current.remove();
@@ -236,13 +254,14 @@ const MapboxMap = (props) => {
                             className='locationSuggestion'
                             key={place.id}
                             onClick={() => {
-                                setQuery(place.place_name), 
-                                setDisplay('none'), 
+                                setQuery(place.place_name);
+                                setDisplay('none');
                                 // setSelectedPlace(place), 
-                                setLng(place.center[0]),
-                                setLat(place.center[1]),
-                                setLocation(`${place.center} ~~~ ${place.place_name}`),
-                                createMap(place.center[0], place.center[1])
+                                setLng(place.center[0]);
+                                setLat(place.center[1]);
+                                setLocation(`${place.center} ~~~ ${place.place_name}`);
+                                // console.log(lng, lat)
+                                // createMap(lng, lat)
                             }}>
                             <div className='locationSuggestionText'>{place.text}</div>
                             <p className='locationSuggestionName'>{place.place_name}</p>   
