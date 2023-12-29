@@ -184,7 +184,7 @@ app.get('/searchlocation/:query', (request, response) => {
       response.status(200).json(res.data)
     })
     .catch(err => {
-      response.status(500).json({ error: err.message })
+      response.status(400).json({ error: err.message })
     });
 });
 
