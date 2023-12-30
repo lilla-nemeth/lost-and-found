@@ -352,19 +352,31 @@ export default function AppStateContextProvider(props) {
         );
     }
 
-    async function fetchPlaces(query, setter, lng, lat) {
+    function fetchPlaces(query, setter, lng, lat) {
         const params = new URLSearchParams({
             fuzzyMatch: true,
             language: 'en',
-            limit: 10,
+            limit: 5,
             proximity: lng && lat ? `${lng}, ${lat}` : '0,0',
         });
 
-        const data = await axios.get(`http://localhost:3003/locationsearch/${query}?${params}`);
-
-        if (query) {
-            setter(data.data.features);
-        }
+        const options = {
+            method: 'get',
+            url: `/locationsearch/${query}?${params}`,
+            mode: 'cors',        
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        axios(options)
+        .then(res => {
+            if (query) {
+                setter(res.data.features);
+            }
+        })
+        .catch(
+            err => console.log(err)
+        )
     }
 
     return (
