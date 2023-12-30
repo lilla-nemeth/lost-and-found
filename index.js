@@ -176,7 +176,7 @@ app.get('/users', authMw, (request, response) => {
 });
 
 // search pet location
-app.get('/searchlocation/:query', (request, response) => {
+app.get('/locationsearch/:query', (request, response) => {
   const query = request.params.query; 
   const params = new URLSearchParams({
     access_token: process.env.API_KEY,

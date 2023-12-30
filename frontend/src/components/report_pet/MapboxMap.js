@@ -1,4 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
+import { AppStateContext } from '../../contexts/AppStateContext';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import TextInput from '../generic/TextInput';
@@ -12,12 +13,14 @@ import {
     // addGeocoder,
     setCoords
 } from '../MapHelpers';
+// import axios from 'axios';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 
 const MapboxMap = (props) => {
     const { setLocation } = props;
+    const { fetchPlaces } = useContext(AppStateContext);
     
     // mapContainer renders the map inside a specific DOM element
     // The ref will prevent the map from 
@@ -89,22 +92,38 @@ const MapboxMap = (props) => {
         return () => map.current.remove();
     }
 
-    const fetchPlaces = async(endpoint) => {
-        const forwardGeocodingRes = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${endpoint}.json?access_token=${mapboxgl.accessToken}`);
-        // const forwardGeocodingRes = await fetch(`https://api.mapbox.com/search/searchbox/v1/suggest?q=${endpoint}.json?access_token=${mapboxgl.accessToken}`);
-        // console.log(forwardGeocodingRes)
-        // const reverseGeocodingRes = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${endpoint}/${lng},${lat}.json?access_token=${mapboxgl.accessToken}`);
-        const data = await forwardGeocodingRes.json();
-        // const data = await reverseGeocodingRes.json();
+    // const fetchPlaces = async(endpoint) => {
+    //     const params = new URLSearchParams({
+    //         fuzzyMatch: true,
+    //         language: 'en',
+    //         limit: 10,
+    //         proximity: lng && lat ? `${lng}, ${lat}` : '0,0',
+    //     });
 
-        setPlaces(data.features);
-    }
+    //     const data = await axios.get(`http://localhost:3003/locationsearch/${endpoint}?${params}`);
+    //     // const forwardGeocodingRes = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${endpoint}.json?access_token=${mapboxgl.accessToken}`);
+        
+    //     // const forwardGeocodingRes = await fetch(`https://api.mapbox.com/search/searchbox/v1/suggest?q=${endpoint}.json?access_token=${mapboxgl.accessToken}`);
+    //     // console.log(forwardGeocodingRes)
+    //     // const reverseGeocodingRes = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${endpoint}/${lng},${lat}.json?access_token=${mapboxgl.accessToken}`);
+    //     // const data = await forwardGeocodingRes.json();
+    //     // const data = await reverseGeocodingRes.json();
+
+    //     if (endpoint) {
+    //         setPlaces(data.data.features)
+    //         console.log(data)
+    //     }
+
+
+    //     // setPlaces(data.features);
+    //     // setPlaces(data.features);
+    // }
 
     function handleChange(e) {
         setQuery(e.target.value);
 
         if (e.target.value) {
-            fetchPlaces(query);
+            fetchPlaces(query, setPlaces, lng, lat);
             setDisplay('block');
         } else {
             setPlaces('');
@@ -116,7 +135,7 @@ const MapboxMap = (props) => {
     }, []);
 
     useEffect(() => {
-        fetchPlaces(query);
+        fetchPlaces(query, setPlaces, lng, lat);
     }, [query]);
 
     return (
