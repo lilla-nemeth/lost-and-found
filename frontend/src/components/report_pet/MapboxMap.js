@@ -92,33 +92,6 @@ const MapboxMap = (props) => {
         return () => map.current.remove();
     }
 
-    // const fetchPlaces = async(endpoint) => {
-    //     const params = new URLSearchParams({
-    //         fuzzyMatch: true,
-    //         language: 'en',
-    //         limit: 10,
-    //         proximity: lng && lat ? `${lng}, ${lat}` : '0,0',
-    //     });
-
-    //     const data = await axios.get(`http://localhost:3003/locationsearch/${endpoint}?${params}`);
-    //     // const forwardGeocodingRes = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${endpoint}.json?access_token=${mapboxgl.accessToken}`);
-        
-    //     // const forwardGeocodingRes = await fetch(`https://api.mapbox.com/search/searchbox/v1/suggest?q=${endpoint}.json?access_token=${mapboxgl.accessToken}`);
-    //     // console.log(forwardGeocodingRes)
-    //     // const reverseGeocodingRes = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${endpoint}/${lng},${lat}.json?access_token=${mapboxgl.accessToken}`);
-    //     // const data = await forwardGeocodingRes.json();
-    //     // const data = await reverseGeocodingRes.json();
-
-    //     if (endpoint) {
-    //         setPlaces(data.data.features)
-    //         console.log(data)
-    //     }
-
-
-    //     // setPlaces(data.features);
-    //     // setPlaces(data.features);
-    // }
-
     function handleChange(e) {
         setQuery(e.target.value);
 
