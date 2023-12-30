@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const axios = require('axios');
+let url = require('url');
 require('dotenv').config();
 
 const { 
@@ -176,15 +177,19 @@ app.get('/users', authMw, (request, response) => {
 
 // search pet location
 app.get('/searchlocation/:query', (request, response) => {
-  const query = request.params.query;
-  const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${process.env.API_KEY}`;
-
-  axios.get(url)
+  const query = request.params.query; 
+  const params = new URLSearchParams({
+    access_token: process.env.API_KEY,
+    ...url.parse(request.url, true).query,
+  });
+  const result = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?${params}`;
+  
+  axios.get(result)
     .then(res => {
-      response.status(200).json(res.data)
+        response.status(200).json(res.data)
     })
     .catch(err => {
-      response.status(400).json({ error: err.message })
+      response.status(500).json({ error: err.message })
     });
 });
 
