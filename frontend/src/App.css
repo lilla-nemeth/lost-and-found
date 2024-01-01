@@ -682,6 +682,10 @@ table {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.petProfileMap {
+  height: 250px;
+}
 /* End of PetCards */
 
 .petStatus {
@@ -1683,8 +1687,8 @@ body.modalActive {
 }
 
 /* Pet Report - MapBox */
-.map-container {
-  height: 450px;
+.petReportMap {
+  height: 250px;
 }
 
 .mapboxgl-ctrl-geocoder .suggestions 

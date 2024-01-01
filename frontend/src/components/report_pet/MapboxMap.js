@@ -140,7 +140,7 @@ const MapboxMap = (props) => {
             </div>
             <div 
                 ref={mapContainer} 
-                className='map-container' />
+                className='map-container petReportMap' />
             <div  
                 className='locationContainer' 
                 ref={dropdownRef} 

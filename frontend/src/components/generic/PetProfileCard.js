@@ -8,16 +8,11 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 const PetProfileCard = (props) => {
   const { pet, user } = props;
-
-
-
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [zoom, setZoom] = useState(9);
 
   function renderMap(pet) {
-    console.log(pet)
-
     if (map.current) return;
     map.current = new mapboxgl.Map({
         container: mapContainer.current,
@@ -58,64 +53,68 @@ const PetProfileCard = (props) => {
             />
           </div>
           <div className='petProfileTextBox'>
-                <table className='table'>
-                  <tbody>
-                    <tr>
-                      <td className='tableCell'>
-                        <div className='petStatus'>{pet.petstatus}</div>
-                      </td>
-                      <td className='tableCell'></td>
-                    </tr>
-                    <tr>
-                      <td colSpan='2' className='petSpecies'>
-                        {pet.species}
-                      </td>
-                    </tr>
-                    <tr className='petMainInfo'>
-                      {petDate(pet.petstatus, pet.since, pet.until, 'tableCell')}
-                    </tr>
-                    <tr className='petOptionalInfo'>
-                      {isInputEmpty('Location', pet.petlocation, 'tableCell')}
-                    </tr>
-                  </tbody>
-                </table>
-                <div style={{width: '100%'}}>
-                  <div ref={mapContainer} className="map-container" />
-                </div>
-                <table>
-                  <tbody>
-                    <tr className='petOptionalInfo'>
-                      {isInputEmpty('Size', pet.petsize, 'tableCell')}
-                    </tr>
-                    <tr className='petOptionalInfo'>
-                      {isInputEmpty('Sex', pet.sex, 'tableCell')}
-                    </tr>
-                    <tr className='petOptionalInfo'>
-                      {isInputEmpty('Breed', pet.breed, 'tableCell')}
-                    </tr>
-                    <tr className='petOptionalInfo'>
-                      {isInputEmpty('Color', pet.color, 'tableCell')}
-                    </tr>
-                    <tr className='petOptionalInfo'>
-                      {isInputEmpty('Age', pet.age, 'tableCell')}
-                    </tr>
-                    <tr className='petOptionalInfo'>
-                      {isInputEmpty(
-                        'Unique feature',
-                        pet.uniquefeature,
-                        'tableCell'
-                      )}
-                    </tr>
-                    <tr className='petOptionalInfo'>
-                      {isInputEmpty(
-                        'Description',
-                        pet.postdescription,
-                        'tableCell'
-                      )}
-                    </tr>
-                  {!user ? <></> : <PetUserData user={user} />}
-                  </tbody>
-                </table>
+            <table className='table'>
+              <tbody>
+                <tr>
+                  <td className='tableCell'>
+                    <div className='petStatus'>{pet.petstatus}</div>
+                  </td>
+                  <td className='tableCell'></td>
+                </tr>
+                <tr>
+                  <td colSpan='2' className='petSpecies'>
+                    {pet.species}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div style={{width: '100%'}}>
+              <div ref={mapContainer} className='map-container petProfileMap' />
+            </div>
+            <table>
+              <tbody>
+                <tr>
+                  <td colSpan='2' className='petSpecies'></td>
+                </tr>
+                <tr className='petMainInfo'>
+                  {petDate(pet.petstatus, pet.since, pet.until, 'tableCell')}
+                </tr>
+                <tr className='petOptionalInfo'>
+                  {isInputEmpty('Location', pet.petlocation, 'tableCell')}
+                </tr>
+          
+                <tr className='petOptionalInfo'>
+                  {isInputEmpty('Size', pet.petsize, 'tableCell')}
+                </tr>
+                <tr className='petOptionalInfo'>
+                  {isInputEmpty('Sex', pet.sex, 'tableCell')}
+                </tr>
+                <tr className='petOptionalInfo'>
+                  {isInputEmpty('Breed', pet.breed, 'tableCell')}
+                </tr>
+                <tr className='petOptionalInfo'>
+                  {isInputEmpty('Color', pet.color, 'tableCell')}
+                </tr>
+                <tr className='petOptionalInfo'>
+                  {isInputEmpty('Age', pet.age, 'tableCell')}
+                </tr>
+                <tr className='petOptionalInfo'>
+                  {isInputEmpty(
+                    'Unique feature',
+                    pet.uniquefeature,
+                    'tableCell'
+                  )}
+                </tr>
+                <tr className='petOptionalInfo'>
+                  {isInputEmpty(
+                    'Description',
+                    pet.postdescription,
+                    'tableCell'
+                  )}
+                </tr>
+                {!user ? <></> : <PetUserData user={user} />}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
