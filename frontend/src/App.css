@@ -566,7 +566,6 @@ table {
 .petListTextBox {
   padding: 40px 0 0 0;
   border-top: 0;
-  min-height: 430px;
   overflow-wrap: break-word;
   display: flex;
   flex-direction: column;
@@ -2014,6 +2013,7 @@ body.modalActive {
   .petListCard {
     padding: 0;
     border-radius: var(--radius);
+    min-height: 640px !important;
   }
 
   .petProfileCard,

@@ -80,6 +80,15 @@ export function changeCheckboxValue(array, setArray, value) {
 	}
 }
 
+export function removeOveflowText(text, char) {
+	if (text.length > char) {
+	  return text.split('').slice(0, char).concat(['...']).join('');
+	} else {
+	  return text;
+	}
+};
+
+
 // Error message from frontend:
 // export function requiredFieldsError(field, setter, fieldName) {
 //     if (!field) {
