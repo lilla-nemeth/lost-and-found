@@ -1717,11 +1717,28 @@ body.modalActive {
     margin-top: 10px !important;
 }
 
+.locationContainer {
+  position: relative;
+  width: 100%;
+}
+
+.locationSuggestionContainer {
+  position: absolute;
+  width: inherit;
+
+  /* For more than 5 options */
+  /* overflow-y: scroll;
+  height: 293px; */
+}
+
 .locationInput {
   padding-right: 18px !important;
 }
 
+
 .locationSuggestion {
+  /* display: flex;
+  flex-direction: column; */
   padding: 12px 18px 12px 18px;
   background: var(--clr-white); 
   border-top: solid 1px var(--clr-brown);
