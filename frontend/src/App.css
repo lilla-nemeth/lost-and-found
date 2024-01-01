@@ -1723,8 +1723,13 @@ body.modalActive {
 }
 
 .locationSuggestionContainer {
+  /* margin: 0 -2px -2px -2px; */
   position: absolute;
   width: inherit;
+  border-bottom: solid 1px var(--clr-brown);
+  /* border-right: solid 1px var(--clr-brown);
+  border-bottom: solid 1px var(--clr-brown);
+  border-left: solid 1px var(--clr-brown); */
 
   /* For more than 5 options */
   /* overflow-y: scroll;
@@ -1735,14 +1740,15 @@ body.modalActive {
   padding-right: 18px !important;
 }
 
-
 .locationSuggestion {
   /* display: flex;
   flex-direction: column; */
+  margin: 0;
   padding: 12px 18px 12px 18px;
   background: var(--clr-white); 
   border-top: solid 1px var(--clr-brown);
-  line-height: '82%';
+  border-right: solid 1px var(--clr-brown);
+  border-left: solid 1px var(--clr-brown);
 }
 
 .locationSuggestion:hover {

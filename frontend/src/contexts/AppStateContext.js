@@ -163,6 +163,8 @@ export default function AppStateContextProvider(props) {
         img,
         petstatus,
         petlocation,
+        longitude,
+        latitude,
         species, 
         petsize, 
         breed, 
@@ -180,6 +182,8 @@ export default function AppStateContextProvider(props) {
         data.append('file', img);
         data.append('petstatus', petstatus);
         data.append('petlocation', petlocation);
+        data.append('longitude', longitude);
+        data.append('latitude', latitude);
         data.append('species', species);
         data.append('petsize', petsize);
         data.append('breed', breed);

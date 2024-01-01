@@ -198,6 +198,8 @@ app.put('/editpet/:id', authMw, (request, response) => {
   let id = request.params.id;
   let petstatus = request.body.petstatus;
   let petlocation = request.body.petlocation;
+  let longitude = request.body.longitude;
+  let latitude = request.body.latitude;
   let species = request.body.species;
   let petsize = request.body.petsize;
   let breed = request.body.breed;
@@ -213,6 +215,8 @@ app.put('/editpet/:id', authMw, (request, response) => {
       [
         petstatus,
         petlocation,
+        longitude,
+        latitude,
         species,
         petsize,
         breed,
@@ -381,6 +385,8 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
   let img = request.file.buffer.toString('base64');
   let petstatus = request.body.petstatus;
   let petlocation = request.body.petlocation;
+  let longitude = request.body.longitude;
+  let latitude = request.body.latitude;
   let species = request.body.species;
   let petsize = request.body.petsize;
   let breed = request.body.breed;
@@ -398,6 +404,8 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
         img,
         petstatus,
         petlocation,
+        longitude,
+        latitude,
         species,
         petsize,
         breed,

@@ -40,6 +40,8 @@ const PetReport = () => {
   const [status, setStatus] = useState('');
   const [preview, setPreview] = useState(null);
   const [files, setFiles] = useState([]);
+  const [longitude, setLongitude] = useState('');
+  const [latitude, setLatitude] = useState('');
   const [location, setLocation] = useState('');
   const [species, setSpecies] = useState('');
   const [description, setDescription] = useState('');
@@ -75,6 +77,8 @@ const PetReport = () => {
         img: files,
         petstatus: status,
         petlocation: location,
+        longitude,
+        latitude,
         species,
         petsize: size,
         breed,
@@ -121,6 +125,8 @@ const PetReport = () => {
           setAge('');
           setUniquefeature('');
           setLocation('');
+          setLongitude('');
+          setLatitude('');
           setDescription('');
           setPreview('');
         },
@@ -242,7 +248,10 @@ const PetReport = () => {
               <h2 className='categoryHeadline'>
                 Location {isFieldRequired(required)}
               </h2>
-              <MapboxMap setLocation={setLocation} />
+              <MapboxMap 
+                setLocation={setLocation} 
+                setLongitude={setLongitude} 
+                setLatitude={setLatitude} />
               <TextArea
                 headlineName={`Description ${isFieldRequired(required)}`}
                 id={'description'}

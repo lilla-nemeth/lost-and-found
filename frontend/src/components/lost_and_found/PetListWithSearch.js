@@ -10,6 +10,8 @@ const PetListWithSearch = () => {
 		'id',
 		'petstatus',
 		'petlocation',
+		'longitude',
+		'latitude',
 		'species',
 		'petsize',
 		'breed',

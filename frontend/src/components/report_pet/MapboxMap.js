@@ -19,8 +19,12 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 
 const MapboxMap = (props) => {
-    const { setLocation } = props;
     const { fetchPlaces } = useContext(AppStateContext);
+    const { 
+        setLocation, 
+        setLongitude, 
+        setLatitude 
+    } = props;
     
     // mapContainer renders the map inside a specific DOM element
     // The ref will prevent the map from 
@@ -35,7 +39,7 @@ const MapboxMap = (props) => {
     const [places, setPlaces] = useState([]);
     const [query, setQuery] = useState('');
     const [display, setDisplay] = useState(false);
-    // const [selectedPlace, setSelectedPlace] = useState([]);
+    const [selectedPlace, setSelectedPlace] = useState([]);
     
     const mapStyle = 'mapbox://styles/l1ll4n3m/clqkvquob00mw01o939rncxn5';
 
@@ -140,7 +144,8 @@ const MapboxMap = (props) => {
             <div  
                 className='locationContainer' 
                 ref={dropdownRef} 
-                onClick={displayDropdown}>
+                onClick={displayDropdown}
+                >
                 <div className='inputBox' style={{padding: '10px 0 0 0 !important'}}>
                     <div className='searchButton'>
                         <SearchIcon onChange={handleChange} />
@@ -159,19 +164,21 @@ const MapboxMap = (props) => {
                 <div className='locationSuggestionContainer'>
                     {display && places && places.map(place => {
                         return (
-                            <div 
-                                  
+                            <div
                                 className='locationSuggestion'
                                 key={place.id}
                                 onClick={() => {
                                     setQuery(place.place_name);
-                                    // setSelectedPlace(place), 
-                                    // setLng(place.center[0]);
-                                    // setLat(place.center[1]);
-                                    setCoords(setLng, place.center[0]);
-                                    setCoords(setLat, place.center[1]);
+                                    // setSelectedPlace(place);
+                                    setLng(place.center[0]);
+                                    setLat(place.center[1]);
+                                    // console.log(lng)
+                                    // console.log(lat)
+                                    console.log(place.place_name, place.center[0], place.center[1])
                                     // createMap(lng, lat) 
-                                    setLocation(`${place.center} ~~~ ${place.place_name}`);
+                                    setLongitude(place.center[0])
+                                    setLatitude(place.center[1])
+                                    setLocation(place.place_name);
                                 }}>
                                 <div className='locationSuggestionText'>{place.text}</div>
                                 <p className='locationSuggestionName'>{place.place_name}</p>   
