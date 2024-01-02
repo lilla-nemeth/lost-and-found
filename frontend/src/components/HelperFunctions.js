@@ -87,11 +87,3 @@ export function removeOveflowText(text, char) {
 	  return text;
 	}
 };
-
-
-// Error message from frontend:
-// export function requiredFieldsError(field, setter, fieldName) {
-//     if (!field) {
-//         return setter(`${fieldName} field is empty.`);
-//     }
-// }

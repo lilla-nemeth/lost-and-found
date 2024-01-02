@@ -724,7 +724,7 @@ table {
 .tableCell:first-child {
   font: 600 15px/1.2 'Poppins', sans-serif;
   text-transform: capitalize;
-  width: 110px;
+  width: 105px;
 }
 
 .petProfileButton {

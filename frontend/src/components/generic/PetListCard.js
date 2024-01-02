@@ -38,7 +38,7 @@ const PetListCard = (props) => {
                 {petDate(pet.petstatus, pet.since, pet.until, 'tableCell')}
               </tr>
               <tr className='petMainInfo'>
-                {isInputEmpty('Location', removeOveflowText(pet.petlocation, 17), 'tableCell')}
+                {isInputEmpty('Location', removeOveflowText(pet.petlocation, 14), 'tableCell')}
               </tr>
             </tbody>
           </table>
