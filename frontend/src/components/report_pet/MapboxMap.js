@@ -1,8 +1,6 @@
 import React, { useRef, useEffect, useState, useContext } from 'react';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import TextInput from '../generic/TextInput';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 import { 
     changeCoordsByUser, 
@@ -10,10 +8,8 @@ import {
     addMaker, 
     addFullscreenControl,
     addGeolocateControl,
-    // addGeocoder,
     setCoords
 } from '../MapHelpers';
-// import axios from 'axios';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
@@ -39,7 +35,6 @@ const MapboxMap = (props) => {
     const [places, setPlaces] = useState([]);
     const [query, setQuery] = useState('');
     const [display, setDisplay] = useState(false);
-    const [selectedPlace, setSelectedPlace] = useState([]);
     
     const mapStyle = 'mapbox://styles/l1ll4n3m/clqkvquob00mw01o939rncxn5';
 
@@ -66,19 +61,19 @@ const MapboxMap = (props) => {
         setCoords(setLat, position.coords.latitude);
         createMap(position.coords.longitude, position.coords.latitude);
     }
-
+    
     function fallbackPosition() {
         // Helsinki fallback coords
         const fallbackLng = 24.9344;
         const fallbackLat = 60.1797;
-
+        
         setCoords(setLng, fallbackLng);
         setCoords(setLat, fallbackLat);
         createMap(fallbackLng, fallbackLat);
     }
 
     function createMap(lng, lat) {
-        if (map.current) return;
+        // if (map.current) return;
         map.current = new mapboxgl.Map({
             accessToken: mapboxgl.accessToken,
             container: mapContainer.current,
@@ -86,13 +81,14 @@ const MapboxMap = (props) => {
             center: [lng, lat],
             zoom: zoom
         });
-
-        changeCoordsByUser(map, setLng, setLat, setZoom);
-        addNavigationButtons(map);
+        
+        if (!query) {
+            changeCoordsByUser(map, setLng, setLat, setZoom);
+            addNavigationButtons(map);
+            addFullscreenControl(map);
+            addGeolocateControl(map);
+        }
         addMaker(true, map, lng, lat);
-        addFullscreenControl(map);
-        addGeolocateControl(map);
-        // addGeocoder(map);
 
         // Clean up on unmount
         return () => map.current.remove();
@@ -123,21 +119,20 @@ const MapboxMap = (props) => {
     };
 
     useEffect(() => {
-        getLocation();
+        fetchPlaces(query, setPlaces, lng, lat);
+    }, [query]);
 
+    useEffect(() => {
+        getLocation();
+    }, []);
+
+    useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-    useEffect(() => {
-        fetchPlaces(query, setPlaces, lng, lat);
-    }, [query]);
-
     return (
         <>
-            <div className="sidebar" >
-                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-            </div>
             <div 
                 ref={mapContainer} 
                 className='map-container petReportMap' />
@@ -169,16 +164,12 @@ const MapboxMap = (props) => {
                                 key={place.id}
                                 onClick={() => {
                                     setQuery(place.place_name);
-                                    // setSelectedPlace(place);
                                     setLng(place.center[0]);
                                     setLat(place.center[1]);
-                                    // console.log(lng)
-                                    // console.log(lat)
-                                    console.log(place.place_name, place.center[0], place.center[1])
-                                    // createMap(lng, lat) 
-                                    setLongitude(place.center[0])
-                                    setLatitude(place.center[1])
+                                    setLongitude(place.center[0]);
+                                    setLatitude(place.center[1]);
                                     setLocation(place.place_name);
+                                    createMap(place.center[0], place.center[1])
                                 }}>
                                 <div className='locationSuggestionText'>{place.text}</div>
                                 <p className='locationSuggestionName'>{place.place_name}</p>   

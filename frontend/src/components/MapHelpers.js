@@ -23,7 +23,8 @@ export function addMaker(createProfile, map, lng, lat) {
     new mapboxgl.Marker({ 
         color: 'rgb(34, 102, 96)',
         scale: 1.5,
-        draggable: createProfile ? true : false,
+        draggable: false,
+        // draggable: createProfile ? true : false,
     })
     .setLngLat([lng, lat])
     .addTo(map.current);
