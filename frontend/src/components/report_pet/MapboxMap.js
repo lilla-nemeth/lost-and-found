@@ -146,7 +146,7 @@ const MapboxMap = (props) => {
                         placeholder='search places' 
                         name='places' 
                         id='places' 
-                        type='text'
+                        type='search'
                         value={query}
                         onChange={handleChange}
                         onFocus={(e) => e.target.select()}
