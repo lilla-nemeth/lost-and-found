@@ -17,9 +17,12 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 const MapboxMap = (props) => {
     const { fetchPlaces } = useContext(AppStateContext);
     const { 
-        setLocation, 
-        setLongitude, 
-        setLatitude 
+        query, 
+        setQuery,
+        lng,
+        lat,
+        setLng, 
+        setLat 
     } = props;
     
     // mapContainer renders the map inside a specific DOM element
@@ -28,12 +31,8 @@ const MapboxMap = (props) => {
     const mapContainer = useRef(null);
     const map = useRef(null);
     const dropdownRef = useRef(null);
-
-    const [lng, setLng] = useState(null);
-    const [lat, setLat] = useState(null);
     const [zoom, setZoom] = useState(9);
     const [places, setPlaces] = useState([]);
-    const [query, setQuery] = useState('');
     const [display, setDisplay] = useState(false);
     
     const mapStyle = 'mapbox://styles/l1ll4n3m/clqkvquob00mw01o939rncxn5';
@@ -164,9 +163,6 @@ const MapboxMap = (props) => {
                                     setQuery(place.place_name);
                                     setLng(place.center[0]);
                                     setLat(place.center[1]);
-                                    setLongitude(place.center[0]);
-                                    setLatitude(place.center[1]);
-                                    setLocation(place.place_name);
                                     createMap(place.center[0], place.center[1])
                                 }}>
                                 <div className='locationSuggestionText'>{place.text}</div>

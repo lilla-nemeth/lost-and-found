@@ -40,9 +40,9 @@ const PetReport = () => {
   const [status, setStatus] = useState('');
   const [preview, setPreview] = useState(null);
   const [files, setFiles] = useState([]);
-  const [longitude, setLongitude] = useState('');
-  const [latitude, setLatitude] = useState('');
-  const [location, setLocation] = useState('');
+  const [lng, setLng] = useState(null);
+  const [lat, setLat] = useState(null);
+  const [query, setQuery] = useState('');
   const [species, setSpecies] = useState('');
   const [description, setDescription] = useState('');
   const [optionalInputs, setOptionalInputs] = useState({
@@ -64,7 +64,7 @@ const PetReport = () => {
 
   let DEBUG = false;
 
-  const disabled = !status || !location || !species || !description || !preview || loading;
+  const disabled = !status || !query || !lng || !lat|| !species || !description || !preview || loading;
   const required = true;
 
   function handleSubmit(event) {
@@ -76,9 +76,9 @@ const PetReport = () => {
         token,
         img: files,
         petstatus: status,
-        petlocation: location,
-        longitude,
-        latitude,
+        petlocation: query,
+        longitude: lng,
+        latitude: lat,
         species,
         petsize: size,
         breed,
@@ -124,9 +124,9 @@ const PetReport = () => {
           setColors('');
           setAge('');
           setUniquefeature('');
-          setLocation('');
-          setLongitude('');
-          setLatitude('');
+          setQuery('');
+          setLng('');
+          setLat('');
           setDescription('');
           setPreview('');
         },
@@ -249,9 +249,12 @@ const PetReport = () => {
                 Location {isFieldRequired(required)}
               </h2>
               <MapboxMap 
-                setLocation={setLocation} 
-                setLongitude={setLongitude} 
-                setLatitude={setLatitude} />
+                query={query} 
+                setQuery={setQuery} 
+                lng={lng}
+                lat={lat}
+                setLng={setLng} 
+                setLat={setLat} />
               <TextArea
                 headlineName={`Description ${isFieldRequired(required)}`}
                 id={'description'}
