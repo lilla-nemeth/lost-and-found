@@ -82,12 +82,10 @@ const MapboxMap = (props) => {
             zoom: zoom
         });
         
-        if (!query) {
-            changeCoordsByUser(map, setLng, setLat, setZoom);
-            addNavigationButtons(map);
-            addFullscreenControl(map);
-            addGeolocateControl(map);
-        }
+        changeCoordsByUser(map, setLng, setLat, setZoom);
+        addNavigationButtons(map);
+        addFullscreenControl(map);
+        addGeolocateControl(map);
         addMaker(true, map, lng, lat);
 
         // Clean up on unmount
