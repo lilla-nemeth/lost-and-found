@@ -61,7 +61,6 @@ const PetSearch = (props) => {
   // function handleSubmit(event) {
   //     event.preventDefault();
   // }
-  if (DEBUG) console.log(species);
 
   return (
     <main className='formMain'>

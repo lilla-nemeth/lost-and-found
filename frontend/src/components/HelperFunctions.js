@@ -80,9 +80,10 @@ export function changeCheckboxValue(array, setArray, value) {
 	}
 }
 
-// Error message from frontend:
-// export function requiredFieldsError(field, setter, fieldName) {
-//     if (!field) {
-//         return setter(`${fieldName} field is empty.`);
-//     }
-// }
+export function removeOveflowText(text, char) {
+	if (text.length > char) {
+	  return text.split('').slice(0, char).concat(['...']).join('');
+	} else {
+	  return text;
+	}
+};

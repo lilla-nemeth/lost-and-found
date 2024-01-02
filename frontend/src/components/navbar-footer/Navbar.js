@@ -16,8 +16,6 @@ const Navbar = (props) => {
 
     let DEBUG = false;
 
-    if (DEBUG) console.log('USERNAME NAVBAR', username);
-
     function returnUnprotectedLinks(className) {
         return (
             <>
@@ -66,8 +64,6 @@ const Navbar = (props) => {
             )
         }
     }
-
-    if (DEBUG) console.log('hamburgerOpen', hamburgerOpen);
 
     return (  
         <div>

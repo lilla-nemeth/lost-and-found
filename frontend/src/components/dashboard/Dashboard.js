@@ -44,8 +44,6 @@ const Dashboard = () => {
 
     let disable = !allChecked || loading;
 
-    if (DEBUG) console.log('userPets', userPets);
-
     history.replace('/dashboard');
 
     function deleteUserPet(id) {
@@ -154,8 +152,6 @@ const Dashboard = () => {
             )
         });
     }
-
-    if (DEBUG) console.log('userPets', userPets);
 
     if (loader) {
         return (

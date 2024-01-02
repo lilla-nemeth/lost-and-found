@@ -1,14 +1,45 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { petDate, isInputEmpty } from '../HelperFunctions.js';
 import PetUserData from './PetUserData.js';
+import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import { ReactComponent as LocationMark } from '../../assets/icons/locationmark.svg';
+
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 const PetProfileCard = (props) => {
   const { pet, user } = props;
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const [zoom, setZoom] = useState(9);
 
+  function renderMap(pet) {
+    if (map.current) return;
+    map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/l1ll4n3m/clqkvquob00mw01o939rncxn5',
+        center: [pet.longitude, pet.latitude],
+        zoom: zoom
+    });
+   
+    const marker = new mapboxgl.Marker({
+      color: 'rgb(34, 102, 96)',
+      draggable: false,
+      scale: 1.5
+    })
+    .setLngLat([pet.longitude, pet.latitude])
+    .addTo(map.current);
+
+    const fullscreen = new mapboxgl.FullscreenControl();
+
+    map.current.addControl(marker);
+    map.current.addControl(fullscreen);
+  }
+
+  useEffect(() => {
+    renderMap(pet);
+}, []);
+  
   let DEBUG = false;
-
-  if (DEBUG) console.log(pet.userid);
-  if (DEBUG) console.log('PetProfileCard - user', user);
 
   return (
     <div className='petProfileContainer'>
@@ -35,15 +66,23 @@ const PetProfileCard = (props) => {
                     {pet.species}
                   </td>
                 </tr>
-                <tr className='petMainInfo'>
-                  {isInputEmpty('ID', '#' + pet.id, 'tableCell')}
+              </tbody>
+            </table>
+            <div style={{width: '100%'}}>
+              <div ref={mapContainer} className='map-container petProfileMap' />
+            </div>
+            <table>
+              <tbody>
+                <tr>
+                  <td colSpan='2' className='petSpecies'></td>
                 </tr>
                 <tr className='petMainInfo'>
                   {petDate(pet.petstatus, pet.since, pet.until, 'tableCell')}
                 </tr>
-                <tr className='petMainInfo'>
+                <tr className='petOptionalInfo'>
                   {isInputEmpty('Location', pet.petlocation, 'tableCell')}
                 </tr>
+          
                 <tr className='petOptionalInfo'>
                   {isInputEmpty('Size', pet.petsize, 'tableCell')}
                 </tr>

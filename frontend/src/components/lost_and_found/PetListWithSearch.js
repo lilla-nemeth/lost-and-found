@@ -10,6 +10,8 @@ const PetListWithSearch = () => {
 		'id',
 		'petstatus',
 		'petlocation',
+		'longitude',
+		'latitude',
 		'species',
 		'petsize',
 		'breed',
@@ -21,10 +23,6 @@ const PetListWithSearch = () => {
 	]);
 
 	let DEBUG = false;
-
-	if (DEBUG) console.log('pets arr from PetList', pets);
-	if (DEBUG) console.log('allPets arr from PetList', allPets);
-	if (DEBUG) console.log(allPets[0]);
 
 	// Alternative:
 	// pet.petstatus.toLowerCase().includes(search.toLowerCase())
@@ -41,14 +39,14 @@ const PetListWithSearch = () => {
 							return <PetListCard key={pet.id} pet={pet} />;
 					  })
 					: allPets
-							.filter((filteredPet) => {
-								if (searchColumns.some((column) => filteredPet[column].toString().toLowerCase().indexOf(search.toLowerCase()) > -1)) {
-									return filteredPet;
-								}
-							})
-							.map((pet) => {
-								return <PetListCard key={pet.id} pet={pet} />;
-							})}
+					.filter((filteredPet) => {
+						if (searchColumns.some((column) => filteredPet[column].toString().toLowerCase().indexOf(search.toLowerCase()) > -1)) {
+							return filteredPet;
+						}
+					})
+					.map((pet) => {
+						return <PetListCard key={pet.id} pet={pet} />;
+					})}
 			</div>
 		</>
 	);

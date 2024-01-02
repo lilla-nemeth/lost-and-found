@@ -27,9 +27,6 @@ const PetsFromAllPets = () => {
   // button is disabled if the checkbox is unchecked:
   let disabled = !checked;
 
-  // if (DEBUG) console.log('PetsFromAllPets - allPets', allPets);
-  // if (DEBUG) console.log('PetsFromAllPets - users', users);
-
   function deleteUsersPet(id) {
     deleteOnePet({
       id,
@@ -72,14 +69,10 @@ const PetsFromAllPets = () => {
     //     }
     // }
 
-    if (DEBUG) console.log(filteredPets);
-
     return filteredPets.map((pet) => {
       return <PetListCard key={pet.id} pet={pet} />;
     });
   }
-
-  if (DEBUG) console.log(listUsersPets(allPets, users, username));
 
   return (
     <main className='petMain'>

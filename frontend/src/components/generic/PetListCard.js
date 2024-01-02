@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { petDate, isInputEmpty } from '../HelperFunctions.js';
+import { petDate, isInputEmpty, removeOveflowText } from '../HelperFunctions.js';
 
 const PetListCard = (props) => {
   const { pet } = props;
 
   let DEBUG = false;
-
-  if (DEBUG) console.log(pet);
 
   return (
     <div className='petListCard' key={pet.id}>
@@ -40,7 +38,7 @@ const PetListCard = (props) => {
                 {petDate(pet.petstatus, pet.since, pet.until, 'tableCell')}
               </tr>
               <tr className='petMainInfo'>
-                {isInputEmpty('Location', pet.petlocation, 'tableCell')}
+                {isInputEmpty('Location', removeOveflowText(pet.petlocation, 14), 'tableCell')}
               </tr>
             </tbody>
           </table>

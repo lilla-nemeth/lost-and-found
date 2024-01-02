@@ -2,7 +2,7 @@ import React from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
 const ImageUpload = (props) => {
-  const { files, setFiles, preview, setPreview } = props;
+  const { setFiles, preview, setPreview } = props;
 
   let DEBUG = false;
 
@@ -10,9 +10,6 @@ const ImageUpload = (props) => {
     setFiles(event.target.files[0]);
     setPreview(URL.createObjectURL(event.target.files[0]));
   }
-
-  if (DEBUG) console.log('files from ImageUpload', files);
-  if (DEBUG) console.log('files.length from ImageUpload', files.length);
 
   return (
     <>

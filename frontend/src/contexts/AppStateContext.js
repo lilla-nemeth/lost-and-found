@@ -73,7 +73,6 @@ export default function AppStateContextProvider(props) {
             });
     },[limit, offset]);
 
-    if (DEBUG) console.log(pets);
     useEffect(() => {
         getAllPets({
             successCallback: res => {
@@ -86,14 +85,9 @@ export default function AppStateContextProvider(props) {
         });  
     },[]);
 
-    if (DEBUG) console.log('token - AppStateContext', token);
-    if (DEBUG) console.log('users arr - AppStateContext', users);
-    if (DEBUG) console.log('pets arr - AppStateContext', pets);
-    if (DEBUG) console.log('allPets arr - AppStateContext', allPets);
-
     function registerUser({email, username, phone, pw, successCallback, successTimeout, errorCallback}) {
         
-        let options = {
+        const options = {
             method: 'post',
             url: '/register',
             data: {
@@ -114,7 +108,7 @@ export default function AppStateContextProvider(props) {
 
     function loginUser({setToken, email, pw, successCallback, errorCallback}) {
 
-        let options = {
+        const options = {
             method: 'post',
             url: '/login',
             mode: 'cors',
@@ -145,7 +139,7 @@ export default function AppStateContextProvider(props) {
 
     function getUsername({token, errorCallback}) {
 
-        let options = {
+        const options = {
             method: 'get',
             url: '/username',
             mode: 'cors',
@@ -169,6 +163,8 @@ export default function AppStateContextProvider(props) {
         img,
         petstatus,
         petlocation,
+        longitude,
+        latitude,
         species, 
         petsize, 
         breed, 
@@ -186,6 +182,8 @@ export default function AppStateContextProvider(props) {
         data.append('file', img);
         data.append('petstatus', petstatus);
         data.append('petlocation', petlocation);
+        data.append('longitude', longitude);
+        data.append('latitude', latitude);
         data.append('species', species);
         data.append('petsize', petsize);
         data.append('breed', breed);
@@ -195,7 +193,7 @@ export default function AppStateContextProvider(props) {
         data.append('uniquefeature', uniquefeature);
         data.append('postdescription', postdescription);
 
-        let options = {
+        const options = {
             method: 'post',
             url: '/reportpet',
             mode: 'cors',
@@ -217,7 +215,7 @@ export default function AppStateContextProvider(props) {
     }
 
     function fetchPets({limit, offset, successCallback, errorCallback}) {
-        let options = {
+        const options = {
             method: 'get',
             url: `/pets/${limit}/${offset}`,
             mode: 'cors',        
@@ -235,7 +233,7 @@ export default function AppStateContextProvider(props) {
     }
     
     function getNumberOfPets({successCallback, errorCallback}) {
-        let options = {
+        const options = {
             method: 'get',
             url: '/pets/total',
             mode: 'cors',        
@@ -254,7 +252,7 @@ export default function AppStateContextProvider(props) {
  
     function getAllPets({successCallback, errorCallback}) {
 
-        let options = {
+        const options = {
             method: 'get',
             url: '/allpets',
             mode: 'cors',
@@ -272,7 +270,7 @@ export default function AppStateContextProvider(props) {
     }
 
     function getUserPets({token, successCallback, errorCallback}) {
-        let options = {
+        const options = {
             method: 'get',
             url: '/userpets',
             mode: 'cors',
@@ -294,7 +292,7 @@ export default function AppStateContextProvider(props) {
 
 
     function getUsers({token, successCallback, errorCallback}) {
-        let options = {
+        const options = {
             method: 'get',
             url: '/users',
             mode: 'cors',
@@ -315,7 +313,7 @@ export default function AppStateContextProvider(props) {
     }
 
     function deleteOnePet({id, token, successCallback, successTimeout, errorCallback}) {
-        let options = {
+        const options = {
             method: 'delete',
             url: `/deletepet/${id}`,
             mode: 'cors',
@@ -337,7 +335,7 @@ export default function AppStateContextProvider(props) {
     }
 
     function deleteAllPets({token, successCallback, successTimeout, errorCallback}) {
-        let options = {
+        const options = {
             method: 'delete',
             url: '/deleteallpets',
             mode: 'cors',
@@ -358,8 +356,35 @@ export default function AppStateContextProvider(props) {
         );
     }
 
+    function fetchPlaces(query, setter, lng, lat) {
+        const params = new URLSearchParams({
+            fuzzyMatch: true,
+            language: 'en',
+            limit: 5,
+            proximity: lng && lat ? `${lng}, ${lat}` : '0,0',
+        });
+
+        const options = {
+            method: 'get',
+            url: `/locationsearch/${query}?${params}`,
+            mode: 'cors',        
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        axios(options)
+        .then(res => {
+            if (query) {
+                setter(res.data.features);
+            }
+        })
+        .catch(
+            err => console.log(err)
+        )
+    }
+
     return (
-        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, users, userPets, setUserPets, reportPet, fetchPets, getNumberOfPets, allPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader, deleteOnePet, deleteAllPets, getUserPets, getAllPets, setAllPets}}>
+        <AppStateContext.Provider value={{registerUser, loginUser, getUsername, username, users, userPets, setUserPets, reportPet, fetchPets, getNumberOfPets, allPets, pets, setPets, total, setTotal, offset, setOffset, limit, loader, deleteOnePet, deleteAllPets, getUserPets, getAllPets, setAllPets, fetchPlaces}}>
             { props.children }
         </AppStateContext.Provider>
     )

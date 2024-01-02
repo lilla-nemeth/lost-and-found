@@ -132,7 +132,8 @@ table {
   --clr-white: rgb(255, 255, 255);
   --clr-lightgrey: rgb(221, 221, 221);
   --clr-lightaquamarine: rgba(129, 180, 175, 0.2);
-  --clr-palebrown: rgb(244, 242, 234);
+  --clr-lightbrown: rgb(244, 242, 234);
+  --clr-darkbrown: rgb(145, 141, 128);
   --clr-brown: rgb(208 203 184);
   --clr-black: rgb(0, 0, 0);
   --clr-aquamarine: rgb(176, 240, 235);
@@ -233,7 +234,7 @@ table {
 }
 
 .footerWithoutPicture {
-  background: var(--clr-palebrown);
+  background: var(--clr-lightbrown);
   color: var(--clr-brown);
   width: 100%;
   position: absolute;
@@ -338,7 +339,7 @@ table {
 }
 
 .sidebarActiveLink:hover {
-  background: var(--clr-palebrown);
+  background: var(--clr-lightbrown);
   border-bottom: 3px solid var(--clr-green);
   z-index: 1;
 }
@@ -372,7 +373,7 @@ table {
   padding: 22.5px;
   text-decoration: none;
   font: var(--font-standard);
-  background: var(--clr-palebrown);
+  background: var(--clr-lightbrown);
   width: 100vw;
 }
 
@@ -520,7 +521,7 @@ table {
 /* Lost & Found */
 .petMain {
   font-family: var(--font-family);
-  background: var(--clr-palebrown);
+  background: var(--clr-lightbrown);
   overflow: hidden;
   min-height: 100vh;
   width: 100%;
@@ -559,17 +560,16 @@ table {
   margin-right: 20px;
   margin-left: 20px;
   width: 25%;
-  height: fit-content;
+  height: 600px;
 }
 
 .petListTextBox {
   padding: 40px 0 0 0;
   border-top: 0;
-  min-height: 430px;
   overflow-wrap: break-word;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
 }
 
 .petListPictureContainer {
@@ -682,6 +682,10 @@ table {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.petProfileMap {
+  height: 250px;
+}
 /* End of PetCards */
 
 .petStatus {
@@ -720,7 +724,7 @@ table {
 .tableCell:first-child {
   font: 600 15px/1.2 'Poppins', sans-serif;
   text-transform: capitalize;
-  width: 110px;
+  width: 105px;
 }
 
 .petProfileButton {
@@ -988,7 +992,7 @@ input[type='checkbox']:checked ~ label {
   top: 0;
   border: 2px solid var(--clr-brown);
   padding: 3px;
-  background: var(--clr-palebrown);
+  background: var(--clr-lightbrown);
   border-radius: var(--radius-button);
 }
 
@@ -1505,14 +1509,8 @@ input[type='checkbox']:checked ~ label {
 }
 
 .searchButton {
-  cursor: pointer;
   background: none;
   fill: var(--clr-brown);
-}
-
-.searchButton:hover {
-  fill: var(--clr-darkgreen);
-  transition: fill 0.2s linear;
 }
 
 .formInput {
@@ -1550,7 +1548,7 @@ input[type='checkbox']:checked ~ label {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: var(--clr-palebrown);
+  background: var(--clr-lightbrown);
 }
 
 #loader {
@@ -1689,48 +1687,86 @@ body.modalActive {
 }
 
 /* Pet Report - MapBox */
-.map-container {
-  height: 450px;
+.petReportMap {
+  height: 250px;
 }
 
-.mapboxgl-ctrl-geocoder {
-  display: flex;
-  width: 400px !important;
-}
-
-.mapboxgl-ctrl-geocoder {
-  width: 120% !important;
+.mapboxgl-ctrl-geocoder .suggestions 
+> .active 
+> a, 
+.mapboxgl-ctrl-geocoder .suggestions 
+> li 
+> a:hover {
+  width: 100%;
 }
 
 .mapboxgl-ctrl-geocoder--input {
-  padding: unset !important;
-  height: auto !important;
-  width: unset !important;
-  border-bottom: 2px solid rgb(34, 102, 96);
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  background: none;
-  font: var(--font-thin) !important;
-  text-transform: capitalize;
+  padding: 25px 40px !important;
 }
 
+.mapboxgl-ctrl-geocoder--icon-search {
+  width: 28px !important;
+  height: 35px !important;
+}
+.mapboxgl-ctrl-geocoder {
+  width: 300px !important;
+}
 .mapboxgl-ctrl-geocoder--icon,
 .mapboxgl-ctrl-geocoder--icon-search {
-  margin: 12px;
-  width: 30px !important;
-  height: 30px !important;
-  padding: 0;
-  position: unset !important;
-  cursor: pointer;
-  background: none;
   fill: var(--clr-brown) !important;
 }
 
-.mapboxgl-ctrl-geocoder--icon:hover,
-.mapboxgl-ctrl-geocoder--icon-search:hover {
-  fill: var(--clr-darkgreen);
-  transition: fill 0.2s linear;
+.mapboxgl-ctrl-geocoder--icon-close {
+    margin-top: 10px !important;
+}
+
+.locationContainer {
+  position: relative;
+  width: 100%;
+}
+
+.locationSuggestionContainer {
+  /* margin: 0 -2px -2px -2px; */
+  position: absolute;
+  width: inherit;
+  border-bottom: solid 1px var(--clr-brown);
+  /* border-right: solid 1px var(--clr-brown);
+  border-bottom: solid 1px var(--clr-brown);
+  border-left: solid 1px var(--clr-brown); */
+
+  /* For more than 5 options */
+  /* overflow-y: scroll;
+  height: 293px; */
+}
+
+.locationInput {
+  padding-right: 18px !important;
+}
+
+.locationSuggestion {
+  /* display: flex;
+  flex-direction: column; */
+  margin: 0;
+  padding: 12px 18px 12px 18px;
+  background: var(--clr-white); 
+  border-top: solid 1px var(--clr-brown);
+  border-right: solid 1px var(--clr-brown);
+  border-left: solid 1px var(--clr-brown);
+}
+
+.locationSuggestion:hover {
+  background-color: var(--clr-lightbrown);
+  cursor: pointer;
+}
+
+.locationSuggestionText {
+  font-size: 13px;
+}
+
+.locationSuggestionName {
+  color: var(--clr-darkbrown); 
+  padding-top: 8px; 
+  font-size: 13px;
 }
 
 /* Media Queries */
@@ -1981,6 +2017,7 @@ body.modalActive {
   .petListCard {
     padding: 0;
     border-radius: var(--radius);
+    min-height: 640px !important;
   }
 
   .petProfileCard,
@@ -2331,7 +2368,7 @@ body.modalActive {
   .petListCard {
     padding: 50px;
     width: 15%;
-    height: fit-content;
+    height: 600px;
   }
 
   .userPet,

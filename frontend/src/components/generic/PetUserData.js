@@ -8,20 +8,15 @@ const PetUserData = (props) => {
 
         return (
             <>
-                <td className='tableCell' style={{paddingTop: '50px'}}>
-                </td>
-                    <tr className='petOptionalInfo'>
-                        {isInputEmpty('user ID', ('#' + user.id), 'tableCell')}
-                    </tr>
-                    <tr className='petOptionalInfo'>
-                        {isInputEmpty('user', (user.username), 'tableCell')}
-                    </tr>
-                    <tr className='petOptionalInfo'>
-                        {isInputEmpty('email', (user.email), 'tableCell')}
-                    </tr>
-                    <tr className='petOptionalInfo'>
-                        {isInputEmpty('phone', (user.phone), 'tableCell')}
-                    </tr>
+                <tr className='petOptionalInfo'>
+                    {isInputEmpty('uploader', (user.username), 'tableCell')}
+                </tr>
+                <tr className='petOptionalInfo'>
+                    {isInputEmpty('email', (user.email), 'tableCell')}
+                </tr>
+                <tr className='petOptionalInfo'>
+                    {isInputEmpty('phone', (user.phone), 'tableCell')}
+                </tr>
             </>
         )
 }

@@ -16,10 +16,6 @@ const PetProfile = () => {
 
     let DEBUG = false;
 
-    if (DEBUG) console.log('pets array PetProfile', pets);
-    if (DEBUG) console.log('users from PetProfile', users);
-
-
     function getPetAndUserData(id, petArr, userArr) {
         if (token && userArr.length > 0) {
             for (let i = 0; i < petArr.length; i++) {
@@ -40,12 +36,7 @@ const PetProfile = () => {
         }
     }
 
-    if (DEBUG) console.log(getPetAndUserData(id, pets, users));
-
     history.replace(`/petprofile/${id}`);
-
-    if (DEBUG) console.log('typeof id', typeof id)
-    if (DEBUG) console.log('id', id)
 
     if (loader) {
         return (

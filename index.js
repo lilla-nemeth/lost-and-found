@@ -5,6 +5,8 @@ const { Pool } = require('pg');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const path = require('path');
+const axios = require('axios');
+let url = require('url');
 require('dotenv').config();
 
 const { 
@@ -173,11 +175,31 @@ app.get('/users', authMw, (request, response) => {
     .catch((err) => response.status(400).json({ msg: ERROR_MSG_FETCH_USER }));
 });
 
+// search pet location
+app.get('/locationsearch/:query', (request, response) => {
+  const query = request.params.query; 
+  const params = new URLSearchParams({
+    access_token: process.env.API_KEY,
+    ...url.parse(request.url, true).query,
+  });
+  const result = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?${params}`;
+  
+  axios.get(result)
+    .then(res => {
+        response.status(200).json(res.data)
+    })
+    .catch(err => {
+      response.status(500).json({ error: err.message })
+    });
+});
+
 // edit pet by user (user dashboard)
 app.put('/editpet/:id', authMw, (request, response) => {
   let id = request.params.id;
   let petstatus = request.body.petstatus;
   let petlocation = request.body.petlocation;
+  let longitude = request.body.longitude;
+  let latitude = request.body.latitude;
   let species = request.body.species;
   let petsize = request.body.petsize;
   let breed = request.body.breed;
@@ -193,6 +215,8 @@ app.put('/editpet/:id', authMw, (request, response) => {
       [
         petstatus,
         petlocation,
+        longitude,
+        latitude,
         species,
         petsize,
         breed,
@@ -361,6 +385,8 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
   let img = request.file.buffer.toString('base64');
   let petstatus = request.body.petstatus;
   let petlocation = request.body.petlocation;
+  let longitude = request.body.longitude;
+  let latitude = request.body.latitude;
   let species = request.body.species;
   let petsize = request.body.petsize;
   let breed = request.body.breed;
@@ -378,6 +404,8 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
         img,
         petstatus,
         petlocation,
+        longitude,
+        latitude,
         species,
         petsize,
         breed,

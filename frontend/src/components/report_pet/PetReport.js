@@ -6,19 +6,15 @@ import { handleError, clearError } from '../HelperFunctions.js';
 import { isFieldRequired } from '../HelperFunctions.js';
 import PetReportOptionalData from './PetReportOptionalData';
 import { ReactComponent as ArrowDown } from '../../assets/icons/togglearrow.svg';
-import Loader from '../generic/Loader';
-import LoaderButton from '../generic/LoaderButton';
+import ImageUpload from './ImageUpload';
+import MapboxMap from './MapboxMap.js';
 
 // generic components:
+import Loader from '../generic/Loader';
+import LoaderButton from '../generic/LoaderButton';
 import RadioButton from '../generic/RadioButton';
 import TextInput from '../generic/TextInput';
 import TextArea from '../generic/TextArea';
-
-import ImageUpload from './ImageUpload';
-// import LocationSearch from './unused/LocationSearch';
-// import MapboxMap from './unused/MapboxMap';
-// import DragnDropZone from './unused/DragnDropZone';
-// import DropZoneTest from './unused/DropZoneTest';
 
 // petstatusOptions -> reunited option comes later with post editing:
 
@@ -44,21 +40,20 @@ const PetReport = () => {
   const [status, setStatus] = useState('');
   const [preview, setPreview] = useState(null);
   const [files, setFiles] = useState([]);
-  const [location, setLocation] = useState('');
+  const [lng, setLng] = useState(null);
+  const [lat, setLat] = useState(null);
+  const [query, setQuery] = useState('');
   const [species, setSpecies] = useState('');
   const [description, setDescription] = useState('');
-
   const [optionalInputs, setOptionalInputs] = useState({
     display: 'hideInputs',
   });
-
   const [size, setSize] = useState('');
   const [breed, setBreed] = useState('');
   const [sex, setSex] = useState('');
   const [colors, setColors] = useState([]);
   const [age, setAge] = useState('');
   const [uniquefeature, setUniquefeature] = useState('');
-
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [successButtonMsg, setSuccessButtonMsg] = useState('');
@@ -69,15 +64,11 @@ const PetReport = () => {
 
   let DEBUG = false;
 
-  let disabled =
-    !status || !location || !species || !description || !preview || loading;
-
-  let required = true;
+  const disabled = !status || !query || !lng || !lat|| !species || !description || !preview || loading;
+  const required = true;
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    if (DEBUG) console.log('files - PetReport', files);
 
     if (!disabled) {
       setLoading(true);
@@ -85,7 +76,9 @@ const PetReport = () => {
         token,
         img: files,
         petstatus: status,
-        petlocation: location,
+        petlocation: query,
+        longitude: lng,
+        latitude: lat,
         species,
         petsize: size,
         breed,
@@ -131,7 +124,9 @@ const PetReport = () => {
           setColors('');
           setAge('');
           setUniquefeature('');
-          setLocation('');
+          setQuery('');
+          setLng('');
+          setLat('');
           setDescription('');
           setPreview('');
         },
@@ -214,7 +209,6 @@ const PetReport = () => {
               </ul>
             </div>
             <ImageUpload
-              files={files}
               setFiles={setFiles}
               preview={preview}
               setPreview={setPreview}
@@ -251,30 +245,27 @@ const PetReport = () => {
                   onChange={(event) => setSpecies(event.target.value)}
                 />
               </ul>
-            </div>
-            <div className='filterBox'>
               <h2 className='categoryHeadline'>
                 Location {isFieldRequired(required)}
               </h2>
-              <TextInput
-                id={'location'}
-                name={'location'}
-                type={'text'}
-                value={location}
-                placeholder={'Location'}
-                onChange={(event) => setLocation(event.target.value)}
+              <MapboxMap 
+                query={query} 
+                setQuery={setQuery} 
+                lng={lng}
+                lat={lat}
+                setLng={setLng} 
+                setLat={setLat} />
+              <TextArea
+                headlineName={`Description ${isFieldRequired(required)}`}
+                id={'description'}
+                name={description}
+                value={description}
+                placeholder={'Description'}
+                rows={'6'}
+                cols={'10'}
+                onChange={(event) => setDescription(event.target.value)}
               />
             </div>
-            <TextArea
-              headlineName={`Description ${isFieldRequired(required)}`}
-              id={'description'}
-              name={description}
-              value={description}
-              placeholder={'Description'}
-              rows={'6'}
-              cols={'10'}
-              onChange={(event) => setDescription(event.target.value)}
-            />
             <div
               className='optionalButton'
               onClick={() => showOptionalInputs()}

@@ -12,8 +12,6 @@ const PetListWithFilters = () => {
 
     let DEBUG = false;
 
-    if (DEBUG) console.log(species);
-
     return (  
         <>
             <div className='petListContainer'>

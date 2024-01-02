@@ -58,8 +58,6 @@ const Register = () => {
     }
   }
 
-  if (DEBUG) console.log('errorMsg', errorMsg);
-
   return (
     <main className='formMain'>
       <BackgroundImages />
