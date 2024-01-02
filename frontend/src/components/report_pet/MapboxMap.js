@@ -72,7 +72,6 @@ const MapboxMap = (props) => {
     }
 
     function createMap(lng, lat) {
-        // if (map.current) return;
         map.current = new mapboxgl.Map({
             accessToken: mapboxgl.accessToken,
             container: mapContainer.current,
