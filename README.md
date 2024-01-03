@@ -1,33 +1,19 @@
 # Lost and Found
 
-Lost and Found is an application, where everyone can search from missing pets. Registrated users are also allowed to create pet profiles and perform other tasks. Created with Node.js, Express, PostgreSQL, JavaScript, Mapbox and React with custom UI.
+Lost and Found is an application, where everyone can search from missing pets. Registrated users are also allowed to create pet profiles and perform other tasks. 
+
+🛠 Created with Node.js, Express, PostgreSQL, JavaScript, Mapbox and React with custom UI.
 
 ## Features
 
-### Main
 - Registration
 - Login/Log out
-
-### For all users
 - Fetch all lost and found pets
 - Search pet from all pets
-
-### Pet profile creation for registrated users
 - Uploading image
 - Searching pet location with Mapbox map and its Geocoding API
 - Form submission (pet report) with required and optional data
-
-### Dashboard for registrated users
 - Deleting own pet profiles (all and one by one)
-
-## Future of the project
-
-### Dashboard
-- Updating pet profiles - "reunited" pet category
-- User profile with picture uploading
-
-### Other
-- Incorporating already written search queries
 
 ## Installing, running locally  
 
@@ -55,7 +41,7 @@ Run the server
 nodemon index.js
 ```
 Server is running on port 3003
-</br></br>
+
 ### Client
 
 Go to the frontend folder
@@ -73,6 +59,35 @@ Start the client
 npm start
 ```
 
+## Environment Variables
+
+To run this app, you need to add the following environment variables to your .env file
+
+### Server
+
+#### Mapbox API Key
+
+`API_KEY`
+
+#### Postgres
+
+`PG_HOST`
+`PG_USER`
+`PG_PASSWORD`
+`PG_PORT`
+`PG_DATABASE`
+
+### Client
+
+#### Mapbox API Key
+`REACT_APP_MAPBOX_API_KEY`
+
 ## License
 
 MIT
+
+## Screenshots
+
+![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/frontend/src/assets/images/screenshots/app_screenshot_00.png)
+
+![Pet List](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/frontend/src/assets/images/screenshots/app_screenshot_05.png)
