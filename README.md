@@ -4,6 +4,10 @@ Lost and Found is an application, where everyone can search from missing pets. R
 
 🛠 Created with Node.js, Express, PostgreSQL, JavaScript, Mapbox and React with custom UI.
 
+![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/dbab47a1f3516893ec324a86fd9e7550202a1407/frontend/src/assets/images/screenshots/app_screenshot_00.png)
+
+![Pet List](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/dbab47a1f3516893ec324a86fd9e7550202a1407/frontend/src/assets/images/screenshots/app_screenshot_05.png)
+
 ## Features
 
 - Registration
@@ -85,9 +89,3 @@ To run this app, you need to add the following environment variables to your .en
 ## License
 
 MIT
-
-## Screenshots
-
-![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/frontend/src/assets/images/screenshots/app_screenshot_00.png)
-
-![Pet List](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/frontend/src/assets/images/screenshots/app_screenshot_05.png)
