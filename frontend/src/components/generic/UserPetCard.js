@@ -89,9 +89,6 @@ const UserPetCard = (props) => {
                   </td>
                 </tr>
                 <tr className='petMainInfo'>
-                  {isInputEmpty('ID', '#' + pet.id, 'tableCell')}
-                </tr>
-                <tr className='petMainInfo'>
                   {petDate(pet.petstatus, pet.since, pet.until, 'tableCell')}
                 </tr>
                 <tr className='petMainInfo'>
