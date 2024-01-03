@@ -90,8 +90,4 @@ MIT
 
 ![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/frontend/src/assets/images/screenshots/app_screenshot_00.png)
 
-![Report Pet](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/frontend/src/assets/images/screenshots/app_screenshot_01.png)
-
-![Pet Profile](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/frontend/src/assets/images/screenshots/app_screenshot_04.png)
-
-![Pet List](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/frontend/src/assets/images/screenshots/app_screenshot_04.png)
+![Pet List](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/frontend/src/assets/images/screenshots/app_screenshot_05.png)
