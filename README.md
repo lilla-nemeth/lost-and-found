@@ -88,7 +88,7 @@ MIT
 
 ## Screenshots
 
-![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/frontend/src/assets/images/screenshots/app_screenshot_00.png)
+![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/adding-screenshots-to-the-readme/frontend/src/assets/images/screenshots/app_screenshot_00.png)
 
 ![Report Pet](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/frontend/src/assets/images/screenshots/app_screenshot_01.png)
 
