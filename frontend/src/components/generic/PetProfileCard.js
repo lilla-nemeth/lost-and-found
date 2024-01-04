@@ -1,42 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { petDate, isInputEmpty } from '../HelperFunctions.js';
 import PetUserData from './PetUserData.js';
-import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 const PetProfileCard = (props) => {
-  const { pet, user } = props;
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [zoom, setZoom] = useState(9);
-
-  function renderMap(pet) {
-    if (map.current) return;
-    map.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/l1ll4n3m/clqkvquob00mw01o939rncxn5',
-        center: [pet.longitude, pet.latitude],
-        zoom: zoom
-    });
-   
-    const marker = new mapboxgl.Marker({
-      color: 'rgb(34, 102, 96)',
-      draggable: false,
-      scale: 1.5
-    })
-    .setLngLat([pet.longitude, pet.latitude])
-    .addTo(map.current);
-
-    const fullscreen = new mapboxgl.FullscreenControl();
-
-    map.current.addControl(marker);
-    map.current.addControl(fullscreen);
-  }
+  const { pet, user, renderMap, mapContainer } = props;
 
   useEffect(() => {
     renderMap(pet);
-}, []);
+  }, [pet]);
   
   let DEBUG = false;
 
