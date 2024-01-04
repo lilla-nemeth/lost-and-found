@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { AuthContext } from './contexts/AuthContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
+import './style/App.css';
 import ScrollToTop from './components/ScrollToTop';
 import Video from './assets/video/dogvideo.mp4';
 import img01 from './assets/images/01backgroundImg.jpg';
