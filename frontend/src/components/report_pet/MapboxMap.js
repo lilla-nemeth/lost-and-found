@@ -5,7 +5,7 @@ import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 import { 
     changeCoordsByUser, 
     addNavigationButtons, 
-    addMaker, 
+    addMarker, 
     addFullscreenControl,
     addGeolocateControl,
     setCoords
@@ -25,9 +25,6 @@ const MapboxMap = (props) => {
         setLat 
     } = props;
     
-    // mapContainer renders the map inside a specific DOM element
-    // The ref will prevent the map from 
-    // reloading when the user interacts with the map
     const mapContainer = useRef(null);
     const map = useRef(null);
     const dropdownRef = useRef(null);
@@ -84,7 +81,7 @@ const MapboxMap = (props) => {
         addNavigationButtons(map);
         addFullscreenControl(map);
         addGeolocateControl(map);
-        addMaker(true, map, lng, lat);
+        addMarker(map, lng, lat);
 
         // Clean up on unmount
         return () => map.current.remove();

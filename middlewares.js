@@ -9,9 +9,7 @@ function authMw(request, response, next) {
     if (token) {
         jwt.verify(token, 'r4uqSKqC6L', (err, decodedToken) => {
             if (decodedToken) {
-                // userId = id from the token:
                 request.userId = decodedToken.id;
-                // add isadmin status to the token (false/true):
                 request.isadmin = decodedToken.isadmin;
                 next();
             } else {
@@ -37,8 +35,6 @@ function isFormValid(request, response, next) {
     const pwLowercase = /^(?=.*[a-z])/; 
     const pwDigit =  /^(?=.*\d)/; 
     const pwAllowedSpecialCharacters = /^(?=.*[§đ½¡”»£¤«“‰„‚\/\\°¿´˛¸€ÞþıŒœ ̛˚˝¯¨əßÐðĸøØÆæ'˘><Ʒʒ·×Ŋŋ—µ,‘’˙–~@#$%^&*+=`|{}:;!.?_\"()\[\]-])/;
-    // const pwAllowedSpecialCharacters = /^(?=.*[!#$@^%&?*+,-.:;])/;
-    // const pwAllowedSpecialCharacters = /^(?=.*[!#$@^%&?*+,-.\/:;<=>_`{|}~])/;
     
     let validByEmailRegex = emailRegex.test(email);
     let emailParts = email.split("@");
@@ -50,7 +46,6 @@ function isFormValid(request, response, next) {
     let isContainLowercase = pwLowercase.test(password);
     let isContainDigit = pwDigit.test(password);
     let isContainSpecialCharacter = pwAllowedSpecialCharacters.test(password);
-
     let message = '';
 
     if (!username && !phone) {
@@ -114,44 +109,7 @@ function isFormValid(request, response, next) {
     }
 }
 
-    // Multer file storage - V1:
-    const fileStorageEngine = multer.diskStorage({
-        destination: (request, file, callback) => {
-            callback(null, './images')
-        },
-        filename: (request, file, callback) => {
-            callback(null, Date.now() + '--' + file.originalname)
-        }
-    });
-
-    // Multer file storage - V2:
-    // const fileStorageEngine = multer.diskStorage({
-    //     destination: './images',
-    //     filename: function(request, file, callback) {
-    //         callback(null, file.fieldname + '--' + Date.now() + 
-    //         path.extname(file.originalname));
-    //     }
-    // })
-
-    const fileFilter = (request, file, callback) => {
-        // reject a file
-        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-            callback(new Error('message'), true);      
-        } else {
-            callback(null, false);
-        }
-    };
-
-    // Multer object - single
-    // const upload = multer({ 
-    //     storage: fileStorageEngine,
-    //     limits: {
-    //         fileSize: 1024 * 1024 * 5
-    //     },
-    //     // fileFilter: fileFilter
-    // });
-
-    const upload = multer();
+const upload = multer();
 
 module.exports = {
     authMw,

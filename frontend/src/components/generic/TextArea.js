@@ -1,7 +1,16 @@
 import React from 'react';
 
 const TextArea = (props) => {
-    const { headlineName, id, name, value, placeholder, rows, cols, onChange } = props;
+    const { 
+        headlineName, 
+        id, 
+        name, 
+        value, 
+        placeholder, 
+        rows, 
+        cols, 
+        onChange 
+    } = props;
 
     let DEBUG = false;
 

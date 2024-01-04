@@ -19,12 +19,11 @@ export function addNavigationButtons(map) {
     map.current.addControl(nav, 'bottom-right');
 }
 
-export function addMaker(createProfile, map, lng, lat) {
+export function addMarker(map, lng, lat) {
     new mapboxgl.Marker({ 
         color: 'rgb(34, 102, 96)',
         scale: 1.5,
-        draggable: false,
-        // draggable: createProfile ? true : false,
+        draggable: false
     })
     .setLngLat([lng, lat])
     .addTo(map.current);

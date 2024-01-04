@@ -9,14 +9,45 @@ import img06 from '../../assets/images/06backgroundImg.jpg';
 import img07 from '../../assets/images/07backgroundImg.jpg';
 
 const BackgroundImage = () => {
-    const [fadeEffect1, setFadeEffect1] = useState({
-      fade: 'fade-in1'
+    const [fadeIn, setFadeIn] = useState({ 
+      fade: 'fade-in' 
     });
-    const [fadeEffect2, setFadeEffect2] = useState({
-      fade: 'fade-in2'
+    const [fadeOut, setFadeOut] = useState({ 
+      fade: 'fade-out' 
     });   
-    const [images1, setImages1] = useState([img01, img02, img02, img03, img03, img04, img04, img05, img05, img06, img06, img07, img07, img01]);
-    const [images2, setImages2] = useState([img01, img01, img02, img02, img03, img03, img04, img04, img05, img05, img06, img06, img07, img07, img01]);
+    const [images1, setImages1] = useState([
+      img01, 
+      img02, 
+      img02, 
+      img03, 
+      img03, 
+      img04, 
+      img04, 
+      img05, 
+      img05, 
+      img06, 
+      img06, 
+      img07, 
+      img07, 
+      img01
+    ]);
+    const [images2, setImages2] = useState([
+      img01, 
+      img01, 
+      img02, 
+      img02, 
+      img03, 
+      img03, 
+      img04, 
+      img04, 
+      img05, 
+      img05, 
+      img06, 
+      img06, 
+      img07, 
+      img07, 
+      img01
+    ]);
     const [indexImages, setIndexImages] = useState(0);
 
     let DEBUG = false;
@@ -25,13 +56,13 @@ const BackgroundImage = () => {
       const imagesInterval = setInterval(() => {
         changeImagesIndex(images2);
         changeImagesIndex(images1);
-        fadeInOut2();
-        fadeInOut1();
+        changeFadeOut();
+        changeFadeIn();
         }, 7000);
         if (imagesInterval) {
           return () => clearInterval(imagesInterval);
       }
-    }, [images1, images2, fadeEffect1, fadeEffect2, changeImagesIndex, fadeInOut1, fadeInOut2]);
+    }, [images1, images2, fadeIn, fadeOut, changeImagesIndex, changeFadeIn, changeFadeOut]);
 
 
     function changeImagesIndex(arr) {
@@ -43,26 +74,26 @@ const BackgroundImage = () => {
         }
     }
 
-    function fadeInOut1() {
-      if (fadeEffect1.fade === 'fade-in1') {
-          setFadeEffect1({
-              fade: 'fade-out1'
+    function changeFadeIn() {
+      if (fadeIn.fade === 'fade-in') {
+          setFadeIn({
+              fade: 'fade-out'
           })
       } else {
-          setFadeEffect1({
-              fade: 'fade-in1'
+          setFadeIn({
+              fade: 'fade-in'
           })
       }
     }
 
-    function fadeInOut2() {
-      if (fadeEffect2.fade === 'fade-out2') {
-          setFadeEffect2({
-              fade: 'fade-in2'
+    function changeFadeOut() {
+      if (fadeOut.fade === 'fade-out') {
+          setFadeOut({
+              fade: 'fade-out'
           })
       } else {
-          setFadeEffect2({
-              fade: 'fade-out2'
+          setFadeOut({
+              fade: 'fade-out'
           })
       }
     }
@@ -73,8 +104,8 @@ const BackgroundImage = () => {
     return (
       <>
         <div className='backgroundFilter'>
-            <div className={fadeEffect2.fade} style={{backgroundImage: urlImages2}}>
-              <div className={fadeEffect1.fade} style={{backgroundImage: urlImages1}}>
+            <div className={fadeOut.fade} style={{backgroundImage: urlImages2}}>
+              <div className={fadeIn.fade} style={{backgroundImage: urlImages1}}>
               </div>
             </div>
         </div>

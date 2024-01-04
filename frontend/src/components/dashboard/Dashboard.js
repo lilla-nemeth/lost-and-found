@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { createBrowserHistory } from 'history';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import { AuthContext } from '../../contexts/AuthContext';
 import Loader from '../generic/Loader';
 import { handleError, clearError } from '../HelperFunctions.js';
-import Checkbox from '../generic/Checkbox';
 import UserPetCard from '../generic/UserPetCard';
 import Sidebar from '../generic/Sidebar';
 import SelectAll from '../generic/SelectAll';
@@ -33,12 +32,10 @@ const Dashboard = () => {
     const [allChecked, setAllChecked] = useState(false);
     const [petCardChecked, setPetCardChecked] = useState('');
     const [deleting, setDeleting] = useState(false);
-
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
-    const [successButtonMsg, setSuccessButtonMsg] = useState('Deleting...');
-
     const [loading, setLoading] = useState(false);
+    const [active, setActive] = useState(true);
 
     let DEBUG = false;
 
@@ -162,10 +159,15 @@ const Dashboard = () => {
     return (
         <main className='petMain'>
             <section>
-                <h1 className='lostAndFoundHeadline'>My Posts</h1>
+                <h1 className='lostAndFoundHeadline'>
+                    My Posts
+                </h1>
                     <div className='dashboardContainer'>
                         <div className='dashboardSidebar'>
-                            <Sidebar />
+                            <Sidebar 
+                                active={active} 
+                                setActive={setActive} 
+                            />
                         </div>
                         <div className='dashboardBox'>
                             <SelectAll 

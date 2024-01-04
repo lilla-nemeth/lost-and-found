@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 
 const SelectAll = (props) => {
-    const { deleteUserAllPets, allChecked, setAllChecked, petCardChecked, setPetCardChecked, disable } = props;
+    const { 
+        deleteUserAllPets, 
+        allChecked, 
+        setAllChecked, 
+        petCardChecked, 
+        setPetCardChecked, 
+        disable 
+    } = props;
 
     let DEBUG = false;
 
@@ -22,7 +29,10 @@ const SelectAll = (props) => {
                       <input
                         type='checkbox'
                         checked={allChecked}
-                        onChange={() => {setAllChecked(!allChecked); setPetCardChecked(petCardChecked)}}
+                        onChange={() => {
+                            setAllChecked(!allChecked); 
+                            setPetCardChecked(petCardChecked)
+                        }}
                       />
                       <span className='bigCheckmark'></span>
                     </label>
