@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
@@ -8,6 +8,7 @@ import PetReportOptionalData from './PetReportOptionalData';
 import { ReactComponent as ArrowDown } from '../../assets/icons/togglearrow.svg';
 import ImageUpload from './ImageUpload';
 import MapboxMap from './MapboxMap.js';
+import { useDropzone } from 'react-dropzone';
 
 // generic components:
 import Loader from '../generic/Loader';
@@ -35,7 +36,7 @@ const PetReport = () => {
   } = useContext(AppStateContext);
 
   const [status, setStatus] = useState('');
-  const [preview, setPreview] = useState(null);
+  // const [preview, setPreview] = useState(null);
   const [files, setFiles] = useState([]);
   const [lng, setLng] = useState(null);
   const [lat, setLat] = useState(null);
@@ -61,7 +62,7 @@ const PetReport = () => {
 
   let DEBUG = false;
 
-  const disabled = !status || !query || !lng || !lat|| !species || !description || !preview || loading;
+  const disabled = !status || !query || !lng || !lat|| !species || !description || !files || loading;
   const required = true;
 
   function handleSubmit(event) {
@@ -125,7 +126,7 @@ const PetReport = () => {
           setLng('');
           setLat('');
           setDescription('');
-          setPreview('');
+          setFiles('');
         },
         successTimeout: () => {
           setTimeout(() => {
@@ -165,6 +166,29 @@ const PetReport = () => {
       <p className='successMessage'>{successMsg}</p>
     </div>
   );
+
+  function fileChangeHandler(event) {
+    console.log(event)
+    // const files = event.target.files[0];
+
+    // setFiles(files);
+    // setPreview(URL.createObjectURL(files));
+  }
+
+  const onDrop = useCallback(acceptedFiles => {
+    if (acceptedFiles?.length) {
+      setFiles(acceptedFiles.map(file => Object.assign(file, {
+        preview: URL.createObjectURL(file)
+        })
+      ));
+      console.log(acceptedFiles)
+    }
+  }, []);
+
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
+    onDrop 
+  });
 
   if (loader) {
     return <Loader />;
@@ -206,9 +230,14 @@ const PetReport = () => {
               </ul>
             </div>
             <ImageUpload
+              fileChangeHandler={fileChangeHandler}
+              files={files}
               setFiles={setFiles}
-              preview={preview}
-              setPreview={setPreview}
+              // preview={preview}
+              // setPreview={setPreview}
+              getRootProps={getRootProps}
+              getInputProps={getInputProps}
+              isDragActive={isDragActive}
             />
             <div className='filterBox'>
               <h2 className='categoryHeadline'>
