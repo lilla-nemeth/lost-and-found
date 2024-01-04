@@ -36,8 +36,8 @@ const PetReport = () => {
   } = useContext(AppStateContext);
 
   const [status, setStatus] = useState('');
-  // const [preview, setPreview] = useState(null);
   const [files, setFiles] = useState([]);
+  const [file, setFile] = useState(null);
   const [lng, setLng] = useState(null);
   const [lat, setLat] = useState(null);
   const [query, setQuery] = useState('');
@@ -62,7 +62,7 @@ const PetReport = () => {
 
   let DEBUG = false;
 
-  const disabled = !status || !query || !lng || !lat|| !species || !description || !files || loading;
+  const disabled = !status || !query || !lng || !lat|| !species || !description || !file || loading;
   const required = true;
 
   function handleSubmit(event) {
@@ -72,7 +72,7 @@ const PetReport = () => {
       setLoading(true);
       reportPet({
         token,
-        img: files,
+        img: file,
         petstatus: status,
         petlocation: query,
         longitude: lng,
@@ -126,7 +126,7 @@ const PetReport = () => {
           setLng('');
           setLat('');
           setDescription('');
-          setFiles('');
+          setFile('');
         },
         successTimeout: () => {
           setTimeout(() => {
@@ -167,24 +167,17 @@ const PetReport = () => {
     </div>
   );
 
-  function fileChangeHandler(event) {
-    console.log(event)
-    // const files = event.target.files[0];
-
-    // setFiles(files);
-    // setPreview(URL.createObjectURL(files));
-  }
-
   const onDrop = useCallback(acceptedFiles => {
     if (acceptedFiles?.length) {
       setFiles(acceptedFiles.map(file => Object.assign(file, {
-        preview: URL.createObjectURL(file)
+          preview: URL.createObjectURL(file)
         })
       ));
-      console.log(acceptedFiles)
+      acceptedFiles.map(file => {
+        setFile(file.preview)
+      })
     }
   }, []);
-
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
     onDrop 
@@ -230,14 +223,11 @@ const PetReport = () => {
               </ul>
             </div>
             <ImageUpload
-              fileChangeHandler={fileChangeHandler}
               files={files}
               setFiles={setFiles}
-              // preview={preview}
-              // setPreview={setPreview}
+              setFile={setFile}
               getRootProps={getRootProps}
               getInputProps={getInputProps}
-              isDragActive={isDragActive}
             />
             <div className='filterBox'>
               <h2 className='categoryHeadline'>

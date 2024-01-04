@@ -4,14 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 const ImageUpload = (props) => {
   const { 
-    // fileChangeHandler,
     files,
-    setFiles, 
-    // preview, 
-    // setPreview, 
+    setFiles,
+    setFile, 
     getRootProps, 
     getInputProps, 
-    // isDragActive 
   } = props;
 
   let DEBUG = false;
@@ -39,7 +36,7 @@ const ImageUpload = (props) => {
                 key={uuidv4()}
                 onClick={() => {
                   setFiles([]);
-                  setPreview('');
+                  setFile('');
                 }}
               >
                 <DeleteIcon />
@@ -56,38 +53,6 @@ const ImageUpload = (props) => {
           </div>
         </div>
       </div>
-
-
-
-      {/* <div {...getRootProps({
-          className: 'imageUploadContainer'
-        })}>
-        {!preview ? (
-          <>
-          <div>
-            <input
-              type='file'
-              name='file'
-              id='file'
-              className='inputFile'
-              onChange={fileChangeHandler}
-              {...getInputProps()}
-            />
-          </div>
-          <label htmlFor='file' className='inputLabel'>
-            Choose a file
-          </label>
-          </>
-        ) : (
-          <>
-
-            <div className='previewContainer'>
-              <img src={preview} alt='image preview' className='previewImage' />
-            </div>
-          </>
-        )}
-      </div> */}
-
     </>
   );
 };
