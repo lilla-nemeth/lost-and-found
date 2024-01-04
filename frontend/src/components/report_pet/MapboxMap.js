@@ -5,7 +5,7 @@ import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 import { 
     changeCoordsByUser, 
     addNavigationButtons, 
-    addMaker, 
+    addMarker, 
     addFullscreenControl,
     addGeolocateControl,
     setCoords
@@ -84,7 +84,7 @@ const MapboxMap = (props) => {
         addNavigationButtons(map);
         addFullscreenControl(map);
         addGeolocateControl(map);
-        addMaker(true, map, lng, lat);
+        addMarker(map, lng, lat);
 
         // Clean up on unmount
         return () => map.current.remove();

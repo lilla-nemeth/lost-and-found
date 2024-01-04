@@ -3,11 +3,16 @@ import { petDate, isInputEmpty } from '../HelperFunctions.js';
 import PetUserData from './PetUserData.js';
 
 const PetProfileCard = (props) => {
-  const { pet, user, renderMap, mapContainer } = props;
+  const { 
+    pet, 
+    user, 
+    renderMap, 
+    mapContainer 
+  } = props;
 
   useEffect(() => {
     renderMap(pet);
-  }, [pet]);
+  }, []);
   
   let DEBUG = false;
 
@@ -52,7 +57,6 @@ const PetProfileCard = (props) => {
                 <tr className='petOptionalInfo'>
                   {isInputEmpty('Location', pet.petlocation, 'tableCell')}
                 </tr>
-          
                 <tr className='petOptionalInfo'>
                   {isInputEmpty('Size', pet.petsize, 'tableCell')}
                 </tr>

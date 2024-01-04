@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import PetProfileCard from '../generic/PetProfileCard';
 import { AuthContext } from '../../contexts/AuthContext';
 
+import { addMarker, addFullscreenControl } from '../MapHelpers';
+
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
@@ -16,57 +18,54 @@ const PetProfile = () => {
     const { id } = useParams();
     const { pets, users, loader } = useContext(AppStateContext);
     const { token } = useContext(AuthContext);
-
-    // mapbox map
     const mapContainer = useRef(null);
-
     const map = useRef(null);
     const [zoom, setZoom] = useState(9);
+
+    let DEBUG = false;
   
     function renderMap(pet) {
       if (map.current) return;
       map.current = new mapboxgl.Map({
+          accessToken: mapboxgl.accessToken,
           container: mapContainer.current,
           style: 'mapbox://styles/l1ll4n3m/clqkvquob00mw01o939rncxn5',
           center: [pet.longitude, pet.latitude],
           zoom: zoom
       });
      
-      const marker = new mapboxgl.Marker({
-        color: 'rgb(34, 102, 96)',
-        draggable: false,
-        scale: 1.5
-      })
-      .setLngLat([pet.longitude, pet.latitude])
-      .addTo(map.current);
-  
-      const fullscreen = new mapboxgl.FullscreenControl();
-  
-      map.current.addControl(marker);
-      map.current.addControl(fullscreen);
+      addMarker(map, pet.longitude, pet.latitude);
+      addFullscreenControl(map);
     }
-  
 
-
-
-    let DEBUG = false;
-
-    function getPetAndUserData(id, petArr, userArr) {
-        if (token && userArr.length > 0) {
-            for (let i = 0; i < petArr.length; i++) {
-                for (let j = 0; j < userArr.length; j++) {
-                    if (id == petArr[i].id) {
-                        if (petArr[i].userid == userArr[j].id) {
-                            
-                            return <PetProfileCard pet={petArr[i]} user={userArr[j]} renderMap={renderMap} mapContainer={mapContainer} />;
+    function getPetAndUserData(id, petsArr, usersArr) {
+        if (token && usersArr.length > 0) {
+            for (let i = 0; i < petsArr.length; i++) {
+                for (let j = 0; j < usersArr.length; j++) {
+                    if (id == petsArr[i].id) {
+                        if (petsArr[i].userid == usersArr[j].id) {
+                            return (
+                                <PetProfileCard 
+                                    pet={petsArr[i]} 
+                                    user={usersArr[j]} 
+                                    renderMap={renderMap} 
+                                    mapContainer={mapContainer} 
+                                />
+                            );
                         }
                     }
                 }
             }
         } else {
-            for (let i = 0; i < petArr.length; i++) {
-                if (id == petArr[i].id) {
-                    return <PetProfileCard pet={petArr[i]} renderMap={renderMap} mapContainer={mapContainer} />;
+            for (let i = 0; i < petsArr.length; i++) {
+                if (id == petsArr[i].id) {
+                    return (
+                        <PetProfileCard 
+                            pet={petsArr[i]} 
+                            renderMap={renderMap} 
+                            mapContainer={mapContainer} 
+                        />
+                    );
                 }
             }
         }
