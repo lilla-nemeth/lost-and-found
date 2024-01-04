@@ -2,7 +2,7 @@ import React from 'react';
 import RadioButton from '../generic/RadioButton';
 import Checkbox from '../generic/Checkbox';
 import TextInput from '../generic/TextInput';
-import { changeCheckboxValue } from '../HelperFunctions.js';
+import { changeCheckboxValue } from '../../utils/HelperFunctions.js';
 
 const PetReportOptionalData = (props) => {
   const {

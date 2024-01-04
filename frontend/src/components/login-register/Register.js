@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppStateContext } from '../../contexts/AppStateContext';
-import { handleError, clearError } from '../HelperFunctions.js';
+import { handleError, clearError } from '../../utils/HelperFunctions.js';
 import BackgroundImages from './BackgroundImages';
 import Logo from '../generic/Logo';
 import PasswordShowHide from './PasswordShowHide';

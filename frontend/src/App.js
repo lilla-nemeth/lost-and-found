@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { AuthContext } from './contexts/AuthContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './style/App.css';
-import ScrollToTop from './components/ScrollToTop';
+import ScrollToTop from './utils/ScrollToTop';
 import Video from './assets/video/dogvideo.mp4';
 import img01 from './assets/images/01backgroundImg.jpg';
 import img02 from './assets/images/02backgroundImg.jpg';

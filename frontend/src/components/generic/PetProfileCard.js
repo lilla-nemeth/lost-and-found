@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { petDate, isInputEmpty } from '../HelperFunctions.js';
+import { petDate, isInputEmpty } from '../../utils/HelperFunctions.js';
 import PetUserData from './PetUserData.js';
 
 const PetProfileCard = (props) => {

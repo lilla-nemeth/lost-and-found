@@ -3,7 +3,7 @@ import { createBrowserHistory } from 'history';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import { AuthContext } from '../../contexts/AuthContext';
 import Loader from '../generic/Loader';
-import { handleError, clearError } from '../HelperFunctions.js';
+import { handleError, clearError } from '../../utils/HelperFunctions.js';
 import UserPetCard from '../generic/UserPetCard';
 import Sidebar from '../generic/Sidebar';
 import SelectAll from '../generic/SelectAll';
