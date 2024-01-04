@@ -422,56 +422,6 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
     );
 });
 
-// *** Working, but unused queries on frontend side ***
-
-// Multer 1 file:
-// app.post('/single/:petId', [authMw, upload.single('image')], (request, response) => {
-//     // let image = request.file;
-//     let petId = request.params.petId;
-//     let filename = request.file.filename;
-//     let filepath = request.file.path;
-//     let mimetype = request.file.mimetype;
-//     let size = request.file.size;
-
-//     pool.query('INSERT INTO images(petId, filename, filepath, mimetype, size) VALUES ($1, $2, $3, $4, $5) RETURNING *', [petId, filename, filepath, mimetype, size])
-//     .then((res) => response.status(200).json({msg: 'Image is successfully uploaded'}))
-//     .catch((err) => response.status(400).json({msg: 'Failed to upload the image'}))
-// });
-
-// // Multer mulitple files:
-// app.post('/multiple', [authMw, upload.array('images', 7)], (request, response) => {
-//     let images = request.files
-
-//     response.status(200).json({msg: 'Images are successfully uploaded'})
-// });
-
-// search (radio buttons and checkboxes)
-// app.get('/search?', (request, response) => {
-//     let selectAll = 'SELECT * FROM pets';
-//     const existingParams = ['petstatus', 'species', 'petsize', 'breed', 'sex', 'color', 'age'].filter(field => request.query[field]);
-
-//     if (existingParams.length) {
-//         selectAll += ' WHERE ';
-//         selectAll += existingParams.map(field => `${field} = '${request.query[field]}'`).join(' AND ');
-//     }
-
-//     pool.query(selectAll)
-//     .then((res) => response.status(200).json(res.rows))
-//     .catch((err) => response.status(400).json({msg: 'Pet not found'}));
-// });
-
-// app.get('/searchpets', (request, response) => {
-//     // 1st option:
-//     // pool.query("SELECT * FROM pets WHERE petstatus LIKE '%lost%' OR petstatus LIKE '%lost%'")
-//     // 2nd option (but it is case sensitive):
-//     // pool.query("SELECT * FROM pets WHERE petstatus LIKE ANY (array['%lost%', '%found%', '%reunited%'])")
-
-//     // 3rd option (case insensitive):
-//     pool.query("SELECT * FROM pets WHERE petstatus ~* 'lost|found'")
-//     .then((res) => response.status(200).json(res.rows))
-//     .catch((err) => response.status(400).json({msg: 'Pet not found'}));
-// });
-
 app.get('*', (request, response) => {
   response.sendFile(path.join(__dirname, 'frontend/build/index.html'));
 });
