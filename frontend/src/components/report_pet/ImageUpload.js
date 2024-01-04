@@ -25,7 +25,6 @@ const ImageUpload = (props) => {
               name='file'
               id='file'
               className='inputFile'
-              // onChange={(e) => console.log(e.target)}
               {...getInputProps()}
             />
             Choose a file
