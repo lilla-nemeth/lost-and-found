@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { petDate, isInputEmpty } from '../HelperFunctions.js';
 import PetUserData from './PetUserData.js';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import { ReactComponent as LocationMark } from '../../assets/icons/locationmark.svg';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
