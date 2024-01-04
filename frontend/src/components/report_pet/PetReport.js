@@ -16,8 +16,6 @@ import RadioButton from '../generic/RadioButton';
 import TextInput from '../generic/TextInput';
 import TextArea from '../generic/TextArea';
 
-// petstatusOptions -> reunited option comes later with post editing:
-
 const PetReport = () => {
   const { token } = useContext(AuthContext);
   const {
@@ -36,7 +34,6 @@ const PetReport = () => {
     setLoader,
   } = useContext(AppStateContext);
 
-  // status -> reunited option comes later with post editing
   const [status, setStatus] = useState('');
   const [preview, setPreview] = useState(null);
   const [files, setFiles] = useState([]);

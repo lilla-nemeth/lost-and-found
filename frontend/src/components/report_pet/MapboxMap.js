@@ -25,9 +25,6 @@ const MapboxMap = (props) => {
         setLat 
     } = props;
     
-    // mapContainer renders the map inside a specific DOM element
-    // The ref will prevent the map from 
-    // reloading when the user interacts with the map
     const mapContainer = useRef(null);
     const map = useRef(null);
     const dropdownRef = useRef(null);

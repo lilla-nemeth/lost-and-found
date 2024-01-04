@@ -11,7 +11,6 @@ export function increaseNumber(total, limit) {
 	return numberArr;
 }
 
-// for only errors from backend (err.response.data.msg):
 let timeOut;
 
 export function handleError(err, setter) {
