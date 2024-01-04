@@ -1,7 +1,15 @@
 import React from 'react';
 
 const Checkbox = (props) => {
-  const { id, name, value, checked, onChange, htmlFor, labelName } = props;
+  const { 
+    id, 
+    name, 
+    value, 
+    checked, 
+    onChange, 
+    htmlFor, 
+    labelName 
+  } = props;
 
   let DEBUG = false;
 

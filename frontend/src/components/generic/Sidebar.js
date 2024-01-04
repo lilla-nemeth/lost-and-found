@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = (props) => {
-    const [active, setActive] = useState(true);
+    const { active, setActive } = props;
 
     let DEBUG = false;
 
@@ -13,8 +12,7 @@ const Sidebar = (props) => {
                     <ul className='sidebarList'>
                         <li className='sidebarListElement'>
                             <NavLink 
-                                to='/dashboard' 
-                                activeClassName='sidebarActiveLink'
+                                to='/dashboard'
                                 className='sidebarInactiveLink'
                                 onClick={() => setActive(!active)}
                             >
@@ -24,8 +22,7 @@ const Sidebar = (props) => {
 		                </li>
                         <li className='sidebarListElement'>
                             <NavLink 
-                                to='/reportpet' 
-                                activeClassName='sidebarActiveLink'
+                                to='/reportpet'
                                 className='sidebarInactiveLink'
                                 onClick={() => setActive(!active)}
                             >

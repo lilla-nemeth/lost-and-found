@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { createBrowserHistory } from 'history';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -35,6 +35,7 @@ const Dashboard = () => {
     const [successMsg, setSuccessMsg] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [loading, setLoading] = useState(false);
+    const [active, setActive] = useState(true);
 
     let DEBUG = false;
 
@@ -163,7 +164,10 @@ const Dashboard = () => {
                 </h1>
                     <div className='dashboardContainer'>
                         <div className='dashboardSidebar'>
-                            <Sidebar />
+                            <Sidebar 
+                                active={active} 
+                                setActive={setActive} 
+                            />
                         </div>
                         <div className='dashboardBox'>
                             <SelectAll 
