@@ -28,7 +28,7 @@ const ImageUpload = (props) => {
               {...getInputProps()}
             />
             Choose a file
-            {files && files.map(file => (
+            {files.map(file => (
               <>
               <button
                 className='deleteButton'
