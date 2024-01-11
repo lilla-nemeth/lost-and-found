@@ -114,6 +114,7 @@ const PetReport = () => {
             },
           });
           setErrorMsg('');
+          setFile('');
           setSize('');
           setStatus('');
           setSpecies('');
@@ -126,7 +127,6 @@ const PetReport = () => {
           setLng('');
           setLat('');
           setDescription('');
-          setFile('');
         },
         successTimeout: () => {
           setTimeout(() => {
@@ -224,6 +224,7 @@ const PetReport = () => {
             </div>
             <ImageUpload
               files={files}
+              file={file}
               setFiles={setFiles}
               setFile={setFile}
               getRootProps={getRootProps}
