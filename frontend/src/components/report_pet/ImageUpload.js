@@ -1,13 +1,12 @@
 import React from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
-import { v4 as uuidv4 } from 'uuid';
 
 const ImageUpload = (props) => {
   const { 
     files,
-    file,
+    preview,
     setFiles,
-    setFile, 
+    setPreview, 
     getRootProps, 
     getInputProps, 
   } = props;
@@ -22,13 +21,12 @@ const ImageUpload = (props) => {
 
   return (
     <>
-      {files && file ? (
+      {files && preview ? (
         <button
           className='deleteButton'
-          // key={uuidv4()}
           onClick={() => {
             setFiles([]);
-            setFile('');
+            setPreview('');
           }}
         >
           <DeleteIcon />
@@ -45,12 +43,14 @@ const ImageUpload = (props) => {
               name='file'
               id='file'
               className='inputFile'
-              // onChange={(e) => setFile(URL.createObjectURL(e.target.files[0]))}
+              // onChange={(e) => {
+              //   console.log(e.target)
+              //   setPreview(URL.createObjectURL(e.target.files[0]))
+              // }}
               {...getInputProps()}
             />
             Drop a file
             {files.map(file => (
-              <>
               <img 
                 key={file.name} 
                 src={file.preview} 
@@ -58,7 +58,6 @@ const ImageUpload = (props) => {
                 onLoad={() => URL.revokeObjectURL(file.preview)}
                 className='previewImage'
               />
-              </>
             ))}
           </div>
         </div>

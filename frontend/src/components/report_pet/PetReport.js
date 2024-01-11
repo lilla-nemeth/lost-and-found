@@ -37,7 +37,7 @@ const PetReport = () => {
 
   const [status, setStatus] = useState('');
   const [files, setFiles] = useState([]);
-  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [lng, setLng] = useState(null);
   const [lat, setLat] = useState(null);
   const [query, setQuery] = useState('');
@@ -62,7 +62,7 @@ const PetReport = () => {
 
   let DEBUG = false;
 
-  const disabled = !status || !query || !lng || !lat|| !species || !description || !file || loading;
+  const disabled = !status || !query || !lng || !lat|| !species || !description || !preview || loading;
   const required = true;
 
   function handleSubmit(event) {
@@ -72,7 +72,7 @@ const PetReport = () => {
       setLoading(true);
       reportPet({
         token,
-        img: file,
+        img: preview,
         petstatus: status,
         petlocation: query,
         longitude: lng,
@@ -114,7 +114,7 @@ const PetReport = () => {
             },
           });
           setErrorMsg('');
-          setFile('');
+          setPreview('');
           setSize('');
           setStatus('');
           setSpecies('');
@@ -169,12 +169,14 @@ const PetReport = () => {
 
   const onDrop = useCallback(acceptedFiles => {
     if (acceptedFiles?.length) {
-      setFiles(acceptedFiles.map(file => Object.assign(file, {
-          preview: URL.createObjectURL(file)
+      setFiles(acceptedFiles.map(acceptedFile => Object.assign(acceptedFile, {
+          preview: URL.createObjectURL(acceptedFile)
         })
       ));
-      acceptedFiles.map(file => {
-        setFile(file.preview)
+      acceptedFiles.map(acceptedFile => {
+        if (acceptedFile) {
+          setPreview(acceptedFile.preview)
+        }
       })
     }
   }, []);
@@ -224,9 +226,9 @@ const PetReport = () => {
             </div>
             <ImageUpload
               files={files}
-              file={file}
+              preview={preview}
               setFiles={setFiles}
-              setFile={setFile}
+              setPreview={setPreview}
               getRootProps={getRootProps}
               getInputProps={getInputProps}
             />
