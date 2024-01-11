@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
 
-/* CSS RESET */
 html,
 body,
 div,
@@ -89,7 +88,7 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
+
 article,
 aside,
 details,
@@ -126,9 +125,7 @@ table {
   border-spacing: 0;
 }
 
-/* Variables */
 :root {
-  /* Colors */
   --clr-white: rgb(255, 255, 255);
   --clr-lightgrey: rgb(221, 221, 221);
   --clr-lightaquamarine: rgba(129, 180, 175, 0.2);
@@ -142,7 +139,6 @@ table {
   --clr-success: rgb(71, 163, 156);
   --clr-error: rgb(205, 0, 0);
 
-  /* Fonts */
   --font-family: 'Poppins', sans-serif;
   --font-formheadline: 500 30px/1.2 'Poppins', sans-serif;
   --font-modal: 300 20px/1.2 'Poppins', sans-serif;
@@ -152,26 +148,21 @@ table {
   --font-landingpage-mobile: 700 14vw/1.2 'Poppins', sans-serif;
   --font-input: 700 28px/1.2 'Poppins', sans-serif;
 
-  /* Shadow */
   --shadow: 7px 12px 24px -8px rgba(0, 0, 0, 0.4);
   --shadow-selected: 7px 12px 24px -8px rgba(71, 163, 156, 0.6);
 
-  /* Radius */
   --radius: 25px;
   --radius2: 30px;
   --radius-button: 4px;
   --radius-circle: 60px;
 
-  /* Width */
   --width100: 100%;
 }
 
-/* Navbar, Footer */
 .navigationWithPicture {
   background: var(--clr-darkgreen);
   box-shadow: var(--shadow);
   font: var(--font-standard);
-  /* width: 100%; */
   width: 100vw;
   display: flex;
   justify-content: space-between;
@@ -184,7 +175,6 @@ table {
 
 .navigationWithoutPicture {
   font: var(--font-standard);
-  /* width: 100%; */
   width: 100vw;
   display: flex;
   justify-content: space-between;
@@ -299,7 +289,6 @@ table {
   z-index: 1;
 }
 
-/* Sidebar links */
 .sidebar {
   padding: 50px;
   border: var(--clr-brown) 4px solid;
@@ -458,7 +447,6 @@ table {
   transition: background 0.2s linear;
 }
 
-/* Lost & Found - PetSearch */
 .searchContainer {
   display: flex;
   align-items: center;
@@ -466,7 +454,6 @@ table {
   flex-direction: column;
 }
 
-/* Landing Page */
 .landingPageHeadline {
   font: var(--font-landingpage);
   color: var(--clr-white);
@@ -487,7 +474,6 @@ table {
   height: 100%;
 }
 
-/* Dashboard */
 .dashboardContainer {
   display: flex;
   flex-wrap: wrap;
@@ -518,7 +504,6 @@ table {
   align-items: center;
 }
 
-/* Lost & Found */
 .petMain {
   font-family: var(--font-family);
   background: var(--clr-lightbrown);
@@ -539,7 +524,6 @@ table {
   text-align: center;
 }
 
-/* Beginning of petCards: PetListCard, PetProfileCard, PetUserCard */
 .petListContainer {
   display: flex;
   flex-wrap: wrap;
@@ -685,7 +669,6 @@ table {
 .petProfileMap {
   height: 250px;
 }
-/* End of PetCards */
 
 .petStatus {
   font: 500 15px/1.2 'Poppins', sans-serif;
@@ -734,7 +717,6 @@ table {
   padding: 15px;
 }
 
-/* Pagination buttons */
 .pagination {
   display: flex;
   align-items: center;
@@ -762,7 +744,6 @@ table {
   transition: background 0.2s linear;
 }
 
-/* Report - Picture */
 .imageUploadContainer {
   border: 4px dashed var(--clr-darkgreen);
   justify-content: center;
@@ -826,7 +807,6 @@ table {
   padding: 0 0 45px;
 }
 
-/* Radio buttons, checkboxes */
 .radioList {
   display: flex;
   flex-flow: row wrap;
@@ -918,7 +898,6 @@ ul li .checkboxCheck::before {
   margin: auto;
 }
 
-/* Radio & Checkbox Inputs */
 input[type='radio']:checked ~ .radioCheck {
   border: 2px solid;
 }
@@ -948,7 +927,6 @@ input[type='checkbox']:checked ~ label {
   color: var(--clr-black);
 }
 
-/* Test checkbox */
 .bigCheckboxContainer,
 .checkboxContainer {
   position: relative;
@@ -1041,9 +1019,6 @@ input[type='checkbox']:checked ~ label {
   transform: rotate(45deg);
 }
 
-/* Background, Logo in Login-Registration */
-
-/* Logo */
 .logoBox {
   padding: 25px;
   border: 4px solid var(--clr-white);
@@ -1116,7 +1091,6 @@ input[type='checkbox']:checked ~ label {
   height: 100%;
 }
 
-/* Login, Registration form */
 .registerContainer,
 .loginContainer {
   filter: brightness(90%);
@@ -1130,8 +1104,6 @@ input[type='checkbox']:checked ~ label {
   justify-content: space-around;
   width: 100%;
   height: 100%;
-
-  /* overflow: hidden; */
 }
 
 .logoContainer {
@@ -1509,7 +1481,6 @@ input[type='checkbox']:checked ~ label {
   color: var(--clr-darkgreen);
 }
 
-/* Paw Loader */
 #loaderContainer {
   display: flex;
   justify-content: center;
@@ -1584,12 +1555,10 @@ input[type='checkbox']:checked ~ label {
   }
 }
 
-/* Pet Report */
 .categoryHeadline {
   padding: 45px 0px 15px;
 }
 
-/* Modal */
 body.modalActive {
   overflow-y: hidden;
 }
@@ -1612,7 +1581,6 @@ body.modalActive {
 .modalOverlay {
   background: rgba(49, 49, 49, 0.8);
   z-index: 4;
-  /* cursor: pointer; */
 }
 
 .modalContent {
@@ -1628,9 +1596,6 @@ body.modalActive {
   min-width: 100px;
   cursor: pointer;
   z-index: 22;
-  /* padding: 50px; */
-  /* height: 50px; */
-  /* line-height: 1.4; */
 }
 
 .modalClose {
@@ -1653,7 +1618,6 @@ body.modalActive {
   background: var(--clr-green);
 }
 
-/* Pet Report - MapBox */
 .petReportMap {
   height: 250px;
 }
@@ -1690,20 +1654,13 @@ body.modalActive {
 .locationContainer {
   position: relative;
   width: 100%;
+  padding: 22px 0;
 }
 
 .locationSuggestionContainer {
-  /* margin: 0 -2px -2px -2px; */
   position: absolute;
   width: inherit;
   border-bottom: solid 1px var(--clr-brown);
-  /* border-right: solid 1px var(--clr-brown);
-  border-bottom: solid 1px var(--clr-brown);
-  border-left: solid 1px var(--clr-brown); */
-
-  /* For more than 5 options */
-  /* overflow-y: scroll;
-  height: 293px; */
 }
 
 .locationInput {
@@ -1711,8 +1668,6 @@ body.modalActive {
 }
 
 .locationSuggestion {
-  /* display: flex;
-  flex-direction: column; */
   margin: 0;
   padding: 12px 18px 12px 18px;
   background: var(--clr-white); 
@@ -1736,7 +1691,6 @@ body.modalActive {
   font-size: 13px;
 }
 
-/* Media Queries */
 @media only screen and (min-width: 100px) and (max-width: 850px) {
   .navLinkDesktop,
   .logOutButtonDesktop {
@@ -1789,7 +1743,6 @@ body.modalActive {
     height: 100vh;
     justify-content: center;
     align-items: center;
-    /* padding-right: 18px; */
   }
 
   .hamburger {
@@ -1800,7 +1753,6 @@ body.modalActive {
     margin-right: 10px;
     margin-left: 10px;
     z-index: 10;
-    /* padding-right: 10px; */
   }
 
   body.burgerOverflow {
@@ -1849,7 +1801,6 @@ body.modalActive {
     margin-top: 60px;
   }
 
-  /* Pet Cards */
   .userPet,
   .petProfileCard,
   .petListCard {
@@ -1978,7 +1929,6 @@ body.modalActive {
     min-height: 950px;
   }
 
-  /* Pet Cards */
   .userPet,
   .petProfileCard,
   .petListCard {
@@ -2134,7 +2084,6 @@ body.modalActive {
 }
 
 @media only screen and (min-width: 600px) and (max-width: 800px) {
-  /* Pet Cards */
   .userPet,
   .petProfileCard,
   .petListCard {
@@ -2210,7 +2159,6 @@ body.modalActive {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* z-index: -1; */
   }
 
   #reportPetLink {
@@ -2253,7 +2201,6 @@ body.modalActive {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
-  /* Pet Cards */
   .userPetInner,
   .petProfileCardInner {
     display: flex;
@@ -2290,7 +2237,6 @@ body.modalActive {
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 2100px) {
-  /* Pet Cards */
   .userPet,
   .petProfileCard,
   .petListCard {
@@ -2331,7 +2277,6 @@ body.modalActive {
 }
 
 @media only screen and (min-width: 1400px) and (max-width: 2100px) {
-  /* Pet Cards */
   .petListCard {
     padding: 50px;
     width: 15%;

@@ -197,7 +197,7 @@ const PetReport = () => {
             onSubmit={handleSubmit}
             encType='multipart/form-data'
           >
-            <div className='filterBox'>
+            <div>
               <h2 className='categoryHeadline'>
                 Status {isFieldRequired(required)}
               </h2>
@@ -222,6 +222,9 @@ const PetReport = () => {
                 />
               </ul>
             </div>
+            <h2 className='categoryHeadline'>
+                Image {isFieldRequired(required)}
+            </h2>
             <ImageUpload
               files={files}
               file={file}
