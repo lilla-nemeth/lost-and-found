@@ -1,13 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
-import { handleError, clearError } from '../HelperFunctions.js';
-import { isFieldRequired } from '../HelperFunctions.js';
+import { handleError, clearError } from '../../utils/HelperFunctions.js';
+import { isFieldRequired } from '../../utils/HelperFunctions.js';
 import PetReportOptionalData from './PetReportOptionalData';
 import { ReactComponent as ArrowDown } from '../../assets/icons/togglearrow.svg';
 import ImageUpload from './ImageUpload';
 import MapboxMap from './MapboxMap.js';
+import { useDropzone } from 'react-dropzone';
 
 // generic components:
 import Loader from '../generic/Loader';
@@ -35,8 +36,8 @@ const PetReport = () => {
   } = useContext(AppStateContext);
 
   const [status, setStatus] = useState('');
-  const [preview, setPreview] = useState(null);
   const [files, setFiles] = useState([]);
+  const [file, setFile] = useState(null);
   const [lng, setLng] = useState(null);
   const [lat, setLat] = useState(null);
   const [query, setQuery] = useState('');
@@ -61,7 +62,7 @@ const PetReport = () => {
 
   let DEBUG = false;
 
-  const disabled = !status || !query || !lng || !lat|| !species || !description || !preview || loading;
+  const disabled = !status || !query || !lng || !lat || !species || !description || !file || loading;
   const required = true;
 
   function handleSubmit(event) {
@@ -71,7 +72,7 @@ const PetReport = () => {
       setLoading(true);
       reportPet({
         token,
-        img: files,
+        img: file,
         petstatus: status,
         petlocation: query,
         longitude: lng,
@@ -113,6 +114,7 @@ const PetReport = () => {
             },
           });
           setErrorMsg('');
+          setFile('');
           setSize('');
           setStatus('');
           setSpecies('');
@@ -125,7 +127,6 @@ const PetReport = () => {
           setLng('');
           setLat('');
           setDescription('');
-          setPreview('');
         },
         successTimeout: () => {
           setTimeout(() => {
@@ -165,6 +166,22 @@ const PetReport = () => {
       <p className='successMessage'>{successMsg}</p>
     </div>
   );
+
+  const onDrop = useCallback(acceptedFiles => {
+    if (acceptedFiles?.length) {
+      setFiles(acceptedFiles.map(acceptedFile => Object.assign(acceptedFile, {
+          preview: URL.createObjectURL(acceptedFile)
+        })
+      ));
+      acceptedFiles.map(acceptedFile => {
+        setFile(acceptedFile);
+      })
+    }
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
+    onDrop 
+  });
 
   if (loader) {
     return <Loader />;
@@ -206,9 +223,12 @@ const PetReport = () => {
               </ul>
             </div>
             <ImageUpload
+              files={files}
+              file={file}
               setFiles={setFiles}
-              preview={preview}
-              setPreview={setPreview}
+              setFile={setFile}
+              getRootProps={getRootProps}
+              getInputProps={getInputProps}
             />
             <div className='filterBox'>
               <h2 className='categoryHeadline'>

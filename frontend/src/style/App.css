@@ -1403,8 +1403,6 @@ input[type='checkbox']:checked ~ label {
   z-index: 4;
   font: var(--font-standard);
   position: absolute;
-  top: 0;
-  right: 0;
   fill: var(--clr-white);
 }
 

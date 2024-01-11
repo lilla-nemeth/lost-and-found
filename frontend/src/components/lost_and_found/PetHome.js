@@ -3,9 +3,6 @@ import { createBrowserHistory } from 'history';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import Loader from '../generic/Loader';
 import PetPage from './PetPage';
-import PetList from './unused/PetList';
-import PetListWithFilters from './unused/PetListWithFilters';
-import PetSearch from './unused/PetSearch';
 import PetListWithSearch from './PetListWithSearch';
 
 let history = createBrowserHistory();

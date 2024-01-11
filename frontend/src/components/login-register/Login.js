@@ -3,7 +3,7 @@ import { createBrowserHistory } from 'history';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
-import { handleError, clearError } from '../HelperFunctions.js';
+import { handleError, clearError } from '../../utils/HelperFunctions.js';
 import Logo from '../generic/Logo';
 import BackgroundImages from './BackgroundImages';
 import PasswordShowHide from './PasswordShowHide';

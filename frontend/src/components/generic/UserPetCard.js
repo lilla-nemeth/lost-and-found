@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { petDate, isInputEmpty } from '../HelperFunctions.js';
+import { petDate, isInputEmpty } from '../../utils/HelperFunctions.js';
 import LoaderButton from './LoaderButton.js';
 
 const UserPetCard = (props) => {

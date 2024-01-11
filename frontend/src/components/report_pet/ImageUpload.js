@@ -2,47 +2,55 @@ import React from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
 const ImageUpload = (props) => {
-  const { setFiles, preview, setPreview } = props;
+  const { 
+    files,
+    file,
+    setFiles,
+    setFile, 
+    getRootProps, 
+    getInputProps, 
+  } = props;
 
   let DEBUG = false;
 
-  function fileChangeHandler(event) {
-    setFiles(event.target.files[0]);
-    setPreview(URL.createObjectURL(event.target.files[0]));
-  }
-
   return (
     <>
-      <div className='imageUploadContainer'>
-        {!preview ? (
-          <>
+      {files && file ? (
+        <button
+          className='deleteButton'
+          onClick={() => {
+            setFiles([]);
+            setFile('');
+          }}
+        >
+          <DeleteIcon />
+        </button>
+      ) : <></>
+      }
+      <div {...getRootProps({
+          className: 'imageUploadContainer'
+        })}>
+        <div className='previewContainer'>
+          <div className='inputLabel'>
             <input
               type='file'
               name='file'
               id='file'
               className='inputFile'
-              onChange={fileChangeHandler}
+              {...getInputProps()}
             />
-            <label htmlFor='file' className='inputLabel'>
-              Choose a file
-            </label>
-          </>
-        ) : (
-          <>
-            <button
-              className='deleteButton'
-              onClick={() => {
-                setFiles([]);
-                setPreview('');
-              }}
-            >
-              <DeleteIcon />
-            </button>
-            <div className='previewContainer'>
-              <img src={preview} alt='image preview' className='previewImage' />
-            </div>
-          </>
-        )}
+            Drop a file
+            {files.map(file => (
+              <img 
+                key={file.name} 
+                src={file.preview} 
+                alt={file.name} 
+                onLoad={() => URL.revokeObjectURL(file.preview)}
+                className='previewImage'
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );

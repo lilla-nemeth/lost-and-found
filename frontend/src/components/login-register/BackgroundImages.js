@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../../App.css';
+import '../../style/App.css';
 import img01 from '../../assets/images/01backgroundImg.jpg';
 import img02 from '../../assets/images/02backgroundImg.jpg';
 import img03 from '../../assets/images/03backgroundImg.jpg';

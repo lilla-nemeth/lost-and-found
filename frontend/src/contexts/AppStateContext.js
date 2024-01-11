@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from './AuthContext';
-import { handleError, clearError } from '../components/HelperFunctions.js';
+import { handleError, clearError } from '../utils/HelperFunctions.js';
 
 export const AppStateContext = createContext();
 

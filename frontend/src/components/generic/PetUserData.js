@@ -1,5 +1,5 @@
 import React from 'react';
-import { isInputEmpty } from '../HelperFunctions.js';
+import { isInputEmpty } from '../../utils/HelperFunctions.js';
 
 const PetUserData = (props) => {
     const { user } = props;

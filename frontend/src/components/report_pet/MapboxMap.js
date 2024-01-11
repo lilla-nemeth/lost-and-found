@@ -9,7 +9,7 @@ import {
     addFullscreenControl,
     addGeolocateControl,
     setCoords
-} from '../MapHelpers';
+} from '../../utils/MapHelpers';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 

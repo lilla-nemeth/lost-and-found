@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import PetProfileCard from '../generic/PetProfileCard';
 import { AuthContext } from '../../contexts/AuthContext';
 
-import { addMarker, addFullscreenControl } from '../MapHelpers';
+import { addMarker, addFullscreenControl } from '../../utils/MapHelpers';
 
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import { v4 as uuidv4 } from 'uuid';
-import { increaseNumber } from '../HelperFunctions.js';
+import { increaseNumber } from '../../utils/HelperFunctions.js';
 
 const PetPage = () => {
 	const { total, limit, setOffset } = useContext(AppStateContext);

@@ -373,10 +373,7 @@ app.post('/login', [isFormValid], (request, response) => {
           }
         });
     })
-    .catch((err) => {
-      isFormValid ? isFormValid : console.log(err);
-      response.status(400).json({ msg: ERROR_MSG_NOT_FOUND_USER });
-    });
+    .catch((err) => response.status(400).json({ msg: ERROR_MSG_NOT_FOUND_USER }));
 });
 
 // report pet by user

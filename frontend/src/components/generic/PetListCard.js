@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { petDate, isInputEmpty, removeOveflowText } from '../HelperFunctions.js';
+import { petDate, isInputEmpty, removeOveflowText } from '../../utils/HelperFunctions.js';
 
 const PetListCard = (props) => {
   const { pet } = props;
