@@ -62,7 +62,7 @@ const PetReport = () => {
 
   let DEBUG = false;
 
-  const disabled = !status || !query || !lng || !lat|| !species || !description || !file || loading;
+  const disabled = !status || !query || !lng || !lat || !species || !description || !file || loading;
   const required = true;
 
   function handleSubmit(event) {
