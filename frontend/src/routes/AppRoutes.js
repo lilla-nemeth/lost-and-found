@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import '../style/App.css';
 import { AuthContext } from '../contexts/AuthContext';
 import { cacheImages } from '../utils/HelperFunctions';
 import Video from '../assets/video/dogvideo.mp4';
