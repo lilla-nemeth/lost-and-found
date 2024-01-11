@@ -31,9 +31,6 @@ const Dashboard = () => {
     } = useContext(AppStateContext);
     const [allChecked, setAllChecked] = useState(false);
     const [petCardChecked, setPetCardChecked] = useState('');
-    const [deleting, setDeleting] = useState(false);
-    const [successMsg, setSuccessMsg] = useState('');
-    const [errorMsg, setErrorMsg] = useState('');
     const [loading, setLoading] = useState(false);
     const [active, setActive] = useState(true);
 
