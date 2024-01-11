@@ -8,7 +8,8 @@ import {
     addMarker, 
     addFullscreenControl,
     addGeolocateControl,
-    setCoords
+    setCoords,
+    handleClickOutside
 } from '../../utils/MapHelpers';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
@@ -101,16 +102,6 @@ const MapboxMap = (props) => {
         setDisplay(!display);
     };
 
-    function handleClickOutside(event) {
-        if (
-          dropdownRef.current &&
-          !dropdownRef.current.contains(event.target) &&
-          event.target !== dropdownRef.current
-        ) {
-          setDisplay(false);
-        }
-    };
-
     useEffect(() => {
         fetchPlaces(query, setPlaces, lng, lat);
     }, [query]);
@@ -120,8 +111,8 @@ const MapboxMap = (props) => {
     }, []);
 
     useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        document.addEventListener('mousedown', (e) => handleClickOutside(e, dropdownRef, setDisplay));
+        return () => document.removeEventListener('mousedown', (e) => handleClickOutside(e, dropdownRef, setDisplay));
     }, []);
 
     return (
