@@ -38,36 +38,48 @@ const PetProfile = () => {
       addFullscreenControl(map);
     }
 
-    function getPetAndUserData(id, petsArr, usersArr) {
-        if (token && usersArr.length > 0) {
-            for (let i = 0; i < petsArr.length; i++) {
-                for (let j = 0; j < usersArr.length; j++) {
-                    if (id == petsArr[i].id) {
-                        if (petsArr[i].userid == usersArr[j].id) {
-                            return (
-                                <PetProfileCard 
-                                    pet={petsArr[i]} 
-                                    user={usersArr[j]} 
-                                    renderMap={renderMap} 
-                                    mapContainer={mapContainer} 
-                                />
-                            );
-                        }
-                    }
+    const onePet = [];
+    const oneUser = [];
+
+    function getPetAndUserData(id, petsArr, usersArr, onePet, oneUser) {
+        if (token && usersArr.length) {
+           petsArr.filter((pet) => usersArr.filter(user => {
+                if (pet.userid === user.id && pet.id.toString() === id) {
+                    onePet.push(pet);
+                    oneUser.push(user);
                 }
-            }
-        } else {
-            for (let i = 0; i < petsArr.length; i++) {
-                if (id == petsArr[i].id) {
+            }));
+
+            return onePet.map(pet => {
+                return oneUser.map(user => {
                     return (
-                        <PetProfileCard 
-                            pet={petsArr[i]} 
+                        <PetProfileCard
+                            key={pet.id} 
+                            pet={pet} 
+                            user={user} 
                             renderMap={renderMap} 
                             mapContainer={mapContainer} 
                         />
-                    );
+                    )
+                })
+            });
+        } else {
+            petsArr.filter(pet => {
+                if (pet.id.toString() === id) {
+                    onePet.push(pet);
                 }
-            }
+            })
+
+            return onePet.map(pet => {
+                return (
+                    <PetProfileCard
+                        key={pet.id} 
+                        pet={pet} 
+                        renderMap={renderMap} 
+                        mapContainer={mapContainer} 
+                    />
+                )
+            })
         }
     }
 
@@ -83,7 +95,7 @@ const PetProfile = () => {
         <>
         <main className='petMain'>
             <section>
-                {getPetAndUserData(id, pets, users)}
+                {getPetAndUserData(id, pets, users, onePet, oneUser)}
                 <div className='backButtonContainer'>
                     <div className='backButtonBox'>
                         <Link to={'/lostandfound'}>
