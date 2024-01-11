@@ -50,6 +50,18 @@ export function petDate(petstatus, since, until, className) {
 	}
 }
 
+export function showOptionalInputs(inputs, setInputs) {
+    if (inputs.display === 'hideInputs') {
+		setInputs({
+        display: 'showInputs',
+      });
+    } else {
+		setInputs({
+        display: 'hideInputs',
+      });
+    }
+}
+
 export function isInputEmpty(nameOfAttribute, attribute, className) {
 	if (attribute === '') {
 		return <td></td>;
@@ -99,4 +111,38 @@ export async function cacheImages(srcArr) {
     });
 
     await Promise.all(promises);
+}
+
+export function changeImagesIndex(arr, index, setIndex) {
+	const numberOfImages = arr.length;
+
+	if (index === numberOfImages - 1) {
+	  return setIndex(0);
+	} else {
+	  return setIndex(index + 1);
+	}
+}
+
+export function changeFadeIn(object, setter) {
+	if (object.fade === 'fade-in') {
+		setter({
+			fade: 'fade-out'
+		})
+	} else {
+		setter({
+			fade: 'fade-in'
+		})
+	}
+}
+
+export function changeFadeOut(object, setter) {
+	if (object.fade === 'fade-out') {
+		setter({
+			fade: 'fade-out'
+		})
+	} else {
+		setter({
+			fade: 'fade-out'
+		})
+	}
 }

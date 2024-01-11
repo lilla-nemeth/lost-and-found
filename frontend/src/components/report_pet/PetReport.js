@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import { handleError, clearError } from '../../utils/HelperFunctions.js';
-import { isFieldRequired } from '../../utils/HelperFunctions.js';
+import { isFieldRequired, showOptionalInputs } from '../../utils/HelperFunctions.js';
 import PetReportOptionalData from './PetReportOptionalData';
 import { ReactComponent as ArrowDown } from '../../assets/icons/togglearrow.svg';
 import ImageUpload from './ImageUpload';
@@ -148,18 +148,6 @@ const PetReport = () => {
     }
   }
 
-  function showOptionalInputs() {
-    if (optionalInputs.display === 'hideInputs') {
-      setOptionalInputs({
-        display: 'showInputs',
-      });
-    } else {
-      setOptionalInputs({
-        display: 'hideInputs',
-      });
-    }
-  }
-
   const errorSuccessMessage = (
     <div className='messagePetReport'>
       <p className='errorMessage'>{errorMsg}</p>
@@ -179,7 +167,7 @@ const PetReport = () => {
     }
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
+  const { getRootProps, getInputProps } = useDropzone({ 
     onDrop 
   });
 
@@ -288,7 +276,7 @@ const PetReport = () => {
             </div>
             <div
               className='optionalButton'
-              onClick={() => showOptionalInputs()}
+              onClick={() => showOptionalInputs(optionalInputs, setOptionalInputs)}
             >
               Optional Data
               <div

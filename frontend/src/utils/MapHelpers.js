@@ -102,3 +102,13 @@ export function addGeocoder(map) {
 
     map.current.addControl(geocoder);
 }
+
+export function handleClickOutside(event, ref, setter) {
+    if (
+        ref.current &&
+        !ref.current.contains(event.target) &&
+        event.target !== ref.current
+    ) {
+        setter(false);
+    }
+};
