@@ -99,4 +99,4 @@ export async function cacheImages(srcArr) {
     });
 
     await Promise.all(promises);
-  }
+}

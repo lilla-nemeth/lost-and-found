@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './routes/App';
+import AppRoutes from './routes/AppRoutes';
 import AuthContextProvider from './contexts/AuthContext';
 import AppStateContextProvider from './contexts/AppStateContext';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -13,7 +13,7 @@ root.render(
   <React.StrictMode>
     <AuthContextProvider>
       <AppStateContextProvider>
-        <App />
+        <AppRoutes />
       </AppStateContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
