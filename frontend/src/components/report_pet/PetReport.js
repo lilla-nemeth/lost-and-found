@@ -167,7 +167,7 @@ const PetReport = () => {
     }
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
+  const { getRootProps, getInputProps } = useDropzone({ 
     onDrop 
   });
 
