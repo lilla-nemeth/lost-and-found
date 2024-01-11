@@ -50,6 +50,18 @@ export function petDate(petstatus, since, until, className) {
 	}
 }
 
+export function showOptionalInputs(inputs, setInputs) {
+    if (inputs.display === 'hideInputs') {
+		setInputs({
+        display: 'showInputs',
+      });
+    } else {
+		setInputs({
+        display: 'hideInputs',
+      });
+    }
+}
+
 export function isInputEmpty(nameOfAttribute, attribute, className) {
 	if (attribute === '') {
 		return <td></td>;
