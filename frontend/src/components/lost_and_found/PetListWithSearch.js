@@ -24,11 +24,6 @@ const PetListWithSearch = () => {
 
 	let DEBUG = false;
 
-	// Alternative:
-	// pet.petstatus.toLowerCase().includes(search.toLowerCase())
-
-	// const columns = allPets[0] && Object.keys(allPets[0]);
-
 	return (
 		<>
 			<h1 className='lostAndFoundHeadline'>Lost and Found Pets</h1>
