@@ -16,40 +16,41 @@ const BackgroundImage = () => {
     const [fadeOut, setFadeOut] = useState({ 
       fade: 'fade-out' 
     }); 
-    const [images1, setImages1] = useState([
-      img01, 
-      img02, 
-      img02, 
-      img03, 
-      img03, 
-      img04, 
-      img04, 
-      img05, 
-      img05, 
-      img06, 
-      img06, 
-      img07, 
-      img07, 
-      img01
-    ]);
-    const [images2, setImages2] = useState([
-      img01, 
-      img01, 
-      img02, 
-      img02, 
-      img03, 
-      img03, 
-      img04, 
-      img04, 
-      img05, 
-      img05, 
-      img06, 
-      img06, 
-      img07, 
-      img07, 
-      img01
-    ]);
     const [imageIndex, setImageIndex] = useState(0);
+
+    const images1 = [
+      img01, 
+      img02, 
+      img02, 
+      img03, 
+      img03, 
+      img04, 
+      img04, 
+      img05, 
+      img05, 
+      img06, 
+      img06, 
+      img07, 
+      img07, 
+      img01
+    ];
+    const images2 = [
+      img01, 
+      img01, 
+      img02, 
+      img02, 
+      img03, 
+      img03, 
+      img04, 
+      img04, 
+      img05, 
+      img05, 
+      img06, 
+      img06, 
+      img07, 
+      img07, 
+      img01
+    ];
 
     let DEBUG = false;
 
