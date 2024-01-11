@@ -71,11 +71,11 @@ export function isFieldRequired(requiredField) {
 	}
 }
 
-export function changeCheckboxValue(array, setArray, value) {
-	if (array.includes(value)) {
-		return setArray(array.filter((el) => el != value));
+export function changeCheckboxValue(array, setArray, string) {
+	if (array.includes(string)) {
+		setArray(array.filter((el) => el != string));
 	} else {
-		return setArray([...array, value]);
+		setArray([...array, string]);
 	}
 }
 
