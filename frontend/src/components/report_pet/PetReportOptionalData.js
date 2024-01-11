@@ -129,53 +129,53 @@ const PetReportOptionalData = (props) => {
             id={'black'}
             name={'color'}
             value={'black'}
-            checked={colors.includes('black')}
-            onChange={() => changeCheckboxValue(colors, setColors, 'black')}
+            checked={colors.includes(' black')}
+            onChange={() => changeCheckboxValue(colors, setColors, ' black')}
             htmlFor={'black'}
             labelName={'Black'}
           />
           <Checkbox
             id={'brown'}
             name={'color'}
-            value={'brown '}
-            checked={colors.includes('brown')}
-            onChange={() => changeCheckboxValue(colors, setColors, 'brown')}
+            value={'brown'}
+            checked={colors.includes(' brown')}
+            onChange={() => changeCheckboxValue(colors, setColors, ' brown')}
             htmlFor={'brown'}
             labelName={'Brown'}
           />
           <Checkbox
             id={'cream'}
             name={'color'}
-            value={'cream '}
-            checked={colors.includes('cream')}
-            onChange={() => changeCheckboxValue(colors, setColors, 'cream')}
+            value={'cream'}
+            checked={colors.includes(' cream')}
+            onChange={() => changeCheckboxValue(colors, setColors, ' cream')}
             htmlFor={'cream'}
             labelName={'Cream'}
           />
           <Checkbox
             id={'grey'}
             name={'color'}
-            value={'grey '}
-            checked={colors.includes('grey')}
-            onChange={() => changeCheckboxValue(colors, setColors, 'grey')}
+            value={'grey'}
+            checked={colors.includes(' grey')}
+            onChange={() => changeCheckboxValue(colors, setColors, ' grey')}
             htmlFor={'grey'}
             labelName={'Grey'}
           />
           <Checkbox
             id={'red'}
             name={'color'}
-            value={'red '}
-            checked={colors.includes('red')}
-            onChange={() => changeCheckboxValue(colors, setColors, 'red')}
+            value={'red'}
+            checked={colors.includes(' red')}
+            onChange={() => changeCheckboxValue(colors, setColors, ' red')}
             htmlFor={'red'}
             labelName={'Red'}
           />
           <Checkbox
             id={'white'}
             name={'color'}
-            value={'white '}
-            checked={colors.includes('white')}
-            onChange={() => changeCheckboxValue(colors, setColors, 'white')}
+            value={'white'}
+            checked={colors.includes(' white')}
+            onChange={() => changeCheckboxValue(colors, setColors, ' white')}
             htmlFor={'white'}
             labelName={'White'}
           />
@@ -183,8 +183,8 @@ const PetReportOptionalData = (props) => {
             id={'otherColor'}
             name={'color'}
             value={'otherColor'}
-            checked={colors.includes('other')}
-            onChange={() => changeCheckboxValue(colors, setColors, 'other')}
+            checked={colors.includes(' other')}
+            onChange={() => changeCheckboxValue(colors, setColors, ' other')}
             htmlFor={'otherColor'}
             labelName={'Other'}
           />
