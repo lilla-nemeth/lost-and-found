@@ -86,3 +86,17 @@ export function removeOveflowText(text, char) {
 	  return text;
 	}
 };
+
+export async function cacheImages(srcArr) {
+    const promises = await srcArr.map((src) => {
+      return new Promise(function (resolve, reject) {
+        const img = new Image();
+
+        img.src = src;
+        img.onload = resolve();
+        img.onerror = reject();
+      });
+    });
+
+    await Promise.all(promises);
+  }
