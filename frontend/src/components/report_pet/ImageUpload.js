@@ -4,29 +4,23 @@ import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 const ImageUpload = (props) => {
   const { 
     files,
-    preview,
+    file,
     setFiles,
-    setPreview, 
+    setFile, 
     getRootProps, 
     getInputProps, 
   } = props;
 
   let DEBUG = false;
 
-  // function fileChangeHandler(event) {
-  //   // setFiles(event.target.files[0]);
-  //   setFile(URL.createObjectURL(event.target.files[0]));
-  //   console.log(event.target)
-  // }
-
   return (
     <>
-      {files && preview ? (
+      {files && file ? (
         <button
           className='deleteButton'
           onClick={() => {
             setFiles([]);
-            setPreview('');
+            setFile('');
           }}
         >
           <DeleteIcon />
@@ -43,10 +37,6 @@ const ImageUpload = (props) => {
               name='file'
               id='file'
               className='inputFile'
-              // onChange={(e) => {
-              //   console.log(e.target)
-              //   setPreview(URL.createObjectURL(e.target.files[0]))
-              // }}
               {...getInputProps()}
             />
             Drop a file

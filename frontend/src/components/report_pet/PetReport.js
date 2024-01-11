@@ -37,7 +37,7 @@ const PetReport = () => {
 
   const [status, setStatus] = useState('');
   const [files, setFiles] = useState([]);
-  const [preview, setPreview] = useState(null);
+  const [file, setFile] = useState(null);
   const [lng, setLng] = useState(null);
   const [lat, setLat] = useState(null);
   const [query, setQuery] = useState('');
@@ -62,7 +62,7 @@ const PetReport = () => {
 
   let DEBUG = false;
 
-  const disabled = !status || !query || !lng || !lat|| !species || !description || !preview || loading;
+  const disabled = !status || !query || !lng || !lat|| !species || !description || !file || loading;
   const required = true;
 
   function handleSubmit(event) {
@@ -72,7 +72,7 @@ const PetReport = () => {
       setLoading(true);
       reportPet({
         token,
-        img: preview,
+        img: file,
         petstatus: status,
         petlocation: query,
         longitude: lng,
@@ -114,7 +114,7 @@ const PetReport = () => {
             },
           });
           setErrorMsg('');
-          setPreview('');
+          setFile('');
           setSize('');
           setStatus('');
           setSpecies('');
@@ -174,9 +174,7 @@ const PetReport = () => {
         })
       ));
       acceptedFiles.map(acceptedFile => {
-        if (acceptedFile) {
-          setPreview(acceptedFile.preview)
-        }
+        setFile(acceptedFile);
       })
     }
   }, []);
@@ -226,9 +224,9 @@ const PetReport = () => {
             </div>
             <ImageUpload
               files={files}
-              preview={preview}
+              file={file}
               setFiles={setFiles}
-              setPreview={setPreview}
+              setFile={setFile}
               getRootProps={getRootProps}
               getInputProps={getInputProps}
             />
