@@ -1,7 +1,26 @@
 'use strict';
-const { Model } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
+const { Attribute, PrimaryKey, AutoIncrement, NotNull } = require('@sequelize/core/decorators-legacy');
+
 module.exports = (sequelize, DataTypes) => {
 	class User extends Model {
+		@Attribute(DataTypes.INTEGER)
+		@PrimaryKey
+		@AutoIncrement
+		id;
+
+		@Attribute(DataTypes.STRING)
+		username;
+
+		@Attribute(DataTypes.STRING)
+		email;
+
+		@Attribute(DataTypes.STRING)
+		pw;
+
+		@Attribute(DataTypes.STRING)
+		phone;
+
 		static associate(models) {
 			// define association here
 		}
