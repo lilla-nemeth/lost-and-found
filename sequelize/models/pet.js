@@ -62,8 +62,15 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Pet.init(
 		{
-			id: DataTypes.INTEGER,
-			userId: DataTypes.INTEGER,
+			id: {
+				type: DataTypes.INTEGER,
+				PrimaryKey: true,
+				AutoIncrement: true,
+			},
+			userId: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+			},
 			img: DataTypes.STRING,
 			petstatus: DataTypes.STRING,
 			longitude: DataTypes.STRING,
@@ -77,7 +84,10 @@ module.exports = (sequelize, DataTypes) => {
 			age: DataTypes.STRING,
 			uniquefeature: DataTypes.STRING,
 			postdescription: DataTypes.STRING,
-			since: DataTypes.DATE,
+			since: {
+				type: DataTypes.DATE,
+				allowNull: false,
+			},
 		},
 		{
 			sequelize,
