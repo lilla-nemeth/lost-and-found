@@ -1,17 +1,21 @@
-const express = require('express');
+import express from 'express';
+import cors from 'cors';
+import { Pool } from 'pg';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import path from 'path';
+import axios from 'axios';
+import url from 'url';
+import dotenv from 'dotenv';
+import { authMw, isFormValid, upload } from './middlewares.js';
+
 const app = express();
-const cors = require('cors');
-const { Pool } = require('pg');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const path = require('path');
-const axios = require('axios');
-let url = require('url');
-require('dotenv').config();
+dotenv.config();
 
-const { authMw, isFormValid, upload } = require('./middlewares.js');
+app.use(cors());
+app.use(express.json());
 
-const {
+import {
 	ERROR_MSG_FETCH_USER_PETS,
 	ERROR_MSG_FETCH_ALL_PETS,
 	ERROR_MSG_FETCH_PETS,
@@ -35,9 +39,9 @@ const {
 	SUCCESS_MSG_DELETED_PET,
 	SUCCESS_MSG_DELETED_PETS,
 	SUCCESS_MSG_DELETED_USER_AND_PETS,
-} = require('./messages.js');
+} from './messages.js';
 
-const {
+import {
 	SELECT_PETS_BY_DESC_DATE,
 	SELECT_PETS_BY_PAGINATION,
 	SELECT_TOTAL_NUM_OF_PETS,
@@ -54,12 +58,9 @@ const {
 	DELETE_USER_BY_ID,
 	INSERT_PET_VALUES,
 	INSERT_USER_VALUES,
-} = require('./queries.js');
+} from './queries.js';
 
 let DEBUG = false;
-
-app.use(cors());
-app.use(express.json());
 
 const port = process.env.PORT || 3003;
 
