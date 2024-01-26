@@ -1,6 +1,6 @@
 'use strict';
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const { Attribute, PrimaryKey, AutoIncrement, NotNull } = require('@sequelize/core/decorators-legacy');
+import { Sequelize, DataTypes, Model } from 'sequelize';
+import { Attribute, PrimaryKey, AutoIncrement, NotNull } from '@sequelize/core/decorators-legacy';
 
 module.exports = (sequelize, DataTypes) => {
 	class User extends Model {
