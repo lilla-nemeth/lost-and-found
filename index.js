@@ -8,6 +8,7 @@ import axios from 'axios';
 import url from 'url';
 import dotenv from 'dotenv';
 import { authMw, isFormValid, upload } from './middlewares.js';
+import * as queries from './queries/queries.js';
 
 const app = express();
 const { Pool } = pg;
@@ -40,7 +41,7 @@ import {
 	SUCCESS_MSG_DELETED_PET,
 	SUCCESS_MSG_DELETED_PETS,
 	SUCCESS_MSG_DELETED_USER_AND_PETS,
-} from './messages.js';
+} from './types/messageTypes.js';
 
 import {
 	SELECT_PETS_BY_DESC_DATE,
@@ -59,7 +60,7 @@ import {
 	DELETE_USER_BY_ID,
 	INSERT_PET_VALUES,
 	INSERT_USER_VALUES,
-} from './queries.js';
+} from './types/queryTypes.js';
 
 let DEBUG = false;
 
@@ -86,38 +87,9 @@ const prodSettings = {
 
 const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : devSettings);
 
-// get all pets by userId
-app.get('/userpets', authMw, (request, response) => {
-	let userId = request.userId;
-	let isadmin = request.isadmin;
-
-	let adminQuery = SELECT_PETS_BY_DESC_DATE;
-	let userQuery = SELECT_PETS_BY_USER;
-
-	pool
-		.query(isadmin ? adminQuery : userQuery, [userId])
-		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_FETCH_USER_PETS }));
-});
-
-// get all pets
-app.get('/allpets', (request, response) => {
-	pool
-		.query(SELECT_PETS_BY_DESC_DATE)
-		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_FETCH_ALL_PETS }));
-});
-
-// get/fetch limited amount of pets to pagination
-app.get('/pets/:fetch/:skip', (request, response) => {
-	let limit = request.params.fetch;
-	let offset = request.params.skip;
-
-	pool
-		.query(SELECT_PETS_BY_PAGINATION, [limit, offset])
-		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_FETCH_PETS }));
-});
+app.get('/userpets', authMw, queries.getAllUserPets);
+app.get('/allpets', queries.getAllPets);
+app.get('/pets/:fetch/:skip', queries.getPetsByPagination);
 
 // get the total amount (number) of pets
 app.get('/pets/total', (request, response) => {
@@ -354,6 +326,7 @@ app.post('/reportpet', [authMw, upload.single('file')], (request, response) => {
 });
 
 app.get('*', (request, response) => {
+	const __dirname = path.resolve(path.dirname(''));
 	response.sendFile(path.join(__dirname, 'frontend/build/index.html'));
 });
 
