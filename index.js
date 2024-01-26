@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { Pool } from 'pg';
+import pg from 'pg';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import path from 'path';
@@ -10,6 +10,7 @@ import dotenv from 'dotenv';
 import { authMw, isFormValid, upload } from './middlewares.js';
 
 const app = express();
+const { Pool } = pg;
 dotenv.config();
 
 app.use(cors());

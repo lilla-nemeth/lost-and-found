@@ -116,8 +116,4 @@ function isFormValid(request, response, next) {
 
 const upload = multer();
 
-module.exports = {
-	authMw,
-	isFormValid,
-	upload,
-};
+export { authMw, isFormValid, upload };
