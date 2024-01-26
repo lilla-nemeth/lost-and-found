@@ -22,14 +22,14 @@ module.exports = (sequelize, DataTypes) => {
 		phone;
 
 		static associate(models) {
-			// User.hasMany(Pet, {
-			// 	foreignKey: {
-			// 		name: 'userId',
-			// 		allowNull: false,
-			// 	},
-			// 	onDelete: 'RESTRICT',
-			// 	onUpdate: 'RESTRICT',
-			// });
+			this.hasMany(models.Pet, {
+				foreignKey: {
+					name: 'userId',
+					allowNull: false,
+				},
+				onDelete: 'RESTRICT',
+				onUpdate: 'RESTRICT',
+			});
 		}
 	}
 	User.init(

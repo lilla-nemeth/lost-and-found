@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
 		since;
 
 		static associate(models) {
-			// Pet.belongsTo(User);
+			this.belongsTo(models.User);
 		}
 	}
 	Pet.init(
