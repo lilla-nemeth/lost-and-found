@@ -69,7 +69,7 @@ npm start
 
 ## Environment Variables
 
-To run this app, you need to add the following environment variables to your .env file. Make sure the .env file is visible to sequelize config file.
+To run this app, you need to add the following environment variables to your .env file. Make sure the .env file is visible to sequelize config.js and queries.js files.
 
 ### Server
 
