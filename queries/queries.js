@@ -69,9 +69,9 @@ const getPetsByPagination = (request, response) => {
 // get the total amount (number) of pets
 const getTotalNumberOfPets = (request, response) => {
 	pool
-		.query(SELECT_TOTAL_NUM_OF_PETS)
+		.query(queries.SELECT_TOTAL_NUM_OF_PETS)
 		.then((res) => response.status(200).json(res.rows[0].count))
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_FETCH_TOTAL_PETS }));
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_TOTAL_PETS }));
 };
 
 // from pets table get one pet by id
@@ -79,9 +79,9 @@ const getPetById = (request, response) => {
 	const id = request.params.id;
 
 	pool
-		.query(SELECT_PET_BY_ID, [id])
+		.query(queries.SELECT_PET_BY_ID, [id])
 		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_FETCH_PET }));
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_PET }));
 };
 
 // get username
@@ -89,17 +89,17 @@ const getUsername = (request, response) => {
 	const id = request.userId;
 
 	pool
-		.query(SELECT_USER_BY_ID, [id])
+		.query(queries.SELECT_USER_BY_ID, [id])
 		.then((res) => response.status(200).json(res.rows[0].username))
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_FETCH_USERNAME }));
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERNAME }));
 };
 
 // get all users
 const getAllUsers = (request, response) => {
 	pool
-		.query(SELECT_ALL_USERS)
+		.query(queries.SELECT_ALL_USERS)
 		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_FETCH_USER }));
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER }));
 };
 
 // search pet location
@@ -138,7 +138,7 @@ const updatePetData = (request, response) => {
 	const postdescription = request.body.postdescription;
 
 	pool
-		.query(UPDATE_PET, [
+		.query(queries.UPDATE_PET, [
 			petstatus,
 			petlocation,
 			longitude,
@@ -153,8 +153,8 @@ const updatePetData = (request, response) => {
 			postdescription,
 			id,
 		])
-		.then((res) => response.status(200).json({ msg: SUCCESS_MSG_UPDATED_PET }))
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_UPDATE_PET }));
+		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_PET }))
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERERROR_MSG_UPDATE_PET }));
 };
 
 // edit user data (user dashboard)
@@ -167,9 +167,9 @@ const updateUserData = (request, response) => {
 	let encryptedPw = bcrypt.hashSync(pw, 10);
 
 	pool
-		.query(UPDATE_USER, [username, email, encryptedPw, phone, id])
-		.then((res) => response.status(200).json({ msg: SUCCESS_MSG_UPDATED_USER }))
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_UPDATE_USER }));
+		.query(queries.UPDATE_USER, [username, email, encryptedPw, phone, id])
+		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_USER }))
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_USER }));
 };
 
 // delete 1 pet by user (user dashboard)
@@ -177,9 +177,9 @@ const deleteUserPet = (request, response) => {
 	let id = request.params.id;
 
 	pool
-		.query(DELETE_PET_BY_ID, [id])
-		.then((res) => response.status(200).json({ msg: SUCCESS_MSG_DELETED_PET }))
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_DELETE_PET }));
+		.query(queries.DELETE_PET_BY_ID, [id])
+		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PET }))
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PET }));
 };
 
 // delete all pets by user (user dashboard)
@@ -187,13 +187,13 @@ const deleteAllUserPets = (request, response) => {
 	let userId = request.userId;
 	let isadmin = request.isadmin;
 
-	let adminQuery = DELETE_ALL_PETS;
-	let userQuery = DELETE_PET_BY_USER;
+	let adminQuery = queries.DELETE_ALL_PETS;
+	let userQuery = queries.DELETE_PET_BY_USER;
 
 	pool
 		.query(isadmin ? adminQuery : userQuery, [userId])
-		.then((res) => response.status(200).json({ msg: SUCCESS_MSG_DELETED_PETS }))
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_DELETE_PETS }));
+		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 };
 
 // delete user - delete user and the connected pets (user dashboard)
@@ -201,18 +201,18 @@ const deleteUser = (request, response) => {
 	let userId = request.userId;
 
 	pool
-		.query(DELETE_PET_BY_USER, [userId])
+		.query(queries.DELETE_PET_BY_USER, [userId])
 		.then((res) => {
 			pool
-				.query(DELETE_USER_BY_ID, [userId])
+				.query(queries.DELETE_USER_BY_ID, [userId])
 				.then((res) =>
 					response.status(200).json({
-						msg: SUCCESS_MSG_DELETED_USER_AND_PETS,
+						msg: messages.SUCCESS_MSG_DELETED_USER_AND_PETS,
 					})
 				)
-				.catch((err) => response.status(400).json({ msg: ERROR_MSG_DELETE_USER }));
+				.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_USER }));
 		})
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_DELETE_PETS }));
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 };
 
 const createAccount = (request, response) => {
@@ -223,13 +223,13 @@ const createAccount = (request, response) => {
 	let encryptedPw = bcrypt.hashSync(pw, 10);
 
 	pool
-		.query(INSERT_USER_VALUES, [username, email, encryptedPw, phone])
-		.then((res) => response.status(200).json({ msg: SUCCESS_MSG_CREATED_USER }))
+		.query(queries.INSERT_USER_VALUES, [username, email, encryptedPw, phone])
+		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_CREATED_USER }))
 		.catch((err) => {
 			if (err.code === '23505' && err.constraint === 'users_email_key') {
-				response.status(400).json({ msg: ERROR_MSG_USED_EMAIL });
+				response.status(400).json({ msg: messages.ERROR_MSG_USED_EMAIL });
 			} else if (err.code === '23505' && err.constraint === 'users_phone_key') {
-				response.status(400).json({ msg: ERROR_MSG_USED_PHONE });
+				response.status(400).json({ msg: messages.ERROR_MSG_USED_PHONE });
 			} else if (err.code != '23505' && isFormValid) {
 				isFormValid;
 			}
@@ -241,7 +241,7 @@ const signIn = (request, response) => {
 	let pw = request.body.pw;
 
 	pool
-		.query(SELECT_USER_BY_EMAIL, [email])
+		.query(queries.SELECT_USER_BY_EMAIL, [email])
 		.then((res) => {
 			let userObject = res.rows[0];
 			let encryptedPw = userObject.pw;
@@ -253,11 +253,11 @@ const signIn = (request, response) => {
 							response.status(200).json(token);
 						});
 					} else {
-						response.status(403).json({ msg: ERROR_MSG_INCORRECT_PASSWORD });
+						response.status(403).json({ msg: messages.ERROR_MSG_INCORRECT_PASSWORD });
 					}
 				});
 		})
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_NOT_FOUND_USER }));
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_NOT_FOUND_USER }));
 };
 
 // report pet by user
@@ -278,7 +278,7 @@ const createPetProfile = (request, response) => {
 	const postdescription = request.body.postdescription;
 
 	pool
-		.query(INSERT_PET_VALUES, [
+		.query(queries.INSERT_PET_VALUES, [
 			userId,
 			img,
 			petstatus,
@@ -295,7 +295,7 @@ const createPetProfile = (request, response) => {
 			postdescription,
 		])
 		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: ERROR_MSG_CREATE_PET }));
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET }));
 };
 
 const getAll = (request, response) => {
