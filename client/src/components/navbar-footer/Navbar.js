@@ -31,8 +31,8 @@ const Navbar = (props) => {
 					</Link>
 				</li>
 				<li className='navList'>
-					<Link className={className} to='/register' onClick={() => setHamburgerOpen(!hamburgerOpen)}>
-						Register
+					<Link className={className} to='/signup' onClick={() => setHamburgerOpen(!hamburgerOpen)}>
+						SignUp
 					</Link>
 				</li>
 			</>

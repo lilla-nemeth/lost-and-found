@@ -59,7 +59,7 @@ function isFormValid(request, response, next) {
 			message = 'Password field is required';
 		}
 	} else {
-		// register
+		// signUp
 		if (!email) {
 			message = 'Email field is required';
 		} else if (!validByEmailRegex) {

@@ -85,10 +85,10 @@ export default function AppStateContextProvider(props) {
 		});
 	}, []);
 
-	function registerUser({ email, username, phone, pw, successCallback, successTimeout, errorCallback }) {
+	function signUpUser({ email, username, phone, pw, successCallback, successTimeout, errorCallback }) {
 		const options = {
 			method: 'post',
-			url: '/register',
+			url: '/signup',
 			data: {
 				email,
 				username,
@@ -362,7 +362,7 @@ export default function AppStateContextProvider(props) {
 	return (
 		<AppStateContext.Provider
 			value={{
-				registerUser,
+				signUpUser,
 				loginUser,
 				getUsername,
 				username,

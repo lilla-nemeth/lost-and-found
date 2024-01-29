@@ -8,6 +8,7 @@ import * as queries from './queries/queries.js';
 import dashboardPets from './routes/petDashboard.js';
 import users from './routes/petProfile.js';
 import pets from './routes/pets.js';
+import user from './routes/userSignUp.js';
 
 dotenv.config();
 
@@ -52,6 +53,9 @@ sequelize
 // Pet profile
 // app.get('/users', authMw, queries.getAllUsers);
 
+// Sign Up
+// app.post('/signup', [isFormValid], queries.createAccount);
+
 // Home
 app.use('/', pets);
 
@@ -60,6 +64,9 @@ app.use('/petprofile/:id', users);
 
 // Dashboard
 app.use('/dashboard', dashboardPets);
+
+// Sign Up
+app.use('/signup', user);
 
 ///////////////////////////////////////////////////////////////////
 
@@ -83,7 +90,7 @@ app.delete('/deleteallpets', authMw, queries.deleteAllUserPets);
 app.delete('/deleteuser', authMw, queries.deleteUser);
 
 // // POST
-app.post('/register', [isFormValid], queries.createAccount);
+
 app.post('/login', [isFormValid], queries.signIn);
 app.post('/reportpet', [authMw, upload.single('file')], queries.createPetProfile);
 

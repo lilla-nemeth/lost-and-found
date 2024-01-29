@@ -1095,7 +1095,7 @@ input[type='checkbox']:checked ~ label {
 	height: 100%;
 }
 
-.registerContainer,
+.signUpContainer,
 .loginContainer {
 	filter: brightness(90%);
 	position: absolute;
@@ -1146,7 +1146,7 @@ input[type='checkbox']:checked ~ label {
 }
 
 .loginFormBox,
-.registerFormBox {
+.signUpFormBox {
 	background: var(--clr-white);
 	border-radius: var(--radius);
 	box-shadow: var(--shadow);
@@ -1792,7 +1792,7 @@ body.modalActive {
 
 @media only screen and (min-width: 100px) and (max-width: 400px) {
 	.loginContainer,
-	.registerContainer {
+	.signUpContainer {
 		flex-direction: column-reverse;
 		padding: unset;
 	}
@@ -1912,7 +1912,7 @@ body.modalActive {
 
 @media only screen and (min-width: 400px) and (max-width: 600px) {
 	.loginContainer,
-	.registerContainer {
+	.signUpContainer {
 		flex-direction: column-reverse;
 		padding: unset;
 	}
@@ -2045,7 +2045,7 @@ body.modalActive {
 
 @media only screen and (min-width: 600px) and (max-width: 1024px) {
 	.loginContainer,
-	.registerContainer {
+	.signUpContainer {
 		flex-direction: column-reverse;
 		padding: unset;
 	}
@@ -2321,7 +2321,7 @@ body.modalActive {
 
 @media only screen and (min-width: 100px) and (max-width: 1024px) {
 	.loginFormBox,
-	.registerFormBox {
+	.signUpFormBox {
 		width: 60%;
 		min-width: unset;
 		display: flex;
@@ -2358,7 +2358,7 @@ body.modalActive {
 		width: unset;
 	}
 
-	.registerContainer,
+	.signUpContainer,
 	.loginContainer {
 		top: 10px;
 		left: unset;
@@ -2387,7 +2387,7 @@ body.modalActive {
 		min-height: 950px;
 	}
 
-	.registerContainer,
+	.signUpContainer,
 	.loginContainer {
 		padding-top: 20px;
 		width: 100vw;
