@@ -29,6 +29,7 @@ const Dashboard = () => {
 		loader,
 		setLoader,
 	} = useContext(AppStateContext);
+	const [errorMsg, setErrorMsg] = useState('');
 	const [allChecked, setAllChecked] = useState(false);
 	const [petCardChecked, setPetCardChecked] = useState('');
 	const [loading, setLoading] = useState(false);

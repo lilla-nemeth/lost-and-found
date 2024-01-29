@@ -243,7 +243,7 @@ export default function AppStateContextProvider(props) {
 	function getAllPets({ successCallback, errorCallback }) {
 		const options = {
 			method: 'get',
-			url: '/allpets',
+			url: '/',
 			mode: 'cors',
 			headers: {
 				'Content-Type': 'application/json',
