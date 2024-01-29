@@ -26,11 +26,6 @@ const Navbar = (props) => {
 				</li>
 				<Modal className={className} />
 				<li className='navList'>
-					<Link className={className} to='/login' onClick={() => setHamburgerOpen(!hamburgerOpen)}>
-						Login
-					</Link>
-				</li>
-				<li className='navList'>
 					<Link className={className} to='/signup' onClick={() => setHamburgerOpen(!hamburgerOpen)}>
 						SignUp
 					</Link>
@@ -58,15 +53,16 @@ const Navbar = (props) => {
 					</Link>
 				</li>
 				<li>
-					<button
+					<Link
 						className={buttonClassName}
+						to='/login'
 						onClick={() => {
 							handleLogOut();
 							setHamburgerOpen(!hamburgerOpen);
 						}}
 					>
 						Log Out
-					</button>
+					</Link>
 				</li>
 			</>
 		);
