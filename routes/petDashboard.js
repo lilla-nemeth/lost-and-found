@@ -10,6 +10,8 @@ router.delete('/pet/:id', authMw, queries.deleteUserPet);
 
 router.delete('/pet', authMw, queries.deleteAllUserPets);
 
+router.get('/', queries.getAllPets);
+
 router.put('/pet/:id', authMw, queries.updatePetData);
 
 export default router;
