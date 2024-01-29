@@ -299,7 +299,7 @@ export default function AppStateContextProvider(props) {
 	function deleteOnePet({ id, token, successCallback, successTimeout, errorCallback }) {
 		const options = {
 			method: 'delete',
-			url: `/deletepet/${id}`,
+			url: `/dashboard/pet/${id}`,
 			mode: 'cors',
 			headers: {
 				'Content-Type': 'application/json',
@@ -318,7 +318,7 @@ export default function AppStateContextProvider(props) {
 	function deleteAllPets({ token, successCallback, successTimeout, errorCallback }) {
 		const options = {
 			method: 'delete',
-			url: '/deleteallpets',
+			url: '/dashboard/pet',
 			mode: 'cors',
 			headers: {
 				'Content-Type': 'application/json',

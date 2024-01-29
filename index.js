@@ -6,6 +6,7 @@ import { authMw, isFormValid, upload } from './middlewares.js';
 import * as queries from './queries/queries.js';
 
 import dashboardPets from './routes/petDashboard.js';
+import dashboardUser from './routes/userDashboard.js';
 import users from './routes/petProfile.js';
 import pets from './routes/pets.js';
 import signUpUser from './routes/userSignUp.js';
@@ -47,6 +48,11 @@ sequelize
 
 // Dashboard
 // app.get('/userpets', authMw, queries.getAllUserPets);
+// app.put('/:id', authMw, queries.updatePetData);
+// app.delete('/:id', authMw, queries.deleteUserPet);
+// app.delete('/dashboard', authMw, queries.deleteAllUserPets);
+// app.put('/editprofile', [authMw, isFormValid], queries.updateUserData);
+// app.delete('/deleteuser', authMw, queries.deleteUser);
 
 // Home (lostandfound)
 // app.get('/allpets', queries.getAllPets);
@@ -77,6 +83,7 @@ app.use('/petprofile/:id', users);
 
 // Dashboard
 app.use('/dashboard', dashboardPets);
+app.use('/dashboard', dashboardUser);
 
 // Sign Up
 app.use('/signup', signUpUser);
@@ -89,19 +96,7 @@ app.use('/reportpet', petData);
 
 ///////////////////////////////////////////////////////////////////
 
-// Home (lostandfound)
-
-// Home (lostandfound)
 app.get('/username', authMw, queries.getUsername);
-
-// // PUT
-app.put('/editpet/:id', authMw, queries.updatePetData);
-app.put('/editprofile', [authMw, isFormValid], queries.updateUserData);
-
-// // DELETE
-app.delete('/deletepet/:id', authMw, queries.deleteUserPet);
-app.delete('/deleteallpets', authMw, queries.deleteAllUserPets);
-app.delete('/deleteuser', authMw, queries.deleteUser);
 
 // app.get('*', queries.getAll);
 
