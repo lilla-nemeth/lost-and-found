@@ -4,9 +4,8 @@ import * as queries from '../queries/queries.js';
 
 const router = Router();
 
-// Posting pet
-// Mapbox geocoding search
+router.post('/', [authMw, upload.single('file')], queries.createPetProfile);
 
-router.get('/locationsearch/:query', queries.getGeocodeLocation);
+router.get('/:query', queries.getGeocodeLocation);
 
 export default router;

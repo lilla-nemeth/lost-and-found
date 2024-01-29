@@ -10,80 +10,80 @@ import Navbar from '../components/navbar-footer/Navbar';
 import Footer from '../components/navbar-footer/Footer';
 
 function AppRoutesWithoutToken(props) {
-    let { transparent } = props;
+	let { transparent } = props;
 
-    let DEBUG = false;
-    
-    return (
-        <>
-          <BrowserRouter>
-            <ScrollToTop>
-              <Routes>
-                <Route
-                  path='/reportpet'
-                  element={
-                    <>
-                      <Navbar />
-                      <PetReport />
-                      <Footer />
-                    </>
-                  }
-                ></Route>
-                <Route
-                  path='/dashboard'
-                  element={
-                    <>
-                      <Navbar />
-                      <Dashboard />
-                      <Footer />
-                    </>
-                  }
-                ></Route>
-                <Route
-                  path='/'
-                  element={
-                    <>
-                      <Navbar />
-                      <PetHome />
-                      <Footer />
-                    </>
-                  }
-                ></Route>
-                <Route
-                  path={'/petprofile/:id'}
-                  element={
-                    <>
-                      <Navbar />
-                      <PetProfile />
-                      <Footer />
-                    </>
-                  }
-                ></Route>
-                <Route
-                  exact
-                  path='/'
-                  element={
-                    <>
-                      <Navbar transparent={transparent} />
-                      <PetLandingPage />
-                    </>
-                  }
-                ></Route>
-                <Route
-                  path='*'
-                  element={
-                    <>
-                      <Navbar />
-                      <PetReport />
-                      <Footer />
-                    </>
-                  }
-                ></Route>
-              </Routes>
-            </ScrollToTop>
-          </BrowserRouter>
-        </>
-    );
+	let DEBUG = false;
+
+	return (
+		<>
+			<BrowserRouter>
+				<ScrollToTop>
+					<Routes>
+						<Route
+							path='/reportpet'
+							element={
+								<>
+									<Navbar />
+									<PetReport />
+									<Footer />
+								</>
+							}
+						></Route>
+						<Route
+							path='/dashboard'
+							element={
+								<>
+									<Navbar />
+									<Dashboard />
+									<Footer />
+								</>
+							}
+						></Route>
+						<Route
+							path='/'
+							element={
+								<>
+									<Navbar />
+									<PetHome />
+									<Footer />
+								</>
+							}
+						></Route>
+						<Route
+							path={'/petprofile/:id'}
+							element={
+								<>
+									<Navbar />
+									<PetProfile />
+									<Footer />
+								</>
+							}
+						></Route>
+						<Route
+							exact
+							path='/'
+							element={
+								<>
+									<Navbar transparent={transparent} />
+									<PetLandingPage />
+								</>
+							}
+						></Route>
+						<Route
+							path='*'
+							element={
+								<>
+									<Navbar />
+									<PetReport />
+									<Footer />
+								</>
+							}
+						></Route>
+					</Routes>
+				</ScrollToTop>
+			</BrowserRouter>
+		</>
+	);
 }
 
 export default AppRoutesWithoutToken;

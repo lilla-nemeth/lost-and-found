@@ -6,6 +6,4 @@ const router = Router();
 
 router.get('/', authMw, queries.getAllUsers);
 
-router.post('/', [authMw, upload.single('file')], queries.createPetProfile);
-
 export default router;

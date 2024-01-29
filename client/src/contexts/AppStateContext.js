@@ -344,7 +344,7 @@ export default function AppStateContextProvider(props) {
 
 		const options = {
 			method: 'get',
-			url: `/locationsearch/${query}?${params}`,
+			url: `reportpet/${query}?${params}`,
 			mode: 'cors',
 			headers: {
 				'Content-Type': 'application/json',
