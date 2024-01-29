@@ -4,6 +4,6 @@ import * as queries from '../queries/queries.js';
 
 const router = Router();
 
-router.post('/signup', [isFormValid], queries.createAccount);
+router.post('/', [isFormValid], queries.createAccount);
 
 export default router;
