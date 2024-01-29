@@ -14,7 +14,7 @@ dotenv.config();
 const { Pool } = pg;
 
 if (process.env.NODE_ENV === 'production') {
-	app.use(express.static(path.join(__dirname, 'frontend/build')));
+	app.use(express.static(path.join(__dirname, 'client/build')));
 }
 
 const devSettings = {
@@ -300,7 +300,7 @@ const createPetProfile = (request, response) => {
 
 const getAll = (request, response) => {
 	const __dirname = path.resolve(path.dirname(''));
-	response.sendFile(path.join(__dirname, 'frontend/build/index.html'));
+	response.sendFile(path.join(__dirname, 'client/build/index.html'));
 };
 
 export {
