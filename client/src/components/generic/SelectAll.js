@@ -9,8 +9,8 @@ const SelectAll = (props) => {
 		<div className='selectBox'>
 			<div className='deleteAllButtonBox'>
 				<button
-					className={disable === 'true' ? 'deleteAllButtonInactive' : 'deleteAllButton'}
-					disable={disable === 'true'}
+					className={disable.toString() ? 'deleteAllButtonInactive' : 'deleteAllButton'}
+					disable={disable.toString()}
 					onClick={() => deleteUserAllPets()}
 				>
 					Delete All Pets
