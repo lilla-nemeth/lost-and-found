@@ -3,15 +3,19 @@ import * as messages from '../types/messageTypes.js';
 import * as queries from '../types/queryTypes.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import path from 'path';
 import axios from 'axios';
-import url from 'url';
 import dotenv from 'dotenv';
-import { request } from 'express';
+import path from 'path';
+import { dirname } from 'path';
+import url from 'url';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
 const { Pool } = pg;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, 'client/build')));
@@ -299,7 +303,8 @@ const createPetProfile = (request, response) => {
 };
 
 const getAll = (request, response) => {
-	const __dirname = path.resolve(path.dirname(''));
+	const __filename = fileURLToPath(import.meta.url);
+	const __dirname = dirname(__filename);
 	response.sendFile(path.join(__dirname, 'client/build/index.html'));
 };
 
