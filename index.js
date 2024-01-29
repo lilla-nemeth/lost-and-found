@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { Sequelize } from 'sequelize';
 import { authMw, isFormValid, upload } from './middlewares.js';
 import * as queries from './queries/queries.js';
 
@@ -14,6 +15,20 @@ app.use(express.json());
 let DEBUG = false;
 
 const port = process.env.PORT || 3003;
+
+const sequelize = new Sequelize(process.env.PG_DATABASE, process.env.PG_USER, process.env.PG_PASSWORD, {
+	host: process.env.PG_HOST,
+	dialect: 'postgres',
+});
+
+sequelize
+	.authenticate()
+	.then(() => {
+		console.log('Connection has been established successfully');
+	})
+	.catch((err) => {
+		console.log('Unable to connect to the database', err);
+	});
 
 // GET
 app.get('/userpets', authMw, queries.getAllUserPets);
