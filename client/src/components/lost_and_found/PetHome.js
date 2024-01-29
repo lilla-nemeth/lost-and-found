@@ -10,7 +10,7 @@ let history = createBrowserHistory();
 const PetHome = () => {
     const { loader } = useContext(AppStateContext);
 
-    history.replace('/lostandfound');
+    history.replace('/');
 
     if (loader) {
         return (

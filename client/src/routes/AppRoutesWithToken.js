@@ -21,7 +21,7 @@ function AppRoutesWithToken(props) {
               <Route path='/login' element={<Login />}></Route>
               <Route path='/register' element={<Register />}></Route>
               <Route
-                path='/lostandfound'
+                path='/'
                 element={
                   <>
                     <Navbar />

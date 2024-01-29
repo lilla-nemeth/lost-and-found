@@ -136,7 +136,7 @@ const PetReport = () => {
           setTimeout(() => {
             setSuccessMsg('');
             setSuccessButtonMsg('Report Pet');
-            navigate('/lostandfound');
+            navigate('/');
           }, 3000);
         },
         errorCallback: (err) => {

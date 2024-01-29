@@ -98,7 +98,7 @@ const PetProfile = () => {
                 {getPetAndUserData(id, pets, users, onePet, oneUser)}
                 <div className='backButtonContainer'>
                     <div className='backButtonBox'>
-                        <Link to={'/lostandfound'}>
+                        <Link to={'/'}>
                             <button className='backButton'>Back to the Pet List</button>
                         </Link>
                     </div>

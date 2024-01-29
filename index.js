@@ -5,6 +5,10 @@ import { Sequelize } from 'sequelize';
 import { authMw, isFormValid, upload } from './middlewares.js';
 import * as queries from './queries/queries.js';
 
+import dashboardPets from './routes/petDashboard.js';
+import users from './routes/petProfile.js';
+import pets from './routes/pets.js';
+
 dotenv.config();
 
 const app = express();
@@ -37,29 +41,52 @@ sequelize
 	});
 
 // GET
-app.get('/userpets', authMw, queries.getAllUserPets);
-app.get('/allpets', queries.getAllPets);
-app.get('/pets/:fetch/:skip', queries.getPetsByPagination);
+
+// Dashboard
+// app.get('/userpets', authMw, queries.getAllUserPets);
+
+// Home (lostandfound)
+// app.get('/allpets', queries.getAllPets);
+// app.get('/pets/:fetch/:skip', queries.getPetsByPagination);
+
+// Pet profile
+// app.get('/users', authMw, queries.getAllUsers);
+
+// Home
+app.use('/', pets);
+
+// Pet profile
+app.use('/petprofile/:id', users);
+
+// Dashboard
+app.use('/dashboard', dashboardPets);
+
+///////////////////////////////////////////////////////////////////
+
+// Home (lostandfound)
 app.get('/pets/total', queries.getTotalNumberOfPets);
 app.get('/pets/:id', queries.getPetById);
+
+// Home (lostandfound)
 app.get('/username', authMw, queries.getUsername);
-app.get('/users', authMw, queries.getAllUsers);
+
+// Home (lostandfound) and reportpet
 app.get('/locationsearch/:query', queries.getGeocodeLocation);
 
-// PUT
+// // PUT
 app.put('/editpet/:id', authMw, queries.updatePetData);
 app.put('/editprofile', [authMw, isFormValid], queries.updateUserData);
 
-// DELETE
+// // DELETE
 app.delete('/deletepet/:id', authMw, queries.deleteUserPet);
 app.delete('/deleteallpets', authMw, queries.deleteAllUserPets);
 app.delete('/deleteuser', authMw, queries.deleteUser);
 
-// POST
+// // POST
 app.post('/register', [isFormValid], queries.createAccount);
 app.post('/login', [isFormValid], queries.signIn);
 app.post('/reportpet', [authMw, upload.single('file')], queries.createPetProfile);
 
-app.get('*', queries.getAll);
+// app.get('*', queries.getAll);
 
 app.listen(port, () => console.log('Server is running on 3003'));

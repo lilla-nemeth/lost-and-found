@@ -40,7 +40,7 @@ function AppRoutesWithoutToken(props) {
                   }
                 ></Route>
                 <Route
-                  path='/lostandfound'
+                  path='/'
                   element={
                     <>
                       <Navbar />
