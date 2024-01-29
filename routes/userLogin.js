@@ -4,4 +4,6 @@ import * as queries from '../queries/queries.js';
 
 const router = Router();
 
+router.post('/', [isFormValid], queries.signIn);
+
 export default router;

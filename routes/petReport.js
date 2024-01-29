@@ -7,4 +7,6 @@ const router = Router();
 // Posting pet
 // Mapbox geocoding search
 
+router.get('/locationsearch/:query', queries.getGeocodeLocation);
+
 export default router;
