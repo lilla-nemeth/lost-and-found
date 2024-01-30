@@ -5,14 +5,11 @@ const SelectAll = (props) => {
 
 	let DEBUG = false;
 
+	console.log(typeof disable);
 	return (
 		<div className='selectBox'>
 			<div className='deleteAllButtonBox'>
-				<button
-					className={disable.toString() ? 'deleteAllButtonInactive' : 'deleteAllButton'}
-					disable={disable.toString()}
-					onClick={() => deleteUserAllPets()}
-				>
+				<button className={disable ? 'deleteAllButtonInactive' : 'deleteAllButton'} onClick={() => deleteUserAllPets()}>
 					Delete All Pets
 				</button>
 			</div>
@@ -22,8 +19,8 @@ const SelectAll = (props) => {
 						type='checkbox'
 						checked={allChecked}
 						onChange={() => {
-							setAllChecked(!allChecked);
-							setPetCardChecked(petCardChecked);
+							setAllChecked(disable);
+							setPetCardChecked(!petCardChecked);
 						}}
 					/>
 					<span className='bigCheckmark'></span>

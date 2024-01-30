@@ -61,10 +61,10 @@ const UserPetCard = (props) => {
 										<label className='checkboxContainer'>
 											<input
 												type='checkbox'
-												checked={allChecked || checked || parentCallback(checked)}
+												checked={checked || allChecked}
 												onChange={() => {
 													setChecked(!checked);
-													parentCallback(!checked);
+													parentCallback(checked);
 												}}
 											/>
 											<span className='checkmark'></span>
