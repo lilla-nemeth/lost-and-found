@@ -5,7 +5,6 @@ const SelectAll = (props) => {
 
 	let DEBUG = false;
 
-	console.log(typeof disable);
 	return (
 		<div className='selectBox'>
 			<div className='deleteAllButtonBox'>
