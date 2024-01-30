@@ -2204,7 +2204,7 @@ body.modalActive {
 	.userPetInner,
 	.petProfileCardInner {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		width: 100%;
 		min-height: unset;
 	}
@@ -2220,6 +2220,7 @@ body.modalActive {
 	.userPetTextBox,
 	.petProfileTextBox {
 		width: 100%;
+		padding: 40px 0 0 0;
 	}
 
 	.sidebar {
