@@ -44,36 +44,8 @@ sequelize
 		console.log('Unable to connect to the database', err);
 	});
 
-// GET
-
-// Dashboard
-// app.get('/userpets', authMw, queries.getAllUserPets);
-// app.put('/:id', authMw, queries.updatePetData);
-// app.delete('/:id', authMw, queries.deleteUserPet);
-// app.delete('/dashboard', authMw, queries.deleteAllUserPets);
-// app.put('/editprofile', [authMw, isFormValid], queries.updateUserData);
-// app.delete('/deleteuser', authMw, queries.deleteUser);
-
-// Home (lostandfound)
-// app.get('/allpets', queries.getAllPets);
-// app.get('/pets/:fetch/:skip', queries.getPetsByPagination);
-// app.get('/pets/total', queries.getTotalNumberOfPets);
-// app.get('/pets/:id', queries.getPetById);
-
-// Pet profile
-// app.get('/users', authMw, queries.getAllUsers);
-
-// Sign Up
-// app.post('/signup', [isFormValid], queries.createAccount);
-
-// Login
-// app.post('/login', [isFormValid], queries.signIn);
-
-// Pet Report
-// app.get('/locationsearch/:query', queries.getGeocodeLocation);
-// app.post('/reportpet', [authMw, upload.single('file')], queries.createPetProfile);
-
-//////////////////////////////////////////////////////////////////
+// For navbar
+app.get('/username', authMw, queries.getUsername);
 
 // Home
 app.use('/', pets);
@@ -93,10 +65,6 @@ app.use('/login', loginUser);
 
 // Pet Report
 app.use('/reportpet', petData);
-
-///////////////////////////////////////////////////////////////////
-
-app.get('/username', authMw, queries.getUsername);
 
 // app.get('*', queries.getAll);
 
