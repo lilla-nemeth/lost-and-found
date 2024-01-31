@@ -34,6 +34,8 @@ const Dashboard = () => {
 	const [petCardChecked, setPetCardChecked] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [active, setActive] = useState(true);
+	const [successMsg, setSuccessMsg] = useState('');
+	const [deleting, setDeleting] = useState(false);
 
 	let DEBUG = false;
 
@@ -140,7 +142,17 @@ const Dashboard = () => {
 
 	function uploadedPets() {
 		return userPets.map((pet) => {
-			return <UserPetCard key={pet.id} pet={pet} deleteUserPet={deleteUserPet} allChecked={allChecked} parentCallback={handleCallback} />;
+			return (
+				<UserPetCard
+					key={pet.id}
+					pet={pet}
+					deleteUserPet={deleteUserPet}
+					allChecked={allChecked}
+					parentCallback={handleCallback}
+					deleting={deleting}
+					setDeleting={setDeleting}
+				/>
+			);
 		});
 	}
 

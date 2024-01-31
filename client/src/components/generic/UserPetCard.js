@@ -3,9 +3,8 @@ import { petDate, isInputEmpty, removeOveflowText } from '../../utils/HelperFunc
 import LoaderButton from './LoaderButton.js';
 
 const UserPetCard = (props) => {
-	const { pet, deleteUserPet, allChecked, parentCallback } = props;
+	const { pet, deleteUserPet, allChecked, parentCallback, deleting, setDeleting } = props;
 	const [checked, setChecked] = useState(false);
-	const [deleting, setDeleting] = useState(false);
 
 	let DEBUG = false;
 
