@@ -82,6 +82,7 @@ const Dashboard = () => {
 			successTimeout: () =>
 				setTimeout(() => {
 					setSuccessMsg('');
+					setDeleting(false);
 				}, 5000),
 			errorCallback: (err) => {
 				setLoading(false);
@@ -124,6 +125,7 @@ const Dashboard = () => {
 				successTimeout: () =>
 					setTimeout(() => {
 						setSuccessMsg('');
+						setDeleting(false);
 					}, 5000),
 				errorCallback: (err) => {
 					setLoading(false);

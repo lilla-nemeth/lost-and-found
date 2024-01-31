@@ -86,7 +86,6 @@ const PetReport = () => {
 				uniquefeature,
 				postdescription: description,
 				successCallback: (res) => {
-					console.log('success');
 					setLoading(false);
 					setUploadingButton(true);
 					setSuccessButtonMsg('Uploading...');
@@ -94,7 +93,6 @@ const PetReport = () => {
 						limit,
 						offset,
 						successCallback: (res) => {
-							console.log('success1');
 							setPets(res.data);
 							setLoader(false);
 							getNumberOfPets({
@@ -106,14 +104,12 @@ const PetReport = () => {
 					});
 					getAllPets({
 						successCallback: (res) => {
-							console.log('success2');
 							setAllPets(res.data);
 						},
 					});
 					getUserPets({
 						token,
 						successCallback: (res) => {
-							console.log('success3');
 							setUserPets(res.data);
 						},
 					});
@@ -144,7 +140,6 @@ const PetReport = () => {
 					}, 3000);
 				},
 				errorCallback: (err) => {
-					console.log('error');
 					setLoading(false);
 					clearError();
 					handleError(err, setErrorMsg);

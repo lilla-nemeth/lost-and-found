@@ -91,7 +91,7 @@ export function changeCheckboxValue(array, setArray, string) {
 	}
 }
 
-export function removeOveflowText(text, char) {
+export function removeOverflowText(text, char) {
 	if (text.length > char) {
 		return text.split('').slice(0, char).concat(['...']).join('');
 	} else {
