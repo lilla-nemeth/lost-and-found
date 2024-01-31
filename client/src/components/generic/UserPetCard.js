@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { petDate, isInputEmpty, removeOveflowText } from '../../utils/HelperFunctions.js';
+import { petDate, isInputEmpty, removeOverflowText } from '../../utils/HelperFunctions.js';
 import LoaderButton from './LoaderButton.js';
 
 const UserPetCard = (props) => {
@@ -76,7 +76,7 @@ const UserPetCard = (props) => {
 									</td>
 								</tr>
 								<tr className='petMainInfo'>{petDate(pet.petstatus, pet.since, pet.until, 'tableCell')}</tr>
-								<tr className='petMainInfo'>{isInputEmpty('Location', removeOveflowText(pet.petlocation, 40), 'tableCell')}</tr>
+								<tr className='petMainInfo'>{isInputEmpty('Location', removeOverflowText(pet.petlocation, 40), 'tableCell')}</tr>
 							</tbody>
 						</table>
 						{allChecked ? buttonAllChecked : buttonCardChecked}
