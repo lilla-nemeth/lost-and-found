@@ -35,7 +35,6 @@ const Dashboard = () => {
 	const [loading, setLoading] = useState(false);
 	const [active, setActive] = useState(true);
 	const [successMsg, setSuccessMsg] = useState('');
-	const [deleting, setDeleting] = useState(false);
 
 	let DEBUG = false;
 
@@ -58,7 +57,6 @@ const Dashboard = () => {
 					},
 				});
 				setSuccessMsg(res);
-				setDeleting(true);
 				fetchPets({
 					limit,
 					offset,
@@ -82,7 +80,6 @@ const Dashboard = () => {
 			successTimeout: () =>
 				setTimeout(() => {
 					setSuccessMsg('');
-					setDeleting(false);
 				}, 5000),
 			errorCallback: (err) => {
 				setLoading(false);
@@ -101,7 +98,6 @@ const Dashboard = () => {
 				successCallback: (res) => {
 					setLoading(false);
 					setUserPets([]);
-					setDeleting(true);
 					setAllChecked('');
 					fetchPets({
 						limit,
@@ -125,7 +121,6 @@ const Dashboard = () => {
 				successTimeout: () =>
 					setTimeout(() => {
 						setSuccessMsg('');
-						setDeleting(false);
 					}, 5000),
 				errorCallback: (err) => {
 					setLoading(false);
@@ -144,17 +139,7 @@ const Dashboard = () => {
 
 	function uploadedPets() {
 		return userPets.map((pet) => {
-			return (
-				<UserPetCard
-					key={pet.id}
-					pet={pet}
-					deleteUserPet={deleteUserPet}
-					allChecked={allChecked}
-					parentCallback={handleCallback}
-					deleting={deleting}
-					setDeleting={setDeleting}
-				/>
-			);
+			return <UserPetCard key={pet.id} pet={pet} deleteUserPet={deleteUserPet} allChecked={allChecked} parentCallback={handleCallback} />;
 		});
 	}
 

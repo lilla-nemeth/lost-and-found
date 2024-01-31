@@ -3,7 +3,7 @@ import { petDate, isInputEmpty, removeOverflowText } from '../../utils/HelperFun
 import LoaderButton from './LoaderButton.js';
 
 const UserPetCard = (props) => {
-	const { pet, deleteUserPet, allChecked, parentCallback, deleting, setDeleting } = props;
+	const { pet, deleteUserPet, allChecked, parentCallback } = props;
 	const [checked, setChecked] = useState(false);
 
 	let DEBUG = false;
@@ -12,25 +12,15 @@ const UserPetCard = (props) => {
 
 	const buttonCardChecked = (
 		<div>
-			{!deleting ? (
-				<button
-					className={disabledLocal ? 'deletePetButtonInactive' : 'deletePetButton'}
-					disabled={disabledLocal}
-					onClick={() => {
-						setDeleting(!false);
-						deleteUserPet(pet.id);
-					}}
-				>
-					<div className='deletePetButtonText'>Delete Pet</div>
-				</button>
-			) : (
-				<button className='deletePetButtonInactive' disabled={disabledLocal} onClick={() => deleteUserPet(pet.id)}>
-					<>
-						<LoaderButton />
-						<div className='deletePetButtonText'>Deleting...</div>
-					</>
-				</button>
-			)}
+			<button
+				className={disabledLocal ? 'deletePetButtonInactive' : 'deletePetButton'}
+				disabled={disabledLocal}
+				onClick={() => {
+					deleteUserPet(pet.id);
+				}}
+			>
+				<div className='deletePetButtonText'>Delete Pet</div>
+			</button>
 		</div>
 	);
 
