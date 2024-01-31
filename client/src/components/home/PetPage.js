@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AppStateContext } from '../../contexts/AppStateContext';
+import { AppStateContext } from '../../contexts/AppStateContext.js';
 import { v4 as uuidv4 } from 'uuid';
 import { increaseNumber } from '../../utils/HelperFunctions.js';
 

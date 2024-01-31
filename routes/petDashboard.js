@@ -10,9 +10,6 @@ router.delete('/pet/:id', authMw, queries.deleteUserPet);
 
 router.delete('/pet', authMw, queries.deleteAllUserPets);
 
-// TODO fix this, it should refresh the main home page with this query
-router.get('/', queries.getAllPets);
-
 router.put('/pet/:id', authMw, queries.updatePetData);
 
 export default router;
