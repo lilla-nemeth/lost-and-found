@@ -45,7 +45,7 @@ Run the server
 nodemon index.js
 ```
 
-Server is running on port 3003
+Server is running on port 8080
 
 ### Client
 

@@ -22,7 +22,7 @@ app.use(express.json());
 
 let DEBUG = false;
 
-const port = process.env.PORT || 3003;
+const port = process.env.PORT || 8080;
 
 const sequelize = new Sequelize(process.env.PG_DATABASE, process.env.PG_USER, process.env.PG_PASSWORD, {
 	host: process.env.PG_HOST,
@@ -68,4 +68,4 @@ app.use('/reportpet', petData);
 
 // app.get('*', queries.getAll);
 
-app.listen(port, () => console.log('Server is running on 3003'));
+app.listen(port, () => console.log('Server is running on 8080'));
