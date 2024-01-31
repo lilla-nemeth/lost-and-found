@@ -14,7 +14,7 @@ export function increaseNumber(total, limit) {
 let timeOut;
 
 export function handleError(err, setter) {
-	setter(err && err.response && err.response.data && err.response.data.msg);
+	setter(err && err.response?.data?.msg);
 
 	timeOut = setTimeout(() => {
 		setter('');
@@ -51,15 +51,15 @@ export function petDate(petstatus, since, until, className) {
 }
 
 export function showOptionalInputs(inputs, setInputs) {
-    if (inputs.display === 'hideInputs') {
+	if (inputs.display === 'hideInputs') {
 		setInputs({
-        display: 'showInputs',
-      });
-    } else {
+			display: 'showInputs',
+		});
+	} else {
 		setInputs({
-        display: 'hideInputs',
-      });
-    }
+			display: 'hideInputs',
+		});
+	}
 }
 
 export function isInputEmpty(nameOfAttribute, attribute, className) {
@@ -93,56 +93,56 @@ export function changeCheckboxValue(array, setArray, string) {
 
 export function removeOveflowText(text, char) {
 	if (text.length > char) {
-	  return text.split('').slice(0, char).concat(['...']).join('');
+		return text.split('').slice(0, char).concat(['...']).join('');
 	} else {
-	  return text;
+		return text;
 	}
-};
+}
 
 export async function cacheImages(srcArr) {
-    const promises = await srcArr.map((src) => {
-      return new Promise(function (resolve, reject) {
-        const img = new Image();
+	const promises = await srcArr.map((src) => {
+		return new Promise(function (resolve, reject) {
+			const img = new Image();
 
-        img.src = src;
-        img.onload = resolve();
-        img.onerror = reject();
-      });
-    });
+			img.src = src;
+			img.onload = resolve();
+			img.onerror = reject();
+		});
+	});
 
-    await Promise.all(promises);
+	await Promise.all(promises);
 }
 
 export function changeImagesIndex(arr, index, setIndex) {
 	const numberOfImages = arr.length;
 
 	if (index === numberOfImages - 1) {
-	  return setIndex(0);
+		return setIndex(0);
 	} else {
-	  return setIndex(index + 1);
+		return setIndex(index + 1);
 	}
 }
 
 export function changeFadeIn(object, setter) {
 	if (object.fade === 'fade-in') {
 		setter({
-			fade: 'fade-out'
-		})
+			fade: 'fade-out',
+		});
 	} else {
 		setter({
-			fade: 'fade-in'
-		})
+			fade: 'fade-in',
+		});
 	}
 }
 
 export function changeFadeOut(object, setter) {
 	if (object.fade === 'fade-out') {
 		setter({
-			fade: 'fade-out'
-		})
+			fade: 'fade-out',
+		});
 	} else {
 		setter({
-			fade: 'fade-out'
-		})
+			fade: 'fade-out',
+		});
 	}
 }
