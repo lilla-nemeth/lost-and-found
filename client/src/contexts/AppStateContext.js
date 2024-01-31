@@ -344,7 +344,7 @@ export default function AppStateContextProvider(props) {
 
 		const options = {
 			method: 'get',
-			url: `reportpet/${query}?${params}`,
+			url: `/reportpet/${query}?${params}`,
 			mode: 'cors',
 			headers: {
 				'Content-Type': 'application/json',
@@ -352,9 +352,7 @@ export default function AppStateContextProvider(props) {
 		};
 		axios(options)
 			.then((res) => {
-				if (query) {
-					setter(res.data.features);
-				}
+				if (query) setter(res.data.features);
 			})
 			.catch((err) => console.log(err));
 	}
