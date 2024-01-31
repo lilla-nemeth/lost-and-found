@@ -8,24 +8,22 @@ import PetListWithSearch from './PetListWithSearch';
 let history = createBrowserHistory();
 
 const PetHome = () => {
-    const { loader } = useContext(AppStateContext);
+	const { loader } = useContext(AppStateContext);
 
-    history.replace('/');
+	history.replace('/');
 
-    if (loader) {
-        return (
-            <Loader />
-        );
-    }
+	if (loader) {
+		return <Loader />;
+	}
 
-    return (  
-        <main className='petMain'>
-            <section>
-                <PetListWithSearch />
-                <PetPage />
-            </section>
-        </main>
-    );
-}
- 
+	return (
+		<main className='petMain'>
+			<section>
+				<PetListWithSearch />
+				<PetPage />
+			</section>
+		</main>
+	);
+};
+
 export default PetHome;

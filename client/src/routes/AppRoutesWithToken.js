@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ScrollToTop from '../utils/ScrollToTop';
 import SignUp from '../components/login-signup/SignUp';
 import Login from '../components/login-signup/Login';
-import PetHome from '../components/lost_and_found/PetHome';
+import PetHome from '../components/home/PetHome';
 import PetLandingPage from '../components/landing_page/PetLandingPage';
-import PetProfile from '../components/lost_and_found/PetProfile';
+import PetProfile from '../components/home/PetProfile';
 import Navbar from '../components/navbar-footer/Navbar';
 import Footer from '../components/navbar-footer/Footer';
 

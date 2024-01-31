@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ScrollToTop from '../utils/ScrollToTop';
-import PetHome from '../components/lost_and_found/PetHome';
+import PetHome from '../components/home/PetHome';
 import PetReport from '../components/report_pet/PetReport';
 import PetLandingPage from '../components/landing_page/PetLandingPage';
-import PetProfile from '../components/lost_and_found/PetProfile';
+import PetProfile from '../components/home/PetProfile';
 import Dashboard from '../components/dashboard/Dashboard';
 import Navbar from '../components/navbar-footer/Navbar';
 import Footer from '../components/navbar-footer/Footer';
