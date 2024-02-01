@@ -41,9 +41,6 @@ const prodSettings = {
 
 const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : devSettings);
 
-// console.log(User);
-// console.log(Pet);
-
 // get all pets by userId
 const getAllUserPets = (request, response) => {
 	const userId = request.userId;
@@ -65,16 +62,29 @@ const getAllPets = (request, response) => {
 };
 
 // get all pets
-// const getAllPets = async (request, response) => {
-// 	try {
-// 		const pets = await Pet.findAll({
-// 			order: [['since', 'DESC']],
-// 		});
+// const getAllPets = (request, response) => {
+// 	const pets = Pet.findAll({
+// 		order: [['since', 'DESC']],
+// 	});
 
-// 		response.status(200).json(pets);
-// 	} catch (err) {
-// 		response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
-// 	}
+// 	Promise()
+// 		.then((res) => {
+// 			console.log('all pets ----------------------');
+// 			response.status(200).json(pets);
+// 		})
+// 		.catch((err) => {
+// 			console.log(err);
+// 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS });
+// 		});
+// 	// try {
+// 	// 	const pets = await Pet.findAll({
+// 	// 		order: [['since', 'DESC']],
+// 	// 	});
+
+// 	// 	response.status(200).json(pets);
+// 	// } catch (err) {
+// 	// 	response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS });
+// 	// }
 // };
 
 // get/fetch limited amount of pets to pagination
