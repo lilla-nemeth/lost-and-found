@@ -10,15 +10,30 @@ const User = sequelize.define('user', {
 	username: {
 		type: DataTypes.STRING,
 		unique: true,
+		validate: {
+			len: [2, 29],
+		},
 	},
 	email: {
 		type: DataTypes.STRING,
 		unique: true,
+		validate: {
+			isEmail: true,
+			max: 254,
+		},
 	},
-	pw: DataTypes.STRING,
+	pw: {
+		type: DataTypes.STRING,
+		validate: {
+			min: 8,
+		},
+	},
 	phone: {
 		type: DataTypes.STRING,
 		unique: true,
+		validate: {
+			len: [3, 15],
+		},
 	},
 });
 
