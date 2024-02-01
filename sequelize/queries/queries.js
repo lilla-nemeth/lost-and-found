@@ -191,12 +191,12 @@ const updatePetData = (request, response) => {
 
 // edit user data (user dashboard)
 const updateUserData = (request, response) => {
-	let id = request.userid;
-	let username = request.body.username;
-	let email = request.body.email;
-	let pw = request.body.pw;
-	let phone = request.body.phone;
-	let encryptedPw = bcrypt.hashSync(pw, 10);
+	const id = request.userid;
+	const username = request.body.username;
+	const email = request.body.email;
+	const pw = request.body.pw;
+	const phone = request.body.phone;
+	const encryptedPw = bcrypt.hashSync(pw, 10);
 
 	pool
 		.query(queries.UPDATE_USER, [username, email, encryptedPw, phone, id])
@@ -206,7 +206,7 @@ const updateUserData = (request, response) => {
 
 // delete 1 pet by user (user dashboard)
 const deleteUserPet = (request, response) => {
-	let id = request.params.id;
+	const id = request.params.id;
 
 	pool
 		.query(queries.DELETE_PET_BY_ID, [id])
@@ -216,11 +216,11 @@ const deleteUserPet = (request, response) => {
 
 // delete all pets by user (user dashboard)
 const deleteAllUserPets = (request, response) => {
-	let userid = request.userid;
-	let isadmin = request.isadmin;
+	const userid = request.userid;
+	const isadmin = request.isadmin;
 
-	let adminQuery = queries.DELETE_ALL_PETS;
-	let userQuery = queries.DELETE_PET_BY_USER;
+	const adminQuery = queries.DELETE_ALL_PETS;
+	const userQuery = queries.DELETE_PET_BY_USER;
 
 	pool
 		.query(isadmin ? adminQuery : userQuery, [userid])
@@ -230,7 +230,7 @@ const deleteAllUserPets = (request, response) => {
 
 // delete user - delete user and the connected pets (user dashboard)
 const deleteUser = (request, response) => {
-	let userid = request.userid;
+	const userid = request.userid;
 
 	pool
 		.query(queries.DELETE_PET_BY_USER, [userid])
@@ -248,11 +248,11 @@ const deleteUser = (request, response) => {
 };
 
 const createAccount = (request, response) => {
-	let username = request.body.username;
-	let email = request.body.email;
-	let pw = request.body.pw;
-	let phone = request.body.phone;
-	let encryptedPw = bcrypt.hashSync(pw, 10);
+	const username = request.body.username;
+	const email = request.body.email;
+	const pw = request.body.pw;
+	const phone = request.body.phone;
+	const encryptedPw = bcrypt.hashSync(pw, 10);
 
 	pool
 		.query(queries.INSERT_USER_VALUES, [username, email, encryptedPw, phone])
@@ -269,14 +269,14 @@ const createAccount = (request, response) => {
 };
 
 const signIn = (request, response) => {
-	let email = request.body.email;
-	let pw = request.body.pw;
+	const email = request.body.email;
+	const pw = request.body.pw;
 
 	pool
 		.query(queries.SELECT_USER_BY_EMAIL, [email])
 		.then((res) => {
-			let userObject = res.rows[0];
-			let encryptedPw = userObject.pw;
+			const userObject = res.rows[0];
+			const encryptedPw = userObject.pw;
 
 			res.rows &&
 				bcrypt.compare(pw, encryptedPw).then((isMatch) => {
