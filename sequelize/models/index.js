@@ -24,10 +24,6 @@ sequelize
 		console.log(err);
 	});
 
-// User.sync({ alter: true })
-// 	.then(() => console.log('User table has been created successfully'))
-// 	.catch(() => console.log('Error syncing the table and model.'));
-
 export default {
 	User,
 	Pet,

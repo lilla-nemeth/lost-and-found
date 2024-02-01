@@ -7,10 +7,19 @@ const User = sequelize.define('user', {
 		primaryKey: true,
 		autoIncrement: true,
 	},
-	username: DataTypes.STRING,
-	email: DataTypes.STRING,
+	username: {
+		type: DataTypes.STRING,
+		unique: true,
+	},
+	email: {
+		type: DataTypes.STRING,
+		unique: true,
+	},
 	pw: DataTypes.STRING,
-	phone: DataTypes.STRING,
+	phone: {
+		type: DataTypes.STRING,
+		unique: true,
+	},
 });
 
 export default User;

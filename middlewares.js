@@ -22,10 +22,10 @@ function authMw(request, response, next) {
 }
 
 function isFormValid(request, response, next) {
-	let email = request.body.email;
-	let password = request.body.pw;
-	let username = request.body.username;
-	let phone = request.body.phone;
+	const email = request.body.email;
+	const password = request.body.pw;
+	const username = request.body.username;
+	const phone = request.body.phone;
 
 	const usernameRegex = /^[A-Za-z0-9öÖäÄåÅ_\.]*$/;
 	const usernameFirstCharacter = /^[a-zA-ZöÖäÄåÅ]/;
@@ -37,16 +37,16 @@ function isFormValid(request, response, next) {
 	const pwDigit = /^(?=.*\d)/;
 	const pwAllowedSpecialCharacters = /^(?=.*[§đ½¡”»£¤«“‰„‚\/\\°¿´˛¸€ÞþıŒœ ̛˚˝¯¨əßÐðĸøØÆæ'˘><Ʒʒ·×Ŋŋ—µ,‘’˙–~@#$%^&*+=`|{}:;!.?_\"()\[\]-])/;
 
-	let validByEmailRegex = emailRegex.test(email);
-	let emailParts = email.split('@');
-	let domainParts = emailParts[1].split('.');
-	let isFirstCharacterPassTheTest = usernameFirstCharacter.test(username);
-	let validByUsernameRegex = usernameRegex.test(username);
-	let validByPhoneRegex = phoneRegex.test(phone);
-	let isContainUppercase = pwUppercase.test(password);
-	let isContainLowercase = pwLowercase.test(password);
-	let isContainDigit = pwDigit.test(password);
-	let isContainSpecialCharacter = pwAllowedSpecialCharacters.test(password);
+	const validByEmailRegex = emailRegex.test(email);
+	const emailParts = email.split('@');
+	const domainParts = emailParts[1].split('.');
+	const isFirstCharacterPassTheTest = usernameFirstCharacter.test(username);
+	const validByUsernameRegex = usernameRegex.test(username);
+	const validByPhoneRegex = phoneRegex.test(phone);
+	const isContainUppercase = pwUppercase.test(password);
+	const isContainLowercase = pwLowercase.test(password);
+	const isContainDigit = pwDigit.test(password);
+	const isContainSpecialCharacter = pwAllowedSpecialCharacters.test(password);
 	let message = '';
 
 	if (!username && !phone) {
