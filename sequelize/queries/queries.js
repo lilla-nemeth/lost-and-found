@@ -10,7 +10,8 @@ import { dirname } from 'path';
 import url from 'url';
 import { fileURLToPath } from 'url';
 
-import Pet from '../models/pet.js';
+// import Pet from '../models/pet.js';
+import User from '../models/index.js';
 
 dotenv.config();
 
@@ -40,6 +41,8 @@ const prodSettings = {
 
 const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : devSettings);
 
+console.log(User);
+
 // get all pets by userId
 const getAllUserPets = (request, response) => {
 	const userId = request.userId;
@@ -53,25 +56,25 @@ const getAllUserPets = (request, response) => {
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS }));
 };
 
-// const getAllPets = (request, response) => {
-// 	pool
-// 		.query(queries.SELECT_PETS_BY_DESC_DATE)
-// 		.then((res) => response.status(200).json(res.rows))
-// 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS }));
-// };
+const getAllPets = (request, response) => {
+	pool
+		.query(queries.SELECT_PETS_BY_DESC_DATE)
+		.then((res) => response.status(200).json(res.rows))
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS }));
+};
 
 // get all pets
-const getAllPets = async (request, response) => {
-	try {
-		const pets = await Pet.findAll({
-			order: [['since', 'DESC']],
-		});
+// const getAllPets = async (request, response) => {
+// 	try {
+// 		const pets = await Pet.findAll({
+// 			order: [['since', 'DESC']],
+// 		});
 
-		response.status(200).json(pets);
-	} catch (err) {
-		response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
-	}
-};
+// 		response.status(200).json(pets);
+// 	} catch (err) {
+// 		response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
+// 	}
+// };
 
 // get/fetch limited amount of pets to pagination
 const getPetsByPagination = (request, response) => {
