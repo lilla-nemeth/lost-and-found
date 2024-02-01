@@ -10,7 +10,7 @@ import { dirname } from 'path';
 import url from 'url';
 import { fileURLToPath } from 'url';
 
-// import Pet from '../models/pet.js';
+import Pet from '../models/pet.js';
 import User from '../models/index.js';
 
 dotenv.config();
@@ -41,7 +41,8 @@ const prodSettings = {
 
 const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : devSettings);
 
-console.log(User);
+// console.log(User);
+// console.log(Pet);
 
 // get all pets by userId
 const getAllUserPets = (request, response) => {

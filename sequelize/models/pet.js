@@ -1,6 +1,5 @@
 import sequelize from '../config/config.js';
 import { DataTypes } from 'sequelize';
-import User from './user.js';
 
 const Pet = sequelize.define('pet', {
 	id: {
@@ -10,9 +9,8 @@ const Pet = sequelize.define('pet', {
 	},
 	userId: {
 		type: DataTypes.INTEGER,
-		allowNull: false,
 	},
-	img: DataTypes.STRING,
+	img: DataTypes.TEXT('long'),
 	petstatus: DataTypes.STRING,
 	longitude: DataTypes.STRING,
 	latitude: DataTypes.STRING,
@@ -30,7 +28,5 @@ const Pet = sequelize.define('pet', {
 		allowNull: false,
 	},
 });
-
-Pet.belongsTo(User);
 
 export default Pet;
