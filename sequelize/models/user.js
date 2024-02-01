@@ -1,6 +1,6 @@
 import sequelize from '../config/config.js';
 import { DataTypes } from 'sequelize';
-// import Pet from './pet.js';
+import Pet from './pet.js';
 
 const User = sequelize.define('user', {
 	id: {
@@ -14,11 +14,11 @@ const User = sequelize.define('user', {
 	phone: DataTypes.STRING,
 });
 
-// User.hasMany(Pet, {
-// 	foreignKey: {
-// 		name: 'userId',
-// 		allowNull: false,
-// 	},
-// });
+User.hasMany(Pet, {
+	foreignKey: {
+		name: 'userId',
+		allowNull: false,
+	},
+});
 
 export default User;
