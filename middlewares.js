@@ -39,29 +39,29 @@ function isFormValid(request, response, next) {
 
 	const validByEmailRegex = emailRegex.test(email);
 	const emailParts = email.split('@');
-	const domainParts = emailParts[1].split('.');
+	const domainPart = emailParts[1].split('.');
 	const isFirstCharacterPassTheTest = usernameFirstCharacter.test(username);
 	const validByUsernameRegex = usernameRegex.test(username);
 	const validByPhoneRegex = phoneRegex.test(phone);
-	const isContainUppercase = pwUppercase.test(password);
-	const isContainLowercase = pwLowercase.test(password);
-	const isContainDigit = pwDigit.test(password);
-	const isContainSpecialCharacter = pwAllowedSpecialCharacters.test(password);
+	const uppercase = pwUppercase.test(password);
+	const lowercase = pwLowercase.test(password);
+	const digits = pwDigit.test(password);
+	const specialChars = pwAllowedSpecialCharacters.test(password);
 	let message = '';
 
 	if (!username && !phone) {
 		// login
 		if (!email) {
-			message = 'Email field is required';
+			message = 'Email is required';
 		} else if (!validByEmailRegex) {
 			message = 'Email format is not valid';
 		} else if (!password) {
-			message = 'Password field is required';
+			message = 'Password is required';
 		}
 	} else {
 		// signUp
 		if (!email) {
-			message = 'Email field is required';
+			message = 'Email is required';
 		} else if (!validByEmailRegex) {
 			message = 'Email format is not valid';
 		} else if (email.length > 254) {
@@ -69,13 +69,13 @@ function isFormValid(request, response, next) {
 		} else if (emailParts[0].length > 64) {
 			message = 'Email username is too long';
 		} else if (
-			domainParts.some(function (part) {
+			domainPart.some(function (part) {
 				return part.length > 63;
 			})
 		) {
-			message = 'Email domain name is too long';
+			message = 'Email domain is too long';
 		} else if (!username) {
-			message = 'Username field is required';
+			message = 'Username is required';
 		} else if (username.length < 2) {
 			message = 'Username must contain at least 2 characters';
 		} else if (username.length > 29) {
@@ -96,13 +96,13 @@ function isFormValid(request, response, next) {
 			message = 'Password field is required';
 		} else if (password.length < 8) {
 			message = 'Password must contain at least 8 characters';
-		} else if (!isContainUppercase) {
+		} else if (!uppercase) {
 			message = 'Password must contain at least one uppercase letter';
-		} else if (!isContainLowercase) {
+		} else if (!lowercase) {
 			message = 'Password must contain at least one lowercase letter';
-		} else if (!isContainDigit) {
+		} else if (!digits) {
 			message = 'Password must contain at least one digit';
-		} else if (!isContainSpecialCharacter) {
+		} else if (!specialChars) {
 			message = 'Password must contain at least one special character';
 		}
 	}
