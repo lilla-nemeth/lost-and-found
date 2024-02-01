@@ -41,15 +41,15 @@ const prodSettings = {
 
 const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : devSettings);
 
-// get all pets by userId
+// get all pets by userid
 const getAllUserPets = (request, response) => {
-	const userId = request.userId;
+	const userid = request.userid;
 	const isadmin = request.isadmin;
 	const adminQuery = queries.SELECT_PETS_BY_DESC_DATE;
 	const userQuery = queries.SELECT_PETS_BY_USER;
 
 	pool
-		.query(isadmin ? adminQuery : userQuery, [userId])
+		.query(isadmin ? adminQuery : userQuery, [userid])
 		.then((res) => response.status(200).json(res.rows))
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS }));
 };
@@ -118,7 +118,7 @@ const getPetById = (request, response) => {
 
 // get username
 const getUsername = (request, response) => {
-	const id = request.userId;
+	const id = request.userid;
 
 	pool
 		.query(queries.SELECT_USER_BY_ID, [id])
@@ -191,7 +191,7 @@ const updatePetData = (request, response) => {
 
 // edit user data (user dashboard)
 const updateUserData = (request, response) => {
-	let id = request.userId;
+	let id = request.userid;
 	let username = request.body.username;
 	let email = request.body.email;
 	let pw = request.body.pw;
@@ -216,27 +216,27 @@ const deleteUserPet = (request, response) => {
 
 // delete all pets by user (user dashboard)
 const deleteAllUserPets = (request, response) => {
-	let userId = request.userId;
+	let userid = request.userid;
 	let isadmin = request.isadmin;
 
 	let adminQuery = queries.DELETE_ALL_PETS;
 	let userQuery = queries.DELETE_PET_BY_USER;
 
 	pool
-		.query(isadmin ? adminQuery : userQuery, [userId])
+		.query(isadmin ? adminQuery : userQuery, [userid])
 		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 };
 
 // delete user - delete user and the connected pets (user dashboard)
 const deleteUser = (request, response) => {
-	let userId = request.userId;
+	let userid = request.userid;
 
 	pool
-		.query(queries.DELETE_PET_BY_USER, [userId])
+		.query(queries.DELETE_PET_BY_USER, [userid])
 		.then((res) => {
 			pool
-				.query(queries.DELETE_USER_BY_ID, [userId])
+				.query(queries.DELETE_USER_BY_ID, [userid])
 				.then((res) =>
 					response.status(200).json({
 						msg: messages.SUCCESS_MSG_DELETED_USER_AND_PETS,
@@ -294,7 +294,7 @@ const signIn = (request, response) => {
 
 // report pet by user
 const createPetProfile = (request, response) => {
-	const userId = request.userId;
+	const userid = request.userid;
 	const img = request.file.buffer.toString('base64');
 	const petstatus = request.body.petstatus;
 	const petlocation = request.body.petlocation;
@@ -311,7 +311,7 @@ const createPetProfile = (request, response) => {
 
 	pool
 		.query(queries.INSERT_PET_VALUES, [
-			userId,
+			userid,
 			img,
 			petstatus,
 			petlocation,
@@ -327,7 +327,10 @@ const createPetProfile = (request, response) => {
 			postdescription,
 		])
 		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET }));
+		.catch((err) => {
+			console.log(err);
+			response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET });
+		});
 };
 
 const getAll = (request, response) => {

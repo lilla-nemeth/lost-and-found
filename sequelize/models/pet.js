@@ -7,7 +7,7 @@ const Pet = sequelize.define('pet', {
 		primaryKey: true,
 		autoIncrement: true,
 	},
-	userId: {
+	userid: {
 		type: DataTypes.INTEGER,
 	},
 	img: DataTypes.TEXT('long'),
@@ -25,7 +25,6 @@ const Pet = sequelize.define('pet', {
 	postdescription: DataTypes.STRING,
 	since: {
 		type: DataTypes.DATE,
-		allowNull: false,
 	},
 });
 

@@ -34,8 +34,8 @@ app.use('/', pets);
 app.use('/petprofile/:id', users);
 
 // Dashboard
-app.use('/dashboard', dashboardPets);
 app.use('/dashboard', dashboardUser);
+app.use('/dashboard', dashboardPets);
 
 // Sign Up
 app.use('/signup', signUpUser);

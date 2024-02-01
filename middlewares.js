@@ -9,7 +9,7 @@ function authMw(request, response, next) {
 	if (token) {
 		jwt.verify(token, 'r4uqSKqC6L', (err, decodedToken) => {
 			if (decodedToken) {
-				request.userId = decodedToken.id;
+				request.userid = decodedToken.id;
 				request.isadmin = decodedToken.isadmin;
 				next();
 			} else {

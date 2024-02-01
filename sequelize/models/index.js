@@ -4,7 +4,7 @@ import Pet from './pet.js';
 
 User.hasMany(Pet, {
 	foreignKey: {
-		name: 'userId',
+		name: 'userid',
 		allowNull: true,
 		validate: {
 			notNull: {
