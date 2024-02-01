@@ -19,8 +19,6 @@ const User = sequelize.define('user', {
 // 		name: 'userId',
 // 		allowNull: false,
 // 	},
-// 	onDelete: 'RESTRICT',
-// 	onUpdate: 'RESTRICT',
 // });
 
 export default User;
