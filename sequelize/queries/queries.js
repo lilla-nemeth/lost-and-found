@@ -1,6 +1,6 @@
 import pg from 'pg';
-import * as messages from '../types/messageTypes.js';
-import * as queries from '../types/queryTypes.js';
+import * as messages from '../../types/messageTypes.js';
+import * as queries from '../../types/queryTypes.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
@@ -9,6 +9,8 @@ import path from 'path';
 import { dirname } from 'path';
 import url from 'url';
 import { fileURLToPath } from 'url';
+
+import Pet from '../models/pet.js';
 
 dotenv.config();
 
@@ -51,12 +53,24 @@ const getAllUserPets = (request, response) => {
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS }));
 };
 
+// const getAllPets = (request, response) => {
+// 	pool
+// 		.query(queries.SELECT_PETS_BY_DESC_DATE)
+// 		.then((res) => response.status(200).json(res.rows))
+// 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS }));
+// };
+
 // get all pets
-const getAllPets = (request, response) => {
-	pool
-		.query(queries.SELECT_PETS_BY_DESC_DATE)
-		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS }));
+const getAllPets = async (request, response) => {
+	try {
+		const pets = await Pet.findAll({
+			order: [['since', 'DESC']],
+		});
+
+		response.status(200).json(pets);
+	} catch (err) {
+		response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
+	}
 };
 
 // get/fetch limited amount of pets to pagination

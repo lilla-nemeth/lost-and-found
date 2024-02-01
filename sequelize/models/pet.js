@@ -1,59 +1,38 @@
 'use strict';
 import { Sequelize, DataTypes, Model } from 'sequelize';
-import { Attribute, PrimaryKey, AutoIncrement, NotNull } from '@sequelize/core/decorators-legacy';
+// import { Attribute, PrimaryKey, AutoIncrement, NotNull } from '@sequelize/core/decorators-legacy';
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
 	class Pet extends Model {
-		@Attribute(DataTypes.INTEGER)
-		@PrimaryKey
-		@AutoIncrement
 		id;
-
-		@Attribute(DataTypes.INTEGER)
-		@NotNull
 		userId;
 
-		@Attribute(DataTypes.STRING)
 		img;
 
-		@Attribute(DataTypes.STRING)
 		petstatus;
 
-		@Attribute(DataTypes.STRING)
 		longitude;
 
-		@Attribute(DataTypes.STRING)
 		latitude;
 
-		@Attribute(DataTypes.STRING)
 		petlocation;
 
-		@Attribute(DataTypes.STRING)
 		species;
 
-		@Attribute(DataTypes.STRING)
 		petsize;
 
-		@Attribute(DataTypes.STRING)
 		breed;
 
-		@Attribute(DataTypes.STRING)
 		sex;
 
-		@Attribute(DataTypes.STRING)
 		color;
 
-		@Attribute(DataTypes.STRING)
 		age;
 
-		@Attribute(DataTypes.STRING)
 		uniquefeature;
 
-		@Attribute(DataTypes.STRING)
 		postdescription;
 
-		@Attribute(DataTypes.DATE)
-		@NotNull
 		since;
 
 		static associate(models) {

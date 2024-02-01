@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { Sequelize } from 'sequelize';
 import { authMw, isFormValid, upload } from './middlewares.js';
-import * as queries from './queries/queries.js';
+import * as queries from './sequelize/queries/queries.js';
 
 import dashboardPets from './routes/petDashboard.js';
 import dashboardUser from './routes/userDashboard.js';
