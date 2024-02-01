@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { Sequelize } from 'sequelize';
-import { authMw, isFormValid, upload } from './middlewares.js';
+// import { Sequelize, DataTypes } from 'sequelize';
+import { authMw } from './middlewares.js';
 import * as queries from './sequelize/queries/queries.js';
 
 import dashboardPets from './routes/petDashboard.js';
@@ -23,26 +23,6 @@ app.use(express.json());
 let DEBUG = false;
 
 const port = process.env.PORT || 8080;
-
-const sequelize = new Sequelize(process.env.PG_DATABASE, process.env.PG_USER, process.env.PG_PASSWORD, {
-	host: process.env.PG_HOST,
-	dialect: 'postgres',
-	pool: {
-		max: 9,
-		min: 0,
-		acquire: 30000,
-		idle: 10000,
-	},
-});
-
-sequelize
-	.authenticate()
-	.then(() => {
-		console.log('Connection has been established successfully');
-	})
-	.catch((err) => {
-		console.log('Unable to connect to the database', err);
-	});
 
 // For navbar
 app.get('/username', authMw, queries.getUsername);
