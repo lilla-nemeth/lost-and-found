@@ -51,8 +51,8 @@ const getPetsByPagination = (request, response) => {
 
 	const pets = models.Pet.findAndCountAll({
 		order: [['since', 'DESC']],
-		offset: offset,
-		limit: limit,
+		offset,
+		limit,
 	});
 	pets
 		.then((data) => {
@@ -73,8 +73,8 @@ const getTotalNumberOfPets = (request, response) => {
 
 	const pets = models.Pet.findAndCountAll({
 		order: [['since', 'DESC']],
-		offset: offset,
-		limit: limit,
+		offset,
+		limit,
 	});
 	pets
 		.then((data) => {
