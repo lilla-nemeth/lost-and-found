@@ -205,6 +205,146 @@ const getAllUserPets = (request, response) => {
 	}
 };
 
+// NOTE: currently unused on the client side
+// edit pet by user (user dashboard)
+const updatePet = (request, response) => {
+	const id = request.params.id;
+	const petstatus = request.body.petstatus;
+	const petlocation = request.body.petlocation;
+	const longitude = request.body.longitude;
+	const latitude = request.body.latitude;
+	const species = request.body.species;
+	const petsize = request.body.petsize;
+	const breed = request.body.breed;
+	const sex = request.body.sex;
+	const color = request.body.color;
+	const age = request.body.age;
+	const uniquefeature = request.body.uniquefeature;
+	const postdescription = request.body.postdescription;
+
+	const pet = models.Pet.update({
+		id,
+		petstatus,
+		petlocation,
+		longitude,
+		latitude,
+		species,
+		petsize,
+		breed,
+		sex,
+		color,
+		age,
+		uniquefeature,
+		postdescription,
+	});
+
+	pet
+		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_PET }))
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERERROR_MSG_UPDATE_PET }));
+};
+
+// NOTE: currently unused on the client side
+// edit user data (user dashboard)
+const updateUser = (request, response) => {
+	const id = request.userId;
+	const username = request.body.username;
+	const email = request.body.email;
+	const pw = request.body.pw;
+	const phone = request.body.phone;
+	const encryptedPw = bcrypt.hashSync(pw, 10);
+
+	const user = models.User.update(
+		{
+			username,
+			email,
+			pw: encryptedPw,
+			phone,
+		},
+		{
+			where: {
+				id,
+			},
+		}
+	);
+	user
+		.query(queries.UPDATE_USER, [username, email, encryptedPw, phone, id])
+		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_USER }))
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_USER }));
+};
+
+// delete 1 pet by user (user dashboard)
+const deleteUserPet = (request, response) => {
+	const id = request.params.id;
+
+	const pet = models.Pet.destroy({
+		where: {
+			id,
+		},
+	});
+
+	pet
+		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PET }))
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PET }));
+};
+
+// delete all pets by user (user dashboard)
+const deleteAllUserPets = (request, response) => {
+	const userId = request.userId;
+	const isAdmin = request.isAdmin;
+
+	const userPetList = models.Pet.destroy({
+		truncate: true,
+		where: {
+			userId,
+		},
+	});
+
+	const adminPetList = models.Pet.destroy({ truncate: true });
+
+	if (isAdmin) {
+		adminPetList
+			.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
+			.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
+	} else {
+		userPetList
+			.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
+			.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
+	}
+};
+
+// delete user - delete user and the connected pets (user dashboard)
+const deleteUser = (request, response) => {
+	const userId = request.userId;
+
+	const pet = models.Pet.destroy({
+		where: {
+			userId,
+		},
+	});
+
+	const user = models.User.destroy({
+		where: {
+			id: userId,
+		},
+	});
+
+	pet
+		.then((res) => {
+			user
+				.then((res) => {
+					response.status(200).json({
+						msg: messages.SUCCESS_MSG_DELETED_USER_AND_PETS,
+					});
+				})
+				.catch((err) => {
+					response.status(400).json({ msg: messages.ERROR_MSG_DELETE_USER });
+				});
+		})
+		.catch((err) => {
+			response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS });
+		});
+};
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 const devSettings = {
@@ -278,100 +418,6 @@ const getGeocodeLocation = (request, response) => {
 		});
 };
 
-// edit pet by user (user dashboard)
-const updatePetData = (request, response) => {
-	const id = request.params.id;
-	const petstatus = request.body.petstatus;
-	const petlocation = request.body.petlocation;
-	const longitude = request.body.longitude;
-	const latitude = request.body.latitude;
-	const species = request.body.species;
-	const petsize = request.body.petsize;
-	const breed = request.body.breed;
-	const sex = request.body.sex;
-	const color = request.body.color;
-	const age = request.body.age;
-	const uniquefeature = request.body.uniquefeature;
-	const postdescription = request.body.postdescription;
-
-	pool
-		.query(queries.UPDATE_PET, [
-			petstatus,
-			petlocation,
-			longitude,
-			latitude,
-			species,
-			petsize,
-			breed,
-			sex,
-			color,
-			age,
-			uniquefeature,
-			postdescription,
-			id,
-		])
-		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_PET }))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERERROR_MSG_UPDATE_PET }));
-};
-
-// edit user data (user dashboard)
-const updateUserData = (request, response) => {
-	const id = request.userId;
-	const username = request.body.username;
-	const email = request.body.email;
-	const pw = request.body.pw;
-	const phone = request.body.phone;
-	const encryptedPw = bcrypt.hashSync(pw, 10);
-
-	pool
-		.query(queries.UPDATE_USER, [username, email, encryptedPw, phone, id])
-		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_USER }))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_USER }));
-};
-
-// delete 1 pet by user (user dashboard)
-const deleteUserPet = (request, response) => {
-	const id = request.params.id;
-
-	pool
-		.query(queries.DELETE_PET_BY_ID, [id])
-		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PET }))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PET }));
-};
-
-// delete all pets by user (user dashboard)
-const deleteAllUserPets = (request, response) => {
-	const userId = request.userId;
-	const isAdmin = request.isAdmin;
-
-	const adminQuery = queries.DELETE_ALL_PETS;
-	const userQuery = queries.DELETE_PET_BY_USER;
-
-	pool
-		.query(isAdmin ? adminQuery : userQuery, [userId])
-		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
-};
-
-// delete user - delete user and the connected pets (user dashboard)
-const deleteUser = (request, response) => {
-	const userId = request.userId;
-
-	pool
-		.query(queries.DELETE_PET_BY_USER, [userId])
-		.then((res) => {
-			pool
-				.query(queries.DELETE_USER_BY_ID, [userId])
-				.then((res) =>
-					response.status(200).json({
-						msg: messages.SUCCESS_MSG_DELETED_USER_AND_PETS,
-					})
-				)
-				.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_USER }));
-		})
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
-};
-
 const signIn = (request, response) => {
 	const email = request.body.email;
 	const pw = request.body.pw;
@@ -410,8 +456,8 @@ export {
 	getUsername,
 	getAllUsers,
 	getGeocodeLocation,
-	updatePetData,
-	updateUserData,
+	updatePet,
+	updateUser,
 	deleteUserPet,
 	deleteAllUserPets,
 	deleteUser,
