@@ -345,6 +345,21 @@ const deleteUser = (request, response) => {
 		});
 };
 
+// get username
+const getUsername = (request, response) => {
+	const userId = request.userId;
+
+	const user = models.User.findByPk(userId);
+
+	user
+		.then((data) => {
+			response.status(200).json(data.username);
+		})
+		.catch((err) => {
+			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERNAME });
+		});
+};
+
 // search pet location
 const getGeocodeLocation = (request, response) => {
 	const query = request.params.query;
@@ -382,41 +397,6 @@ const prodSettings = {
 };
 
 const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : devSettings);
-
-// get username
-const getUsername = (request, response) => {
-	const id = request.userId;
-
-	pool
-		.query(queries.SELECT_USER_BY_ID, [id])
-		.then((res) => response.status(200).json(res.rows[0].username))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERNAME }));
-};
-
-// const getUsername = (request, response) => {
-// 	const userId = request.userId;
-
-// 	const user = models.User.findByPk(userId);
-// 	console.log(user);
-// 	// console.log(userId);
-
-// 	// const user = models.User.findOne({
-// 	// 	where: {
-// 	// 		id: userId,
-// 	// 	},
-// 	// });
-
-// 	// const user = models.User.findByPk(userId);
-
-// 	user
-// 		.then((data) => {
-// 			// response.status(200).json(data);
-// 			// console.log(data[0]);
-// 		})
-// 		.catch((err) => {
-// 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERNAME });
-// 		});
-// };
 
 const signIn = (request, response) => {
 	const email = request.body.email;
