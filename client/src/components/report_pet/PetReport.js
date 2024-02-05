@@ -23,7 +23,6 @@ const PetReport = () => {
 		reportPet,
 		getUserPets,
 		setUserPets,
-		getAllPets,
 		setAllPets,
 		fetchPets,
 		limit,
@@ -100,11 +99,6 @@ const PetReport = () => {
 									setTotal(Number(res.data));
 								},
 							});
-						},
-					});
-					getAllPets({
-						successCallback: (res) => {
-							setAllPets(res.data);
 						},
 					});
 					getUserPets({

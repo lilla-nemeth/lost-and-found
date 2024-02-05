@@ -73,18 +73,6 @@ export default function AppStateContextProvider(props) {
 		});
 	}, [limit, offset]);
 
-	useEffect(() => {
-		getAllPets({
-			successCallback: (res) => {
-				setAllPets(res.data);
-			},
-			errorCallback: (err) => {
-				clearError();
-				handleError(err, setErrorMsg);
-			},
-		});
-	}, []);
-
 	function signUpUser({ email, username, phone, pw, successCallback, successTimeout, errorCallback }) {
 		const options = {
 			method: 'post',
@@ -240,24 +228,6 @@ export default function AppStateContextProvider(props) {
 			});
 	}
 
-	function getAllPets({ successCallback, errorCallback }) {
-		const options = {
-			method: 'get',
-			url: '/',
-			mode: 'cors',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		};
-		axios(options)
-			.then((res) => {
-				if (res && successCallback) successCallback(res);
-			})
-			.catch((err) => {
-				if (err && errorCallback) errorCallback(err);
-			});
-	}
-
 	function getUserPets({ token, successCallback, errorCallback }) {
 		const options = {
 			method: 'get',
@@ -382,7 +352,6 @@ export default function AppStateContextProvider(props) {
 				deleteOnePet,
 				deleteAllPets,
 				getUserPets,
-				getAllPets,
 				setAllPets,
 				fetchPlaces,
 			}}

@@ -18,7 +18,6 @@ const Dashboard = () => {
 		deleteAllPets,
 		userPets,
 		setUserPets,
-		getAllPets,
 		setAllPets,
 		fetchPets,
 		limit,
@@ -70,12 +69,6 @@ const Dashboard = () => {
 						});
 					},
 				});
-				getAllPets({
-					successCallback: (res) => {
-						setLoading(false);
-						setAllPets(res.data);
-					},
-				});
 			},
 			successTimeout: () =>
 				setTimeout(() => {
@@ -110,11 +103,6 @@ const Dashboard = () => {
 									setTotal(Number(res.data));
 								},
 							});
-						},
-					});
-					getAllPets({
-						successCallback: (res) => {
-							setAllPets(res.data);
 						},
 					});
 				},

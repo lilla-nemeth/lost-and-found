@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'production') {
 ///////////////////////////////////////////////////////////////////////////////////
 
 // get all users
-// TODO: works, but useless, instead getAllPets should have another query to get user data from users
+// TODO: works, but useless, instead getPetsByPagination should have another query to get user data from users
 const getAllUsers = (request, response) => {
 	const users = models.User.findAll();
 
@@ -107,34 +107,6 @@ const getAllUserPets = (request, response) => {
 		.query(isadmin ? adminQuery : userQuery, [userid])
 		.then((res) => response.status(200).json(res.rows))
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS }));
-};
-
-// TODO: during getAllPets, I should find the user by userid,
-// and fetch the pets with the whole user object (2 queries)
-
-// const getAllPets = (request, response) => {
-// 	pool
-// 		.query(queries.SELECT_PETS_BY_DESC_DATE)
-// 		.then((res) => response.status(200).json(res.rows))
-// 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS }));
-// };
-
-// get all pets
-const getAllPets = (request, response) => {
-	const pets = models.Pet.findAll({
-		order: [['since', 'DESC']],
-	});
-
-	console.log(pets);
-	pets
-		.then((res) => {
-			// console.log(data);
-			response.status(200).json(console.log(pets));
-		})
-		.catch((err) => {
-			// response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS });
-			console.log(err);
-		});
 };
 
 // from pets table get one pet by id
@@ -389,7 +361,6 @@ const getAll = (request, response) => {
 
 export {
 	getAllUserPets,
-	getAllPets,
 	getPetsByPagination,
 	getTotalNumberOfPets,
 	getPetById,
