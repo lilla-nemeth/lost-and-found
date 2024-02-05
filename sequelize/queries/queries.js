@@ -23,6 +23,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
+// REWRITTEN FUNCTIONS WITH SEQUELIZE:
 
 // get all users
 // TODO: works, but useless, instead getPetsByPagination should have another query to get user data from users
@@ -73,7 +74,52 @@ const getTotalNumberOfPets = (request, response) => {
 			response.status(200).json(data.count);
 		})
 		.catch((err) => {
-			console.log(err);
+			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_TOTAL_PETS });
+		});
+};
+
+// report pet by user
+const createPetProfile = (request, response) => {
+	const userid = request.userid;
+	const img = request.file.buffer.toString('base64');
+	const petstatus = request.body.petstatus;
+	const petlocation = request.body.petlocation;
+	const longitude = request.body.longitude;
+	const latitude = request.body.latitude;
+	const species = request.body.species;
+	const petsize = request.body.petsize;
+	const breed = request.body.breed;
+	const sex = request.body.sex;
+	const color = request.body.color;
+	const age = request.body.age;
+	const uniquefeature = request.body.uniquefeature;
+	const postdescription = request.body.postdescription;
+	const since = request.body.since;
+
+	const pet = models.Pet.create({
+		userid,
+		img,
+		petstatus,
+		petlocation,
+		longitude,
+		latitude,
+		species,
+		petsize,
+		breed,
+		sex,
+		color,
+		age,
+		uniquefeature,
+		postdescription,
+		since,
+	});
+
+	pet
+		.then((data) => {
+			response.status(200).json(data.save());
+		})
+		.catch((err) => {
+			response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET });
 		});
 };
 
@@ -108,6 +154,42 @@ const getAllUserPets = (request, response) => {
 		.then((res) => response.status(200).json(res.rows))
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS }));
 };
+
+// const getAllUserPets = (request, response) => {
+// 	const userid = request.userid;
+// 	const isadmin = request.isadmin;
+
+// 	const userPetList = models.Pet.findAll({
+// 		order: [['since', 'DESC']],
+// 		where: {
+// 			id: userid,
+// 		},
+// 	});
+
+// 	const adminPetList = models.Pet.findAll({
+// 		order: [['since', 'DESC']],
+// 	});
+
+// 	// for hidden isadmin property, than can be added later
+// 	if (isadmin) {
+// 		adminPetList
+// 			.then((data) => {
+// 				response.status(200).json(data.rows);
+// 			})
+// 			.catch((err) => {
+// 				console.log(err);
+// 			});
+// 	} else {
+// 		userPetList
+// 			.then((data) => {
+// 				response.status(200).json(data.rows);
+// 				console.log(data.rows);
+// 			})
+// 			.catch((err) => {
+// 				response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
+// 			});
+// 	}
+// };
 
 // from pets table get one pet by id
 const getPetById = (request, response) => {
@@ -310,47 +392,6 @@ const signIn = (request, response) => {
 				});
 		})
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_NOT_FOUND_USER }));
-};
-
-// report pet by user
-const createPetProfile = (request, response) => {
-	const userid = request.userid;
-	const img = request.file.buffer.toString('base64');
-	const petstatus = request.body.petstatus;
-	const petlocation = request.body.petlocation;
-	const longitude = request.body.longitude;
-	const latitude = request.body.latitude;
-	const species = request.body.species;
-	const petsize = request.body.petsize;
-	const breed = request.body.breed;
-	const sex = request.body.sex;
-	const color = request.body.color;
-	const age = request.body.age;
-	const uniquefeature = request.body.uniquefeature;
-	const postdescription = request.body.postdescription;
-
-	pool
-		.query(queries.INSERT_PET_VALUES, [
-			userid,
-			img,
-			petstatus,
-			petlocation,
-			longitude,
-			latitude,
-			species,
-			petsize,
-			breed,
-			sex,
-			color,
-			age,
-			uniquefeature,
-			postdescription,
-		])
-		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => {
-			console.log(err);
-			response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET });
-		});
 };
 
 const getAll = (request, response) => {
