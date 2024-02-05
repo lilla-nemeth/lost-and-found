@@ -10,7 +10,7 @@ const Pet = sequelize.define('pet', {
 	userid: {
 		type: DataTypes.INTEGER,
 	},
-	img: DataTypes.TEXT('long'),
+	img: DataTypes.TEXT,
 	petstatus: DataTypes.STRING,
 	longitude: DataTypes.STRING,
 	latitude: DataTypes.STRING,
