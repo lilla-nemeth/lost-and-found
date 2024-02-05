@@ -34,6 +34,9 @@ const getAllUsers = (request, response) => {
 		.then((data) => {
 			response.status(200).json(data);
 		})
+		.then(() => {
+			response.status(200).json({ msg: messages.SUCCESS_MSG_FETCHED_USERS });
+		})
 		.catch((err) => {
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERS });
 		});
@@ -54,6 +57,9 @@ const getPetsByPagination = (request, response) => {
 		.then((data) => {
 			response.status(200).json(data.rows);
 		})
+		.then(() => {
+			response.status(200).json({ msg: messages.SUCCESS_MSG_FETCHED_PETS });
+		})
 		.catch((err) => {
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_PETS });
 		});
@@ -72,6 +78,9 @@ const getTotalNumberOfPets = (request, response) => {
 	pets
 		.then((data) => {
 			response.status(200).json(data.count);
+		})
+		.then(() => {
+			response.status(200).json({ msg: messages.SUCCESS_MSG_FETCHED_TOTAL_PETS });
 		})
 		.catch((err) => {
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_TOTAL_PETS });
@@ -118,8 +127,30 @@ const createPetProfile = (request, response) => {
 		.then((data) => {
 			response.status(200).json(data.save());
 		})
+		.then((data) => {
+			response.status(200).json({ msg: messages.SUCCESS_MSG_CREATED_PET });
+		})
 		.catch((err) => {
 			response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET });
+		});
+};
+
+// NOTE: UNUSED
+// from pets table get one pet by id
+const getPetById = (request, response) => {
+	const id = request.params.id;
+
+	const pet = models.Pet.findByPk(id);
+
+	pet
+		.then((data) => {
+			response.status(200).json(data.rows);
+		})
+		.then((data) => {
+			response.status(200).json({ msg: messages.SUCCESS_MSG_FETCHED_PET });
+		})
+		.catch((err) => {
+			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
 		});
 };
 
@@ -145,19 +176,19 @@ const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : dev
 // get all pets by userid
 const getAllUserPets = (request, response) => {
 	const userid = request.userid;
-	const isadmin = request.isadmin;
+	const isAdmin = request.isAdmin;
 	const adminQuery = queries.SELECT_PETS_BY_DESC_DATE;
 	const userQuery = queries.SELECT_PETS_BY_USER;
 
 	pool
-		.query(isadmin ? adminQuery : userQuery, [userid])
+		.query(isAdmin ? adminQuery : userQuery, [userid])
 		.then((res) => response.status(200).json(res.rows))
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS }));
 };
 
 // const getAllUserPets = (request, response) => {
 // 	const userid = request.userid;
-// 	const isadmin = request.isadmin;
+// 	const isAdmin = request.isAdmin;
 
 // 	const userPetList = models.Pet.findAll({
 // 		order: [['since', 'DESC']],
@@ -170,8 +201,7 @@ const getAllUserPets = (request, response) => {
 // 		order: [['since', 'DESC']],
 // 	});
 
-// 	// for hidden isadmin property, than can be added later
-// 	if (isadmin) {
+// 	if (isAdmin) {
 // 		adminPetList
 // 			.then((data) => {
 // 				response.status(200).json(data.rows);
@@ -190,16 +220,6 @@ const getAllUserPets = (request, response) => {
 // 			});
 // 	}
 // };
-
-// from pets table get one pet by id
-const getPetById = (request, response) => {
-	const id = request.params.id;
-
-	pool
-		.query(queries.SELECT_PET_BY_ID, [id])
-		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_PET }));
-};
 
 // get username
 const getUsername = (request, response) => {
@@ -319,13 +339,13 @@ const deleteUserPet = (request, response) => {
 // delete all pets by user (user dashboard)
 const deleteAllUserPets = (request, response) => {
 	const userid = request.userid;
-	const isadmin = request.isadmin;
+	const isAdmin = request.isAdmin;
 
 	const adminQuery = queries.DELETE_ALL_PETS;
 	const userQuery = queries.DELETE_PET_BY_USER;
 
 	pool
-		.query(isadmin ? adminQuery : userQuery, [userid])
+		.query(isAdmin ? adminQuery : userQuery, [userid])
 		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 };
@@ -349,16 +369,28 @@ const deleteUser = (request, response) => {
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 };
 
-const createAccount = (request, response) => {
+const createUserAccount = (request, response) => {
 	const username = request.body.username;
 	const email = request.body.email;
 	const pw = request.body.pw;
 	const phone = request.body.phone;
 	const encryptedPw = bcrypt.hashSync(pw, 10);
 
-	pool
-		.query(queries.INSERT_USER_VALUES, [username, email, encryptedPw, phone])
-		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_CREATED_USER }))
+	const user = models.User.create({
+		username,
+		email,
+		phone,
+		encryptedPw,
+		isAdmin: false,
+	});
+
+	user
+		.then((data) => {
+			response.status(200).json(data.save());
+		})
+		.then((data) => {
+			response.status(200).json({ msg: messages.SUCCESS_MSG_CREATED_USER });
+		})
 		.catch((err) => {
 			if (err.code === '23505' && err.constraint === 'users_email_key') {
 				response.status(400).json({ msg: messages.ERROR_MSG_USED_EMAIL });
@@ -369,6 +401,27 @@ const createAccount = (request, response) => {
 			}
 		});
 };
+
+// const createUserAccount = (request, response) => {
+// 	const username = request.body.username;
+// 	const email = request.body.email;
+// 	const pw = request.body.pw;
+// 	const phone = request.body.phone;
+// 	const encryptedPw = bcrypt.hashSync(pw, 10);
+
+// 	pool
+// 		.query(queries.INSERT_USER_VALUES, [username, email, encryptedPw, phone])
+// 		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_CREATED_USER }))
+// 		.catch((err) => {
+// 			if (err.code === '23505' && err.constraint === 'users_email_key') {
+// 				response.status(400).json({ msg: messages.ERROR_MSG_USED_EMAIL });
+// 			} else if (err.code === '23505' && err.constraint === 'users_phone_key') {
+// 				response.status(400).json({ msg: messages.ERROR_MSG_USED_PHONE });
+// 			} else if (err.code != '23505' && isFormValid) {
+// 				isFormValid;
+// 			}
+// 		});
+// };
 
 const signIn = (request, response) => {
 	const email = request.body.email;
@@ -383,7 +436,7 @@ const signIn = (request, response) => {
 			res.rows &&
 				bcrypt.compare(pw, encryptedPw).then((isMatch) => {
 					if (isMatch) {
-						jwt.sign({ id: userObject.id, isadmin: userObject.isadmin }, 'r4uqSKqC6L', (err, token) => {
+						jwt.sign({ id: userObject.id, isAdmin: userObject.isAdmin }, 'r4uqSKqC6L', (err, token) => {
 							response.status(200).json(token);
 						});
 					} else {
@@ -413,7 +466,7 @@ export {
 	deleteUserPet,
 	deleteAllUserPets,
 	deleteUser,
-	createAccount,
+	createUserAccount,
 	signIn,
 	createPetProfile,
 	getAll,
