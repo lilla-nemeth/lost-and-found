@@ -4,6 +4,6 @@ import * as queries from '../sequelize/queries/queries.js';
 
 const router = Router();
 
-router.post('/', [isFormValid], queries.createAccount);
+router.post('/', [isFormValid], queries.createUserAccount);
 
 export default router;

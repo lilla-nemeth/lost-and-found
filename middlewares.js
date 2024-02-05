@@ -10,7 +10,7 @@ function authMw(request, response, next) {
 		jwt.verify(token, 'r4uqSKqC6L', (err, decodedToken) => {
 			if (decodedToken) {
 				request.userid = decodedToken.id;
-				request.isadmin = decodedToken.isadmin;
+				request.isAdmin = decodedToken.isAdmin;
 				next();
 			} else {
 				response.status(401).json({ msg: 'Token is not valid' });
