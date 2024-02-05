@@ -10,6 +10,7 @@ import { dirname } from 'path';
 import url from 'url';
 import { fileURLToPath } from 'url';
 import models from '../models/index.js';
+import { isFormValid } from '../../middlewares.js';
 
 dotenv.config();
 
@@ -151,6 +152,41 @@ const getPetById = (request, response) => {
 		})
 		.catch((err) => {
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
+		});
+};
+
+// TODO: test again
+const createUserAccount = (request, response) => {
+	const username = request.body.username;
+	const email = request.body.email;
+	const pw = request.body.pw;
+	const phone = request.body.phone;
+	const encryptedPw = bcrypt.hashSync(pw, 10);
+
+	const user = models.User.create({
+		username,
+		email,
+		pw: encryptedPw,
+		phone,
+		isAdmin: false,
+	});
+
+	user
+		.then((data) => {
+			console.log(encryptedPw);
+			response.status(200).json(data.save());
+		})
+		.then(() => {
+			response.status(200).json({ msg: messages.SUCCESS_MSG_CREATED_USER });
+		})
+		.catch((err) => {
+			if (err.code === '23505' && err.constraint === 'users_email_key') {
+				response.status(400).json({ msg: messages.ERROR_MSG_USED_EMAIL });
+			} else if (err.code === '23505' && err.constraint === 'users_phone_key') {
+				response.status(400).json({ msg: messages.ERROR_MSG_USED_PHONE });
+			} else if (err.code != '23505' && isFormValid) {
+				isFormValid;
+			}
 		});
 };
 
@@ -368,60 +404,6 @@ const deleteUser = (request, response) => {
 		})
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 };
-
-const createUserAccount = (request, response) => {
-	const username = request.body.username;
-	const email = request.body.email;
-	const pw = request.body.pw;
-	const phone = request.body.phone;
-	const encryptedPw = bcrypt.hashSync(pw, 10);
-
-	const user = models.User.create({
-		username,
-		email,
-		phone,
-		encryptedPw,
-		isAdmin: false,
-	});
-
-	user
-		.then((data) => {
-			response.status(200).json(data.save());
-		})
-		.then((data) => {
-			response.status(200).json({ msg: messages.SUCCESS_MSG_CREATED_USER });
-		})
-		.catch((err) => {
-			if (err.code === '23505' && err.constraint === 'users_email_key') {
-				response.status(400).json({ msg: messages.ERROR_MSG_USED_EMAIL });
-			} else if (err.code === '23505' && err.constraint === 'users_phone_key') {
-				response.status(400).json({ msg: messages.ERROR_MSG_USED_PHONE });
-			} else if (err.code != '23505' && isFormValid) {
-				isFormValid;
-			}
-		});
-};
-
-// const createUserAccount = (request, response) => {
-// 	const username = request.body.username;
-// 	const email = request.body.email;
-// 	const pw = request.body.pw;
-// 	const phone = request.body.phone;
-// 	const encryptedPw = bcrypt.hashSync(pw, 10);
-
-// 	pool
-// 		.query(queries.INSERT_USER_VALUES, [username, email, encryptedPw, phone])
-// 		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_CREATED_USER }))
-// 		.catch((err) => {
-// 			if (err.code === '23505' && err.constraint === 'users_email_key') {
-// 				response.status(400).json({ msg: messages.ERROR_MSG_USED_EMAIL });
-// 			} else if (err.code === '23505' && err.constraint === 'users_phone_key') {
-// 				response.status(400).json({ msg: messages.ERROR_MSG_USED_PHONE });
-// 			} else if (err.code != '23505' && isFormValid) {
-// 				isFormValid;
-// 			}
-// 		});
-// };
 
 const signIn = (request, response) => {
 	const email = request.body.email;
