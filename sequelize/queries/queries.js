@@ -38,6 +38,45 @@ const getAllUsers = (request, response) => {
 		});
 };
 
+// get/fetch limited amount of pets to pagination
+// TODO: this getPetsByPagination could be combined with getTotalNumberOfPets
+const getPetsByPagination = (request, response) => {
+	const offset = request.params.skip;
+	const limit = request.params.fetch;
+
+	const pets = models.Pet.findAndCountAll({
+		order: [['since', 'DESC']],
+		offset: offset,
+		limit: limit,
+	});
+	pets
+		.then((data) => {
+			response.status(200).json(data.rows);
+		})
+		.catch((err) => {
+			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_PETS });
+		});
+};
+
+// get the total amount (number) of pets
+const getTotalNumberOfPets = (request, response) => {
+	const offset = request.params.skip;
+	const limit = request.params.fetch;
+
+	const pets = models.Pet.findAndCountAll({
+		order: [['since', 'DESC']],
+		offset: offset,
+		limit: limit,
+	});
+	pets
+		.then((data) => {
+			response.status(200).json(data.count);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 const devSettings = {
@@ -72,56 +111,30 @@ const getAllUserPets = (request, response) => {
 
 // TODO: during getAllPets, I should find the user by userid,
 // and fetch the pets with the whole user object (2 queries)
-const getAllPets = (request, response) => {
-	pool
-		.query(queries.SELECT_PETS_BY_DESC_DATE)
-		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS }));
-};
 
-// get all pets
 // const getAllPets = (request, response) => {
-// 	const pets = Pet.findAll({
-// 		order: [['since', 'DESC']],
-// 	});
-
-// 	Promise()
-// 		.then((res) => {
-// 			console.log('all pets ----------------------');
-// 			response.status(200).json(pets);
-// 		})
-// 		.catch((err) => {
-// 			console.log(err);
-// 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS });
-// 		});
-// 	// try {
-// 	// 	const pets = await Pet.findAll({
-// 	// 		order: [['since', 'DESC']],
-// 	// 	});
-
-// 	// 	response.status(200).json(pets);
-// 	// } catch (err) {
-// 	// 	response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS });
-// 	// }
+// 	pool
+// 		.query(queries.SELECT_PETS_BY_DESC_DATE)
+// 		.then((res) => response.status(200).json(res.rows))
+// 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS }));
 // };
 
-// get/fetch limited amount of pets to pagination
-const getPetsByPagination = (request, response) => {
-	const limit = request.params.fetch;
-	const offset = request.params.skip;
+// get all pets
+const getAllPets = (request, response) => {
+	const pets = models.Pet.findAll({
+		order: [['since', 'DESC']],
+	});
 
-	pool
-		.query(queries.SELECT_PETS_BY_PAGINATION, [limit, offset])
-		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_PETS }));
-};
-
-// get the total amount (number) of pets
-const getTotalNumberOfPets = (request, response) => {
-	pool
-		.query(queries.SELECT_TOTAL_NUM_OF_PETS)
-		.then((res) => response.status(200).json(res.rows[0].count))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_TOTAL_PETS }));
+	console.log(pets);
+	pets
+		.then((res) => {
+			// console.log(data);
+			response.status(200).json(console.log(pets));
+		})
+		.catch((err) => {
+			// response.status(400).json({ msg: messages.ERROR_MSG_FETCH_ALL_PETS });
+			console.log(err);
+		});
 };
 
 // from pets table get one pet by id
@@ -143,6 +156,31 @@ const getUsername = (request, response) => {
 		.then((res) => response.status(200).json(res.rows[0].username))
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERNAME }));
 };
+
+// const getUsername = (request, response) => {
+// 	const userid = request.userid;
+
+// 	const user = models.User.findByPk(userid);
+// 	console.log(user);
+// 	// console.log(userid);
+
+// 	// const user = models.User.findOne({
+// 	// 	where: {
+// 	// 		id: userid,
+// 	// 	},
+// 	// });
+
+// 	// const user = models.User.findByPk(userid);
+
+// 	user
+// 		.then((data) => {
+// 			// response.status(200).json(data);
+// 			// console.log(data[0]);
+// 		})
+// 		.catch((err) => {
+// 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERNAME });
+// 		});
+// };
 
 // search pet location
 const getGeocodeLocation = (request, response) => {
