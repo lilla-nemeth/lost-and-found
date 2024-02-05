@@ -170,6 +170,41 @@ const getPetById = (request, response) => {
 		});
 };
 
+// get all pets by userId
+const getAllUserPets = (request, response) => {
+	const userId = request.userId;
+	const isAdmin = request.isAdmin;
+
+	const userPetList = models.Pet.findAll({
+		order: [['since', 'DESC']],
+		where: {
+			userId,
+		},
+	});
+
+	const adminPetList = models.Pet.findAll({
+		order: [['since', 'DESC']],
+	});
+
+	if (isAdmin) {
+		adminPetList
+			.then((data) => {
+				response.status(200).json(data);
+			})
+			.catch((err) => {
+				response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
+			});
+	} else {
+		userPetList
+			.then((data) => {
+				response.status(200).json(data);
+			})
+			.catch((err) => {
+				response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
+			});
+	}
+};
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 const devSettings = {
@@ -188,59 +223,6 @@ const prodSettings = {
 };
 
 const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : devSettings);
-
-// get all pets by userId
-const getAllUserPets = (request, response) => {
-	const userId = request.userId;
-	const isAdmin = request.isAdmin;
-	const adminQuery = queries.SELECT_PETS_BY_DESC_DATE;
-	const userQuery = queries.SELECT_PETS_BY_USER;
-
-	pool
-		.query(isAdmin ? adminQuery : userQuery, [userId])
-		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => {
-			console.log(err);
-			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
-		});
-};
-
-// const getAllUserPets = (request, response) => {
-// 	const userId = request.userId;
-// 	const isAdmin = request.isAdmin;
-
-// 	const userPetList = models.Pet.findAll({
-// 		order: [['since', 'DESC']],
-// 		where: {
-// 			id: userId,
-// 		},
-// 	});
-
-// 	const adminPetList = models.Pet.findAll({
-// 		order: [['since', 'DESC']],
-// 	});
-
-// 	// if (isAdmin) {
-// 	// 	adminPetList
-// 	// 		.then((data) => {
-// 	// 			response.status(200).json(data.rows);
-// 	// 		})
-// 	// 		.catch((err) => {
-// 	// 			console.log(err);
-// 	// 		});
-// 	// } else {
-// 	userPetList
-// 		.then((data) => {
-// 			// response.status(200).json(data.rows);
-// 			console.log(data);
-// 			// console.log(data.rows);
-// 		})
-// 		.catch((err) => {
-// 			console.log(err);
-// 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
-// 		});
-// 	// }
-// };
 
 // get username
 const getUsername = (request, response) => {
