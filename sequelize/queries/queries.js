@@ -26,6 +26,37 @@ if (process.env.NODE_ENV === 'production') {
 ///////////////////////////////////////////////////////////////////////////////////
 // REWRITTEN FUNCTIONS WITH SEQUELIZE:
 
+// TODO: test again
+const createUserAccount = (request, response) => {
+	const username = request.body.username;
+	const email = request.body.email;
+	const pw = request.body.pw;
+	const phone = request.body.phone;
+	const encryptedPw = bcrypt.hashSync(pw, 10);
+
+	const user = models.User.create({
+		username,
+		email,
+		pw: encryptedPw,
+		phone,
+		isAdmin: false,
+	});
+
+	user
+		.then((data) => {
+			response.status(200).json(data.save());
+		})
+		.catch((err) => {
+			if (err.code === '23505' && err.constraint === 'users_email_key') {
+				response.status(400).json({ msg: messages.ERROR_MSG_USED_EMAIL });
+			} else if (err.code === '23505' && err.constraint === 'users_phone_key') {
+				response.status(400).json({ msg: messages.ERROR_MSG_USED_PHONE });
+			} else if (err.code != '23505' && isFormValid) {
+				isFormValid;
+			}
+		});
+};
+
 // get all users
 // TODO: works, but useless, instead getPetsByPagination should have another query to get user data from users
 const getAllUsers = (request, response) => {
@@ -34,9 +65,6 @@ const getAllUsers = (request, response) => {
 	users
 		.then((data) => {
 			response.status(200).json(data);
-		})
-		.then(() => {
-			response.status(200).json({ msg: messages.SUCCESS_MSG_FETCHED_USERS });
 		})
 		.catch((err) => {
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERS });
@@ -58,10 +86,8 @@ const getPetsByPagination = (request, response) => {
 		.then((data) => {
 			response.status(200).json(data.rows);
 		})
-		.then(() => {
-			response.status(200).json({ msg: messages.SUCCESS_MSG_FETCHED_PETS });
-		})
 		.catch((err) => {
+			console.log(err);
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_PETS });
 		});
 };
@@ -79,9 +105,6 @@ const getTotalNumberOfPets = (request, response) => {
 	pets
 		.then((data) => {
 			response.status(200).json(data.count);
-		})
-		.then(() => {
-			response.status(200).json({ msg: messages.SUCCESS_MSG_FETCHED_TOTAL_PETS });
 		})
 		.catch((err) => {
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_TOTAL_PETS });
@@ -104,7 +127,6 @@ const createPetProfile = (request, response) => {
 	const age = request.body.age;
 	const uniquefeature = request.body.uniquefeature;
 	const postdescription = request.body.postdescription;
-	const since = request.body.since;
 
 	const pet = models.Pet.create({
 		userid,
@@ -121,15 +143,11 @@ const createPetProfile = (request, response) => {
 		age,
 		uniquefeature,
 		postdescription,
-		since,
 	});
 
 	pet
 		.then((data) => {
 			response.status(200).json(data.save());
-		})
-		.then((data) => {
-			response.status(200).json({ msg: messages.SUCCESS_MSG_CREATED_PET });
 		})
 		.catch((err) => {
 			response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET });
@@ -147,46 +165,8 @@ const getPetById = (request, response) => {
 		.then((data) => {
 			response.status(200).json(data.rows);
 		})
-		.then((data) => {
-			response.status(200).json({ msg: messages.SUCCESS_MSG_FETCHED_PET });
-		})
 		.catch((err) => {
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
-		});
-};
-
-// TODO: test again
-const createUserAccount = (request, response) => {
-	const username = request.body.username;
-	const email = request.body.email;
-	const pw = request.body.pw;
-	const phone = request.body.phone;
-	const encryptedPw = bcrypt.hashSync(pw, 10);
-
-	const user = models.User.create({
-		username,
-		email,
-		pw: encryptedPw,
-		phone,
-		isAdmin: false,
-	});
-
-	user
-		.then((data) => {
-			console.log(encryptedPw);
-			response.status(200).json(data.save());
-		})
-		.then(() => {
-			response.status(200).json({ msg: messages.SUCCESS_MSG_CREATED_USER });
-		})
-		.catch((err) => {
-			if (err.code === '23505' && err.constraint === 'users_email_key') {
-				response.status(400).json({ msg: messages.ERROR_MSG_USED_EMAIL });
-			} else if (err.code === '23505' && err.constraint === 'users_phone_key') {
-				response.status(400).json({ msg: messages.ERROR_MSG_USED_PHONE });
-			} else if (err.code != '23505' && isFormValid) {
-				isFormValid;
-			}
 		});
 };
 
@@ -248,10 +228,11 @@ const getAllUserPets = (request, response) => {
 // 	} else {
 // 		userPetList
 // 			.then((data) => {
-// 				response.status(200).json(data.rows);
+// 				// response.status(200).json(data.rows);
 // 				console.log(data.rows);
 // 			})
 // 			.catch((err) => {
+// 				console.log(err);
 // 				response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
 // 			});
 // 	}
