@@ -7,7 +7,7 @@ const Pet = sequelize.define('pet', {
 		primaryKey: true,
 		autoIncrement: true,
 	},
-	userid: {
+	userId: {
 		type: DataTypes.INTEGER,
 	},
 	img: DataTypes.TEXT,

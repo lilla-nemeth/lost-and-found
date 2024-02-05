@@ -44,7 +44,7 @@ const PetProfile = () => {
 		if (token && usersArr.length) {
 			petsArr.filter((pet) =>
 				usersArr.filter((user) => {
-					if (pet.userid === user.id && pet.id.toString() === id) {
+					if (pet.userId === user.id && pet.id.toString() === id) {
 						onePet.push(pet);
 						oneUser.push(user);
 					}

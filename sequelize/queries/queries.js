@@ -113,7 +113,7 @@ const getTotalNumberOfPets = (request, response) => {
 
 // report pet by user
 const createPetProfile = (request, response) => {
-	const userid = request.userid;
+	const userId = request.userId;
 	const img = request.file.buffer.toString('base64');
 	const petstatus = request.body.petstatus;
 	const petlocation = request.body.petlocation;
@@ -129,7 +129,7 @@ const createPetProfile = (request, response) => {
 	const postdescription = request.body.postdescription;
 
 	const pet = models.Pet.create({
-		userid,
+		userId,
 		img,
 		petstatus,
 		petlocation,
@@ -189,27 +189,30 @@ const prodSettings = {
 
 const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : devSettings);
 
-// get all pets by userid
+// get all pets by userId
 const getAllUserPets = (request, response) => {
-	const userid = request.userid;
+	const userId = request.userId;
 	const isAdmin = request.isAdmin;
 	const adminQuery = queries.SELECT_PETS_BY_DESC_DATE;
 	const userQuery = queries.SELECT_PETS_BY_USER;
 
 	pool
-		.query(isAdmin ? adminQuery : userQuery, [userid])
+		.query(isAdmin ? adminQuery : userQuery, [userId])
 		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS }));
+		.catch((err) => {
+			console.log(err);
+			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
+		});
 };
 
 // const getAllUserPets = (request, response) => {
-// 	const userid = request.userid;
+// 	const userId = request.userId;
 // 	const isAdmin = request.isAdmin;
 
 // 	const userPetList = models.Pet.findAll({
 // 		order: [['since', 'DESC']],
 // 		where: {
-// 			id: userid,
+// 			id: userId,
 // 		},
 // 	});
 
@@ -217,30 +220,31 @@ const getAllUserPets = (request, response) => {
 // 		order: [['since', 'DESC']],
 // 	});
 
-// 	if (isAdmin) {
-// 		adminPetList
-// 			.then((data) => {
-// 				response.status(200).json(data.rows);
-// 			})
-// 			.catch((err) => {
-// 				console.log(err);
-// 			});
-// 	} else {
-// 		userPetList
-// 			.then((data) => {
-// 				// response.status(200).json(data.rows);
-// 				console.log(data.rows);
-// 			})
-// 			.catch((err) => {
-// 				console.log(err);
-// 				response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
-// 			});
-// 	}
+// 	// if (isAdmin) {
+// 	// 	adminPetList
+// 	// 		.then((data) => {
+// 	// 			response.status(200).json(data.rows);
+// 	// 		})
+// 	// 		.catch((err) => {
+// 	// 			console.log(err);
+// 	// 		});
+// 	// } else {
+// 	userPetList
+// 		.then((data) => {
+// 			// response.status(200).json(data.rows);
+// 			console.log(data);
+// 			// console.log(data.rows);
+// 		})
+// 		.catch((err) => {
+// 			console.log(err);
+// 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
+// 		});
+// 	// }
 // };
 
 // get username
 const getUsername = (request, response) => {
-	const id = request.userid;
+	const id = request.userId;
 
 	pool
 		.query(queries.SELECT_USER_BY_ID, [id])
@@ -249,19 +253,19 @@ const getUsername = (request, response) => {
 };
 
 // const getUsername = (request, response) => {
-// 	const userid = request.userid;
+// 	const userId = request.userId;
 
-// 	const user = models.User.findByPk(userid);
+// 	const user = models.User.findByPk(userId);
 // 	console.log(user);
-// 	// console.log(userid);
+// 	// console.log(userId);
 
 // 	// const user = models.User.findOne({
 // 	// 	where: {
-// 	// 		id: userid,
+// 	// 		id: userId,
 // 	// 	},
 // 	// });
 
-// 	// const user = models.User.findByPk(userid);
+// 	// const user = models.User.findByPk(userId);
 
 // 	user
 // 		.then((data) => {
@@ -330,7 +334,7 @@ const updatePetData = (request, response) => {
 
 // edit user data (user dashboard)
 const updateUserData = (request, response) => {
-	const id = request.userid;
+	const id = request.userId;
 	const username = request.body.username;
 	const email = request.body.email;
 	const pw = request.body.pw;
@@ -355,27 +359,27 @@ const deleteUserPet = (request, response) => {
 
 // delete all pets by user (user dashboard)
 const deleteAllUserPets = (request, response) => {
-	const userid = request.userid;
+	const userId = request.userId;
 	const isAdmin = request.isAdmin;
 
 	const adminQuery = queries.DELETE_ALL_PETS;
 	const userQuery = queries.DELETE_PET_BY_USER;
 
 	pool
-		.query(isAdmin ? adminQuery : userQuery, [userid])
+		.query(isAdmin ? adminQuery : userQuery, [userId])
 		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 };
 
 // delete user - delete user and the connected pets (user dashboard)
 const deleteUser = (request, response) => {
-	const userid = request.userid;
+	const userId = request.userId;
 
 	pool
-		.query(queries.DELETE_PET_BY_USER, [userid])
+		.query(queries.DELETE_PET_BY_USER, [userId])
 		.then((res) => {
 			pool
-				.query(queries.DELETE_USER_BY_ID, [userid])
+				.query(queries.DELETE_USER_BY_ID, [userId])
 				.then((res) =>
 					response.status(200).json({
 						msg: messages.SUCCESS_MSG_DELETED_USER_AND_PETS,
