@@ -422,6 +422,40 @@ const signIn = (request, response) => {
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_NOT_FOUND_USER }));
 };
 
+// const signIn = (request, response) => {
+// 	const email = request.body.email;
+// 	const pw = request.body.pw;
+
+// 	const user = models.User.findAll({
+// 		where: {
+// 			email,
+// 		},
+// 	});
+
+// 	user
+// 		.then((data) => {
+// 			const userObject = data;
+// 			const encryptedPw = userObject.pw;
+
+// 			console.log(userObject.pw);
+
+// 			// data &&
+// 			// 	bcrypt.compare(pw, encryptedPw).then((isMatch) => {
+// 			// 		if (isMatch) {
+// 			// 			jwt.sign({ id: userObject.id, isAdmin: userObject.isAdmin }, 'r4uqSKqC6L', (err, token) => {
+// 			// 				response.status(200).json(token);
+// 			// 			});
+// 			// 		} else {
+// 			// 			response.status(403).json({ msg: messages.ERROR_MSG_INCORRECT_PASSWORD });
+// 			// 		}
+// 			// 	});
+// 		})
+// 		.catch((err) => {
+// 			console.log(err);
+// 			response.status(400).json({ msg: messages.ERROR_MSG_NOT_FOUND_USER });
+// 		});
+// };
+
 const getAll = (request, response) => {
 	const __filename = fileURLToPath(import.meta.url);
 	const __dirname = dirname(__filename);
