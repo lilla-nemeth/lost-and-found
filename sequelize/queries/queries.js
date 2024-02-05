@@ -345,6 +345,25 @@ const deleteUser = (request, response) => {
 		});
 };
 
+// search pet location
+const getGeocodeLocation = (request, response) => {
+	const query = request.params.query;
+	const params = new URLSearchParams({
+		access_token: process.env.API_KEY,
+		...url.parse(request.url, true).query,
+	});
+	const result = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?${params}`;
+
+	axios
+		.get(result)
+		.then((res) => {
+			response.status(200).json(res.data);
+		})
+		.catch((err) => {
+			response.status(500).json({ error: err.message });
+		});
+};
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 const devSettings = {
@@ -398,25 +417,6 @@ const getUsername = (request, response) => {
 // 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERNAME });
 // 		});
 // };
-
-// search pet location
-const getGeocodeLocation = (request, response) => {
-	const query = request.params.query;
-	const params = new URLSearchParams({
-		access_token: process.env.API_KEY,
-		...url.parse(request.url, true).query,
-	});
-	const result = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?${params}`;
-
-	axios
-		.get(result)
-		.then((res) => {
-			response.status(200).json(res.data);
-		})
-		.catch((err) => {
-			response.status(500).json({ error: err.message });
-		});
-};
 
 const signIn = (request, response) => {
 	const email = request.body.email;
