@@ -25,7 +25,6 @@ const PetProfile = () => {
 	let DEBUG = false;
 
 	function renderMap(pet) {
-		if (map.current) return;
 		map.current = new mapboxgl.Map({
 			accessToken: mapboxgl.accessToken,
 			container: mapContainer.current,
