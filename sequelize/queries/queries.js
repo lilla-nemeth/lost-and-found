@@ -24,9 +24,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
-// REWRITTEN FUNCTIONS WITH SEQUELIZE:
 
-// TODO: test again
+// WITH SEQUELIZE:
+
 const createUserAccount = (request, response) => {
 	const username = request.body.username;
 	const email = request.body.email;
