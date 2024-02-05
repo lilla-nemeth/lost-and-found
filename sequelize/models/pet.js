@@ -25,6 +25,7 @@ const Pet = sequelize.define('pet', {
 	postdescription: DataTypes.STRING,
 	since: {
 		type: DataTypes.DATE,
+		defaultValue: DataTypes.NOW,
 	},
 });
 
