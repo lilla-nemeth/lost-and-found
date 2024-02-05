@@ -9,9 +9,7 @@ import path from 'path';
 import { dirname } from 'path';
 import url from 'url';
 import { fileURLToPath } from 'url';
-
-import Pet from '../models/pet.js';
-import User from '../models/index.js';
+import models from '../models/index.js';
 
 dotenv.config();
 
@@ -23,6 +21,24 @@ const __dirname = dirname(__filename);
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, 'client/build')));
 }
+
+///////////////////////////////////////////////////////////////////////////////////
+
+// get all users
+// TODO: works, but useless, instead getAllPets should have another query to get user data from users
+const getAllUsers = (request, response) => {
+	const users = models.User.findAll();
+
+	users
+		.then((data) => {
+			response.status(200).json(data);
+		})
+		.catch((err) => {
+			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERS });
+		});
+};
+
+///////////////////////////////////////////////////////////////////////////////////
 
 const devSettings = {
 	host: process.env.PG_HOST,
@@ -54,6 +70,8 @@ const getAllUserPets = (request, response) => {
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS }));
 };
 
+// TODO: during getAllPets, I should find the user by userid,
+// and fetch the pets with the whole user object (2 queries)
 const getAllPets = (request, response) => {
 	pool
 		.query(queries.SELECT_PETS_BY_DESC_DATE)
@@ -124,14 +142,6 @@ const getUsername = (request, response) => {
 		.query(queries.SELECT_USER_BY_ID, [id])
 		.then((res) => response.status(200).json(res.rows[0].username))
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERNAME }));
-};
-
-// get all users
-const getAllUsers = (request, response) => {
-	pool
-		.query(queries.SELECT_ALL_USERS)
-		.then((res) => response.status(200).json(res.rows))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER }));
 };
 
 // search pet location
