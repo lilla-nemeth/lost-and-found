@@ -76,7 +76,6 @@ const Dashboard = () => {
 					setSuccessMsg('');
 				}, 5000),
 			errorCallback: (err) => {
-				console.log(err);
 				setLoading(false);
 				clearError();
 				handleError(err, setErrorMsg);

@@ -110,7 +110,6 @@ const getPetsByPagination = (request, response) => {
 			response.status(200).json(data);
 		})
 		.catch((err) => {
-			console.log(err);
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_PETS });
 		});
 };
