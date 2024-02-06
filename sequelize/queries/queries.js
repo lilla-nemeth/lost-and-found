@@ -1,4 +1,3 @@
-import pg from 'pg';
 import * as messages from '../../types/messageTypes.js';
 import * as queries from '../../types/queryTypes.js';
 import bcrypt from 'bcryptjs';
@@ -14,18 +13,12 @@ import { isFormValid } from '../../middlewares.js';
 
 dotenv.config();
 
-const { Pool } = pg;
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, 'client/build')));
 }
-
-///////////////////////////////////////////////////////////////////////////////////
-
-// WITH SEQUELIZE:
 
 const createUserAccount = (request, response) => {
 	const username = request.body.username;
@@ -409,25 +402,6 @@ const getGeocodeLocation = (request, response) => {
 			response.status(500).json({ error: err.message });
 		});
 };
-
-///////////////////////////////////////////////////////////////////////////////////
-
-const devSettings = {
-	host: process.env.PG_HOST,
-	user: process.env.PG_USER,
-	password: process.env.PG_PASSWORD,
-	port: process.env.PG_PORT,
-	database: process.env.PG_DATABASE,
-};
-
-const prodSettings = {
-	connectionString: process.env.DATABASE_URL,
-	ssl: {
-		rejectUnauthorized: process.env.NODE_ENV === 'production' ? false : true,
-	},
-};
-
-const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : devSettings);
 
 const getAll = (request, response) => {
 	const __filename = fileURLToPath(import.meta.url);
