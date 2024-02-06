@@ -34,10 +34,10 @@ git clone https://github.com/lilla-nemeth/lost-and-found.git
 
 ### Server
 
-Go to the project root directory
+Go to the server folder
 
 ```
-cd lost-and-found
+cd server
 ```
 
 Install the dependencies
