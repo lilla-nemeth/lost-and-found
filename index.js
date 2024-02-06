@@ -1,10 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-// import { Sequelize, DataTypes } from 'sequelize';
 import { authMw } from './middlewares.js';
 import * as queries from './sequelize/queries/queries.js';
 
+// Express routes
 import dashboardPets from './routes/petDashboard.js';
 import dashboardUser from './routes/userDashboard.js';
 import users from './routes/petProfile.js';
@@ -46,6 +46,6 @@ app.use('/login', loginUser);
 // Pet Report
 app.use('/reportpet', petData);
 
-// app.get('*', queries.getAll);
+app.get('*', queries.getAll);
 
 app.listen(port, () => console.log('Server is running on 8080'));
