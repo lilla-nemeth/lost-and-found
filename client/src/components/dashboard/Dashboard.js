@@ -21,7 +21,9 @@ const Dashboard = () => {
 		fetchPets,
 		limit,
 		offset,
+		pets,
 		setPets,
+		total,
 		setTotal,
 		loader,
 		setLoader,
@@ -58,9 +60,14 @@ const Dashboard = () => {
 					limit,
 					offset,
 					successCallback: (res) => {
-						setLoader(false);
 						setPets(res.data.rows);
 						setTotal(Number(res.data.count));
+						setLoader(false);
+					},
+					errorCallback: (err) => {
+						setLoading(false);
+						clearError();
+						handleError(err, setErrorMsg);
 					},
 				});
 			},
@@ -69,6 +76,7 @@ const Dashboard = () => {
 					setSuccessMsg('');
 				}, 5000),
 			errorCallback: (err) => {
+				console.log(err);
 				setLoading(false);
 				clearError();
 				handleError(err, setErrorMsg);
@@ -90,9 +98,14 @@ const Dashboard = () => {
 						limit,
 						offset,
 						successCallback: (res) => {
-							setLoader(false);
 							setPets(res.data.rows);
 							setTotal(Number(res.data.count));
+							setLoader(false);
+						},
+						errorCallback: (err) => {
+							setLoading(false);
+							clearError();
+							handleError(err, setErrorMsg);
 						},
 					});
 				},

@@ -57,9 +57,9 @@ export default function AppStateContextProvider(props) {
 			limit,
 			offset,
 			successCallback: (res) => {
-				setLoader(false);
 				setPets(res.data.rows);
 				setTotal(Number(res.data.count));
+				setLoader(false);
 			},
 			errorCallback: (err) => {
 				clearError();

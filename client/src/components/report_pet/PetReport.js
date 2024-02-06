@@ -80,9 +80,14 @@ const PetReport = () => {
 						limit,
 						offset,
 						successCallback: (res) => {
-							setLoader(false);
 							setPets(res.data.rows);
 							setTotal(Number(res.data.count));
+							setLoader(false);
+						},
+						errorCallback: (err) => {
+							setLoading(false);
+							clearError();
+							handleError(err, setErrorMsg);
 						},
 					});
 					getUserPets({
