@@ -57,6 +57,37 @@ const createUserAccount = (request, response) => {
 		});
 };
 
+const signIn = (request, response) => {
+	const email = request.body.email;
+	const pw = request.body.pw;
+
+	const user = models.User.findAll({
+		where: {
+			email,
+		},
+	});
+
+	user
+		.then((data) => {
+			const userData = data[0];
+			const encryptedPw = userData.pw;
+
+			data &&
+				bcrypt.compare(pw, encryptedPw).then((isMatch) => {
+					if (isMatch) {
+						jwt.sign({ id: userData.id, isAdmin: userData.isAdmin }, 'r4uqSKqC6L', (err, token) => {
+							response.status(200).json(token);
+						});
+					} else {
+						response.status(403).json({ msg: messages.ERROR_MSG_INCORRECT_PASSWORD });
+					}
+				});
+		})
+		.catch((err) => {
+			response.status(400).json({ msg: messages.ERROR_MSG_NOT_FOUND_USER });
+		});
+};
+
 // get all users
 // TODO: works, but useless, instead getPetsByPagination should have another query to get user data from users
 const getAllUsers = (request, response) => {
@@ -397,64 +428,6 @@ const prodSettings = {
 };
 
 const pool = new Pool(process.env.NODE_ENV === 'production' ? prodSettings : devSettings);
-
-const signIn = (request, response) => {
-	const email = request.body.email;
-	const pw = request.body.pw;
-
-	pool
-		.query(queries.SELECT_USER_BY_EMAIL, [email])
-		.then((res) => {
-			const userObject = res.rows[0];
-			const encryptedPw = userObject.pw;
-
-			res.rows &&
-				bcrypt.compare(pw, encryptedPw).then((isMatch) => {
-					if (isMatch) {
-						jwt.sign({ id: userObject.id, isAdmin: userObject.isAdmin }, 'r4uqSKqC6L', (err, token) => {
-							response.status(200).json(token);
-						});
-					} else {
-						response.status(403).json({ msg: messages.ERROR_MSG_INCORRECT_PASSWORD });
-					}
-				});
-		})
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_NOT_FOUND_USER }));
-};
-
-// const signIn = (request, response) => {
-// 	const email = request.body.email;
-// 	const pw = request.body.pw;
-
-// 	const user = models.User.findAll({
-// 		where: {
-// 			email,
-// 		},
-// 	});
-
-// 	user
-// 		.then((data) => {
-// 			const userObject = data;
-// 			const encryptedPw = userObject.pw;
-
-// 			console.log(userObject.pw);
-
-// 			// data &&
-// 			// 	bcrypt.compare(pw, encryptedPw).then((isMatch) => {
-// 			// 		if (isMatch) {
-// 			// 			jwt.sign({ id: userObject.id, isAdmin: userObject.isAdmin }, 'r4uqSKqC6L', (err, token) => {
-// 			// 				response.status(200).json(token);
-// 			// 			});
-// 			// 		} else {
-// 			// 			response.status(403).json({ msg: messages.ERROR_MSG_INCORRECT_PASSWORD });
-// 			// 		}
-// 			// 	});
-// 		})
-// 		.catch((err) => {
-// 			console.log(err);
-// 			response.status(400).json({ msg: messages.ERROR_MSG_NOT_FOUND_USER });
-// 		});
-// };
 
 const getAll = (request, response) => {
 	const __filename = fileURLToPath(import.meta.url);
