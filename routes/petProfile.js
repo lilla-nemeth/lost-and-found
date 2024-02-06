@@ -4,7 +4,6 @@ import * as queries from '../sequelize/queries/queries.js';
 
 const router = Router();
 
-// TODO: Temporary solution, getPetsByPagination should have another query from users table, getting users data
 router.get('/', authMw, queries.getAllUsers);
 
 export default router;

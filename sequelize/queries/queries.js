@@ -81,7 +81,6 @@ const signIn = (request, response) => {
 };
 
 // get all users
-// TODO: works, but useless, instead getPetsByPagination should have another query to get user data from users
 const getAllUsers = (request, response) => {
 	const users = models.User.findAll();
 
