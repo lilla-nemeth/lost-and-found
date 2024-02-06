@@ -43,7 +43,7 @@ cd lost-and-found
 Install the dependencies
 
 ```
-npm install
+yarn install
 ```
 
 Run the server
