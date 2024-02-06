@@ -1,21 +1,28 @@
 # Lost and Found
 
-Lost and Found is an application, where everyone can search from missing pets. Registrated users are also allowed to create pet profiles and perform other tasks.
+Lost and Found is an application made for missing and found pets. Users with accounts are also allowed to create pet profiles and perform other tasks.
 
-🛠 Created with Node.js, Express, PostgreSQL, JavaScript, Mapbox and React with custom UI.
+🛠 Created with PERN stack, Sequelize, Mapbox and custom UI.
 
-![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/dbab47a1f3516893ec324a86fd9e7550202a1407/client/src/assets/images/screenshots/app_screenshot_00.png)
+![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/client/src/assets/images/screenshots/app_screenshot_00.png)
 
 ## Features
 
 - Registration
 - Login/Log out
 - Fetch all lost and found pets
-- Search pet from all pets
+- Search pet from all pets (basic)
 - Uploading image
-- Searching pet location with Mapbox map and its Geocoding API
-- Form submission (pet report) with required and optional data
+- Searching pet location with Mapbox map and using its Geocoding API
+- Reporting missing/found pet with required and optional data
 - Deleting own pet profiles (all and one by one)
+
+## Future of the App
+
+- Pet and user profile updates
+- Stricter image uploading
+- Filters for listed pets (e.g by creation date, species)
+- Technical improvements (e.g unit tests, switching to TypeScript)
 
 ## Installing, running locally
 
