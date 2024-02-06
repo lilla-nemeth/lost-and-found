@@ -1,15 +1,14 @@
 import { Request, Response } from 'express';
-import * as messages from '../../types/messageTypes.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import dotenv from 'dotenv';
 import path from 'path';
 import { dirname } from 'path';
-import url from 'url';
-import { fileURLToPath } from 'url';
-import models from '../models/index.js';
-import { isFormValid } from '../../middlewares/middlewares.js';
+import url, { fileURLToPath } from 'url';
+import { isFormValid } from '../../middlewares/middlewares';
+import models from '../models/index';
+import * as messages from '../../types/messageTypes';
 
 dotenv.config();
 
