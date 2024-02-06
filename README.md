@@ -49,7 +49,7 @@ yarn install
 Run the server
 
 ```
-nodemon index.js
+yarn start
 ```
 
 Server is running on port 8080
