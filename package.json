@@ -3,6 +3,9 @@
 	"version": "1.0.0",
 	"description": "Lost & Found App",
 	"main": "index.ts",
+	"scripts": {
+		"start": "node index.ts"
+	},
 	"repository": "https://github.com/lilla-nemeth/lost-and-found.git",
 	"author": "Lilla Németh",
 	"license": "MIT",
