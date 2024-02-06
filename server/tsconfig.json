@@ -10,6 +10,10 @@
 		"esModuleInterop": true,
 		"moduleResolution": "node"
 	},
+	"paths": {
+		"/*": ["*"]
+	},
+	"include": ["./**/*"],
 	"exclude": ["node_modules", "build/**/*"],
 	"ts-node": {
 		"esm": true,
