@@ -91,6 +91,8 @@ const getPetsByPagination = (request: Request, response: Response) => {
 	const offset = request.params.skip;
 	const limit = request.params.fetch;
 
+	// TODO: finding a solution for this
+	// @ts-ignore
 	const pets = models.Pet.findAndCountAll({
 		order: [['since', 'DESC']],
 		offset,
@@ -106,7 +108,8 @@ const getPetsByPagination = (request: Request, response: Response) => {
 };
 
 // report pet by user
-const createPetProfile = (request: Request, response: Response) => {
+// const createPetProfile = (request: Request, response: Response) => {
+const createPetProfile = (request: any, response: Response) => {
 	const userId = request.userId;
 	const img = request.file.buffer.toString('base64');
 	const petstatus = request.body.petstatus;
@@ -149,7 +152,8 @@ const createPetProfile = (request: Request, response: Response) => {
 };
 
 // get all pets by userId
-const getAllUserPets = (request: Request, response: Response) => {
+// const getAllUserPets = (request: Request, response: Response) => {
+const getAllUserPets = (request: any, response: Response) => {
 	const userId = request.userId;
 	const isAdmin = request.isAdmin;
 
@@ -199,7 +203,8 @@ const deleteUserPet = (request: Request, response: Response) => {
 };
 
 // delete all pets by user (user dashboard)
-const deleteAllUserPets = (request: Request, response: Response) => {
+// const deleteAllUserPets = (request: Request, response: Response) => {
+const deleteAllUserPets = (request: any, response: Response) => {
 	const userId = request.userId;
 	const isAdmin = request.isAdmin;
 
@@ -224,13 +229,14 @@ const deleteAllUserPets = (request: Request, response: Response) => {
 };
 
 // get username
-const getUsername = (request: Request, response: Response) => {
+// const getUsername = (request: Request, response: Response) => {
+const getUsername = (request: any, response: Response) => {
 	const userId = request.userId;
 
 	const user = models.User.findByPk(userId);
 
 	user
-		.then((data) => {
+		.then((data: any) => {
 			response.status(200).json(data.username);
 		})
 		.catch((err) => {
@@ -281,6 +287,8 @@ const updatePet = (request: Request, response: Response) => {
 	const uniquefeature = request.body.uniquefeature;
 	const postdescription = request.body.postdescription;
 
+	// TODO: finding a solution for this
+	// @ts-ignore
 	const pet = models.Pet.update({
 		id,
 		petstatus,
@@ -303,7 +311,8 @@ const updatePet = (request: Request, response: Response) => {
 };
 
 // edit user data (user dashboard)
-const updateUser = (request: Request, response: Response) => {
+// const updateUser = (request: Request, response: Response) => {
+const updateUser = (request: any, response: Response) => {
 	const id = request.userId;
 	const username = request.body.username;
 	const email = request.body.email;
@@ -330,7 +339,8 @@ const updateUser = (request: Request, response: Response) => {
 };
 
 // delete user - delete user and the connected pets (user dashboard)
-const deleteUser = (request: Request, response: Response) => {
+// const deleteUser = (request: Request, response: Response) => {
+const deleteUser = (request: any, response: Response) => {
 	const userId = request.userId;
 
 	const pet = models.Pet.destroy({
@@ -369,7 +379,7 @@ const getPetById = (request: Request, response: Response) => {
 	const pet = models.Pet.findByPk(id);
 
 	pet
-		.then((data) => {
+		.then((data: any) => {
 			response.status(200).json(data.rows);
 		})
 		.catch((err) => {
