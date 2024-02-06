@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { createBrowserHistory } from 'history';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext.js';
 import { AppStateContext } from '../../contexts/AppStateContext.js';
 import { handleError, clearError } from '../../utils/HelperFunctions.js';
@@ -23,6 +23,8 @@ const Login = () => {
 
 	let DEBUG = false;
 
+	const navigate = useNavigate();
+
 	let disabled = !password || !email || loading;
 
 	function handleSubmit(event) {
@@ -38,6 +40,7 @@ const Login = () => {
 					setLoading(false);
 					setEmail('');
 					setPassword('');
+					navigate('/reportpet');
 				},
 				errorCallback: (err) => {
 					setLoading(false);
@@ -47,8 +50,6 @@ const Login = () => {
 			});
 		}
 	}
-
-	history.replace('/login');
 
 	return (
 		<main className='formMain'>
