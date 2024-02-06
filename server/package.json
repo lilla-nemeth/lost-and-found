@@ -2,7 +2,7 @@
 	"name": "lost-and-found",
 	"version": "1.0.0",
 	"description": "Lost & Found App",
-	"main": "index.js",
+	"main": "index.ts",
 	"scripts": {
 		"start": "node index.ts",
 		"build": "tsc --project ./tsconfig.json",

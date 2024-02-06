@@ -7,6 +7,5 @@
 		"noImplicitAny": true,
 		"esModuleInterop": true
 	},
-	"exclude": ["node_modules", "build/**/*"],
-	"include": ["server/**/*"]
+	"exclude": ["server/node_modules", "server/build/**/*"]
 }

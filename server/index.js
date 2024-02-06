@@ -1,51 +1,51 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import { authMw } from './middlewares.js';
-import * as queries from './sequelize/queries/queries.js';
+// import express from 'express';
+// import cors from 'cors';
+// import dotenv from 'dotenv';
+// import { authMw } from './middlewares.js';
+// import * as queries from './sequelize/queries/queries.js';
 
-// Express routes
-import dashboardPets from './routes/petDashboard.js';
-import dashboardUser from './routes/userDashboard.js';
-import users from './routes/petProfile.js';
-import pets from './routes/pets.js';
-import signUpUser from './routes/userSignUp.js';
-import loginUser from './routes/userLogin.js';
-import petData from './routes/petReport.js';
+// // Express routes
+// import dashboardPets from './routes/petDashboard.js';
+// import dashboardUser from './routes/userDashboard.js';
+// import users from './routes/petProfile.js';
+// import pets from './routes/pets.js';
+// import signUpUser from './routes/userSignUp.js';
+// import loginUser from './routes/userLogin.js';
+// import petData from './routes/petReport.js';
 
-dotenv.config();
+// dotenv.config();
 
-const app = express();
+// const app = express();
 
-app.use(cors());
-app.use(express.json());
+// app.use(cors());
+// app.use(express.json());
 
-let DEBUG = false;
+// let DEBUG = false;
 
-const port = process.env.PORT || 8080;
+// const port = process.env.PORT || 8080;
 
-// For navbar
-app.get('/username', authMw, queries.getUsername);
+// // For navbar
+// app.get('/username', authMw, queries.getUsername);
 
-// Home
-app.use('/', pets);
+// // Home
+// app.use('/', pets);
 
-// Pet Profile
-app.use('/petprofile/:id', users);
+// // Pet Profile
+// app.use('/petprofile/:id', users);
 
-// Dashboard
-app.use('/dashboard', dashboardUser);
-app.use('/dashboard', dashboardPets);
+// // Dashboard
+// app.use('/dashboard', dashboardUser);
+// app.use('/dashboard', dashboardPets);
 
-// Sign Up
-app.use('/signup', signUpUser);
+// // Sign Up
+// app.use('/signup', signUpUser);
 
-// Login
-app.use('/login', loginUser);
+// // Login
+// app.use('/login', loginUser);
 
-// Pet Report
-app.use('/reportpet', petData);
+// // Pet Report
+// app.use('/reportpet', petData);
 
-app.get('*', queries.getAll);
+// app.get('*', queries.getAll);
 
-app.listen(port, () => console.log('Server is running on 8080'));
+// app.listen(port, () => console.log('Server is running on 8080'));
