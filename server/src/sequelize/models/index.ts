@@ -1,6 +1,6 @@
-import sequelize from '../config/config.js';
-import User from './user.js';
-import Pet from './pet.js';
+import sequelize from '../config/config';
+import User from './user';
+import Pet from './pet';
 
 User.hasMany(Pet, {
 	foreignKey: {

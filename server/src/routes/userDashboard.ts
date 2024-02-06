@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { authMw, isFormValid } from '../middlewares/middlewares';
-import * as queries from '../sequelize/queries/queries.js';
+import * as queries from '../sequelize/queries/queries';
 
 const router = Router();
 
