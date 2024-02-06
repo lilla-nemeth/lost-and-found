@@ -1,13 +1,14 @@
 {
 	"compilerOptions": {
-		"target": "ES6",
-		"module": "esnext",
+		"lib": ["es2023"],
+		"target": "es2022",
+		"module": "node16",
 		"allowJs": true,
 		"outDir": "build",
 		"strict": true,
 		"noImplicitAny": true,
 		"esModuleInterop": true,
-		"moduleResolution": "node"
+		"moduleResolution": "node16"
 	},
 	"exclude": ["node_modules", "build/**/*"],
 	"ts-node": {
