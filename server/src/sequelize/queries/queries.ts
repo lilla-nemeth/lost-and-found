@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import * as messages from '../../types/messageTypes.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -8,18 +9,11 @@ import { dirname } from 'path';
 import url from 'url';
 import { fileURLToPath } from 'url';
 import models from '../models/index.js';
-import { isFormValid } from '../../middlewares/middlewares';
+import { isFormValid } from '../../middlewares/middlewares.js';
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static(path.join(__dirname, 'client/build')));
-}
-
-const createUserAccount = (request, response) => {
+const createUserAccount = (request: Request, response: Response) => {
 	const username = request.body.username;
 	const email = request.body.email;
 	const pw = request.body.pw;
@@ -49,7 +43,7 @@ const createUserAccount = (request, response) => {
 		});
 };
 
-const signIn = (request, response) => {
+const signIn = (request: Request, response: Response) => {
 	const email = request.body.email;
 	const pw = request.body.pw;
 
@@ -60,14 +54,14 @@ const signIn = (request, response) => {
 	});
 
 	user
-		.then((data) => {
+		.then((data: any) => {
 			const userData = data[0];
 			const encryptedPw = userData.pw;
 
 			data &&
 				bcrypt.compare(pw, encryptedPw).then((isMatch) => {
 					if (isMatch) {
-						jwt.sign({ id: userData.id, isAdmin: userData.isAdmin }, 'r4uqSKqC6L', (err, token) => {
+						jwt.sign({ id: userData.id, isAdmin: userData.isAdmin }, 'r4uqSKqC6L', (err: any, token: any) => {
 							response.status(200).json(token);
 						});
 					} else {
@@ -81,7 +75,7 @@ const signIn = (request, response) => {
 };
 
 // get all users
-const getAllUsers = (request, response) => {
+const getAllUsers = (request: Request, response: Response) => {
 	const users = models.User.findAll();
 
 	users
@@ -94,7 +88,7 @@ const getAllUsers = (request, response) => {
 };
 
 // get/fetch pets by pagination, data has data.rows (pet objects) and data.count (total)
-const getPetsByPagination = (request, response) => {
+const getPetsByPagination = (request: Request, response: Response) => {
 	const offset = request.params.skip;
 	const limit = request.params.fetch;
 
@@ -113,7 +107,7 @@ const getPetsByPagination = (request, response) => {
 };
 
 // report pet by user
-const createPetProfile = (request, response) => {
+const createPetProfile = (request: Request, response: Response) => {
 	const userId = request.userId;
 	const img = request.file.buffer.toString('base64');
 	const petstatus = request.body.petstatus;
@@ -156,7 +150,7 @@ const createPetProfile = (request, response) => {
 };
 
 // get all pets by userId
-const getAllUserPets = (request, response) => {
+const getAllUserPets = (request: Request, response: Response) => {
 	const userId = request.userId;
 	const isAdmin = request.isAdmin;
 
@@ -191,7 +185,7 @@ const getAllUserPets = (request, response) => {
 };
 
 // delete 1 pet by user (user dashboard)
-const deleteUserPet = (request, response) => {
+const deleteUserPet = (request: Request, response: Response) => {
 	const id = request.params.id;
 
 	const pet = models.Pet.destroy({
@@ -206,7 +200,7 @@ const deleteUserPet = (request, response) => {
 };
 
 // delete all pets by user (user dashboard)
-const deleteAllUserPets = (request, response) => {
+const deleteAllUserPets = (request: Request, response: Response) => {
 	const userId = request.userId;
 	const isAdmin = request.isAdmin;
 
@@ -231,7 +225,7 @@ const deleteAllUserPets = (request, response) => {
 };
 
 // get username
-const getUsername = (request, response) => {
+const getUsername = (request: Request, response: Response) => {
 	const userId = request.userId;
 
 	const user = models.User.findByPk(userId);
@@ -246,7 +240,7 @@ const getUsername = (request, response) => {
 };
 
 // search pet location
-const getGeocodeLocation = (request, response) => {
+const getGeocodeLocation = (request: Request, response: Response) => {
 	const query = request.params.query;
 	const params = new URLSearchParams({
 		access_token: process.env.API_KEY,
@@ -264,7 +258,7 @@ const getGeocodeLocation = (request, response) => {
 		});
 };
 
-const getAll = (request, response) => {
+const getAll = (request: Request, response: Response) => {
 	const __filename = fileURLToPath(import.meta.url);
 	const __dirname = dirname(__filename);
 	response.sendFile(path.join(__dirname, 'client/build/index.html'));
@@ -273,7 +267,7 @@ const getAll = (request, response) => {
 ///////////////////////////////////////////
 
 // edit pet by user (user dashboard)
-const updatePet = (request, response) => {
+const updatePet = (request: Request, response: Response) => {
 	const id = request.params.id;
 	const petstatus = request.body.petstatus;
 	const petlocation = request.body.petlocation;
@@ -306,11 +300,11 @@ const updatePet = (request, response) => {
 
 	pet
 		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_PET }))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERERROR_MSG_UPDATE_PET }));
+		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_PET }));
 };
 
 // edit user data (user dashboard)
-const updateUser = (request, response) => {
+const updateUser = (request: Request, response: Response) => {
 	const id = request.userId;
 	const username = request.body.username;
 	const email = request.body.email;
@@ -332,13 +326,12 @@ const updateUser = (request, response) => {
 		}
 	);
 	user
-		.query(queries.UPDATE_USER, [username, email, encryptedPw, phone, id])
 		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_USER }))
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_USER }));
 };
 
 // delete user - delete user and the connected pets (user dashboard)
-const deleteUser = (request, response) => {
+const deleteUser = (request: Request, response: Response) => {
 	const userId = request.userId;
 
 	const pet = models.Pet.destroy({
@@ -371,7 +364,7 @@ const deleteUser = (request, response) => {
 };
 
 // from pets table get one pet by id
-const getPetById = (request, response) => {
+const getPetById = (request: Request, response: Response) => {
 	const id = request.params.id;
 
 	const pet = models.Pet.findByPk(id);
