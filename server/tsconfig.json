@@ -9,8 +9,9 @@
 		"esModuleInterop": true,
 		"moduleResolution": "node"
 	},
-	"exclude": ["server/node_modules", "server/build/**/*"],
+	"exclude": ["node_modules", "build/**/*"],
 	"ts-node": {
-		"esm": true
+		"esm": true,
+		"experimentalSpecifierResolution": "node"
 	}
 }

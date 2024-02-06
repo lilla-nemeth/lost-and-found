@@ -2,9 +2,9 @@
 	"name": "lost-and-found",
 	"version": "1.0.0",
 	"description": "Lost & Found App",
-	"main": "index.ts",
+	"main": "index.js",
 	"scripts": {
-		"start": "ts-node ./index.ts",
+		"start": "ts-node  ./index.ts",
 		"build": "tsc --project ./tsconfig.json",
 		"test": "jest -c ./jest.unit.json",
 		"test:coverage": "jest --coverage -c ./jest.unit.json"
@@ -35,6 +35,5 @@
 	},
 	"devDependencies": {
 		"typescript": "^5.3.3"
-	},
-	"type": "module"
+	}
 }

@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { authMw } from './middlewares.js';
+import { authMw } from './middlewares/middlewares.js';
 import * as queries from './sequelize/queries/queries.js';
 
 // Express routes
