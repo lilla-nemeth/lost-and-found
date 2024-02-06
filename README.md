@@ -4,7 +4,7 @@ Lost and Found is an application made for missing and found pets. Users with acc
 
 🛠 Created with PERN stack, Sequelize, Mapbox and custom UI.
 
-![Registration](https://repository-images.githubusercontent.com/387771743/90eb308c-8f1c-4791-a9b5-a18de8fb6f32)
+![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/client/src/assets/images/screenshots/app_screenshot_00.png)
 
 ## Features
 
