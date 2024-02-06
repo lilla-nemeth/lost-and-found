@@ -1,5 +1,4 @@
 import * as messages from '../../types/messageTypes.js';
-import * as queries from '../../types/queryTypes.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
