@@ -1,13 +1,15 @@
+import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
 
 let DEBUG = false;
 
-function authMw(request, response, next) {
+// function authMw(request: Request, response: Response, next: NextFunction) {
+function authMw(request: any, response: Response, next: NextFunction) {
 	let token = request.headers['x-auth-token'];
 
 	if (token) {
-		jwt.verify(token, 'r4uqSKqC6L', (err, decodedToken) => {
+		jwt.verify(token, 'r4uqSKqC6L', (err: any, decodedToken: any) => {
 			if (decodedToken) {
 				request.userId = decodedToken.id;
 				request.isAdmin = decodedToken.isAdmin;
@@ -21,13 +23,13 @@ function authMw(request, response, next) {
 	}
 }
 
-function isFormValid(request, response, next) {
+function isFormValid(request: Request, response: Response, next: NextFunction) {
 	const email = request.body.email;
 	const password = request.body.pw;
 	const username = request.body.username;
 	const phone = request.body.phone;
 
-	const usernameRegex = /^[A-Za-z0-9öÖäÄåÅ_\.]*$/;
+	const usernameRegex = new RegExp(/^[A-Za-z0-9öÖäÄåÅ_\.]*$/);
 	const usernameFirstCharacter = /^[a-zA-ZöÖäÄåÅ]/;
 	const emailRegex =
 		/^[-!#$%&'.*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
@@ -69,7 +71,7 @@ function isFormValid(request, response, next) {
 		} else if (emailParts[0].length > 64) {
 			message = 'Email username is too long';
 		} else if (
-			domainPart.some(function (part) {
+			domainPart.some(function (part: string[]) {
 				return part.length > 63;
 			})
 		) {
