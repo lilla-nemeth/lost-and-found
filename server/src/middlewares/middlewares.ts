@@ -29,15 +29,16 @@ function isFormValid(request: Request, response: Response, next: NextFunction) {
 	const username = request.body.username;
 	const phone = request.body.phone;
 
-	const usernameRegex = new RegExp(/^[A-Za-z0-9öÖäÄåÅ_\.]*$/);
-	const usernameFirstCharacter = /^[a-zA-ZöÖäÄåÅ]/;
-	const emailRegex =
+	const usernameRegex: RegExp = /^[A-Za-z0-9öÖäÄåÅ_\.]*$/;
+	const usernameFirstCharacter: RegExp = /^[a-zA-ZöÖäÄåÅ]/;
+	const emailRegex: RegExp =
 		/^[-!#$%&'.*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
-	const phoneRegex = /^\d+$/;
-	const pwUppercase = /^(?=.*[A-Z])/;
-	const pwLowercase = /^(?=.*[a-z])/;
-	const pwDigit = /^(?=.*\d)/;
-	const pwAllowedSpecialCharacters = /^(?=.*[§đ½¡”»£¤«“‰„‚\/\\°¿´˛¸€ÞþıŒœ ̛˚˝¯¨əßÐðĸøØÆæ'˘><Ʒʒ·×Ŋŋ—µ,‘’˙–~@#$%^&*+=`|{}:;!.?_\"()\[\]-])/;
+	const phoneRegex: RegExp = /^\d+$/;
+	const pwUppercase: RegExp = /^(?=.*[A-Z])/;
+	const pwLowercase: RegExp = /^(?=.*[a-z])/;
+	const pwDigit: RegExp = /^(?=.*\d)/;
+	const pwAllowedSpecialCharacters: RegExp =
+		/^(?=.*[§đ½¡”»£¤«“‰„‚\/\\°¿´˛¸€ÞþıŒœ ̛˚˝¯¨əßÐðĸøØÆæ'˘><Ʒʒ·×Ŋŋ—µ,‘’˙–~@#$%^&*+=`|{}:;!.?_\"()\[\]-])/;
 
 	const validByEmailRegex = emailRegex.test(email);
 	const emailParts = email.split('@');
@@ -49,7 +50,7 @@ function isFormValid(request: Request, response: Response, next: NextFunction) {
 	const lowercase = pwLowercase.test(password);
 	const digits = pwDigit.test(password);
 	const specialChars = pwAllowedSpecialCharacters.test(password);
-	let message = '';
+	let message: string = '';
 
 	if (!username && !phone) {
 		// login
