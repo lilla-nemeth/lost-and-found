@@ -5,13 +5,13 @@ import { authMw } from './middlewares/middlewares.js';
 import * as queries from './sequelize/queries/queries.js';
 
 // Express routes
-import dashboardPets from './routes/petDashboard.js';
-import dashboardUser from './routes/userDashboard.js';
-import users from './routes/petProfile.js';
-import pets from './routes/pets.js';
-import signUpUser from './routes/userSignUp.js';
-import loginUser from './routes/userLogin.js';
-import petData from './routes/petReport.js';
+import dashboardPets from './routes/petDashboard';
+import dashboardUser from './routes/userDashboard';
+import users from './routes/petProfile';
+import pets from './routes/pets';
+import signUpUser from './routes/userSignUp';
+import loginUser from './routes/userLogin';
+import petData from './routes/petReport';
 
 dotenv.config();
 
