@@ -4,7 +4,7 @@
 	"description": "Lost & Found App",
 	"main": "index.ts",
 	"scripts": {
-		"start": "node --loader ts-node/esm ./src/index.ts",
+		"start": "nodemon ts-node/esm ./src/index.ts",
 		"build": "tsc --project ./tsconfig.json",
 		"test": "jest -c ./jest.unit.json",
 		"test:coverage": "jest --coverage -c ./jest.unit.json"

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { isFormValid } from '../middlewares/middlewares.js';
+import { isFormValid } from '../middlewares/middlewares';
 import * as queries from '../sequelize/queries/queries.js';
 
 const router = Router();

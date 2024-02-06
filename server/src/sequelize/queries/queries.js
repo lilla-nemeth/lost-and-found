@@ -8,7 +8,7 @@ import { dirname } from 'path';
 import url from 'url';
 import { fileURLToPath } from 'url';
 import models from '../models/index.js';
-import { isFormValid } from '../../middlewares/middlewares.js';
+import { isFormValid } from '../../middlewares/middlewares';
 
 dotenv.config();
 

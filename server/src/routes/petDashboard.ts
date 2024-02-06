@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authMw } from '../middlewares/middlewares.js';
+import { authMw } from '../middlewares/middlewares';
 import * as queries from '../sequelize/queries/queries.js';
 
 const router = Router();
