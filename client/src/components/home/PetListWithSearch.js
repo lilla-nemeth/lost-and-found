@@ -4,7 +4,7 @@ import PetListCard from '../generic/PetListCard';
 import Search from '../generic/Search';
 
 const PetListWithSearch = () => {
-	const { pets, allPets } = useContext(AppStateContext);
+	const { pets } = useContext(AppStateContext);
 	const [search, setSearch] = useState('');
 	const [searchColumns, setSearchColumns] = useState([
 		'id',
@@ -33,7 +33,7 @@ const PetListWithSearch = () => {
 					? pets.map((pet) => {
 							return <PetListCard key={pet.id} pet={pet} />;
 					  })
-					: allPets
+					: pets
 							.filter((filteredPet) => {
 								if (searchColumns.some((column) => filteredPet[column].toString().toLowerCase().indexOf(search.toLowerCase()) > -1)) {
 									return filteredPet;

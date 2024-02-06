@@ -18,12 +18,10 @@ const Dashboard = () => {
 		deleteAllPets,
 		userPets,
 		setUserPets,
-		setAllPets,
 		fetchPets,
 		limit,
 		offset,
 		setPets,
-		getNumberOfPets,
 		setTotal,
 		loader,
 		setLoader,
@@ -60,13 +58,9 @@ const Dashboard = () => {
 					limit,
 					offset,
 					successCallback: (res) => {
-						setPets(res.data);
 						setLoader(false);
-						getNumberOfPets({
-							successCallback: (res) => {
-								setTotal(Number(res.data));
-							},
-						});
+						setPets(res.data.rows);
+						setTotal(Number(res.data.count));
 					},
 				});
 			},
@@ -96,13 +90,9 @@ const Dashboard = () => {
 						limit,
 						offset,
 						successCallback: (res) => {
-							setPets(res.data);
 							setLoader(false);
-							getNumberOfPets({
-								successCallback: (res) => {
-									setTotal(Number(res.data));
-								},
-							});
+							setPets(res.data.rows);
+							setTotal(Number(res.data.count));
 						},
 					});
 				},

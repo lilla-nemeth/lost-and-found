@@ -8,7 +8,6 @@ export const AppStateContext = createContext();
 export default function AppStateContextProvider(props) {
 	const { token } = useContext(AuthContext);
 
-	const [allPets, setAllPets] = useState([]);
 	const [pets, setPets] = useState([]);
 	const [userPets, setUserPets] = useState([]);
 	const [users, setUsers] = useState([]);
@@ -58,13 +57,9 @@ export default function AppStateContextProvider(props) {
 			limit,
 			offset,
 			successCallback: (res) => {
-				setPets(res.data);
 				setLoader(false);
-				getNumberOfPets({
-					successCallback: (res) => {
-						setTotal(Number(res.data));
-					},
-				});
+				setPets(res.data.rows);
+				setTotal(Number(res.data.count));
 			},
 			errorCallback: (err) => {
 				clearError();
@@ -210,24 +205,6 @@ export default function AppStateContextProvider(props) {
 			});
 	}
 
-	function getNumberOfPets({ successCallback, errorCallback }) {
-		const options = {
-			method: 'get',
-			url: '/pets/total',
-			mode: 'cors',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		};
-		axios(options)
-			.then((res) => {
-				if (successCallback) successCallback(res);
-			})
-			.catch((err) => {
-				if (err && errorCallback) errorCallback(err);
-			});
-	}
-
 	function getUserPets({ token, successCallback, errorCallback }) {
 		const options = {
 			method: 'get',
@@ -339,8 +316,6 @@ export default function AppStateContextProvider(props) {
 				setUserPets,
 				reportPet,
 				fetchPets,
-				getNumberOfPets,
-				allPets,
 				pets,
 				setPets,
 				total,
@@ -352,7 +327,6 @@ export default function AppStateContextProvider(props) {
 				deleteOnePet,
 				deleteAllPets,
 				getUserPets,
-				setAllPets,
 				fetchPlaces,
 			}}
 		>

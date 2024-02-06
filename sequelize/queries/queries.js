@@ -95,8 +95,7 @@ const getAllUsers = (request, response) => {
 		});
 };
 
-// get/fetch limited amount of pets to pagination
-// TODO: this getPetsByPagination could be combined with getTotalNumberOfPets
+// get/fetch pets by pagination, data has data.rows (pet objects) and data.count (total)
 const getPetsByPagination = (request, response) => {
 	const offset = request.params.skip;
 	const limit = request.params.fetch;
@@ -108,30 +107,11 @@ const getPetsByPagination = (request, response) => {
 	});
 	pets
 		.then((data) => {
-			response.status(200).json(data.rows);
+			response.status(200).json(data);
 		})
 		.catch((err) => {
 			console.log(err);
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_PETS });
-		});
-};
-
-// get the total amount (number) of pets
-const getTotalNumberOfPets = (request, response) => {
-	const offset = request.params.skip;
-	const limit = request.params.fetch;
-
-	const pets = models.Pet.findAndCountAll({
-		order: [['since', 'DESC']],
-		offset,
-		limit,
-	});
-	pets
-		.then((data) => {
-			response.status(200).json(data.count);
-		})
-		.catch((err) => {
-			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_TOTAL_PETS });
 		});
 };
 
@@ -412,7 +392,6 @@ const getAll = (request, response) => {
 export {
 	getAllUserPets,
 	getPetsByPagination,
-	getTotalNumberOfPets,
 	getPetById,
 	getUsername,
 	getAllUsers,

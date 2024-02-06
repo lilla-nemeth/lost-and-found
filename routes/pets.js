@@ -8,7 +8,6 @@ const router = Router();
 router.get('/', authMw, queries.getAllUsers);
 
 router.get('/pets/:fetch/:skip', queries.getPetsByPagination);
-router.get('/pets/total', queries.getTotalNumberOfPets);
 router.get('/pets/:id', queries.getPetById);
 
 export default router;

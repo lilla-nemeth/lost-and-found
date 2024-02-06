@@ -19,20 +19,8 @@ import TextArea from '../generic/TextArea';
 
 const PetReport = () => {
 	const { token } = useContext(AuthContext);
-	const {
-		reportPet,
-		getUserPets,
-		setUserPets,
-		setAllPets,
-		fetchPets,
-		limit,
-		offset,
-		setPets,
-		getNumberOfPets,
-		setTotal,
-		loader,
-		setLoader,
-	} = useContext(AppStateContext);
+	const { reportPet, getUserPets, setUserPets, fetchPets, limit, offset, setPets, setTotal, loader, setLoader } =
+		useContext(AppStateContext);
 
 	const [status, setStatus] = useState('');
 	const [files, setFiles] = useState([]);
@@ -92,13 +80,9 @@ const PetReport = () => {
 						limit,
 						offset,
 						successCallback: (res) => {
-							setPets(res.data);
 							setLoader(false);
-							getNumberOfPets({
-								successCallback: (res) => {
-									setTotal(Number(res.data));
-								},
-							});
+							setPets(res.data.rows);
+							setTotal(Number(res.data.count));
 						},
 					});
 					getUserPets({
