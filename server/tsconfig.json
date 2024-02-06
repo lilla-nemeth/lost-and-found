@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"module": "CommonJS",
+		"outDir": "build",
+		"strict": true,
+		"noImplicitAny": true,
+		"esModuleInterop": true
+	},
+	"exclude": ["node_modules", "build/**/*"],
+	"include": ["server/**/*"]
+}

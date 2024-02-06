@@ -4,7 +4,10 @@
 	"description": "Lost & Found App",
 	"main": "index.js",
 	"scripts": {
-		"start": "node index.js"
+		"start": "node index.ts",
+		"build": "tsc --project ./tsconfig.json",
+		"test": "jest -c ./jest.unit.json",
+		"test:coverage": "jest --coverage -c ./jest.unit.json"
 	},
 	"repository": "https://github.com/lilla-nemeth/lost-and-found.git",
 	"author": "Lilla Németh",
