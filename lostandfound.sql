@@ -26,7 +26,7 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.pets (
     id integer NOT NULL,
-    userid integer NOT NULL,
+    userId integer NOT NULL,
     img character varying,
     petstatus character varying(50),
     longitude character varying(50),
@@ -123,7 +123,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: pets; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.pets (id, userid, img, petstatus, longitude, latitude, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription, since) FROM stdin;
+COPY public.pets (id, userId, img, petstatus, longitude, latitude, petlocation, species, petsize, breed, sex, color, age, uniquefeature, postdescription, since) FROM stdin;
 \.
 
 
@@ -174,11 +174,11 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: pets pets_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: pets pets_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.pets
-    ADD CONSTRAINT pets_userid_fkey FOREIGN KEY (userid) REFERENCES public.users(id);
+    ADD CONSTRAINT pets_userId_fkey FOREIGN KEY (userId) REFERENCES public.users(id);
 
 
 --

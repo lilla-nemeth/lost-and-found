@@ -1,10 +1,10 @@
 # Lost and Found
 
-Lost and Found is an application, where everyone can search from missing pets. Registrated users are also allowed to create pet profiles and perform other tasks. 
+Lost and Found is an application, where everyone can search from missing pets. Registrated users are also allowed to create pet profiles and perform other tasks.
 
 🛠 Created with Node.js, Express, PostgreSQL, JavaScript, Mapbox and React with custom UI.
 
-![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/dbab47a1f3516893ec324a86fd9e7550202a1407/frontend/src/assets/images/screenshots/app_screenshot_00.png)
+![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/dbab47a1f3516893ec324a86fd9e7550202a1407/client/src/assets/images/screenshots/app_screenshot_00.png)
 
 ## Features
 
@@ -17,7 +17,7 @@ Lost and Found is an application, where everyone can search from missing pets. R
 - Form submission (pet report) with required and optional data
 - Deleting own pet profiles (all and one by one)
 
-## Installing, running locally  
+## Installing, running locally
 
 Clone the repo
 
@@ -28,6 +28,7 @@ git clone https://github.com/lilla-nemeth/lost-and-found.git
 ### Server
 
 Go to the project root directory
+
 ```
 cd lost-and-found
 ```
@@ -39,17 +40,21 @@ npm install
 ```
 
 Run the server
+
 ```
 nodemon index.js
 ```
-Server is running on port 3003
+
+Server is running on port 8080
 
 ### Client
 
-Go to the frontend folder
+Go to the client folder
+
 ```
-cd frontend
+cd client
 ```
+
 Install the dependencies
 
 ```
@@ -57,13 +62,14 @@ npm install
 ```
 
 Start the client
+
 ```
 npm start
 ```
 
 ## Environment Variables
 
-To run this app, you need to add the following environment variables to your .env file
+To run this app, you need to add the following environment variables to your .env file. Make sure the .env file is visible to sequelize config.js and queries.js files.
 
 ### Server
 
@@ -82,6 +88,7 @@ To run this app, you need to add the following environment variables to your .en
 ### Client
 
 #### Mapbox API Key
+
 `REACT_APP_MAPBOX_API_KEY`
 
 ## License
