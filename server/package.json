@@ -4,7 +4,7 @@
 	"description": "Lost & Found App",
 	"main": "index.ts",
 	"scripts": {
-		"start": "node index.ts",
+		"start": "ts-node ./index.ts",
 		"build": "tsc --project ./tsconfig.json",
 		"test": "jest -c ./jest.unit.json",
 		"test:coverage": "jest --coverage -c ./jest.unit.json"
@@ -30,7 +30,8 @@
 		"pg": "^8.11.3",
 		"pg-hstore": "^2.3.4",
 		"sequelize": "^6.36.0",
-		"ts-jest": "^29.1.2"
+		"ts-jest": "^29.1.2",
+		"ts-node": "^10.9.2"
 	},
 	"devDependencies": {
 		"typescript": "^5.3.3"

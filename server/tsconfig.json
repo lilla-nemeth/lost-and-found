@@ -1,12 +1,16 @@
 {
 	"compilerOptions": {
 		"target": "ES6",
-		"module": "CommonJS",
+		"module": "esnext",
 		"allowJs": true,
 		"outDir": "build",
 		"strict": true,
 		"noImplicitAny": true,
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"moduleResolution": "node"
 	},
-	"exclude": ["server/node_modules", "server/build/**/*"]
+	"exclude": ["server/node_modules", "server/build/**/*"],
+	"ts-node": {
+		"esm": true
+	}
 }
