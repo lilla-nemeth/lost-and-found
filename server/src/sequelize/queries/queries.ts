@@ -247,10 +247,9 @@ const getUsername = (request: any, response: Response) => {
 // search pet location
 const getGeocodeLocation = (request: Request, response: Response) => {
 	const query = request.params.query;
-	// TODO: fix this
-	// @ts-ignore
+
 	const params = new URLSearchParams({
-		access_token: process.env.API_KEY,
+		access_token: process.env.API_KEY!,
 		...url.parse(request.url, true).query,
 	});
 	const result = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?${params}`;
