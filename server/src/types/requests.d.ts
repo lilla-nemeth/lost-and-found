@@ -3,6 +3,7 @@ import { Request } from 'express';
 type UserId = number;
 type PetStatus = string;
 type PetLocation = string;
+type Longitude = string;
 
 interface RequestCreateUserAccount extends Request {}
 
@@ -19,6 +20,7 @@ interface RequestCreatePetProfileFile extends Request {
 interface RequestCreatePetProfileBody extends Request {
 	petstatus: PetStatus;
 	petlocation: PetLocation;
+	longitude: Longitude;
 }
 
 interface RequestGetAllUserPets extends Request {

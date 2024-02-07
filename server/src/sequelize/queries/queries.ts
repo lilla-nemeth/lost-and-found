@@ -114,9 +114,9 @@ const getPetsByPagination = (request: Request, response: Response) => {
 const createPetProfile = (request: type.RequestCreatePetProfile, response: Response) => {
 	const userId: type.RequestCreatePetProfile['userId'] = request.userId;
 	const img = request.file.buffer.toString('base64');
-	const petstatus: type.RequestCreatePetProfileBody = (request.body = request.body.petstatus);
-	const petlocation = request.body.petlocation;
-	const longitude = request.body.longitude;
+	const petstatus: type.RequestCreatePetProfileBody['petstatus'] = (request.body = request.body.petstatus);
+	const petlocation: type.RequestCreatePetProfileBody['petlocation'] = (request.body = request.body.petlocation);
+	const longitude: type.RequestCreatePetProfileBody['longitude'] = request.body.longitude;
 	const latitude = request.body.latitude;
 	const species = request.body.species;
 	const petsize = request.body.petsize;
