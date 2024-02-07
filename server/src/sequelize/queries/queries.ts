@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { PetInstance } from '../../types/models';
+import * as type from '../../types/requests';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
@@ -111,8 +111,8 @@ const getPetsByPagination = (request: Request, response: Response) => {
 
 // report pet by user
 // const createPetProfile = (request: Request, response: Response) => {
-const createPetProfile = (request: any, response: Response) => {
-	const userId = request.userId;
+const createPetProfile = (request: type.RequestCreatePetProfile, response: Response) => {
+	const userId: type.RequestCreatePetProfile['userId'] = request.userId;
 	const img = request.file.buffer.toString('base64');
 	const petstatus = request.body.petstatus;
 	const petlocation = request.body.petlocation;
@@ -154,10 +154,9 @@ const createPetProfile = (request: any, response: Response) => {
 };
 
 // get all pets by userId
-// const getAllUserPets = (request: Request, response: Response) => {
-const getAllUserPets = (request: Request, response: Response) => {
-	const userId: PetInstance['userId'] = request.userId;
-	const isAdmin = request.isAdmin;
+const getAllUserPets = (request: type.RequestGetAllUserPets, response: Response) => {
+	const userId: type.RequestGetAllUserPets['userId'] = request.userId;
+	const isAdmin: type.RequestGetAllUserPets['isAdmin'] = request.isAdmin;
 
 	const userPetList = models.Pet.findAll({
 		order: [['since', 'DESC']],
@@ -175,7 +174,7 @@ const getAllUserPets = (request: Request, response: Response) => {
 			.then((data) => {
 				response.status(200).json(data);
 			})
-			.catch((err) => {
+			.catch(() => {
 				response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
 			});
 	} else {
@@ -183,7 +182,7 @@ const getAllUserPets = (request: Request, response: Response) => {
 			.then((data) => {
 				response.status(200).json(data);
 			})
-			.catch((err) => {
+			.catch(() => {
 				response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
 			});
 	}
