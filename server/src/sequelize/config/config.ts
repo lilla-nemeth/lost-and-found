@@ -1,8 +1,13 @@
 import { Sequelize } from 'sequelize';
 import 'dotenv/config';
 
-const sequelize = new Sequelize(process.env.PG_DATABASE!, process.env.PG_USER!, process.env.PG_PASSWORD!, {
-	host: process.env.PG_HOST!,
+const dbName = process.env.PG_DATABASE!;
+const dbUsername = process.env.PG_USER!;
+const dbPassword = process.env.PG_PASSWORD!;
+const dbHost = process.env.PG_HOST!;
+
+const sequelize = new Sequelize(dbName, dbUsername, dbPassword, {
+	host: dbHost,
 	dialect: 'postgres',
 	define: {
 		timestamps: false,
