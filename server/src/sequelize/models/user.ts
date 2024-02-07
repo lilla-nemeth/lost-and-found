@@ -1,6 +1,6 @@
 import sequelize from '../config/config';
 import { DataTypes } from 'sequelize';
-import { UserInstance } from '../../types/modelAttributes';
+import { UserInstance } from '../../types/models';
 
 const User = sequelize.define<UserInstance>('user', {
 	id: {

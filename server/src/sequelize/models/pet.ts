@@ -1,7 +1,7 @@
 import sequelize from '../config/config';
 import { DataTypes } from 'sequelize';
 
-import { PetInstance } from '../../types/modelAttributes';
+import { PetInstance } from '../../types/models';
 
 const Pet = sequelize.define<PetInstance>('pet', {
 	id: {

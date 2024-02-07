@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { PetInstance } from '../../types/models';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
@@ -154,8 +155,8 @@ const createPetProfile = (request: any, response: Response) => {
 
 // get all pets by userId
 // const getAllUserPets = (request: Request, response: Response) => {
-const getAllUserPets = (request: any, response: Response) => {
-	const userId = request.userId;
+const getAllUserPets = (request: Request, response: Response) => {
+	const userId: PetInstance['userId'] = request.userId;
 	const isAdmin = request.isAdmin;
 
 	const userPetList = models.Pet.findAll({
