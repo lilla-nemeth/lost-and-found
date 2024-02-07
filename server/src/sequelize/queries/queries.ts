@@ -8,7 +8,7 @@ import { dirname } from 'path';
 import url, { fileURLToPath } from 'url';
 import { isFormValid } from '../../middlewares/middlewares';
 import models from '../models/index';
-import * as messages from '../../types/messageTypes';
+import * as messages from '../../types/messages';
 
 dotenv.config({ path: '../../../.env' });
 
