@@ -6,7 +6,7 @@ declare global {
 			PG_PASSWORD: string;
 			PG_PORT: string;
 			PG_DATABASE: string;
-			NODE_ENV: 'development' | 'production';
+			NODE_ENV?: 'development' | 'production';
 			API_KEY: string;
 		}
 	}
