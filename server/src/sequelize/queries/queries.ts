@@ -88,11 +88,12 @@ const getAllUsers = (request: Request, response: Response) => {
 
 // get/fetch pets by pagination, data has data.rows (pet objects) and data.count (total)
 const getPetsByPagination = (request: Request, response: Response) => {
-	const offset = request.params.skip;
-	const limit = request.params.fetch;
+	const skip: string = request.params.skip;
+	const fetch: string = request.params.fetch;
 
-	// TODO: finding a solution for this
-	// @ts-ignore
+	const offset = Number(skip);
+	const limit = Number(fetch);
+
 	const pets = models.Pet.findAndCountAll({
 		order: [['since', 'DESC']],
 		offset,
