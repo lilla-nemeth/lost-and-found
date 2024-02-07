@@ -25,7 +25,7 @@ interface PetAttributes {
 	age: string;
 	uniquefeature: string;
 	postdescription: string;
-	since: string;
+	since?: string;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
