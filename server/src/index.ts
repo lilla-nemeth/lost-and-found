@@ -16,7 +16,7 @@ import signUpUser from './routes/userSignUp';
 import loginUser from './routes/userLogin';
 import petData from './routes/petReport';
 
-dotenv.config();
+dotenv.config({ path: '../.env' });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

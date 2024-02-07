@@ -10,7 +10,7 @@ import { isFormValid } from '../../middlewares/middlewares';
 import models from '../models/index';
 import * as messages from '../../types/messageTypes';
 
-dotenv.config();
+dotenv.config({ path: '../../../.env' });
 
 const createUserAccount = (request: Request, response: Response) => {
 	const username = request.body.username;
