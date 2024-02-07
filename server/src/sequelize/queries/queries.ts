@@ -289,23 +289,27 @@ const updatePet = (request: Request, response: Response) => {
 	const uniquefeature = request.body.uniquefeature;
 	const postdescription = request.body.postdescription;
 
-	// TODO: finding a solution for this
-	// @ts-ignore
-	const pet = models.Pet.update({
-		id,
-		petstatus,
-		petlocation,
-		longitude,
-		latitude,
-		species,
-		petsize,
-		breed,
-		sex,
-		color,
-		age,
-		uniquefeature,
-		postdescription,
-	});
+	const pet = models.Pet.update(
+		{
+			petstatus,
+			petlocation,
+			longitude,
+			latitude,
+			species,
+			petsize,
+			breed,
+			sex,
+			color,
+			age,
+			uniquefeature,
+			postdescription,
+		},
+		{
+			where: {
+				id,
+			},
+		}
+	);
 
 	pet
 		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_PET }))
