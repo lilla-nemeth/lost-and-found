@@ -5,7 +5,7 @@ import multer from 'multer';
 let DEBUG = false;
 
 // function authMw(request: Request, response: Response, next: NextFunction) {
-function authMw(request: any, response: Response, next: NextFunction) {
+const authMw = (request: any, response: Response, next: NextFunction) => {
 	let token = request.headers['x-auth-token'];
 
 	if (token) {
@@ -21,9 +21,9 @@ function authMw(request: any, response: Response, next: NextFunction) {
 	} else {
 		response.status(401).json({ msg: 'No token found' });
 	}
-}
+};
 
-function isFormValid(request: Request, response: Response, next: NextFunction) {
+const isFormValid = (request: Request, response: Response, next: NextFunction) => {
 	const email = request.body.email;
 	const password = request.body.pw;
 	const username = request.body.username;
@@ -115,7 +115,7 @@ function isFormValid(request: Request, response: Response, next: NextFunction) {
 	} else {
 		next();
 	}
-}
+};
 
 const upload = multer();
 
