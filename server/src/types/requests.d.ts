@@ -36,7 +36,7 @@ declare module 'express-serve-static-core' {
 	interface Request {
 		ReqBody?: RequestPetBody | RequestUserBody;
 		file?: File | null;
-		P?: RequestPaginationParams | RequestGetPetIdParams;
+		P?: RequestPaginationParams | RequestGetPetIdParams | RequestGetSearchParamsQuery;
 	}
 }
 
@@ -48,6 +48,10 @@ interface RequestPaginationParams {
 
 interface RequestGetPetIdParams {
 	id: Id;
+}
+
+interface RequestGetSearchParamsQuery {
+	query: string;
 }
 
 // Request body
@@ -83,4 +87,13 @@ interface RequestUserPets extends Request {
 	isAdmin: IsAdmin;
 }
 
-export { Request, RequestPetBody, RequestUserBody, RequestGetPetIdParams, RequestPaginationParams, RequestGetPetUserId, RequestUserPets };
+export {
+	Request,
+	RequestGetPetIdParams,
+	RequestPaginationParams,
+	RequestGetSearchParamsQuery,
+	RequestPetBody,
+	RequestUserBody,
+	RequestGetPetUserId,
+	RequestUserPets,
+};

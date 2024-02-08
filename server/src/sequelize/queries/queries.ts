@@ -250,10 +250,9 @@ const getUsername = (request: any, response: Response) => {
 
 // search pet location
 const getGeocodeLocation = (request: Request, response: Response) => {
-	// TODO: make type definition
-	const query = request.params.query;
+	const query: types.RequestGetSearchParamsQuery['query'] = request.params.query;
 
-	const params = new URLSearchParams({
+	const params: url.URLSearchParams = new URLSearchParams({
 		access_token: process.env.API_KEY!,
 		...url.parse(request.url, true).query,
 	});
@@ -275,7 +274,7 @@ const getAll = (request: Request, response: Response) => {
 	response.sendFile(path.join(__dirname, 'client/build/index.html'));
 };
 
-///////////////////////////////////////////
+//////////////////////////////
 
 // edit pet by user (user dashboard)
 const updatePet = (request: Request, response: Response) => {
@@ -320,7 +319,7 @@ const updatePet = (request: Request, response: Response) => {
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_PET }));
 };
 
-// edit user data (user dashboard)
+// edit user data (Dashboard)
 const updateUser = (request: types.RequestGetPetUserId, response: Response) => {
 	const id: types.RequestGetPetUserId['userId'] = request.userId;
 	const username: types.RequestUserBody['username'] = request.body.username;
@@ -347,7 +346,7 @@ const updateUser = (request: types.RequestGetPetUserId, response: Response) => {
 		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_USER }));
 };
 
-// delete user - delete user and the connected pets (user dashboard)
+// delete user - delete user and the connected pets (Dashboard)
 const deleteUser = (request: types.RequestGetPetUserId, response: Response) => {
 	const userId: types.RequestGetPetUserId['userId'] = request.userId;
 
