@@ -113,19 +113,19 @@ const getPetsByPagination = (request: Request, response: Response) => {
 // const createPetProfile = (request: Request, response: Response) => {
 const createPetProfile = (request: type.RequestCreatePetProfile, response: Response) => {
 	const userId: type.RequestCreatePetProfile['userId'] = request.userId;
-	const img = request.file.buffer.toString('base64');
-	const petstatus: type.RequestCreatePetProfileBody['petstatus'] = (request.body = request.body.petstatus);
-	const petlocation: type.RequestCreatePetProfileBody['petlocation'] = (request.body = request.body.petlocation);
-	const longitude: type.RequestCreatePetProfileBody['longitude'] = request.body.longitude;
-	const latitude = request.body.latitude;
-	const species = request.body.species;
-	const petsize = request.body.petsize;
-	const breed = request.body.breed;
-	const sex = request.body.sex;
-	const color = request.body.color;
-	const age = request.body.age;
-	const uniquefeature = request.body.uniquefeature;
-	const postdescription = request.body.postdescription;
+	const img: type.Request['file'] = request.file.buffer.toString('base64');
+	const petstatus: type.RequestPetBody['petstatus'] = request.body.petstatus;
+	const petlocation: type.RequestPetBody['petlocation'] = request.body.petlocation;
+	const longitude: type.RequestPetBody['longitude'] = request.body.longitude;
+	const latitude: type.RequestPetBody['latitude'] = request.body.latitude;
+	const species: type.RequestPetBody['species'] = request.body.species;
+	const petsize: type.RequestPetBody['petsize'] = request.body.petsize;
+	const breed: type.RequestPetBody['breed'] = request.body.breed;
+	const sex: type.RequestPetBody['sex'] = request.body.sex;
+	const color: type.RequestPetBody['color'] = request.body.color;
+	const age: type.RequestPetBody['age'] = request.body.age;
+	const uniquefeature: type.RequestPetBody['uniquefeature'] = request.body.uniquefeature;
+	const postdescription: type.RequestPetBody['postdescription'] = request.body.postdescription;
 
 	const pet = models.Pet.create({
 		userId,

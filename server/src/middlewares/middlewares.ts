@@ -90,7 +90,7 @@ const isFormValid = (request: Request, response: Response, next: NextFunction) =
 		} else if (!phone) {
 			message = 'Phone number is required';
 		} else if (!validByPhoneRegex) {
-			message = 'Phone number must contain only digits';
+			message = 'Phone number contains invalid characters';
 		} else if (phone.length < 3) {
 			message = 'Phone number is too short (min. 3 digits)';
 		} else if (phone.length > 15) {
