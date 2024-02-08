@@ -25,18 +25,28 @@ type PostDescription = string;
 // interface Request<
 // 	P = core.ParamsDictionary,
 // 	ResBody = any,
-// 	ReqBody = any,
+// 	ReqBody = RequestPetBody | RequestUserBody,
+// 	ReqFile = File | null,
 // 	ReqQuery = core.Query,
 // 	Locals extends Record<string, any> = Record<string, any>
-// > extends core.Request<P, ResBody, ReqBody, ReqQuery, Locals> {}
+// > extends core.Request<P, ResBody, ReqBody, ReqFile, ReqQuery, Locals> {}
+
+// Requests
 
 declare module 'express-serve-static-core' {
 	interface Request {
-		body?: RequestPetBody | RequestUserBody;
+		ReqBody?: RequestPetBody | RequestUserBody;
 		file?: File | null;
+		P?: RequestPaginationParams;
 	}
 }
-// Requests - body
+// Request params
+interface RequestPaginationParams {
+	skip: string;
+	fetch: string;
+}
+
+// Request body
 interface RequestPetBody {
 	petstatus: PetStatus;
 	petlocation: PetLocation;
@@ -59,7 +69,6 @@ interface RequestUserBody {
 	phone: Phone;
 }
 
-// Requests
 interface RequestCreatePetProfile extends Request {
 	userId: UserId;
 }
@@ -77,4 +86,12 @@ interface RequestCreatePetProfile extends Request {
 // 	password: Password;
 // }
 
-export { Request, RequestPetBody, RequestCreateUserAccount, RequestSignIn, RequestCreatePetProfile, RequestGetAllUserPets };
+export {
+	Request,
+	RequestPetBody,
+	RequestPaginationParams,
+	RequestCreateUserAccount,
+	RequestSignIn,
+	RequestCreatePetProfile,
+	RequestGetAllUserPets,
+};

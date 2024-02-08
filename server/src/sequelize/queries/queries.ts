@@ -89,8 +89,8 @@ const getAllUsers = (request: Request, response: Response) => {
 
 // get/fetch pets by pagination, data has data.rows (pet objects) and data.count (total)
 const getPetsByPagination = (request: Request, response: Response) => {
-	const skip: string = request.params.skip;
-	const fetch: string = request.params.fetch;
+	const skip: type.RequestPaginationParams['skip'] = request.params.skip;
+	const fetch: type.RequestPaginationParams['fetch'] = request.params.fetch;
 
 	const offset = Number(skip);
 	const limit = Number(fetch);
@@ -110,7 +110,6 @@ const getPetsByPagination = (request: Request, response: Response) => {
 };
 
 // report pet by user
-// const createPetProfile = (request: Request, response: Response) => {
 const createPetProfile = (request: type.RequestCreatePetProfile, response: Response) => {
 	const userId: type.RequestCreatePetProfile['userId'] = request.userId;
 	const img: type.Request['file'] = request.file.buffer.toString('base64');
@@ -125,7 +124,7 @@ const createPetProfile = (request: type.RequestCreatePetProfile, response: Respo
 	const color: type.RequestPetBody['color'] = request.body.color;
 	const age: type.RequestPetBody['age'] = request.body.age;
 	const uniquefeature: type.RequestPetBody['uniquefeature'] = request.body.uniquefeature;
-	const postdescription: type.RequestPetBody['postdescription'] = request.body.postdescription;
+	const postdescription = request.body.postdescription;
 
 	const pet = models.Pet.create({
 		userId,
