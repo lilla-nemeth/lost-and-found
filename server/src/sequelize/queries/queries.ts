@@ -14,10 +14,10 @@ import * as messages from '../../types/messages';
 dotenv.config({ path: '../../../.env' });
 
 const createUserAccount = (request: Request, response: Response) => {
-	const username = request.body.username;
-	const email = request.body.email;
-	const pw = request.body.pw;
-	const phone = request.body.phone;
+	const username: type.RequestUserBody['username'] = request.body.username as string;
+	const email: type.RequestUserBody['email'] = request.body.email;
+	const pw: type.RequestUserBody['pw'] = request.body.pw;
+	const phone: type.RequestUserBody['phone'] = request.body.phone as string;
 	const encryptedPw = bcrypt.hashSync(pw, 10);
 
 	const user = models.User.create({
@@ -44,8 +44,8 @@ const createUserAccount = (request: Request, response: Response) => {
 };
 
 const signIn = (request: Request, response: Response) => {
-	const email = request.body.email;
-	const pw = request.body.pw;
+	const email: type.RequestUserBody['email'] = request.body.email;
+	const pw: type.RequestUserBody['pw'] = request.body.pw;
 
 	const user = models.User.findAll({
 		where: {
@@ -110,9 +110,12 @@ const getPetsByPagination = (request: Request, response: Response) => {
 };
 
 // report pet by user
-const createPetProfile = (request: type.RequestCreatePetProfile, response: Response) => {
+// TODO: fix this (removing any):
+const createPetProfile = (request: type.RequestCreatePetProfile | any, response: Response) => {
 	const userId: type.RequestCreatePetProfile['userId'] = request.userId;
-	const img: type.Request['file'] = request.file.buffer.toString('base64');
+	// TODO: fix this:
+	const img: any = request.file.buffer.toString('base64');
+	// const img: type.Request['file'] = request.file.buffer.toString('base64');
 	const petstatus: type.RequestPetBody['petstatus'] = request.body.petstatus;
 	const petlocation: type.RequestPetBody['petlocation'] = request.body.petlocation;
 	const longitude: type.RequestPetBody['longitude'] = request.body.longitude;
@@ -124,7 +127,7 @@ const createPetProfile = (request: type.RequestCreatePetProfile, response: Respo
 	const color: type.RequestPetBody['color'] = request.body.color;
 	const age: type.RequestPetBody['age'] = request.body.age;
 	const uniquefeature: type.RequestPetBody['uniquefeature'] = request.body.uniquefeature;
-	const postdescription = request.body.postdescription;
+	const postdescription: type.RequestPetBody['postdescription'] = request.body.postdescription;
 
 	const pet = models.Pet.create({
 		userId,

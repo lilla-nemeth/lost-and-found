@@ -1,5 +1,4 @@
 import { Request } from 'express';
-import { File } from 'multer';
 
 // User types
 type Username = string;
@@ -62,11 +61,12 @@ interface RequestPetBody {
 	postdescription: PostDescription;
 }
 
+// For sign in only email and password are needed - creating new Body interface option?
 interface RequestUserBody {
-	username: Username;
+	username?: Username;
 	email: Email;
 	pw: Password;
-	phone: Phone;
+	phone?: Phone;
 }
 
 interface RequestCreatePetProfile extends Request {
@@ -89,6 +89,7 @@ interface RequestCreatePetProfile extends Request {
 export {
 	Request,
 	RequestPetBody,
+	RequestUserBody,
 	RequestPaginationParams,
 	RequestCreateUserAccount,
 	RequestSignIn,
