@@ -1,12 +1,7 @@
 import { Request, Response } from 'express';
 import * as types from '../../../types/requests';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import axios from 'axios';
 import dotenv from 'dotenv';
-import path from 'path';
-import { dirname } from 'path';
-import url, { fileURLToPath } from 'url';
 import { isFormValid } from '../../../middlewares/middlewares';
 import models from '../../models/index';
 import * as messages from '../../../types/messages';

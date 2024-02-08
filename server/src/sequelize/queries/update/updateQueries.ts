@@ -1,13 +1,7 @@
 import { Request, Response } from 'express';
 import * as types from '../../../types/requests';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import axios from 'axios';
 import dotenv from 'dotenv';
-import path from 'path';
-import { dirname } from 'path';
-import url, { fileURLToPath } from 'url';
-import { isFormValid } from '../../../middlewares/middlewares';
 import models from '../../models/index';
 import * as messages from '../../../types/messages';
 
@@ -57,7 +51,8 @@ const updatePet = (request: Request, response: Response) => {
 };
 
 // edit user data (Dashboard)
-const updateUser = (request: types.RequestGetPetUserId, response: Response) => {
+const updateUser = (request: Request, response: Response) => {
+	// TODO: fix this:
 	const id: types.RequestGetPetUserId['userId'] = request.userId;
 	const username: types.RequestUserBody['username'] = request.body.username;
 	const email: types.RequestUserBody['email'] = request.body.email;

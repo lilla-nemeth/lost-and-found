@@ -7,7 +7,6 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { dirname } from 'path';
 import url, { fileURLToPath } from 'url';
-import { isFormValid } from '../../../middlewares/middlewares';
 import models from '../../models/index';
 import * as messages from '../../../types/messages';
 
@@ -95,7 +94,7 @@ const getPetById = (request: Request, response: Response) => {
 };
 
 // get all pets by userId
-const getAllUserPets = (request: types.RequestUserPets, response: Response) => {
+const getAllUserPets = (request: Request, response: Response) => {
 	const userId: types.RequestUserPets['userId'] = request.userId;
 	const isAdmin: types.RequestUserPets['isAdmin'] = request.isAdmin;
 

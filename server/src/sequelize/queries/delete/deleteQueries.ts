@@ -1,13 +1,6 @@
 import { Request, Response } from 'express';
 import * as types from '../../../types/requests';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import axios from 'axios';
 import dotenv from 'dotenv';
-import path from 'path';
-import { dirname } from 'path';
-import url, { fileURLToPath } from 'url';
-import { isFormValid } from '../../../middlewares/middlewares';
 import models from '../../models/index';
 import * as messages from '../../../types/messages';
 
@@ -31,7 +24,8 @@ const deleteUserPet = (request: Request, response: Response) => {
 };
 
 // delete all pets by user (user dashboard)
-const deleteAllUserPets = (request: types.RequestUserPets, response: Response) => {
+const deleteAllUserPets = (request: Request, response: Response) => {
+	// TODO: fix this
 	const userId: types.RequestUserPets['userId'] = request.userId;
 	const isAdmin: types.RequestUserPets['isAdmin'] = request.isAdmin;
 
@@ -56,7 +50,8 @@ const deleteAllUserPets = (request: types.RequestUserPets, response: Response) =
 };
 
 // delete user - delete user and the connected pets (Dashboard)
-const deleteUser = (request: types.RequestGetPetUserId, response: Response) => {
+const deleteUser = (request: Request, response: Response) => {
+	// TODO: fix this
 	const userId: types.RequestGetPetUserId['userId'] = request.userId;
 
 	const pet = models.Pet.destroy({
