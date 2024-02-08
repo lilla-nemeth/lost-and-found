@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { authMw } from '../middlewares/middlewares';
-import * as queries from '../sequelize/queries/queries';
+import * as readQueries from '../sequelize/queries/read/readQueries';
 
 const router = Router();
 
-router.get('/', authMw, queries.getAllUsers);
-router.get('/pets/:fetch/:skip', queries.getPetsByPagination);
-router.get('/pets/:id', queries.getPetById);
+router.get('/', authMw, readQueries.getAllUsers);
+router.get('/pets/:fetch/:skip', readQueries.getPetsByPagination);
+router.get('/pets/:id', readQueries.getPetById);
 
 export default router;

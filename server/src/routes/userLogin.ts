@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { isFormValid } from '../middlewares/middlewares';
-import * as queries from '../sequelize/queries/queries';
+import * as readQueries from '../sequelize/queries/read/readQueries';
 
 const router = Router();
 
-router.post('/', [isFormValid], queries.signIn);
+router.post('/', [isFormValid], readQueries.signIn);
 
 export default router;

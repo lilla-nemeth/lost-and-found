@@ -2,7 +2,7 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { authMw } from './middlewares/middlewares';
-import * as queries from './sequelize/queries/queries';
+import * as readQueries from './sequelize/queries/read/readQueries';
 import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // For navbar
-app.get('/username', authMw, queries.getUsername);
+app.get('/username', authMw, readQueries.getUsername);
 
 // Home
 app.use('/', pets);
@@ -57,6 +57,6 @@ app.use('/login', loginUser);
 // Pet Report
 app.use('/reportpet', petData);
 
-app.get('*', queries.getAll);
+app.get('*', readQueries.getAll);
 
 app.listen(port, () => console.log('Server is running on 8080'));
