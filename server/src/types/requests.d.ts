@@ -29,16 +29,9 @@ declare module 'express-serve-static-core' {
 		ReqBody?: RequestPetBody | RequestUserBody;
 		file?: File | null;
 		P?: RequestPaginationParams | RequestGetPetIdParams | RequestGetSearchParamsQuery;
+		userId?: UserId;
+		isAdmin?: IsAdmin;
 	}
-}
-
-interface RequestGetPetUserId extends Request {
-	userId: UserId;
-}
-
-interface RequestUserPets extends Request {
-	userId: UserId;
-	isAdmin: IsAdmin;
 }
 
 // Request Params
@@ -78,13 +71,4 @@ interface RequestUserBody {
 	phone?: Phone;
 }
 
-export {
-	Request,
-	RequestGetPetUserId,
-	RequestUserPets,
-	RequestGetPetIdParams,
-	RequestPaginationParams,
-	RequestGetSearchParamsQuery,
-	RequestPetBody,
-	RequestUserBody,
-};
+export { Request, RequestGetPetIdParams, RequestPaginationParams, RequestGetSearchParamsQuery, RequestPetBody, RequestUserBody };

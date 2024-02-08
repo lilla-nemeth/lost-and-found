@@ -95,8 +95,8 @@ const getPetById = (request: Request, response: Response) => {
 
 // get all pets by userId
 const getAllUserPets = (request: Request, response: Response) => {
-	const userId: types.RequestUserPets['userId'] = request.userId;
-	const isAdmin: types.RequestUserPets['isAdmin'] = request.isAdmin;
+	const userId: Request['userId'] = request.userId;
+	const isAdmin: Request['isAdmin'] = request.isAdmin;
 
 	const userPetList = models.Pet.findAll({
 		order: [['since', 'DESC']],
@@ -129,8 +129,8 @@ const getAllUserPets = (request: Request, response: Response) => {
 };
 
 // get username
-const getUsername = (request: any, response: Response) => {
-	const userId: types.RequestGetPetUserId['userId'] = request.userId;
+const getUsername = (request: Request, response: Response) => {
+	const userId: Request['userId'] = request.userId;
 
 	const user = models.User.findByPk(userId);
 

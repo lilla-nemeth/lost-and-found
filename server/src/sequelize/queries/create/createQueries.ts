@@ -40,8 +40,8 @@ const createUserAccount = (request: Request, response: Response) => {
 
 // report pet by user
 // TODO: fix this (removing any):
-const createPetProfile = (request: types.RequestGetPetUserId | any, response: Response) => {
-	const userId: types.RequestGetPetUserId['userId'] = request.userId;
+const createPetProfile = (request: Request | any, response: Response) => {
+	const userId: Request['userId'] = request.userId;
 	// TODO: fix this:
 	const img: any = request.file.buffer.toString('base64');
 	// const img: types.Request['file'] = request.file.buffer.toString('base64');

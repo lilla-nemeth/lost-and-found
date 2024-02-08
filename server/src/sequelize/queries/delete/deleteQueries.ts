@@ -26,8 +26,8 @@ const deleteUserPet = (request: Request, response: Response) => {
 // delete all pets by user (user dashboard)
 const deleteAllUserPets = (request: Request, response: Response) => {
 	// TODO: fix this
-	const userId: types.RequestUserPets['userId'] = request.userId;
-	const isAdmin: types.RequestUserPets['isAdmin'] = request.isAdmin;
+	const userId: Request['userId'] = request.userId;
+	const isAdmin: Request['isAdmin'] = request.isAdmin;
 
 	const userPetList = models.Pet.destroy({
 		truncate: true,
@@ -52,7 +52,7 @@ const deleteAllUserPets = (request: Request, response: Response) => {
 // delete user - delete user and the connected pets (Dashboard)
 const deleteUser = (request: Request, response: Response) => {
 	// TODO: fix this
-	const userId: types.RequestGetPetUserId['userId'] = request.userId;
+	const userId: Request['userId'] = request.userId;
 
 	const pet = models.Pet.destroy({
 		where: {
