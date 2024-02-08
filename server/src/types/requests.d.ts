@@ -1,13 +1,13 @@
 import { Request } from 'express';
 
-// User types
+// User Types
 type Username = string;
 type Email = string;
 type Password = string;
 type Phone = string;
 type IsAdmin = boolean;
 
-// Pet types
+// Pet Types
 type Id = string;
 type UserId = number;
 type PetStatus = string;
@@ -23,15 +23,7 @@ type Age = string;
 type UniqueFeature = string;
 type PostDescription = string;
 
-// interface Request<
-// 	P = core.ParamsDictionary,
-// 	ResBody = any,
-// 	ReqBody = RequestPetBody | RequestUserBody,
-// 	ReqFile = File | null,
-// 	ReqQuery = core.Query,
-// 	Locals extends Record<string, any> = Record<string, any>
-// > extends core.Request<P, ResBody, ReqBody, ReqFile, ReqQuery, Locals> {}
-
+// Request
 declare module 'express-serve-static-core' {
 	interface Request {
 		ReqBody?: RequestPetBody | RequestUserBody;
@@ -40,7 +32,16 @@ declare module 'express-serve-static-core' {
 	}
 }
 
-// Request params
+interface RequestGetPetUserId extends Request {
+	userId: UserId;
+}
+
+interface RequestUserPets extends Request {
+	userId: UserId;
+	isAdmin: IsAdmin;
+}
+
+// Request Params
 interface RequestPaginationParams {
 	skip: string;
 	fetch: string;
@@ -54,7 +55,7 @@ interface RequestGetSearchParamsQuery {
 	query: string;
 }
 
-// Request body
+// Request Body
 interface RequestPetBody {
 	petstatus: PetStatus;
 	petlocation: PetLocation;
@@ -77,23 +78,13 @@ interface RequestUserBody {
 	phone?: Phone;
 }
 
-// Requests
-interface RequestGetPetUserId extends Request {
-	userId: UserId;
-}
-
-interface RequestUserPets extends Request {
-	userId: UserId;
-	isAdmin: IsAdmin;
-}
-
 export {
 	Request,
+	RequestGetPetUserId,
+	RequestUserPets,
 	RequestGetPetIdParams,
 	RequestPaginationParams,
 	RequestGetSearchParamsQuery,
 	RequestPetBody,
 	RequestUserBody,
-	RequestGetPetUserId,
-	RequestUserPets,
 };
