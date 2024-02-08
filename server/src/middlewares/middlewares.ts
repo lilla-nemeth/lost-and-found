@@ -1,18 +1,22 @@
 import { Request, Response, NextFunction } from 'express';
+import * as types from '../types/requests';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
 
 let DEBUG = false;
 
 // function authMw(request: Request, response: Response, next: NextFunction) {
-const authMw = (request: any, response: Response, next: NextFunction) => {
+const authMw = (request: Request, response: Response, next: NextFunction) => {
 	let token = request.headers['x-auth-token'];
 
 	if (token) {
 		jwt.verify(token, 'r4uqSKqC6L', (err: any, decodedToken: any) => {
 			if (decodedToken) {
-				request.userId = decodedToken.id;
-				request.isAdmin = decodedToken.isAdmin;
+				let userId: Request['userId'] = request.userId;
+				let isAdmin: Request['isAdmin'] = request.isAdmin;
+
+				userId = decodedToken.id;
+				isAdmin = decodedToken.isAdmin;
 				next();
 			} else {
 				response.status(401).json({ msg: 'Token is not valid' });
@@ -24,10 +28,10 @@ const authMw = (request: any, response: Response, next: NextFunction) => {
 };
 
 const isFormValid = (request: Request, response: Response, next: NextFunction) => {
-	const email = request.body.email;
-	const password = request.body.pw;
-	const username = request.body.username;
-	const phone = request.body.phone;
+	const email: types.RequestUserBody['email'] = request.body.email;
+	const password: types.RequestUserBody['pw'] = request.body.pw;
+	const username: types.RequestUserBody['username'] = request.body.username as string;
+	const phone: types.RequestUserBody['phone'] = request.body.phone as string;
 
 	const usernameRegex: RegExp = /^[A-Za-z0-9öÖäÄåÅ_\.]*$/;
 	const usernameFirstCharacter: RegExp = /^[a-zA-ZöÖäÄåÅ]/;
