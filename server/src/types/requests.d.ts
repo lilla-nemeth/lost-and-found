@@ -5,8 +5,10 @@ type Username = string;
 type Email = string;
 type Password = string;
 type Phone = string;
+type IsAdmin = boolean;
 
 // Pet types
+type Id = string;
 type UserId = number;
 type PetStatus = string;
 type PetLocation = string;
@@ -36,7 +38,7 @@ declare module 'express-serve-static-core' {
 	interface Request {
 		ReqBody?: RequestPetBody | RequestUserBody;
 		file?: File | null;
-		P?: RequestPaginationParams;
+		P?: RequestPaginationParams | RequestGetPetIdParams;
 	}
 }
 // Request params
@@ -52,13 +54,17 @@ interface RequestPetBody {
 	longitude: Longitude;
 	latitude: Latitude;
 	species: Species;
-	petsize: Petsize;
-	breed: Breed;
-	sex: Sex;
-	color: Color;
-	age: Age;
-	uniquefeature: UniqueFeature;
+	petsize?: Petsize;
+	breed?: Breed;
+	sex?: Sex;
+	color?: Color;
+	age?: Age;
+	uniquefeature?: UniqueFeature;
 	postdescription: PostDescription;
+}
+
+interface RequestGetPetIdParams {
+	id: Id;
 }
 
 // For sign in only email and password are needed - creating new Body interface option?
@@ -69,16 +75,16 @@ interface RequestUserBody {
 	phone?: Phone;
 }
 
-interface RequestCreatePetProfile extends Request {
+interface RequestGetPetUserId extends Request {
 	userId: UserId;
 }
 
-// interface RequestGetAllUserPets extends Request {
-// 	userId: UserId;
-// 	isAdmin: boolean;
-// }
+interface RequestUserPets extends Request {
+	userId: UserId;
+	isAdmin: IsAdmin;
+}
 
-// // User requests
+// User requests
 // interface RequestCreateUserAccount extends Request {}
 
 // interface RequestSignIn extends Request {
@@ -90,9 +96,10 @@ export {
 	Request,
 	RequestPetBody,
 	RequestUserBody,
+	RequestGetPetIdParams,
 	RequestPaginationParams,
 	RequestCreateUserAccount,
 	RequestSignIn,
-	RequestCreatePetProfile,
-	RequestGetAllUserPets,
+	RequestGetPetUserId,
+	RequestUserPets,
 };

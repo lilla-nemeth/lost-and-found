@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as type from '../../types/requests';
+import * as types from '../../types/requests';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
@@ -14,11 +14,11 @@ import * as messages from '../../types/messages';
 dotenv.config({ path: '../../../.env' });
 
 const createUserAccount = (request: Request, response: Response) => {
-	const username: type.RequestUserBody['username'] = request.body.username as string;
-	const email: type.RequestUserBody['email'] = request.body.email;
-	const pw: type.RequestUserBody['pw'] = request.body.pw;
-	const phone: type.RequestUserBody['phone'] = request.body.phone as string;
-	const encryptedPw: type.RequestUserBody['pw'] = bcrypt.hashSync(pw, 10);
+	const username: types.RequestUserBody['username'] = request.body.username as string;
+	const email: types.RequestUserBody['email'] = request.body.email;
+	const pw: types.RequestUserBody['pw'] = request.body.pw;
+	const phone: types.RequestUserBody['phone'] = request.body.phone as string;
+	const encryptedPw: types.RequestUserBody['pw'] = bcrypt.hashSync(pw, 10);
 
 	const user = models.User.create({
 		username,
@@ -44,8 +44,8 @@ const createUserAccount = (request: Request, response: Response) => {
 };
 
 const signIn = (request: Request, response: Response) => {
-	const email: type.RequestUserBody['email'] = request.body.email;
-	const pw: type.RequestUserBody['pw'] = request.body.pw;
+	const email: types.RequestUserBody['email'] = request.body.email;
+	const pw: types.RequestUserBody['pw'] = request.body.pw;
 
 	const user = models.User.findAll({
 		where: {
@@ -89,8 +89,8 @@ const getAllUsers = (request: Request, response: Response) => {
 
 // get/fetch pets by pagination, data has data.rows (pet objects) and data.count (total)
 const getPetsByPagination = (request: Request, response: Response) => {
-	const skip: type.RequestPaginationParams['skip'] = request.params.skip;
-	const fetch: type.RequestPaginationParams['fetch'] = request.params.fetch;
+	const skip: types.RequestPaginationParams['skip'] = request.params.skip;
+	const fetch: types.RequestPaginationParams['fetch'] = request.params.fetch;
 
 	const offset = Number(skip);
 	const limit = Number(fetch);
@@ -111,23 +111,24 @@ const getPetsByPagination = (request: Request, response: Response) => {
 
 // report pet by user
 // TODO: fix this (removing any):
-const createPetProfile = (request: type.RequestCreatePetProfile | any, response: Response) => {
-	const userId: type.RequestCreatePetProfile['userId'] = request.userId;
+const createPetProfile = (request: types.RequestGetPetUserId | any, response: Response) => {
+	const userId: types.RequestGetPetUserId['userId'] = request.userId;
 	// TODO: fix this:
 	const img: any = request.file.buffer.toString('base64');
-	// const img: type.Request['file'] = request.file.buffer.toString('base64');
-	const petstatus: type.RequestPetBody['petstatus'] = request.body.petstatus;
-	const petlocation: type.RequestPetBody['petlocation'] = request.body.petlocation;
-	const longitude: type.RequestPetBody['longitude'] = request.body.longitude;
-	const latitude: type.RequestPetBody['latitude'] = request.body.latitude;
-	const species: type.RequestPetBody['species'] = request.body.species;
-	const petsize: type.RequestPetBody['petsize'] = request.body.petsize;
-	const breed: type.RequestPetBody['breed'] = request.body.breed;
-	const sex: type.RequestPetBody['sex'] = request.body.sex;
-	const color: type.RequestPetBody['color'] = request.body.color;
-	const age: type.RequestPetBody['age'] = request.body.age;
-	const uniquefeature: type.RequestPetBody['uniquefeature'] = request.body.uniquefeature;
-	const postdescription: type.RequestPetBody['postdescription'] = request.body.postdescription;
+	// const img: types.Request['file'] = request.file.buffer.toString('base64');
+	// TODO: testing without as string option:
+	const petstatus: types.RequestPetBody['petstatus'] = request.body.petstatus;
+	const petlocation: types.RequestPetBody['petlocation'] = request.body.petlocation;
+	const longitude: types.RequestPetBody['longitude'] = request.body.longitude;
+	const latitude: types.RequestPetBody['latitude'] = request.body.latitude;
+	const species: types.RequestPetBody['species'] = request.body.species;
+	const petsize: types.RequestPetBody['petsize'] = request.body.petsize as string;
+	const breed: types.RequestPetBody['breed'] = request.body.breed as string;
+	const sex: types.RequestPetBody['sex'] = request.body.sex as string;
+	const color: types.RequestPetBody['color'] = request.body.color as string;
+	const age: types.RequestPetBody['age'] = request.body.age as string;
+	const uniquefeature: types.RequestPetBody['uniquefeature'] = request.body.uniquefeature as string;
+	const postdescription: types.RequestPetBody['postdescription'] = request.body.postdescription;
 
 	const pet = models.Pet.create({
 		userId,
@@ -156,9 +157,9 @@ const createPetProfile = (request: type.RequestCreatePetProfile | any, response:
 };
 
 // get all pets by userId
-const getAllUserPets = (request: type.RequestGetAllUserPets, response: Response) => {
-	const userId: type.RequestGetAllUserPets['userId'] = request.userId;
-	const isAdmin: type.RequestGetAllUserPets['isAdmin'] = request.isAdmin;
+const getAllUserPets = (request: types.RequestUserPets, response: Response) => {
+	const userId: types.RequestUserPets['userId'] = request.userId;
+	const isAdmin: types.RequestUserPets['isAdmin'] = request.isAdmin;
 
 	const userPetList = models.Pet.findAll({
 		order: [['since', 'DESC']],
@@ -192,11 +193,13 @@ const getAllUserPets = (request: type.RequestGetAllUserPets, response: Response)
 
 // delete 1 pet by user (user dashboard)
 const deleteUserPet = (request: Request, response: Response) => {
-	const id = request.params.id;
+	const paramsId: types.RequestGetPetIdParams['id'] = request.params.id;
+
+	const id = Number(paramsId);
 
 	const pet = models.Pet.destroy({
 		where: {
-			id,
+			id: id,
 		},
 	});
 
@@ -206,10 +209,9 @@ const deleteUserPet = (request: Request, response: Response) => {
 };
 
 // delete all pets by user (user dashboard)
-// const deleteAllUserPets = (request: Request, response: Response) => {
-const deleteAllUserPets = (request: any, response: Response) => {
-	const userId = request.userId;
-	const isAdmin = request.isAdmin;
+const deleteAllUserPets = (request: types.RequestUserPets, response: Response) => {
+	const userId: types.RequestUserPets['userId'] = request.userId;
+	const isAdmin: types.RequestUserPets['isAdmin'] = request.isAdmin;
 
 	const userPetList = models.Pet.destroy({
 		truncate: true,
@@ -234,7 +236,7 @@ const deleteAllUserPets = (request: any, response: Response) => {
 // get username
 // const getUsername = (request: Request, response: Response) => {
 const getUsername = (request: any, response: Response) => {
-	const userId = request.userId;
+	const userId: types.RequestGetPetUserId['userId'] = request.userId;
 
 	const user = models.User.findByPk(userId);
 
@@ -249,6 +251,7 @@ const getUsername = (request: any, response: Response) => {
 
 // search pet location
 const getGeocodeLocation = (request: Request, response: Response) => {
+	// TODO: make type definition
 	const query = request.params.query;
 
 	const params = new URLSearchParams({
@@ -268,8 +271,8 @@ const getGeocodeLocation = (request: Request, response: Response) => {
 };
 
 const getAll = (request: Request, response: Response) => {
-	const __filename = fileURLToPath(import.meta.url);
-	const __dirname = dirname(__filename);
+	const __filename: string = fileURLToPath(import.meta.url);
+	const __dirname: string = dirname(__filename);
 	response.sendFile(path.join(__dirname, 'client/build/index.html'));
 };
 
@@ -277,19 +280,19 @@ const getAll = (request: Request, response: Response) => {
 
 // edit pet by user (user dashboard)
 const updatePet = (request: Request, response: Response) => {
-	const id = request.params.id;
-	const petstatus = request.body.petstatus;
-	const petlocation = request.body.petlocation;
-	const longitude = request.body.longitude;
-	const latitude = request.body.latitude;
-	const species = request.body.species;
-	const petsize = request.body.petsize;
-	const breed = request.body.breed;
-	const sex = request.body.sex;
-	const color = request.body.color;
-	const age = request.body.age;
-	const uniquefeature = request.body.uniquefeature;
-	const postdescription = request.body.postdescription;
+	const id: types.RequestGetPetIdParams['id'] = request.params.id;
+	const petstatus: types.RequestPetBody['petstatus'] = request.body.petstatus;
+	const petlocation: types.RequestPetBody['petlocation'] = request.body.petlocation;
+	const longitude: types.RequestPetBody['longitude'] = request.body.longitude;
+	const latitude: types.RequestPetBody['latitude'] = request.body.latitude;
+	const species: types.RequestPetBody['species'] = request.body.species;
+	const petsize: types.RequestPetBody['petsize'] = request.body.petsize;
+	const breed: types.RequestPetBody['breed'] = request.body.breed;
+	const sex: types.RequestPetBody['sex'] = request.body.sex;
+	const color: types.RequestPetBody['color'] = request.body.color;
+	const age: types.RequestPetBody['age'] = request.body.age;
+	const uniquefeature: types.RequestPetBody['uniquefeature'] = request.body.uniquefeature;
+	const postdescription: types.RequestPetBody['postdescription'] = request.body.postdescription;
 
 	const pet = models.Pet.update(
 		{
@@ -347,9 +350,8 @@ const updateUser = (request: any, response: Response) => {
 };
 
 // delete user - delete user and the connected pets (user dashboard)
-// const deleteUser = (request: Request, response: Response) => {
-const deleteUser = (request: any, response: Response) => {
-	const userId = request.userId;
+const deleteUser = (request: types.RequestGetPetUserId, response: Response) => {
+	const userId: types.RequestGetPetUserId['userId'] = request.userId;
 
 	const pet = models.Pet.destroy({
 		where: {
@@ -382,7 +384,7 @@ const deleteUser = (request: any, response: Response) => {
 
 // from pets table get one pet by id
 const getPetById = (request: Request, response: Response) => {
-	const id = request.params.id;
+	const id: types.RequestGetPetIdParams['id'] = request.params.id;
 
 	const pet = models.Pet.findByPk(id);
 
