@@ -32,8 +32,6 @@ type PostDescription = string;
 // 	Locals extends Record<string, any> = Record<string, any>
 // > extends core.Request<P, ResBody, ReqBody, ReqFile, ReqQuery, Locals> {}
 
-// Requests
-
 declare module 'express-serve-static-core' {
 	interface Request {
 		ReqBody?: RequestPetBody | RequestUserBody;
@@ -41,10 +39,15 @@ declare module 'express-serve-static-core' {
 		P?: RequestPaginationParams | RequestGetPetIdParams;
 	}
 }
+
 // Request params
 interface RequestPaginationParams {
 	skip: string;
 	fetch: string;
+}
+
+interface RequestGetPetIdParams {
+	id: Id;
 }
 
 // Request body
@@ -63,11 +66,6 @@ interface RequestPetBody {
 	postdescription: PostDescription;
 }
 
-interface RequestGetPetIdParams {
-	id: Id;
-}
-
-// For sign in only email and password are needed - creating new Body interface option?
 interface RequestUserBody {
 	username?: Username;
 	email: Email;
@@ -75,6 +73,7 @@ interface RequestUserBody {
 	phone?: Phone;
 }
 
+// Requests
 interface RequestGetPetUserId extends Request {
 	userId: UserId;
 }
@@ -84,22 +83,4 @@ interface RequestUserPets extends Request {
 	isAdmin: IsAdmin;
 }
 
-// User requests
-// interface RequestCreateUserAccount extends Request {}
-
-// interface RequestSignIn extends Request {
-// 	email: Email;
-// 	password: Password;
-// }
-
-export {
-	Request,
-	RequestPetBody,
-	RequestUserBody,
-	RequestGetPetIdParams,
-	RequestPaginationParams,
-	RequestCreateUserAccount,
-	RequestSignIn,
-	RequestGetPetUserId,
-	RequestUserPets,
-};
+export { Request, RequestPetBody, RequestUserBody, RequestGetPetIdParams, RequestPaginationParams, RequestGetPetUserId, RequestUserPets };
