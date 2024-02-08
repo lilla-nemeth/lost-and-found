@@ -323,13 +323,13 @@ const updatePet = (request: Request, response: Response) => {
 
 // edit user data (user dashboard)
 // const updateUser = (request: Request, response: Response) => {
-const updateUser = (request: any, response: Response) => {
-	const id = request.userId;
-	const username = request.body.username;
-	const email = request.body.email;
-	const pw = request.body.pw;
-	const phone = request.body.phone;
-	const encryptedPw = bcrypt.hashSync(pw, 10);
+const updateUser = (request: types.RequestGetPetUserId, response: Response) => {
+	const id: types.RequestGetPetUserId['userId'] = request.userId;
+	const username: types.RequestUserBody['username'] = request.body.username;
+	const email: types.RequestUserBody['email'] = request.body.email;
+	const pw: types.RequestUserBody['pw'] = request.body.pw;
+	const phone: types.RequestUserBody['phone'] = request.body.phone;
+	const encryptedPw: types.RequestUserBody['pw'] = bcrypt.hashSync(pw, 10);
 
 	const user = models.User.update(
 		{
