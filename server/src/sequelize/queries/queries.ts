@@ -234,7 +234,6 @@ const deleteAllUserPets = (request: types.RequestUserPets, response: Response) =
 };
 
 // get username
-// const getUsername = (request: Request, response: Response) => {
 const getUsername = (request: any, response: Response) => {
 	const userId: types.RequestGetPetUserId['userId'] = request.userId;
 
@@ -322,7 +321,6 @@ const updatePet = (request: Request, response: Response) => {
 };
 
 // edit user data (user dashboard)
-// const updateUser = (request: Request, response: Response) => {
 const updateUser = (request: types.RequestGetPetUserId, response: Response) => {
 	const id: types.RequestGetPetUserId['userId'] = request.userId;
 	const username: types.RequestUserBody['username'] = request.body.username;
