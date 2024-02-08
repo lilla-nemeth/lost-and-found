@@ -33,7 +33,7 @@ const isFormValid = (request: Request, response: Response, next: NextFunction) =
 	const usernameFirstCharacter: RegExp = /^[a-zA-ZöÖäÄåÅ]/;
 	const emailRegex: RegExp =
 		/^[-!#$%&'.*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
-	const phoneRegex: RegExp = /^\d+$/;
+	const phoneRegex: RegExp = /^(\+?\d{1,3}|\d{1,4})\d+/;
 	const pwUppercase: RegExp = /^(?=.*[A-Z])/;
 	const pwLowercase: RegExp = /^(?=.*[a-z])/;
 	const pwDigit: RegExp = /^(?=.*\d)/;
