@@ -18,7 +18,7 @@ const createUserAccount = (request: Request, response: Response) => {
 	const email: type.RequestUserBody['email'] = request.body.email;
 	const pw: type.RequestUserBody['pw'] = request.body.pw;
 	const phone: type.RequestUserBody['phone'] = request.body.phone as string;
-	const encryptedPw = bcrypt.hashSync(pw, 10);
+	const encryptedPw: type.RequestUserBody['pw'] = bcrypt.hashSync(pw, 10);
 
 	const user = models.User.create({
 		username,

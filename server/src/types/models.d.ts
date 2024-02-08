@@ -29,7 +29,7 @@ interface PetAttributes {
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
-interface PetCreationAttributes extends Optional<PetAttributes, 'id'> {}
+interface PetCreationAttributes extends Optional<PetAttributes, 'id' | 'petsize' | 'breed' | 'sex' | 'color' | 'age' | 'uniquefeature'> {}
 
 interface UserInstance extends Model<UserAttributes, UserCreationAttributes>, UserAttributes {
 	createdAt?: Date;
