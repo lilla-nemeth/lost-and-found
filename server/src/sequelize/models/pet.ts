@@ -1,7 +1,9 @@
-import sequelize from '../config/config.js';
+import sequelize from '../config/config';
 import { DataTypes } from 'sequelize';
 
-const Pet = sequelize.define('pet', {
+import { PetInstance } from '../../types/models';
+
+const Pet = sequelize.define<PetInstance>('pet', {
 	id: {
 		type: DataTypes.INTEGER,
 		primaryKey: true,

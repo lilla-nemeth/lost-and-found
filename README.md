@@ -2,7 +2,7 @@
 
 Lost and Found is an application made for missing and found pets. Users with accounts are also allowed to create pet profiles and perform other tasks.
 
-🛠 Created with PERN stack, Sequelize, Mapbox and custom UI.
+🛠 Created with PERN stack, JavaScript, TypeScript, Sequelize, Mapbox and custom UI.
 
 ![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/client/src/assets/images/screenshots/app_screenshot_00.png)
 
@@ -22,7 +22,7 @@ Lost and Found is an application made for missing and found pets. Users with acc
 - Pet and user profile updates
 - Stricter image uploading
 - Filters for listed pets (e.g by creation date, species)
-- Technical improvements (e.g unit tests, switching to TypeScript)
+- Technical improvements (e.g unit tests, transitioning to TypeScript (client))
 
 ## Installing, running locally
 
@@ -34,22 +34,22 @@ git clone https://github.com/lilla-nemeth/lost-and-found.git
 
 ### Server
 
-Go to the project root directory
+Go to the server folder
 
 ```
-cd lost-and-found
+cd server
 ```
 
 Install the dependencies
 
 ```
-npm install
+yarn install
 ```
 
 Run the server
 
 ```
-nodemon index.js
+yarn start
 ```
 
 Server is running on port 8080
@@ -76,7 +76,7 @@ npm start
 
 ## Environment Variables
 
-To run this app, you need to add the following environment variables to your .env file. Make sure the .env file is visible to sequelize config.js and queries.js files.
+To run this app, create a .env file in the root folders of server and client and add the following environment variables
 
 ### Server
 

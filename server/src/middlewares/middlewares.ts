@@ -1,13 +1,15 @@
+import { Request, Response, NextFunction } from 'express';
+import * as types from '../types/requests';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
 
 let DEBUG = false;
 
-function authMw(request, response, next) {
+const authMw = async (request: types.Request, response: Response, next: NextFunction): Promise<void> => {
 	let token = request.headers['x-auth-token'];
 
 	if (token) {
-		jwt.verify(token, 'r4uqSKqC6L', (err, decodedToken) => {
+		jwt.verify(token, 'r4uqSKqC6L', (err: any, decodedToken: any) => {
 			if (decodedToken) {
 				request.userId = decodedToken.id;
 				request.isAdmin = decodedToken.isAdmin;
@@ -19,23 +21,24 @@ function authMw(request, response, next) {
 	} else {
 		response.status(401).json({ msg: 'No token found' });
 	}
-}
+};
 
-function isFormValid(request, response, next) {
-	const email = request.body.email;
-	const password = request.body.pw;
-	const username = request.body.username;
-	const phone = request.body.phone;
+const isFormValid = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
+	const email: types.RequestUserBody['email'] = request.body.email;
+	const password: types.RequestUserBody['pw'] = request.body.pw;
+	const username: types.RequestUserBody['username'] = request.body.username as string;
+	const phone: types.RequestUserBody['phone'] = request.body.phone as string;
 
-	const usernameRegex = /^[A-Za-z0-9öÖäÄåÅ_\.]*$/;
-	const usernameFirstCharacter = /^[a-zA-ZöÖäÄåÅ]/;
-	const emailRegex =
+	const usernameRegex: RegExp = /^[A-Za-z0-9öÖäÄåÅ_\.]*$/;
+	const usernameFirstCharacter: RegExp = /^[a-zA-ZöÖäÄåÅ]/;
+	const emailRegex: RegExp =
 		/^[-!#$%&'.*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
-	const phoneRegex = /^\d+$/;
-	const pwUppercase = /^(?=.*[A-Z])/;
-	const pwLowercase = /^(?=.*[a-z])/;
-	const pwDigit = /^(?=.*\d)/;
-	const pwAllowedSpecialCharacters = /^(?=.*[§đ½¡”»£¤«“‰„‚\/\\°¿´˛¸€ÞþıŒœ ̛˚˝¯¨əßÐðĸøØÆæ'˘><Ʒʒ·×Ŋŋ—µ,‘’˙–~@#$%^&*+=`|{}:;!.?_\"()\[\]-])/;
+	const phoneRegex: RegExp = /^(\+?\d{1,3}|\d{1,4})\d+/;
+	const pwUppercase: RegExp = /^(?=.*[A-Z])/;
+	const pwLowercase: RegExp = /^(?=.*[a-z])/;
+	const pwDigit: RegExp = /^(?=.*\d)/;
+	const pwAllowedSpecialCharacters: RegExp =
+		/^(?=.*[§đ½¡”»£¤«“‰„‚\/\\°¿´˛¸€ÞþıŒœ ̛˚˝¯¨əßÐðĸøØÆæ'˘><Ʒʒ·×Ŋŋ—µ,‘’˙–~@#$%^&*+=`|{}:;!.?_\"()\[\]-])/;
 
 	const validByEmailRegex = emailRegex.test(email);
 	const emailParts = email.split('@');
@@ -47,7 +50,7 @@ function isFormValid(request, response, next) {
 	const lowercase = pwLowercase.test(password);
 	const digits = pwDigit.test(password);
 	const specialChars = pwAllowedSpecialCharacters.test(password);
-	let message = '';
+	let message: string = '';
 
 	if (!username && !phone) {
 		// login
@@ -69,7 +72,7 @@ function isFormValid(request, response, next) {
 		} else if (emailParts[0].length > 64) {
 			message = 'Email username is too long';
 		} else if (
-			domainPart.some(function (part) {
+			domainPart.some(function (part: string) {
 				return part.length > 63;
 			})
 		) {
@@ -87,7 +90,7 @@ function isFormValid(request, response, next) {
 		} else if (!phone) {
 			message = 'Phone number is required';
 		} else if (!validByPhoneRegex) {
-			message = 'Phone number must contain only digits';
+			message = 'Phone number contains invalid characters';
 		} else if (phone.length < 3) {
 			message = 'Phone number is too short (min. 3 digits)';
 		} else if (phone.length > 15) {
@@ -108,12 +111,13 @@ function isFormValid(request, response, next) {
 	}
 
 	if (message != '') {
-		return response.status(400).json({ msg: message });
+		response.status(400).json({ msg: message });
 	} else {
 		next();
 	}
-}
+};
 
-const upload = multer();
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 export { authMw, isFormValid, upload };
