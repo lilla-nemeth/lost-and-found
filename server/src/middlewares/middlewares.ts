@@ -5,7 +5,7 @@ import multer from 'multer';
 
 let DEBUG = false;
 
-const authMw = (request: types.Request, response: Response, next: NextFunction) => {
+const authMw = async (request: types.Request, response: Response, next: NextFunction): Promise<void> => {
 	let token = request.headers['x-auth-token'];
 
 	if (token) {
@@ -23,7 +23,7 @@ const authMw = (request: types.Request, response: Response, next: NextFunction) 
 	}
 };
 
-const isFormValid = (request: Request, response: Response, next: NextFunction) => {
+const isFormValid = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
 	const email: types.RequestUserBody['email'] = request.body.email;
 	const password: types.RequestUserBody['pw'] = request.body.pw;
 	const username: types.RequestUserBody['username'] = request.body.username as string;
@@ -111,7 +111,7 @@ const isFormValid = (request: Request, response: Response, next: NextFunction) =
 	}
 
 	if (message != '') {
-		return response.status(400).json({ msg: message });
+		response.status(400).json({ msg: message });
 	} else {
 		next();
 	}
