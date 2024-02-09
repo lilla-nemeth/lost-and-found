@@ -52,7 +52,6 @@ const updatePet = (request: Request, response: Response) => {
 
 // edit user data (Dashboard)
 const updateUser = (request: Request, response: Response) => {
-	// TODO: fix this:
 	const id: Request['userId'] = request.userId;
 	const username: types.RequestUserBody['username'] = request.body.username;
 	const email: types.RequestUserBody['email'] = request.body.email;

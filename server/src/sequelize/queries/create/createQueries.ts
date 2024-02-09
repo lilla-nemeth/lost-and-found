@@ -39,13 +39,9 @@ const createUserAccount = (request: Request, response: Response) => {
 };
 
 // report pet by user
-// TODO: fix this (removing any):
 const createPetProfile = (request: Request | any, response: Response) => {
 	const userId: Request['userId'] = request.userId as number;
-	// TODO: fix this:
-	const img: any = request.file.buffer.toString('base64');
-	// const img: types.Request['file'] = request.file.buffer.toString('base64');
-	// TODO: testing without as string option:
+	const img: Request['file'] = request.file.buffer.toString('base64') as string;
 	const petstatus: types.RequestPetBody['petstatus'] = request.body.petstatus;
 	const petlocation: types.RequestPetBody['petlocation'] = request.body.petlocation;
 	const longitude: types.RequestPetBody['longitude'] = request.body.longitude;

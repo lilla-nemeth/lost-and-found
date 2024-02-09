@@ -27,10 +27,11 @@ type PostDescription = string;
 declare module 'express-serve-static-core' {
 	interface Request {
 		ReqBody?: RequestPetBody | RequestUserBody;
-		file?: File | null;
+		file?: File | null | string;
 		P?: RequestPaginationParams | RequestGetPetIdParams | RequestGetSearchParamsQuery;
 		userId?: UserId;
 		isAdmin?: IsAdmin;
+		headers: any;
 	}
 }
 
