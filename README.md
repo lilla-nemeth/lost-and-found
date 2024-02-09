@@ -22,7 +22,7 @@ Lost and Found is an application made for missing and found pets. Users with acc
 - Pet and user profile updates
 - Stricter image uploading
 - Filters for listed pets (e.g by creation date, species)
-- Technical improvements (e.g unit tests, transitioning to TypeScript (frontend))
+- Technical improvements (e.g unit tests, transitioning to TypeScript (client))
 
 ## Installing, running locally
 
