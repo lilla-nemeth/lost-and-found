@@ -12,15 +12,17 @@ const deleteUserPet = async (request: types.Request, response: Response): Promis
 
 	const id = Number(paramsId);
 
-	const pet = models.Pet.destroy({
+	const pet: Promise<number> = models.Pet.destroy({
 		where: {
 			id: id,
 		},
 	});
 
 	pet
-		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PET }))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PET }));
+		.then(() => {
+			response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PET });
+		})
+		.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PET }));
 };
 
 // delete all pets by user (user dashboard)
@@ -39,12 +41,12 @@ const deleteAllUserPets = async (request: types.Request, response: Response): Pr
 
 	if (isAdmin) {
 		adminPetList
-			.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
-			.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
+			.then(() => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
+			.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 	} else {
 		userPetList
-			.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
-			.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
+			.then(() => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
+			.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 	}
 };
 
@@ -65,18 +67,18 @@ const deleteUser = async (request: types.Request, response: Response): Promise<v
 	});
 
 	pet
-		.then((res) => {
+		.then(() => {
 			user
-				.then((res) => {
+				.then(() => {
 					response.status(200).json({
 						msg: messages.SUCCESS_MSG_DELETED_USER_AND_PETS,
 					});
 				})
-				.catch((err) => {
+				.catch(() => {
 					response.status(400).json({ msg: messages.ERROR_MSG_DELETE_USER });
 				});
 		})
-		.catch((err) => {
+		.catch(() => {
 			response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS });
 		});
 };

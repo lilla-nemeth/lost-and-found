@@ -9,6 +9,7 @@ import { dirname } from 'path';
 import url, { fileURLToPath } from 'url';
 import models from '../../models/index';
 import * as messages from '../../../types/messages';
+import * as modelTypes from '../../../types/models';
 
 dotenv.config({ path: '../../../../.env' });
 
@@ -16,7 +17,7 @@ const signIn = async (request: types.Request, response: Response): Promise<void>
 	const email: types.RequestUserBody['email'] = request.body.email;
 	const pw: types.RequestUserBody['pw'] = request.body.pw;
 
-	const user = models.User.findAll({
+	const user: Promise<modelTypes.UserInstance[]> = models.User.findAll({
 		where: {
 			email,
 		},
@@ -38,20 +39,18 @@ const signIn = async (request: types.Request, response: Response): Promise<void>
 					}
 				});
 		})
-		.catch((err) => {
-			response.status(400).json({ msg: messages.ERROR_MSG_NOT_FOUND_USER });
-		});
+		.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_NOT_FOUND_USER }));
 };
 
 // get all users
 const getAllUsers = async (request: types.Request, response: Response): Promise<void> => {
-	const users = models.User.findAll();
+	const users: Promise<modelTypes.UserInstance[]> = models.User.findAll();
 
 	users
 		.then((data) => {
 			response.status(200).json(data);
 		})
-		.catch((err) => {
+		.catch(() => {
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERS });
 		});
 };
@@ -64,7 +63,7 @@ const getPetsByPagination = async (request: types.Request, response: Response): 
 	const offset = Number(skip);
 	const limit = Number(fetch);
 
-	const pets = models.Pet.findAndCountAll({
+	const pets: modelTypes.GetPets = models.Pet.findAndCountAll({
 		order: [['since', 'DESC']],
 		offset,
 		limit,
@@ -73,7 +72,7 @@ const getPetsByPagination = async (request: types.Request, response: Response): 
 		.then((data) => {
 			response.status(200).json(data);
 		})
-		.catch((err) => {
+		.catch(() => {
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_PETS });
 		});
 };
@@ -82,13 +81,13 @@ const getPetsByPagination = async (request: types.Request, response: Response): 
 const getPetById = async (request: types.Request, response: Response): Promise<void> => {
 	const id: types.RequestGetPetIdParams['id'] = request.params.id;
 
-	const pet = models.Pet.findByPk(id);
+	const pet: Promise<modelTypes.PetInstance | null> = models.Pet.findByPk(id);
 
 	pet
-		.then((data: any) => {
-			response.status(200).json(data.rows);
+		.then((data) => {
+			response.status(200).json(data);
 		})
-		.catch((err) => {
+		.catch(() => {
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
 		});
 };
@@ -98,23 +97,23 @@ const getAllUserPets = async (request: types.Request, response: Response): Promi
 	const userId: types.Request['userId'] = request.userId;
 	const isAdmin: types.Request['isAdmin'] = request.isAdmin;
 
-	const userPetList = models.Pet.findAll({
+	const userPetList: Promise<modelTypes.PetInstance[]> = models.Pet.findAll({
 		order: [['since', 'DESC']],
 		where: {
 			userId,
 		},
 	});
 
-	const adminPetList = models.Pet.findAll({
+	const adminPetList: Promise<modelTypes.PetInstance[]> = models.Pet.findAll({
 		order: [['since', 'DESC']],
 	});
 
 	if (isAdmin) {
 		adminPetList
-			.then((data: any) => {
+			.then((data) => {
 				response.status(200).json(data);
 			})
-			.catch((err: any) => {
+			.catch(() => {
 				response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
 			});
 	} else {
@@ -132,14 +131,14 @@ const getAllUserPets = async (request: types.Request, response: Response): Promi
 const getUsername = async (request: types.Request, response: Response): Promise<void> => {
 	const id: types.Request['userId'] = request.userId;
 
-	const user = models.User.findByPk(id);
+	const user: Promise<modelTypes.UserInstance | null> = models.User.findByPk(id);
 
 	console.log(user);
 	user
 		.then((data: any) => {
 			response.status(200).json(data.username);
 		})
-		.catch((err: any) => {
+		.catch(() => {
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERNAME });
 		});
 };
@@ -156,10 +155,10 @@ const getGeocodeLocation = async (request: types.Request, response: Response): P
 
 	axios
 		.get(result)
-		.then((res) => {
+		.then((res: any) => {
 			response.status(200).json(res.data);
 		})
-		.catch((err) => {
+		.catch((err: any) => {
 			response.status(500).json({ error: err.message });
 		});
 };
@@ -167,6 +166,7 @@ const getGeocodeLocation = async (request: types.Request, response: Response): P
 const getAll = async (request: Request, response: Response): Promise<void> => {
 	const __filename: string = fileURLToPath(import.meta.url);
 	const __dirname: string = dirname(__filename);
+
 	response.sendFile(path.join(__dirname, 'client/build/index.html'));
 };
 

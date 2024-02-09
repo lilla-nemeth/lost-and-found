@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { isFormValid } from '../../../middlewares/middlewares';
 import models from '../../models/index';
 import * as messages from '../../../types/messages';
+import { PetInstance, UserInstance } from '../../../types/models';
 
 dotenv.config({ path: '../../../../.env' });
 
@@ -15,7 +16,7 @@ const createUserAccount = async (request: types.Request, response: Response): Pr
 	const phone: types.RequestUserBody['phone'] = request.body.phone as string;
 	const encryptedPw: types.RequestUserBody['pw'] = bcrypt.hashSync(pw, 10);
 
-	const user = models.User.create({
+	const user: Promise<UserInstance> = models.User.create({
 		username,
 		email,
 		pw: encryptedPw,
@@ -27,7 +28,7 @@ const createUserAccount = async (request: types.Request, response: Response): Pr
 		.then((data) => {
 			response.status(200).json(data.save());
 		})
-		.catch((err) => {
+		.catch((err: any) => {
 			if (err.code === '23505' && err.constraint === 'users_email_key') {
 				response.status(400).json({ msg: messages.ERROR_MSG_USED_EMAIL });
 			} else if (err.code === '23505' && err.constraint === 'users_phone_key') {
@@ -55,7 +56,7 @@ const createPetProfile = async (request: types.Request, response: Response): Pro
 	const uniquefeature: types.RequestPetBody['uniquefeature'] = request.body.uniquefeature as string;
 	const postdescription: types.RequestPetBody['postdescription'] = request.body.postdescription;
 
-	const pet = models.Pet.create({
+	const pet: Promise<PetInstance> = models.Pet.create({
 		userId,
 		img,
 		petstatus,
@@ -72,14 +73,7 @@ const createPetProfile = async (request: types.Request, response: Response): Pro
 		postdescription,
 	});
 
-	pet
-		.then((data: any) => {
-			console.log(data.userId);
-			response.status(200).json(data.save());
-		})
-		.catch((err: any) => {
-			response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET });
-		});
+	pet.then((data) => response.status(200).json(data.save())).catch(() => response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET }));
 };
 
 export { createUserAccount, createPetProfile };

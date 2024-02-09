@@ -7,7 +7,7 @@ import * as messages from '../../../types/messages';
 
 dotenv.config({ path: '../../../../.env' });
 
-// edit pet by user (user dashboard)
+// edit pet by user (Dashboard)
 const updatePet = async (request: types.Request, response: Response): Promise<void> => {
 	const id: types.RequestGetPetIdParams['id'] = request.params.id;
 	const petstatus: types.RequestPetBody['petstatus'] = request.body.petstatus;
@@ -23,7 +23,7 @@ const updatePet = async (request: types.Request, response: Response): Promise<vo
 	const uniquefeature: types.RequestPetBody['uniquefeature'] = request.body.uniquefeature;
 	const postdescription: types.RequestPetBody['postdescription'] = request.body.postdescription;
 
-	const pet = models.Pet.update(
+	const pet: Promise<[affectedCount: number]> = models.Pet.update(
 		{
 			petstatus,
 			petlocation,
@@ -46,8 +46,8 @@ const updatePet = async (request: types.Request, response: Response): Promise<vo
 	);
 
 	pet
-		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_PET }))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_PET }));
+		.then(() => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_PET }))
+		.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_PET }));
 };
 
 // edit user data (Dashboard)
@@ -59,7 +59,7 @@ const updateUser = async (request: types.Request, response: Response): Promise<v
 	const phone: types.RequestUserBody['phone'] = request.body.phone;
 	const encryptedPw: types.RequestUserBody['pw'] = bcrypt.hashSync(pw, 10);
 
-	const user = models.User.update(
+	const user: Promise<[affectedCount: number]> = models.User.update(
 		{
 			username,
 			email,
@@ -73,8 +73,8 @@ const updateUser = async (request: types.Request, response: Response): Promise<v
 		}
 	);
 	user
-		.then((res) => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_USER }))
-		.catch((err) => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_USER }));
+		.then(() => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_USER }))
+		.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_USER }));
 };
 
 export { updatePet, updateUser };

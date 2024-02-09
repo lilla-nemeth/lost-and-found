@@ -41,4 +41,9 @@ interface PetInstance extends Model<PetAttributes, PetCreationAttributes>, PetAt
 	updatedAt?: Date;
 }
 
-export { PetInstance, UserInstance };
+type GetPets = Promise<{
+	rows: PetInstance[];
+	count: number;
+}>;
+
+export { PetInstance, UserInstance, GetPets };
