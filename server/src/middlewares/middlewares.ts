@@ -76,7 +76,7 @@ const isFormValid = (request: Request, response: Response, next: NextFunction) =
 		} else if (emailParts[0].length > 64) {
 			message = 'Email username is too long';
 		} else if (
-			domainPart.some(function (part: string[]) {
+			domainPart.some(function (part: string) {
 				return part.length > 63;
 			})
 		) {
