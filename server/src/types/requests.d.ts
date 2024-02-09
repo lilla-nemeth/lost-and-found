@@ -1,6 +1,7 @@
 import { Request } from 'express';
 
 // User Types
+type IdParams = string;
 type Username = string;
 type Email = string;
 type Password = string;
@@ -8,7 +9,6 @@ type Phone = string;
 type IsAdmin = boolean;
 
 // Pet Types
-type Id = string;
 type UserId = number;
 type PetStatus = string;
 type PetLocation = string;
@@ -27,12 +27,16 @@ type PostDescription = string;
 declare module 'express-serve-static-core' {
 	interface Request {
 		ReqBody?: RequestPetBody | RequestUserBody;
-		file?: File | null | string;
+		file?: File | null | RequestFileBuffer | string;
 		P?: RequestPaginationParams | RequestGetPetIdParams | RequestGetSearchParamsQuery;
 		userId?: UserId;
 		isAdmin?: IsAdmin;
 		headers: any;
 	}
+}
+
+interface RequestFileBuffer {
+	buffer: [];
 }
 
 // Request Params
@@ -42,7 +46,7 @@ interface RequestPaginationParams {
 }
 
 interface RequestGetPetIdParams {
-	id: Id;
+	id: IdParams;
 }
 
 interface RequestGetSearchParamsQuery {
