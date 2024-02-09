@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import * as types from '../../../types/requests';
 import dotenv from 'dotenv';
 import models from '../../models/index';

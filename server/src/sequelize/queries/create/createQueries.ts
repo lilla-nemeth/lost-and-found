@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import * as types from '../../../types/requests';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
