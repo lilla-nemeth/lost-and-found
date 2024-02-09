@@ -27,7 +27,7 @@ type PostDescription = string;
 declare module 'express-serve-static-core' {
 	interface Request {
 		ReqBody?: RequestPetBody | RequestUserBody;
-		file?: File | null | RequestFileBuffer | string;
+		file?: File | null | buffer | string;
 		P?: RequestPaginationParams | RequestGetPetIdParams | RequestGetSearchParamsQuery;
 		userId?: UserId;
 		isAdmin?: IsAdmin;
@@ -35,9 +35,7 @@ declare module 'express-serve-static-core' {
 	}
 }
 
-interface RequestFileBuffer {
-	buffer: [];
-}
+type buffer = any;
 
 // Request Params
 interface RequestPaginationParams {
@@ -55,6 +53,7 @@ interface RequestGetSearchParamsQuery {
 
 // Request Body
 interface RequestPetBody {
+	userId: UserId;
 	petstatus: PetStatus;
 	petlocation: PetLocation;
 	longitude: Longitude;

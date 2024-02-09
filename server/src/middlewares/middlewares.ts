@@ -6,17 +6,14 @@ import multer from 'multer';
 let DEBUG = false;
 
 // function authMw(request: Request, response: Response, next: NextFunction) {
-const authMw = (request: Request, response: Response, next: NextFunction) => {
+const authMw = (request: types.Request, response: Response, next: NextFunction) => {
 	let token = request.headers['x-auth-token'];
 
 	if (token) {
 		jwt.verify(token, 'r4uqSKqC6L', (err: any, decodedToken: any) => {
 			if (decodedToken) {
-				let userId: Request['userId'] = request.userId;
-				let isAdmin: Request['isAdmin'] = request.isAdmin;
-
-				userId = decodedToken.id;
-				isAdmin = decodedToken.isAdmin;
+				request.userId = decodedToken.id;
+				request.isAdmin = decodedToken.isAdmin;
 				next();
 			} else {
 				response.status(401).json({ msg: 'Token is not valid' });

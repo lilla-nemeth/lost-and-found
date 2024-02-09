@@ -8,7 +8,7 @@ import * as messages from '../../../types/messages';
 
 dotenv.config({ path: '../../../../.env' });
 
-const createUserAccount = (request: Request, response: Response) => {
+const createUserAccount = (request: types.Request, response: Response) => {
 	const username: types.RequestUserBody['username'] = request.body.username as string;
 	const email: types.RequestUserBody['email'] = request.body.email;
 	const pw: types.RequestUserBody['pw'] = request.body.pw;
@@ -39,9 +39,9 @@ const createUserAccount = (request: Request, response: Response) => {
 };
 
 // report pet by user
-const createPetProfile = (request: Request | any, response: Response) => {
-	const userId: Request['userId'] = request.userId as number;
-	const img: Request['file'] = request.file.buffer.toString('base64') as string;
+const createPetProfile = (request: types.Request, response: Response) => {
+	const userId: types.Request['userId'] = request.userId as number;
+	const img: types.Request['file'] = request.file.buffer.toString('base64') as string;
 	const petstatus: types.RequestPetBody['petstatus'] = request.body.petstatus;
 	const petlocation: types.RequestPetBody['petlocation'] = request.body.petlocation;
 	const longitude: types.RequestPetBody['longitude'] = request.body.longitude;
@@ -73,10 +73,11 @@ const createPetProfile = (request: Request | any, response: Response) => {
 	});
 
 	pet
-		.then((data) => {
+		.then((data: any) => {
+			console.log(data.userId);
 			response.status(200).json(data.save());
 		})
-		.catch((err) => {
+		.catch((err: any) => {
 			response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET });
 		});
 };

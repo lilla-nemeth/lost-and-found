@@ -12,7 +12,7 @@ import * as messages from '../../../types/messages';
 
 dotenv.config({ path: '../../../../.env' });
 
-const signIn = (request: Request, response: Response) => {
+const signIn = (request: types.Request, response: Response) => {
 	const email: types.RequestUserBody['email'] = request.body.email;
 	const pw: types.RequestUserBody['pw'] = request.body.pw;
 
@@ -44,7 +44,7 @@ const signIn = (request: Request, response: Response) => {
 };
 
 // get all users
-const getAllUsers = (request: Request, response: Response) => {
+const getAllUsers = (request: types.Request, response: Response) => {
 	const users = models.User.findAll();
 
 	users
@@ -57,7 +57,7 @@ const getAllUsers = (request: Request, response: Response) => {
 };
 
 // get/fetch pets by pagination, data has data.rows (pet objects) and data.count (total)
-const getPetsByPagination = (request: Request, response: Response) => {
+const getPetsByPagination = (request: types.Request, response: Response) => {
 	const skip: types.RequestPaginationParams['skip'] = request.params.skip;
 	const fetch: types.RequestPaginationParams['fetch'] = request.params.fetch;
 
@@ -79,7 +79,7 @@ const getPetsByPagination = (request: Request, response: Response) => {
 };
 
 // from pets table get one pet by id
-const getPetById = (request: Request, response: Response) => {
+const getPetById = (request: types.Request, response: Response) => {
 	const id: types.RequestGetPetIdParams['id'] = request.params.id;
 
 	const pet = models.Pet.findByPk(id);
@@ -94,9 +94,9 @@ const getPetById = (request: Request, response: Response) => {
 };
 
 // get all pets by userId
-const getAllUserPets = (request: Request, response: Response) => {
-	const userId: Request['userId'] = request.userId;
-	const isAdmin: Request['isAdmin'] = request.isAdmin;
+const getAllUserPets = (request: types.Request, response: Response) => {
+	const userId: types.Request['userId'] = request.userId;
+	const isAdmin: types.Request['isAdmin'] = request.isAdmin;
 
 	const userPetList = models.Pet.findAll({
 		order: [['since', 'DESC']],
@@ -129,8 +129,8 @@ const getAllUserPets = (request: Request, response: Response) => {
 };
 
 // get username
-const getUsername = (request: Request, response: Response) => {
-	const id: Request['userId'] = request.userId;
+const getUsername = (request: types.Request, response: Response) => {
+	const id: types.Request['userId'] = request.userId;
 
 	const user = models.User.findByPk(id);
 
@@ -145,7 +145,7 @@ const getUsername = (request: Request, response: Response) => {
 };
 
 // search pet location
-const getGeocodeLocation = (request: Request, response: Response) => {
+const getGeocodeLocation = (request: types.Request, response: Response) => {
 	const query: types.RequestGetSearchParamsQuery['query'] = request.params.query;
 
 	const params: url.URLSearchParams = new URLSearchParams({
