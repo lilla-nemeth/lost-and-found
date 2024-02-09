@@ -13,9 +13,11 @@ Pet.belongsTo(User);
 
 sequelize
 	.sync({ alter: true })
-	.then(() => console.log('Tables have been created successfully'))
+	.then(() => {
+		console.log('Models and tables have been created successfully.');
+	})
 	.catch((err) => {
-		console.log('Error syncing the table and model.');
+		console.log('Error syncing tables and models.');
 	});
 
 export default {
