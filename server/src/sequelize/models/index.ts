@@ -5,8 +5,9 @@ import Pet from './pet';
 User.hasMany(Pet, {
 	foreignKey: {
 		name: 'userId',
-		allowNull: false,
 	},
+	// TODO: This will delete all pets, change the delete user query
+	onDelete: 'CASCADE',
 });
 
 Pet.belongsTo(User);

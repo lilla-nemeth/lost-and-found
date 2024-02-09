@@ -111,10 +111,10 @@ const getAllUserPets = (request: Request, response: Response) => {
 
 	if (isAdmin) {
 		adminPetList
-			.then((data) => {
+			.then((data: any) => {
 				response.status(200).json(data);
 			})
-			.catch(() => {
+			.catch((err: any) => {
 				response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
 			});
 	} else {
@@ -130,15 +130,16 @@ const getAllUserPets = (request: Request, response: Response) => {
 
 // get username
 const getUsername = (request: Request, response: Response) => {
-	const userId: Request['userId'] = request.userId;
+	const id: Request['userId'] = request.userId;
 
-	const user = models.User.findByPk(userId);
+	const user = models.User.findByPk(id);
 
+	console.log(user);
 	user
 		.then((data: any) => {
 			response.status(200).json(data.username);
 		})
-		.catch((err) => {
+		.catch((err: any) => {
 			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USERNAME });
 		});
 };

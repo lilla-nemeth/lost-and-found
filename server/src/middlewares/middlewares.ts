@@ -121,6 +121,9 @@ const isFormValid = (request: Request, response: Response, next: NextFunction) =
 	}
 };
 
+// const storage = multer.memoryStorage();
+// const upload = multer({ storage: storage });
+
 const upload = multer();
 
 export { authMw, isFormValid, upload };
