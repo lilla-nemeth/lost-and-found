@@ -39,8 +39,5 @@
 		"ts-node": "^10.9.2",
 		"typescript": "^5.3.3"
 	},
-	"type": "module",
-	"engines": {
-		"node": "<=19.9.0"
-	}
+	"type": "module"
 }
