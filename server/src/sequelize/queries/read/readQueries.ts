@@ -12,7 +12,7 @@ import * as messages from '../../../types/messages';
 
 dotenv.config({ path: '../../../../.env' });
 
-const signIn = (request: types.Request, response: Response) => {
+const signIn = async (request: types.Request, response: Response): Promise<void> => {
 	const email: types.RequestUserBody['email'] = request.body.email;
 	const pw: types.RequestUserBody['pw'] = request.body.pw;
 
@@ -44,7 +44,7 @@ const signIn = (request: types.Request, response: Response) => {
 };
 
 // get all users
-const getAllUsers = (request: types.Request, response: Response) => {
+const getAllUsers = async (request: types.Request, response: Response): Promise<void> => {
 	const users = models.User.findAll();
 
 	users
@@ -57,7 +57,7 @@ const getAllUsers = (request: types.Request, response: Response) => {
 };
 
 // get/fetch pets by pagination, data has data.rows (pet objects) and data.count (total)
-const getPetsByPagination = (request: types.Request, response: Response) => {
+const getPetsByPagination = async (request: types.Request, response: Response): Promise<void> => {
 	const skip: types.RequestPaginationParams['skip'] = request.params.skip;
 	const fetch: types.RequestPaginationParams['fetch'] = request.params.fetch;
 
@@ -79,7 +79,7 @@ const getPetsByPagination = (request: types.Request, response: Response) => {
 };
 
 // from pets table get one pet by id
-const getPetById = (request: types.Request, response: Response) => {
+const getPetById = async (request: types.Request, response: Response): Promise<void> => {
 	const id: types.RequestGetPetIdParams['id'] = request.params.id;
 
 	const pet = models.Pet.findByPk(id);
@@ -94,7 +94,7 @@ const getPetById = (request: types.Request, response: Response) => {
 };
 
 // get all pets by userId
-const getAllUserPets = (request: types.Request, response: Response) => {
+const getAllUserPets = async (request: types.Request, response: Response): Promise<void> => {
 	const userId: types.Request['userId'] = request.userId;
 	const isAdmin: types.Request['isAdmin'] = request.isAdmin;
 
@@ -129,7 +129,7 @@ const getAllUserPets = (request: types.Request, response: Response) => {
 };
 
 // get username
-const getUsername = (request: types.Request, response: Response) => {
+const getUsername = async (request: types.Request, response: Response): Promise<void> => {
 	const id: types.Request['userId'] = request.userId;
 
 	const user = models.User.findByPk(id);
@@ -145,7 +145,7 @@ const getUsername = (request: types.Request, response: Response) => {
 };
 
 // search pet location
-const getGeocodeLocation = (request: types.Request, response: Response) => {
+const getGeocodeLocation = async (request: types.Request, response: Response): Promise<void> => {
 	const query: types.RequestGetSearchParamsQuery['query'] = request.params.query;
 
 	const params: url.URLSearchParams = new URLSearchParams({
@@ -164,7 +164,7 @@ const getGeocodeLocation = (request: types.Request, response: Response) => {
 		});
 };
 
-const getAll = (request: Request, response: Response) => {
+const getAll = async (request: Request, response: Response): Promise<void> => {
 	const __filename: string = fileURLToPath(import.meta.url);
 	const __dirname: string = dirname(__filename);
 	response.sendFile(path.join(__dirname, 'client/build/index.html'));

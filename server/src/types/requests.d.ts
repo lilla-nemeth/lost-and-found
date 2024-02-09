@@ -7,6 +7,7 @@ type Email = string;
 type Password = string;
 type Phone = string;
 type IsAdmin = boolean;
+type Token = string;
 
 // Pet Types
 type UserId = number;

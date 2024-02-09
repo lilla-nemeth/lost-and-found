@@ -7,7 +7,7 @@ import * as messages from '../../../types/messages';
 dotenv.config({ path: '../../../../.env' });
 
 // delete 1 pet by user (user dashboard)
-const deleteUserPet = (request: types.Request, response: Response) => {
+const deleteUserPet = async (request: types.Request, response: Response): Promise<void> => {
 	const paramsId: types.RequestGetPetIdParams['id'] = request.params.id;
 
 	const id = Number(paramsId);
@@ -24,7 +24,7 @@ const deleteUserPet = (request: types.Request, response: Response) => {
 };
 
 // delete all pets by user (user dashboard)
-const deleteAllUserPets = (request: types.Request, response: Response) => {
+const deleteAllUserPets = async (request: types.Request, response: Response): Promise<void> => {
 	const userId: types.Request['userId'] = request.userId;
 	const isAdmin: types.Request['isAdmin'] = request.isAdmin;
 
@@ -49,7 +49,7 @@ const deleteAllUserPets = (request: types.Request, response: Response) => {
 };
 
 // delete user - delete user and the connected pets (Dashboard)
-const deleteUser = (request: types.Request, response: Response) => {
+const deleteUser = async (request: types.Request, response: Response): Promise<void> => {
 	const userId: types.Request['userId'] = request.userId;
 
 	const pet = models.Pet.destroy({

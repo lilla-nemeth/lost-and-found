@@ -8,7 +8,7 @@ import * as messages from '../../../types/messages';
 dotenv.config({ path: '../../../../.env' });
 
 // edit pet by user (user dashboard)
-const updatePet = (request: Request, response: Response) => {
+const updatePet = async (request: Request, response: Response): Promise<void> => {
 	const id: types.RequestGetPetIdParams['id'] = request.params.id;
 	const petstatus: types.RequestPetBody['petstatus'] = request.body.petstatus;
 	const petlocation: types.RequestPetBody['petlocation'] = request.body.petlocation;
@@ -51,7 +51,7 @@ const updatePet = (request: Request, response: Response) => {
 };
 
 // edit user data (Dashboard)
-const updateUser = (request: Request, response: Response) => {
+const updateUser = async (request: Request, response: Response): Promise<void> => {
 	const id: Request['userId'] = request.userId;
 	const username: types.RequestUserBody['username'] = request.body.username;
 	const email: types.RequestUserBody['email'] = request.body.email;

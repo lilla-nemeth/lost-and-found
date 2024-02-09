@@ -5,7 +5,6 @@ import multer from 'multer';
 
 let DEBUG = false;
 
-// function authMw(request: Request, response: Response, next: NextFunction) {
 const authMw = (request: types.Request, response: Response, next: NextFunction) => {
 	let token = request.headers['x-auth-token'];
 
@@ -118,9 +117,7 @@ const isFormValid = (request: Request, response: Response, next: NextFunction) =
 	}
 };
 
-// const storage = multer.memoryStorage();
-// const upload = multer({ storage: storage });
-
-const upload = multer();
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 export { authMw, isFormValid, upload };

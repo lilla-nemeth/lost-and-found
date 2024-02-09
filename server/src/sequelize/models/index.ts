@@ -6,7 +6,6 @@ User.hasMany(Pet, {
 	foreignKey: {
 		name: 'userId',
 	},
-	// TODO: This will delete all pets, change the delete user query
 	onDelete: 'CASCADE',
 });
 

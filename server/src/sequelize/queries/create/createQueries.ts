@@ -8,7 +8,7 @@ import * as messages from '../../../types/messages';
 
 dotenv.config({ path: '../../../../.env' });
 
-const createUserAccount = (request: types.Request, response: Response) => {
+const createUserAccount = async (request: types.Request, response: Response): Promise<void> => {
 	const username: types.RequestUserBody['username'] = request.body.username as string;
 	const email: types.RequestUserBody['email'] = request.body.email;
 	const pw: types.RequestUserBody['pw'] = request.body.pw;
@@ -39,7 +39,7 @@ const createUserAccount = (request: types.Request, response: Response) => {
 };
 
 // report pet by user
-const createPetProfile = (request: types.Request, response: Response) => {
+const createPetProfile = async (request: types.Request, response: Response): Promise<void> => {
 	const userId: types.Request['userId'] = request.userId as number;
 	const img: types.Request['file'] = request.file.buffer.toString('base64') as string;
 	const petstatus: types.RequestPetBody['petstatus'] = request.body.petstatus;
