@@ -1,13 +1,10 @@
 import { Response } from 'express';
 import * as types from '../../types/requests';
 import bcrypt from 'bcryptjs';
-import dotenv from 'dotenv';
 import { isFormValid } from '../../middlewares/middlewares';
 import models from '../models/index';
 import * as messages from '../../types/messages';
 import { PetInstance, UserInstance } from '../../types/models';
-
-dotenv.config({ path: '../../../../.env' });
 
 const createUserAccount = async (request: types.Request, response: Response): Promise<void> => {
 	const username: types.RequestUserBody['username'] = request.body.username as string;
