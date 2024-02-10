@@ -1,7 +1,7 @@
 import React from 'react';
 import Sugar from 'sugar';
 
-export function increaseNumber(total, limit) {
+function increaseNumber(total, limit) {
 	let numberOfPages = total / limit;
 	let numberArr = [];
 
@@ -13,7 +13,7 @@ export function increaseNumber(total, limit) {
 
 let timeOut;
 
-export function handleError(err, setter) {
+function handleError(err, setter) {
 	setter(err && err.response?.data?.msg);
 
 	timeOut = setTimeout(() => {
@@ -21,18 +21,18 @@ export function handleError(err, setter) {
 	}, 5000);
 }
 
-export function clearError() {
+function clearError() {
 	clearTimeout(timeOut);
 }
 
-export function convertDate(timestamp) {
+function convertDate(timestamp) {
 	let dateBySugar = Sugar.Date.create(timestamp);
 	let formattedDateBySugar = Sugar.Date.format(dateBySugar, '{dd}/{MM}/{yyyy}');
 
 	return formattedDateBySugar;
 }
 
-export function petDate(petstatus, since, until, className) {
+function petDate(petstatus, since, until, className) {
 	if (petstatus === 'lost' || petstatus === 'found') {
 		return (
 			<>
@@ -50,7 +50,7 @@ export function petDate(petstatus, since, until, className) {
 	}
 }
 
-export function showOptionalInputs(inputs, setInputs) {
+function showOptionalInputs(inputs, setInputs) {
 	if (inputs.display === 'hideInputs') {
 		setInputs({
 			display: 'showInputs',
@@ -62,7 +62,7 @@ export function showOptionalInputs(inputs, setInputs) {
 	}
 }
 
-export function isInputEmpty(nameOfAttribute, attribute, className) {
+function isInputEmpty(nameOfAttribute, attribute, className) {
 	if (attribute === '') {
 		return <td></td>;
 	} else {
@@ -75,7 +75,7 @@ export function isInputEmpty(nameOfAttribute, attribute, className) {
 	}
 }
 
-export function isFieldRequired(requiredField) {
+function isFieldRequired(requiredField) {
 	if (requiredField) {
 		return '*';
 	} else {
@@ -83,7 +83,7 @@ export function isFieldRequired(requiredField) {
 	}
 }
 
-export function changeCheckboxValue(array, setArray, string) {
+function changeCheckboxValue(array, setArray, string) {
 	if (array.includes(string)) {
 		setArray(array.filter((el) => el != string));
 	} else {
@@ -91,7 +91,7 @@ export function changeCheckboxValue(array, setArray, string) {
 	}
 }
 
-export function removeOverflowText(text, char) {
+function removeOverflowText(text, char) {
 	if (text.length > char) {
 		return text.split('').slice(0, char).concat(['...']).join('');
 	} else {
@@ -99,7 +99,7 @@ export function removeOverflowText(text, char) {
 	}
 }
 
-export async function cacheImages(srcArr) {
+async function cacheImages(srcArr) {
 	const promises = await srcArr.map((src) => {
 		return new Promise(function (resolve, reject) {
 			const img = new Image();
@@ -113,7 +113,7 @@ export async function cacheImages(srcArr) {
 	await Promise.all(promises);
 }
 
-export function changeImagesIndex(arr, index, setIndex) {
+function changeImagesIndex(arr, index, setIndex) {
 	const numberOfImages = arr.length;
 
 	if (index === numberOfImages - 1) {
@@ -123,7 +123,7 @@ export function changeImagesIndex(arr, index, setIndex) {
 	}
 }
 
-export function changeFadeIn(object, setter) {
+function changeFadeIn(object, setter) {
 	if (object.fade === 'fade-in') {
 		setter({
 			fade: 'fade-out',
@@ -135,7 +135,7 @@ export function changeFadeIn(object, setter) {
 	}
 }
 
-export function changeFadeOut(object, setter) {
+function changeFadeOut(object, setter) {
 	if (object.fade === 'fade-out') {
 		setter({
 			fade: 'fade-out',
@@ -146,3 +146,20 @@ export function changeFadeOut(object, setter) {
 		});
 	}
 }
+
+export {
+	increaseNumber,
+	handleError,
+	clearError,
+	convertDate,
+	petDate,
+	showOptionalInputs,
+	isInputEmpty,
+	isFieldRequired,
+	changeCheckboxValue,
+	removeOverflowText,
+	cacheImages,
+	changeImagesIndex,
+	changeFadeIn,
+	changeFadeOut,
+};
