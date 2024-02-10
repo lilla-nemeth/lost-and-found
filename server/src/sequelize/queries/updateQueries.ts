@@ -1,9 +1,9 @@
 import { Response } from 'express';
-import * as types from '../../../types/requests';
+import * as types from '../../types/requests';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
-import models from '../../models/index';
-import * as messages from '../../../types/messages';
+import models from '../models/index';
+import * as messages from '../../types/messages';
 
 dotenv.config({ path: '../../../../.env' });
 

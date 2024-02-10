@@ -2,7 +2,7 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { authMw } from './middlewares/middlewares';
-import * as readQueries from './sequelize/queries/read/readQueries';
+import * as readQueries from './sequelize/queries/readQueries';
 import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';

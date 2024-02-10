@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { authMw, upload } from '../middlewares/middlewares';
-import * as readQueries from '../sequelize/queries/read/readQueries';
-import * as createQueries from '../sequelize/queries/create/createQueries';
+import * as readQueries from '../sequelize/queries/readQueries';
+import * as createQueries from '../sequelize/queries/createQueries';
 
 const router = Router();
 

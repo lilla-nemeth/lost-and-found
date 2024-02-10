@@ -1,11 +1,11 @@
 import { Response } from 'express';
-import * as types from '../../../types/requests';
+import * as types from '../../types/requests';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
-import { isFormValid } from '../../../middlewares/middlewares';
-import models from '../../models/index';
-import * as messages from '../../../types/messages';
-import { PetInstance, UserInstance } from '../../../types/models';
+import { isFormValid } from '../../middlewares/middlewares';
+import models from '../models/index';
+import * as messages from '../../types/messages';
+import { PetInstance, UserInstance } from '../../types/models';
 
 dotenv.config({ path: '../../../../.env' });
 

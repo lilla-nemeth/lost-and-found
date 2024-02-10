@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as types from '../../../types/requests';
+import * as types from '../../types/requests';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
@@ -7,9 +7,9 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { dirname } from 'path';
 import url, { fileURLToPath } from 'url';
-import models from '../../models/index';
-import * as messages from '../../../types/messages';
-import * as modelTypes from '../../../types/models';
+import models from '../models/index';
+import * as messages from '../../types/messages';
+import * as modelTypes from '../../types/models';
 
 dotenv.config({ path: '../../../../.env' });
 
