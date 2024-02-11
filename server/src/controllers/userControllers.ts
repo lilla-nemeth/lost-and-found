@@ -69,7 +69,7 @@ const signIn = async (request: types.Request, response: Response): Promise<void>
 };
 
 // get all users from users table, however currently the data is used for pet profiles
-const getAllUsers = async (request: types.Request, response: Response): Promise<void> => {
+const getAllUsers = async (request: null, response: Response): Promise<void> => {
 	const users: Promise<UserInstance[]> = models.User.findAll();
 
 	users
