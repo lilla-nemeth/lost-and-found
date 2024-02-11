@@ -30,8 +30,6 @@ app.use(express.urlencoded({ extended: true }));
 
 let DEBUG = false;
 
-const port = process.env.PORT || 8080;
-
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, 'client/build')));
 }
@@ -60,4 +58,4 @@ app.use('/reportpet', petData);
 
 app.get('*', getAll);
 
-app.listen(port, () => console.log('Server is running on 8080'));
+export default app;

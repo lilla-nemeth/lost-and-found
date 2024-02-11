@@ -2,7 +2,7 @@
 	"name": "lost-and-found",
 	"version": "1.0.0",
 	"description": "Lost & Found App",
-	"main": "./src/index.ts",
+	"main": "./src/server.ts",
 	"scripts": {
 		"start": "nodemon --esm",
 		"build": "tsc --project ./tsconfig.json",

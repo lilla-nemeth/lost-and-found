@@ -10,7 +10,6 @@
 		"esModuleInterop": true,
 		"moduleResolution": "node",
 		"typeRoots": ["./node_modules/@types", "./src/types"]
-		// "skipLibCheck": true
 	},
 	"paths": {
 		"/*": ["*"]
