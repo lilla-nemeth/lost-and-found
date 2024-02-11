@@ -1,7 +1,7 @@
 import { Response } from 'express';
-import * as types from '../../types/requests';
+import * as types from '../types/requests';
 import models from '../models/index';
-import * as messages from '../../types/messages';
+import * as messages from '../types/messages';
 
 // delete 1 pet by user (user dashboard)
 const deleteUserPet = async (request: types.Request, response: Response): Promise<void> => {

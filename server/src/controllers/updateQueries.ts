@@ -1,9 +1,8 @@
 import { Response } from 'express';
-import * as types from '../../types/requests';
+import * as types from '../types/requests';
 import bcrypt from 'bcryptjs';
 import models from '../models/index';
-import * as messages from '../../types/messages';
-
+import * as messages from '../types/messages';
 
 // edit pet by user (Dashboard)
 const updatePet = async (request: types.Request, response: Response): Promise<void> => {

@@ -1,4 +1,4 @@
-import sequelize from '../config/config';
+import sequelize from '../config/sequelize.config';
 import User from './user';
 import Pet from './pet';
 

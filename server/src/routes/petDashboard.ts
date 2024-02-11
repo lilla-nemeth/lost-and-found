@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { authMw } from '../middlewares/middlewares';
-import * as deleteQueries from '../sequelize/queries/deleteQueries';
-import * as updateQueries from '../sequelize/queries/updateQueries';
-import * as readQueries from '../sequelize/queries/readQueries';
+import * as deleteQueries from '../controllers/deleteQueries';
+import * as updateQueries from '../controllers/updateQueries';
+import * as readQueries from '../controllers/readQueries';
 
 const router = Router();
 

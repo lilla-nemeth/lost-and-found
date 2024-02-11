@@ -7,5 +7,5 @@ import {
 	getUsername,
 	getGeocodeLocation,
 	getAll,
-} from '../../sequelize/queries/readQueries';
+} from '../../controllers/readQueries';
 import Response from 'express';

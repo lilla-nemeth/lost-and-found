@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { authMw, isFormValid } from '../middlewares/middlewares';
-import * as updateQueries from '../sequelize/queries/updateQueries';
-import * as deleteQueries from '../sequelize/queries/deleteQueries';
+import * as updateQueries from '../controllers/updateQueries';
+import * as deleteQueries from '../controllers/deleteQueries';
 
 const router = Router();
 
