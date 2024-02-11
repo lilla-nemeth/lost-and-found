@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { authMw } from '../middlewares/middlewares';
-import * as readQueries from '../controllers/readQueries';
+import { getAllUsers } from '../controllers/userControllers';
 
 const router = Router();
 
-router.get('/', authMw, readQueries.getAllUsers);
+router.get('/', authMw, getAllUsers);
 
 export default router;

@@ -2,7 +2,8 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { authMw } from './middlewares/middlewares';
-import * as readQueries from './controllers/readQueries';
+import { getUsername } from './controllers/userControllers';
+import { getAll } from './controllers/clientControllers';
 import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -36,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // For navbar
-app.get('/username', authMw, readQueries.getUsername);
+app.get('/username', authMw, getUsername);
 
 // Home
 app.use('/', pets);
@@ -57,6 +58,6 @@ app.use('/login', loginUser);
 // Pet Report
 app.use('/reportpet', petData);
 
-app.get('*', readQueries.getAll);
+app.get('*', getAll);
 
 app.listen(port, () => console.log('Server is running on 8080'));
