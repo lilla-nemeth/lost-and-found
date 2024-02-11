@@ -37,4 +37,25 @@ const createUserAccount = async (request: types.Request, response: Response): Pr
 		});
 };
 
-export { createUserAccount };
+// delete user - delete user and the connected pets (Dashboard)
+const deleteUser = async (request: types.Request, response: Response): Promise<void> => {
+	const userId: types.Request['userId'] = request.userId;
+
+	const user: Promise<number> = models.User.destroy({
+		where: {
+			id: userId,
+		},
+	});
+
+	user
+		.then(() => {
+			response.status(200).json({
+				msg: messages.SUCCESS_MSG_DELETED_USER_AND_PETS,
+			});
+		})
+		.catch(() => {
+			response.status(400).json({ msg: messages.ERROR_MSG_DELETE_USER });
+		});
+};
+
+export { createUserAccount, deleteUser };
