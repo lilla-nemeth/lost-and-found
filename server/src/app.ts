@@ -5,8 +5,6 @@ import { authMw } from './middlewares/middlewares';
 import { getUsername } from './controllers/userControllers';
 import { getAll } from './controllers/clientControllers';
 import path from 'path';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 
 // Express routes
 import dashboardPets from './routes/petDashboard';
@@ -19,8 +17,6 @@ import petData from './routes/petReport';
 
 dotenv.config({ path: '../.env' });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 const app: Application = express();
 
 // Body parsing middleware
