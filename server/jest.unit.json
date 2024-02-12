@@ -4,5 +4,10 @@
 	"coverageDirectory": "./coverage",
 	"testMatch": ["**/?(*.)+(test).ts"],
 	"resetMocks": true,
-	"clearMocks": true
+	"clearMocks": true,
+	"transform": {
+		"^.+\\.ts?$": "babel-jest"
+	},
+	"testRegex": "(/tests/.*|(\\.|/)(test))\\.(ts?)$",
+	"moduleFileExtensions": ["ts", "tsx", "json", "node"]
 }
