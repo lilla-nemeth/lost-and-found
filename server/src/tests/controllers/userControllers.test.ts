@@ -10,13 +10,13 @@ import models from '../../models/index';
 // getAllUsers
 jest.mock('../../models', () => ({
 	User: {
-		findAll: jest.fn(),
+		findAll: jest.fn() as jest.Mock,
 	},
 }));
 
 const mockResponse = () => {
 	const res: Partial<Response> = {
-		status: jest.fn(),
+		status: jest.fn().mockReturnThis(),
 		json: jest.fn(),
 	};
 	return res as Response;
@@ -41,28 +41,26 @@ const usersMockData = [
 	},
 ];
 
-describe('Get all users', () => {
+describe('get all users', () => {
 	it('should return all users', async () => {
-		const response: Response = mockResponse();
+		const mRes: Response = mockResponse();
 		const usersResult = usersMockData;
 
 		(models.User.findAll as jest.Mock).mockResolvedValue(usersResult);
 
-		await getAllUsers(null, response);
-
-		expect(response.status).toHaveBeenCalledWith(200);
-		expect(response.json).toHaveBeenCalledWith(usersResult);
+		await getAllUsers(null, mRes);
+		expect(mRes.status).toHaveBeenCalledWith(200);
+		expect(mRes.json).toHaveBeenCalledWith(usersResult);
 	});
 
 	it('should return error message if fetching users fails', async () => {
-		const response: Response = mockResponse();
+		const mRes: Response = mockResponse();
 
 		(models.User.findAll as jest.Mock).mockRejectedValue(new Error('Database error'));
 
-		await getAllUsers(null, response);
-
-		expect(response.status).toHaveBeenCalledWith(400);
-		expect(response.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_FETCH_USERS });
+		await getAllUsers(null, mRes);
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_FETCH_USERS });
 	});
 });
 

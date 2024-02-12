@@ -23,7 +23,7 @@ const createUserAccount = async (request: types.Request, response: Response): Pr
 		isAdmin: false,
 	});
 
-	user
+	await user
 		.then((data) => {
 			response.status(200).json(data.save());
 		})
@@ -49,7 +49,7 @@ const signIn = async (request: types.Request, response: Response): Promise<void>
 		},
 	});
 
-	user
+	await user
 		.then((data: any) => {
 			const userData = data[0];
 			const encryptedPw = userData.pw;
@@ -69,10 +69,10 @@ const signIn = async (request: types.Request, response: Response): Promise<void>
 };
 
 // get all users from users table, however currently the data is used for pet profiles
-const getAllUsers = async (request: types.Request | null, response: Response): Promise<void> => {
+const getAllUsers = async (request: null, response: Response): Promise<void> => {
 	const users: Promise<UserInstance[]> = models.User.findAll();
 
-	users
+	await users
 		.then((data) => {
 			response.status(200).json(data);
 		})
@@ -88,7 +88,7 @@ const getUsername = async (request: types.Request, response: Response): Promise<
 	const user: Promise<UserInstance | null> = models.User.findByPk(id);
 
 	console.log(user);
-	user
+	await user
 		.then((data: any) => {
 			response.status(200).json(data.username);
 		})
@@ -120,7 +120,7 @@ const updateUser = async (request: types.Request, response: Response): Promise<v
 			},
 		}
 	);
-	user
+	await user
 		.then(() => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_USER }))
 		.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_USER }));
 };
@@ -136,7 +136,7 @@ const deleteUser = async (request: types.Request, response: Response): Promise<v
 		},
 	});
 
-	user
+	await user
 		.then(() => {
 			response.status(200).json({
 				msg: messages.SUCCESS_MSG_DELETED_USER_AND_PETS,
