@@ -2,12 +2,13 @@
 	"name": "lost-and-found",
 	"version": "1.0.0",
 	"description": "Lost & Found App",
-	"main": "./src/server.ts",
+	"main": "server.ts",
 	"scripts": {
-		"start": "nodemon --esm",
-		"build": "tsc --project ./tsconfig.json",
+		"start": "tsc && nodemon ./src/server.ts",
+		"build": "tsc --p ./tsconfig.json",
 		"test": "jest -c ./jest.unit.json",
-		"test:coverage": "jest --coverage -c ./jest.unit.json"
+		"test:coverage": "jest --coverage -c ./jest.unit.json",
+		"clear_jest": "jest --clearCache"
 	},
 	"repository": "https://github.com/lilla-nemeth/lost-and-found.git",
 	"author": "Lilla Németh",
@@ -30,7 +31,8 @@
 		"pg": "^8.11.3",
 		"pg-hstore": "^2.3.4",
 		"sequelize": "^6.36.0",
-		"ts-jest": "^29.1.2"
+		"ts-jest": "^29.1.2",
+		"tsc": "^2.0.4"
 	},
 	"devDependencies": {
 		"@jest/globals": "^29.7.0",
@@ -39,6 +41,5 @@
 		"@types/multer": "^1.4.11",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.3.3"
-	},
-	"type": "module"
+	}
 }

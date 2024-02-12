@@ -1,23 +1,18 @@
 {
 	"compilerOptions": {
-		"lib": ["es2023"],
-		"target": "es2022",
-		"module": "ES2022",
+		"target": "es2016",
+		"module": "CommonJS",
 		"allowJs": true,
-		"outDir": "build",
+		"outDir": "./dist",
 		"strict": true,
 		"noImplicitAny": true,
 		"esModuleInterop": true,
-		"moduleResolution": "node",
-		"typeRoots": ["./node_modules/@types", "./src/types"]
+		"moduleResolution": "Node",
+		"typeRoots": ["./node_modules/@types", "./src/types"],
+		"types": ["node", "jest"],
+		"rootDir": "src",
+		"sourceMap": true
 	},
-	"paths": {
-		"/*": ["*"]
-	},
-	"include": ["./**/*"],
-	"exclude": ["node_modules", "build/**/*"],
-	"ts-node": {
-		"esm": true,
-		"experimentalSpecifierResolution": "node"
-	}
+	"exclude": ["**/*.test.ts", "node_modules", "dist"],
+	"include": ["src/**/*", "/**/*.ts"]
 }
