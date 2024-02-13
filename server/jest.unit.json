@@ -8,6 +8,5 @@
 	"transform": {
 		"^.+\\.ts?$": "babel-jest"
 	},
-	"testRegex": "(/tests/.*|(\\.|/)(test))\\.(ts?)$",
-	"moduleFileExtensions": ["ts", "tsx", "json", "node"]
+	"moduleFileExtensions": ["js", "ts", "tsx", "json", "node"]
 }
