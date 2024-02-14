@@ -4,6 +4,7 @@ import * as types from '../../types/requests';
 import * as messages from '../../types/messages';
 import models from '../../models/index';
 import { UserInstance } from 'types/models';
+import bcrypt from 'bcryptjs';
 
 const usersMockData = [
 	{
@@ -98,7 +99,7 @@ describe('get username', () => {
 	});
 
 	it('should return error message if user is not found', async () => {
-		const mReq: any = { userId: 422 };
+		const mReq: any = { userId: 267 };
 		const mRes: Response = mockResponse();
 
 		jest.spyOn(models.User, 'findByPk').mockResolvedValueOnce(null);
@@ -111,4 +112,75 @@ describe('get username', () => {
 });
 
 // updateUser
+describe('update user', () => {
+	interface CustomRequest extends types.Request {
+		body: types.RequestUserBody;
+	}
+
+	const mockResponse = () => {
+		const res: Partial<Response> = {
+			status: jest.fn().mockReturnThis(),
+			json: jest.fn(),
+		};
+		return res as Response;
+	};
+
+	it('should update user successfully', async () => {
+		const mReq: CustomRequest = {
+			userId: 1,
+			body: {
+				username: usersMockData[0].username,
+				email: usersMockData[0].email,
+				pw: usersMockData[0].pw,
+				phone: usersMockData[0].phone,
+			},
+			headers: {},
+		} as CustomRequest;
+		const mRes: Response = mockResponse();
+
+		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2b$10$b63KmockedHash');
+		jest.spyOn(models.User, 'update').mockResolvedValueOnce([1]);
+
+		await updateUser(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(200);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.SUCCESS_MSG_UPDATED_USER });
+		expect(models.User.update).toHaveBeenCalledWith(
+			{
+				username: mReq.body.username,
+				email: mReq.body.email,
+				pw: '$2b$10$b63KmockedHash',
+				phone: mReq.body.phone,
+			},
+			{
+				where: {
+					id: mReq.userId,
+				},
+			}
+		);
+	});
+
+	it('should handle update error', async () => {
+		const mReq: CustomRequest = {
+			userId: 1,
+			body: {
+				username: usersMockData[0].username,
+				email: usersMockData[0].email,
+				pw: usersMockData[0].pw,
+				phone: usersMockData[0].phone,
+			},
+			headers: {},
+		} as CustomRequest;
+
+		const mRes: Response = mockResponse();
+
+		jest.spyOn(models.User, 'update').mockRejectedValueOnce(new Error('Update error'));
+
+		await updateUser(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_UPDATE_USER });
+	});
+});
+
 // deleteUser

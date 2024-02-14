@@ -104,7 +104,6 @@ const updateUser = async (request: types.Request, response: Response): Promise<v
 	const pw: types.RequestUserBody['pw'] = request.body.pw;
 	const phone: types.RequestUserBody['phone'] = request.body.phone;
 	const encryptedPw: types.RequestUserBody['pw'] = bcrypt.hashSync(pw, 10);
-
 	const user: Promise<[affectedCount: number]> = models.User.update(
 		{
 			username,
