@@ -84,10 +84,8 @@ const getAllUsers = async (request: types.Request | null, response: Response): P
 // get username
 const getUsername = async (request: types.Request, response: Response): Promise<void> => {
 	const id: types.Request['userId'] = request.userId;
-
 	const user: Promise<UserInstance | null> = models.User.findByPk(id);
 
-	console.log(user);
 	await user
 		.then((data: any) => {
 			response.status(200).json(data.username);

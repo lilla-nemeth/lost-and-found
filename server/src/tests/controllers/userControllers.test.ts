@@ -3,6 +3,7 @@ import { Response } from 'express';
 import * as types from '../../types/requests';
 import * as messages from '../../types/messages';
 import models from '../../models/index';
+import { UserInstance } from 'types/models';
 
 const usersMockData = [
 	{
@@ -27,7 +28,6 @@ const usersMockData = [
 // signIn
 
 // getAllUsers
-
 describe('get all users', () => {
 	jest.mock('../../models', () => ({
 		User: {
@@ -87,26 +87,21 @@ describe('get username', () => {
 	it('should return username if user is found', async () => {
 		const mReq: any = { userId: 1 };
 		const mRes: Response = mockResponse();
-		const usersResult = usersMockData;
+		const mockUser: UserInstance | null = { id: 1, username: 'johndoe' } as UserInstance;
 
-		// (models.User.findByPk as jest.Mock).mockResolvedValue(usersMockData);
-		const usersInstances = usersMockData.map((userData) => models.User.build(userData));
-		// console.log(usersInstances);
-		jest.spyOn(models.User, 'findByPk').mockResolvedValue(usersInstances[0]);
+		jest.spyOn(models.User, 'findByPk').mockResolvedValueOnce(mockUser);
 
 		await getUsername(mReq, mRes);
 
 		expect(mRes.status).toHaveBeenCalledWith(200);
-		usersInstances.forEach((user) => {
-			expect(mRes.json).toHaveBeenCalledWith(user.username);
-		});
+		expect(mRes.json).toHaveBeenCalledWith('johndoe');
 	});
 
 	it('should return error message if user is not found', async () => {
-		const mReq: any = { userId: 1 };
+		const mReq: any = { userId: 422 };
 		const mRes: Response = mockResponse();
 
-		(models.User.findByPk as jest.Mock).mockRejectedValue(new Error('User not found'));
+		jest.spyOn(models.User, 'findByPk').mockResolvedValueOnce(null);
 
 		await getUsername(mReq, mRes);
 
