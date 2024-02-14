@@ -58,7 +58,6 @@ describe('get all users', () => {
 
 	it('should return error message if fetching users fails', async () => {
 		const mRes: Response = mockResponse();
-		const usersInstances = usersMockData.map((userData) => models.User.build(userData));
 
 		(models.User.findAll as jest.Mock).mockRejectedValue(new Error('Database error'));
 
@@ -184,3 +183,63 @@ describe('update user', () => {
 });
 
 // deleteUser
+describe('delete user', () => {
+	it('should delete user successfully', async () => {
+		interface CustomRequest extends types.Request {
+			userId: number;
+		}
+
+		const mockResponse = () => {
+			const res: Partial<Response> = {
+				status: jest.fn().mockReturnThis(),
+				json: jest.fn(),
+			};
+			return res as Response;
+		};
+
+		const mReq: CustomRequest = {
+			userId: 1,
+			headers: {},
+		} as CustomRequest;
+		const mockResponseObj: Response = mockResponse();
+
+		jest.spyOn(models.User, 'destroy').mockResolvedValueOnce(1);
+
+		await deleteUser(mReq, mockResponseObj);
+
+		expect(mockResponseObj.status).toHaveBeenCalledWith(200);
+		expect(mockResponseObj.json).toHaveBeenCalledWith({ msg: messages.SUCCESS_MSG_DELETED_USER_AND_PETS });
+		expect(models.User.destroy).toHaveBeenCalledWith({
+			where: {
+				id: mReq.userId,
+			},
+		});
+	});
+
+	it('should handle delete error', async () => {
+		interface CustomRequest extends types.Request {
+			userId: number;
+		}
+
+		const mockResponse = () => {
+			const res: Partial<Response> = {
+				status: jest.fn().mockReturnThis(),
+				json: jest.fn(),
+			};
+			return res as Response;
+		};
+
+		const mReq: CustomRequest = {
+			userId: 1,
+			headers: {},
+		} as CustomRequest;
+		const mockResponseObj: Response = mockResponse();
+
+		jest.spyOn(models.User, 'destroy').mockRejectedValueOnce(new Error('Delete error'));
+
+		await deleteUser(mReq, mockResponseObj);
+
+		expect(mockResponseObj.status).toHaveBeenCalledWith(400);
+		expect(mockResponseObj.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_DELETE_USER });
+	});
+});
