@@ -25,16 +25,17 @@ const createUserAccount = async (request: types.Request, response: Response): Pr
 
 	await user
 		.then((data) => {
-			response.status(200).json(data.save());
+			response.status(200).json(data);
 		})
 		.catch((err: any) => {
 			if (err.code === '23505' && err.constraint === 'users_email_key') {
 				response.status(400).json({ msg: messages.ERROR_MSG_USED_EMAIL });
 			} else if (err.code === '23505' && err.constraint === 'users_phone_key') {
 				response.status(400).json({ msg: messages.ERROR_MSG_USED_PHONE });
-			} else if (err.code != '23505' && isFormValid) {
+			} else if (err.code !== '23505' && isFormValid) {
 				isFormValid;
 			}
+			response.status(400).json({ msg: messages.ERROR_MSG_CREATE_USER });
 		});
 };
 

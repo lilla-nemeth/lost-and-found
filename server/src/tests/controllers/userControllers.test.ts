@@ -25,7 +25,124 @@ const usersMockData = [
 	},
 ];
 
+interface CustomRequest extends types.Request {
+	body: types.RequestUserBody;
+}
+
 // createUserAccount
+describe('create user account', () => {
+	const mockResponse = () => {
+		const res: Partial<Response> = {
+			status: jest.fn().mockReturnThis(),
+			json: jest.fn(),
+		};
+		return res as Response;
+	};
+
+	it('should create user account successfully', async () => {
+		const userData = {
+			username: usersMockData[0].username,
+			email: usersMockData[0].email,
+			pw: usersMockData[0].pw,
+			phone: usersMockData[0].phone,
+		};
+
+		const mReq: CustomRequest = {
+			body: userData,
+			headers: {},
+		} as CustomRequest;
+
+		const mRes: Response = {
+			status: jest.fn().mockReturnThis(),
+			json: jest.fn(),
+		} as unknown as Response;
+
+		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2a$10$mockedHash');
+
+		const mockUserInstance: any = {
+			username: userData.username,
+			email: userData.email,
+			pw: '$2a$10$mockedHash',
+			phone: userData.phone,
+			isAdmin: false,
+		};
+
+		jest.spyOn(models.User, 'create').mockResolvedValueOnce(mockUserInstance);
+
+		await createUserAccount(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(200);
+		expect(mRes.json).toHaveBeenCalledWith({
+			...userData,
+			pw: '$2a$10$mockedHash',
+			isAdmin: false,
+		});
+	});
+
+	it('should handle used email error', async () => {
+		const mReq: CustomRequest = {
+			body: {
+				username: usersMockData[0].username,
+				email: usersMockData[0].email,
+				pw: usersMockData[0].pw,
+				phone: usersMockData[0].phone,
+			},
+			headers: {},
+		} as CustomRequest;
+		const mRes: Response = mockResponse();
+
+		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2b$10$b63KmockedHash');
+		jest.spyOn(models.User, 'create').mockRejectedValueOnce({ code: '23505', constraint: 'users_email_key' });
+
+		await createUserAccount(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_USED_EMAIL });
+	});
+
+	it('should handle used phone error', async () => {
+		const mReq: CustomRequest = {
+			body: {
+				username: usersMockData[0].username,
+				email: usersMockData[0].email,
+				pw: usersMockData[0].pw,
+				phone: usersMockData[0].phone,
+			},
+			headers: {},
+		} as CustomRequest;
+		const mRes: Response = mockResponse();
+
+		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2b$10$b63KmockedHash');
+		jest.spyOn(models.User, 'create').mockRejectedValueOnce({ code: '23505', constraint: 'users_phone_key' });
+
+		await createUserAccount(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_USED_PHONE });
+	});
+
+	it('should handle other errors', async () => {
+		const mReq: CustomRequest = {
+			body: {
+				username: usersMockData[0].username,
+				email: usersMockData[0].email,
+				pw: usersMockData[0].pw,
+				phone: usersMockData[0].phone,
+			},
+			headers: {},
+		} as CustomRequest;
+		const mRes: Response = mockResponse();
+
+		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2b$10$b63KmockedHash');
+		jest.spyOn(models.User, 'create').mockRejectedValueOnce(new Error('Some other error'));
+
+		await createUserAccount(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_CREATE_USER });
+	});
+});
+
 // signIn
 
 // getAllUsers
@@ -112,10 +229,6 @@ describe('get username', () => {
 
 // updateUser
 describe('update user', () => {
-	interface CustomRequest extends types.Request {
-		body: types.RequestUserBody;
-	}
-
 	const mockResponse = () => {
 		const res: Partial<Response> = {
 			status: jest.fn().mockReturnThis(),
@@ -185,10 +298,6 @@ describe('update user', () => {
 // deleteUser
 describe('delete user', () => {
 	it('should delete user successfully', async () => {
-		interface CustomRequest extends types.Request {
-			userId: number;
-		}
-
 		const mockResponse = () => {
 			const res: Partial<Response> = {
 				status: jest.fn().mockReturnThis(),
@@ -217,10 +326,6 @@ describe('delete user', () => {
 	});
 
 	it('should handle delete error', async () => {
-		interface CustomRequest extends types.Request {
-			userId: number;
-		}
-
 		const mockResponse = () => {
 			const res: Partial<Response> = {
 				status: jest.fn().mockReturnThis(),
