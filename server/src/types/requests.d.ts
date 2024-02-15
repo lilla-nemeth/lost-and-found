@@ -76,4 +76,17 @@ interface RequestUserBody {
 	phone?: Phone;
 }
 
-export { Request, RequestGetPetIdParams, RequestPaginationParams, RequestGetSearchParamsQuery, RequestPetBody, RequestUserBody };
+// For testing
+interface CustomRequest extends Request {
+	body: RequestUserBody;
+}
+
+export {
+	Request,
+	RequestGetPetIdParams,
+	RequestPaginationParams,
+	RequestGetSearchParamsQuery,
+	RequestPetBody,
+	RequestUserBody,
+	CustomRequest,
+};

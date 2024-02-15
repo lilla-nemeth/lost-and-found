@@ -25,9 +25,9 @@ const usersMockData = [
 	},
 ];
 
-interface CustomRequest extends types.Request {
-	body: types.RequestUserBody;
-}
+// interface CustomRequest extends types.Request {
+// 	body: types.RequestUserBody;
+// }
 
 // createUserAccount
 describe('create user account', () => {
@@ -47,10 +47,10 @@ describe('create user account', () => {
 			phone: usersMockData[0].phone,
 		};
 
-		const mReq: CustomRequest = {
+		const mReq: types.CustomRequest = {
 			body: userData,
 			headers: {},
-		} as CustomRequest;
+		} as types.CustomRequest;
 
 		const mRes: Response = {
 			status: jest.fn().mockReturnThis(),
@@ -80,7 +80,7 @@ describe('create user account', () => {
 	});
 
 	it('should handle used email error', async () => {
-		const mReq: CustomRequest = {
+		const mReq: types.CustomRequest = {
 			body: {
 				username: usersMockData[0].username,
 				email: usersMockData[0].email,
@@ -88,7 +88,7 @@ describe('create user account', () => {
 				phone: usersMockData[0].phone,
 			},
 			headers: {},
-		} as CustomRequest;
+		} as types.CustomRequest;
 		const mRes: Response = mockResponse();
 
 		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2b$10$b63KmockedHash');
@@ -101,7 +101,7 @@ describe('create user account', () => {
 	});
 
 	it('should handle used phone error', async () => {
-		const mReq: CustomRequest = {
+		const mReq: types.CustomRequest = {
 			body: {
 				username: usersMockData[0].username,
 				email: usersMockData[0].email,
@@ -109,7 +109,7 @@ describe('create user account', () => {
 				phone: usersMockData[0].phone,
 			},
 			headers: {},
-		} as CustomRequest;
+		} as types.CustomRequest;
 		const mRes: Response = mockResponse();
 
 		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2b$10$b63KmockedHash');
@@ -122,7 +122,7 @@ describe('create user account', () => {
 	});
 
 	it('should handle other errors', async () => {
-		const mReq: CustomRequest = {
+		const mReq: types.CustomRequest = {
 			body: {
 				username: usersMockData[0].username,
 				email: usersMockData[0].email,
@@ -130,7 +130,7 @@ describe('create user account', () => {
 				phone: usersMockData[0].phone,
 			},
 			headers: {},
-		} as CustomRequest;
+		} as types.CustomRequest;
 		const mRes: Response = mockResponse();
 
 		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2b$10$b63KmockedHash');
@@ -238,7 +238,7 @@ describe('update user', () => {
 	};
 
 	it('should update user successfully', async () => {
-		const mReq: CustomRequest = {
+		const mReq: types.CustomRequest = {
 			userId: 1,
 			body: {
 				username: usersMockData[0].username,
@@ -247,7 +247,7 @@ describe('update user', () => {
 				phone: usersMockData[0].phone,
 			},
 			headers: {},
-		} as CustomRequest;
+		} as types.CustomRequest;
 		const mRes: Response = mockResponse();
 
 		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2b$10$b63KmockedHash');
@@ -273,7 +273,7 @@ describe('update user', () => {
 	});
 
 	it('should handle update error', async () => {
-		const mReq: CustomRequest = {
+		const mReq: types.CustomRequest = {
 			userId: 1,
 			body: {
 				username: usersMockData[0].username,
@@ -282,7 +282,7 @@ describe('update user', () => {
 				phone: usersMockData[0].phone,
 			},
 			headers: {},
-		} as CustomRequest;
+		} as types.CustomRequest;
 
 		const mRes: Response = mockResponse();
 
@@ -306,10 +306,10 @@ describe('delete user', () => {
 			return res as Response;
 		};
 
-		const mReq: CustomRequest = {
+		const mReq: types.CustomRequest = {
 			userId: 1,
 			headers: {},
-		} as CustomRequest;
+		} as types.CustomRequest;
 		const mockResponseObj: Response = mockResponse();
 
 		jest.spyOn(models.User, 'destroy').mockResolvedValueOnce(1);
@@ -334,10 +334,10 @@ describe('delete user', () => {
 			return res as Response;
 		};
 
-		const mReq: CustomRequest = {
+		const mReq: types.CustomRequest = {
 			userId: 1,
 			headers: {},
-		} as CustomRequest;
+		} as types.CustomRequest;
 		const mockResponseObj: Response = mockResponse();
 
 		jest.spyOn(models.User, 'destroy').mockRejectedValueOnce(new Error('Delete error'));
