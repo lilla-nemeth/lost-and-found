@@ -5,6 +5,7 @@ import * as messages from '../../types/messages';
 import models from '../../models/index';
 import { UserInstance } from 'types/models';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 const usersMockData = [
 	{
@@ -142,6 +143,90 @@ describe('create user account', () => {
 });
 
 // signIn
+describe('sign in', () => {
+	jest.mock('../../models', () => ({
+		User: {
+			findAll: jest.fn(),
+		},
+	}));
+
+	jest.mock('bcryptjs', () => ({
+		compare: jest.fn(),
+	}));
+
+	const mockResponse = () => {
+		const res: Partial<Response> = {
+			status: jest.fn().mockReturnThis(),
+			json: jest.fn(),
+		};
+		return res as Response;
+	};
+
+	it('should sign in user successfully', async () => {
+		const mReq: types.CustomRequest = {
+			body: {
+				email: usersMockData[0].email,
+				pw: usersMockData[0].pw,
+			},
+		} as types.CustomRequest;
+		const mRes = mockResponse();
+		const mockUser: UserInstance | null = { id: 1, isAdmin: false, pw: mEncryptedPw } as UserInstance;
+
+		jest.spyOn(models.User, 'findAll').mockResolvedValueOnce([mockUser]);
+
+		const bcryptCompare = jest.fn().mockResolvedValue(true);
+		bcrypt.compare = bcryptCompare;
+
+		const signMock = jest.spyOn(jwt, 'sign').mockImplementation((_, __, callback: any) => {
+			const token = 'mockedToken';
+			callback(null, token);
+		});
+
+		await signIn(mReq, mRes);
+
+		expect(signMock).toHaveBeenCalledWith({ id: expect.any(Number), isAdmin: expect.any(Boolean) }, 'r4uqSKqC6L', expect.any(Function));
+		expect(mRes.status).toHaveBeenCalledWith(200);
+		expect(mRes.json).toHaveBeenCalledWith('mockedToken');
+	});
+
+	it('should handle incorrect password', async () => {
+		const mReq: any = {
+			body: {
+				email: usersMockData[0].email,
+				pw: usersMockData[0].pw,
+			},
+		};
+		const mRes = mockResponse();
+		const mockUser: UserInstance | null = { id: 1, isAdmin: false, pw: mEncryptedPw } as UserInstance;
+
+		jest.spyOn(models.User, 'findAll').mockResolvedValueOnce([mockUser]);
+
+		const bcryptCompare = jest.fn().mockResolvedValue(false);
+		bcrypt.compare = bcryptCompare;
+
+		await signIn(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(403);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_INCORRECT_PASSWORD });
+	});
+
+	it('should handle user not found', async () => {
+		const mReq: any = {
+			body: {
+				email: usersMockData[0].email,
+				pw: usersMockData[0].pw,
+			},
+		};
+		const mRes = mockResponse();
+
+		jest.spyOn(models.User, 'findAll').mockResolvedValueOnce([]);
+
+		await signIn(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_NOT_FOUND_USER });
+	});
+});
 
 // getAllUsers
 describe('get all users', () => {
@@ -200,20 +285,20 @@ describe('get username', () => {
 	};
 
 	it('should return username if user is found', async () => {
-		const mReq: any = { userId: 1 };
+		const mReq: types.CustomRequest = { userId: 1 } as types.CustomRequest;
 		const mRes: Response = mockResponse();
-		const mockUser: UserInstance | null = { id: 1, username: 'johndoe' } as UserInstance;
+		const mockUser: UserInstance | null = { id: 1, username: usersMockData[0].username } as UserInstance;
 
 		jest.spyOn(models.User, 'findByPk').mockResolvedValueOnce(mockUser);
 
 		await getUsername(mReq, mRes);
 
 		expect(mRes.status).toHaveBeenCalledWith(200);
-		expect(mRes.json).toHaveBeenCalledWith('johndoe');
+		expect(mRes.json).toHaveBeenCalledWith(usersMockData[0].username);
 	});
 
 	it('should return error message if user is not found', async () => {
-		const mReq: any = { userId: 267 };
+		const mReq: types.CustomRequest = { userId: 267 } as types.CustomRequest;
 		const mRes: Response = mockResponse();
 
 		jest.spyOn(models.User, 'findByPk').mockResolvedValueOnce(null);
