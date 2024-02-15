@@ -25,9 +25,7 @@ const usersMockData = [
 	},
 ];
 
-// interface CustomRequest extends types.Request {
-// 	body: types.RequestUserBody;
-// }
+const mEncryptedPw = '$2b$10$b63KmockedHash';
 
 // createUserAccount
 describe('create user account', () => {
@@ -57,12 +55,12 @@ describe('create user account', () => {
 			json: jest.fn(),
 		} as unknown as Response;
 
-		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2a$10$mockedHash');
+		jest.spyOn(bcrypt, 'hashSync').mockReturnValue(mEncryptedPw);
 
 		const mockUserInstance: any = {
 			username: userData.username,
 			email: userData.email,
-			pw: '$2a$10$mockedHash',
+			pw: mEncryptedPw,
 			phone: userData.phone,
 			isAdmin: false,
 		};
@@ -74,7 +72,7 @@ describe('create user account', () => {
 		expect(mRes.status).toHaveBeenCalledWith(200);
 		expect(mRes.json).toHaveBeenCalledWith({
 			...userData,
-			pw: '$2a$10$mockedHash',
+			pw: mEncryptedPw,
 			isAdmin: false,
 		});
 	});
@@ -91,7 +89,7 @@ describe('create user account', () => {
 		} as types.CustomRequest;
 		const mRes: Response = mockResponse();
 
-		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2b$10$b63KmockedHash');
+		jest.spyOn(bcrypt, 'hashSync').mockReturnValue(mEncryptedPw);
 		jest.spyOn(models.User, 'create').mockRejectedValueOnce({ code: '23505', constraint: 'users_email_key' });
 
 		await createUserAccount(mReq, mRes);
@@ -112,7 +110,7 @@ describe('create user account', () => {
 		} as types.CustomRequest;
 		const mRes: Response = mockResponse();
 
-		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2b$10$b63KmockedHash');
+		jest.spyOn(bcrypt, 'hashSync').mockReturnValue(mEncryptedPw);
 		jest.spyOn(models.User, 'create').mockRejectedValueOnce({ code: '23505', constraint: 'users_phone_key' });
 
 		await createUserAccount(mReq, mRes);
@@ -133,7 +131,7 @@ describe('create user account', () => {
 		} as types.CustomRequest;
 		const mRes: Response = mockResponse();
 
-		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2b$10$b63KmockedHash');
+		jest.spyOn(bcrypt, 'hashSync').mockReturnValue(mEncryptedPw);
 		jest.spyOn(models.User, 'create').mockRejectedValueOnce(new Error('Some other error'));
 
 		await createUserAccount(mReq, mRes);
@@ -250,7 +248,7 @@ describe('update user', () => {
 		} as types.CustomRequest;
 		const mRes: Response = mockResponse();
 
-		jest.spyOn(bcrypt, 'hashSync').mockReturnValue('$2b$10$b63KmockedHash');
+		jest.spyOn(bcrypt, 'hashSync').mockReturnValue(mEncryptedPw);
 		jest.spyOn(models.User, 'update').mockResolvedValueOnce([1]);
 
 		await updateUser(mReq, mRes);
@@ -261,7 +259,7 @@ describe('update user', () => {
 			{
 				username: mReq.body.username,
 				email: mReq.body.email,
-				pw: '$2b$10$b63KmockedHash',
+				pw: mEncryptedPw,
 				phone: mReq.body.phone,
 			},
 			{
