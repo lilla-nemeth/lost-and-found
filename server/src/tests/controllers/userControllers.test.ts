@@ -390,14 +390,14 @@ describe('delete user', () => {
 			userId: 1,
 			headers: {},
 		} as types.CustomRequest;
-		const mockResponseObj: Response = mockResponse();
+		const mRes: Response = mockResponse();
 
 		jest.spyOn(models.User, 'destroy').mockResolvedValueOnce(1);
 
-		await deleteUser(mReq, mockResponseObj);
+		await deleteUser(mReq, mRes);
 
-		expect(mockResponseObj.status).toHaveBeenCalledWith(200);
-		expect(mockResponseObj.json).toHaveBeenCalledWith({ msg: messages.SUCCESS_MSG_DELETED_USER_AND_PETS });
+		expect(mRes.status).toHaveBeenCalledWith(200);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.SUCCESS_MSG_DELETED_USER_AND_PETS });
 		expect(models.User.destroy).toHaveBeenCalledWith({
 			where: {
 				id: mReq.userId,
@@ -418,13 +418,13 @@ describe('delete user', () => {
 			userId: 1,
 			headers: {},
 		} as types.CustomRequest;
-		const mockResponseObj: Response = mockResponse();
+		const mRes: Response = mockResponse();
 
 		jest.spyOn(models.User, 'destroy').mockRejectedValueOnce(new Error('Delete error'));
 
-		await deleteUser(mReq, mockResponseObj);
+		await deleteUser(mReq, mRes);
 
-		expect(mockResponseObj.status).toHaveBeenCalledWith(400);
-		expect(mockResponseObj.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_DELETE_USER });
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_DELETE_USER });
 	});
 });
