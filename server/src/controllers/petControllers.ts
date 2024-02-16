@@ -39,7 +39,9 @@ const createPetProfile = async (request: types.Request, response: Response): Pro
 		postdescription,
 	});
 
-	pet.then((data) => response.status(200).json(data.save())).catch(() => response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET }));
+	await pet
+		.then((data) => response.status(200).json(data.save()))
+		.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET }));
 };
 
 // READ
@@ -56,7 +58,7 @@ const getPetsByPagination = async (request: types.Request, response: Response): 
 		offset,
 		limit,
 	});
-	pets
+	await pets
 		.then((data) => {
 			response.status(200).json(data);
 		})
@@ -71,7 +73,7 @@ const getPetById = async (request: types.Request, response: Response): Promise<v
 
 	const pet: Promise<PetInstance | null> = models.Pet.findByPk(id);
 
-	pet
+	await pet
 		.then((data) => {
 			response.status(200).json(data);
 		})
@@ -97,7 +99,7 @@ const getAllUserPets = async (request: types.Request, response: Response): Promi
 	});
 
 	if (isAdmin) {
-		adminPetList
+		await adminPetList
 			.then((data) => {
 				response.status(200).json(data);
 			})
@@ -105,7 +107,7 @@ const getAllUserPets = async (request: types.Request, response: Response): Promi
 				response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
 			});
 	} else {
-		userPetList
+		await userPetList
 			.then((data) => {
 				response.status(200).json(data);
 			})
@@ -154,7 +156,7 @@ const updatePet = async (request: types.Request, response: Response): Promise<vo
 		}
 	);
 
-	pet
+	await pet
 		.then(() => response.status(200).json({ msg: messages.SUCCESS_MSG_UPDATED_PET }))
 		.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_UPDATE_PET }));
 };
@@ -172,7 +174,7 @@ const deleteUserPet = async (request: types.Request, response: Response): Promis
 		},
 	});
 
-	pet
+	await pet
 		.then(() => {
 			response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PET });
 		})
@@ -194,11 +196,11 @@ const deleteAllUserPets = async (request: types.Request, response: Response): Pr
 	const adminPetList: Promise<number> = models.Pet.destroy({ truncate: true });
 
 	if (isAdmin) {
-		adminPetList
+		await adminPetList
 			.then(() => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
 			.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 	} else {
-		userPetList
+		await userPetList
 			.then(() => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
 			.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 	}
