@@ -51,10 +51,7 @@ describe('create user account', () => {
 			headers: {},
 		} as types.CustomRequest;
 
-		const mRes: Response = {
-			status: jest.fn().mockReturnThis(),
-			json: jest.fn(),
-		} as unknown as Response;
+		const mRes = mockResponse();
 
 		jest.spyOn(bcrypt, 'hashSync').mockReturnValue(mEncryptedPw);
 
