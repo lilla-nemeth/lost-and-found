@@ -16,7 +16,7 @@ const getGeocodeLocation = async (request: types.Request, response: Response): P
 	});
 	const result = `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?${params}`;
 
-	axios
+	await axios
 		.get(result)
 		.then((res: any) => {
 			response.status(200).json(res.data);
