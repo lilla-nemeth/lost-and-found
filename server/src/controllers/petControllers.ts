@@ -39,9 +39,7 @@ const createPetProfile = async (request: types.Request, response: Response): Pro
 		postdescription,
 	});
 
-	await pet
-		.then((data) => response.status(200).json(data.save()))
-		.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET }));
+	await pet.then((data) => response.status(200).json(data)).catch(() => response.status(400).json({ msg: messages.ERROR_MSG_CREATE_PET }));
 };
 
 // READ
