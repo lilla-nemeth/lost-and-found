@@ -13,11 +13,19 @@ import models from '../../models/index';
 import * as messages from '../../types/messages';
 import * as modelTypes from '../../types/models';
 
+const petFile = {
+	file: Buffer.from('sample-image'),
+};
+
+const petImage = {
+	buffer: Buffer.from('sample-image'),
+};
+
 const petsMockData = [
 	{
 		id: 1,
 		userId: 3,
-		file: Buffer.from('sample-image'),
+		img: 'testimage',
 		petstatus: 'found',
 		petlocation: 'Los Angeles',
 		latitude: '34.052235',
@@ -34,7 +42,7 @@ const petsMockData = [
 	{
 		id: 2,
 		userId: 4,
-		file: Buffer.from('sample-image'),
+		img: 'testimage',
 		petstatus: 'lost',
 		petlocation: 'Paris',
 		latitude: '48.856613',
@@ -49,10 +57,6 @@ const petsMockData = [
 		postdescription: 'My dog has disappeared in Paris.',
 	},
 ];
-
-const petImage = {
-	buffer: petsMockData[0].file,
-};
 
 const petBody = {
 	petstatus: petsMockData[0].petstatus,
@@ -126,9 +130,9 @@ describe('get pets by pagination', () => {
 	it('should return pets with pagination', async () => {
 		const mRes: Response = mockResponse();
 
-		const petsInstances = petsMockData.map((petsMockData) => {
-			const imgBase64 = petsMockData['file'].toString('base64');
-			const petsMockDataWithBase64Img = { ...petsMockData, img: imgBase64 };
+		const petsInstances = petsMockData.map((petData) => {
+			const imgBase64 = petFile['file'].toString('base64') as string;
+			const petsMockDataWithBase64Img = { ...petData, img: imgBase64 };
 			return models.Pet.build(petsMockDataWithBase64Img);
 		});
 
@@ -167,8 +171,148 @@ describe('get pets by pagination', () => {
 });
 
 // getPetById
+describe('get pet by id', () => {
+	jest.mock('../../models', () => ({
+		Pet: {
+			findByPk: jest.fn(),
+		},
+	}));
+
+	const mockResponse = () => {
+		const res: Partial<Response> = {
+			status: jest.fn().mockReturnThis(),
+			json: jest.fn(),
+		};
+		return res as Response;
+	};
+
+	it('should return a pet when found', async () => {
+		const mRes: Response = mockResponse();
+		const petId = '1';
+
+		jest.spyOn(models.Pet, 'findByPk').mockResolvedValueOnce(Promise.resolve(petsMockData[0] as any));
+
+		const mReq: requestTypes.Request = {
+			params: {
+				id: petId,
+			},
+		} as unknown as requestTypes.Request;
+
+		await getPetById(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(200);
+		expect(mRes.json).toHaveBeenCalledWith(petsMockData[0]);
+	});
+
+	it('should return error message if pet is not found', async () => {
+		const mRes: Response = mockResponse();
+
+		jest.spyOn(models.Pet, 'findByPk').mockRejectedValue(null);
+
+		const mReq: requestTypes.Request = {
+			params: {
+				id: '1',
+			},
+		} as unknown as requestTypes.Request;
+
+		await getPetById(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
+	});
+
+	it('should return error message if an error occurs during retrieval', async () => {
+		const mRes: Response = mockResponse();
+
+		jest.spyOn(models.Pet, 'findByPk').mockRejectedValue(new Error('Database error'));
+
+		const mReq: requestTypes.Request = {
+			params: {
+				id: '1',
+			},
+		} as unknown as requestTypes.Request;
+
+		await getPetById(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
+	});
+});
 
 // getAllUserPets
+describe('get all user or admin pets', () => {
+	const mockResponse = () => {
+		const res: Partial<Response> = {
+			status: jest.fn().mockReturnThis(),
+			json: jest.fn(),
+		};
+		return res as Response;
+	};
+
+	it('should return user pets when user is not an admin', async () => {
+		const userId = 1;
+		const isAdmin = false;
+		const userPetList: modelTypes.PetInstance[] = petsMockData.map((petData) => models.Pet.build(petData));
+
+		jest.spyOn(models.Pet, 'findAll').mockResolvedValue(userPetList);
+
+		// const userPetList: modelTypes.PetInstance[] = petsMockData;
+
+		// jest.spyOn(models.Pet, 'findAll').mockResolvedValueOnce(userPetList);
+
+		const mReq: requestTypes.Request = {
+			userId,
+			isAdmin,
+		} as requestTypes.Request;
+
+		const mRes: Response = mockResponse();
+
+		await getAllUserPets(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(200);
+		expect(mRes.json).toHaveBeenCalledWith(userPetList);
+	});
+
+	it('should return all pets when user is an admin', async () => {
+		const userId = 1;
+		const isAdmin = true;
+		const adminPetList: modelTypes.PetInstance[] = petsMockData.map((petData) => models.Pet.build(petData));
+
+		jest.spyOn(models.Pet, 'findAll').mockResolvedValueOnce(adminPetList);
+
+		const mReq: requestTypes.Request = {
+			userId,
+			isAdmin,
+		} as requestTypes.Request;
+
+		const mRes: Response = mockResponse();
+
+		await getAllUserPets(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(200);
+		expect(mRes.json).toHaveBeenCalledWith(adminPetList);
+	});
+
+	it('should handle errors when fetching user pets', async () => {
+		const userId = 1;
+		const isAdmin = false;
+
+		jest.spyOn(models.Pet, 'findAll').mockRejectedValueOnce(new Error('Database error'));
+
+		const mReq: requestTypes.Request = {
+			userId,
+			isAdmin,
+		} as requestTypes.Request;
+
+		const mRes: Response = mockResponse();
+
+		await getAllUserPets(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
+	});
+});
+
 // updatePet
 // deleteUserPet
 // deleteAllUserPets
