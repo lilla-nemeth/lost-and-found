@@ -54,7 +54,6 @@ interface RequestGetSearchParamsQuery {
 
 // Request Body
 interface RequestPetBody {
-	userId: UserId;
 	petstatus: PetStatus;
 	petlocation: PetLocation;
 	longitude: Longitude;
@@ -76,17 +75,4 @@ interface RequestUserBody {
 	phone?: Phone;
 }
 
-// For testing
-interface CustomRequest extends Request {
-	body: RequestUserBody;
-}
-
-export {
-	Request,
-	RequestGetPetIdParams,
-	RequestPaginationParams,
-	RequestGetSearchParamsQuery,
-	RequestPetBody,
-	RequestUserBody,
-	CustomRequest,
-};
+export { Request, RequestGetPetIdParams, RequestPaginationParams, RequestGetSearchParamsQuery, RequestPetBody, RequestUserBody };
