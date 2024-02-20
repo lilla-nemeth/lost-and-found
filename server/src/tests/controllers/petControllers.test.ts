@@ -241,6 +241,12 @@ describe('get pet by id', () => {
 
 // getAllUserPets
 describe('get all user or admin pets', () => {
+	jest.mock('../../models', () => ({
+		Pet: {
+			findAll: jest.fn(),
+		},
+	}));
+
 	const mockResponse = () => {
 		const res: Partial<Response> = {
 			status: jest.fn().mockReturnThis(),
@@ -288,7 +294,7 @@ describe('get all user or admin pets', () => {
 	it('should handle errors when fetching pets fails', async () => {
 		const isAdmin = false;
 
-		(models.Pet.findAll as jest.Mock).mockRejectedValue(new Error('Database error'));
+		jest.spyOn(models.Pet, 'findAll').mockRejectedValue(new Error('Database error'));
 
 		const mReq: requestTypes.Request = {
 			isAdmin,
@@ -304,5 +310,53 @@ describe('get all user or admin pets', () => {
 });
 
 // updatePet
+describe('update pet function', () => {
+	jest.mock('../../models', () => ({
+		Pet: {
+			update: jest.fn(),
+		},
+	}));
+
+	const mockResponse = () => {
+		const res: Partial<Response> = {
+			status: jest.fn().mockReturnThis(),
+			json: jest.fn(),
+		};
+		return res as Response;
+	};
+
+	test('should update pet successfully', async () => {
+		const mReq: requestTypes.Request = {
+			params: { id: 1 },
+			body: petBody,
+		} as unknown as requestTypes.Request;
+
+		const mRes = mockResponse();
+
+		jest.spyOn(models.Pet, 'update').mockResolvedValue([1]);
+
+		await updatePet(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(200);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.SUCCESS_MSG_UPDATED_PET });
+	});
+
+	test('should handle error while updating pet', async () => {
+		const mReq: requestTypes.Request = {
+			params: { id: 1 },
+			body: petBody,
+		} as unknown as requestTypes.Request;
+
+		const mRes = mockResponse();
+
+		jest.spyOn(models.Pet, 'update').mockRejectedValue(new Error('Database error'));
+
+		await updatePet(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_UPDATE_PET });
+	});
+});
+
 // deleteUserPet
 // deleteAllUserPets
