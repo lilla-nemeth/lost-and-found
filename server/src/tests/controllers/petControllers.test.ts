@@ -325,7 +325,7 @@ describe('update pet function', () => {
 		return res as Response;
 	};
 
-	test('should update pet successfully', async () => {
+	it('should update pet successfully', async () => {
 		const mReq: requestTypes.Request = {
 			params: { id: 1 },
 			body: petBody,
@@ -341,7 +341,7 @@ describe('update pet function', () => {
 		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.SUCCESS_MSG_UPDATED_PET });
 	});
 
-	test('should handle error while updating pet', async () => {
+	it('should handle error while updating pet', async () => {
 		const mReq: requestTypes.Request = {
 			params: { id: 1 },
 			body: petBody,
@@ -359,4 +359,50 @@ describe('update pet function', () => {
 });
 
 // deleteUserPet
+describe('deleteUserPet function', () => {
+	jest.mock('../../models', () => ({
+		Pet: {
+			destroy: jest.fn(),
+		},
+	}));
+
+	const mockResponse = () => {
+		const res: Partial<Response> = {
+			status: jest.fn().mockReturnThis(),
+			json: jest.fn(),
+		};
+		return res as Response;
+	};
+
+	it('should delete pet successfully', async () => {
+		const mReq: requestTypes.Request = {
+			params: { id: 1 },
+		} as unknown as requestTypes.Request;
+
+		const mRes = mockResponse();
+
+		jest.spyOn(models.Pet, 'destroy').mockResolvedValue(1);
+
+		await deleteUserPet(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(200);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.SUCCESS_MSG_DELETED_PET });
+	});
+
+	it('should handle error while deleting pet', async () => {
+		const mReq: requestTypes.Request = {
+			params: { id: 1 },
+		} as unknown as requestTypes.Request;
+
+		const mRes = mockResponse();
+
+		jest.spyOn(models.Pet, 'destroy').mockRejectedValue(new Error('Database error'));
+
+		await deleteUserPet(mReq, mRes);
+
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_DELETE_PET });
+	});
+});
+
 // deleteAllUserPets
