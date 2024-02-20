@@ -174,7 +174,7 @@ const deleteUserPet = async (request: types.Request, response: Response): Promis
 };
 
 // delete all pets by user (user dashboard)
-const deleteAllUserPets = async (request: types.Request, response: Response): Promise<void> => {
+const deleteAllPets = async (request: types.Request, response: Response): Promise<void> => {
 	const userId: types.Request['userId'] = request.userId;
 	const isAdmin: types.Request['isAdmin'] = request.isAdmin;
 
@@ -196,4 +196,4 @@ const deleteAllUserPets = async (request: types.Request, response: Response): Pr
 		.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 };
 
-export { createPetProfile, getPetsByPagination, getPetById, getAllUserPets, updatePet, deleteUserPet, deleteAllUserPets };
+export { createPetProfile, getPetsByPagination, getPetById, getAllUserPets, updatePet, deleteUserPet, deleteAllPets };

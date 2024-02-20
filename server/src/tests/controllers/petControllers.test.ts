@@ -5,7 +5,7 @@ import {
 	getAllUserPets,
 	updatePet,
 	deleteUserPet,
-	deleteAllUserPets,
+	deleteAllPets,
 } from '../../controllers/petControllers';
 import { Response } from 'express';
 import * as requestTypes from '../../types/requests';
@@ -310,7 +310,7 @@ describe('get all user or admin pets', () => {
 });
 
 // updatePet
-describe('update pet function', () => {
+describe('update pet', () => {
 	jest.mock('../../models', () => ({
 		Pet: {
 			update: jest.fn(),
@@ -359,7 +359,7 @@ describe('update pet function', () => {
 });
 
 // deleteUserPet
-describe('deleteUserPet function', () => {
+describe('delete user pet', () => {
 	jest.mock('../../models', () => ({
 		Pet: {
 			destroy: jest.fn(),
@@ -405,4 +405,95 @@ describe('deleteUserPet function', () => {
 	});
 });
 
-// deleteAllUserPets
+// deleteAllPets
+describe('deleteAllPets function', () => {
+	jest.mock('../../models', () => ({
+		Pet: {
+			destroy: jest.fn(),
+		},
+	}));
+
+	const mockResponse = () => {
+		const res: Partial<Response> = {
+			status: jest.fn().mockReturnThis(),
+			json: jest.fn(),
+		};
+		return res as Response;
+	};
+
+	it('should delete all user pets successfully as admin', async () => {
+		const mReq: requestTypes.Request = {
+			userId: 2,
+			isAdmin: true,
+		} as unknown as requestTypes.Request;
+
+		const mRes = mockResponse();
+
+		jest.spyOn(models.Pet, 'destroy').mockResolvedValue(Promise.resolve(0));
+
+		await deleteAllPets(mReq, mRes);
+
+		expect(models.Pet.destroy).toHaveBeenCalledWith({ truncate: true });
+		expect(mRes.status).toHaveBeenCalledWith(200);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.SUCCESS_MSG_DELETED_PETS });
+	});
+
+	it('should delete user pets successfully as user', async () => {
+		const mReq: requestTypes.Request = {
+			userId: 5,
+			isAdmin: false,
+		} as unknown as requestTypes.Request;
+
+		const mRes = mockResponse();
+
+		jest.spyOn(models.Pet, 'destroy').mockResolvedValueOnce(Promise.resolve(5));
+
+		await deleteAllPets(mReq, mRes);
+
+		expect(models.Pet.destroy).toHaveBeenCalledWith({
+			truncate: true,
+			where: { userId: mReq.userId },
+		});
+		expect(mRes.status).toHaveBeenCalledWith(200);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.SUCCESS_MSG_DELETED_PETS });
+	});
+
+	it('should handle error while deleting admin pets', async () => {
+		const mReq: requestTypes.Request = {
+			userId: 5,
+			isAdmin: true,
+		} as unknown as requestTypes.Request;
+
+		const mRes = mockResponse();
+
+		jest.spyOn(models.Pet, 'destroy').mockRejectedValue(new Error('Database error'));
+
+		await deleteAllPets(mReq, mRes);
+
+		expect(models.Pet.destroy).toHaveBeenCalledWith({
+			truncate: true,
+		});
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_DELETE_PETS });
+	});
+
+	it('should handle error while deleting user pets', async () => {
+		const mReq: requestTypes.Request = {
+			userId: 5,
+			isAdmin: false,
+		} as unknown as requestTypes.Request;
+
+		const mRes = mockResponse();
+
+		jest.spyOn(models.Pet, 'destroy').mockRejectedValue(new Error('Database error'));
+
+		await deleteAllPets(mReq, mRes);
+
+		expect(models.Pet.destroy).toHaveBeenCalledWith({
+			truncate: true,
+			where: { userId: mReq.userId },
+		});
+		expect(mRes.status).toHaveBeenCalledWith(400);
+		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_DELETE_PETS });
+	});
+});
