@@ -178,24 +178,22 @@ const deleteAllUserPets = async (request: types.Request, response: Response): Pr
 	const userId: types.Request['userId'] = request.userId;
 	const isAdmin: types.Request['isAdmin'] = request.isAdmin;
 
-	const userPetList: Promise<number> = models.Pet.destroy({
-		truncate: true,
-		where: {
-			userId,
-		},
-	});
-
-	const adminPetList: Promise<number> = models.Pet.destroy({ truncate: true });
+	let petListPromise: Promise<PetInstance['id']>;
 
 	if (isAdmin) {
-		await adminPetList
-			.then(() => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
-			.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
+		petListPromise = models.Pet.destroy({ truncate: true });
 	} else {
-		await userPetList
-			.then(() => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
-			.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
+		petListPromise = models.Pet.destroy({
+			truncate: true,
+			where: {
+				userId,
+			},
+		});
 	}
+
+	await petListPromise
+		.then(() => response.status(200).json({ msg: messages.SUCCESS_MSG_DELETED_PETS }))
+		.catch(() => response.status(400).json({ msg: messages.ERROR_MSG_DELETE_PETS }));
 };
 
 export { createPetProfile, getPetsByPagination, getPetById, getAllUserPets, updatePet, deleteUserPet, deleteAllUserPets };
