@@ -24,7 +24,7 @@ const petImage = {
 const petsMockData = [
 	{
 		id: 1,
-		userId: 3,
+		userId: 1,
 		img: 'testimage',
 		petstatus: 'found',
 		petlocation: 'Los Angeles',
@@ -41,7 +41,7 @@ const petsMockData = [
 	},
 	{
 		id: 2,
-		userId: 4,
+		userId: 1,
 		img: 'testimage',
 		petstatus: 'lost',
 		petlocation: 'Paris',
@@ -250,22 +250,17 @@ describe('get all user or admin pets', () => {
 	};
 
 	it('should return user pets when user is not an admin', async () => {
+		const mRes: Response = mockResponse();
 		const userId = 1;
 		const isAdmin = false;
 		const userPetList: modelTypes.PetInstance[] = petsMockData.map((petData) => models.Pet.build(petData));
 
 		jest.spyOn(models.Pet, 'findAll').mockResolvedValue(userPetList);
 
-		// const userPetList: modelTypes.PetInstance[] = petsMockData;
-
-		// jest.spyOn(models.Pet, 'findAll').mockResolvedValueOnce(userPetList);
-
 		const mReq: requestTypes.Request = {
 			userId,
 			isAdmin,
 		} as requestTypes.Request;
-
-		const mRes: Response = mockResponse();
 
 		await getAllUserPets(mReq, mRes);
 
@@ -274,18 +269,15 @@ describe('get all user or admin pets', () => {
 	});
 
 	it('should return all pets when user is an admin', async () => {
-		const userId = 1;
+		const mRes: Response = mockResponse();
 		const isAdmin = true;
 		const adminPetList: modelTypes.PetInstance[] = petsMockData.map((petData) => models.Pet.build(petData));
 
 		jest.spyOn(models.Pet, 'findAll').mockResolvedValueOnce(adminPetList);
 
 		const mReq: requestTypes.Request = {
-			userId,
 			isAdmin,
 		} as requestTypes.Request;
-
-		const mRes: Response = mockResponse();
 
 		await getAllUserPets(mReq, mRes);
 
@@ -293,14 +285,12 @@ describe('get all user or admin pets', () => {
 		expect(mRes.json).toHaveBeenCalledWith(adminPetList);
 	});
 
-	it('should handle errors when fetching user pets', async () => {
-		const userId = 1;
+	it('should handle errors when fetching pets fails', async () => {
 		const isAdmin = false;
 
-		jest.spyOn(models.Pet, 'findAll').mockRejectedValueOnce(new Error('Database error'));
+		(models.Pet.findAll as jest.Mock).mockRejectedValue(new Error('Database error'));
 
 		const mReq: requestTypes.Request = {
-			userId,
 			isAdmin,
 		} as requestTypes.Request;
 

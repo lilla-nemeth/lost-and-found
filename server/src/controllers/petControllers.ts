@@ -85,34 +85,28 @@ const getAllUserPets = async (request: types.Request, response: Response): Promi
 	const userId: types.Request['userId'] = request.userId;
 	const isAdmin: types.Request['isAdmin'] = request.isAdmin;
 
-	const userPetList: Promise<PetInstance[]> = models.Pet.findAll({
-		order: [['since', 'DESC']],
-		where: {
-			userId,
-		},
-	});
-
-	const adminPetList: Promise<PetInstance[]> = models.Pet.findAll({
-		order: [['since', 'DESC']],
-	});
+	let petListPromise: Promise<PetInstance[]>;
 
 	if (isAdmin) {
-		await adminPetList
-			.then((data) => {
-				response.status(200).json(data);
-			})
-			.catch(() => {
-				response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
-			});
+		petListPromise = models.Pet.findAll({
+			order: [['since', 'DESC']],
+		});
 	} else {
-		await userPetList
-			.then((data) => {
-				response.status(200).json(data);
-			})
-			.catch(() => {
-				response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
-			});
+		petListPromise = models.Pet.findAll({
+			order: [['since', 'DESC']],
+			where: {
+				userId,
+			},
+		});
 	}
+
+	await petListPromise
+		.then((data: PetInstance[]) => {
+			response.status(200).json(data);
+		})
+		.catch(() => {
+			response.status(400).json({ msg: messages.ERROR_MSG_FETCH_USER_PETS });
+		});
 };
 
 // UPDATE
