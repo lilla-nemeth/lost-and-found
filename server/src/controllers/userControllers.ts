@@ -8,7 +8,7 @@ import * as messages from '../types/messages';
 import { UserInstance } from '../types/models';
 
 // CREATE
-const createUserAccount = async (request: types.Request, response: Response): Promise<void> => {
+const createAccount = async (request: types.Request, response: Response): Promise<void> => {
 	const username: types.RequestUserBody['username'] = request.body.username as string;
 	const email: types.RequestUserBody['email'] = request.body.email;
 	const pw: types.RequestUserBody['pw'] = request.body.pw;
@@ -145,4 +145,4 @@ const deleteUser = async (request: types.Request, response: Response): Promise<v
 		});
 };
 
-export { createUserAccount, signIn, getAllUsers, getUsername, updateUser, deleteUser };
+export { createAccount, signIn, getAllUsers, getUsername, updateUser, deleteUser };

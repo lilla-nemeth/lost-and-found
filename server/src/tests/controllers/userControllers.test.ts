@@ -1,4 +1,4 @@
-import { createUserAccount, signIn, getAllUsers, getUsername, updateUser, deleteUser } from '../../controllers/userControllers';
+import { createAccount, signIn, getAllUsers, getUsername, updateUser, deleteUser } from '../../controllers/userControllers';
 import { Response } from 'express';
 import * as types from '../../types/requests';
 import * as messages from '../../types/messages';
@@ -32,7 +32,7 @@ afterEach(() => {
 	jest.clearAllMocks();
 });
 
-// createUserAccount
+// createAccount
 describe('create user account', () => {
 	const mockResponse = () => {
 		const res: Partial<Response> = {
@@ -69,7 +69,7 @@ describe('create user account', () => {
 
 		jest.spyOn(models.User, 'create').mockResolvedValueOnce(mockUserInstance);
 
-		await createUserAccount(mReq, mRes);
+		await createAccount(mReq, mRes);
 
 		expect(mRes.status).toHaveBeenCalledWith(200);
 		expect(mRes.json).toHaveBeenCalledWith({
@@ -94,7 +94,7 @@ describe('create user account', () => {
 		jest.spyOn(bcrypt, 'hashSync').mockReturnValue(mEncryptedPw);
 		jest.spyOn(models.User, 'create').mockRejectedValueOnce({ code: '23505', constraint: 'users_email_key' });
 
-		await createUserAccount(mReq, mRes);
+		await createAccount(mReq, mRes);
 
 		expect(mRes.status).toHaveBeenCalledWith(400);
 		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_USED_EMAIL });
@@ -115,7 +115,7 @@ describe('create user account', () => {
 		jest.spyOn(bcrypt, 'hashSync').mockReturnValue(mEncryptedPw);
 		jest.spyOn(models.User, 'create').mockRejectedValueOnce({ code: '23505', constraint: 'users_phone_key' });
 
-		await createUserAccount(mReq, mRes);
+		await createAccount(mReq, mRes);
 
 		expect(mRes.status).toHaveBeenCalledWith(400);
 		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_USED_PHONE });
@@ -136,7 +136,7 @@ describe('create user account', () => {
 		jest.spyOn(bcrypt, 'hashSync').mockReturnValue(mEncryptedPw);
 		jest.spyOn(models.User, 'create').mockRejectedValueOnce(new Error('Some other error'));
 
-		await createUserAccount(mReq, mRes);
+		await createAccount(mReq, mRes);
 
 		expect(mRes.status).toHaveBeenCalledWith(400);
 		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_CREATE_USER });
