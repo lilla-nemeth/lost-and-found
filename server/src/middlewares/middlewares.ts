@@ -41,8 +41,8 @@ const isFormValid = async (request: Request, response: Response, next: NextFunct
 		/^(?=.*[§đ½¡”»£¤«“‰„‚\/\\°¿´˛¸€ÞþıŒœ ̛˚˝¯¨əßÐðĸøØÆæ'˘><Ʒʒ·×Ŋŋ—µ,‘’˙–~@#$%^&*+=`|{}:;!.?_\"()\[\]-])/;
 
 	const validByEmailRegex = emailRegex.test(email);
-	const emailParts = email.split('@');
-	const domainPart = emailParts[1].split('.');
+	const emailParts = email && email.split('@');
+	const domainPart = emailParts && emailParts[1].split('.');
 	const checkDomainPartLength =
 		domainPart &&
 		domainPart.some(function (part: string) {
