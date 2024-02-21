@@ -1,14 +1,12 @@
 import { Router } from 'express';
 import { authMw } from '../middlewares/middlewares';
-import * as deleteQueries from '../sequelize/queries/delete/deleteQueries';
-import * as updateQueries from '../sequelize/queries/update/updateQueries';
-import * as readQueries from '../sequelize/queries/read/readQueries';
+import { getAllUserPets, updatePet, deleteUserPet, deleteAllPets } from '../controllers/petControllers';
 
 const router = Router();
 
-router.get('/', authMw, readQueries.getAllUserPets);
-router.delete('/pet/:id', authMw, deleteQueries.deleteUserPet);
-router.delete('/pet', authMw, deleteQueries.deleteAllUserPets);
-router.put('/pet/:id', authMw, updateQueries.updatePet);
+router.get('/', authMw, getAllUserPets);
+router.delete('/pet/:id', authMw, deleteUserPet);
+router.delete('/pet', authMw, deleteAllPets);
+router.put('/pet/:id', authMw, updatePet);
 
 export default router;

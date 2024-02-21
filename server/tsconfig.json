@@ -1,24 +1,25 @@
 {
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"display": "Node 21",
+	"_version": "21.0.0",
 	"compilerOptions": {
 		"lib": ["es2023"],
 		"target": "es2022",
-		"module": "ES2022",
+		"module": "node16",
+		"moduleResolution": "node16",
 		"allowJs": true,
-		"outDir": "build",
+		"outDir": "./dist",
 		"strict": true,
 		"noImplicitAny": true,
 		"esModuleInterop": true,
-		"moduleResolution": "node",
-		"typeRoots": ["./node_modules/@types", "./src/types"]
-		// "skipLibCheck": true
+		"typeRoots": ["./node_modules/@types", "./src/types"],
+		"types": ["node", "jest"],
+		"rootDir": "src",
+		"sourceMap": true,
+		"baseUrl": "src/",
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true
 	},
-	"paths": {
-		"/*": ["*"]
-	},
-	"include": ["./**/*"],
-	"exclude": ["node_modules", "build/**/*"],
-	"ts-node": {
-		"esm": true,
-		"experimentalSpecifierResolution": "node"
-	}
+	"exclude": ["node_modules", "dist"],
+	"include": ["src/**/*", "/**/*.ts"]
 }

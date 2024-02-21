@@ -2,7 +2,7 @@
 
 Lost and Found is an application made for missing and found pets. Users with accounts are also allowed to create pet profiles and perform other tasks.
 
-🛠 Created with PERN stack, JavaScript, TypeScript, Sequelize, Mapbox and custom UI.
+🛠 Created with PERN stack, JavaScript, TypeScript, Sequelize, Mapbox and custom UI. Unit tests made with Jest (in progress).
 
 ![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/client/src/assets/images/screenshots/app_screenshot_00.png)
 
@@ -20,11 +20,13 @@ Lost and Found is an application made for missing and found pets. Users with acc
 ## Future of the App
 
 - Pet and user profile updates
-- Stricter image uploading
 - Filters for listed pets (e.g by creation date, species)
-- Technical improvements (e.g unit tests, transitioning to TypeScript (client))
+- Stricter image uploading
+- Creating unit tests (client side)
+- Transitioning to TypeScript (client side)
+- Other technical improvements
 
-## Installing, running locally
+## Installation, running the app locally
 
 Clone the repo
 
@@ -97,6 +99,28 @@ To run this app, create a .env file in the root folders of server and client and
 #### Mapbox API Key
 
 `REACT_APP_MAPBOX_API_KEY`
+
+## Running unit tests
+
+### Server
+
+Running all tests:
+
+```
+yarn run test
+```
+
+or
+
+```
+yarn run test:watchAll
+```
+
+Run tests in one file, example:
+
+```
+yarn run test server/src/tests/controllers/userControllers.test.ts
+```
 
 ## License
 

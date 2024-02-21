@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { isFormValid } from '../middlewares/middlewares';
-import * as createQueries from '../sequelize/queries/create/createQueries';
+import { createAccount } from '../controllers/userControllers';
 
 const router = Router();
 
-router.post('/', [isFormValid], createQueries.createUserAccount);
+router.post('/', [isFormValid], createAccount);
 
 export default router;

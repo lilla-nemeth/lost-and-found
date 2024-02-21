@@ -28,7 +28,7 @@ const FAILED_TO = `Failed to`;
 const FETCH = `fetch`;
 const UPDATE = `update`;
 const DELETE = `delete`;
-const ADD = `add`;
+const CREATE = `create`;
 const ALREADY = `already`;
 const EXISTS = `exists`;
 const PLEASE_TRY_ANOTHER_ONE = `Please try another one.`;
@@ -41,7 +41,8 @@ const ERROR_MSG_FETCH_PET = `${FAILED_TO} ${FETCH} pet.`;
 const ERROR_MSG_UPDATE_PET = `${FAILED_TO} ${UPDATE} your post.`;
 const ERROR_MSG_DELETE_PET = `${FAILED_TO} ${DELETE} your post.`;
 const ERROR_MSG_DELETE_PETS = `${FAILED_TO} ${DELETE} your posts.`;
-const ERROR_MSG_CREATE_PET = `${FAILED_TO} ${ADD} new pet.`;
+const ERROR_MSG_CREATE_PET = `${FAILED_TO} ${CREATE} new pet.`;
+const ERROR_MSG_CREATE_USER = `${FAILED_TO} ${CREATE} new user.`;
 
 /* User Error Messages */
 const ERROR_MSG_FETCH_USERNAME = `${FAILED_TO} ${FETCH} username.`;
@@ -65,6 +66,7 @@ export {
 	ERROR_MSG_DELETE_PET,
 	ERROR_MSG_DELETE_PETS,
 	ERROR_MSG_CREATE_PET,
+	ERROR_MSG_CREATE_USER,
 	ERROR_MSG_DELETE_USER,
 	ERROR_MSG_USED_EMAIL,
 	ERROR_MSG_USED_PHONE,

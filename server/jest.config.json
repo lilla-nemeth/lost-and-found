@@ -1,0 +1,13 @@
+{
+	"preset": "ts-jest",
+	"testEnvironment": "node",
+	"coverageDirectory": "./coverage",
+	"testMatch": ["**/?(*.)+(test).ts"],
+	"resetMocks": true,
+	"clearMocks": true,
+	"transform": {
+		"^.+\\.ts?$": "babel-jest"
+	},
+	"setupFilesAfterEnv": ["./src/tests/closeConnection.test.ts"],
+	"moduleFileExtensions": ["js", "ts", "tsx", "json", "node"]
+}

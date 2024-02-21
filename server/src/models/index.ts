@@ -1,4 +1,4 @@
-import sequelize from '../config/config';
+import sequelize from '../config/sequelize.config';
 import User from './user';
 import Pet from './pet';
 
@@ -16,7 +16,7 @@ sequelize
 	.then(() => {
 		console.log('Models and tables have been created successfully.');
 	})
-	.catch((err) => {
+	.catch(() => {
 		console.log('Error syncing tables and models.');
 	});
 

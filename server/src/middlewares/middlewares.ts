@@ -41,8 +41,13 @@ const isFormValid = async (request: Request, response: Response, next: NextFunct
 		/^(?=.*[§đ½¡”»£¤«“‰„‚\/\\°¿´˛¸€ÞþıŒœ ̛˚˝¯¨əßÐðĸøØÆæ'˘><Ʒʒ·×Ŋŋ—µ,‘’˙–~@#$%^&*+=`|{}:;!.?_\"()\[\]-])/;
 
 	const validByEmailRegex = emailRegex.test(email);
-	const emailParts = email.split('@');
-	const domainPart = emailParts[1].split('.');
+	const emailParts = email && email.split('@');
+	const domainPart = emailParts && emailParts[1].split('.');
+	const checkDomainPartLength =
+		domainPart &&
+		domainPart.some(function (part: string) {
+			return part.length > 63;
+		});
 	const isFirstCharacterPassTheTest = usernameFirstCharacter.test(username);
 	const validByUsernameRegex = usernameRegex.test(username);
 	const validByPhoneRegex = phoneRegex.test(phone);
@@ -50,35 +55,36 @@ const isFormValid = async (request: Request, response: Response, next: NextFunct
 	const lowercase = pwLowercase.test(password);
 	const digits = pwDigit.test(password);
 	const specialChars = pwAllowedSpecialCharacters.test(password);
+	const fieldIsRequired: string = 'is required.';
 	let message: string = '';
 
 	if (!username && !phone) {
 		// login
+		if (!password) {
+			message = `Password ${fieldIsRequired}`;
+		}
+
 		if (!email) {
-			message = 'Email is required';
+			message = `Email ${fieldIsRequired}`;
 		} else if (!validByEmailRegex) {
 			message = 'Email format is not valid';
-		} else if (!password) {
-			message = 'Password is required';
 		}
 	} else {
 		// signUp
 		if (!email) {
-			message = 'Email is required';
+			message = `Email ${fieldIsRequired}`;
 		} else if (!validByEmailRegex) {
 			message = 'Email format is not valid';
 		} else if (email.length > 254) {
 			message = 'Email length exceeds the maximum';
 		} else if (emailParts[0].length > 64) {
 			message = 'Email username is too long';
-		} else if (
-			domainPart.some(function (part: string) {
-				return part.length > 63;
-			})
-		) {
+		} else if (checkDomainPartLength) {
 			message = 'Email domain is too long';
-		} else if (!username) {
-			message = 'Username is required';
+		}
+
+		if (!username) {
+			message = `Username ${fieldIsRequired}`;
 		} else if (username.length < 2) {
 			message = 'Username must contain at least 2 characters';
 		} else if (username.length > 29) {
@@ -87,16 +93,20 @@ const isFormValid = async (request: Request, response: Response, next: NextFunct
 			message = 'Username must start with a letter';
 		} else if (!validByUsernameRegex) {
 			message = 'Username contains invalid characters';
-		} else if (!phone) {
-			message = 'Phone number is required';
+		}
+
+		if (!phone) {
+			message = `Phone number ${fieldIsRequired}`;
 		} else if (!validByPhoneRegex) {
 			message = 'Phone number contains invalid characters';
 		} else if (phone.length < 3) {
 			message = 'Phone number is too short (min. 3 digits)';
 		} else if (phone.length > 15) {
 			message = 'Phone number is too long (max. 15 digits)';
-		} else if (!password) {
-			message = 'Password field is required';
+		}
+
+		if (!password) {
+			message = `Password ${fieldIsRequired}`;
 		} else if (password.length < 8) {
 			message = 'Password must contain at least 8 characters';
 		} else if (!uppercase) {
@@ -110,7 +120,7 @@ const isFormValid = async (request: Request, response: Response, next: NextFunct
 		}
 	}
 
-	if (message != '') {
+	if (message !== '') {
 		response.status(400).json({ msg: message });
 	} else {
 		next();

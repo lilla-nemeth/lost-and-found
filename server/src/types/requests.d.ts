@@ -54,7 +54,6 @@ interface RequestGetSearchParamsQuery {
 
 // Request Body
 interface RequestPetBody {
-	userId: UserId;
 	petstatus: PetStatus;
 	petlocation: PetLocation;
 	longitude: Longitude;

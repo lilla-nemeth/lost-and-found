@@ -2,10 +2,9 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { authMw } from './middlewares/middlewares';
-import * as readQueries from './sequelize/queries/read/readQueries';
+import { getUsername } from './controllers/userControllers';
+import { getAll } from './controllers/clientControllers';
 import path from 'path';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 
 // Express routes
 import dashboardPets from './routes/petDashboard';
@@ -18,8 +17,6 @@ import petData from './routes/petReport';
 
 dotenv.config({ path: '../.env' });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 const app: Application = express();
 
 // Body parsing middleware
@@ -29,14 +26,12 @@ app.use(express.urlencoded({ extended: true }));
 
 let DEBUG = false;
 
-const port = process.env.PORT || 8080;
-
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, 'client/build')));
 }
 
 // For navbar
-app.get('/username', authMw, readQueries.getUsername);
+app.get('/username', authMw, getUsername);
 
 // Home
 app.use('/', pets);
@@ -57,6 +52,6 @@ app.use('/login', loginUser);
 // Pet Report
 app.use('/reportpet', petData);
 
-app.get('*', readQueries.getAll);
+app.get('*', getAll);
 
-app.listen(port, () => console.log('Server is running on 8080'));
+export default app;
