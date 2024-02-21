@@ -6,8 +6,8 @@
 	"scripts": {
 		"start": "tsc && nodemon ./src/server.ts",
 		"build": "tsc --p ./tsconfig.json",
-		"test": "jest -c ./jest.unit.json",
-		"test:coverage": "jest --coverage -c ./jest.unit.json",
+		"test": "jest -c ./jest.config.json",
+		"test:coverage": "jest --coverage -c ./jest.config.json",
 		"test:watch": "jest --watchAll",
 		"clear_jest": "jest --clearCache"
 	},
