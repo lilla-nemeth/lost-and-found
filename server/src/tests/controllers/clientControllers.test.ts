@@ -2,6 +2,10 @@ import { getAll } from '../../controllers/clientControllers';
 import { Request, Response } from 'express';
 import path from 'path';
 
+afterEach(() => {
+	jest.clearAllMocks();
+});
+
 // getAll
 describe('getAll', () => {
 	it('should send the HTML file', async () => {

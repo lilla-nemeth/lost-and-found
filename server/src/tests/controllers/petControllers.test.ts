@@ -73,6 +73,10 @@ const petBody = {
 	postdescription: petsMockData[0].postdescription,
 };
 
+afterEach(() => {
+	jest.clearAllMocks();
+});
+
 // createPetProfile
 describe('create pet profile', () => {
 	const mReq: requestTypes.Request = {

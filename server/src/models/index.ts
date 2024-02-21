@@ -16,7 +16,7 @@ sequelize
 	.then(() => {
 		console.log('Models and tables have been created successfully.');
 	})
-	.catch((err) => {
+	.catch(() => {
 		console.log('Error syncing tables and models.');
 	});
 

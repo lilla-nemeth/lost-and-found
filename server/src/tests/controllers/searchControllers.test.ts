@@ -5,6 +5,10 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '../../../../.env' });
 
+afterEach(() => {
+	jest.clearAllMocks();
+});
+
 // getGeocodeLocation
 describe('get geocode location', () => {
 	jest.mock('axios');
