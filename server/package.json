@@ -9,7 +9,7 @@
 		"test": "jest -c ./jest.config.json",
 		"test:coverage": "jest --coverage -c ./jest.config.json",
 		"test:watch": "jest --watchAll",
-		"clear_jest": "jest --clearCache"
+		"test:clearCache": "jest --clearCache"
 	},
 	"repository": "https://github.com/lilla-nemeth/lost-and-found.git",
 	"author": "Lilla Németh",
