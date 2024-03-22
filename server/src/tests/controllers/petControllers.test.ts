@@ -4,7 +4,7 @@ import {
 	getPetById,
 	getAllUserPets,
 	updatePet,
-	deleteUserPet,
+	deletePet,
 	deleteAllPets,
 } from '../../controllers/petControllers';
 import { Response } from 'express';
@@ -362,7 +362,7 @@ describe('update pet', () => {
 	});
 });
 
-// deleteUserPet
+// deletePet
 describe('delete user pet', () => {
 	jest.mock('../../models', () => ({
 		Pet: {
@@ -387,7 +387,7 @@ describe('delete user pet', () => {
 
 		jest.spyOn(models.Pet, 'destroy').mockResolvedValue(1);
 
-		await deleteUserPet(mReq, mRes);
+		await deletePet(mReq, mRes);
 
 		expect(mRes.status).toHaveBeenCalledWith(200);
 		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.SUCCESS_MSG_DELETED_PET });
@@ -402,7 +402,7 @@ describe('delete user pet', () => {
 
 		jest.spyOn(models.Pet, 'destroy').mockRejectedValue(new Error('Database error'));
 
-		await deleteUserPet(mReq, mRes);
+		await deletePet(mReq, mRes);
 
 		expect(mRes.status).toHaveBeenCalledWith(400);
 		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_DELETE_PET });
