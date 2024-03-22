@@ -1,5 +1,5 @@
 import {
-	createPetProfile,
+	createPet,
 	getPetsByPagination,
 	getPetById,
 	getAllUserPets,
@@ -77,7 +77,7 @@ afterEach(() => {
 	jest.clearAllMocks();
 });
 
-// createPetProfile
+// createPet
 describe('create pet profile', () => {
 	const mReq: requestTypes.Request = {
 		userId: petsMockData[0].userId,
@@ -97,7 +97,7 @@ describe('create pet profile', () => {
 		const mRes: Response = mockResponse();
 		models.Pet.create = jest.fn().mockResolvedValueOnce(petsMockData);
 
-		await createPetProfile(mReq, mRes);
+		await createPet(mReq, mRes);
 
 		expect(mRes.status).toHaveBeenCalledWith(200);
 		expect(mRes.json).toHaveBeenCalled();
@@ -108,7 +108,7 @@ describe('create pet profile', () => {
 		const mRes: Response = mockResponse();
 		models.Pet.create = jest.fn().mockRejectedValueOnce(new Error(messages.ERROR_MSG_CREATE_PET));
 
-		await createPetProfile(mReq, mRes);
+		await createPet(mReq, mRes);
 
 		expect(mRes.status).toHaveBeenCalledWith(400);
 		expect(mRes.json).toHaveBeenCalledWith({ msg: messages.ERROR_MSG_CREATE_PET });
