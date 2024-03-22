@@ -21,8 +21,6 @@ const SignUp = () => {
 	const { signUpUser } = useContext(AppStateContext);
 	const navigate = useNavigate();
 
-	let DEBUG = false;
-
 	let disabled = !password || !email || !username || !phone || loading;
 
 	function handleSubmit(event) {

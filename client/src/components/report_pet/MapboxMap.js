@@ -27,8 +27,6 @@ const MapboxMap = (props) => {
 
 	const mapStyle = 'mapbox://styles/l1ll4n3m/clqkvquob00mw01o939rncxn5';
 
-	let DEBUG = false;
-
 	function getLocation() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(

@@ -5,8 +5,6 @@ import { petDate, isInputEmpty, removeOverflowText } from '../../utils/HelperFun
 const PetListCard = (props) => {
 	const { pet } = props;
 
-	let DEBUG = false;
-
 	return (
 		<div className='petListCard' key={pet.id}>
 			<div className='petListCardInner'>

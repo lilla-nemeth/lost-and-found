@@ -6,8 +6,6 @@ const UserPetCard = (props) => {
 	const { pet, deletePet, allChecked, parentCallback } = props;
 	const [checked, setChecked] = useState(false);
 
-	let DEBUG = false;
-
 	let disabledLocal = !checked;
 
 	const buttonCardChecked = (

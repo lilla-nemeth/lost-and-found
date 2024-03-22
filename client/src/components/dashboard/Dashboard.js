@@ -35,8 +35,6 @@ const Dashboard = () => {
 	const [active, setActive] = useState(true);
 	const [successMsg, setSuccessMsg] = useState('');
 
-	let DEBUG = false;
-
 	const disable = !allChecked || loading;
 
 	history.replace('/dashboard');

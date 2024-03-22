@@ -10,84 +10,42 @@ import img07 from '../../assets/images/07backgroundImg.jpg';
 import { changeImagesIndex, changeFadeOut, changeFadeIn } from '../../utils/HelperFunctions';
 
 const BackgroundImage = () => {
-    const [fadeIn, setFadeIn] = useState({ 
-      fade: 'fade-in' 
-    });
-    const [fadeOut, setFadeOut] = useState({ 
-      fade: 'fade-out' 
-    }); 
-    const [imageIndex, setImageIndex] = useState(0);
+	const [fadeIn, setFadeIn] = useState({
+		fade: 'fade-in',
+	});
+	const [fadeOut, setFadeOut] = useState({
+		fade: 'fade-out',
+	});
+	const [imageIndex, setImageIndex] = useState(0);
 
-    const images1 = [
-      img01, 
-      img02, 
-      img02, 
-      img03, 
-      img03, 
-      img04, 
-      img04, 
-      img05, 
-      img05, 
-      img06, 
-      img06, 
-      img07, 
-      img07, 
-      img01
-    ];
-    const images2 = [
-      img01, 
-      img01, 
-      img02, 
-      img02, 
-      img03, 
-      img03, 
-      img04, 
-      img04, 
-      img05, 
-      img05, 
-      img06, 
-      img06, 
-      img07, 
-      img07, 
-      img01
-    ];
+	const images1 = [img01, img02, img02, img03, img03, img04, img04, img05, img05, img06, img06, img07, img07, img01];
+	const images2 = [img01, img01, img02, img02, img03, img03, img04, img04, img05, img05, img06, img06, img07, img07, img01];
 
-    let DEBUG = false;
+	useEffect(() => {
+		const imagesInterval = setInterval(() => {
+			changeImagesIndex(images2, imageIndex, setImageIndex);
+			changeImagesIndex(images1, imageIndex, setImageIndex);
+			changeFadeOut(fadeOut, setFadeOut);
+			changeFadeIn(fadeIn, setFadeIn);
+		}, 7000);
 
-    useEffect(() => {
-      const imagesInterval = setInterval(() => {
-        changeImagesIndex(images2, imageIndex, setImageIndex);
-        changeImagesIndex(images1, imageIndex, setImageIndex);
-        changeFadeOut(fadeOut, setFadeOut);
-        changeFadeIn(fadeIn, setFadeIn);
-        }, 7000);
+		if (imagesInterval) {
+			return () => clearInterval(imagesInterval);
+		}
+	}, [images1, images2, fadeIn, fadeOut, changeImagesIndex, changeFadeIn, changeFadeOut]);
 
-        if (imagesInterval) {
-          return () => clearInterval(imagesInterval);
-        }
-    }, [
-      images1, 
-      images2, 
-      fadeIn, 
-      fadeOut, 
-      changeImagesIndex, 
-      changeFadeIn, 
-      changeFadeOut
-    ]);
+	const urlImages1 = `url('${images1[imageIndex]}')`;
+	const urlImages2 = `url('${images2[imageIndex]}')`;
 
-    const urlImages1 = `url('${images1[imageIndex]}')`;
-    const urlImages2 = `url('${images2[imageIndex]}')`;
-
-    return (
-      <>
-        <div className='backgroundFilter'>
-            <div className={fadeOut.fade} style={{backgroundImage: urlImages2}}>
-              <div className={fadeIn.fade} style={{backgroundImage: urlImages1}}>
-              </div>
-            </div>
-        </div>
-      </>
-    )
-}
+	return (
+		<>
+			<div className='backgroundFilter'>
+				<div className={fadeOut.fade} style={{ backgroundImage: urlImages2 }}>
+					<div className={fadeIn.fade} style={{ backgroundImage: urlImages1 }}></div>
+				</div>
+			</div>
+		</>
+	);
+};
 
 export default BackgroundImage;

@@ -6,8 +6,6 @@ import { increaseNumber } from '../../utils/HelperFunctions.js';
 const PetPage = () => {
 	const { total, limit, setOffset } = useContext(AppStateContext);
 
-	let DEBUG = false;
-
 	return (
 		<div className='pagination'>
 			{increaseNumber(total, limit).map((page) => {
