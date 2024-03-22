@@ -17,8 +17,6 @@ export default function AppStateContextProvider(props) {
 	const [loader, setLoader] = useState(true);
 	const [errorMsg, setErrorMsg] = useState('');
 
-	let DEBUG = false;
-
 	let limit = 6;
 
 	useEffect(() => {

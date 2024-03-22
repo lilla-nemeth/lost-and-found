@@ -13,27 +13,21 @@ import AppRoutesWithToken from './AppRoutesWithToken';
 import AppRoutesWithoutToken from './AppRoutesWithoutToken';
 
 function AppRoutes() {
-  const { token } = useContext(AuthContext);
-  
-  const images = [Video, img01, img02, img03, img04, img05, img06, img07];
-  
-  let transparent = true;
-  
-  let DEBUG = false;
-  
-  useEffect(() => {
-    cacheImages(images);
-  });
+	const { token } = useContext(AuthContext);
 
-  if (!token) {
-    return (
-      <AppRoutesWithToken transparent={transparent} />
-    );
-  }
+	const images = [Video, img01, img02, img03, img04, img05, img06, img07];
 
-  return (
-    <AppRoutesWithoutToken transparent={transparent} />
-  );
+	let transparent = true;
+
+	useEffect(() => {
+		cacheImages(images);
+	});
+
+	if (!token) {
+		return <AppRoutesWithToken transparent={transparent} />;
+	}
+
+	return <AppRoutesWithoutToken transparent={transparent} />;
 }
 
 export default AppRoutes;

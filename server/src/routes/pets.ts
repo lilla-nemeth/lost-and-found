@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authMw } from '../middlewares/middlewares';
+import { authMw } from '../middlewares';
 import { getPetsByPagination, getPetById } from '../controllers/petControllers';
 import { getAllUsers } from '../controllers/userControllers';
 

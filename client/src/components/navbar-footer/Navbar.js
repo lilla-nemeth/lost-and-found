@@ -14,8 +14,6 @@ const Navbar = (props) => {
 
 	const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
-	let DEBUG = false;
-
 	function returnUnprotectedLinks(className) {
 		return (
 			<>

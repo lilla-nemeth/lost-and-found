@@ -47,8 +47,6 @@ const PetReport = () => {
 
 	const navigate = useNavigate();
 
-	let DEBUG = false;
-
 	const disabled = !status || !query || !lng || !lat || !species || !description || !file || loading;
 	const required = true;
 

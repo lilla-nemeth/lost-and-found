@@ -1,4 +1,4 @@
-import { authMw, isFormValid } from '../../middlewares/middlewares';
+import { authMw, isFormValid } from '../../middlewares';
 import { Response, NextFunction } from 'express';
 import * as types from '../../types/requests';
 import jwt from 'jsonwebtoken';

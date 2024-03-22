@@ -21,8 +21,6 @@ const Login = () => {
 	const { setToken } = useContext(AuthContext);
 	const { loginUser } = useContext(AppStateContext);
 
-	let DEBUG = false;
-
 	const navigate = useNavigate();
 
 	let disabled = !password || !email || loading;

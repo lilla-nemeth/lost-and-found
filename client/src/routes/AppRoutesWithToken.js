@@ -11,8 +11,6 @@ import Footer from '../components/navbar-footer/Footer';
 function AppRoutesWithToken(props) {
 	let { transparent } = props;
 
-	let DEBUG = false;
-
 	return (
 		<>
 			<BrowserRouter>

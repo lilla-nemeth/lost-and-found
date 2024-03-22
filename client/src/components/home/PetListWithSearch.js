@@ -22,8 +22,6 @@ const PetListWithSearch = () => {
 		'postdescription',
 	]);
 
-	let DEBUG = false;
-
 	return (
 		<>
 			<h1 className='lostAndFoundHeadline'>Lost and Found Pets</h1>

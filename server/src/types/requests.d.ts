@@ -1,28 +1,9 @@
 import { Request } from 'express';
+import * as petTypes from './petTypes';
+import * as userTypes from './userTypes';
 
-// User Types
 type IdParams = string;
-type Username = string;
-type Email = string;
-type Password = string;
-type Phone = string;
-type IsAdmin = boolean;
 type Token = string;
-
-// Pet Types
-type UserId = number;
-type PetStatus = string;
-type PetLocation = string;
-type Longitude = string;
-type Latitude = string;
-type Species = string;
-type Petsize = string;
-type Breed = string;
-type Sex = string;
-type Color = string;
-type Age = string;
-type UniqueFeature = string;
-type PostDescription = string;
 
 // Request
 declare module 'express-serve-static-core' {
@@ -30,8 +11,8 @@ declare module 'express-serve-static-core' {
 		ReqBody?: RequestPetBody | RequestUserBody;
 		file?: File | null | buffer | string;
 		P?: RequestPaginationParams | RequestGetPetIdParams | RequestGetSearchParamsQuery;
-		userId?: UserId;
-		isAdmin?: IsAdmin;
+		userId?: petTypes.UserId;
+		isAdmin?: userTypes.IsAdmin;
 		headers: any;
 	}
 }
@@ -54,25 +35,26 @@ interface RequestGetSearchParamsQuery {
 
 // Request Body
 interface RequestPetBody {
-	petstatus: PetStatus;
-	petlocation: PetLocation;
-	longitude: Longitude;
-	latitude: Latitude;
-	species: Species;
-	petsize?: Petsize;
-	breed?: Breed;
-	sex?: Sex;
-	color?: Color;
-	age?: Age;
-	uniquefeature?: UniqueFeature;
-	postdescription: PostDescription;
+	petstatus: petTypes.PetStatus;
+	petlocation: petTypes.PetLocation;
+	longitude: petTypes.Longitude;
+	latitude: petTypes.Latitude;
+	species: petTypes.Species;
+	petsize?: petTypes.PetSize;
+	breed?: petTypes.Breed;
+	sex?: petTypes.Sex;
+	color?: petTypes.Color;
+	age?: petTypes.Age;
+	uniquefeature?: petTypes.UniqueFeature;
+	postdescription: petTypes.PostDescription;
+	since?: petTypes.Since;
 }
 
 interface RequestUserBody {
-	username?: Username;
-	email: Email;
-	pw: Password;
-	phone?: Phone;
+	username?: userTypes.Username;
+	email: userTypes.Email;
+	pw: userTypes.Password;
+	phone?: userTypes.Phone;
 }
 
 export { Request, RequestGetPetIdParams, RequestPaginationParams, RequestGetSearchParamsQuery, RequestPetBody, RequestUserBody };

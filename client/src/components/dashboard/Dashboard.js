@@ -35,13 +35,11 @@ const Dashboard = () => {
 	const [active, setActive] = useState(true);
 	const [successMsg, setSuccessMsg] = useState('');
 
-	let DEBUG = false;
-
 	const disable = !allChecked || loading;
 
 	history.replace('/dashboard');
 
-	function deleteUserPet(id) {
+	function deletePet(id) {
 		setLoading(true);
 
 		deleteOnePet({
@@ -129,7 +127,7 @@ const Dashboard = () => {
 
 	function uploadedPets() {
 		return userPets.map((pet) => {
-			return <UserPetCard key={pet.id} pet={pet} deleteUserPet={deleteUserPet} allChecked={allChecked} parentCallback={handleCallback} />;
+			return <UserPetCard key={pet.id} pet={pet} deletePet={deletePet} allChecked={allChecked} parentCallback={handleCallback} />;
 		});
 	}
 

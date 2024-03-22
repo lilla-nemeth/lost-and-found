@@ -3,8 +3,6 @@ import React from 'react';
 const SelectAll = (props) => {
 	const { deleteUserAllPets, allChecked, setAllChecked, petCardChecked, setPetCardChecked, disable } = props;
 
-	let DEBUG = false;
-
 	return (
 		<div className='selectBox'>
 			<div className='deleteAllButtonBox'>

@@ -7,8 +7,6 @@ const PasswordShowHide = (props) => {
 	const { password, setPassword } = props;
 	const [showPassword, setShowPassword] = useState(false);
 
-	let DEBUG = false;
-
 	function handleClickShowPw() {
 		setShowPassword(!showPassword);
 	}

@@ -3,8 +3,6 @@ import * as types from '../types/requests';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
 
-let DEBUG = false;
-
 const authMw = async (request: types.Request, response: Response, next: NextFunction): Promise<void> => {
 	let token = request.headers['x-auth-token'];
 

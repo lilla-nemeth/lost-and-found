@@ -1,31 +1,33 @@
 import { Model, Optional } from 'sequelize';
+import * as userTypes from './userTypes';
+import * as petTypes from './petTypes';
 
 interface UserAttributes {
-	id: number;
-	username: string;
-	email: string;
-	pw: string;
-	phone: string;
-	isAdmin: boolean;
+	id: userTypes.Id;
+	username: userTypes.Username;
+	email: userTypes.Email;
+	pw: userTypes.Password;
+	phone: userTypes.Phone;
+	isAdmin: userTypes.IsAdmin;
 }
 
 interface PetAttributes {
-	id: number;
-	userId: number;
-	img: string;
-	petstatus: string;
-	longitude: string;
-	latitude: string;
-	petlocation: string;
-	species: string;
-	petsize: string;
-	breed: string;
-	sex: string;
-	color: string;
-	age: string;
-	uniquefeature: string;
-	postdescription: string;
-	since?: string;
+	id: petTypes.Id;
+	userId: petTypes.UserId;
+	img: petTypes.Img;
+	petstatus: petTypes.PetStatus;
+	longitude: petTypes.Longitude;
+	latitude: petTypes.Latitude;
+	petlocation: petTypes.PetLocation;
+	species: petTypes.Species;
+	petsize: petTypes.PetSize;
+	breed: petTypes.Breed;
+	sex: petTypes.Sex;
+	color: petTypes.Color;
+	age: petTypes.Age;
+	uniquefeature: petTypes.UniqueFeature;
+	postdescription: petTypes.PostDescription;
+	since?: Date;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -41,9 +43,4 @@ interface PetInstance extends Model<PetAttributes, PetCreationAttributes>, PetAt
 	updatedAt?: Date;
 }
 
-type GetPets = Promise<{
-	rows: PetInstance[];
-	count: number;
-}>;
-
-export { PetInstance, UserInstance, GetPets };
+export { PetInstance, UserInstance };

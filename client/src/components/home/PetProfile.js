@@ -22,8 +22,6 @@ const PetProfile = () => {
 	const map = useRef(null);
 	const [zoom, setZoom] = useState(9);
 
-	let DEBUG = false;
-
 	function renderMap(pet) {
 		map.current = new mapboxgl.Map({
 			accessToken: mapboxgl.accessToken,

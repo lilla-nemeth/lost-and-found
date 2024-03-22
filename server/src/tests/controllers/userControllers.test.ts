@@ -302,7 +302,7 @@ describe('get username', () => {
 		const mReq: types.Request = { userId: 267 } as types.Request;
 		const mRes: Response = mockResponse();
 
-		jest.spyOn(models.User, 'findByPk').mockResolvedValueOnce(null);
+		jest.spyOn(models.User, 'findByPk').mockImplementationOnce(() => Promise.reject(new Error('User not found')));
 
 		await getUsername(mReq, mRes);
 
