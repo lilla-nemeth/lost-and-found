@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authMw, upload } from '../middlewares/middlewares';
+import { authMw, upload } from '../middlewares';
 import { getGeocodeLocation } from '../controllers/searchControllers';
 import { createPetProfile } from '../controllers/petControllers';
 

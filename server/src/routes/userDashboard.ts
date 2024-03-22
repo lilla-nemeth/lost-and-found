@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authMw, isFormValid } from '../middlewares/middlewares';
+import { authMw, isFormValid } from '../middlewares';
 import { updateUser, deleteUser } from '../controllers/userControllers';
 
 const router = Router();

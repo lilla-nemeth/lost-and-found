@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { authMw } from './middlewares/middlewares';
+import { authMw } from './middlewares';
 import { getUsername } from './controllers/userControllers';
 import { getAll } from './controllers/clientControllers';
 import path from 'path';

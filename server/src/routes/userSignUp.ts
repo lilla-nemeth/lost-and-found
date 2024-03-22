@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { isFormValid } from '../middlewares/middlewares';
+import { isFormValid } from '../middlewares';
 import { createAccount } from '../controllers/userControllers';
 
 const router = Router();
