@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16.1
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=pass123
+      - POSTGRES_DB=lost_and_found_development
+    ports:
+      - 5432:5432
+    networks:
+      - shared-network
+    volumes:
+      - ./postgres-db:/var/lib/postgresql/data
+
+  server:
+    container_name: lost_and_found_server
+    restart: unless-stopped
+    image: lost-and-found-server-dev:1.0.0
+    build:
+      context: server
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - shared-network
+    depends_on:
+      - postgres
+
+  client:
+    container_name: lost_and_found_client
+    restart: unless-stopped
+    image: lost-and-found-client-dev:1.0.0
+    build:
+      context: client
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - shared-network
+    depends_on:
+      - server
+
+networks:
+  shared-network:
