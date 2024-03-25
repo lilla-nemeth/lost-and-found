@@ -94,6 +94,12 @@ To run this app, create a .env file in the root folders of server and client and
 `PG_PORT`
 `PG_DATABASE`
 
+#### Node Environment
+
+Currently the app is not in production, but in that case this variable would be necessary
+
+`NODE_ENV`
+
 ### Client
 
 #### Mapbox API Key
