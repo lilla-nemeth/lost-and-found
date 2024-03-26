@@ -20,7 +20,8 @@ const PetProfile = () => {
 	const { token } = useContext(AuthContext);
 	const mapContainer = useRef(null);
 	const map = useRef(null);
-	const [zoom, setZoom] = useState(9);
+
+	const zoom = 9;
 
 	function renderMap(pet) {
 		map.current = new mapboxgl.Map({

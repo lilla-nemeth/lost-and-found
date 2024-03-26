@@ -6,7 +6,7 @@ import Search from '../generic/Search';
 const PetListWithSearch = () => {
 	const { pets } = useContext(AppStateContext);
 	const [search, setSearch] = useState('');
-	const [searchColumns, setSearchColumns] = useState([
+	const searchColumns = [
 		'id',
 		'petstatus',
 		'petlocation',
@@ -20,7 +20,7 @@ const PetListWithSearch = () => {
 		'age',
 		'uniquefeature',
 		'postdescription',
-	]);
+	];
 
 	return (
 		<>
@@ -33,8 +33,12 @@ const PetListWithSearch = () => {
 					  })
 					: pets
 							.filter((filteredPet) => {
-								if (searchColumns.some((column) => filteredPet[column].toString().toLowerCase().indexOf(search.toLowerCase()) > -1)) {
-									return filteredPet;
+								if (!searchColumns) {
+									return;
+								} else {
+									searchColumns.some((column) => {
+										return filteredPet[column].toString().toLowerCase().indexOf(search.toLowerCase()) > -1;
+									});
 								}
 							})
 							.map((pet) => {
