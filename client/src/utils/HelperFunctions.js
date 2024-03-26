@@ -85,7 +85,7 @@ function isFieldRequired(requiredField) {
 
 function changeCheckboxValue(array, setArray, string) {
 	if (array.includes(string)) {
-		setArray(array.filter((el) => el != string));
+		setArray(array.filter((el) => el !== string));
 	} else {
 		setArray([...array, string]);
 	}
