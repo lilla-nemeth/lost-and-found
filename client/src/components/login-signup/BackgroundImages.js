@@ -32,7 +32,7 @@ const BackgroundImage = () => {
 		if (imagesInterval) {
 			return () => clearInterval(imagesInterval);
 		}
-	}, [images1, images2, fadeIn, fadeOut, changeImagesIndex, changeFadeIn, changeFadeOut]);
+	}, [images1, images2, fadeIn, fadeOut, imageIndex, changeImagesIndex, changeFadeIn, changeFadeOut, setImageIndex]);
 
 	const urlImages1 = `url('${images1[imageIndex]}')`;
 	const urlImages2 = `url('${images2[imageIndex]}')`;
