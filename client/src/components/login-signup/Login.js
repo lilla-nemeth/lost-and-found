@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { createBrowserHistory } from 'history';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext.js';
 import { AppStateContext } from '../../contexts/AppStateContext.js';
@@ -8,8 +7,6 @@ import Logo from '../generic/Logo.js';
 import BackgroundImages from './BackgroundImages.js';
 import PasswordShowHide from './PasswordShowHide.js';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
-
-let history = createBrowserHistory();
 
 const Login = () => {
 	const [email, setEmail] = useState('');
