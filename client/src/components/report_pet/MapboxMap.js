@@ -96,11 +96,11 @@ const MapboxMap = (props) => {
 		if (query) {
 			fetchPlaces(query, setPlaces, lng, lat);
 		}
-	}, [query]);
+	}, [fetchPlaces, query, setPlaces, lng, lat]);
 
 	useEffect(() => {
 		getLocation();
-	}, []);
+	}, [getLocation]);
 
 	useEffect(() => {
 		document.addEventListener('mousedown', (e) => handleClickOutside(e, dropdownRef, setDisplay));
