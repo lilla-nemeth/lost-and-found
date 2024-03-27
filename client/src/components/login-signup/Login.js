@@ -63,7 +63,6 @@ const Login = () => {
 					</div>
 					<div className='message'>
 						<p className='errorMessage'>{errorMsg}</p>
-						<p className='successMessage'>{successMsg}</p>
 					</div>
 					<form method='POST' onSubmit={handleSubmit}>
 						<div className='inputBox'>

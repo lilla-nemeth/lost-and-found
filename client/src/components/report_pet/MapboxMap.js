@@ -100,7 +100,7 @@ const MapboxMap = (props) => {
 
 	useEffect(() => {
 		getLocation();
-	}, [getLocation]);
+	});
 
 	useEffect(() => {
 		document.addEventListener('mousedown', (e) => handleClickOutside(e, dropdownRef, setDisplay));
@@ -111,7 +111,7 @@ const MapboxMap = (props) => {
 		<>
 			<div ref={mapContainer} className='map-container petReportMap' />
 			<div className='locationContainer' ref={dropdownRef} onClick={displayDropdown}>
-				<div className='inputBox' style={{ padding: '10px 0 0 0 !important' }}>
+				<div className='inputBox'>
 					<div className='searchButton'>
 						<SearchIcon onChange={handleChange} />
 					</div>
