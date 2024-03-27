@@ -1,5 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
-import { createBrowserHistory } from 'history';
+import React, { useContext, useRef } from 'react';
 import { useParams } from 'react-router';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import Loader from '../generic/Loader';
@@ -11,8 +10,6 @@ import { addMarker, addFullscreenControl } from '../../utils/MapHelpers';
 
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
-
-let history = createBrowserHistory();
 
 const PetProfile = () => {
 	const { id } = useParams();
@@ -43,9 +40,9 @@ const PetProfile = () => {
 		if (token && usersArr.length) {
 			petsArr.filter((pet) =>
 				usersArr.filter((user) => {
-					if (!pet || !user || id) {
+					if (!pet || !user || !id) {
 						return;
-					} 
+					}
 					if (pet.userId === user.id && pet.id.toString() === id) {
 						onePet.push(pet);
 						oneUser.push(user);
@@ -70,8 +67,6 @@ const PetProfile = () => {
 			});
 		}
 	}
-
-	history.replace(`/petprofile/${id}`);
 
 	if (loader) {
 		return <Loader />;
