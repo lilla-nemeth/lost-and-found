@@ -14,13 +14,18 @@ function increaseNumber(total, limit) {
 let timeOut;
 
 function handleError(err, setter) {
-	setter(err && err.response?.data?.msg);
+	if (!err) {
+		return;
+	}
+
+	if (err?.response?.data?.msg) {
+		setter(err.response.data.msg);
+	}
 
 	timeOut = setTimeout(() => {
 		setter('');
 	}, 5000);
 }
-
 function clearError() {
 	clearTimeout(timeOut);
 }
