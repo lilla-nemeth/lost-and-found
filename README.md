@@ -78,7 +78,13 @@ yarn start
 
 ## Environment Variables
 
-To run this app, create a .env file in the root folders of server and client and add the following environment variables
+In order to run this app, create .env files in the following folders to make environment variables available.
+
+### Main Root Folder
+
+For docker-compose
+`PG_PASSWORD`
+`PG_DATABASE`
 
 ### Server
 
