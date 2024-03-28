@@ -100,7 +100,7 @@ const MapboxMap = (props) => {
 
 	useEffect(() => {
 		getLocation();
-	});
+	}, []);
 
 	useEffect(() => {
 		document.addEventListener('mousedown', (e) => handleClickOutside(e, dropdownRef, setDisplay));
