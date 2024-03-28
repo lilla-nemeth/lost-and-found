@@ -2,9 +2,10 @@ FROM node:20
 
 WORKDIR /app/src/client
 
-COPY package*.json .
+COPY package.json .
+COPY yarn.lock .
 
-RUN npm install
+RUN yarn install
 
 COPY . .
 
@@ -12,4 +13,4 @@ ENV PORT=3000
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["yarn", "run", "start"]

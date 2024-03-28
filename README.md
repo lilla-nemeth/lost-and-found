@@ -67,13 +67,13 @@ cd client
 Install the dependencies
 
 ```
-npm install
+yarn install
 ```
 
 Start the client
 
 ```
-npm start
+yarn start
 ```
 
 ## Environment Variables
