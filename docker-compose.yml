@@ -5,8 +5,8 @@ services:
     image: postgres:16.1
     restart: always
     environment:
-      - POSTGRES_PASSWORD=pass123
-      - POSTGRES_DB=lost_and_found_development
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DATABASE}
     ports:
       - 5432:5432
     networks:
