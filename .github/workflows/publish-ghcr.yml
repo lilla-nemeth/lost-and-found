@@ -1,0 +1,18 @@
+name: Docker Image CI for Github Container Registry
+
+on: push
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to Github Container Registry
+        run: docker login --username ${{ github.repository_owner }} --password ${{ secrets.GH_PAT }} ghcr.io
+
+      - name: Build and push Docker image
+        run: |
+          docker-compose -f docker-compose.yml build --parallel --tag ghcr.io/${{ github.repository_owner }}/${{ github.repository }}-ghcr:latest
+          docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository }}-ghcr:latest
