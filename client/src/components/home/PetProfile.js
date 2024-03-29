@@ -56,7 +56,7 @@ const PetProfile = () => {
 				});
 			});
 		} else {
-			petsArr.filter((pet) => {
+			petsArr.forEach((pet) => {
 				if (pet.id.toString() === id) {
 					onePet.push(pet);
 				}

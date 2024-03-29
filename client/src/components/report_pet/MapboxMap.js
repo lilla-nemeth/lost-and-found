@@ -98,10 +98,10 @@ const MapboxMap = (props) => {
 		}
 	}, [fetchPlaces, query, setPlaces, lng, lat]);
 
-	// getLocation should load once
-	// eslint-disable-next-line
 	useEffect(() => {
 		getLocation();
+		// getLocation should load once
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
