@@ -96,10 +96,12 @@ const MapboxMap = (props) => {
 		if (query) {
 			fetchPlaces(query, setPlaces, lng, lat);
 		}
-	}, [query]);
+	}, [fetchPlaces, query, setPlaces, lng, lat]);
 
 	useEffect(() => {
 		getLocation();
+		// getLocation should load once
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -111,7 +113,7 @@ const MapboxMap = (props) => {
 		<>
 			<div ref={mapContainer} className='map-container petReportMap' />
 			<div className='locationContainer' ref={dropdownRef} onClick={displayDropdown}>
-				<div className='inputBox' style={{ padding: '10px 0 0 0 !important' }}>
+				<div className='inputBox'>
 					<div className='searchButton'>
 						<SearchIcon onChange={handleChange} />
 					</div>

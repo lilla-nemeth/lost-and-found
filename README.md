@@ -67,18 +67,24 @@ cd client
 Install the dependencies
 
 ```
-npm install
+yarn install
 ```
 
 Start the client
 
 ```
-npm start
+yarn start
 ```
 
 ## Environment Variables
 
-To run this app, create a .env file in the root folders of server and client and add the following environment variables
+In order to run this app, create .env files in the following folders to make environment variables available.
+
+### Main Root Folder
+
+For docker-compose
+`PG_PASSWORD`
+`PG_DATABASE`
 
 ### Server
 
@@ -93,6 +99,12 @@ To run this app, create a .env file in the root folders of server and client and
 `PG_PASSWORD`
 `PG_PORT`
 `PG_DATABASE`
+
+#### Node Environment
+
+Currently the app is not in production, but in that case this variable would be necessary
+
+`NODE_ENV`
 
 ### Client
 

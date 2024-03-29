@@ -1,5 +1,5 @@
 {
-	"name": "lost-and-found",
+	"name": "lost-and-found-server",
 	"version": "1.0.0",
 	"description": "Lost & Found App",
 	"main": "server.ts",

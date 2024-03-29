@@ -7,7 +7,7 @@ const PetProfileCard = (props) => {
 
 	useEffect(() => {
 		renderMap(pet);
-	}, []);
+	}, [pet, renderMap]);
 
 	return (
 		<div className='petProfileContainer'>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { petDate, isInputEmpty, removeOverflowText } from '../../utils/HelperFunctions.js';
-import LoaderButton from './LoaderButton.js';
 
 const UserPetCard = (props) => {
 	const { pet, deletePet, allChecked, parentCallback } = props;

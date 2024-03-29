@@ -146,7 +146,7 @@ const PetReport = () => {
 				)
 			);
 			acceptedFiles.map((acceptedFile) => {
-				setFile(acceptedFile);
+				return setFile(acceptedFile);
 			});
 		}
 	}, []);

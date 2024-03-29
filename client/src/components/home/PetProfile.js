@@ -1,5 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
-import { createBrowserHistory } from 'history';
+import React, { useContext, useRef } from 'react';
 import { useParams } from 'react-router';
 import { AppStateContext } from '../../contexts/AppStateContext';
 import Loader from '../generic/Loader';
@@ -12,15 +11,14 @@ import { addMarker, addFullscreenControl } from '../../utils/MapHelpers';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
-let history = createBrowserHistory();
-
 const PetProfile = () => {
 	const { id } = useParams();
 	const { pets, users, loader } = useContext(AppStateContext);
 	const { token } = useContext(AuthContext);
 	const mapContainer = useRef(null);
 	const map = useRef(null);
-	const [zoom, setZoom] = useState(9);
+
+	const zoom = 9;
 
 	function renderMap(pet) {
 		map.current = new mapboxgl.Map({
@@ -40,14 +38,17 @@ const PetProfile = () => {
 
 	function getPetAndUserData(id, petsArr, usersArr, onePet, oneUser) {
 		if (token && usersArr.length) {
-			petsArr.filter((pet) =>
-				usersArr.filter((user) => {
+			petsArr.forEach((pet) => {
+				usersArr.forEach((user) => {
+					if (!pet || !user || !id) {
+						return;
+					}
 					if (pet.userId === user.id && pet.id.toString() === id) {
 						onePet.push(pet);
 						oneUser.push(user);
 					}
-				})
-			);
+				});
+			});
 
 			return onePet.map((pet) => {
 				return oneUser.map((user) => {
@@ -55,7 +56,7 @@ const PetProfile = () => {
 				});
 			});
 		} else {
-			petsArr.filter((pet) => {
+			petsArr.forEach((pet) => {
 				if (pet.id.toString() === id) {
 					onePet.push(pet);
 				}
@@ -66,8 +67,6 @@ const PetProfile = () => {
 			});
 		}
 	}
-
-	history.replace(`/petprofile/${id}`);
 
 	if (loader) {
 		return <Loader />;

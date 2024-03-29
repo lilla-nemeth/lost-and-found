@@ -21,18 +21,20 @@ const Dashboard = () => {
 		fetchPets,
 		limit,
 		offset,
-		pets,
 		setPets,
-		total,
 		setTotal,
 		loader,
 		setLoader,
 	} = useContext(AppStateContext);
-	const [errorMsg, setErrorMsg] = useState('');
 	const [allChecked, setAllChecked] = useState(false);
 	const [petCardChecked, setPetCardChecked] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [active, setActive] = useState(true);
+	// errorMsg is not used
+	// eslint-disable-next-line
+	const [errorMsg, setErrorMsg] = useState('');
+	// successMsg is not used
+	// eslint-disable-next-line
 	const [successMsg, setSuccessMsg] = useState('');
 
 	const disable = !allChecked || loading;

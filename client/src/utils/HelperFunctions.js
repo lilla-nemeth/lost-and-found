@@ -14,13 +14,18 @@ function increaseNumber(total, limit) {
 let timeOut;
 
 function handleError(err, setter) {
-	setter(err && err.response?.data?.msg);
+	if (!err) {
+		return;
+	}
+
+	if (err?.response?.data?.msg) {
+		setter(err.response.data.msg);
+	}
 
 	timeOut = setTimeout(() => {
 		setter('');
 	}, 5000);
 }
-
 function clearError() {
 	clearTimeout(timeOut);
 }
@@ -85,7 +90,7 @@ function isFieldRequired(requiredField) {
 
 function changeCheckboxValue(array, setArray, string) {
 	if (array.includes(string)) {
-		setArray(array.filter((el) => el != string));
+		setArray(array.filter((el) => el !== string));
 	} else {
 		setArray([...array, string]);
 	}
