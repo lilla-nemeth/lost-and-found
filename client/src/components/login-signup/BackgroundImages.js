@@ -32,6 +32,8 @@ const BackgroundImage = () => {
 		if (imagesInterval) {
 			return () => clearInterval(imagesInterval);
 		}
+		// images1 and images2 are constant arrays and do not change over time
+		// eslint-disable-next-line
 	}, [fadeIn, fadeOut, imageIndex, setImageIndex]);
 
 	const urlImages1 = `url('${images1[imageIndex]}')`;

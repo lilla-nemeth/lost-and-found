@@ -33,13 +33,7 @@ const PetListWithSearch = () => {
 					  })
 					: pets
 							.filter((filteredPet) => {
-								if (!searchColumns) {
-									return;
-								} else {
-									searchColumns.some((column) => {
-										return filteredPet[column].toString().toLowerCase().indexOf(search.toLowerCase()) > -1;
-									});
-								}
+								return searchColumns.some((column) => filteredPet[column].toString().toLowerCase().indexOf(search.toLowerCase()) > -1);
 							})
 							.map((pet) => {
 								return <PetListCard key={pet.id} pet={pet} />;

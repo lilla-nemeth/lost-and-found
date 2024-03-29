@@ -38,8 +38,8 @@ const PetProfile = () => {
 
 	function getPetAndUserData(id, petsArr, usersArr, onePet, oneUser) {
 		if (token && usersArr.length) {
-			petsArr.filter((pet) =>
-				usersArr.filter((user) => {
+			petsArr.forEach((pet) => {
+				usersArr.forEach((user) => {
 					if (!pet || !user || !id) {
 						return;
 					}
@@ -47,8 +47,8 @@ const PetProfile = () => {
 						onePet.push(pet);
 						oneUser.push(user);
 					}
-				})
-			);
+				});
+			});
 
 			return onePet.map((pet) => {
 				return oneUser.map((user) => {

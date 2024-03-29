@@ -15,6 +15,8 @@ export default function AppStateContextProvider(props) {
 	const [total, setTotal] = useState(0);
 	const [offset, setOffset] = useState(0);
 	const [loader, setLoader] = useState(true);
+	// errorMsg is not used
+	// eslint-disable-next-line
 	const [errorMsg, setErrorMsg] = useState('');
 
 	let limit = 6;
