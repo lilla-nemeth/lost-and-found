@@ -18,5 +18,14 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker-compose -f docker-compose.yml build --parallel --compress --quiet --tag ghcr.io/${{ github.repository }}-ghcr:latest
-          docker push ghcr.io/${{ github.repository }}-ghcr:latest
+          # Build and push PostgreSQL service image
+          docker-compose -f docker-compose.yml build postgres
+          docker-compose -f docker-compose.yml push postgres
+
+          # Build and push Server service image
+          docker-compose -f docker-compose.yml build server
+          docker-compose -f docker-compose.yml push server
+
+          # Build and push Client service image
+          docker-compose -f docker-compose.yml build client
+          docker-compose -f docker-compose.yml push client
