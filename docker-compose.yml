@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   postgres:
@@ -17,7 +17,7 @@ services:
   server:
     container_name: lost_and_found_server
     restart: unless-stopped
-    image: lost-and-found-server-dev:1.0.0
+    image: lost-and-found-server-dev:tag-v1.0.0
     build:
       context: server
       dockerfile: Dockerfile
@@ -31,7 +31,7 @@ services:
   client:
     container_name: lost_and_found_client
     restart: unless-stopped
-    image: lost-and-found-client-dev:1.0.0
+    image: lost-and-found-client-dev:tag-v1.0.0
     build:
       context: client
       dockerfile: Dockerfile
