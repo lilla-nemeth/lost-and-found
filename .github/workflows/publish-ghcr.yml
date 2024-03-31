@@ -12,6 +12,7 @@ jobs:
     env:
       PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
       PG_DATABASE: ${{ secrets.PG_DATABASE }}
+      POSTGRES_VERSION: '16.1'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -23,8 +24,8 @@ jobs:
         run: |
           # Build and push PostgreSQL service image
           docker-compose -f docker-compose.yml build postgres
-          docker tag postgres:16.1 ghcr.io/${{ github.repository_owner }}/postgres:16.1
-          docker push ghcr.io/${{ github.repository_owner }}/postgres:16.1
+          docker tag postgres:${POSTGRES_VERSION} ghcr.io/${{ github.repository_owner }}/postgres:${POSTGRES_VERSION}
+          docker push ghcr.io/${{ github.repository_owner }}/postgres:${POSTGRES_VERSION}
 
           # Build and push Server service image
           docker-compose -f docker-compose.yml build server
