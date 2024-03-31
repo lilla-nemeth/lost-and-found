@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=${PG_PASSWORD}
       - POSTGRES_DB=${PG_DATABASE}
-      - POSTGRES_VERSION: "16.1"
+      - POSTGRES_VERSION: 16.1
     ports:
       - 5432:5432
     networks:
