@@ -2,9 +2,9 @@ name: Docker Image CI for Github Container Registry
 
 on:
   push:
-    branches: ['main']
+    branches: ["main"]
   pull_request:
-    branches: ['main']
+    branches: ["main"]
 
 jobs:
   build_and_publish:
@@ -12,7 +12,7 @@ jobs:
     env:
       PG_PASSWORD: ${{ secrets.PG_PASSWORD }}
       PG_DATABASE: ${{ secrets.PG_DATABASE }}
-      POSTGRES_VERSION: '16.1'
+      POSTGRES_VERSION: "16.1"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
