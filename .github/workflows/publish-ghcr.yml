@@ -23,15 +23,15 @@ jobs:
         run: |
           # Build and push PostgreSQL service image
           docker-compose -f docker-compose.yml build postgres
-          docker tag postgres:latest ghcr.io/${{ github.repository_owner }}/postgres:16.1
+          docker tag postgres:16.1 ghcr.io/${{ github.repository_owner }}/postgres:16.1
           docker push ghcr.io/${{ github.repository_owner }}/postgres:16.1
 
           # Build and push Server service image
           docker-compose -f docker-compose.yml build server
-          docker tag server:latest ghcr.io/${{ github.repository_owner }}/lost-and-found-server-dev:tag-v1.0.0
+          docker tag lost_and_found_server:tag-v1.0.0 ghcr.io/${{ github.repository_owner }}/lost-and-found-server-dev:tag-v1.0.0
           docker push ghcr.io/${{ github.repository_owner }}/lost-and-found-server-dev:tag-v1.0.0
 
           # Build and push Client service image
           docker-compose -f docker-compose.yml build client
-          docker tag client:latest ghcr.io/${{ github.repository_owner }}/lost-and-found-client-dev:tag-v1.0.0
+          docker tag lost_and_found_client:tag-v1.0.0 ghcr.io/${{ github.repository_owner }}/lost-and-found-client-dev:tag-v1.0.0
           docker push ghcr.io/${{ github.repository_owner }}/lost-and-found-client-dev:tag-v1.0.0
