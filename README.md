@@ -2,7 +2,7 @@
 
 Lost and Found is an application made for missing and found pets. Users with accounts are also allowed to create pet profiles and perform other tasks.
 
-🛠 Created with PERN stack, JavaScript, TypeScript, Sequelize, Mapbox and custom UI. Unit tests made with Jest (in progress).
+🛠 Created with PERN stack, JavaScript, TypeScript, Sequelize, Mapbox and custom UI. Unit tests made with Jest.
 
 ![Registration](https://raw.githubusercontent.com/lilla-nemeth/lost-and-found/main/client/src/assets/images/screenshots/app_screenshot_00.png)
 
@@ -26,15 +26,15 @@ Lost and Found is an application made for missing and found pets. Users with acc
 - Transitioning to TypeScript (client side)
 - Other technical improvements
 
-## Installation, running the app locally
+## Installation
 
-Clone the repo
+Clone the repository
 
 ```
 git clone https://github.com/lilla-nemeth/lost-and-found.git
 ```
 
-### Server
+Server
 
 Go to the server folder
 
@@ -42,21 +42,14 @@ Go to the server folder
 cd server
 ```
 
-Install the dependencies
+Install the dependencies and run the server
 
 ```
 yarn install
-```
-
-Run the server
-
-```
 yarn start
 ```
 
-Server is running on port 8080
-
-### Client
+Client
 
 Go to the client folder
 
@@ -64,21 +57,39 @@ Go to the client folder
 cd client
 ```
 
-Install the dependencies
+Install the dependencies and run the client
 
 ```
 yarn install
-```
-
-Start the client
-
-```
 yarn start
+```
+
+### Docker
+
+Latest Docker images are available in Github Container Registry (Packages), but they can be built either separately or all of them with docker-compose.
+
+One by one
+
+```
+cd server
+docker build -t lost-and-found/server:1.0 .
+```
+
+```
+cd client
+docker build -t lost-and-found/client:1.0 .
+```
+
+With docker-compose
+
+```
+docker-compose build
+docker-compose up
 ```
 
 ## Environment Variables
 
-In order to run this app, create .env files in the following folders to make environment variables available.
+Create .env files in the following folders to make environment variables available.
 
 ### Main Root Folder
 
@@ -88,11 +99,11 @@ For docker-compose
 
 ### Server
 
-#### Mapbox API Key
+Mapbox API Key
 
 `API_KEY`
 
-#### Postgres
+Postgres
 
 `PG_HOST`
 `PG_USER`
@@ -100,33 +111,23 @@ For docker-compose
 `PG_PORT`
 `PG_DATABASE`
 
-#### Node Environment
-
-Currently the app is not in production, but in that case this variable would be necessary
-
-`NODE_ENV`
-
 ### Client
 
-#### Mapbox API Key
+Mapbox API Key
 
 `REACT_APP_MAPBOX_API_KEY`
 
 ## Running unit tests
 
-### Server
+Server
 
-Running all tests:
+Running all tests
 
 ```
 yarn run test
 ```
 
 or
-
-```
-yarn run test:watchAll
-```
 
 Run tests in one file, example:
 
