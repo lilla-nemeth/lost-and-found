@@ -46,8 +46,10 @@
     "typescript": "^5.3.3"
   },
   "resolutions": {
-    "send": "^1.1.0",
     "serve-static": "^1.16.2",
-    "micromatch": "^4.0.8"
+    "micromatch": "^4.0.8",
+    "body-parser": "^1.20.3",
+    "cookie": "^1.0.1",
+    "send": "^0.19.1"
   }
 }
