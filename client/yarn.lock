@@ -2332,9 +2332,9 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "22.8.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.8.6.tgz#e8a0c0871623283d8b3ef7d7b9b1bfdfd3028e22"
-  integrity sha512-tosuJYKrIqjQIlVCM4PEGxOmyg3FCPa/fViuJChnGeEIhjA46oy8FMVoF9su1/v8PNs2a8Q0iFNyOx0uOF91nw==
+  version "22.8.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.8.7.tgz#04ab7a073d95b4a6ee899f235d43f3c320a976f4"
+  integrity sha512-LidcG+2UeYIWcMuMUpBKOnryBWG/rnmOHQR5apjn8myTQcx3rinFRn7DcIFhMnS0PPFSC6OafdIKEad0lj6U0Q==
   dependencies:
     undici-types "~6.19.8"
 
@@ -8515,9 +8515,9 @@ react-dom@^18.2.0:
     scheduler "^0.23.2"
 
 react-dropzone@^14.2.3:
-  version "14.3.2"
-  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-14.3.2.tgz#975a1dd7b54507781d27aebe003ae41b51930aac"
-  integrity sha512-SMfxMjU/lHm6iXHqpRTnYXSbngC08yz51W3NlqS+cBhXpR+orZacLuxO5MJ0gcF+9vV5/K91uniiTCzkmRgriA==
+  version "14.3.3"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-14.3.3.tgz#8f2cf46567615123c91e1ba59b07e6c815e5aef0"
+  integrity sha512-38yaWovqDqZdtn7LKTE5lFdqc57hYbPdS/oIxyhmaTP/yzC0yztPxnNy+poxew5HKF44gzGCNcNDBYjqlCXr6g==
   dependencies:
     attr-accept "^2.2.4"
     file-selector "^2.1.0"
